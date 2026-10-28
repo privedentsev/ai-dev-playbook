@@ -1,0 +1,59 @@
+{
+  "schema_version": 1,
+  "plan_id": "lc-d92d89c244c7ca4f",
+  "at": "2026-10-22T13:14:12+03:00",
+  "actor": {
+    "model": null,
+    "name": "cli:privedentsev1",
+    "role": "cli"
+  },
+  "basis": "playbook.py close PB-027",
+  "action": "close_task",
+  "files": [
+    {
+      "from": "docs/tasks/PB-027-evidence/probe.log",
+      "to": "docs/archive/tasks/PB-027-evidence/probe.log",
+      "sha256": "sha256:bdbf5512ff3238bf5f19276d65b83b806a4d45f7d50cd2d7dbe5994389f0f02e",
+      "bytes": 882
+    },
+    {
+      "from": "docs/tasks/PB-027-evidence/probe.py",
+      "to": "docs/archive/tasks/PB-027-evidence/probe.py",
+      "sha256": "sha256:0f9c369372b29f783bce56d609d3ae95671c66f625c3e4f334201a3890909083",
+      "bytes": 23053
+    },
+    {
+      "from": "docs/tasks/PB-027-evidence/reopen-lc-2d98ac29a5ebd047.json",
+      "to": "docs/archive/tasks/PB-027-evidence/reopen-lc-2d98ac29a5ebd047.json",
+      "sha256": "sha256:6edc2b6abb834ce6751004ed7b1b110a7760b3318b08e2586a880634f78da4c7",
+      "bytes": 988
+    },
+    {
+      "from": "docs/tasks/PB-027.md",
+      "to": "docs/archive/tasks/PB-027.md",
+      "sha256": "sha256:76a5602cea6ab00a01cf0a07df0186aff04718ba4eb854045698a0ba7face726",
+      "bytes": 26385
+    }
+  ],
+  "moves": [
+    {
+      "from": "docs/tasks/PB-027-evidence",
+      "to": "docs/archive/tasks/PB-027-evidence"
+    },
+    {
+      "from": "docs/tasks/PB-027.md",
+      "to": "docs/archive/tasks/PB-027.md"
+    }
+  ],
+  "materials": [],
+  "external": [],
+  "type": "lifecycle-close",
+  "task": "PB-027",
+  "outcome": "done",
+  "previous_status": "in_review",
+  "reason": null,
+  "acceptance_ref": null,
+  "policy": "legacy",
+  "handoff": null,
+  "acceptance": null
+}

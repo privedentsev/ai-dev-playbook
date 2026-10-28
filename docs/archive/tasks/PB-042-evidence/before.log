@@ -1,0 +1,53 @@
+test_document_returns_to_previous_indexed_state (test_index_replay.IndexReplayTest.test_document_returns_to_previous_indexed_state) ... ERROR
+test_interrupted_new_request_restores_then_retries (test_index_replay.IndexReplayTest.test_interrupted_new_request_restores_then_retries) ... FAIL
+test_task_status_returns_to_previous_indexed_state (test_index_replay.IndexReplayTest.test_task_status_returns_to_previous_indexed_state) ... 
+  test_task_status_returns_to_previous_indexed_state (test_index_replay.IndexReplayTest.test_task_status_returns_to_previous_indexed_state) (args=()) ... FAIL
+  test_task_status_returns_to_previous_indexed_state (test_index_replay.IndexReplayTest.test_task_status_returns_to_previous_indexed_state) (args=('--all',)) ... FAIL
+
+======================================================================
+ERROR: test_document_returns_to_previous_indexed_state (test_index_replay.IndexReplayTest.test_document_returns_to_previous_indexed_state)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_index_replay.py", line 41, in test_document_returns_to_previous_indexed_state
+    playbook._catalog_consistency(self.root, 'test', ['spec', 'plan'])
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/ai-dev-playbook/scripts/playbook.py", line 472, in _catalog_consistency
+    require(not errors, f"{label}: " + "; ".join(errors))
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/ai-dev-playbook/scripts/playbook.py", line 59, in require
+    raise ValueError(message)
+ValueError: test: docs/specs/index.md: индекс не соответствует каталогу
+
+======================================================================
+FAIL: test_interrupted_new_request_restores_then_retries (test_index_replay.IndexReplayTest.test_interrupted_new_request_restores_then_retries)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_index_replay.py", line 62, in test_interrupted_new_request_restores_then_retries
+    with self.assertRaises(KeyboardInterrupt):
+         ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+AssertionError: KeyboardInterrupt not raised
+
+======================================================================
+FAIL: test_task_status_returns_to_previous_indexed_state (test_index_replay.IndexReplayTest.test_task_status_returns_to_previous_indexed_state) (args=())
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_index_replay.py", line 33, in test_task_status_returns_to_previous_indexed_state
+    self.assertEqual(paths['task_index'].read_text(), expected)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: '# Ин[244 chars]| in_progress | P2 | — | 2026-01-01 00:00 | — [169 chars]т.\n' != '# Ин[244 chars]| in_review | P2 | — | 2026-01-01 00:00 | — | [167 chars]т.\n'
+Diff is 668 characters long. Set self.maxDiff to None to see it.
+
+======================================================================
+FAIL: test_task_status_returns_to_previous_indexed_state (test_index_replay.IndexReplayTest.test_task_status_returns_to_previous_indexed_state) (args=('--all',))
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_index_replay.py", line 33, in test_task_status_returns_to_previous_indexed_state
+    self.assertEqual(paths['task_index'].read_text(), expected)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: '# Ин[244 chars]| in_progress | P2 | — | 2026-01-01 00:00 | — [169 chars]т.\n' != '# Ин[244 chars]| in_review | P2 | — | 2026-01-01 00:00 | — | [167 chars]т.\n'
+Diff is 668 characters long. Set self.maxDiff to None to see it.
+
+----------------------------------------------------------------------
+Ran 3 tests in 1.282s
+
+FAILED (failures=3, errors=1)

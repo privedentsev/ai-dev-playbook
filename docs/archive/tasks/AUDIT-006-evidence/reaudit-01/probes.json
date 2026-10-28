@@ -1,0 +1,124 @@
+[
+  {
+    "scenario": "combined_close_reverse=False",
+    "rc": 0,
+    "stdout": "План lc-e1d5bb3b766eca1f применён. Операция: work/lifecycle/20261022-131955-6b65deed\n",
+    "stderr": "",
+    "check": {
+      "rc": 0,
+      "stdout": "OK: структура, ссылки и 1 карточки; каталог документов: 2 документов, 0 legacy. Поведение продукта не проверялось.\n",
+      "stderr": ""
+    },
+    "immutable_equal": true,
+    "active_spec_equal": true
+  },
+  {
+    "scenario": "combined_close_reverse=True",
+    "rc": 0,
+    "stdout": "План lc-d754cbb2afc40d67 применён. Операция: work/lifecycle/20261022-131957-7e00b5d1\n",
+    "stderr": "",
+    "check": {
+      "rc": 0,
+      "stdout": "OK: структура, ссылки и 1 карточки; каталог документов: 2 документов, 0 legacy. Поведение продукта не проверялось.\n",
+      "stderr": ""
+    },
+    "immutable_equal": true,
+    "active_spec_equal": true
+  },
+  {
+    "scenario": "promotion_missing",
+    "rc": 1,
+    "stdout": "",
+    "stderr": "ERROR: spec:alpha: нужна запись приёмки promotion\n",
+    "expected_rc": 1,
+    "unchanged_on_refusal": true
+  },
+  {
+    "scenario": "promotion_diagnostic",
+    "rc": 1,
+    "stdout": "",
+    "stderr": "ERROR: spec:alpha: приёмка не соответствует изменению или редакции\n",
+    "expected_rc": 1,
+    "unchanged_on_refusal": true
+  },
+  {
+    "scenario": "promotion_rejected",
+    "rc": 1,
+    "stdout": "",
+    "stderr": "ERROR: spec:alpha: приёмка не соответствует изменению или редакции\n",
+    "expected_rc": 1,
+    "unchanged_on_refusal": true
+  },
+  {
+    "scenario": "promotion_wrong_document",
+    "rc": 1,
+    "stdout": "",
+    "stderr": "ERROR: spec:alpha: приёмка не соответствует изменению или редакции\n",
+    "expected_rc": 1,
+    "unchanged_on_refusal": true
+  },
+  {
+    "scenario": "promotion_wrong_change",
+    "rc": 1,
+    "stdout": "",
+    "stderr": "ERROR: spec:alpha: приёмка не соответствует изменению или редакции\n",
+    "expected_rc": 1,
+    "unchanged_on_refusal": true
+  },
+  {
+    "scenario": "promotion_wrong_revision",
+    "rc": 1,
+    "stdout": "",
+    "stderr": "ERROR: spec:alpha: приёмка не соответствует изменению или редакции\n",
+    "expected_rc": 1,
+    "unchanged_on_refusal": true
+  },
+  {
+    "scenario": "promotion_wrong_payload",
+    "rc": 1,
+    "stdout": "",
+    "stderr": "ERROR: spec:alpha: приёмка не соответствует изменению или редакции\n",
+    "expected_rc": 1,
+    "unchanged_on_refusal": true
+  },
+  {
+    "scenario": "promotion_wrong_source",
+    "rc": 1,
+    "stdout": "",
+    "stderr": "ERROR: spec:alpha: приёмка не соответствует изменению или редакции\n",
+    "expected_rc": 1,
+    "unchanged_on_refusal": true
+  },
+  {
+    "scenario": "promotion_executor",
+    "rc": 1,
+    "stdout": "",
+    "stderr": "ERROR: spec:alpha: приёмка требует автора, роль и время\n",
+    "expected_rc": 1,
+    "unchanged_on_refusal": true
+  },
+  {
+    "scenario": "promotion_bad_time",
+    "rc": 1,
+    "stdout": "",
+    "stderr": "ERROR: spec:alpha: приёмка требует автора, роль и время\n",
+    "expected_rc": 1,
+    "unchanged_on_refusal": true
+  },
+  {
+    "scenario": "promotion_receipt_changed",
+    "rc": 1,
+    "stdout": "",
+    "stderr": "ERROR: План устарел или подменён (plan_id, inputs, writes): входы изменились — постройте план заново командой lifecycle plan\n",
+    "expected_rc": 1,
+    "unchanged_on_refusal": true
+  },
+  {
+    "scenario": "promotion_valid",
+    "rc": 0,
+    "stdout": "План lc-ee3d5bcd6e50b8dd применён. Операция: work/lifecycle/20261022-132004-a629af04\n",
+    "stderr": "",
+    "expected_rc": 0,
+    "unchanged_on_refusal": false
+  }
+]

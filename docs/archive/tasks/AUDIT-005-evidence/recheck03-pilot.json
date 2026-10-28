@@ -1,0 +1,23 @@
+{
+  "before_count": 258,
+  "after_count": 292,
+  "changed_original_names": [
+    "AGENTS.md"
+  ],
+  "current_missing_names": [],
+  "current_changed_names": [],
+  "pilot_check_code": 0,
+  "pilot_check_stdout": "OK: структура, ссылки и 1 карточки. Поведение продукта не проверялось.\n",
+  "pilot_check_stderr": "",
+  "verification_reports": [
+    {
+      "status": "passed",
+      "checks": [
+        [
+          "self-check",
+          "passed"
+        ]
+      ]
+    }
+  ]
+}

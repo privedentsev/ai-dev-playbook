@@ -1,0 +1,20 @@
+{
+  "schema_version": 2,
+  "workflow": {
+    "route": "ultra_fast",
+    "reason": "Попытка использовать неизвестный маршрут"
+  },
+  "verification_plan": {
+    "revision": 1,
+    "rationale": "Тест неизвестного маршрута",
+    "scope": ["tests"],
+    "checks": [
+      {
+        "id": "unit-tests",
+        "kind": "command",
+        "purpose": "Тест",
+        "registry_id": "unit-tests"
+      }
+    ]
+  }
+}

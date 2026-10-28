@@ -1,0 +1,8 @@
+{
+  "schema_version": 2,
+  "workflow": {
+    "route": "quick",
+    "reason": "Тест"
+  },
+  "verification_plan": null
+}

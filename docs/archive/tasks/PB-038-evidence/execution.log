@@ -1,0 +1,35 @@
+# PB-038 Execution and Verification Evidence
+
+## 1. Reproduction of defects before fix
+- Reproducer: tests/test_close_lifecycle.py:CollectionIndexRetentionTest
+- Initial failure:
+  ERROR: docs/plans/index.md: битая или внешняя локальная ссылка ../tasks/DEV-1.md
+  ERROR: docs/specs/index.md: битая или внешняя локальная ссылка ../tasks/DEV-2.md
+
+## 2. Implemented fix in ai-dev-playbook/scripts/lifecycle.py
+- build_plan():
+  * Projected records (`records: projected_records`) passed to projected catalog so documents.index_region() generates links to new task paths.
+  * All collection indexes in catalog["collections"] inspected:
+    - If index does not exist, only created if that collection's documents were in operation.
+    - If index exists, checks _collection_index_write with projected catalog.
+    - If _collection_index_write returns None (region unchanged), manual text is still rewritten with document_links.rewrite.
+    - If rewritten != current_text, write is registered in writes[rel] and kind added to touched_kinds.
+  * All collection index paths added to input_rels to ensure complete preimage snapshotting.
+- run_plan():
+  * Collection indexes modified in plan["writes"] added to kinds for staged and final consistency checks.
+
+## 3. Unit and regression test suite
+- tests/test_close_lifecycle.py: CollectionIndexRetentionTest added with 5 tests:
+  * test_close_task_updates_active_plan_index_and_dry_run
+  * test_reopen_restores_plan_index_and_blocks_active_dependent
+  * test_manual_links_across_collections_including_none_generator
+  * test_stale_plan_rejects_modified_collection_index
+  * test_staged_check_failure_restores_preimage
+- All 38 tests in test_close_lifecycle.py pass.
+- All 34 tests in test_lifecycle.py pass.
+
+## 4. Addressing Audit Finding PB-038-A1
+- Synchronized all files, execution log, manifest, and indexes prior to running verify.
+- Re-ran playbook.py verify PB-038 and registered lifecycle handoff.
+- Verified verification.inputs_fresh returns True with empty diff.
+

@@ -1,0 +1,23 @@
+{
+  "schema_version": 2,
+  "workflow": {
+    "route": "quick",
+    "reason": "Тест"
+  },
+  "verification_plan": {
+    "revision": 1,
+    "rationale": "Тест",
+    "scope": [
+      "tests"
+    ],
+    "checks": [
+      {
+        "id": "c1",
+        "kind": "command",
+        "purpose": "Тест",
+        "registry_id": "unit-tests",
+        "inputs": null
+      }
+    ]
+  }
+}

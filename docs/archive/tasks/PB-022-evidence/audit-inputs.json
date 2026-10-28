@@ -1,0 +1,24 @@
+{
+  "at": "2026-10-01T13:47:40+03:00",
+  "python": "3.14.6",
+  "system": "Darwin",
+  "branch": "dev",
+  "head": "0744f938ddd571d179a598b7dd92f5b73267ccba",
+  "scope": "Working-tree snapshot of reviewed code, tests and contracts; captured after probes, not a before/after verification runner attestation.",
+  "files": {
+    "ai-dev-playbook/project.json": "20db085b5ff635af9aeeb285a52a09d2c38b116a76d8e8816ac7dd08ade41d58",
+    "ai-dev-playbook/scripts/document_links.py": "fe48034d78e7ed532bd6f3ceab155cb6d58a4445f42bcdbde40499118bbf858a",
+    "ai-dev-playbook/scripts/documents.py": "4596e7a440aa31ca1c7b4010c4c217c6826d3106f0393ef0ee1edde521c38da5",
+    "ai-dev-playbook/scripts/playbook.py": "317744b00db7e091fa78f80f4e2a9c6c906e5a4640377ead4e5fb1d386b70189",
+    "ai-dev-playbook/scripts/updating.py": "01cfd3f71467a557504e02128e732cdaf65c112790cd9bab4308915bfdf49af4",
+    "ai-dev-playbook/scripts/verification.py": "0bb563b8f17a1c9c2eb3e1e12dff78bb3f923bca85447d8a1f983ff7e2e127b9",
+    "docs/designs/workflow-and-document-lifecycle.md": "31c71d65c7471aaa0eb66cd9620b4f5015c6eda966eec4b5238a76a947417cfa",
+    "docs/plans/workflow-and-document-lifecycle.md": "97d0865ad41c177f845713e57a0fcdd93fa4c79efe1c520a89389a2c17f778a2",
+    "docs/specs/workflow-and-document-lifecycle.md": "10a7f73cc1e2f32ce65f52f2020cf9b4675f7473bb392107855cdcd404af53a7",
+    "docs/tasks/PB-022-evidence/audit-probes.py": "abdb102165cc424774a302ec93f615cd046fa422e1baad4c386b57baef872bce",
+    "tests/test_cli.py": "b725d3a34eeea35289192249b490d0828125cf84a0c26417bd348f8bdab0ecdc",
+    "tests/test_document_links.py": "59378debbccc99ec85202f1feeff1de9f64aa849b5c6a4c462272baff7385afd",
+    "tests/test_documents.py": "295a67c97f0f7b10289c5216de6644cd0bfbb0035d1b36c04b31cb439ceb0e39",
+    "tests/test_playbook.py": "c3ab2fbe200ceb85d4d1eecfaf8c71df2fcaa04186b20ac887b5931cf3e7f605"
+  }
+}

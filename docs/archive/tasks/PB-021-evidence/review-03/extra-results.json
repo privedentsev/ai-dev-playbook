@@ -1,0 +1,29 @@
+[
+  {
+    "case": "material-id-list",
+    "returncode": 1,
+    "stdout": "",
+    "stderr": "ERROR: <fixture>/project/docs/specs/alpha.md: поле 'materials': id материала должен быть непустой строкой\n",
+    "added": [],
+    "removed": [],
+    "changed": []
+  },
+  {
+    "case": "change-id-object",
+    "returncode": 1,
+    "stdout": "",
+    "stderr": "ERROR: <fixture>/project/docs/specs/alpha.md: поле 'changes': id изменения должен быть непустой строкой\n",
+    "added": [],
+    "removed": [],
+    "changed": []
+  },
+  {
+    "case": "malformed-external-uri",
+    "returncode": 1,
+    "stdout": "",
+    "stderr": "ERROR: <fixture>/project/docs/specs/alpha.md: поле 'materials': external source 'https://[' — не URI\n",
+    "added": [],
+    "removed": [],
+    "changed": []
+  }
+]

@@ -1,0 +1,223 @@
+{
+  "schema_version": 1,
+  "plan_id": "lc-4353b915f3bdc137",
+  "at": "2026-10-26T13:42:20+03:00",
+  "actor": {
+    "model": "GPT-6",
+    "name": "Codex",
+    "role": "executor"
+  },
+  "basis": "Инженер разрешил исправление исторических остатков материалов; PB-044",
+  "action": "repair_task_materials",
+  "files": [
+    {
+      "from": "docs/tasks/PB-022-evidence/audit-final-checks.log",
+      "to": "docs/archive/tasks/PB-022-evidence/audit-final-checks.log",
+      "sha256": "sha256:7969dd5f504ff2cc8b6f21864be84961808bb3e8bde9ec3facb35b97114d22fc",
+      "bytes": 361
+    },
+    {
+      "from": "docs/tasks/PB-022-evidence/audit-inputs.json",
+      "to": "docs/archive/tasks/PB-022-evidence/audit-inputs.json",
+      "sha256": "sha256:81392192b8f997e8dae0b3a46adae4cc59593787cb7e16d9e889281f47090889",
+      "bytes": 1871
+    },
+    {
+      "from": "docs/tasks/PB-022-evidence/audit-probes-after-fixes.log",
+      "to": "docs/archive/tasks/PB-022-evidence/audit-probes-after-fixes.log",
+      "sha256": "sha256:68a91ac5d0c1bc54f8fa69dd2bd72ccfb068b82a6eaf26263c63fddfcad82d79",
+      "bytes": 1271
+    },
+    {
+      "from": "docs/tasks/PB-022-evidence/audit-probes.log",
+      "to": "docs/archive/tasks/PB-022-evidence/audit-probes.log",
+      "sha256": "sha256:80ba4e521f90fe71c5abab61703f1c13880ccbdabd1d9569363c66f7563b07ff",
+      "bytes": 13530
+    },
+    {
+      "from": "docs/tasks/PB-022-evidence/audit-probes.py",
+      "to": "docs/archive/tasks/PB-022-evidence/audit-probes.py",
+      "sha256": "sha256:abdb102165cc424774a302ec93f615cd046fa422e1baad4c386b57baef872bce",
+      "bytes": 6905
+    },
+    {
+      "from": "docs/tasks/PB-022-evidence/audit-unit-tests.log",
+      "to": "docs/archive/tasks/PB-022-evidence/audit-unit-tests.log",
+      "sha256": "sha256:a6fedac048a2ee5e26cf88026c17c1c7f7421061124eaa60bedb7a42f0522baa",
+      "bytes": 30665
+    },
+    {
+      "from": "docs/tasks/PB-022-evidence/reaudit-02-final-checks.log",
+      "to": "docs/archive/tasks/PB-022-evidence/reaudit-02-final-checks.log",
+      "sha256": "sha256:b4002d8925aee2b0c1df5961edadf25d4a96c091e6e71f75ad4843660e8ccd4a",
+      "bytes": 587
+    },
+    {
+      "from": "docs/tasks/PB-022-evidence/reaudit-02-inputs.json",
+      "to": "docs/archive/tasks/PB-022-evidence/reaudit-02-inputs.json",
+      "sha256": "sha256:d4cfea2857f85f99a343047287944fab1463e99eb260e75c3ba2c69b352c4163",
+      "bytes": 3272
+    },
+    {
+      "from": "docs/tasks/PB-022-evidence/reaudit-02-original-probes.log",
+      "to": "docs/archive/tasks/PB-022-evidence/reaudit-02-original-probes.log",
+      "sha256": "sha256:b706fc610bdaf2883c7bdcd2334cd4052eef145f381b68a0554358efbad8b56a",
+      "bytes": 1271
+    },
+    {
+      "from": "docs/tasks/PB-022-evidence/reaudit-02-previous-probes.log",
+      "to": "docs/archive/tasks/PB-022-evidence/reaudit-02-previous-probes.log",
+      "sha256": "sha256:0e295b5de95e0eb63e72533208ea1517aa9290fdec59ada9d31d9d0d48af3211",
+      "bytes": 1088
+    },
+    {
+      "from": "docs/tasks/PB-022-evidence/reaudit-02-probes-after-fixes.log",
+      "to": "docs/archive/tasks/PB-022-evidence/reaudit-02-probes-after-fixes.log",
+      "sha256": "sha256:8fbed49433b9c4388a3b3eb2cd685bcd731f43a4cd2697818c5dfe574adaa4f6",
+      "bytes": 714
+    },
+    {
+      "from": "docs/tasks/PB-022-evidence/reaudit-02-probes.log",
+      "to": "docs/archive/tasks/PB-022-evidence/reaudit-02-probes.log",
+      "sha256": "sha256:d72f0fd772f81c09ffa2c1016fdd22ce2abe51cb9ddaa9810222d64b58c1104f",
+      "bytes": 3128
+    },
+    {
+      "from": "docs/tasks/PB-022-evidence/reaudit-02-probes.py",
+      "to": "docs/archive/tasks/PB-022-evidence/reaudit-02-probes.py",
+      "sha256": "sha256:db68e92f803632761b6270e8f07c882169d7c6f6884cc6868644cfee435356cf",
+      "bytes": 3213
+    },
+    {
+      "from": "docs/tasks/PB-022-evidence/reaudit-02-unit-tests.log",
+      "to": "docs/archive/tasks/PB-022-evidence/reaudit-02-unit-tests.log",
+      "sha256": "sha256:fe050b75c4f60254175fd3e27d3d8f7ae39bcf2b38fd6559e400f32e2f7949bb",
+      "bytes": 37411
+    },
+    {
+      "from": "docs/tasks/PB-022-evidence/reaudit-03-final-checks.log",
+      "to": "docs/archive/tasks/PB-022-evidence/reaudit-03-final-checks.log",
+      "sha256": "sha256:c1c2670c49ae0c829d81da76f1465a46046226146be2b6a1a50e890aeeb86d31",
+      "bytes": 398
+    },
+    {
+      "from": "docs/tasks/PB-022-evidence/reaudit-03-inputs.json",
+      "to": "docs/archive/tasks/PB-022-evidence/reaudit-03-inputs.json",
+      "sha256": "sha256:73fb261d11a5a73a93664d3f843df1494232e5f07da74976a519f7b735a08276",
+      "bytes": 3163
+    },
+    {
+      "from": "docs/tasks/PB-022-evidence/reaudit-03-last-probes.log",
+      "to": "docs/archive/tasks/PB-022-evidence/reaudit-03-last-probes.log",
+      "sha256": "sha256:c4fa4122f076d7c6a04ec17e01db452c5f5e2680ebfacaff38ebced5d66c5d17",
+      "bytes": 714
+    },
+    {
+      "from": "docs/tasks/PB-022-evidence/reaudit-03-original-probes.log",
+      "to": "docs/archive/tasks/PB-022-evidence/reaudit-03-original-probes.log",
+      "sha256": "sha256:988b5bdd4ae9eff8e938413752254ce33c4fdfd28064e0fe43c9faff40d8c980",
+      "bytes": 1271
+    },
+    {
+      "from": "docs/tasks/PB-022-evidence/reaudit-03-previous-probes.log",
+      "to": "docs/archive/tasks/PB-022-evidence/reaudit-03-previous-probes.log",
+      "sha256": "sha256:9f1e8aba6d290fbe4a08adc64c8219e8c74e1564ffb4233405abfb1e51fb7cc2",
+      "bytes": 1088
+    },
+    {
+      "from": "docs/tasks/PB-022-evidence/reaudit-03-probes.log",
+      "to": "docs/archive/tasks/PB-022-evidence/reaudit-03-probes.log",
+      "sha256": "sha256:58072241c68cb38029ddff22e1f56b2983dd9dd678fd9cc4108d8daadd953e08",
+      "bytes": 457
+    },
+    {
+      "from": "docs/tasks/PB-022-evidence/reaudit-03-probes.py",
+      "to": "docs/archive/tasks/PB-022-evidence/reaudit-03-probes.py",
+      "sha256": "sha256:a790474219e18eba51ad547b279cff00e6cc8e11f6333e2167ca326bad51005a",
+      "bytes": 2986
+    },
+    {
+      "from": "docs/tasks/PB-022-evidence/reaudit-03-unit-tests.log",
+      "to": "docs/archive/tasks/PB-022-evidence/reaudit-03-unit-tests.log",
+      "sha256": "sha256:6fb16f8a913153776cad675f369e4ce85d2873165f98162bfcf855aa07101dd7",
+      "bytes": 39388
+    },
+    {
+      "from": "docs/tasks/PB-022-evidence/reaudit-final-checks.log",
+      "to": "docs/archive/tasks/PB-022-evidence/reaudit-final-checks.log",
+      "sha256": "sha256:1f82677d0d0582fe96d171263c55598b58a5e6b448d4335987edff1c78e75a72",
+      "bytes": 397
+    },
+    {
+      "from": "docs/tasks/PB-022-evidence/reaudit-inputs.json",
+      "to": "docs/archive/tasks/PB-022-evidence/reaudit-inputs.json",
+      "sha256": "sha256:954e43f36b9804e326c64122555a0de7c37fcd8603c758ac641ea404b9a57929",
+      "bytes": 2443
+    },
+    {
+      "from": "docs/tasks/PB-022-evidence/reaudit-original-probes.log",
+      "to": "docs/archive/tasks/PB-022-evidence/reaudit-original-probes.log",
+      "sha256": "sha256:587d0cffdd6e30917ceddf96d372fa0dcb3e7a0b69f1c8275d50c0cf8f925af6",
+      "bytes": 1271
+    },
+    {
+      "from": "docs/tasks/PB-022-evidence/reaudit-probes-after-fixes.log",
+      "to": "docs/archive/tasks/PB-022-evidence/reaudit-probes-after-fixes.log",
+      "sha256": "sha256:28574be63a1dbd892cee9e0323539bceded12abe1006eab26f204215a524e8db",
+      "bytes": 1088
+    },
+    {
+      "from": "docs/tasks/PB-022-evidence/reaudit-probes.log",
+      "to": "docs/archive/tasks/PB-022-evidence/reaudit-probes.log",
+      "sha256": "sha256:ac3d3520d74427b2827ac2f4bbbdf82fa3334f613ef9f9cc0910459e1f662461",
+      "bytes": 7070
+    },
+    {
+      "from": "docs/tasks/PB-022-evidence/reaudit-probes.py",
+      "to": "docs/archive/tasks/PB-022-evidence/reaudit-probes.py",
+      "sha256": "sha256:34e667192d6aa5d25aed4eec55abd99f0805b9e16d3b6405dcee36883b936a45",
+      "bytes": 4525
+    },
+    {
+      "from": "docs/tasks/PB-022-evidence/reaudit-unit-tests.log",
+      "to": "docs/archive/tasks/PB-022-evidence/reaudit-unit-tests.log",
+      "sha256": "sha256:5360493908150fdfad9a86dcc0c3d2789fd0c57fee25bc4b872fbf534b1ccfdf",
+      "bytes": 32435
+    },
+    {
+      "from": "docs/tasks/PB-022-evidence/unit-tests-after-fixes.log",
+      "to": "docs/archive/tasks/PB-022-evidence/unit-tests-after-fixes.log",
+      "sha256": "sha256:67549402f05e0dcbefabd99ddbd0b1bde9e6088b9135f4975ff59ad92fa9ab87",
+      "bytes": 32435
+    },
+    {
+      "from": "docs/tasks/PB-022-evidence/unit-tests-after-reaudit-02.log",
+      "to": "docs/archive/tasks/PB-022-evidence/unit-tests-after-reaudit-02.log",
+      "sha256": "sha256:fc6ba1f8ada32950b26467cbc3370446ec97987525629b6224c6b84e3fcad76d",
+      "bytes": 39102
+    },
+    {
+      "from": "docs/tasks/PB-022-evidence/unit-tests-after-reaudit-fixes.log",
+      "to": "docs/archive/tasks/PB-022-evidence/unit-tests-after-reaudit-fixes.log",
+      "sha256": "sha256:589007ce628166444ded534f2fe76e07223f83d8e7272397ec6f56daca9c7833",
+      "bytes": 33344
+    },
+    {
+      "from": "docs/tasks/PB-022-evidence/unit-tests.log",
+      "to": "docs/archive/tasks/PB-022-evidence/unit-tests.log",
+      "sha256": "sha256:364e0589985481d0ae9bdefc20151890fe511ca1ca334d673b8dcc8ed749e2c2",
+      "bytes": 28241
+    }
+  ],
+  "moves": [
+    {
+      "from": "docs/tasks/PB-022-evidence",
+      "to": "docs/archive/tasks/PB-022-evidence"
+    }
+  ],
+  "materials": [],
+  "external": [],
+  "type": "lifecycle-material-repair",
+  "task": "PB-022",
+  "reason": "Старый close перенёс карточку без evidence; восстановление размещения без повторной приёмки"
+}

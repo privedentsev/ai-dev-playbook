@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "actor": {
+    "name": "Engineer",
+    "role": "engineer",
+    "model": "human"
+  },
+  "basis": "Применять только после явной приёмки инженером итогового протокола AUDIT-006 и регистрации lifecycle accept",
+  "scope": {
+    "tasks": [
+      "AUDIT-006"
+    ],
+    "documents": [
+      "plan:workflow-and-document-lifecycle"
+    ]
+  },
+  "actions": [
+    {
+      "action": "close_task",
+      "task": "AUDIT-006",
+      "outcome": "done"
+    },
+    {
+      "action": "archive_document",
+      "document": "plan:workflow-and-document-lifecycle",
+      "reason": "Завершение принятого блока PB-021–PB-029 и AUDIT-006",
+      "successor": null
+    }
+  ]
+}

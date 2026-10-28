@@ -1,0 +1,43 @@
+test_A1_angle_suffix_matrix_positive (__main__.Reaudit02.test_A1_angle_suffix_matrix_positive) ... ok
+test_A2_even_backslashes_before_code_span (__main__.Reaudit02.test_A2_even_backslashes_before_code_span) ... FAIL
+test_A4_nested_inline_and_reference_images_positive (__main__.Reaudit02.test_A4_nested_inline_and_reference_images_positive) ... ok
+test_A5_extensionless_fragment_detects_moved_target (__main__.Reaudit02.test_A5_extensionless_fragment_detects_moved_target) ... FAIL
+test_A5_extensionless_joint_move_has_no_false_conflict (__main__.Reaudit02.test_A5_extensionless_joint_move_has_no_false_conflict) ... FAIL
+
+======================================================================
+FAIL: test_A2_even_backslashes_before_code_span (__main__.Reaudit02.test_A2_even_backslashes_before_code_span)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/docs/tasks/PB-022-evidence/reaudit-02-probes.py", line 54, in test_A2_even_backslashes_before_code_span
+    self.assertEqual(self.rewrite(text), text)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: '\\\\`[example](../b.md)`\n' != '\\\\`[example](b.md)`\n'
+- \\`[example](../b.md)`
+?              ---
++ \\`[example](b.md)`
+
+
+======================================================================
+FAIL: test_A5_extensionless_fragment_detects_moved_target (__main__.Reaudit02.test_A5_extensionless_fragment_detects_moved_target)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/docs/tasks/PB-022-evidence/reaudit-02-probes.py", line 66, in test_A5_extensionless_fragment_detects_moved_target
+    self.assertTrue(plan["conflicts"],
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+                    "b.md moved but unsupported wikilink is silently accepted")
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: [] is not true : b.md moved but unsupported wikilink is silently accepted
+
+======================================================================
+FAIL: test_A5_extensionless_joint_move_has_no_false_conflict (__main__.Reaudit02.test_A5_extensionless_joint_move_has_no_false_conflict)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/docs/tasks/PB-022-evidence/reaudit-02-probes.py", line 60, in test_A5_extensionless_joint_move_has_no_false_conflict
+    self.assertFalse(plan["conflicts"], plan["conflicts"])
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: [{'path': '/private/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/tmps49qccwu/docs/a.md', 'line': 1, 'kind': 'unsupported', 'detail': 'b'}] is not false : [{'path': '/private/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/tmps49qccwu/docs/a.md', 'line': 1, 'kind': 'unsupported', 'detail': 'b'}]
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.011s
+
+FAILED (failures=3)

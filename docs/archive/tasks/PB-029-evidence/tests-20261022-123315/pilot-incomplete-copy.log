@@ -1,0 +1,49 @@
+=== Запуск сквозного пилота маршрутов PB-029 ===
+Полигон сохранён на диске: /private/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/pb029-check-i9ifukxe/repo/work/pilot-workspace
+
+--- 1. Инициализация проекта и настройка 5 коллекций документов ---
+Проект успешно сконфигурирован.
+
+--- 2. Пилот маленькой задачи (TASK-101: баг валидации) ---
+verify TASK-101: PASS
+Снимок полигона на момент передачи сохранён: /private/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/pb029-check-i9ifukxe/repo/docs/tasks/PB-029-evidence/pilot-workspace-handoff.tar.gz
+CLI-зонд воспроизвёл дефект: parse_age('') -> ValueError (код != 0).
+CLI-зонд: отказ в закрытии TASK-101 при наличии диагностического замечания подтверждён (rc=1).
+CLI-зонд: повторный verify TASK-101 с новым тестом: PASS (4 теста OK)
+CLI-зонд: parse_age('') is None -> OK (код 0).
+CLI-зонд: TASK-101 закрыта и заархивирована в docs/archive/tasks/TASK-101.md.
+=== Конец автоматического CLI-зонда TASK-101 ===
+
+--- 3. Пилот средней задачи (DEV-201: повтор платежей) ---
+Promotion спецификации успешно выполнен: ревизия 1 -> 2, спецификация осталась активной.
+Средняя задача закрыта, спецификация осталась активной.
+
+--- 4. Пилот большой задачи (блок подзадач SUB-1, SUB-2, AUDIT-1 и плана) ---
+Закрытие SUB-1: общий план и спецификация не затронуты.
+Отказ в закрытии при диагностическом замечании аудитора подтверждён.
+SUB-2 после исправления замечаний успешно принята и заархивирована.
+Отказ в архивировании плана при открытой задаче AUDIT-1 подтверждён.
+Итоговый аудит блока и архивирование плана успешно завершены; спецификация осталась активной.
+
+--- 5. Проверка неизменяемости сопровождающих материалов (evidence) ---
+Неизменяемость evidence подтверждена: хеш побайтно совпал.
+
+check --ready для всех документов и архива: PASS
+
+--- 7. Самоприменение на копии ai-dev-playbook (AC-12) ---
+Traceback (most recent call last):
+  File "/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/pb029-check-i9ifukxe/repo/docs/tasks/PB-029-evidence/e2e_pilot.py", line 1280, in <module>
+    sys.exit(main())
+             ~~~~^^
+  File "/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/pb029-check-i9ifukxe/repo/docs/tasks/PB-029-evidence/e2e_pilot.py", line 735, in main
+    assert code == 0, f"copy check --ready failed: {err}"
+           ^^^^^^^^^
+AssertionError: copy check --ready failed: ERROR: docs/tasks/PB-029.md: поле 'materials': обязательный материал 'verify-cfaf1027e6ad4ee091e738c72f1c6f9c' отсутствует: work/verification/PB-029/cfaf1027e6ad4ee091e738c72f1c6f9c
+docs/tasks/PB-029.md: поле 'materials': обязательный материал 'verify-e4fd2cae40ff4ceb9e4edd3718d4134d' отсутствует: work/verification/PB-029/e4fd2cae40ff4ceb9e4edd3718d4134d
+docs/tasks/PB-029.md: поле 'materials': обязательный материал 'verify-3adc173af30d4a32b122195e18361108' отсутствует: work/verification/PB-029/3adc173af30d4a32b122195e18361108
+docs/tasks/PB-029.md: поле 'materials': обязательный материал 'verify-6fbb0babb2ae48638253d2e03c3249d3' отсутствует: work/verification/PB-029/6fbb0babb2ae48638253d2e03c3249d3
+docs/tasks/PB-029.md: поле 'materials': обязательный материал 'verify-a76c1e3315e74150945bd29fc4d96398' отсутствует: work/verification/PB-029/a76c1e3315e74150945bd29fc4d96398
+docs/tasks/PB-029.md: поле 'materials': обязательный материал 'verify-5fa46edc2a19416aa6cf5876b166fbbd' отсутствует: work/verification/PB-029/5fa46edc2a19416aa6cf5876b166fbbd
+docs/tasks/PB-029.md: поле 'materials': обязательный материал 'verify-37d06c5ca7c94dd3a0a5feed0e876aef' отсутствует: work/verification/PB-029/37d06c5ca7c94dd3a0a5feed0e876aef
+docs/tasks/PB-029.md: поле 'materials': обязательный материал 'verify-5eebb0ee160d4bd3b30e77c6e8adab64' отсутствует: work/verification/PB-029/5eebb0ee160d4bd3b30e77c6e8adab64
+

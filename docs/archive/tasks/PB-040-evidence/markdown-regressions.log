@@ -1,0 +1,15 @@
+test_cli_show_legacy_and_future (test_task_cards.CardLifecycleTest.test_cli_show_legacy_and_future) ... ok
+test_handoff_accept_close_and_tamper (test_task_cards.CardLifecycleTest.test_handoff_accept_close_and_tamper) ... ok
+test_return_fix_new_handoff_requires_new_audit (test_task_cards.CardLifecycleTest.test_return_fix_new_handoff_requires_new_audit) ... ok
+test_default_template_is_supported (test_task_cards.ParserTest.test_default_template_is_supported) ... ok
+test_fenced_examples_and_duplicate_fields (test_task_cards.ParserTest.test_fenced_examples_and_duplicate_fields) ... ok
+test_markdown_colons_urls_and_paragraphs_are_not_fields (test_task_cards.ParserTest.test_markdown_colons_urls_and_paragraphs_are_not_fields) ... ok
+test_negative_grammar_and_links (test_task_cards.ParserTest.test_negative_grammar_and_links) ... ok
+test_projection_and_journal_binding (test_task_cards.ParserTest.test_projection_and_journal_binding) ... ok
+test_two_fixes_three_audits (test_task_cards.ParserTest.test_two_fixes_three_audits) ... ok
+test_unsupported_versions_and_bad_markers (test_task_cards.ParserTest.test_unsupported_versions_and_bad_markers) ... ok
+
+----------------------------------------------------------------------
+Ran 10 tests in 3.536s
+
+OK

@@ -1,0 +1,29 @@
+{
+  "platform": "macOS-27.0.1-x86_64-i386-64bit-Mach-O",
+  "python": "3.14.6 (main, Jun 10 2026, 10:03:53) [Clang 21.0.0 (clang-2100.0.123.102)]",
+  "inputs": {
+    "tests/test_pb029.py": "123481e614a60e0ff1f2404a32dfcd9005a379bf251d2aa83a21cbddd970b721",
+    "ai-dev-playbook/scripts/file_operations.py": "9faa9cde835821c7c71c4166d17acb738e6be239786ff4ddfe845c955c22f0d6",
+    "docs/tasks/PB-029.md": "907c82d690c236fabaf8c3f0f6b2ff6f729c7632215f29092309f9691a423379"
+  },
+  "accept_probe": {
+    "argv": [
+      "/usr/local/opt/python@3.14/bin/python3.14",
+      "/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/pb029-review-6w806r_c/repo/ai-dev-playbook/scripts/playbook.py",
+      "lifecycle",
+      "accept",
+      "PB-029",
+      "--result",
+      "accepted",
+      "--kind",
+      "acceptance",
+      "--actor",
+      "Codex",
+      "--model",
+      "GPT-6"
+    ],
+    "exit": 1,
+    "stdout": "",
+    "stderr": "ERROR: PB-029: карточка без метаданных — handoff/accept требуют раздел documents в project.json и блок метаданных карточки\n"
+  }
+}

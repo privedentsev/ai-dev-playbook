@@ -1,0 +1,16 @@
+{
+  "ai-dev-playbook/scripts/playbook.py": "03be15c0e97092cc68a9bce98392068c9932adadedabc44a2f0acb625a65cfb5",
+  "ai-dev-playbook/scripts/documents.py": "4596e7a440aa31ca1c7b4010c4c217c6826d3106f0393ef0ee1edde521c38da5",
+  "ai-dev-playbook/scripts/file_operations.py": "19ef97b51aa91825c7d1882de60ed5d2d7706ac35cf0959b713dd1de0e2dc5c9",
+  "ai-dev-playbook/templates/documents/adr.md": "9b7fcb0a9f836712b17b1eb33c119c453535bb9c1083c128e43935b55c4ca1d7",
+  "ai-dev-playbook/templates/documents/design.md": "75fd0e33319b6a114975c106c279092626635c877c8c966551de3271c593d915",
+  "ai-dev-playbook/templates/documents/discussion.md": "5f9c918394833646a547b7de9dd9b60f7b81c57103937f9c9b155acd9862373b",
+  "ai-dev-playbook/templates/documents/plan.md": "bbd856fbbebb15324455d85b8b4372db475bc297b92ff029b181c62596531159",
+  "ai-dev-playbook/templates/documents/spec.md": "81fff9a274aa87bff6c17413fe89986c2b6e1f11822b1a174d986643c6f68a73",
+  "ai-dev-playbook/manifest.json": "7cb1c50dbbc85047cb62cf411afd52fb4de7d5cf562f2133ef72699d122d4f60",
+  "docs/architecture.md": "52fed8f9d51420b0ab9a343d0468cf2a40258656416536f35b067b1400199be2",
+  "docs/code-map.md": "278a1180e990f5fb7f67ed8ca2ca50cc3ae6d2dead807584bd28f9cb8fcc8a12",
+  "docs/tasks/PB-024.md": "311f46c664385de59e5d20744be4cb22c31a12cb09bfba41897dc0c89773c205",
+  "docs/tasks/index.md": "4337e227f2af82b04b222837317836e1bdfaaa511d04fb1c0149befb9fb32e9a",
+  "tests/test_document_cli.py": "e206a6821ea4a755f8a127fafeb3b52544164ab776fc29fb2789adef887a75c9"
+}

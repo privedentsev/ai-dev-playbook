@@ -1,0 +1,11 @@
+{
+  "schema_version": 2,
+  "registry": [
+    {
+      "id": "unit-tests",
+      "kind": "command",
+      "argv": ["python3", "-m", "unittest"]
+    }
+  ],
+  "unexpected_key": "not_allowed"
+}

@@ -1,0 +1,8 @@
+test_A2_backslash_parity_rewrite_and_check (__main__.AcceptanceMatrix.test_A2_backslash_parity_rewrite_and_check) ... ok
+test_A5_missing_and_ambiguous_candidates (__main__.AcceptanceMatrix.test_A5_missing_and_ambiguous_candidates) ... ok
+test_A5_wikilink_forms_and_move_directions (__main__.AcceptanceMatrix.test_A5_wikilink_forms_and_move_directions) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.017s
+
+OK

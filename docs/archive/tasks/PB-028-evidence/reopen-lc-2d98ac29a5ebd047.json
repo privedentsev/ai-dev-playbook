@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "plan_id": "lc-2d98ac29a5ebd047",
+  "at": "2026-10-22T12:49:16+03:00",
+  "actor": {
+    "model": "GPT-6 Astra",
+    "name": "Codex",
+    "role": "auditor"
+  },
+  "basis": "AUDIT-006: combined block closure refused and promotion without acceptance; controlled return required by task rules",
+  "action": "reopen",
+  "files": [
+    {
+      "from": "docs/archive/tasks/PB-028.md",
+      "to": "docs/tasks/PB-028.md",
+      "sha256": "sha256:efbe6eb4e664ed40d225849f83f05d3bcea83396122960bad8e9be7e63edbd26",
+      "bytes": 55831
+    }
+  ],
+  "moves": [
+    {
+      "from": "docs/archive/tasks/PB-028.md",
+      "to": "docs/tasks/PB-028.md"
+    }
+  ],
+  "materials": [],
+  "external": [],
+  "type": "lifecycle-reopen",
+  "task": "PB-028",
+  "status": "blocked",
+  "reason": "Dependency PB-026 reopened by AUDIT-006; revalidate after correction",
+  "previous_status": "done",
+  "previous_closed": "2026-10-22T07:49:42+03:00",
+  "policy": "legacy",
+  "blocked": []
+}

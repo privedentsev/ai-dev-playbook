@@ -1,0 +1,3 @@
+first transition: (0, 'Индекс обновлён.\n', '')
+return transition: (0, 'Индексы уже актуальны.\n', '')
+index matches cards: False

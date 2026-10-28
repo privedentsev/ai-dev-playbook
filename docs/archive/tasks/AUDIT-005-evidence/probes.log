@@ -1,0 +1,27 @@
+test_A1_new_file_after_preview_is_overwritten (__main__.Probes.test_A1_new_file_after_preview_is_overwritten) ... ok
+test_A2_drift_allowed_by_plan_fails_apply (__main__.Probes.test_A2_drift_allowed_by_plan_fails_apply) ... ok
+test_A3_keep_removed_file_produces_invalid_manifest (__main__.Probes.test_A3_keep_removed_file_produces_invalid_manifest) ... ok
+test_A4_nested_set_loses_parent_value (__main__.Probes.test_A4_nested_set_loses_parent_value) ... ok
+test_A4_rename_collision_loses_existing_value (__main__.Probes.test_A4_rename_collision_loses_existing_value) ... ok
+test_A5_schema_upgrade_succeeds_but_installed_CLI_breaks (__main__.Probes.test_A5_schema_upgrade_succeeds_but_installed_CLI_breaks) ... ok
+test_A6_missing_backup_is_reported_as_success (__main__.Probes.test_A6_missing_backup_is_reported_as_success) ... ok
+test_A6_standalone_missing_index_is_success (__main__.Probes.test_A6_standalone_missing_index_is_success) ... ok
+test_A7_live_edit_during_staging_is_overwritten (__main__.Probes.test_A7_live_edit_during_staging_is_overwritten) ... ok
+test_A8_manifest_reserved_setting_path_is_deleted (__main__.Probes.test_A8_manifest_reserved_setting_path_is_deleted) ... ok
+test_control_SIGKILL_restore_full_hash_match (__main__.Probes.test_control_SIGKILL_restore_full_hash_match) ... ok
+
+----------------------------------------------------------------------
+Ran 11 tests in 6.252s
+
+OK
+A1: unreviewed new project file overwritten, exit=0
+A2: no-conflict drift plan rolls back at final hash check
+A3: keep for removed locally edited file makes invalid manifest and rolls back
+A4: nested json_set silently discards scalar parent
+A4: json_rename silently replaces existing destination value
+A5: apply exit=0, installed check fails on schema=2, pending absent
+A6: missing VERSION backup skipped, restore exit=0 and marker removed
+A6: standalone restore without backup_index removes pending and exits 0
+A7: original edited during staging; no second fingerprint check; edit overwritten
+A8: corrupt manifest accepted; resources.json becomes managed removal and is deleted
+CONTROL: real SIGKILL after first write; CLI restore returns all preimage hashes

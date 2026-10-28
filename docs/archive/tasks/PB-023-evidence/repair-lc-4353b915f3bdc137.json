@@ -1,0 +1,181 @@
+{
+  "schema_version": 1,
+  "plan_id": "lc-4353b915f3bdc137",
+  "at": "2026-10-26T13:42:20+03:00",
+  "actor": {
+    "model": "GPT-6",
+    "name": "Codex",
+    "role": "executor"
+  },
+  "basis": "Инженер разрешил исправление исторических остатков материалов; PB-044",
+  "action": "repair_task_materials",
+  "files": [
+    {
+      "from": "docs/tasks/PB-023-evidence/audit-unit-tests.log",
+      "to": "docs/archive/tasks/PB-023-evidence/audit-unit-tests.log",
+      "sha256": "sha256:8584d6038fe6db89b483f18c3529d7d214e36505a616d46ac55303f81cd6f99b",
+      "bytes": 37411
+    },
+    {
+      "from": "docs/tasks/PB-023-evidence/audit_inputs.json",
+      "to": "docs/archive/tasks/PB-023-evidence/audit_inputs.json",
+      "sha256": "sha256:a8c0a0422a39093ce29560760a3153a16132e63a5a45bbc11569b2bcceca30b3",
+      "bytes": 598
+    },
+    {
+      "from": "docs/tasks/PB-023-evidence/audit_repro.json",
+      "to": "docs/archive/tasks/PB-023-evidence/audit_repro.json",
+      "sha256": "sha256:94f301c1ce445d9a81e71ccb2fb9d9c0e8564d80ad656cd1ae33e7e07afd26fc",
+      "bytes": 1448
+    },
+    {
+      "from": "docs/tasks/PB-023-evidence/audit_repro.py",
+      "to": "docs/archive/tasks/PB-023-evidence/audit_repro.py",
+      "sha256": "sha256:26be20afdaac86901255bcf3208499315eda28bbc611c1e9660350f5a50001ee",
+      "bytes": 6823
+    },
+    {
+      "from": "docs/tasks/PB-023-evidence/audit_verify.json",
+      "to": "docs/archive/tasks/PB-023-evidence/audit_verify.json",
+      "sha256": "sha256:ab04ba7144126841362370857a5375e1c25f1093ea399b122ed9118e28a90480",
+      "bytes": 1412
+    },
+    {
+      "from": "docs/tasks/PB-023-evidence/fix2_inputs.json",
+      "to": "docs/archive/tasks/PB-023-evidence/fix2_inputs.json",
+      "sha256": "sha256:803438c69f3199c36e7559c279ae53ed2763cc886f0f6d9202ab11fae1bc4007",
+      "bytes": 938
+    },
+    {
+      "from": "docs/tasks/PB-023-evidence/fix2_probes.json",
+      "to": "docs/archive/tasks/PB-023-evidence/fix2_probes.json",
+      "sha256": "sha256:9a8adc3b30e9020be971ca872ff707798f5db88fab2b21c6aceb2496f0cd5dbf",
+      "bytes": 2286
+    },
+    {
+      "from": "docs/tasks/PB-023-evidence/fix3_inputs.json",
+      "to": "docs/archive/tasks/PB-023-evidence/fix3_inputs.json",
+      "sha256": "sha256:3b304787d6f42193d25b6ed3621524ec8d8f1af153c76c97ce4c4925e32c447c",
+      "bytes": 1058
+    },
+    {
+      "from": "docs/tasks/PB-023-evidence/fix3_probes.json",
+      "to": "docs/archive/tasks/PB-023-evidence/fix3_probes.json",
+      "sha256": "sha256:50a54505dfff5ff70553c588c49686f813549a3e482c1392e34decdce0ba9136",
+      "bytes": 2690
+    },
+    {
+      "from": "docs/tasks/PB-023-evidence/fix_inputs.json",
+      "to": "docs/archive/tasks/PB-023-evidence/fix_inputs.json",
+      "sha256": "sha256:f3a0c5544a2b144ca88ca379ae6b4ad659929bc762f843b8854025c2a6f0c4f2",
+      "bytes": 818
+    },
+    {
+      "from": "docs/tasks/PB-023-evidence/fix_repro.json",
+      "to": "docs/archive/tasks/PB-023-evidence/fix_repro.json",
+      "sha256": "sha256:a7edcc410e192af4611a5bc484b386f45e1df53c159d24e71908366dea937920",
+      "bytes": 1442
+    },
+    {
+      "from": "docs/tasks/PB-023-evidence/reaudit-unit-tests.log",
+      "to": "docs/archive/tasks/PB-023-evidence/reaudit-unit-tests.log",
+      "sha256": "sha256:4933cca137cf5cdda8419067dacc0b139c46f5f77629e87eb4d70ba2f95d6758",
+      "bytes": 39102
+    },
+    {
+      "from": "docs/tasks/PB-023-evidence/reaudit_inputs.json",
+      "to": "docs/archive/tasks/PB-023-evidence/reaudit_inputs.json",
+      "sha256": "sha256:25e11a943fa60efd639b0ddcc8284a6fd2c0cd6684f7898e47c8e2969d96b720",
+      "bytes": 590
+    },
+    {
+      "from": "docs/tasks/PB-023-evidence/reaudit_probes.json",
+      "to": "docs/archive/tasks/PB-023-evidence/reaudit_probes.json",
+      "sha256": "sha256:193f3e697cc74c1d1f4c39f9eb1c8b011f08c6551ae8a59f48c4fbee614fe57e",
+      "bytes": 2294
+    },
+    {
+      "from": "docs/tasks/PB-023-evidence/reaudit_probes.py",
+      "to": "docs/archive/tasks/PB-023-evidence/reaudit_probes.py",
+      "sha256": "sha256:6a2d92e303922dbb3e9a892619f121003d5dacf1252fde5e69ee67fd946fa4a6",
+      "bytes": 4349
+    },
+    {
+      "from": "docs/tasks/PB-023-evidence/reaudit_verify.json",
+      "to": "docs/archive/tasks/PB-023-evidence/reaudit_verify.json",
+      "sha256": "sha256:b2d89d5c05464522966fba7e80c7d8bc2afa0d69263e490e4f345a76f64a8982",
+      "bytes": 1412
+    },
+    {
+      "from": "docs/tasks/PB-023-evidence/review3-unit-tests.log",
+      "to": "docs/archive/tasks/PB-023-evidence/review3-unit-tests.log",
+      "sha256": "sha256:a5bc5b225b30b6f94b2d353c9e0c8a2e4e873a4d280b99ea6176eaeeeb736ced",
+      "bytes": 39388
+    },
+    {
+      "from": "docs/tasks/PB-023-evidence/review3_inputs.json",
+      "to": "docs/archive/tasks/PB-023-evidence/review3_inputs.json",
+      "sha256": "sha256:ca6010d82a27e737ed01b3507970ea1835673032e3a151cdd773c509352a4f2a",
+      "bytes": 819
+    },
+    {
+      "from": "docs/tasks/PB-023-evidence/review3_probes.json",
+      "to": "docs/archive/tasks/PB-023-evidence/review3_probes.json",
+      "sha256": "sha256:7bf3b4a2761cad6c37ac1767aa1a613f53f2b12af6f445bb5c0e7028417b91e6",
+      "bytes": 2705
+    },
+    {
+      "from": "docs/tasks/PB-023-evidence/review3_probes.py",
+      "to": "docs/archive/tasks/PB-023-evidence/review3_probes.py",
+      "sha256": "sha256:edfbb98fd53665e2c87eec146dac0df54cc7d42edadac32d9c6df7ae6480420e",
+      "bytes": 3056
+    },
+    {
+      "from": "docs/tasks/PB-023-evidence/review3_verify.json",
+      "to": "docs/archive/tasks/PB-023-evidence/review3_verify.json",
+      "sha256": "sha256:b6aefcacc24c32279b618c471e00f012ee23c2a5fcd4142f2543a2dc18733021",
+      "bytes": 1412
+    },
+    {
+      "from": "docs/tasks/PB-023-evidence/review4-unit-tests.log",
+      "to": "docs/archive/tasks/PB-023-evidence/review4-unit-tests.log",
+      "sha256": "sha256:765b9948478d3cc840b53a5a96c08924611f72003aa321e4e4e50fd96ab588d5",
+      "bytes": 39527
+    },
+    {
+      "from": "docs/tasks/PB-023-evidence/review4_inputs.json",
+      "to": "docs/archive/tasks/PB-023-evidence/review4_inputs.json",
+      "sha256": "sha256:daf77bef5bfae58fc9958b5f5b931cc532c44bf130dafa38657716e65cb293e2",
+      "bytes": 819
+    },
+    {
+      "from": "docs/tasks/PB-023-evidence/review4_probes.json",
+      "to": "docs/archive/tasks/PB-023-evidence/review4_probes.json",
+      "sha256": "sha256:c1d30d5d2cd9eaffea2866dfe4dcb307da51a6fef720a02e0917f1587767d0fc",
+      "bytes": 3351
+    },
+    {
+      "from": "docs/tasks/PB-023-evidence/review4_probes.py",
+      "to": "docs/archive/tasks/PB-023-evidence/review4_probes.py",
+      "sha256": "sha256:828989d0c0e26e65bf06e3f5b09173faa28ac041c5e49f8230235b78cf65ab72",
+      "bytes": 2427
+    },
+    {
+      "from": "docs/tasks/PB-023-evidence/review4_verify.json",
+      "to": "docs/archive/tasks/PB-023-evidence/review4_verify.json",
+      "sha256": "sha256:dec1f1d0665f03766fb01ef817fcf248a547a00d2639485682d996d75470f35f",
+      "bytes": 1412
+    }
+  ],
+  "moves": [
+    {
+      "from": "docs/tasks/PB-023-evidence",
+      "to": "docs/archive/tasks/PB-023-evidence"
+    }
+  ],
+  "materials": [],
+  "external": [],
+  "type": "lifecycle-material-repair",
+  "task": "PB-023",
+  "reason": "Старый close перенёс карточку без evidence; восстановление размещения без повторной приёмки"
+}

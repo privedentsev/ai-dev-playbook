@@ -1,0 +1,19 @@
+{
+  "test_names": [
+    "test_small_task_route_e2e",
+    "test_medium_task_route_e2e",
+    "test_large_block_route_e2e",
+    "test_link_and_archive_immutability_e2e",
+    "test_self_project_copy_pilot",
+    "test_ac07_feature_deprecation_and_adr_archival_e2e",
+    "test_ac10_ac11_lifecycle_controls_and_missing_evidence",
+    "test_ac02_discussion_lifecycle_and_transition_to_spec"
+  ],
+  "files": {
+    "tests/test_pb029.py": "261931c9d5b32abd490bfdf4a0766f0cdde18a8e63d8d4d1a355ffb4e6a06ac5",
+    "docs/tasks/PB-029-evidence/e2e_pilot.py": "d04a1abc9a4b7378fb8b006cccf97da58b4e1db09d9836c6552d53b8ab44a536",
+    "docs/tasks/PB-029-evidence/process-log.md": "0eada65bf9068c4aac6b981b14c01f31176e28a24beb01021f4b6b9e50db0b9b",
+    "docs/tasks/PB-029-evidence/mapping-ac.md": "4ac63e0a4c44b4b416488fef173a2f662eff846a8706f2f731c4ea06990d2d03",
+    "docs/tasks/PB-029.md": "0226547e13766c2f6bb5cf54ebb8ecf399bfa816674744c3c42b36eae020aa30"
+  }
+}

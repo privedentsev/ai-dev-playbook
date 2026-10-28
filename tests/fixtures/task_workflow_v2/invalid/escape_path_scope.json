@@ -1,0 +1,19 @@
+{
+  "schema_version": 2,
+  "workflow": {
+    "route": "small"
+  },
+  "verification_plan": {
+    "revision": 1,
+    "rationale": "Путь с выходом за корень проекта",
+    "scope": ["../outside_project"],
+    "checks": [
+      {
+        "id": "check1",
+        "kind": "command",
+        "purpose": "Проверка",
+        "registry_id": "unit-tests"
+      }
+    ]
+  }
+}

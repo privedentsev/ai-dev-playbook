@@ -1,0 +1,20 @@
+{
+  "owner": "PB-020",
+  "at": "2026-10-01T03:30:19+03:00",
+  "files": [
+    {
+      "original_path": "docs/tasks/PB-020-evidence/review-handoff.md",
+      "archived_path": "docs/archive/tasks/PB-020-evidence/review-handoff.md",
+      "original_sha256": "47562c00c5726b4c650dae2089ecb340570c251fb6065e3e8a2133b24777845e",
+      "archived_sha256": "4685c8776d1da5575a3b1574dabaa539c5988a7ab74d3e2b4d3b2d2f8e19dca9",
+      "navigation_updated": true
+    },
+    {
+      "original_path": "docs/tasks/PB-020-evidence/review-inputs.json",
+      "archived_path": "docs/archive/tasks/PB-020-evidence/review-inputs.json",
+      "original_sha256": "f476fa87d0134f29c227144675922317cd080a022cfca8ce560ae5227751a00a",
+      "archived_sha256": "f476fa87d0134f29c227144675922317cd080a022cfca8ce560ae5227751a00a",
+      "navigation_updated": false
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+test_A1 (__main__.Recheck3.test_A1) ... ok
+test_A2_drift_and_second_plan (__main__.Recheck3.test_A2_drift_and_second_plan) ... ok
+test_A3_keep_removed_file (__main__.Recheck3.test_A3_keep_removed_file) ... ok
+test_A4_collisions_rejected_without_changes (__main__.Recheck3.test_A4_collisions_rejected_without_changes) ... ok
+test_A5_incompatible_cli_rejected (__main__.Recheck3.test_A5_incompatible_cli_rejected) ... ok
+test_A6_missing_and_corrupt_backup_refused_then_restored (__main__.Recheck3.test_A6_missing_and_corrupt_backup_refused_then_restored) ... ok
+test_A7_editor (__main__.Recheck3.test_A7_editor) ... ok
+test_A7_live_restore_refused (__main__.Recheck3.test_A7_live_restore_refused) ... ok
+test_A8_reserved_paths_rejected (__main__.Recheck3.test_A8_reserved_paths_rejected) ... ok
+test_remaining_A6_incomplete_index_false_success (__main__.Recheck3.test_remaining_A6_incomplete_index_false_success) ... ok
+test_remaining_A7_standalone_ignores_pending_owner (__main__.Recheck3.test_remaining_A7_standalone_ignores_pending_owner) ... ok
+
+----------------------------------------------------------------------
+Ran 11 tests in 15.035s
+
+OK

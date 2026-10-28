@@ -1,0 +1,21 @@
+{
+  "schema_version": 2,
+  "workflow": {
+    "route": "quick"
+  },
+  "verification_plan": {
+    "revision": 1,
+    "rationale": "Тест",
+    "scope": ["tests"],
+    "checks": [
+      {
+        "id": "c1",
+        "kind": "command",
+        "purpose": "Проверка",
+        "registry_id": "unit-tests"
+      }
+    ]
+  },
+  "relations": [],
+  "materials": []
+}

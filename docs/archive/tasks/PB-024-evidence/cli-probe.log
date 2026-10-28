@@ -1,0 +1,41 @@
+$ document create spec alpha --title Alpha -> 0
+PASS create preview rc=0 
+PASS create preview без записи 
+PASS create preview показывает diff 
+$ index --all -> 0
+PASS index --all 
+$ index --all -> 0
+PASS index --all идемпотентен 
+$ document create spec alpha --title Alpha --apply -> 0
+PASS create apply rc=0 
+PASS create apply: документ и индекс 
+PASS create apply: receipt операции 
+$ document create spec alpha --apply -> 1
+PASS create коллизия 
+$ document register docs/plans/legacy-plan.md --metadata {"schema_version": 1, "document_id": "plan:legacy-plan", "kind": "plan", "state": "accepted", "created_at": "2026-01-01T00:00:00+03:00", "updated_at": "2026-01-02T00:00:00+03:00", "current_revision": 1, "relations": [], "tasks": [], "changes": [], "materials": [], "archive": null} -> 0
+PASS register preview rc=0 без записи 
+$ document register docs/plans/legacy-plan.md --metadata {"schema_version": 1, "document_id": "plan:legacy-plan", "kind": "plan", "state": "accepted", "created_at": "2026-01-01T00:00:00+03:00", "updated_at": "2026-01-02T00:00:00+03:00", "current_revision": 1, "relations": [], "tasks": [], "changes": [], "materials": [], "archive": null} --apply -> 0
+PASS register apply rc=0 
+PASS register сохраняет тело 
+PASS register: не legacy в индексе 
+$ document register docs/plans/legacy-plan.md --metadata {"schema_version": 1, "document_id": "plan:legacy-plan", "kind": "plan", "state": "accepted", "created_at": "2026-01-01T00:00:00+03:00", "updated_at": "2026-01-02T00:00:00+03:00", "current_revision": 1, "relations": [], "tasks": [], "changes": [], "materials": [], "archive": null} --apply -> 1
+PASS register повторно — отказ 
+$ document register docs/plans/other.md --metadata {"schema_version": 99, "document_id": "plan:other", "kind": "plan", "state": "accepted", "created_at": "2026-01-01T00:00:00+03:00", "updated_at": "2026-01-02T00:00:00+03:00", "current_revision": 1, "relations": [], "tasks": [], "changes": [], "materials": [], "archive": null} --apply -> 1
+PASS register schema_version 99 — отказ 
+$ document register docs/stray.md --metadata {"schema_version": 1, "document_id": "plan:legacy-plan", "kind": "plan", "state": "accepted", "created_at": "2026-01-01T00:00:00+03:00", "updated_at": "2026-01-02T00:00:00+03:00", "current_revision": 1, "relations": [], "tasks": [], "changes": [], "materials": [], "archive": null} --apply -> 1
+PASS register вне коллекции — отказ 
+$ document register docs/plans/index.md --metadata {"schema_version": 1, "document_id": "plan:legacy-plan", "kind": "plan", "state": "accepted", "created_at": "2026-01-01T00:00:00+03:00", "updated_at": "2026-01-02T00:00:00+03:00", "current_revision": 1, "relations": [], "tasks": [], "changes": [], "materials": [], "archive": null} --apply -> 1
+PASS register файла индекса — отказ 
+$ index --documents -> 1
+PASS index: файл без маркеров — отказ без записи 
+$ check --ready -> 1
+PASS check ловит повреждённый индекс, не чинит 
+$ index --documents -> 0
+PASS index обновляет только область 
+$ check --ready -> 1
+PASS check ловит устаревший индекс 
+$ index --all -> 0
+$ check --ready -> 0
+PASS check --ready после исправления 
+
+ИТОГ: 22/22 пройдено

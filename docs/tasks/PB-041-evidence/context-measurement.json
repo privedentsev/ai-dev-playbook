@@ -1,0 +1,7 @@
+{
+  "sample": "synthetic eight iterations, 32 journal entries",
+  "full_characters": 39508,
+  "compact_characters": 867,
+  "tokens_measured": false,
+  "limitation": "Synthetic sample; no fixed token reduction promised."
+}

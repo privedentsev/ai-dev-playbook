@@ -1,0 +1,31 @@
+test_self_project_copy_pilot (test_pb029.Pb029EndToEndRoutesTest.test_self_project_copy_pilot)
+AC-12: Копия собственного проекта ai-dev-playbook со всеми незакоммиченными ... FAIL
+
+======================================================================
+FAIL: test_self_project_copy_pilot (test_pb029.Pb029EndToEndRoutesTest.test_self_project_copy_pilot)
+AC-12: Копия собственного проекта ai-dev-playbook со всеми незакоммиченными
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_pb029.py", line 757, in test_self_project_copy_pilot
+    self.assertEqual(code, 0, f"close PILOT-001 failed:\nout={out}\nerr={err}")
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 1 != 0 : close PILOT-001 failed:
+out=
+err=ERROR: docs/archive/tasks/PB-052.md: битая или внешняя локальная ссылка ../../../work/audits/PB-052-reaudit-02/report.md
+
+
+----------------------------------------------------------------------
+Ran 1 test in 180.263s
+
+FAILED (failures=1)
+PB-051: чекбоксы уже актуальны.
+PB-041: чекбоксы уже актуальны.
+PB-045: чекбоксы уже актуальны.
+PB-044: чекбоксы уже актуальны.
+PB-050: чекбоксы уже актуальны.
+PB-049: чекбоксы уже актуальны.
+PB-048: чекбоксы уже актуальны.
+AUDIT-008: чекбоксы уже актуальны.
+PB-047: чекбоксы уже актуальны.
+PB-053: чекбоксы уже актуальны.
+PB-046: чекбоксы уже актуальны.

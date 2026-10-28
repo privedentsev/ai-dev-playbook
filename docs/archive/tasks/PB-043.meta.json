@@ -1,0 +1,113 @@
+{
+  "schema_version": 1,
+  "card_format_version": 2,
+  "relations": [
+    {
+      "relation": "based_on",
+      "target": "spec:handoff-context"
+    }
+  ],
+  "materials": [
+    {
+      "id": "pb043-evidence",
+      "role": "report",
+      "source": "docs/archive/tasks/PB-043-evidence",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-043"
+      ]
+    },
+    {
+      "id": "verify-18e1a58302674edabe2470dc1cdf831e",
+      "role": "report",
+      "source": "docs/archive/tasks/PB-043-evidence/work/verification/PB-043/18e1a58302674edabe2470dc1cdf831e",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-043"
+      ]
+    },
+    {
+      "id": "independent-audit",
+      "role": "report",
+      "source": "docs/archive/tasks/PB-043-evidence/work/verification/PB-043/independent-audit",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-043"
+      ]
+    },
+    {
+      "id": "lifecycle-lc-d07afcb3e1603f54",
+      "role": "report",
+      "source": "docs/archive/tasks/PB-043-evidence/close-lc-d07afcb3e1603f54.json",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": []
+    }
+  ],
+  "criterion_evidence": {
+    "CHECK-01": {
+      "check_sha256": "sha256:80a0bf4305de552b54589b4217bbb2ee514785aac0ea32cdbe6984053f88161f",
+      "card_projection": "sha256:2ecbbed8caf875448e72cec62039b3da85e12542113d3b8b9293f08c50cfbe5d",
+      "report_id": "verify-18e1a58302674edabe2470dc1cdf831e",
+      "report_sha256": "sha256:1939834f4a369e0f2793de22d943b78b2abdf5bc8883c3c5e73eac692f8d90ed"
+    }
+  },
+  "handoff": {
+    "at": "2026-10-26T08:04:23+03:00",
+    "actor": {
+      "name": "Codex",
+      "model": "GPT-6"
+    },
+    "summary": "HANDOFF-01",
+    "reports": [
+      "verify-18e1a58302674edabe2470dc1cdf831e"
+    ],
+    "card_projection": "sha256:2ecbbed8caf875448e72cec62039b3da85e12542113d3b8b9293f08c50cfbe5d",
+    "entry_id": "HANDOFF-01",
+    "journal_sha256": "sha256:5a832ead398708d53eff1dabf9f6d8be947f4a9575fa4347e5629da7c7531cc6"
+  },
+  "acceptance": {
+    "at": "2026-10-26T08:10:31+03:00",
+    "actor": {
+      "name": "Codex",
+      "model": "GPT-6"
+    },
+    "role": "auditor",
+    "kind": "acceptance",
+    "result": "accepted",
+    "handoff_at": "2026-10-26T08:04:23+03:00",
+    "session": null,
+    "detail": null,
+    "audit_id": "AUDIT-01",
+    "audit_sha256": "sha256:2cb0b2be79c7d03510351d97e4fca725141bbfa4067b50b9c2da5e782876ac05"
+  },
+  "moves": [
+    {
+      "from": "docs/tasks/PB-043-evidence",
+      "to": "docs/archive/tasks/PB-043-evidence"
+    },
+    {
+      "from": "work/verification/PB-043/18e1a58302674edabe2470dc1cdf831e",
+      "to": "docs/archive/tasks/PB-043-evidence/work/verification/PB-043/18e1a58302674edabe2470dc1cdf831e"
+    },
+    {
+      "from": "work/verification/PB-043/independent-audit",
+      "to": "docs/archive/tasks/PB-043-evidence/work/verification/PB-043/independent-audit"
+    },
+    {
+      "from": "docs/tasks/PB-043.md",
+      "to": "docs/archive/tasks/PB-043.md"
+    },
+    {
+      "from": "docs/tasks/PB-043.meta.json",
+      "to": "docs/archive/tasks/PB-043.meta.json"
+    }
+  ]
+}

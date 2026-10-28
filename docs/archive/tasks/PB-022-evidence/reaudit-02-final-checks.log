@@ -1,0 +1,14 @@
+$ python3 ai-dev-playbook/scripts/playbook.py index
+Индекс обновлён.
+exit_code=0
+
+$ python3 ai-dev-playbook/scripts/playbook.py check --ready
+OK: структура, ссылки и 35 карточки. Поведение продукта не проверялось.
+exit_code=0
+
+$ git diff --check
+exit_code=0
+
+Changed during audit (PB-023, outside acceptance): ['ai-dev-playbook/scripts/file_operations.py', 'tests/test_file_operations.py']
+Unchanged inputs: 9/11; PB-022 source/test hashes unchanged.
+Manifest mismatches: ['ai-dev-playbook/scripts/file_operations.py']

@@ -1,0 +1,10 @@
+test_A1_new_and_collision_paths_preserved (__main__.Recheck.test_A1_new_and_collision_paths_preserved) ... ok
+test_A7_external_editor_preserved_and_lock_released (__main__.Recheck.test_A7_external_editor_preserved_and_lock_released) ... ok
+test_A7_second_apply_blocked (__main__.Recheck.test_A7_second_apply_blocked) ... ok
+test_active_restore_unlocks_running_apply (__main__.Recheck.test_active_restore_unlocks_running_apply) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 4.610s
+
+OK
+ACTIVE RESTORE: first process remained alive, pending removed, ordinary check allowed; second apply entered; exits: 1 0

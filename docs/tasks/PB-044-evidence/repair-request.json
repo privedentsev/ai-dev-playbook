@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "actor": {
+    "name": "Codex",
+    "role": "executor",
+    "model": "GPT-6"
+  },
+  "basis": "Инженер разрешил исправление исторических остатков материалов; PB-044",
+  "scope": {
+    "tasks": [
+      "AUDIT-005",
+      "PB-021",
+      "PB-022",
+      "PB-023",
+      "PB-024",
+      "PB-025"
+    ]
+  },
+  "actions": [
+    {
+      "action": "repair_task_materials",
+      "task": "AUDIT-005",
+      "reason": "Старый close перенёс карточку без evidence; восстановление размещения без повторной приёмки"
+    },
+    {
+      "action": "repair_task_materials",
+      "task": "PB-021",
+      "reason": "Старый close перенёс карточку без evidence; восстановление размещения без повторной приёмки"
+    },
+    {
+      "action": "repair_task_materials",
+      "task": "PB-022",
+      "reason": "Старый close перенёс карточку без evidence; восстановление размещения без повторной приёмки"
+    },
+    {
+      "action": "repair_task_materials",
+      "task": "PB-023",
+      "reason": "Старый close перенёс карточку без evidence; восстановление размещения без повторной приёмки"
+    },
+    {
+      "action": "repair_task_materials",
+      "task": "PB-024",
+      "reason": "Старый close перенёс карточку без evidence; восстановление размещения без повторной приёмки"
+    },
+    {
+      "action": "repair_task_materials",
+      "task": "PB-025",
+      "reason": "Старый close перенёс карточку без evidence; восстановление размещения без повторной приёмки"
+    }
+  ]
+}

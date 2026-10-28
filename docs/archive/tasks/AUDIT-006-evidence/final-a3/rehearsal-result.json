@@ -1,0 +1,11 @@
+{
+  "result": "PASS",
+  "synthetic_acceptance": true,
+  "verification_scope": "rehearsal: actual check --ready; source full suite separately",
+  "audit_evidence_preserved": 30,
+  "plan_history_preserved": 1,
+  "code_tests_unchanged": true,
+  "active_spec_design_preserved": true,
+  "refusal_without_acceptance_unchanged": true,
+  "steps": 10
+}

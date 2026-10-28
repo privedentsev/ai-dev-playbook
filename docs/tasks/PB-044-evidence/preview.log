@@ -1,0 +1,1180 @@
+План lc-d7ad29c04b5d08ef (lifecycle):
+Основание: Инженер разрешил исправление исторических остатков материалов; PB-044
+Исполнитель: Codex (executor, GPT-6)
+Действия:
+  repair_task_materials AUDIT-005: материалы → docs/archive/tasks/AUDIT-005-evidence; статус и Closed сохранены
+  repair_task_materials PB-021: материалы → docs/archive/tasks/PB-021-evidence; статус и Closed сохранены
+  repair_task_materials PB-022: материалы → docs/archive/tasks/PB-022-evidence; статус и Closed сохранены
+  repair_task_materials PB-023: материалы → docs/archive/tasks/PB-023-evidence; статус и Closed сохранены
+  repair_task_materials PB-024: материалы → docs/archive/tasks/PB-024-evidence; статус и Closed сохранены
+  repair_task_materials PB-025: материалы → docs/archive/tasks/PB-025-evidence; статус и Closed сохранены
+Переносы:
+  docs/tasks/AUDIT-005-evidence → docs/archive/tasks/AUDIT-005-evidence
+  docs/tasks/AUDIT-005-evidence/__pycache__ → docs/archive/tasks/AUDIT-005-evidence/__pycache__
+  docs/tasks/AUDIT-005-evidence/__pycache__/probes.cpython-314.pyc → docs/archive/tasks/AUDIT-005-evidence/__pycache__/probes.cpython-314.pyc
+  docs/tasks/AUDIT-005-evidence/__pycache__/recheck02.cpython-314.pyc → docs/archive/tasks/AUDIT-005-evidence/__pycache__/recheck02.cpython-314.pyc
+  docs/tasks/AUDIT-005-evidence/inputs.json → docs/archive/tasks/AUDIT-005-evidence/inputs.json
+  docs/tasks/AUDIT-005-evidence/probes.log → docs/archive/tasks/AUDIT-005-evidence/probes.log
+  docs/tasks/AUDIT-005-evidence/probes.py → docs/archive/tasks/AUDIT-005-evidence/probes.py
+  docs/tasks/AUDIT-005-evidence/recheck01-independent.log → docs/archive/tasks/AUDIT-005-evidence/recheck01-independent.log
+  docs/tasks/AUDIT-005-evidence/recheck01-inputs.json → docs/archive/tasks/AUDIT-005-evidence/recheck01-inputs.json
+  docs/tasks/AUDIT-005-evidence/recheck01-original-probes.log → docs/archive/tasks/AUDIT-005-evidence/recheck01-original-probes.log
+  docs/tasks/AUDIT-005-evidence/recheck01-report.md → docs/archive/tasks/AUDIT-005-evidence/recheck01-report.md
+  docs/tasks/AUDIT-005-evidence/recheck01-structure.log → docs/archive/tasks/AUDIT-005-evidence/recheck01-structure.log
+  docs/tasks/AUDIT-005-evidence/recheck01-unit.log → docs/archive/tasks/AUDIT-005-evidence/recheck01-unit.log
+  docs/tasks/AUDIT-005-evidence/recheck01.py → docs/archive/tasks/AUDIT-005-evidence/recheck01.py
+  docs/tasks/AUDIT-005-evidence/recheck02-historical.log → docs/archive/tasks/AUDIT-005-evidence/recheck02-historical.log
+  docs/tasks/AUDIT-005-evidence/recheck02-independent.log → docs/archive/tasks/AUDIT-005-evidence/recheck02-independent.log
+  docs/tasks/AUDIT-005-evidence/recheck02-inputs.json → docs/archive/tasks/AUDIT-005-evidence/recheck02-inputs.json
+  docs/tasks/AUDIT-005-evidence/recheck02-report.md → docs/archive/tasks/AUDIT-005-evidence/recheck02-report.md
+  docs/tasks/AUDIT-005-evidence/recheck02-structure.log → docs/archive/tasks/AUDIT-005-evidence/recheck02-structure.log
+  docs/tasks/AUDIT-005-evidence/recheck02-unit.log → docs/archive/tasks/AUDIT-005-evidence/recheck02-unit.log
+  docs/tasks/AUDIT-005-evidence/recheck02.py → docs/archive/tasks/AUDIT-005-evidence/recheck02.py
+  docs/tasks/AUDIT-005-evidence/recheck03-acceptance.log → docs/archive/tasks/AUDIT-005-evidence/recheck03-acceptance.log
+  docs/tasks/AUDIT-005-evidence/recheck03-closed.json → docs/archive/tasks/AUDIT-005-evidence/recheck03-closed.json
+  docs/tasks/AUDIT-005-evidence/recheck03-historical.log → docs/archive/tasks/AUDIT-005-evidence/recheck03-historical.log
+  docs/tasks/AUDIT-005-evidence/recheck03-inputs.json → docs/archive/tasks/AUDIT-005-evidence/recheck03-inputs.json
+  docs/tasks/AUDIT-005-evidence/recheck03-pilot.json → docs/archive/tasks/AUDIT-005-evidence/recheck03-pilot.json
+  docs/tasks/AUDIT-005-evidence/recheck03-report.md → docs/archive/tasks/AUDIT-005-evidence/recheck03-report.md
+  docs/tasks/AUDIT-005-evidence/recheck03-structure.log → docs/archive/tasks/AUDIT-005-evidence/recheck03-structure.log
+  docs/tasks/AUDIT-005-evidence/recheck03-unit.log → docs/archive/tasks/AUDIT-005-evidence/recheck03-unit.log
+  docs/tasks/AUDIT-005-evidence/recheck03.py → docs/archive/tasks/AUDIT-005-evidence/recheck03.py
+  docs/tasks/AUDIT-005-evidence/report.md → docs/archive/tasks/AUDIT-005-evidence/report.md
+  docs/tasks/AUDIT-005-evidence/structure.log → docs/archive/tasks/AUDIT-005-evidence/structure.log
+  docs/tasks/AUDIT-005-evidence/unit-tests.log → docs/archive/tasks/AUDIT-005-evidence/unit-tests.log
+  docs/tasks/PB-021-evidence → docs/archive/tasks/PB-021-evidence
+  docs/tasks/PB-021-evidence/audit-inputs.json → docs/archive/tasks/PB-021-evidence/audit-inputs.json
+  docs/tasks/PB-021-evidence/audit-results.json → docs/archive/tasks/PB-021-evidence/audit-results.json
+  docs/tasks/PB-021-evidence/audit_probe.py → docs/archive/tasks/PB-021-evidence/audit_probe.py
+  docs/tasks/PB-021-evidence/concurrent-run.log → docs/archive/tasks/PB-021-evidence/concurrent-run.log
+  docs/tasks/PB-021-evidence/review-02 → docs/archive/tasks/PB-021-evidence/review-02
+  docs/tasks/PB-021-evidence/review-02/extra-results.json → docs/archive/tasks/PB-021-evidence/review-02/extra-results.json
+  docs/tasks/PB-021-evidence/review-02/extra_probe.py → docs/archive/tasks/PB-021-evidence/review-02/extra_probe.py
+  docs/tasks/PB-021-evidence/review-02/inputs.json → docs/archive/tasks/PB-021-evidence/review-02/inputs.json
+  docs/tasks/PB-021-evidence/review-02/probes.json → docs/archive/tasks/PB-021-evidence/review-02/probes.json
+  docs/tasks/PB-021-evidence/review-02/report.json → docs/archive/tasks/PB-021-evidence/review-02/report.json
+  docs/tasks/PB-021-evidence/review-02/self-check.stdout.log → docs/archive/tasks/PB-021-evidence/review-02/self-check.stdout.log
+  docs/tasks/PB-021-evidence/review-02/stability.json → docs/archive/tasks/PB-021-evidence/review-02/stability.json
+  docs/tasks/PB-021-evidence/review-02/unit-tests.stderr.log → docs/archive/tasks/PB-021-evidence/review-02/unit-tests.stderr.log
+  docs/tasks/PB-021-evidence/review-03 → docs/archive/tasks/PB-021-evidence/review-03
+  docs/tasks/PB-021-evidence/review-03/extra-results.json → docs/archive/tasks/PB-021-evidence/review-03/extra-results.json
+  docs/tasks/PB-021-evidence/review-03/inputs.json → docs/archive/tasks/PB-021-evidence/review-03/inputs.json
+  docs/tasks/PB-021-evidence/review-03/probes.json → docs/archive/tasks/PB-021-evidence/review-03/probes.json
+  docs/tasks/PB-021-evidence/review-03/report.json → docs/archive/tasks/PB-021-evidence/review-03/report.json
+  docs/tasks/PB-021-evidence/review-03/self-check.stdout.log → docs/archive/tasks/PB-021-evidence/review-03/self-check.stdout.log
+  docs/tasks/PB-021-evidence/review-03/stability.json → docs/archive/tasks/PB-021-evidence/review-03/stability.json
+  docs/tasks/PB-021-evidence/review-03/unit-tests.stderr.log → docs/archive/tasks/PB-021-evidence/review-03/unit-tests.stderr.log
+  docs/tasks/PB-021-evidence/unit-tests.log → docs/archive/tasks/PB-021-evidence/unit-tests.log
+  docs/tasks/PB-022-evidence → docs/archive/tasks/PB-022-evidence
+  docs/tasks/PB-022-evidence/audit-final-checks.log → docs/archive/tasks/PB-022-evidence/audit-final-checks.log
+  docs/tasks/PB-022-evidence/audit-inputs.json → docs/archive/tasks/PB-022-evidence/audit-inputs.json
+  docs/tasks/PB-022-evidence/audit-probes-after-fixes.log → docs/archive/tasks/PB-022-evidence/audit-probes-after-fixes.log
+  docs/tasks/PB-022-evidence/audit-probes.log → docs/archive/tasks/PB-022-evidence/audit-probes.log
+  docs/tasks/PB-022-evidence/audit-probes.py → docs/archive/tasks/PB-022-evidence/audit-probes.py
+  docs/tasks/PB-022-evidence/audit-unit-tests.log → docs/archive/tasks/PB-022-evidence/audit-unit-tests.log
+  docs/tasks/PB-022-evidence/reaudit-02-final-checks.log → docs/archive/tasks/PB-022-evidence/reaudit-02-final-checks.log
+  docs/tasks/PB-022-evidence/reaudit-02-inputs.json → docs/archive/tasks/PB-022-evidence/reaudit-02-inputs.json
+  docs/tasks/PB-022-evidence/reaudit-02-original-probes.log → docs/archive/tasks/PB-022-evidence/reaudit-02-original-probes.log
+  docs/tasks/PB-022-evidence/reaudit-02-previous-probes.log → docs/archive/tasks/PB-022-evidence/reaudit-02-previous-probes.log
+  docs/tasks/PB-022-evidence/reaudit-02-probes-after-fixes.log → docs/archive/tasks/PB-022-evidence/reaudit-02-probes-after-fixes.log
+  docs/tasks/PB-022-evidence/reaudit-02-probes.log → docs/archive/tasks/PB-022-evidence/reaudit-02-probes.log
+  docs/tasks/PB-022-evidence/reaudit-02-probes.py → docs/archive/tasks/PB-022-evidence/reaudit-02-probes.py
+  docs/tasks/PB-022-evidence/reaudit-02-unit-tests.log → docs/archive/tasks/PB-022-evidence/reaudit-02-unit-tests.log
+  docs/tasks/PB-022-evidence/reaudit-03-final-checks.log → docs/archive/tasks/PB-022-evidence/reaudit-03-final-checks.log
+  docs/tasks/PB-022-evidence/reaudit-03-inputs.json → docs/archive/tasks/PB-022-evidence/reaudit-03-inputs.json
+  docs/tasks/PB-022-evidence/reaudit-03-last-probes.log → docs/archive/tasks/PB-022-evidence/reaudit-03-last-probes.log
+  docs/tasks/PB-022-evidence/reaudit-03-original-probes.log → docs/archive/tasks/PB-022-evidence/reaudit-03-original-probes.log
+  docs/tasks/PB-022-evidence/reaudit-03-previous-probes.log → docs/archive/tasks/PB-022-evidence/reaudit-03-previous-probes.log
+  docs/tasks/PB-022-evidence/reaudit-03-probes.log → docs/archive/tasks/PB-022-evidence/reaudit-03-probes.log
+  docs/tasks/PB-022-evidence/reaudit-03-probes.py → docs/archive/tasks/PB-022-evidence/reaudit-03-probes.py
+  docs/tasks/PB-022-evidence/reaudit-03-unit-tests.log → docs/archive/tasks/PB-022-evidence/reaudit-03-unit-tests.log
+  docs/tasks/PB-022-evidence/reaudit-final-checks.log → docs/archive/tasks/PB-022-evidence/reaudit-final-checks.log
+  docs/tasks/PB-022-evidence/reaudit-inputs.json → docs/archive/tasks/PB-022-evidence/reaudit-inputs.json
+  docs/tasks/PB-022-evidence/reaudit-original-probes.log → docs/archive/tasks/PB-022-evidence/reaudit-original-probes.log
+  docs/tasks/PB-022-evidence/reaudit-probes-after-fixes.log → docs/archive/tasks/PB-022-evidence/reaudit-probes-after-fixes.log
+  docs/tasks/PB-022-evidence/reaudit-probes.log → docs/archive/tasks/PB-022-evidence/reaudit-probes.log
+  docs/tasks/PB-022-evidence/reaudit-probes.py → docs/archive/tasks/PB-022-evidence/reaudit-probes.py
+  docs/tasks/PB-022-evidence/reaudit-unit-tests.log → docs/archive/tasks/PB-022-evidence/reaudit-unit-tests.log
+  docs/tasks/PB-022-evidence/unit-tests-after-fixes.log → docs/archive/tasks/PB-022-evidence/unit-tests-after-fixes.log
+  docs/tasks/PB-022-evidence/unit-tests-after-reaudit-02.log → docs/archive/tasks/PB-022-evidence/unit-tests-after-reaudit-02.log
+  docs/tasks/PB-022-evidence/unit-tests-after-reaudit-fixes.log → docs/archive/tasks/PB-022-evidence/unit-tests-after-reaudit-fixes.log
+  docs/tasks/PB-022-evidence/unit-tests.log → docs/archive/tasks/PB-022-evidence/unit-tests.log
+  docs/tasks/PB-023-evidence → docs/archive/tasks/PB-023-evidence
+  docs/tasks/PB-023-evidence/audit-unit-tests.log → docs/archive/tasks/PB-023-evidence/audit-unit-tests.log
+  docs/tasks/PB-023-evidence/audit_inputs.json → docs/archive/tasks/PB-023-evidence/audit_inputs.json
+  docs/tasks/PB-023-evidence/audit_repro.json → docs/archive/tasks/PB-023-evidence/audit_repro.json
+  docs/tasks/PB-023-evidence/audit_repro.py → docs/archive/tasks/PB-023-evidence/audit_repro.py
+  docs/tasks/PB-023-evidence/audit_verify.json → docs/archive/tasks/PB-023-evidence/audit_verify.json
+  docs/tasks/PB-023-evidence/fix2_inputs.json → docs/archive/tasks/PB-023-evidence/fix2_inputs.json
+  docs/tasks/PB-023-evidence/fix2_probes.json → docs/archive/tasks/PB-023-evidence/fix2_probes.json
+  docs/tasks/PB-023-evidence/fix3_inputs.json → docs/archive/tasks/PB-023-evidence/fix3_inputs.json
+  docs/tasks/PB-023-evidence/fix3_probes.json → docs/archive/tasks/PB-023-evidence/fix3_probes.json
+  docs/tasks/PB-023-evidence/fix_inputs.json → docs/archive/tasks/PB-023-evidence/fix_inputs.json
+  docs/tasks/PB-023-evidence/fix_repro.json → docs/archive/tasks/PB-023-evidence/fix_repro.json
+  docs/tasks/PB-023-evidence/reaudit-unit-tests.log → docs/archive/tasks/PB-023-evidence/reaudit-unit-tests.log
+  docs/tasks/PB-023-evidence/reaudit_inputs.json → docs/archive/tasks/PB-023-evidence/reaudit_inputs.json
+  docs/tasks/PB-023-evidence/reaudit_probes.json → docs/archive/tasks/PB-023-evidence/reaudit_probes.json
+  docs/tasks/PB-023-evidence/reaudit_probes.py → docs/archive/tasks/PB-023-evidence/reaudit_probes.py
+  docs/tasks/PB-023-evidence/reaudit_verify.json → docs/archive/tasks/PB-023-evidence/reaudit_verify.json
+  docs/tasks/PB-023-evidence/review3-unit-tests.log → docs/archive/tasks/PB-023-evidence/review3-unit-tests.log
+  docs/tasks/PB-023-evidence/review3_inputs.json → docs/archive/tasks/PB-023-evidence/review3_inputs.json
+  docs/tasks/PB-023-evidence/review3_probes.json → docs/archive/tasks/PB-023-evidence/review3_probes.json
+  docs/tasks/PB-023-evidence/review3_probes.py → docs/archive/tasks/PB-023-evidence/review3_probes.py
+  docs/tasks/PB-023-evidence/review3_verify.json → docs/archive/tasks/PB-023-evidence/review3_verify.json
+  docs/tasks/PB-023-evidence/review4-unit-tests.log → docs/archive/tasks/PB-023-evidence/review4-unit-tests.log
+  docs/tasks/PB-023-evidence/review4_inputs.json → docs/archive/tasks/PB-023-evidence/review4_inputs.json
+  docs/tasks/PB-023-evidence/review4_probes.json → docs/archive/tasks/PB-023-evidence/review4_probes.json
+  docs/tasks/PB-023-evidence/review4_probes.py → docs/archive/tasks/PB-023-evidence/review4_probes.py
+  docs/tasks/PB-023-evidence/review4_verify.json → docs/archive/tasks/PB-023-evidence/review4_verify.json
+  docs/tasks/PB-024-evidence → docs/archive/tasks/PB-024-evidence
+  docs/tasks/PB-024-evidence/cli-probe.log → docs/archive/tasks/PB-024-evidence/cli-probe.log
+  docs/tasks/PB-024-evidence/cli-probe.py → docs/archive/tasks/PB-024-evidence/cli-probe.py
+  docs/tasks/PB-024-evidence/inputs.json → docs/archive/tasks/PB-024-evidence/inputs.json
+  docs/tasks/PB-024-evidence/unit-tests.log → docs/archive/tasks/PB-024-evidence/unit-tests.log
+  docs/tasks/PB-025-evidence → docs/archive/tasks/PB-025-evidence
+  docs/tasks/PB-025-evidence/audit-inputs.json → docs/archive/tasks/PB-025-evidence/audit-inputs.json
+  docs/tasks/PB-025-evidence/audit-probe.log → docs/archive/tasks/PB-025-evidence/audit-probe.log
+  docs/tasks/PB-025-evidence/audit-probe.py → docs/archive/tasks/PB-025-evidence/audit-probe.py
+  docs/tasks/PB-025-evidence/inputs.json → docs/archive/tasks/PB-025-evidence/inputs.json
+  docs/tasks/PB-025-evidence/unit-tests.log → docs/archive/tasks/PB-025-evidence/unit-tests.log
+Удаляются каталоги:
+  docs/tasks/AUDIT-005-evidence
+  docs/tasks/AUDIT-005-evidence/__pycache__
+  docs/tasks/PB-021-evidence
+  docs/tasks/PB-021-evidence/review-02
+  docs/tasks/PB-021-evidence/review-03
+  docs/tasks/PB-022-evidence
+  docs/tasks/PB-023-evidence
+  docs/tasks/PB-024-evidence
+  docs/tasks/PB-025-evidence
+Записей: 140, удалений файлов: 119
+Diff записей (.md):
+--- /dev/null
++++ b/docs/archive/tasks/AUDIT-005-evidence/recheck01-report.md
+@@ -0,0 +1,43 @@
++# AUDIT-005: повторная проверка исправлений PB-019
++
++## Повторный аудит 2026-09-30T15:21:36+03:00; исполнитель: Codex; модель: GPT-6 Astra (по указанию инженера).
++
++**Результат: A1 закрыт; A7 исправлен частично и остаётся открытым. PB-019 возвращён в in_progress.** A2/A3/A4/A5/A6/A8 повторно воспроизводятся. Всего открыты 7 находок: 5 High, 2 Medium. Блок не принят.
++
++## Область и проверки
++
++Проверены изменения `state_fingerprint`, `_require_plan_inputs`, ранний pending, повторная сверка перед записью, пять новых тестов и обновлённый контракт. Модель подтверждена инженером ранее в этой беседе; политика ресурсов 2, бюджет неизвестен. Ветка dev, незакоммиченное дерево; точные [хеши входов](recheck01-inputs.json). Код комплекта и tests/ аудитор не менял, все записи тестовых CLI выполнялись во временных копиях. Пилот платформы в этом повторном аудите не запускался.
++
++| Команда | Результат |
++|---|---|
++| `python3 -m unittest discover -s tests -v` | 103 теста, OK; [лог](recheck01-unit.log) |
++| `python3 docs/tasks/AUDIT-005-evidence/probes.py -v` | Исторические 11 probes: 2 ожидаемых FAIL на A1/A7 — прежняя перезапись теперь отклонена; 9 OK подтверждают остальные шесть дефектов и контроль SIGKILL/restore; [лог](recheck01-original-probes.log) |
++| `python3 docs/tasks/AUDIT-005-evidence/recheck01.py` | 4 сценария, OK: 3 приёмочных сценария + 1 воспроизведение оставшегося дефекта; [код](recheck01.py), [лог](recheck01-independent.log) |
++
++Исторический probes.py сохранён без переопределения ожиданий. Его FAIL не является регрессией: он утверждает старое дефектное поведение. В новом recheck01.py только последний тест утверждает наблюдаемый дефект; его OK также не означает успешную приёмку.
++
++## A1 — исправление принято
++
++Реальный установленный CLI отклоняет сохранённый план при появлении нового файла релиза, изменении и удалении collision после обоих решений keep/release. Проверены содержимое/отсутствие пользовательского файла, отсутствие pending и сохранение VERSION=0.0.2. Штатный тест удаления управляемого файла также проходит. A1 закрыт этой повторной проверкой.
++
++## A7 — High, остаётся открытым: restore снимает блокировку живой операции
++
++Положительная часть: отдельный процесс редактора меняет оригинал во время staged-проверки — apply отказывает как устаревший, сохраняет правку, снимает свой pending, не пишет done. Второй apply при неизменном pending блокируется; первый успешно завершается, установленный check --ready проходит.
++
++**Оставшееся воспроизведение:** `test_active_restore_unlocks_running_apply` запускает установленный apply отдельным процессом и удерживает его в доверенной staged-проверке через файловый барьер. Пока процесс жив, запускается `update restore`: код 0, pending удалён, обычный check уже разрешён. Затем запускается второй apply; журнал обоих процессов достигает `staged`, оба процесса живы одновременно. После снятия барьера в сохранённом прогоне первый завершился с кодом 1, второй — 0; победитель зависит от планировщика. Существенное наблюдение — две одновременные операции после штатного restore, а не конкретные коды выхода.
++
++**Причина и доказательство:** `updating.py:732–739` создаёт маркер и предлагает restore при конкуренции, но не хранит проверяемое владение живой операцией; `update_restore` (`updating.py:835–845`) не отличает активный процесс от прерванного и безусловно удаляет pending. Доступность restore/status при pending разрешена в `playbook.py`. Код удаляет маркер и в завершении/abort apply без проверки, что он всё ещё принадлежит этой операции.
++
++**Влияние:** гарантия единственного применения обходится штатной командой, которую предлагает ошибка блокировки. Операции могут писать и снимать маркеры друг друга; обычные команды допускаются во время продолжающегося обновления. Потеря данных именно в этом прогоне не заявляется — доказан обход взаимного исключения.
++
++**Критерий исправления:** восстановление должно отказывать, пока соответствующее применение живо; блокировка и её снятие должны учитывать владельца операции. После реального прерывания восстановление должно оставаться доступным. Повторить два apply + restore в отдельных процессах с барьером, а также SIGKILL/restore; второй apply и обычные команды не должны войти до завершения или подтверждённого восстановления первой операции. Это уточнение существующего A7 в границах PB-019, отдельная дублирующая карточка не создаётся.
++
++Дополнительная граница: контракт признаёт окно между последней сверкой и записью. В этой же фразе ошибочно обещана сохранность поздней правки в backup: backup создаётся **до** последней сверки и не может содержать более позднее изменение. Не считать backup защитой такой правки; уточнить формулировку при доработке A7. Само узкое окно внешнего редактора не тестировалось и отдельной новой находкой не объявлено.
++
++## Остальные находки и передача
++
++A2/A3 (PB-018), A4 (PB-017), A5/A6 (PB-018), A8 (PB-015) остаются открытыми: исторические сценарии снова подтвердили заявленные дефекты. Исправления этих находок в карточках не заявлены. Новых независимых ID не добавлено; история первого аудита сохранена.
++
++Следующий шаг — доработать A7 в PB-019 и остальные находки после отдельного разрешения инженера, затем повторить аудит. AUDIT-005 остаётся blocked; принятие протокола инженером и индивидуальная приёмка остальных зависимостей не подменены этим повтором. Commit/push/release не выполнялись.
++
++Финальная проверка документов: index — OK; check --ready — OK, 24 карточки ([лог](recheck01-structure.log)); git diff --check — OK. Хеши проверяемых scripts/ и tests/ не изменились во время оформления результата.
+--- /dev/null
++++ b/docs/archive/tasks/AUDIT-005-evidence/recheck02-report.md
+@@ -0,0 +1,58 @@
++# AUDIT-005: повторная проверка всех исправлений
++
++## Повторный аудит 2026-09-30T16:15:48+03:00; исполнитель: Codex; модель: GPT-6 Astra (по указанию инженера).
++
++**Итог: A1/A2/A3/A4/A5/A8 закрыты; A6/A7 исправлены частично и остаются открытыми (оба High). Блок не принят.** PB-019 возвращён в in_progress, PB-018 остаётся blocked из-за зависимостей и неполной приёмки восстановления.
++
++## Среда и команды
++
++macOS, Python 3.14.6, ветка dev, незакоммиченное дерево; [хеши проверяемых файлов](recheck02-inputs.json). Модель указана по решению инженера в этой беседе; политика ресурсов 2, бюджет неизвестен. Все сценарии CLI выполнялись во временных установках. Реальный пилот и приложение фестиваля повторно не запускались. Исходники и tests/ аудитор не менял, исправлений не выполнял.
++
++- `python3 -m unittest discover -s tests -v` — **121 тест, OK**, [лог](recheck02-unit.log).
++- `python3 docs/tasks/AUDIT-005-evidence/probes.py -v` — исторические 11 probes: 10 FAIL, 1 OK; [лог](recheck02-historical.log). Все 10 утверждений старого дефектного поведения теперь отклонены, контроль восстановления после реального SIGKILL проходит. Это ожидаемый результат исторических probes, а не десять регрессий. Старый файл сохранён без изменения ожиданий.
++- `python3 docs/tasks/AUDIT-005-evidence/recheck02.py` — **11 сценариев, OK**; [код](recheck02.py), [лог](recheck02-independent.log). Девять проверяют корректное поведение, последние два намеренно подтверждают оставшиеся дефекты A6/A7. Поэтому общий OK не означает приёмки блока.
++
++## Приёмка находок
++
++| ID | Результат и доказательство |
++|---|---|
++| A1 | Закрыт ранее, подтверждён снова: новый файл и collision после keep/release, изменение/удаление → отказ без перезаписи. |
++| A2 | Закрыт: update сохраняет нетронутый drift; установленный check --ready и следующий пустой план проходят, drift остаётся видимым. |
++| A3 | Закрыт: keep удаляемого из релиза файла сохраняет содержимое, выводит путь из files/kept; check и повторный пустой план проходят. |
++| A4 | Закрыт: rename в занятое назначение, пересекающиеся пути, set через строку/null отклоняются при plan без изменения настроек. Штатные тесты проверили допустимое схождение и идемпотентность. |
++| A5 | Закрыт: несовместимый CLI отклонён до записи, прежние настройки сохранены, pending снят, установленный check работает. Положительный test_schema_migration_compatible_cli_applies из 121 теста проверяет совместимый переход и следующие subprocess check/index/plan. |
++| A6 | Частично: missing/corrupt backup и отсутствие индекса отклоняются; после восстановления целой копии реальный SIGKILL/restore возвращает исходные хеши. Но неполный backed всё ещё приводит к ложному успеху (ниже). |
++| A7 | Частично: живая операция защищена файловой блокировкой, restore/второй apply/обычный check отклоняются; внешняя правка во время staged-проверок сохраняется. Но автономный restore не проверяет владельца pending (ниже). |
++| A8 | Закрыт: project.json/resources.json/manifest.json в files отклонены как с прежним, так и с пересчитанным release_id. Штатные тесты проверяют неканонические/обязательные пути и согласованность release_id/files. |
++
++## A6 — High: неполный индекс пропускает часть пред-образа
++
++**Воспроизведение:** `test_remaining_A6_incomplete_index_false_success`. Реальный subprocess получает SIGKILL после первой фактической записи обновления 0.0.2→0.0.3. В `backup_index.json` удаляется только VERSION из массива `backed`; файл backup/VERSION и его запись в `hashes` сохраняются. `update restore` возвращает 0, снимает pending, но VERSION остаётся 0.0.3, а project.json/manifest возвращены к 0.0.2. Следующий check падает.
++
++**Причина:** `_read_backup_index` (`updating.py:743–774`) проверяет файлы только из backed; соответствие множества backed множеству hashes/фактических копий не проверяется. Частичный или пустой backed может объявить достаточным неполное восстановление. В автономном скрипте используется та же неполная проверка состава.
++
++**Влияние:** сохранён полный пред-образ, но повреждение метаданных оставляет смешанное состояние и снимает защитный маркер с сообщением об успехе. Это продолжение исходного A6, а не новая независимая находка.
++
++**Критерий исправления:** валидировать целостность и полноту индекса до любых изменений: согласованность backed/hashes/набора копий, отсутствие повторов и пересечения backed/added; если поддерживается старый формат без hashes, его гарантии должны быть явно отделены. При неполном/противоречивом индексе CLI и standalone возвращают ненулевой код, сохраняют pending и не меняют проект. После восстановления корректного индекса — полный возврат и проверка пред-образа. Добавить сценарии пропущенного элемента и пустого backed при существующих копиях.
++
++Размещение: [PB-018](../../archive/tasks/PB-018.md). Статус находки — открыт.
++
++## A7 — High: старый автономный restore использует чужой pending
++
++**Воспроизведение:** `test_remaining_A7_standalone_ignores_pending_owner`. Первая операция 0.0.2→0.0.3 реально прерывается SIGKILL, восстанавливается, затем обновление до 0.0.3 успешно повторяется. Старая операция с её restore.py остаётся на диске. Следующее обновление 0.0.3→0.0.4 прерывается SIGKILL после первой записи — pending принадлежит новой операции. Запуск **старого** restore.py возвращает 0, восстанавливает 0.0.2 вместо пред-образа 0.0.3 и удаляет pending новой операции. Маркер вручную не редактировался; использованы реальные операции.
++
++**Причина:** автономный `RESTORE_SCRIPT` (`updating.py:804–886`) берёт общую файловую блокировку, но не сверяет op_id/op_dir текущего pending со своим каталогом. В конце pending удаляется без проверки владельца. `_release_pending` защищает apply, но автономное восстановление им не пользуется и не воспроизводит его проверку.
++
++**Влияние:** штатный восстановитель из другого каталога откатывает не ту операцию и скрывает актуальную незавершённую транзакцию. Исправление обхода живой блокировки подтверждено, требование принадлежности операции выполнено не полностью.
++
++**Критерий исправления:** до записи сверять владельца и путь операции pending с выбранной резервной копией; несовпадение должно давать отказ без изменения файлов/маркера. Снимать только собственный маркер. Определить отдельно поведение при отсутствии pending, не подменяя восстановление текущей операции неявным откатом старой. Проверить ошибочный старый restore.py и правильный текущий restore.py на двух последовательных обновлениях с реальным SIGKILL; актуальная операция должна полностью восстановиться до своей исходной версии.
++
++Размещение: [PB-019](../../archive/tasks/PB-019.md), совместная область с PB-018. PB-019 возвращён в in_progress, A7 открыт.
++
++## Границы и передача
++
++Проверены все восемь первоначальных находок и оставшееся замечание первого повтора. Другие ОС/ФС, отключение питания, все точки прерывания и остаточное окно внешнего редактора после последней сверки не проверялись. Поздняя правка не гарантируется backup — формулировка контракта исправлена. Совместимость CLI проверяется исполнением config/resources целевого кода; это не sandbox и не независимая проверка доверия к артефакту.
++
++История прежних аудитов сохранена, новые ID и дубли карточек не создавались. Закрытие шести находок не равно индивидуальному done всех зависимостей. AUDIT-005 остаётся blocked. Следующий шаг — доработка A6/A7 и повторная проверка; протокол ожидает принятия инженером. Commit/push/release не выполнялись.
++
++Финальные проверки сохранённого результата: index — OK; check --ready — OK, 24 карточки ([лог](recheck02-structure.log)); git diff --check — OK. Хеши scripts/ и tests/ совпадают с recheck02-inputs.json после оформления результата.
+--- /dev/null
++++ b/docs/archive/tasks/AUDIT-005-evidence/recheck03-report.md
+@@ -0,0 +1,46 @@
++# AUDIT-005: итог повторного аудита и индивидуальная приёмка карточек
++
++## Повторный аудит 2026-09-30T16:41:33+03:00; исполнитель: Codex; модель: GPT-6 Astra (по указанию инженера).
++
++**Все восемь находок A1–A8 закрыты. Открытых блокирующих замечаний в проверенном объёме нет.** Карточки PB-014–PB-019 и PB-006 приняты аудитором; перевод в done выполнен штатной командой close по цепочке зависимостей. AUDIT-005 остаётся in_review до принятия протокола инженером.
++
++## Проверки и среда
++
++macOS, Python 3.14.6; ветка dev, HEAD 0744f938ddd571d179a598b7dd92f5b73267ccba с незакоммиченными изменениями; [точные хеши входов](recheck03-inputs.json). Исполнитель Codex, модель GPT-6 Astra по указанию инженера в этой беседе; ресурсная политика 2, бюджет неизвестен. Исходники и штатные tests/ аудитор не менял. Тестовые установки создавались во временных каталогах.
++
++| Команда/сценарий | Результат |
++|---|---|
++| `python3 -m unittest discover -s tests -v` | 126 тестов, OK; [лог](recheck03-unit.log) |
++| `python3 docs/tasks/AUDIT-005-evidence/recheck03.py` | 11 приёмочных сценариев, OK; [код](recheck03.py), [лог](recheck03-acceptance.log). Все утверждения проверяют требуемое безопасное поведение. |
++| `python3 docs/tasks/AUDIT-005-evidence/recheck02.py` | 9 прежних положительных сценариев проходят; 2 исторические remaining-пробы дают ожидаемый FAIL: прежнее дефектное поведение теперь отклонено; [лог](recheck03-historical.log). Это не новые регрессии. |
++| Проверка сохранённого реального пилота | 292/292 файлов совпадают со снимком after; из 258 исходных изменён только согласованный AGENTS.md, остальные 257 сохранены. check --ready=0, сохранённый verify PILOT-001=passed/self-check. [Результат](recheck03-pilot.json). |
++
++## Закрытие A6 и A7
++
++**A6 закрыт.** После реального SIGKILL проверены шесть вариантов повреждения backup_index: пропуск VERSION в backed, пустой backed, повтор, пересечение backed/added, пропуск хеша, одновременный пропуск пути и хеша при оставшейся копии. Каждый вариант прогнан через CLI и автономный скрипт: отказ, pending побайтово сохранён, все файлы проекта совпадают с состоянием до отказа. После возврата правильного индекса CLI restore восстанавливает полный набор исходных SHA-256; check --ready проходит. Проверки отсутствующего/повреждённого backup из прежнего сценария также проходят.
++
++**A7 закрыт.** На двух последовательных реальных обновлениях с SIGKILL старый restore.py теперь отказывает без изменения файлов/маркера новой операции. Текущий restore.py восстанавливает точный пред-образ второй операции (0.0.3, не 0.0.2), снимает свой pending; check --ready проходит. Повторный запуск старого restore без pending отклоняется и ничего не меняет. Проверки живой блокировки, второго apply, внешнего редактора во время staged-проверок и владения маркером также прошли.
++
++A1/A2/A3/A4/A5/A8 подтверждены регрессиями: устаревший план не пишет файлы, drift и keep-remove сохраняются, неоднозначная миграция отклоняется до записи, несовместимый CLI отклоняется, зарезервированные пути manifest не принимаются. Совместимый переход схемы с последующими subprocess check/index/plan покрыт штатным тестом.
++
++## Индивидуальная приёмка
++
++| Карточка | Основание принятия |
++|---|---|
++| [PB-014](../../archive/tasks/PB-014.md) | Контракт версий/владения, VERSION=0.0.2, подстановка при init, content-derived release_id, проверка release.json, отказ на downgrade/неоднозначный релиз, принятие ошибочной 0.1.0 только через проверку содержимого adopt. Релиз не выпускался. |
++| [PB-015](../../archive/tasks/PB-015.md) | Init/manifest/adopt и сохранность проектных файлов; отсутствие/повреждение manifest и схем отклоняются. A8 закрыт. |
++| [PB-016](../../archive/tasks/PB-016.md) | Предпросмотр без записи, добавления/замены/удаления/конфликты, пустой повторный план, отпечатки старых и новых путей, отказ на устаревание/неподдерживаемый переход; пути и симлинки ограничены. A1 закрыт, общая защита A7 принята в PB-019. |
++| [PB-017](../../archive/tasks/PB-017.md) | Явные декларативные переходы, сохранение неизвестных полей, идемпотентность, коллизии и отказ на недостигнутую схему; формат карточек/AGENTS выдаёт ручные шаги, история не переписывается. A4 закрыт. |
++| [PB-018](../../archive/tasks/PB-018.md) | Staged-проверки и совместимость CLI, сохранность drift/keep, отказ до записи, backup/journal, восстановление после сбоя и реального SIGKILL, строгий индекс, автономный путь, итоговая согласованность и повтор. A2/A3/A5/A6 закрыты. |
++| [PB-019](../../archive/tasks/PB-019.md) | Новые пути/коллизии включены в отпечаток; повторная сверка; живая блокировка и владелец; отказ старого restore и успешное восстановление своей операции после SIGKILL. A1/A7 закрыты. |
++| [PB-006](../../archive/tasks/PB-006.md) | Принят сохранённый протокол согласованного реального пилота с его границами: подключение через staging/ручное объединение, adopt, переходы, сохранность, жизненный цикл тестовой карточки. Снимки и check перепроверены сейчас. Это приёмка протокола ранее выполненного пилота, а не заявление о новом полном прогоне на текущем коде. Исправленный механизм отдельно перепроверен на fixtures. |
++
++## Границы принятия
++
++Новая полная установка в исходный platforma-festival и приложение фестиваля в этом аудите не запускались; оригинал и сохранённый пилот не менялись. Исходные копии пилота/артефакты остаются во внешних локальных каталогах из PB-006, отчёт содержит только агрегаты без содержимого секретов. Реальные исторические релизы отсутствуют, переходы 0.0.3+ в сценариях являются fixtures.
++
++Не заявлены проверка всех точек прерывания, потеря питания, гарантии fsync каталогов, Windows/другие ФС и полное исключение внешнего редактора после последней сверки. Старый формат backup без hashes допускается по документированному контракту только с проверкой состава/наличия; криптографическая целостность его содержимого не подтверждается. Проверка целевого CLI исполняет его код и не является sandbox/проверкой происхождения релиза.
++
++История находок и предыдущих отказов сохранена. Принятые карточки закрываются штатным close; AUDIT-005 требует принятия протокола инженером и пока не закрывается. Commit/push/merge/release не выполнялись.
++
++Финальная проверка: все семь принятых карточек находятся в docs/archive/tasks с Status: done и Closed ([метки закрытия](recheck03-closed.json)); AUDIT-005 — in_review. Index/check --ready — OK, 24 карточки; git diff --check — OK. Проверяемые scripts/ и tests/ не изменились после тестов.
+--- /dev/null
++++ b/docs/archive/tasks/AUDIT-005-evidence/report.md
+@@ -0,0 +1,114 @@
++# AUDIT-005: Протокол проверки механизма обновления
++
++## Аудит 2026-09-30T14:57:11+03:00; исполнитель: Codex; модель: GPT-6 Astra (по указанию инженера).
++
++**Вывод: блок не принят.** Воспроизведены 8 дефектов: 6 High и 2 Medium. Исправления не выполнялись. Идентификаторы ниже имеют префикс `AUDIT-005-`.
++
++## Среда и доказательства
++
++macOS, Python 3.14.6; ветка `dev`, HEAD `0744f938ddd571d179a598b7dd92f5b73267ccba`, существующее незакоммиченное дерево. Аудит относится к файлам с хешами из [inputs.json](inputs.json), а не только к HEAD. Модель указана по ответу инженера. Ресурсная политика 2, бюджет неизвестен. Подагенты не привлекались.
++
++- `python3 -m unittest discover -s tests -v` — 98 тестов, OK; [лог](unit-tests.log).
++- `python3 docs/tasks/AUDIT-005-evidence/probes.py -v` — 11 сценариев, все подтвердили ожидаемые наблюдения; [код](probes.py), [лог](probes.log). Из них 10 воспроизводят 8 дефектов, один подтверждает успешное восстановление после SIGKILL. Их `OK` означает **воспроизведение дефекта**, а не соответствие требованиям.
++- В probes команды выполняются subprocess установленного CLI; фабрика артефактов/установок взята из tests/test_cli.py. Рабочие данные только во временных каталогах. Для SIGKILL подключён hook в памяти дочернего процесса сразу после первой фактической записи и fsync журнала; реализация на диске не менялась.
++
++## Находки
++
++### AUDIT-005-A1 — High: Новый файл после предпросмотра перезаписывается без разрешения
++
++- Размещение: [PB-019](../../archive/tasks/PB-019.md). Код: `updating.py:199–209, 686–689`.
++- Воспроизведение: test_A1_new_file_after_preview_is_overwritten: релиз добавляет rules/new.md; после plan --save пользователь создаёт этот файл; apply завершается с кодом 0 и заменяет пользовательский текст релизным.
++- Причина: state_fingerprint учитывает только старый manifest; новые пути целевого релиза и их состояние missing не входят в отпечаток. Сохранённый план теряет актуальность, но запись разрешена.
++- Влияние: Пользовательские данные заменяются без нового предпросмотра/разрешения конфликта; пред-образ остаётся только в backup успешной операции.
++- Критерий исправления: Появление, изменение и исчезновение любого затрагиваемого пути (включая новые пути релиза) после preview должны отклонять apply до первой записи. Проверить и смену содержимого существующей collision после решения keep/release.
++
++### AUDIT-005-A2 — Medium: Разрешённый планом drift делает обновление неприменимым
++
++- Размещение: [PB-018](../../archive/tasks/PB-018.md). Код: `updating.py:441–451, 789–794`.
++- Воспроизведение: test_A2_drift_allowed_by_plan_fails_apply: локально дополнить rules/git.md; обновить только VERSION/updates.json. План сообщает drift и ноль конфликтов; apply пишет файлы, затем откатывается с «Итоговое содержимое не совпадает с manifest».
++- Причина: План разрешает нетронутое локальное отличие, но итоговая проверка требует хеши эталона для всех файлов вне kept.
++- Влияние: Обычная локальная адаптация блокирует обновление; разрешение --resolve для такого пути отклоняется как решение без конфликта.
++- Критерий исправления: Согласовать план и итоговую проверку: нетронутый drift сохраняется и обновление проходит согласно контракту либо план заранее требует явного решения. Регрессия проверяет последующий check и повторный план.
++
++### AUDIT-005-A3 — Medium: keep для удаляемого из релиза файла создаёт недопустимый manifest
++
++- Размещение: [PB-018](../../archive/tasks/PB-018.md). Код: `updating.py:575–583`.
++- Воспроизведение: test_A3_keep_removed_file_produces_invalid_manifest: локально изменить templates/adr.md, удалить его из нового релиза, разрешить modified-remove через =keep. Apply откатывается: «kept должен ссылаться на управляемые файлы».
++- Причина: conflicts_keep добавляется без пересечения с составом целевого релиза; manifest.kept ссылается на путь, отсутствующий в manifest.files.
++- Влияние: Документированный сценарий сохранения локального файла с выводом из управления не работает.
++- Критерий исправления: Сохранить файл побайтово, исключить его из files/kept нового manifest, успешно завершить update и следующий check/plan.
++
++### AUDIT-005-A4 — High: Миграции теряют пользовательские значения при коллизии
++
++- Размещение: [PB-017](../../archive/tasks/PB-017.md). Код: `updating.py:274–283, 329–334`.
++- Воспроизведение: test_A4_rename_collision_loses_existing_value: custom.old и custom.new уже имеют разные значения; json_rename old→new молча удаляет значение new. test_A4_nested_set_loses_parent_value: custom — строка; json_set custom.child превращает её в объект, потеряв строку. В обоих случаях apply=0.
++- Причина: _path_set заменяет любой не-объект пустым объектом; json_rename игнорирует наличие занятого назначения. Diff показывает результат, но конфликта и отдельного решения нет.
++- Влияние: Нарушено требование PB-017 о сохранении значений и явном разрешении неоднозначности миграций.
++- Критерий исправления: Отклонять неоднозначный rename/set до записи либо требовать явного решения для конкретной коллизии. Проверить занятое назначение, скалярного родителя, совпадающие/пересекающиеся пути и повторное выполнение.
++
++### AUDIT-005-A5 — High: Успех update не подтверждает работоспособность установленного CLI
++
++- Размещение: [PB-018](../../archive/tasks/PB-018.md). Код: `updating.py:590–605, 781–796; playbook.py:78`.
++- Воспроизведение: test_A5_schema_upgrade_succeeds_but_installed_CLI_breaks повторяет существующий test_schema_migration_with_steps: шаблон project schema=2 и явный json_set schema_version=2 при неизменном CLI. Apply=0, pending снят; следующий запуск установленного check завершается «Неподдерживаемая схема project.json».
++- Причина: При ненастроенном verification staged-проверка пропускается; _verify_final проверяет версию и хеши, но не принятие схемы/конфигурации новым CLI. Положительный штатный тест проверяет только JSON.
++- Влияние: Обновление объявляется успешным, обычные команды и дальнейшее обновление недоступны; автоматического отката нет.
++- Критерий исправления: Даже без пользовательского verification проверять совместимость целевого CLI и мигрированных настроек до записи. Неконсистентный артефакт должен быть отклонён без изменения проекта; корректный переход должен выдержать следующий запуск check/index/plan. Не исполнять произвольные команды из артефакта.
++
++### AUDIT-005-A6 — High: Неполное восстановление выдаётся за успешное и снимает pending
++
++- Размещение: [PB-018](../../archive/tasks/PB-018.md). Код: `updating.py:607–628, 643–667, 799–809`.
++- Воспроизведение: test_A6_missing_backup_is_reported_as_success: реальный SIGKILL после первой journaled-записи, затем удалить backup/VERSION; update restore=0, маркер снят, VERSION остаётся новой, project/manifest старые. test_A6_standalone_missing_index_is_success: удалить backup_index.json; автономный restore.py также возвращает 0 и снимает pending.
++- Причина: Отсутствующий индекс/пред-образ молча пропускается, целостность и полнота восстановления не подтверждаются перед снятием блокировки.
++- Влияние: Смешанное состояние объявляется восстановленным; теряется сигнал незавершённой операции. Невозможность восстановить утраченную копию допустима, ложный успех — нет.
++- Критерий исправления: Предварительно валидировать индекс и весь набор backup; при недостающем/повреждённом пред-образе возвращать ненулевой код и сохранять pending. Снимать маркер только после подтверждённого возврата всех путей, одинаково для CLI и автономного скрипта.
++
++### AUDIT-005-A7 — High: Изменения во время staged-проверок не инвалидируют план
++
++- Размещение: [PB-019](../../archive/tasks/PB-019.md). Код: `updating.py:686–689, 719–746`.
++- Воспроизведение: test_A7_live_edit_during_staging_is_overwritten: доверенная проверка во временной копии моделирует редактор — меняет rules/git.md оригинала во время staged-фазы. Apply=0 и перезаписывает это изменение релизом.
++- Причина: Единственная сверка состояния происходит до копирования и проверок; pending создаётся только после checks и backup. Повторной сверки перед записью нет.
++- Влияние: Во время долгой проверки обычная работа не заблокирована, пользовательские изменения могут быть заменены устаревшим планом; конкурентный apply также входит в подготовку до блокировки.
++- Критерий исправления: Защитить операцию от конкурирующих обновлений и повторно сверять все входы после checks перед записью; обнаруженное изменение должно отменять применение. Проверить отдельными процессами редактирование и два apply, сохранность пред-образа и отсутствие ложного done.
++
++### AUDIT-005-A8 — High: Повреждённый manifest допускает управление проектными настройками
++
++- Размещение: [PB-015](../../archive/tasks/PB-015.md). Код: `updating.py:146–168`.
++- Воспроизведение: test_A8_manifest_reserved_setting_path_is_deleted: добавить resources.json с его реальным хешем в manifest.files без изменения release_id. Check --ready=0; plan считает его удалённым из нового релиза; apply=0 удаляет настройки, следующий check падает.
++- Причина: read_manifest проверяет только префикс пути/формат хеша; не сверяет release_id с files и не запрещает включать зарезервированные настройки/служебные и неизвестные пути в управляемое ядро.
++- Влияние: Повреждённый manifest принимается как достоверный и нарушает границу владения файлами, вплоть до удаления настроек.
++- Критерий исправления: До планирования валидировать канонический состав, обязательные пути, согласованность release_id/files и исключения project.json/resources.json/manifest.json; повреждение должно отклоняться без записи. Отдельно проверить manifest с пересчитанным release_id и зарезервированным путём.
++
++## Покрытие и границы
++
++| Требование | Результат |
++|---|---|
++| Версия 0.0.2; ошибочная 0.1.0 | VERSION подтверждён; init подставляет номер; adopt проверяет файлы и требует решения, VERSION=keep запрещён. Штатные тесты прошли. |
++| Новая установка и непустой проект | Init, отказ до записи при конфликте и повторный init проверены штатными тестами; сохранённый реальный пилот проверен чтением и check. Полного повторного внедрения в исходный проект не выполнялось. |
++| Эталон / manifest / release.json | Положительные и отрицательные штатные сценарии прошли; выявлен A8. release.json проверяет содержимое, не является криптографической подписью издателя. |
++| Обновление, конфликты, keep/release, удаление | Штатный end-to-end проходит; дополнительные ветви выявили A1/A2/A3/A7. |
++| Миграции и сохранность данных | Базовое сохранение неизвестного поля и повтор миграций проходят; неоднозначность и конечная совместимость нарушены — A4/A5. |
++| Устаревший план / неподдерживаемый переход / downgrade | Базовые отказы проходят; новые целевые пути и изменения во время staged-фазы не защищены — A1/A7. |
++| Сбой записи / повтор / восстановление | Штатный injected OSError, повторный пустой план, автономный restore прошли. Реальный SIGKILL после первой записи + CLI restore вернул все исходные хеши. Повреждённый backup выявляет A6. |
++| Документы, история, посторонние файлы | Штатные сценарии и снимки пилота подтверждают базовую сохранность; универсальная гарантия не принята из-за A1/A4/A7/A8. |
++
++Не проверены: все точки SIGKILL, отключение питания и гарантии fsync каталогов/данных, другие ОС/ФС, полноценная гонка двух независимых apply, реальные исторические релизы (их нет), внешняя достоверность происхождения артефактов. Тестовые 0.0.3+ — fixtures, выпусков не было. Отдельный аудит security всех входных файлов не заявляется.
++
++## Перепроверка пилота PB-006
++
++Чтением проверены `/Users/privedentsev1/Dev/pb006-artifacts/snapshot-before.txt`, `snapshot-after.txt`, сохранённая копия `/Users/privedentsev1/Dev/platforma-festival-pb006` и её отчёт verify. Содержимое секретов не выводилось, использовались только хеши.
++
++- Снимок before: 258 файлов; after: 292. Из исходных 258 изменён только AGENTS.md (согласованное дополнение); остальные **257** совпадают побайтово. Фраза пилота «все 258 … сохранены» нуждается в этой оговорке.
++- Все 292 файла after сейчас присутствуют и совпадают по SHA-256; текущего расхождения со снимком нет.
++- `python3 -B /Users/privedentsev1/Dev/platforma-festival-pb006/ai-dev-playbook/scripts/playbook.py --root /Users/privedentsev1/Dev/platforma-festival-pb006 check --ready` — OK, 1 карточка.
++- Сохранённый `work/verification/PILOT-001/*/report.json`: status=passed, единственная проверка self-check=passed. Это проверка структуры; приложение фестиваля в аудите не запускалось.
++- В оригинальном platforma-festival каталоги ai-dev-playbook и docs/tasks отсутствуют. Текущий аудит оригинал/пилот не изменял; доказать историческую неизменность оригинала по отсутствующему полному снимку его состояния нельзя.
++
++Ограничения PB-006 про первый конфликт init, ручное объединение и переформатирование JSON подтверждаются реализацией и не объявлены самостоятельными блокирующими дефектами: это описанные границы первой версии.
++
++## Статусы и передача
++
++Запуск до завершения зависимостей выполнен по прямому запросу инженера. Проверка read_tasks (`playbook.py:245–248`) запрещает ready/in_progress/in_review при любой незавершённой зависимости. Поэтому AUDIT-005 отмечен blocked, протокол готов к принятию; PB-015/PB-017/PB-018 остаются blocked с явным требованием исправлений, а не искусственно закрытыми зависимостями. Это известное ограничение учёта, уже описанное в PB-006. `verify AUDIT-005` не применим к blocked; тесты выполнены напрямую с сохранёнными логами.
++
++A1/A7 затрагивают PB-016 и PB-018 вместе: создана связанная draft PB-019 после проверки дублей. Остальные находки помещены в собственные карточки. PB-014 не имеет отдельной находки по контракту, но это не индивидуальное закрытие карточки. Приёмка всего блока и выпуск запрещены открытыми находками; запрос аудита не разрешает ремонт.
++
++Следующий шаг: принять протокол; отдельно разрешить исправления, затем повторить связанные проверки и аудит блока. Код комплекта и тесты tests/ в этом аудите не менялись; добавлены только протокол/доказательства и записи в проектных документах, без commit/push/release.
+--- a/docs/archive/tasks/AUDIT-005.md
++++ b/docs/archive/tasks/AUDIT-005.md
+@@ -48,9 +48,9 @@
+ 
+ По прямому запросу инженера проверено текущее рабочее дерево до формального завершения зависимостей. **Блок не принят: 8 открытых замечаний (6 High, 2 Medium).**
+ 
+-- [Протокол, область, воспроизведение, влияние и критерии исправления](../../tasks/AUDIT-005-evidence/report.md).
+-- [Сценарии воспроизведения](../../tasks/AUDIT-005-evidence/probes.py): 11 проверок; 10 подтвердили 8 дефектов, одна — успешный возврат пред-образа после реального SIGKILL.
+-- [Штатные тесты](../../tasks/AUDIT-005-evidence/unit-tests.log): 98/98; [дополнительные проверки](../../tasks/AUDIT-005-evidence/probes.log): 11/11 наблюдений подтверждены. Это не означает прохождение приёмки.
++- [Протокол, область, воспроизведение, влияние и критерии исправления](AUDIT-005-evidence/report.md).
++- [Сценарии воспроизведения](AUDIT-005-evidence/probes.py): 11 проверок; 10 подтвердили 8 дефектов, одна — успешный возврат пред-образа после реального SIGKILL.
++- [Штатные тесты](AUDIT-005-evidence/unit-tests.log): 98/98; [дополнительные проверки](AUDIT-005-evidence/probes.log): 11/11 наблюдений подтверждены. Это не означает прохождение приёмки.
+ - Размещение: A8 → PB-015; A4 → PB-017; A2/A3/A5/A6 → PB-018; A1/A7 → новая draft [PB-019](PB-019.md), совместно для PB-016/PB-018. Существующая история карточек сохранена.
+ - Пилот проверен чтением: сохранность 257 исходных файлов + согласованное изменение AGENTS.md; 292/292 совпадают со снимком after; check --ready проходит. Полное повторное внедрение и приложение фестиваля не запускались.
+ 
+@@ -62,19 +62,19 @@
+ 
+ ## Повторный аудит 2026-09-30T15:21:36+03:00; исполнитель: Codex; модель: GPT-6 Astra (по указанию инженера).
+ 
+-[Повторный протокол](../../tasks/AUDIT-005-evidence/recheck01-report.md): **A1 закрыт; A7 частично исправлен, остаётся открыт** — update restore снимает маркер живого apply и допускает второй процесс. PB-019 возвращён в in_progress. A2/A3/A4/A5/A6/A8 повторно воспроизводятся; итого 7 открытых находок (5 High, 2 Medium). Блок не принят, статус blocked сохранён.
++[Повторный протокол](AUDIT-005-evidence/recheck01-report.md): **A1 закрыт; A7 частично исправлен, остаётся открыт** — update restore снимает маркер живого apply и допускает второй процесс. PB-019 возвращён в in_progress. A2/A3/A4/A5/A6/A8 повторно воспроизводятся; итого 7 открытых находок (5 High, 2 Medium). Блок не принят, статус blocked сохранён.
+ 
+ 103 штатных теста прошли. Независимые subprocess-проверки: 3 сценария приёмки прошли, один воспроизвёл обход блокировки через restore. Исторические probes: ожидаемые отказы на A1/A7, остальные находки подтверждены. Исправлений кода, коммита и выпуска нет; следующий шаг — доработка открытых находок и повторная проверка.
+ 
+ ## Повторный аудит 2026-09-30T16:15:48+03:00; исполнитель: Codex; модель: GPT-6 Astra (по указанию инженера).
+ 
+-[Повторная проверка всех исправлений](../../tasks/AUDIT-005-evidence/recheck02-report.md): **A1/A2/A3/A4/A5/A8 закрыты. A6/A7 остаются открытыми (оба High).** A6: неполный backed в backup_index даёт ложный успех и смешанное состояние. A7: старый автономный restore.py восстанавливает чужую операцию и снимает её pending. Размещение — PB-018 и PB-019 соответственно; PB-019 возвращён в in_progress, AUDIT-005 остаётся blocked.
++[Повторная проверка всех исправлений](AUDIT-005-evidence/recheck02-report.md): **A1/A2/A3/A4/A5/A8 закрыты. A6/A7 остаются открытыми (оба High).** A6: неполный backed в backup_index даёт ложный успех и смешанное состояние. A7: старый автономный restore.py восстанавливает чужую операцию и снимает её pending. Размещение — PB-018 и PB-019 соответственно; PB-019 возвращён в in_progress, AUDIT-005 остаётся blocked.
+ 
+ 121 штатный тест прошёл. Все старые дефектные ветви исторического probes.py теперь отклонены; контроль SIGKILL/restore проходит. Независимые проверки нового состояния: 9 приёмочных ветвей проходят, 2 сценария воспроизводят оставшиеся дефекты; их OK не означает приёмку. Код не исправлялся, commit/push/release не выполнялись. Следующий шаг — доработать A6/A7, повторить проверки и принять протокол инженером.
+ 
+ ## Повторный аудит 2026-09-30T16:41:33+03:00; исполнитель: Codex; модель: GPT-6 Astra (по указанию инженера).
+ 
+-[Итоговый протокол и индивидуальная приёмка](../../tasks/AUDIT-005-evidence/recheck03-report.md): **A1–A8 закрыты**, новых блокирующих замечаний в проверенном объёме нет. 126 штатных тестов и 11 независимых приёмочных сценариев прошли. A6/A7 проверены также на реальном SIGKILL, повреждённых индексах и двух последовательных обновлениях с автономным восстановлением.
++[Итоговый протокол и индивидуальная приёмка](AUDIT-005-evidence/recheck03-report.md): **A1–A8 закрыты**, новых блокирующих замечаний в проверенном объёме нет. 126 штатных тестов и 11 независимых приёмочных сценариев прошли. A6/A7 проверены также на реальном SIGKILL, повреждённых индексах и двух последовательных обновлениях с автономным восстановлением.
+ 
+ Карточки PB-014–PB-019 и PB-006 приняты индивидуально и закрываются командой close по зависимостям. PB-006 принимается как сохранённый протокол пилота: снимки/check перепроверены; новый полный прогон на исправленном коде не заявляется. Границы приведены в отчёте.
+ 
+@@ -85,3 +85,29 @@
+ ## Принятие 2026-09-30T16:44:09+03:00; исполнитель: инженер; модель: —.
+ 
+ Инженер явно поручил: «Прими аудит 5». Итоговый протокол принят; все восемь находок закрыты повторными проверками, зависимости завершены. По этому решению Codex оформляет закрытие AUDIT-005 командой close. Разрешения на commit/push/release не выдавались.
++
++<!-- playbook-meta:start -->
++```json
++{
++  "schema_version": 1,
++  "relations": [],
++  "materials": [
++    {
++      "id": "recovered-evidence",
++      "role": "report",
++      "source": "docs/archive/tasks/AUDIT-005-evidence",
++      "storage": "local",
++      "required": true,
++      "immutable": true,
++      "used_by": []
++    }
++  ],
++  "moves": [
++    {
++      "from": "docs/tasks/AUDIT-005-evidence",
++      "to": "docs/archive/tasks/AUDIT-005-evidence"
++    }
++  ]
++}
++```
++<!-- playbook-meta:end -->
+--- a/docs/archive/tasks/PB-006.md
++++ b/docs/archive/tasks/PB-006.md
+@@ -64,10 +64,10 @@
+ 
+ ## Аудит 2026-09-30T14:57:11+03:00; исполнитель: Codex; модель: GPT-6 Astra (по указанию инженера).
+ 
+-Сохранённый пилот и его доказательства перепроверены чтением: 292/292 файлов снимка after совпадают, check --ready проходит, verify PILOT-001 содержит только self-check. Уточнение пункта 9: из 258 исходных файлов **257** сохранены побайтово, AGENTS.md осознанно дополнен. Независимый повтор полного внедрения в исходный проект не проводился. Успешный SIGKILL/restore проверен отдельно в fixtures AUDIT-005; это не расширяет исторический протокол пилота. [Подробности и границы](../../tasks/AUDIT-005-evidence/report.md). Формальный draft сохраняется из-за PB-018; полная приёмка блока не пройдена.
++Сохранённый пилот и его доказательства перепроверены чтением: 292/292 файлов снимка after совпадают, check --ready проходит, verify PILOT-001 содержит только self-check. Уточнение пункта 9: из 258 исходных файлов **257** сохранены побайтово, AGENTS.md осознанно дополнен. Независимый повтор полного внедрения в исходный проект не проводился. Успешный SIGKILL/restore проверен отдельно в fixtures AUDIT-005; это не расширяет исторический протокол пилота. [Подробности и границы](AUDIT-005-evidence/report.md). Формальный draft сохраняется из-за PB-018; полная приёмка блока не пройдена.
+ 
+ ## Повторный аудит 2026-09-30T16:41:33+03:00; исполнитель: Codex; модель: GPT-6 Astra (по указанию инженера).
+ 
+ Индивидуальная приёмка протокола пилота пройдена. Сохранённые доказательства повторно сверены: 292/292 after без расхождений, 257 исходных файлов побайтово сохранены, AGENTS.md согласованно дополнен, check --ready=0, verify PILOT-001=passed/self-check. Приняты описанные этапы подключения, adopt/update, конфликты, восстановление и lifecycle с явными ограничениями. Новый полный прогон пилота на исправленном комплекте не выполнялся; исправления независимо проверены на fixtures. Открытых замечаний к результату карточки нет.
+ 
+-Основание: [итоговый протокол AUDIT-005](../../tasks/AUDIT-005-evidence/recheck03-report.md), 126 штатных тестов и 11 независимых приёмочных сценариев. Принято аудитором; карточка подлежит переводу в done штатным close после завершения зависимостей. Код аудитор не менял.
++Основание: [итоговый протокол AUDIT-005](AUDIT-005-evidence/recheck03-report.md), 126 штатных тестов и 11 независимых приёмочных сценариев. Принято аудитором; карточка подлежит переводу в done штатным close после завершения зависимостей. Код аудитор не менял.
+--- a/docs/archive/tasks/PB-014.md
++++ b/docs/archive/tasks/PB-014.md
+@@ -62,4 +62,4 @@
+ 
+ Индивидуальная приёмка всей карточки пройдена: контракт версий и состава, VERSION=0.0.2, производная playbook_version, release_id/release.json, границы владения и ошибочная метка 0.1.0 проверены документально и сценариями init/adopt/update. Открытых замечаний в границах карточки нет.
+ 
+-Основание: [итоговый протокол AUDIT-005](../../tasks/AUDIT-005-evidence/recheck03-report.md), 126 штатных тестов и 11 независимых приёмочных сценариев. Принято аудитором; карточка подлежит переводу в done штатным close после завершения зависимостей. Код аудитор не менял.
++Основание: [итоговый протокол AUDIT-005](AUDIT-005-evidence/recheck03-report.md), 126 штатных тестов и 11 независимых приёмочных сценариев. Принято аудитором; карточка подлежит переводу в done штатным close после завершения зависимостей. Код аудитор не менял.
+--- a/docs/archive/tasks/PB-015.md
++++ b/docs/archive/tasks/PB-015.md
+@@ -54,7 +54,7 @@
+ 
+ ## Аудит 2026-09-30T14:57:11+03:00; исполнитель: Codex; модель: GPT-6 Astra (по указанию инженера).
+ 
+-Протокол: [AUDIT-005](AUDIT-005.md), [подробные доказательства](../../tasks/AUDIT-005-evidence/report.md). Результат требует исправлений; находки открыты.
++Протокол: [AUDIT-005](AUDIT-005.md), [подробные доказательства](AUDIT-005-evidence/report.md). Результат требует исправлений; находки открыты.
+ 
+ ### AUDIT-005-A8 — High: Повреждённый manifest допускает управление проектными настройками
+ 
+@@ -66,7 +66,7 @@
+ 
+ ## Повторный аудит 2026-09-30T15:21:36+03:00; исполнитель: Codex; модель: GPT-6 Astra (по указанию инженера).
+ 
+-A8 повторно воспроизводится: повреждённый manifest допускает удаление resources.json. Исправление не заявлено; находка открыта. [Протокол](../../tasks/AUDIT-005-evidence/recheck01-report.md). Код в рамках аудита не менялся.
++A8 повторно воспроизводится: повреждённый manifest допускает удаление resources.json. Исправление не заявлено; находка открыта. [Протокол](AUDIT-005-evidence/recheck01-report.md). Код в рамках аудита не менялся.
+ 
+ ## Исправления 2026-09-30T15:52:17+03:00
+ 
+@@ -78,10 +78,10 @@
+ 
+ A8 закрыт повторным аудитом: все зарезервированные пути отклонены независимо от пересчёта release_id, настройки сохранены. Штатные проверки канонического состава и обязательных путей также прошли. Формальный blocked по PB-014 сохранён; индивидуальное закрытие карточки этим протоколом не выполнялось.
+ 
+-[Протокол и доказательства](../../tasks/AUDIT-005-evidence/recheck02-report.md). Проверки: 121 штатный тест OK; 11 независимых сценариев подтвердили 9 корректных ветвей и 2 остающихся дефекта. Код аудитор не менял.
++[Протокол и доказательства](AUDIT-005-evidence/recheck02-report.md). Проверки: 121 штатный тест OK; 11 независимых сценариев подтвердили 9 корректных ветвей и 2 остающихся дефекта. Код аудитор не менял.
+ 
+ ## Повторный аудит 2026-09-30T16:41:33+03:00; исполнитель: Codex; модель: GPT-6 Astra (по указанию инженера).
+ 
+ Индивидуальная приёмка всей карточки пройдена: init/manifest/adopt, сохранность проекта, отказы на повреждённый/неподдерживаемый manifest и неизвестное состояние. A8 закрыт, регрессии подтверждены; открытых замечаний в границах карточки нет.
+ 
+-Основание: [итоговый протокол AUDIT-005](../../tasks/AUDIT-005-evidence/recheck03-report.md), 126 штатных тестов и 11 независимых приёмочных сценариев. Принято аудитором; карточка подлежит переводу в done штатным close после завершения зависимостей. Код аудитор не менял.
++Основание: [итоговый протокол AUDIT-005](AUDIT-005-evidence/recheck03-report.md), 126 штатных тестов и 11 независимых приёмочных сценариев. Принято аудитором; карточка подлежит переводу в done штатным close после завершения зависимостей. Код аудитор не менял.
+--- a/docs/archive/tasks/PB-016.md
++++ b/docs/archive/tasks/PB-016.md
+@@ -56,20 +56,20 @@
+ 
+ ## Аудит 2026-09-30T14:57:11+03:00; исполнитель: Codex; модель: GPT-6 Astra (по указанию инженера).
+ 
+-Общие находки AUDIT-005-A1/A7 по актуальности плана размещены в [PB-019](PB-019.md), поскольку затрагивают также применение PB-018. [Протокол и воспроизведение](../../tasks/AUDIT-005-evidence/report.md). Приёмка защиты от устаревшего плана не подтверждена; blocked сохранён до исправлений и завершения зависимости.
++Общие находки AUDIT-005-A1/A7 по актуальности плана размещены в [PB-019](PB-019.md), поскольку затрагивают также применение PB-018. [Протокол и воспроизведение](AUDIT-005-evidence/report.md). Приёмка защиты от устаревшего плана не подтверждена; blocked сохранён до исправлений и завершения зависимости.
+ 
+ ## Повторный аудит 2026-09-30T15:21:36+03:00; исполнитель: Codex; модель: GPT-6 Astra (по указанию инженера).
+ 
+-A1 закрыт повторной проверкой; A7 остаётся открыт в PB-019 из-за снятия блокировки живого apply через update restore. [Протокол](../../tasks/AUDIT-005-evidence/recheck01-report.md). Код в рамках аудита не менялся.
++A1 закрыт повторной проверкой; A7 остаётся открыт в PB-019 из-за снятия блокировки живого apply через update restore. [Протокол](AUDIT-005-evidence/recheck01-report.md). Код в рамках аудита не менялся.
+ 
+ ## Повторный аудит 2026-09-30T16:15:48+03:00; исполнитель: Codex; модель: GPT-6 Astra (по указанию инженера).
+ 
+ A1 повторно подтверждён как закрытый. A7 в PB-019 остаётся открыт: автономный восстановитель не проверяет владельца pending. Изменения во время staged-проверок обнаруживаются, сохранность пользовательской правки подтверждена.
+ 
+-[Протокол и доказательства](../../tasks/AUDIT-005-evidence/recheck02-report.md). Проверки: 121 штатный тест OK; 11 независимых сценариев подтвердили 9 корректных ветвей и 2 остающихся дефекта. Код аудитор не менял.
++[Протокол и доказательства](AUDIT-005-evidence/recheck02-report.md). Проверки: 121 штатный тест OK; 11 независимых сценариев подтвердили 9 корректных ветвей и 2 остающихся дефекта. Код аудитор не менял.
+ 
+ ## Повторный аудит 2026-09-30T16:41:33+03:00; исполнитель: Codex; модель: GPT-6 Astra (по указанию инженера).
+ 
+ Индивидуальная приёмка всей карточки пройдена: preview без записи, состав плана, конфликты, сохранение неизвестных путей, пустой повтор, устаревание всех затрагиваемых путей, неподдерживаемые переходы и защита путей. A1 закрыт; совместное требование A7 принято в PB-019.
+ 
+-Основание: [итоговый протокол AUDIT-005](../../tasks/AUDIT-005-evidence/recheck03-report.md), 126 штатных тестов и 11 независимых приёмочных сценариев. Принято аудитором; карточка подлежит переводу в done штатным close после завершения зависимостей. Код аудитор не менял.
++Основание: [итоговый протокол AUDIT-005](AUDIT-005-evidence/recheck03-report.md), 126 штатных тестов и 11 независимых приёмочных сценариев. Принято аудитором; карточка подлежит переводу в done штатным close после завершения зависимостей. Код аудитор не менял.
+--- a/docs/archive/tasks/PB-017.md
++++ b/docs/archive/tasks/PB-017.md
+@@ -56,7 +56,7 @@
+ 
+ ## Аудит 2026-09-30T14:57:11+03:00; исполнитель: Codex; модель: GPT-6 Astra (по указанию инженера).
+ 
+-Протокол: [AUDIT-005](AUDIT-005.md), [подробные доказательства](../../tasks/AUDIT-005-evidence/report.md). Результат требует исправлений; находки открыты.
++Протокол: [AUDIT-005](AUDIT-005.md), [подробные доказательства](AUDIT-005-evidence/report.md). Результат требует исправлений; находки открыты.
+ 
+ ### AUDIT-005-A4 — High: Миграции теряют пользовательские значения при коллизии
+ 
+@@ -68,7 +68,7 @@
+ 
+ ## Повторный аудит 2026-09-30T15:21:36+03:00; исполнитель: Codex; модель: GPT-6 Astra (по указанию инженера).
+ 
+-Оба сценария A4 снова воспроизводятся: rename затирает занятое назначение, вложенный set теряет скалярного родителя. Исправление не заявлено; находка открыта. [Протокол](../../tasks/AUDIT-005-evidence/recheck01-report.md). Код в рамках аудита не менялся.
++Оба сценария A4 снова воспроизводятся: rename затирает занятое назначение, вложенный set теряет скалярного родителя. Исправление не заявлено; находка открыта. [Протокол](AUDIT-005-evidence/recheck01-report.md). Код в рамках аудита не менялся.
+ 
+ ## Исправления 2026-09-30T15:52:17+03:00
+ 
+@@ -80,10 +80,10 @@
+ 
+ A4 закрыт: коллизия rename, пересечение путей и set через скаляр/null отклоняются до записи; допустимое схождение и повтор проверены. Формальный blocked по PB-016 сохранён; индивидуальное закрытие карточки этим протоколом не выполнялось.
+ 
+-[Протокол и доказательства](../../tasks/AUDIT-005-evidence/recheck02-report.md). Проверки: 121 штатный тест OK; 11 независимых сценариев подтвердили 9 корректных ветвей и 2 остающихся дефекта. Код аудитор не менял.
++[Протокол и доказательства](AUDIT-005-evidence/recheck02-report.md). Проверки: 121 штатный тест OK; 11 независимых сценариев подтвердили 9 корректных ветвей и 2 остающихся дефекта. Код аудитор не менял.
+ 
+ ## Повторный аудит 2026-09-30T16:41:33+03:00; исполнитель: Codex; модель: GPT-6 Astra (по указанию инженера).
+ 
+ Индивидуальная приёмка всей карточки пройдена: объявленные переходы, точечные миграции и идемпотентность, сохранение полей и истории, явные ручные шаги для форматов, отказы на коллизии/неподдерживаемые схемы. A4 закрыт. Реальных исторических релизов нет — миграции проверены на fixtures.
+ 
+-Основание: [итоговый протокол AUDIT-005](../../tasks/AUDIT-005-evidence/recheck03-report.md), 126 штатных тестов и 11 независимых приёмочных сценариев. Принято аудитором; карточка подлежит переводу в done штатным close после завершения зависимостей. Код аудитор не менял.
++Основание: [итоговый протокол AUDIT-005](AUDIT-005-evidence/recheck03-report.md), 126 штатных тестов и 11 независимых приёмочных сценариев. Принято аудитором; карточка подлежит переводу в done штатным close после завершения зависимостей. Код аудитор не менял.
+--- a/docs/archive/tasks/PB-018.md
++++ b/docs/archive/tasks/PB-018.md
+@@ -60,7 +60,7 @@
+ 
+ ## Аудит 2026-09-30T14:57:11+03:00; исполнитель: Codex; модель: GPT-6 Astra (по указанию инженера).
+ 
+-Протокол: [AUDIT-005](AUDIT-005.md), [подробные доказательства](../../tasks/AUDIT-005-evidence/report.md). Результат требует исправлений; находки открыты.
++Протокол: [AUDIT-005](AUDIT-005.md), [подробные доказательства](AUDIT-005-evidence/report.md). Результат требует исправлений; находки открыты.
+ 
+ ### AUDIT-005-A2 — Medium: Разрешённый планом drift делает обновление неприменимым
+ 
+@@ -90,7 +90,7 @@
+ 
+ ## Повторный аудит 2026-09-30T15:21:36+03:00; исполнитель: Codex; модель: GPT-6 Astra (по указанию инженера).
+ 
+-A2/A3/A5/A6 повторно воспроизводятся. A7 в PB-019 исправлен частично: restore снимает pending живого apply, допуская параллельную операцию. [Протокол](../../tasks/AUDIT-005-evidence/recheck01-report.md). Код в рамках аудита не менялся.
++A2/A3/A5/A6 повторно воспроизводятся. A7 в PB-019 исправлен частично: restore снимает pending живого apply, допуская параллельную операцию. [Протокол](AUDIT-005-evidence/recheck01-report.md). Код в рамках аудита не менялся.
+ 
+ ## Исправления 2026-09-30T15:52:17+03:00
+ 
+@@ -113,7 +113,7 @@
+ 
+ A7 также открыт в PB-019: старый автономный restore.py откатывает чужую операцию и снимает её маркер. Формальный blocked сохранён по зависимости PB-017; доработать восстановление и повторить аудит.
+ 
+-[Протокол и доказательства](../../tasks/AUDIT-005-evidence/recheck02-report.md). Проверки: 121 штатный тест OK; 11 независимых сценариев подтвердили 9 корректных ветвей и 2 остающихся дефекта. Код аудитор не менял.
++[Протокол и доказательства](AUDIT-005-evidence/recheck02-report.md). Проверки: 121 штатный тест OK; 11 независимых сценариев подтвердили 9 корректных ветвей и 2 остающихся дефекта. Код аудитор не менял.
+ 
+ ## Исправления 2026-09-30T16:34:17+03:00
+ 
+@@ -127,4 +127,4 @@
+ 
+ Индивидуальная приёмка всей карточки пройдена. A2/A3/A5 подтверждены, A6 закрыт: шесть повреждений индекса проверены через CLI и standalone после реального SIGKILL — отказ без записи с сохранением pending; правильный индекс восстанавливает полный набор исходных SHA-256. Проверены staged/CLI-совместимость, journal/backup, сбои, повтор и сохранность; открытых замечаний в заявленных границах нет.
+ 
+-Основание: [итоговый протокол AUDIT-005](../../tasks/AUDIT-005-evidence/recheck03-report.md), 126 штатных тестов и 11 независимых приёмочных сценариев. Принято аудитором; карточка подлежит переводу в done штатным close после завершения зависимостей. Код аудитор не менял.
++Основание: [итоговый протокол AUDIT-005](AUDIT-005-evidence/recheck03-report.md), 126 штатных тестов и 11 независимых приёмочных сценариев. Принято аудитором; карточка подлежит переводу в done штатным close после завершения зависимостей. Код аудитор не менял.
+--- a/docs/archive/tasks/PB-019.md
++++ b/docs/archive/tasks/PB-019.md
+@@ -54,11 +54,11 @@
+ 
+ ## Передача
+ 
+-[Воспроизводимые проверки](../../tasks/AUDIT-005-evidence/probes.py), [протокол](../../tasks/AUDIT-005-evidence/report.md), [повторный протокол](../../tasks/AUDIT-005-evidence/recheck01-report.md) и [второй повторный протокол](../../tasks/AUDIT-005-evidence/recheck02-report.md). Реализация готова к очередному независимому аудиту вместе с находками исходных карточек; `done` выставляет аудитор или инженер после приёмки.
++[Воспроизводимые проверки](AUDIT-005-evidence/probes.py), [протокол](AUDIT-005-evidence/report.md), [повторный протокол](AUDIT-005-evidence/recheck01-report.md) и [второй повторный протокол](AUDIT-005-evidence/recheck02-report.md). Реализация готова к очередному независимому аудиту вместе с находками исходных карточек; `done` выставляет аудитор или инженер после приёмки.
+ 
+ ## Повторный аудит 2026-09-30T15:21:36+03:00; исполнитель: Codex; модель: GPT-6 Astra (по указанию инженера).
+ 
+-Протокол: [повторный AUDIT-005](../../tasks/AUDIT-005-evidence/recheck01-report.md). **Возврат в in_progress.**
++Протокол: [повторный AUDIT-005](AUDIT-005-evidence/recheck01-report.md). **Возврат в in_progress.**
+ 
+ - **A1 закрыт:** независимые subprocess-проверки появления нового пути и изменения/удаления collision после keep/release подтвердили отказ до записи и сохранность пользовательского состояния.
+ - **A7, High, открыт:** базовая повторная сверка и запрет второго apply работают. Но `update restore` при живом первом apply снимает pending; второй apply входит в staged одновременно с первым. Воспроизведение: `python3 docs/tasks/AUDIT-005-evidence/recheck01.py`, `test_active_restore_unlocks_running_apply`; доказательство — оба процесса живы и оба журнала содержат staged до снятия барьера. Код: updating.py:732–739, 835–845. Влияние: обход взаимного исключения, удаление чужого маркера и доступ обычных команд во время обновления.
+@@ -74,10 +74,10 @@
+ 
+ Приёмка: standalone до записи сверяет op_id/op_dir текущего pending со своей копией, отказывает для старого каталога без изменений, снимает только собственный маркер; правильный восстановитель после SIGKILL возвращает пред-образ текущей операции. Проверить два последовательных обновления и оба пути восстановления. Новая карточка не нужна: требование владения блокировкой уже входит в A7.
+ 
+-[Протокол и доказательства](../../tasks/AUDIT-005-evidence/recheck02-report.md). Проверки: 121 штатный тест OK; 11 независимых сценариев подтвердили 9 корректных ветвей и 2 остающихся дефекта. Код аудитор не менял.
++[Протокол и доказательства](AUDIT-005-evidence/recheck02-report.md). Проверки: 121 штатный тест OK; 11 независимых сценариев подтвердили 9 корректных ветвей и 2 остающихся дефекта. Код аудитор не менял.
+ 
+ ## Повторный аудит 2026-09-30T16:41:33+03:00; исполнитель: Codex; модель: GPT-6 Astra (по указанию инженера).
+ 
+ Индивидуальная приёмка всей карточки пройдена. A1 подтверждён; A7 закрыт: старый standalone отклонён без изменений при pending новой операции, актуальный standalone после реального SIGKILL возвращает точный пред-образ 0.0.3 и снимает свой маркер. Повтор без pending отклонён. Живая блокировка, параллельный apply, внешний редактор и повторная сверка проходят; открытых замечаний нет.
+ 
+-Основание: [итоговый протокол AUDIT-005](../../tasks/AUDIT-005-evidence/recheck03-report.md), 126 штатных тестов и 11 независимых приёмочных сценариев. Принято аудитором; карточка подлежит переводу в done штатным close после завершения зависимостей. Код аудитор не менял.
++Основание: [итоговый протокол AUDIT-005](AUDIT-005-evidence/recheck03-report.md), 126 штатных тестов и 11 независимых приёмочных сценариев. Принято аудитором; карточка подлежит переводу в done штатным close после завершения зависимостей. Код аудитор не менял.
+--- a/docs/archive/tasks/PB-021.md
++++ b/docs/archive/tasks/PB-021.md
+@@ -96,12 +96,12 @@
+ 
+ Независимая проверка реализации Devin в отдельной сессии. Область: metadata документов/карточек, конфигурация коллекций, каталог, отношения, владельцы и кандидаты материалов, read-only CLI; design §2–4 и критерии этой карточки. Результат: **не принято**, шесть открытых замечаний в границах PB-021; `in_review → in_progress`. Код не исправлялся.
+ 
+-Среда: macOS 27.0.1, Python 3.14.6, ветка `dev`, HEAD `0744f93`; проверено фактическое рабочее дерево с существующими незакоммиченными изменениями, не один HEAD. Точная модель уточнена инженером в этой сессии. Отпечатки до/после повторного прогона (с обнаруженным изменением входов) — [снимок](../../tasks/PB-021-evidence/audit-inputs.json).
++Среда: macOS 27.0.1, Python 3.14.6, ветка `dev`, HEAD `0744f93`; проверено фактическое рабочее дерево с существующими незакоммиченными изменениями, не один HEAD. Точная модель уточнена инженером в этой сессии. Отпечатки до/после повторного прогона (с обнаруженным изменением входов) — [снимок](PB-021-evidence/audit-inputs.json).
+ 
+ ### Проверки аудитора
+ 
+-- `python3 -m unittest discover -s tests -v`: **187 tests, OK**, 21.428 s; [лог](../../tasks/PB-021-evidence/unit-tests.log).
+-- `python3 docs/tasks/PB-021-evidence/audit_probe.py`: 12 независимых сценариев в настроенных временных установках, каждый запускает установленный CLI отдельным subprocess. [Скрипт](../../tasks/PB-021-evidence/audit_probe.py), [stdout/stderr, exit codes и сравнения дерева](../../tasks/PB-021-evidence/audit-results.json). Скрипт сохраняет наблюдения, а не объявляет ошибочное поведение успешной регрессией.
++- `python3 -m unittest discover -s tests -v`: **187 tests, OK**, 21.428 s; [лог](PB-021-evidence/unit-tests.log).
++- `python3 docs/tasks/PB-021-evidence/audit_probe.py`: 12 независимых сценариев в настроенных временных установках, каждый запускает установленный CLI отдельным subprocess. [Скрипт](PB-021-evidence/audit_probe.py), [stdout/stderr, exit codes и сравнения дерева](PB-021-evidence/audit-results.json). Скрипт сохраняет наблюдения, а не объявляет ошибочное поведение успешной регрессией.
+ - Обычные `document impact`, `materials`, `list`: работают; обратная связь `spec:beta → based_on`, legacy и текущая ревизия видны. Полный состав каталогов/файлов/symlink и SHA-256 файлов до/после равны во всех 12 сценариях, включая запуск Python без `-B`. Read-only требование подтверждено в этих сценариях.
+ - `verify PB-021 --dry-run`: проверены inputs и argv (`unit-tests`, `self-check`); новый `verify` аудитора не запускался, успешный отчёт исполнителя не заменяет отрицательные сценарии ниже.
+ - `index` и `git diff --check`: PASS. Первый `check --ready` после сохранения протокола: PASS (35 карточек); финальный повтор после внешних правок: ERROR, `AttributeError: tuple object has no attribute items` в `document_links.map_path`, вызванном из `check_text`. Успешная финальная структурная проверка текущего дерева не подтверждена. В self-project раздел `documents` ещё отсутствует: успешный self-check сам по себе не проверяет новый каталог.
+@@ -156,7 +156,7 @@
+ 
+ ### Изменение входов во время аудита
+ 
+-Во время оформления протокола внешним исполнителем изменены `documents.py`, затем `playbook.py`, появился `document_links.py`. Аудитор эти файлы не редактировал. На повторном прогоне 12 subprocess-сценариев A1–A6 воспроизвелись снова; состав/байты фикстур не изменились. Повтор общего suite завершился **187 tests, 11 errors**, включая `NameError: rewrite_links` в `close`: [лог промежуточного состояния](../../tasks/PB-021-evidence/concurrent-run.log). До/после прогона хеш `playbook.py` изменился. Этот прогон относится к изменяющемуся дереву; первоначальные 187 OK не подтверждают итоговое состояние. Промежуточные ошибки соседней переработки не оформляются как установленные дефекты PB-021 без стабильного снимка. Перед повторной приёмкой необходим завершённый неизменный набор входов и новый полный прогон.
++Во время оформления протокола внешним исполнителем изменены `documents.py`, затем `playbook.py`, появился `document_links.py`. Аудитор эти файлы не редактировал. На повторном прогоне 12 subprocess-сценариев A1–A6 воспроизвелись снова; состав/байты фикстур не изменились. Повтор общего suite завершился **187 tests, 11 errors**, включая `NameError: rewrite_links` в `close`: [лог промежуточного состояния](PB-021-evidence/concurrent-run.log). До/после прогона хеш `playbook.py` изменился. Этот прогон относится к изменяющемуся дереву; первоначальные 187 OK не подтверждают итоговое состояние. Промежуточные ошибки соседней переработки не оформляются как установленные дефекты PB-021 без стабильного снимка. Перед повторной приёмкой необходим завершённый неизменный набор входов и новый полный прогон.
+ 
+ ### Границы и следующий шаг
+ 
+@@ -185,12 +185,12 @@
+ 
+ Область: исправления PB-021-A1–A6, read-only CLI, регрессии и ранее недоказанная фикстура карты переносов. **Результат: A1–A5 закрыты повторной проверкой; A6 исправлена частично и остаётся открытой (Medium). PB-021 не принята, возвращена `in_review → in_progress`.** Исторические записи выше сохранены; заявление исполнителя о закрытии всех шести находок не подтверждено.
+ 
+-Среда: macOS 27.0.1, Python 3.14.6, `dev`, HEAD `0744f93` с незакоммиченными изменениями. Модель подтверждена инженером ранее в этом чате. Код аудитор не менял. [Снимок исходников/тестов до проверки](../../tasks/PB-021-evidence/review-02/inputs.json) и [сверка после](../../tasks/PB-021-evidence/review-02/stability.json) совпали; изменений входов, наблюдавшихся в первом аудите, на этот раз нет.
++Среда: macOS 27.0.1, Python 3.14.6, `dev`, HEAD `0744f93` с незакоммиченными изменениями. Модель подтверждена инженером ранее в этом чате. Код аудитор не менял. [Снимок исходников/тестов до проверки](PB-021-evidence/review-02/inputs.json) и [сверка после](PB-021-evidence/review-02/stability.json) совпали; изменений входов, наблюдавшихся в первом аудите, на этот раз нет.
+ 
+ ### Проверки и результаты
+ 
+-- После проверки конфигурации и `verify PB-021 --dry-run` выполнен `python3 ai-dev-playbook/scripts/playbook.py verify PB-021`: **PASS**, `inputs_unchanged: true`, run `3d0bc11545704d08897b6ca21623c4e1`. Внутри: **253 tests OK**, `check --ready` — PASS. [Отчёт](../../tasks/PB-021-evidence/review-02/report.json), [лог тестов](../../tasks/PB-021-evidence/review-02/unit-tests.stderr.log), [self-check](../../tasks/PB-021-evidence/review-02/self-check.stdout.log). Копии побайтные, пути внутри отчёта сохраняют исходный `work/verification/...`; документы аудита дополнены после прогона, код и тесты не менялись.
+-- `python3 docs/tasks/PB-021-evidence/audit_probe.py`: повторены 12 исходных subprocess-сценариев на временных установках. [Результаты](../../tasks/PB-021-evidence/review-02/probes.json). Ожидаемые коды, сообщения, наличие `missed.log` и отсутствие `spec:fake` дополнительно сверены; дерево/байты не меняются во всех сценариях.
++- После проверки конфигурации и `verify PB-021 --dry-run` выполнен `python3 ai-dev-playbook/scripts/playbook.py verify PB-021`: **PASS**, `inputs_unchanged: true`, run `3d0bc11545704d08897b6ca21623c4e1`. Внутри: **253 tests OK**, `check --ready` — PASS. [Отчёт](PB-021-evidence/review-02/report.json), [лог тестов](PB-021-evidence/review-02/unit-tests.stderr.log), [self-check](PB-021-evidence/review-02/self-check.stdout.log). Копии побайтные, пути внутри отчёта сохраняют исходный `work/verification/...`; документы аудита дополнены после прогона, код и тесты не менялись.
++- `python3 docs/tasks/PB-021-evidence/audit_probe.py`: повторены 12 исходных subprocess-сценариев на временных установках. [Результаты](PB-021-evidence/review-02/probes.json). Ожидаемые коды, сообщения, наличие `missed.log` и отсутствие `spec:fake` дополнительно сверены; дерево/байты не меняются во всех сценариях.
+ - **A1:** внешний symlink-документ и symlink внутри материала отклоняются с путями; обход не следует symlink. **A2:** материалы, содержащие код/тесты или каталог миграций, отклоняются. **A3:** точный дубль external URI у двух владельцев отклоняется. **A4:** неучтённый `missed.log` виден с владельцем; регрессии покрывают скрытый файл. **A5:** fenced-пример остаётся legacy. Эти пять замечаний закрыты.
+ - Фикстуры `MovesCase` в `tests/test_document_links.py` проходят в общем наборе: историческая ссылка immutable-evidence разрешается по карте, отсутствие карты и конфликт одного `from` с двумя `to` отклоняются. Прежний пробел доказательств по чтению карты закрыт в этом объёме; это не полная приёмка PB-022 и не проверка её создания в PB-025.
+ 
+@@ -198,7 +198,7 @@
+ 
+ Исходный `state: []` теперь даёт адресную ошибку. Но `_changes` и `_materials` после `_err` всё ещё вызывают `seen.add(ident)` для невалидного ID (`documents.py:290,344`). Внешний `source` передаётся в `urlsplit` без преобразования его исключений в адресную диагностику (`documents.py:357`).
+ 
+-Воспроизведение: `python3 docs/tasks/PB-021-evidence/review-02/extra_probe.py`. [Скрипт](../../tasks/PB-021-evidence/review-02/extra_probe.py), [результаты трёх отдельных CLI-процессов](../../tasks/PB-021-evidence/review-02/extra-results.json):
++Воспроизведение: `python3 docs/tasks/PB-021-evidence/review-02/extra_probe.py`. [Скрипт](PB-021-evidence/review-02/extra_probe.py), [результаты трёх отдельных CLI-процессов](PB-021-evidence/review-02/extra-results.json):
+ 
+ | Поле в `docs/specs/alpha.md` | Значение | Фактическая ошибка при exit 1 |
+ |---|---|---|
+@@ -228,14 +228,14 @@
+ 
+ **Результат: аудит PB-021 пройден. Остаток A6 закрыт; A1–A5 остаются закрыты. Открытых замечаний в проверенной области нет.** Критерии приёмки отмечены выполненными. Карточка остаётся `in_review` до принятия результата инженером и закрытия; архивирование этим запросом не выполнялось.
+ 
+-Область: последняя доработка `_changes`/`_materials`, три остаточных случая A6, повторение исходных CLI-сценариев и общего проверочного набора. Среда: macOS 27.0.1, Python 3.14.6, ветка `dev`, HEAD `0744f93` с незакоммиченными изменениями. По сравнению с предыдущим аудитом изменены только `documents.py`, `tests/test_documents.py` и self-manifest среди файлов комплекта/тестов. [Входы](../../tasks/PB-021-evidence/review-03/inputs.json) и [сверка после](../../tasks/PB-021-evidence/review-03/stability.json): состав и SHA-256 37 файлов совпали, параллельных изменений не обнаружено.
++Область: последняя доработка `_changes`/`_materials`, три остаточных случая A6, повторение исходных CLI-сценариев и общего проверочного набора. Среда: macOS 27.0.1, Python 3.14.6, ветка `dev`, HEAD `0744f93` с незакоммиченными изменениями. По сравнению с предыдущим аудитом изменены только `documents.py`, `tests/test_documents.py` и self-manifest среди файлов комплекта/тестов. [Входы](PB-021-evidence/review-03/inputs.json) и [сверка после](PB-021-evidence/review-03/stability.json): состав и SHA-256 37 файлов совпали, параллельных изменений не обнаружено.
+ 
+ ### Проверки и доказательства
+ 
+-- `python3 docs/tasks/PB-021-evidence/review-02/extra_probe.py`: **3/3** проблемных случая A6 теперь отклоняются с exit 1 и указанием `docs/specs/alpha.md` и поля `materials`/`changes`. Невалидные ID не добавляются в `seen`; исключение `urlsplit` преобразуется в адресную ошибку. [Результаты](../../tasks/PB-021-evidence/review-03/extra-results.json).
+-- `python3 docs/tasks/PB-021-evidence/audit_probe.py`: **12/12** исходных subprocess-сценариев дали ожидаемые результаты. Symlink, пересечения с компонентами и два владельца отклоняются; неучтённый `missed.log` виден, fenced-пример остаётся legacy, `state: []` даёт адресную ошибку. [Результаты](../../tasks/PB-021-evidence/review-03/probes.json).
++- `python3 docs/tasks/PB-021-evidence/review-02/extra_probe.py`: **3/3** проблемных случая A6 теперь отклоняются с exit 1 и указанием `docs/specs/alpha.md` и поля `materials`/`changes`. Невалидные ID не добавляются в `seen`; исключение `urlsplit` преобразуется в адресную ошибку. [Результаты](PB-021-evidence/review-03/extra-results.json).
++- `python3 docs/tasks/PB-021-evidence/audit_probe.py`: **12/12** исходных subprocess-сценариев дали ожидаемые результаты. Symlink, пересечения с компонентами и два владельца отклоняются; неучтённый `missed.log` виден, fenced-пример остаётся legacy, `state: []` даёт адресную ошибку. [Результаты](PB-021-evidence/review-03/probes.json).
+ - Во всех 15 subprocess-сценариях до/после совпали состав дерева, symlink и SHA-256 файлов; проверки включают запуск Python без `-B`. Сетевых запросов нет.
+-- Конфигурация и argv проверены через `verify PB-021 --dry-run`; `python3 ai-dev-playbook/scripts/playbook.py verify PB-021`: **PASS**, run `a365bf286bbe4299b3cabddaae0fe360`, `inputs_unchanged: true`; **256 tests OK**, `check --ready` — PASS. [Отчёт](../../tasks/PB-021-evidence/review-03/report.json), [тесты](../../tasks/PB-021-evidence/review-03/unit-tests.stderr.log), [self-check](../../tasks/PB-021-evidence/review-03/self-check.stdout.log). Копии побайтные, внутренние пути отчёта сохранены из `work/verification/...`. Протокол и отметки приёмки добавлены после прогона; код/тесты аудитор не менял.
++- Конфигурация и argv проверены через `verify PB-021 --dry-run`; `python3 ai-dev-playbook/scripts/playbook.py verify PB-021`: **PASS**, run `a365bf286bbe4299b3cabddaae0fe360`, `inputs_unchanged: true`; **256 tests OK**, `check --ready` — PASS. [Отчёт](PB-021-evidence/review-03/report.json), [тесты](PB-021-evidence/review-03/unit-tests.stderr.log), [self-check](PB-021-evidence/review-03/self-check.stdout.log). Копии побайтные, внутренние пути отчёта сохранены из `work/verification/...`. Протокол и отметки приёмки добавлены после прогона; код/тесты аудитор не менял.
+ 
+ ### Границы и передача
+ 
+@@ -246,3 +246,29 @@
+ Инженер принял результат повторного аудита и разрешил закрытие сообщением «Закрывай». A1–A6 закрыты, критерии приёмки выполнены; исходники и тесты совпадают со снимком последней приёмки. Карточка закрывается штатным `close PB-021`. Evidence сохраняются по прежним путям с проверкой SHA-256; перенос сопровождающих материалов относится к будущему lifecycle. Приёмка PB-022 и AUDIT-006 этим не выполняется.
+ 
+ Закрытие подтверждено: `done`, карточка в архиве, входящие/исходящие ссылки и индекс обновлены. `index`, `check --ready` (35 карточек), `git diff --check` — PASS; состав и SHA-256 evidence не изменились. Commit/push не выполнялись.
++
++<!-- playbook-meta:start -->
++```json
++{
++  "schema_version": 1,
++  "relations": [],
++  "materials": [
++    {
++      "id": "recovered-evidence",
++      "role": "report",
++      "source": "docs/archive/tasks/PB-021-evidence",
++      "storage": "local",
++      "required": true,
++      "immutable": true,
++      "used_by": []
++    }
++  ],
++  "moves": [
++    {
++      "from": "docs/tasks/PB-021-evidence",
++      "to": "docs/archive/tasks/PB-021-evidence"
++    }
++  ]
++}
++```
++<!-- playbook-meta:end -->
+--- a/docs/archive/tasks/PB-022.md
++++ b/docs/archive/tasks/PB-022.md
+@@ -77,7 +77,7 @@
+ - `playbook.py`: `relocate_links`, `retarget_links` и `check_links` переведены на `document_links`; `check` дополнительно валидирует индексы коллекций, когда раздел `documents` настроен; поведение `close` сохранено.
+ - `tests/test_document_links.py`: 50 тестов — контракт rewrite, конфликты, self/входящие/взаимные ссылки, immutable через карту, индексы (группы, идемпотентность, ручные области), регрессии ссылок и `close` покрыты существующим `test_cli.py`.
+ 
+-Проверки: `python3 -m unittest discover -s tests -v` — **237 тестов, OK** ([лог](../../tasks/PB-022-evidence/unit-tests.log)); `python3 ai-dev-playbook/scripts/playbook.py check --ready` — **OK** (35 карточек). `verify PB-022` не запускался: `verify` требует активный статус, а активный статус недоступен, пока PB-021 не `done` (правило read_tasks). Отчёт verify и независимая приёмка — после разблокировки.
++Проверки: `python3 -m unittest discover -s tests -v` — **237 тестов, OK** ([лог](PB-022-evidence/unit-tests.log)); `python3 ai-dev-playbook/scripts/playbook.py check --ready` — **OK** (35 карточек). `verify PB-022` не запускался: `verify` требует активный статус, а активный статус недоступен, пока PB-021 не `done` (правило read_tasks). Отчёт verify и независимая приёмка — после разблокировки.
+ 
+ ### Блокировка
+ 
+@@ -93,13 +93,13 @@
+ 
+ Независимая проверка в отдельном чате по запросу инженера. **PB-022 не принята: открыты PB-022-A1–A4 (1 High, 3 Medium), задача возвращена в `in_progress`.** PB-021 уже `done` и архивирована: прежняя блокировка зависимости снята; историческая запись выше сохранена. Все находки находятся в границах этой карточки, отдельных задач не требуется.
+ 
+-Область: `document_links.py`, интеграция ссылок в `playbook.py`, индексы и moves/immutable в `documents.py`, соответствующие тесты; сверка с приёмкой PB-022 и design §5. Среда: macOS, Python 3.14.6, локальные временные проекты; ветка `dev`, HEAD `0744f938ddd571d179a598b7dd92f5b73267ccba`, исходное дерево с незакоммиченными изменениями. Проверялось рабочее дерево, не только HEAD. Отпечатки исходников, тестов и контрактов — [audit-inputs.json](../../tasks/PB-022-evidence/audit-inputs.json).
++Область: `document_links.py`, интеграция ссылок в `playbook.py`, индексы и moves/immutable в `documents.py`, соответствующие тесты; сверка с приёмкой PB-022 и design §5. Среда: macOS, Python 3.14.6, локальные временные проекты; ветка `dev`, HEAD `0744f938ddd571d179a598b7dd92f5b73267ccba`, исходное дерево с незакоммиченными изменениями. Проверялось рабочее дерево, не только HEAD. Отпечатки исходников, тестов и контрактов — [audit-inputs.json](PB-022-evidence/audit-inputs.json).
+ 
+ ### PB-022-A1 — High: кодирование пути меняет адресата, включая посторонние ссылки при close
+ 
+ Источник: `document_links.py:190–212`, `playbook.py:334–351`, `documents.py:935–938`. После `unquote` сборщик не защищает литеральные `%`, `#`, `?` и двоеточие в первом сегменте. Даже пустая карта и неизменный источник превращают `a%23b.md` в `a#b.md`, `a%3Fb.md` в `a?b.md`, `a%2520b.md` в `a%20b.md`, `./a%3Ab.md` в `a:b.md`; меняются файл или схема URI. Генератор индекса также выдаёт неправильный адрес для файла `a#b.md`.
+ 
+-Воспроизведение: тесты `test_A1_*` в [audit-probes.py](../../tasks/PB-022-evidence/audit-probes.py). В subprocess-сценарии `init → index → check → close DEV-1 → check` исходная проверка проходит, `close` возвращает 0, но меняет не связанную с задачей ссылку в README и следующая проверка возвращает 1. Файл-адресат остаётся на месте. Влияние: существующая команда закрытия может повредить навигацию по проекту при успешном завершении.
++Воспроизведение: тесты `test_A1_*` в [audit-probes.py](PB-022-evidence/audit-probes.py). В subprocess-сценарии `init → index → check → close DEV-1 → check` исходная проверка проходит, `close` возвращает 0, но меняет не связанную с задачей ссылку в README и следующая проверка возвращает 1. Файл-адресат остаётся на месте. Влияние: существующая команда закрытия может повредить навигацию по проекту при успешном завершении.
+ 
+ Критерий исправления: кодировать именно компонент пути с сохранением адресата после URL-разбора; отдельно сохранять query/fragment и стиль ссылки; не изменять незатронутые адресаты. Покрыть bare/angle-ссылки, генерацию индексов и реальный `close`; после него проверка проекта и разрешение всех исходных адресатов должны проходить.
+ 
+@@ -123,10 +123,10 @@
+ 
+ ### Проверки, доказательства и границы
+ 
+-- `python3 -m unittest discover -s tests -v` — **256 тестов, OK**; [полный лог](../../tasks/PB-022-evidence/audit-unit-tests.log). Это подтверждает существующий набор, но не закрывает находки.
+-- `python3 docs/tasks/PB-022-evidence/audit-probes.py` — **10 сценариев: 2 прошли, 8 воспроизводят дефекты; 13 FAIL с учётом subtests**, код выхода 1; [лог](../../tasks/PB-022-evidence/audit-probes.log). Assertions описывают ожидаемое поведение; это разовое доказательство аудита, постоянные регрессии должен добавить исполнитель.
++- `python3 -m unittest discover -s tests -v` — **256 тестов, OK**; [полный лог](PB-022-evidence/audit-unit-tests.log). Это подтверждает существующий набор, но не закрывает находки.
++- `python3 docs/tasks/PB-022-evidence/audit-probes.py` — **10 сценариев: 2 прошли, 8 воспроизводят дефекты; 13 FAIL с учётом subtests**, код выхода 1; [лог](PB-022-evidence/audit-probes.log). Assertions описывают ожидаемое поведение; это разовое доказательство аудита, постоянные регрессии должен добавить исполнитель.
+ - Положительные сценарии независимо подтвердили разрешение ссылок после полного перемещения двух взаимосвязанных документов, self/image/reference/query/fragment, историческое разрешение immutable и сохранение ручных областей/идемпотентность индекса. Штатные тесты дополнительно покрывают группировку актуальных/архивных документов, планы без статусов задач и конфликт из managed core.
+-- `python3 ai-dev-playbook/scripts/playbook.py check --ready` — **OK**, 35 карточек; после сохранения протокола повторены `index`, `check --ready`, `git diff --check`, результаты — [audit-final-checks.log](../../tasks/PB-022-evidence/audit-final-checks.log). Это структурная проверка.
++- `python3 ai-dev-playbook/scripts/playbook.py check --ready` — **OK**, 35 карточек; после сохранения протокола повторены `index`, `check --ready`, `git diff --check`, результаты — [audit-final-checks.log](PB-022-evidence/audit-final-checks.log). Это структурная проверка.
+ - `verify PB-022` в этом аудите не запускался; штатные команды выполнены напрямую с отдельным логом. Свежий verify требуется после исправлений перед повторной приёмкой. Историческое объяснение его недоступности зависимостью больше не актуально.
+ - Не подтверждены новые lifecycle-команды, атомарность/восстановление, интеграция будущего архивирования, CI и полный процесс блока; это последующие задачи. Сам проект пока не включает новые коллекции, сценарии коллекций проверены во временной конфигурации.
+ 
+@@ -139,19 +139,19 @@
+ - **A3** — затронутость считается изменением относительного адресата (`_affected` сравнивает relpath по старому и новому расположению источника): перенос источника с HTML/wikilink на неподвижную цель даёт конфликт `unsupported`. HTML-атрибуты распознаются в кавычках и без.
+ - **A4** — inline/reference ссылки разбираются проходом со сбалансированными скобками и экранированием (`_bracket_end`, `_dest_end`): `[a [b] c](x)`, `[![img](i)](x)`, `\[`. Контракт и границы обновлены в docstring модуля.
+ 
+-Регрессии: `tests/test_document_links.py::AuditRegressionTest` — 14 тестов по A1–A4. Проверки: `python3 -m unittest discover -s tests -v` — **270 тестов, OK** ([лог](../../tasks/PB-022-evidence/unit-tests-after-fixes.log)); probes аудита — **10/10 OK** ([лог](../../tasks/PB-022-evidence/audit-probes-after-fixes.log)); `check --ready` — OK; `verify PB-022` — **passed**, отчёт `work/verification/PB-022/efdb2a457cc4485e81cdfc70d52e6a72/report.json`. Self-manifest обновлён (`adopt --force --apply`). Статус переведён в `in_review` для повторной независимой приёмки; находки аудита закрываются аудитором, не исполнителем.
++Регрессии: `tests/test_document_links.py::AuditRegressionTest` — 14 тестов по A1–A4. Проверки: `python3 -m unittest discover -s tests -v` — **270 тестов, OK** ([лог](PB-022-evidence/unit-tests-after-fixes.log)); probes аудита — **10/10 OK** ([лог](PB-022-evidence/audit-probes-after-fixes.log)); `check --ready` — OK; `verify PB-022` — **passed**, отчёт `work/verification/PB-022/efdb2a457cc4485e81cdfc70d52e6a72/report.json`. Self-manifest обновлён (`adopt --force --apply`). Статус переведён в `in_review` для повторной независимой приёмки; находки аудита закрываются аудитором, не исполнителем.
+ 
+ ## Повторный аудит 2026-10-01T14:08:26+03:00; исполнитель: Codex; модель: GPT-6 Astra (по указанию инженера).
+ 
+ **PB-022 не принята: A3 закрыта повторной проверкой; A1, A2 и A4 исправлены частично и остаются открытыми; добавлена A5.** Открыто 1 High и 3 Medium. Статус возвращён `in_review → in_progress`. История первичного аудита и исправлений сохранена; находки остаются в этой карточке.
+ 
+-Область: исправления A1–A4, общие check/rewrite, индексы, регрессии `close`. Среда: macOS, Python 3.14.6, временные каталоги и subprocess CLI; ветка `dev`, HEAD `0744f938ddd571d179a598b7dd92f5b73267ccba`, проверено рабочее дерево с исходными незакоммиченными изменениями. Независимость от исполнителя сохранена: этот чат выполняет только аудит. Исходники и постоянные тесты сверены до/после проверок — [reaudit-inputs.json](../../tasks/PB-022-evidence/reaudit-inputs.json).
++Область: исправления A1–A4, общие check/rewrite, индексы, регрессии `close`. Среда: macOS, Python 3.14.6, временные каталоги и subprocess CLI; ветка `dev`, HEAD `0744f938ddd571d179a598b7dd92f5b73267ccba`, проверено рабочее дерево с исходными незакоммиченными изменениями. Независимость от исполнителя сохранена: этот чат выполняет только аудит. Исходники и постоянные тесты сверены до/после проверок — [reaudit-inputs.json](PB-022-evidence/reaudit-inputs.json).
+ 
+ ### PB-022-A1 — High, остаётся открытой: query/fragment вынесены за угловые скобки
+ 
+ Первые дефекты компонентного кодирования устранены: прежние сценарии для литеральных `%`, `#`, `?`, `:` и адресов индекса проходят. Однако `document_links.py:383–390` собирает angle-токен как `<путь>` плюс суффикс снаружи. Ссылка `[x](<a b.md?raw=1#sec>)` после переноса становится `[x](<../a b.md>?raw=1#sec)` и перестаёт распознаваться как Markdown-ссылка.
+ 
+-Воспроизведение: два теста `test_A1_*` в [reaudit-probes.py](../../tasks/PB-022-evidence/reaudit-probes.py). В реальном subprocess-сценарии `init → index → check → close DEV-1 → check` оба check и close возвращают 0, но посторонняя ссылка README утрачивает корректный синтаксис. Это более опасный вариант прежней регрессии: проверка уже не обнаруживает повреждение, поскольку scan не видит ссылку.
++Воспроизведение: два теста `test_A1_*` в [reaudit-probes.py](PB-022-evidence/reaudit-probes.py). В реальном subprocess-сценарии `init → index → check → close DEV-1 → check` оба check и close возвращают 0, но посторонняя ссылка README утрачивает корректный синтаксис. Это более опасный вариант прежней регрессии: проверка уже не обнаруживает повреждение, поскольку scan не видит ссылку.
+ 
+ Критерий исправления: path/query/fragment должны оставаться внутри одного angle-токена; сохранять title и доступность ссылки, не изменять незатронутые ссылки при close. Проверить query отдельно, fragment отдельно и вместе, bare/angle и reference definitions; повторный scan результата должен находить тот же адресат.
+ 
+@@ -179,11 +179,11 @@
+ 
+ ### Результаты повторной проверки и передача
+ 
+-- `python3 -m unittest discover -s tests -v` — **270 тестов, OK**; [лог](../../tasks/PB-022-evidence/reaudit-unit-tests.log).
+-- `python3 docs/tasks/PB-022-evidence/audit-probes.py` — **10/10 OK**; [новый лог прежних воспроизведений](../../tasks/PB-022-evidence/reaudit-original-probes.log). Исторический неуспешный лог не перезаписан.
+-- `python3 docs/tasks/PB-022-evidence/reaudit-probes.py` — **8 сценариев: 1 OK, 7 FAIL**, код 1; [лог](../../tasks/PB-022-evidence/reaudit-probes.log). Это независимые проверки комбинаций исправленного поведения, а не изменения реализации.
++- `python3 -m unittest discover -s tests -v` — **270 тестов, OK**; [лог](PB-022-evidence/reaudit-unit-tests.log).
++- `python3 docs/tasks/PB-022-evidence/audit-probes.py` — **10/10 OK**; [новый лог прежних воспроизведений](PB-022-evidence/reaudit-original-probes.log). Исторический неуспешный лог не перезаписан.
++- `python3 docs/tasks/PB-022-evidence/reaudit-probes.py` — **8 сценариев: 1 OK, 7 FAIL**, код 1; [лог](PB-022-evidence/reaudit-probes.log). Это независимые проверки комбинаций исправленного поведения, а не изменения реализации.
+ - Отчёт исполнителя `work/verification/PB-022/efdb2a457cc4485e81cdfc70d52e6a72/report.json` проверен: `passed`, снимки до/после совпадают. На входе повторного аудита от снимка отличались только `docs/architecture.md`, карточка PB-022 и индекс задач; исходники и тесты совпадали. Отчёт не покрывает новые воспроизведения и последующие записи аудита.
+-- После записи повторены `index`, `check --ready`, `git diff --check`, сверка хешей исходников/тестов и self-manifest; [результаты](../../tasks/PB-022-evidence/reaudit-final-checks.log). Структурный успех не закрывает поведенческие дефекты.
++- После записи повторены `index`, `check --ready`, `git diff --check`, сверка хешей исходников/тестов и self-manifest; [результаты](PB-022-evidence/reaudit-final-checks.log). Структурный успех не закрывает поведенческие дефекты.
+ 
+ Код комплекта и постоянные тесты не изменялись; сохранены отдельный протокол, новые probes/логи и актуальное ограничение в архитектуре. Повторный adopt не требуется. Не проверялись новые lifecycle-команды, восстановление, CI и совместный результат последующих задач. Следующий шаг: исполнитель устраняет A1/A2/A4/A5, расширяет постоянные регрессии, обновляет manifest и verify, затем передаёт PB-022 на повторный аудит. Задача не закрыта, PB-024 по этой зависимости не разблокирована. Commit/push не выполнялись.
+ 
+@@ -194,13 +194,13 @@
+ - **A4** — при разборе внешней ссылки стираются только скобки и адресат; подпись продолжает сканироваться: `[![i](i.png)](b.md)` даёт два адресата, оба переписываются и проверяются. Ожидание постоянного теста исправлено.
+ - **A5** — кандидат `.md` для wikilink добавляется только при незаданном суффиксе: `[[b.md]]` ≠ `b.md.md`, совместный перенос источника и цели конфликта не даёт.
+ 
+-Регрессии: `tests/test_document_links.py::AuditRegressionTest` расширен до 21 теста (angle+query/fragment, escaped/unmatched backtick, вложенное изображение, совместный перенос wikilink). Проверки: `python3 -m unittest discover -s tests -v` — **277 тестов, OK** ([лог](../../tasks/PB-022-evidence/unit-tests-after-reaudit-fixes.log)); прежние probes — 10/10, новые probes — **8/8 OK** ([лог](../../tasks/PB-022-evidence/reaudit-probes-after-fixes.log)); `check --ready` — OK. `verify PB-022` — **passed**, отчёт `work/verification/PB-022/70e07d2aa9f14475b99f34e33adf168d/report.json` (первый прогон завершился `stale`: параллельная работа добавила `file_operations.py` во время измерения входов; повторный прогон на неизменных входах успешен). Self-manifest обновлён. Статус — `in_review` для повторной независимой приёмки.
++Регрессии: `tests/test_document_links.py::AuditRegressionTest` расширен до 21 теста (angle+query/fragment, escaped/unmatched backtick, вложенное изображение, совместный перенос wikilink). Проверки: `python3 -m unittest discover -s tests -v` — **277 тестов, OK** ([лог](PB-022-evidence/unit-tests-after-reaudit-fixes.log)); прежние probes — 10/10, новые probes — **8/8 OK** ([лог](PB-022-evidence/reaudit-probes-after-fixes.log)); `check --ready` — OK. `verify PB-022` — **passed**, отчёт `work/verification/PB-022/70e07d2aa9f14475b99f34e33adf168d/report.json` (первый прогон завершился `stale`: параллельная работа добавила `file_operations.py` во время измерения входов; повторный прогон на неизменных входах успешен). Self-manifest обновлён. Статус — `in_review` для повторной независимой приёмки.
+ 
+ ## Повторный аудит 2026-10-02T06:47:59+03:00; исполнитель: Codex; модель: GPT-6 Astra (по указанию инженера).
+ 
+ **PB-022 не принята. A1 и A4 закрыты повторной проверкой, A3 остаётся закрытой; A2 и A5 исправлены частично и остаются открытыми (2 Medium).** Статус возвращён `in_review → in_progress`. Новые ID не создавались: остаточные случаи относятся к маскированию кода и разрешению wikilink из существующих находок. История сохранена.
+ 
+-Область: правки от 2026-10-01T14:17+03:00, все прежние воспроизведения, дополнительные границы исправленного поведения. Среда: macOS, Python 3.14.6, временные проекты; `dev`, HEAD `0744f938ddd571d179a598b7dd92f5b73267ccba`, рабочее дерево с незакоммиченными изменениями. Новая реализация PB-023 присутствует в дереве и участвует в общей регрессии, но её независимая приёмка этим аудитом не выполнялась. Отпечатки до/после — [reaudit-02-inputs.json](../../tasks/PB-022-evidence/reaudit-02-inputs.json).
++Область: правки от 2026-10-01T14:17+03:00, все прежние воспроизведения, дополнительные границы исправленного поведения. Среда: macOS, Python 3.14.6, временные проекты; `dev`, HEAD `0744f938ddd571d179a598b7dd92f5b73267ccba`, рабочее дерево с незакоммиченными изменениями. Новая реализация PB-023 присутствует в дереве и участвует в общей регрессии, но её независимая приёмка этим аудитом не выполнялась. Отпечатки до/после — [reaudit-02-inputs.json](PB-022-evidence/reaudit-02-inputs.json).
+ 
+ ### A1/A4 — закрыты; A3 — без регрессии в проверенных сценариях
+ 
+@@ -212,7 +212,7 @@
+ 
+ Источник: `document_links.py:116–119`. Проверяется только последний символ перед backtick. При двух обратных слешах первый экранирует второй, а backtick открывает code span; текущая реализация считает его экранированным. Поэтому ссылка внутри корректного кодового примера переписывается при переносе документа.
+ 
+-Воспроизведение: `test_A2_even_backslashes_before_code_span` в [reaudit-02-probes.py](../../tasks/PB-022-evidence/reaudit-02-probes.py): текст содержит два обратных слеша перед code span с примером ссылки; перенос `docs/a.md → docs/archive/a.md` меняет адрес примера `b.md → ../b.md`, хотя весь пример должен сохраниться побайтно. Старые случаи одиночного экранирования и unmatched-run теперь проходят.
++Воспроизведение: `test_A2_even_backslashes_before_code_span` в [reaudit-02-probes.py](PB-022-evidence/reaudit-02-probes.py): текст содержит два обратных слеша перед code span с примером ссылки; перенос `docs/a.md → docs/archive/a.md` меняет адрес примера `b.md → ../b.md`, хотя весь пример должен сохраниться побайтно. Старые случаи одиночного экранирования и unmatched-run теперь проходят.
+ 
+ Влияние: нарушается исключение кодовых примеров из rewrite/check. Критерий исправления: определять экранирование по чётности непрерывной последовательности обратных слешей; проверить 0/1/2/3/4 слеша, code spans разной длины, неизменность кода и распознавание настоящих ссылок рядом.
+ 
+@@ -227,12 +227,12 @@
+ 
+ ### Проверки и передача
+ 
+-- `python3 -m unittest discover -s tests -v` — **310 тестов, OK**; [лог](../../tasks/PB-022-evidence/reaudit-02-unit-tests.log). Во время аудита параллельно изменились `file_operations.py` и `tests/test_file_operations.py`; этот прогон не подтверждает их позднее состояние.
+-- `python3 docs/tasks/PB-022-evidence/audit-probes.py` — **10/10 OK**; [лог](../../tasks/PB-022-evidence/reaudit-02-original-probes.log).
+-- `python3 docs/tasks/PB-022-evidence/reaudit-probes.py` — **8/8 OK**; [лог](../../tasks/PB-022-evidence/reaudit-02-previous-probes.log).
+-- `python3 docs/tasks/PB-022-evidence/reaudit-02-probes.py` — **5 сценариев: 2 OK, 3 FAIL**, код 1; [лог](../../tasks/PB-022-evidence/reaudit-02-probes.log). Все три FAIL относятся к A2/A5.
++- `python3 -m unittest discover -s tests -v` — **310 тестов, OK**; [лог](PB-022-evidence/reaudit-02-unit-tests.log). Во время аудита параллельно изменились `file_operations.py` и `tests/test_file_operations.py`; этот прогон не подтверждает их позднее состояние.
++- `python3 docs/tasks/PB-022-evidence/audit-probes.py` — **10/10 OK**; [лог](PB-022-evidence/reaudit-02-original-probes.log).
++- `python3 docs/tasks/PB-022-evidence/reaudit-probes.py` — **8/8 OK**; [лог](PB-022-evidence/reaudit-02-previous-probes.log).
++- `python3 docs/tasks/PB-022-evidence/reaudit-02-probes.py` — **5 сценариев: 2 OK, 3 FAIL**, код 1; [лог](PB-022-evidence/reaudit-02-probes.log). Все три FAIL относятся к A2/A5.
+ - Отчёт `work/verification/PB-022/70e07d2aa9f14475b99f34e33adf168d/report.json` действительно `passed`, его снимки до/после совпадают. Однако текущие `file_operations.py`, `playbook.py`, `updating.py`, `verification.py`, `tests/test_cli.py`, manifest и часть документов уже отличаются от этого отчёта. Он не подтверждает всё текущее дерево; в этом аудите полный unittest и воспроизведения запущены заново. PB-022-модули `document_links.py`/`documents.py` и их тесты совпадают с отчётом.
+-- После записи выполнены `index`, `check --ready`, `git diff --check`. Из 11 снятых исходников/тестов 9 не изменились, включая модули и тесты PB-022; изменились только `file_operations.py` и `tests/test_file_operations.py` из PB-023. Финальная сверка manifest также выявила несоответствие `file_operations.py`, отсутствовавшее при первоначальной проверке. Чужие изменения и manifest аудитор не исправлял: их проверка/актуализация остаётся в PB-023. [Итоговый лог](../../tasks/PB-022-evidence/reaudit-02-final-checks.log). Полное дерево не объявляется проверенным на неизменных входах; воспроизведения A2/A5 относятся к неизменившемуся модулю PB-022.
++- После записи выполнены `index`, `check --ready`, `git diff --check`. Из 11 снятых исходников/тестов 9 не изменились, включая модули и тесты PB-022; изменились только `file_operations.py` и `tests/test_file_operations.py` из PB-023. Финальная сверка manifest также выявила несоответствие `file_operations.py`, отсутствовавшее при первоначальной проверке. Чужие изменения и manifest аудитор не исправлял: их проверка/актуализация остаётся в PB-023. [Итоговый лог](PB-022-evidence/reaudit-02-final-checks.log). Полное дерево не объявляется проверенным на неизменных входах; воспроизведения A2/A5 относятся к неизменившемуся модулю PB-022.
+ 
+ Аудитор не менял код и постоянные тесты. Добавлены протокол, отдельные probes/логи, обновлены ограничение архитектуры и индекс; эти документальные изменения не требуют adopt. Следующий шаг: исправить A2/A5, дополнить постоянные регрессии, актуализировать manifest/verify и передать PB-022 на повторную приёмку. Задача не закрыта, зависимость PB-024 не разблокирована. Новые lifecycle-команды, восстановление, внешний CI и весь блок не принимались. Commit/push не выполнялись.
+ 
+@@ -241,13 +241,13 @@
+ - **A2** — экранирование открывающего backtick определяется чётностью непрерывной серии `\` перед ним: `\\` экранирует сам слеш, и `` ` `` открывает code span; нечётная серия — литерал. Маскирование не считает слеши внутри уже замаскированного кода.
+ - **A5** — `_wiki_target` разбирает wikilink на path/query/fragment до выбора кандидата; `.md` добавляется только к path без суффикса; реальная цель — кандидат, существующий на диске или ключ `moves`; отсутствующий кандидат зависимостью не считается; несколько реальных кандидатов — конфликт неоднозначности. `[[b#section]]` корректно привязывается к `b.md`.
+ 
+-Регрессии: `AuditRegressionTest` расширен — `test_backslash_parity_around_code_span` (0/1/2/3 слеша), `test_wikilink_extensionless_joint_move_no_conflict`, `test_wikilink_fragment_detects_moved_target`, `test_wikilink_ambiguous_candidates_conflict`. Проверки: `python3 -m unittest discover -s tests -v` — **323 теста, OK** ([лог](../../tasks/PB-022-evidence/unit-tests-after-reaudit-02.log)); все probes — 10/10 + 8/8 + **5/5 OK** ([лог](../../tasks/PB-022-evidence/reaudit-02-probes-after-fixes.log)); `check --ready` — OK. `verify PB-022` — **passed**, отчёт `work/verification/PB-022/2bfeab982206473390dbe12babe10fdd/report.json` (первый прогон — `stale` из-за параллельных записей evidence PB-023; повтор на неизменных входах успешен). Self-manifest обновлён. Статус — `in_review` для повторной независимой приёмки.
++Регрессии: `AuditRegressionTest` расширен — `test_backslash_parity_around_code_span` (0/1/2/3 слеша), `test_wikilink_extensionless_joint_move_no_conflict`, `test_wikilink_fragment_detects_moved_target`, `test_wikilink_ambiguous_candidates_conflict`. Проверки: `python3 -m unittest discover -s tests -v` — **323 теста, OK** ([лог](PB-022-evidence/unit-tests-after-reaudit-02.log)); все probes — 10/10 + 8/8 + **5/5 OK** ([лог](PB-022-evidence/reaudit-02-probes-after-fixes.log)); `check --ready` — OK. `verify PB-022` — **passed**, отчёт `work/verification/PB-022/2bfeab982206473390dbe12babe10fdd/report.json` (первый прогон — `stale` из-за параллельных записей evidence PB-023; повтор на неизменных входах успешен). Self-manifest обновлён. Статус — `in_review` для повторной независимой приёмки.
+ 
+ ## Повторный аудит 2026-10-02T07:04:05+03:00; исполнитель: Codex; модель: GPT-6 Astra (по указанию инженера).
+ 
+ **Независимая приёмка PB-022 пройдена в границах карточки. A2 и A5 закрыты повторной проверкой; A1/A3/A4 остаются закрытыми. Новых замечаний не выявлено, блокирующих находок нет.** История предыдущих аудитов и исправлений сохранена. Карточка остаётся `in_review` до принятия протокола инженером и закрытия/архивирования.
+ 
+-Область: финальные исправления экранирования code spans и разрешения wikilink, все 23 прежних воспроизведения, регрессии остальных требований PB-022. Среда: macOS, Python 3.14.6, локальные временные проекты и subprocess CLI; ветка `dev`, HEAD `0744f938ddd571d179a598b7dd92f5b73267ccba`, проверено рабочее дерево с незакоммиченными изменениями. За аудит 11 исходников/тестов не менялись; [отпечатки](../../tasks/PB-022-evidence/reaudit-03-inputs.json).
++Область: финальные исправления экранирования code spans и разрешения wikilink, все 23 прежних воспроизведения, регрессии остальных требований PB-022. Среда: macOS, Python 3.14.6, локальные временные проекты и subprocess CLI; ветка `dev`, HEAD `0744f938ddd571d179a598b7dd92f5b73267ccba`, проверено рабочее дерево с незакоммиченными изменениями. За аудит 11 исходников/тестов не менялись; [отпечатки](PB-022-evidence/reaudit-03-inputs.json).
+ 
+ ### Подтверждение исправлений
+ 
+@@ -257,14 +257,40 @@
+ 
+ ### Команды и результаты
+ 
+-- `python3 -m unittest discover -s tests -v` — **325 тестов, OK**; [лог](../../tasks/PB-022-evidence/reaudit-03-unit-tests.log).
+-- `python3 docs/tasks/PB-022-evidence/audit-probes.py` — **10/10 OK**; [лог](../../tasks/PB-022-evidence/reaudit-03-original-probes.log).
+-- `python3 docs/tasks/PB-022-evidence/reaudit-probes.py` — **8/8 OK**; [лог](../../tasks/PB-022-evidence/reaudit-03-previous-probes.log).
+-- `python3 docs/tasks/PB-022-evidence/reaudit-02-probes.py` — **5/5 OK**; [лог](../../tasks/PB-022-evidence/reaudit-03-last-probes.log).
+-- `python3 docs/tasks/PB-022-evidence/reaudit-03-probes.py` — **3/3 OK**, включая 35 комбинаций экранирования/переноса и контроли отсутствующей/неоднозначной цели; [скрипт](../../tasks/PB-022-evidence/reaudit-03-probes.py), [лог](../../tasks/PB-022-evidence/reaudit-03-probes.log).
++- `python3 -m unittest discover -s tests -v` — **325 тестов, OK**; [лог](PB-022-evidence/reaudit-03-unit-tests.log).
++- `python3 docs/tasks/PB-022-evidence/audit-probes.py` — **10/10 OK**; [лог](PB-022-evidence/reaudit-03-original-probes.log).
++- `python3 docs/tasks/PB-022-evidence/reaudit-probes.py` — **8/8 OK**; [лог](PB-022-evidence/reaudit-03-previous-probes.log).
++- `python3 docs/tasks/PB-022-evidence/reaudit-02-probes.py` — **5/5 OK**; [лог](PB-022-evidence/reaudit-03-last-probes.log).
++- `python3 docs/tasks/PB-022-evidence/reaudit-03-probes.py` — **3/3 OK**, включая 35 комбинаций экранирования/переноса и контроли отсутствующей/неоднозначной цели; [скрипт](PB-022-evidence/reaudit-03-probes.py), [лог](PB-022-evidence/reaudit-03-probes.log).
+ - Проверен отчёт исполнителя `work/verification/PB-022/2bfeab982206473390dbe12babe10fdd/report.json`: `passed`, снимки до/после совпадают. С тех пор изменились `file_operations.py`, его тесты, manifest и часть документов/evidence; исходники и тесты PB-022 совпадают с отчётом. Поэтому актуальное поведение подтверждено свежими запусками выше, а старый verify не выдаётся за снимок всего текущего дерева.
+-- После сохранения протокола выполнены `index`, `check --ready`, `git diff --check`, сверка исходников/тестов до/после и self-manifest — [итоговый лог](../../tasks/PB-022-evidence/reaudit-03-final-checks.log). Структурные проверки отделены от поведенческих результатов.
++- После сохранения протокола выполнены `index`, `check --ready`, `git diff --check`, сверка исходников/тестов до/после и self-manifest — [итоговый лог](PB-022-evidence/reaudit-03-final-checks.log). Структурные проверки отделены от поведенческих результатов.
+ 
+ Границы: это приёмка PB-022, а не PB-023, будущих lifecycle-команд или всего блока AUDIT-006. Новые коллекции self-project по-прежнему проверяются через временные конфигурации; универсальная грамматика Markdown, внешние URI, CI, восстановление и поведение будущего архивирования не объявляются принятыми.
+ 
+ Аудитор не менял код, постоянные тесты и комплект; добавил протокол/доказательства, обновил чек-лист приёмки и ограничение архитектуры. Adopt не требуется; commit/push не выполнялись. Следующий шаг: принятие протокола инженером и закрытие PB-022 с сохранением evidence; дальнейшая готовность PB-024 зависит также от отдельной приёмки PB-023.
++
++<!-- playbook-meta:start -->
++```json
++{
++  "schema_version": 1,
++  "relations": [],
++  "materials": [
++    {
++      "id": "recovered-evidence",
++      "role": "report",
++      "source": "docs/archive/tasks/PB-022-evidence",
++      "storage": "local",
++      "required": true,
++      "immutable": true,
++      "used_by": []
++    }
++  ],
++  "moves": [
++    {
++      "from": "docs/tasks/PB-022-evidence",
++      "to": "docs/archive/tasks/PB-022-evidence"
++    }
++  ]
++}
++```
++<!-- playbook-meta:end -->
+--- a/docs/archive/tasks/PB-023.md
++++ b/docs/archive/tasks/PB-023.md
+@@ -95,7 +95,7 @@
+ 
+ **Область.** AC-10 и инфраструктурная часть AC-12: engine, общий gate и подключение к CLI/verify/update, совместимость существующих update-регрессий, восстановление библиотекой и автономным скриптом. Новые lifecycle-команды PB-024+, пилот полной схемы и Windows не приняты этим аудитом.
+ 
+-**Доказательства.** [Сценарии воспроизведения](../../tasks/PB-023-evidence/audit_repro.py), [фактический результат восьми запусков](../../tasks/PB-023-evidence/audit_repro.json), [среда и SHA-256 исходников](../../tasks/PB-023-evidence/audit_inputs.json). Команда: `python3 docs/tasks/PB-023-evidence/audit_repro.py`. Скрипт работает только во временных проектах; успешное завершение подтверждает воспроизведение дефектов, а не исправность реализации. После продолжения аудита все восемь сценариев повторно воспроизведены.
++**Доказательства.** [Сценарии воспроизведения](PB-023-evidence/audit_repro.py), [фактический результат восьми запусков](PB-023-evidence/audit_repro.json), [среда и SHA-256 исходников](PB-023-evidence/audit_inputs.json). Команда: `python3 docs/tasks/PB-023-evidence/audit_repro.py`. Скрипт работает только во временных проектах; успешное завершение подтверждает воспроизведение дефектов, а не исправность реализации. После продолжения аудита все восемь сценариев повторно воспроизведены.
+ 
+ ### PB-023-A1 — High: временный файл уничтожает чужие данные и не учитывается восстановлением
+ 
+@@ -123,7 +123,7 @@
+ 
+ **Следующий шаг:** исполнитель исправляет PB-023-A1–A4 в этой карточке, добавляет регрессии и передаёт результат на повторную независимую приёмку. PB-024 не получает принятую зависимость PB-023.
+ 
+-**Завершающие проверки аудита.** `python3 ai-dev-playbook/scripts/playbook.py verify PB-023` — passed, 2026-10-02: unit-tests (**310 тестов, OK**) и self-check; inputs во время запуска не изменились. [Краткий отчёт](../../tasks/PB-023-evidence/audit_verify.json), [лог тестов](../../tasks/PB-023-evidence/audit-unit-tests.log). Полный отчёт: `work/verification/PB-023/7a4e89b640a14c1c96d34d9b0d82aa8c/report.json` (игнорируемый `work/`, может отсутствовать в другом checkout). Успех штатного набора не покрывает воспроизведённые A1–A4. После записи итогов повторены `index`, `check --ready` и `git diff --check`; код комплекта не менялся, self-manifest не переоформлялся. Итоговая запись протокола добавлена после verify и не входит в его снимок; исходники соответствуют сохранённым SHA-256.
++**Завершающие проверки аудита.** `python3 ai-dev-playbook/scripts/playbook.py verify PB-023` — passed, 2026-10-02: unit-tests (**310 тестов, OK**) и self-check; inputs во время запуска не изменились. [Краткий отчёт](PB-023-evidence/audit_verify.json), [лог тестов](PB-023-evidence/audit-unit-tests.log). Полный отчёт: `work/verification/PB-023/7a4e89b640a14c1c96d34d9b0d82aa8c/report.json` (игнорируемый `work/`, может отсутствовать в другом checkout). Успех штатного набора не покрывает воспроизведённые A1–A4. После записи итогов повторены `index`, `check --ready` и `git diff --check`; код комплекта не менялся, self-manifest не переоформлялся. Итоговая запись протокола добавлена после verify и не входит в его снимок; исходники соответствуют сохранённым SHA-256.
+ 
+ ## Исправление аудита A1–A4; 2026-10-02; исполнитель: Devin; модель: SWE-2 High
+ 
+@@ -135,13 +135,13 @@
+ 
+ **A4 — режимы каталогов.** Индекс хранит `dir_modes` для `removed_dirs` (схема 1, валидация: dict покрывает ровно removed_dirs, int 0..0o7777). Откат и оба restore делают `mkdir` родителей раньше потомков и `chmod` по записанному режиму с пост-проверкой; несовпадение — отказ с сохранением маркера. Регрессии: `test_removed_dir_mode_restored_on_rollback`, `test_removed_dir_mode_restored_by_engine_restore`; сценарий `directory_mode`.
+ 
+-**Проверки исправления.** Обновлённый [сценарий воспроизведения](../../tasks/PB-023-evidence/audit_repro.py) теперь утверждает исправленное поведение: все 8 запусков проходят, результат — [fix_repro.json](../../tasks/PB-023-evidence/fix_repro.json), среда и SHA-256 — [fix_inputs.json](../../tasks/PB-023-evidence/fix_inputs.json). `tests/test_file_operations.py` — 42 теста OK. `python3 -m unittest discover -s tests -v` — **319 тестов, OK** (2026-10-02, macOS, Python 3.14.6). `check --ready` — OK. `verify PB-023` — **passed**, отчёт `work/verification/PB-023/645bc85dfd944e1abfcc3548dec2c187/report.json`. Self-manifest обновлён (`adopt . --force --apply`, 29 управляемых файлов). Карточка возвращена в `in_review`; повторная независимая приёмка — отдельно.
++**Проверки исправления.** Обновлённый [сценарий воспроизведения](PB-023-evidence/audit_repro.py) теперь утверждает исправленное поведение: все 8 запусков проходят, результат — [fix_repro.json](PB-023-evidence/fix_repro.json), среда и SHA-256 — [fix_inputs.json](PB-023-evidence/fix_inputs.json). `tests/test_file_operations.py` — 42 теста OK. `python3 -m unittest discover -s tests -v` — **319 тестов, OK** (2026-10-02, macOS, Python 3.14.6). `check --ready` — OK. `verify PB-023` — **passed**, отчёт `work/verification/PB-023/645bc85dfd944e1abfcc3548dec2c187/report.json`. Self-manifest обновлён (`adopt . --force --apply`, 29 управляемых файлов). Карточка возвращена в `in_review`; повторная независимая приёмка — отдельно.
+ 
+ ## Повторный аудит 2026-10-02T06:55:42+03:00; исполнитель: Codex; модель: GPT-6 Astra (по указанию инженера).
+ 
+ **Вывод: не принято.** PB-023-A3 и PB-023-A4 подтверждены; PB-023-A1 и PB-023-A2 остаются открытыми (High). Карточка возвращена `in_review → in_progress`. Проверена реализация исправлений Devin в незакоммиченном дереве `dev`, HEAD `0744f938ddd571d179a598b7dd92f5b73267ccba`; код аудитором не менялся.
+ 
+-**Доказательства:** [независимые дополнительные сценарии](../../tasks/PB-023-evidence/reaudit_probes.py), [результат](../../tasks/PB-023-evidence/reaudit_probes.json), [среда и SHA-256](../../tasks/PB-023-evidence/reaudit_inputs.json). Команда `python3 docs/tasks/PB-023-evidence/reaudit_probes.py` повторяет восемь обновлённых исполнителем сценариев `audit_repro.py`, затем выполняет пять дополнительных проверок. Исходные восемь сценариев проходят; дополнительные проверки фиксируют два оставшихся дефекта. Все операции и SIGKILL — только во временных проектах.
++**Доказательства:** [независимые дополнительные сценарии](PB-023-evidence/reaudit_probes.py), [результат](PB-023-evidence/reaudit_probes.json), [среда и SHA-256](PB-023-evidence/reaudit_inputs.json). Команда `python3 docs/tasks/PB-023-evidence/reaudit_probes.py` повторяет восемь обновлённых исполнителем сценариев `audit_repro.py`, затем выполняет пять дополнительных проверок. Исходные восемь сценариев проходят; дополнительные проверки фиксируют два оставшихся дефекта. Все операции и SIGKILL — только во временных проектах.
+ 
+ ### PB-023-A1 — High, остаётся открытым: автономный restore удаляет чужой похожий файл
+ 
+@@ -162,7 +162,7 @@
+ 
+ **Границы:** macOS / Python 3.14.6; Windows, полный lifecycle CLI PB-024+ и пилот всей новой схемы не проверялись. Исторический `audit_repro.py` изменён исполнителем под исправленное поведение; старый JSON остаётся историческим результатом, новые результаты сохранены отдельно. Следующий шаг — исправление оставшихся A1/A2, самопроверка и повторная независимая приёмка. PB-023 пока не является принятой зависимостью для PB-024.
+ 
+-**Итоговые проверки повторного аудита.** Первый `verify` получил `stale`: во время прогона сторонняя сессия изменила `document_links.py`; оба отдельных check прошли, но этот запуск не принят как стабильный. После обновления карточки повторён `verify PB-023`: **passed**, inputs неизменны; [краткий отчёт](../../tasks/PB-023-evidence/reaudit_verify.json), [лог тестов](../../tasks/PB-023-evidence/reaudit-unit-tests.log). Полный отчёт `work/verification/PB-023/454cfd0e851b48eb8e483edc979fb023/report.json` хранится в игнорируемом `work/` и может отсутствовать в другом checkout. SHA-256 четырёх проверенных модулей после прогона совпадают с evidence. Итоговая запись добавлена после verify; далее повторены `index`, `check --ready`, `git diff --check`. Код комплекта аудитором не менялся; self-manifest не переоформлялся.
++**Итоговые проверки повторного аудита.** Первый `verify` получил `stale`: во время прогона сторонняя сессия изменила `document_links.py`; оба отдельных check прошли, но этот запуск не принят как стабильный. После обновления карточки повторён `verify PB-023`: **passed**, inputs неизменны; [краткий отчёт](PB-023-evidence/reaudit_verify.json), [лог тестов](PB-023-evidence/reaudit-unit-tests.log). Полный отчёт `work/verification/PB-023/454cfd0e851b48eb8e483edc979fb023/report.json` хранится в игнорируемом `work/` и может отсутствовать в другом checkout. SHA-256 четырёх проверенных модулей после прогона совпадают с evidence. Итоговая запись добавлена после verify; далее повторены `index`, `check --ready`, `git diff --check`. Код комплекта аудитором не менялся; self-manifest не переоформлялся.
+ 
+ ## Исправление повторного аудита A1/A2; 2026-10-02; исполнитель: Devin; модель: SWE-2 High
+ 
+@@ -170,13 +170,13 @@
+ 
+ **A2 (остаток) — pending исключает «применено».** Ранний `find_completed` в `run_operation` возвращал `already_completed` до проверки маркера: kill внутри restore до `_neutralize_receipt` оставлял pending и квитанцию `completed`, и повтор плана ложно сообщал применение. Теперь ранний ответ допустим только при отсутствии pending; при живом маркере повтор проходит в `_apply_operation` и отклоняется («Незавершённая операция» → restore), а после завершения восстановления применяет план реально. Регрессия: `test_restore_kill_before_neutralize_blocks_retry`; probe `kill_restore_before_receipt_neutralization` фиксирует refused → restored → completed с `a.md=NEW`.
+ 
+-**Проверки исправления.** Обновлённый [reaudit_probes.py](../../tasks/PB-023-evidence/reaudit_probes.py) утверждает исправленное поведение (повтор отклоняется по pending, а не already_completed; чужой temp сохраняется): 8 исходных сценариев + 5 граничных проверок проходят — [fix2_probes.json](../../tasks/PB-023-evidence/fix2_probes.json), отпечатки — [fix2_inputs.json](../../tasks/PB-023-evidence/fix2_inputs.json). `tests/test_file_operations.py` — 44 теста OK. `python3 -m unittest discover -s tests -v` — **325 тестов, OK** (2026-10-02, macOS, Python 3.14.6). `check --ready` — OK. `verify PB-023` — **passed**, отчёт `work/verification/PB-023/eaba844d6a49429abd91b77c301fbcce/report.json`. Self-manifest обновлён (`adopt . --force --apply`, 29 управляемых файлов). Карточка возвращена в `in_review`; независимая приёмка — отдельно.
++**Проверки исправления.** Обновлённый [reaudit_probes.py](PB-023-evidence/reaudit_probes.py) утверждает исправленное поведение (повтор отклоняется по pending, а не already_completed; чужой temp сохраняется): 8 исходных сценариев + 5 граничных проверок проходят — [fix2_probes.json](PB-023-evidence/fix2_probes.json), отпечатки — [fix2_inputs.json](PB-023-evidence/fix2_inputs.json). `tests/test_file_operations.py` — 44 теста OK. `python3 -m unittest discover -s tests -v` — **325 тестов, OK** (2026-10-02, macOS, Python 3.14.6). `check --ready` — OK. `verify PB-023` — **passed**, отчёт `work/verification/PB-023/eaba844d6a49429abd91b77c301fbcce/report.json`. Self-manifest обновлён (`adopt . --force --apply`, 29 управляемых файлов). Карточка возвращена в `in_review`; независимая приёмка — отдельно.
+ 
+ ## Повторный аудит 2026-10-02T07:04:10+03:00; исполнитель: Codex; модель: GPT-6 Astra (по указанию инженера).
+ 
+ **Вывод: не принято.** PB-023-A1 закрыто; исправления A3/A4 подтверждены повторно. **PB-023-A2 остаётся открытым (High)**: ранний ответ о завершении по-прежнему обходит gate. Возврат `in_review → in_progress`. Проверено незакоммиченное дерево `dev`; код комплекта аудитором не менялся.
+ 
+-**Проверки и доказательства:** [сценарий третьей проверки](../../tasks/PB-023-evidence/review3_probes.py), [результат](../../tasks/PB-023-evidence/review3_probes.json), [среда и отпечатки всех модулей](../../tasks/PB-023-evidence/review3_inputs.json). Команда `python3 docs/tasks/PB-023-evidence/review3_probes.py`. Повторены восемь исходных и пять граничных сценариев с исправленными ожиданиями; все проходят. Чужой файл с суффиксом `manual.tmp` сохраняется обоими restore. Прерванный restore с существующим pending блокирует повтор, после завершения restore план реально применяется. Проверки выполняются во временных проектах.
++**Проверки и доказательства:** [сценарий третьей проверки](PB-023-evidence/review3_probes.py), [результат](PB-023-evidence/review3_probes.json), [среда и отпечатки всех модулей](PB-023-evidence/review3_inputs.json). Команда `python3 docs/tasks/PB-023-evidence/review3_probes.py`. Повторены восемь исходных и пять граничных сценариев с исправленными ожиданиями; все проходят. Чужой файл с суффиксом `manual.tmp` сохраняется обоими restore. Прерванный restore с существующим pending блокирует повтор, после завершения restore план реально применяется. Проверки выполняются во временных проектах.
+ 
+ ### PB-023-A2 — High: гонка между чтением квитанции и проверкой pending
+ 
+@@ -188,13 +188,13 @@
+ 
+ **Следующий шаг:** исправить оставшуюся гонку A2 и передать на повторную независимую приёмку. Новых ID замечаний не создавалось; это незакрытая часть исходной гарантии A2. Windows и lifecycle CLI PB-024+ остаются вне проверенной области. Самоприменение полной новой схемы не принято этим аудитом.
+ 
+-**Завершающие проверки.** `verify PB-023` — **passed**, 325 тестов OK и self-check OK, inputs неизменны: [краткий отчёт](../../tasks/PB-023-evidence/review3_verify.json), [лог](../../tasks/PB-023-evidence/review3-unit-tests.log). Полный отчёт `work/verification/PB-023/c2bf45ef98f145b982bff876b59c5ee4/report.json` — игнорируемый `work/`, может отсутствовать в другом checkout. Предыдущий запуск `f8043947fab440ffa616f8c4aacb9f06` не принят: при параллельном изменении PB-022/architecture self-check застал отсутствующий файл `PB-022-evidence/reaudit-03-final-checks.log`; 325 тестов в нём прошли, исходники не менялись. После стабилизации выполнен указанный успешный повтор. SHA-256 всех модулей совпадают с сохранённым снимком. После добавления этой итоговой записи повторены `index`, `check --ready` и `git diff --check`; сама запись не входит в снимок verify. Self-manifest аудитором не менялся. HEAD `0744f938ddd571d179a598b7dd92f5b73267ccba`.
++**Завершающие проверки.** `verify PB-023` — **passed**, 325 тестов OK и self-check OK, inputs неизменны: [краткий отчёт](PB-023-evidence/review3_verify.json), [лог](PB-023-evidence/review3-unit-tests.log). Полный отчёт `work/verification/PB-023/c2bf45ef98f145b982bff876b59c5ee4/report.json` — игнорируемый `work/`, может отсутствовать в другом checkout. Предыдущий запуск `f8043947fab440ffa616f8c4aacb9f06` не принят: при параллельном изменении PB-022/architecture self-check застал отсутствующий файл `PB-022-evidence/reaudit-03-final-checks.log`; 325 тестов в нём прошли, исходники не менялись. После стабилизации выполнен указанный успешный повтор. SHA-256 всех модулей совпадают с сохранённым снимком. После добавления этой итоговой записи повторены `index`, `check --ready` и `git diff --check`; сама запись не входит в снимок verify. Self-manifest аудитором не менялся. HEAD `0744f938ddd571d179a598b7dd92f5b73267ccba`.
+ 
+ ## Исправление гонки A2; 2026-10-02; исполнитель: Devin; модель: SWE-2 High
+ 
+ **A2 — уже не остаток, а гонка.** Ранний `find_completed`/`pending_info` в `run_operation` выполнялись до `acquire_gate`: конкурирующий restore мог вклиниться между чтением квитанции и проверкой маркера, и повтор отвечал `already_completed` по устаревшему `prior` после возврата пред-образа. Теперь пред-gate проверка квитанций убрана полностью: решение принимается в `_apply_operation` под удерживаемым gate и operation lock, после проверки обоих pending (`acquire_gate` + повторная проверка маркера) и с актуальной квитанцией. Restore за gate не проходит — вклиниться не может; при живом pending повтор отклоняется до чтения квитанций, после завершения restore применяет план реально.
+ 
+-Регрессии: `test_completed_decision_under_gate_after_pending` доказывает порядок `gate → pending → find_completed` и отказ конкурирующей команды под удерживаемым gate; `test_restore_kill_before_neutralize_blocks_retry` покрывает пересечение retry/restore. Обновлённый [review3_probes.py](../../tasks/PB-023-evidence/review3_probes.py) воспроизводит исходное расписание (квитанция completed + живой pending + конкурирующий restore): повтор отклонён, restore завершается, повтор применяет план под gate — `defect_reproduced: false`. Результаты — [fix3_probes.json](../../tasks/PB-023-evidence/fix3_probes.json), отпечатки — [fix3_inputs.json](../../tasks/PB-023-evidence/fix3_inputs.json).
++Регрессии: `test_completed_decision_under_gate_after_pending` доказывает порядок `gate → pending → find_completed` и отказ конкурирующей команды под удерживаемым gate; `test_restore_kill_before_neutralize_blocks_retry` покрывает пересечение retry/restore. Обновлённый [review3_probes.py](PB-023-evidence/review3_probes.py) воспроизводит исходное расписание (квитанция completed + живой pending + конкурирующий restore): повтор отклонён, restore завершается, повтор применяет план под gate — `defect_reproduced: false`. Результаты — [fix3_probes.json](PB-023-evidence/fix3_probes.json), отпечатки — [fix3_inputs.json](PB-023-evidence/fix3_inputs.json).
+ 
+ **Проверки исправления.** `tests/test_file_operations.py` — 45 тестов OK. `python3 -m unittest discover -s tests -v` — **326 тестов, OK** (2026-10-02, macOS, Python 3.14.6). `check --ready` — OK. `verify PB-023` — **passed**, отчёт `work/verification/PB-023/1a8effd57ce4445fb4cb1169dfa1094c/report.json`. Self-manifest обновлён (`adopt . --force --apply`, 29 управляемых файлов). Карточка возвращена в `in_review`; независимая приёмка — отдельно.
+ 
+@@ -206,8 +206,34 @@
+ 
+ **Остальные замечания:** повторены проверки сохранности чужого похожего temp, очистки собственного temp, нейтрализации receipt, отказа при утраченном backup-index и восстановления режима каталога. Все восемь исходных, пять граничных, один сценарий из третьей проверки и три независимые дополнительные проверки прошли. Проверки с SIGKILL и restore выполнялись только во временных проектах.
+ 
+-**Доказательства:** [сценарий четвёртой проверки](../../tasks/PB-023-evidence/review4_probes.py), [результат](../../tasks/PB-023-evidence/review4_probes.json), [среда и SHA-256 всех модулей](../../tasks/PB-023-evidence/review4_inputs.json). Команда: `python3 docs/tasks/PB-023-evidence/review4_probes.py`. Сценарии прежних аудитов, изменённые исполнителем под исправленное поведение, прочитаны перед запуском; новые результаты сохраняются отдельно от исторических.
+-
+-**Штатные проверки:** `verify PB-023` — **passed**, **326 тестов OK**, self-check OK, inputs во время прогона неизменны. [Краткий отчёт](../../tasks/PB-023-evidence/review4_verify.json), [лог тестов](../../tasks/PB-023-evidence/review4-unit-tests.log). Полный отчёт `work/verification/PB-023/3c6d606b598c454b84e1c5f313c3f563/report.json` находится в игнорируемом `work/` и может отсутствовать в другом checkout. SHA-256 модулей после проверки совпадают со снимком. После записи протокола и отметок приёмки повторены `index`, `check --ready`, `git diff --check`; эти документные правки не входят в снимок verify.
++**Доказательства:** [сценарий четвёртой проверки](PB-023-evidence/review4_probes.py), [результат](PB-023-evidence/review4_probes.json), [среда и SHA-256 всех модулей](PB-023-evidence/review4_inputs.json). Команда: `python3 docs/tasks/PB-023-evidence/review4_probes.py`. Сценарии прежних аудитов, изменённые исполнителем под исправленное поведение, прочитаны перед запуском; новые результаты сохраняются отдельно от исторических.
++
++**Штатные проверки:** `verify PB-023` — **passed**, **326 тестов OK**, self-check OK, inputs во время прогона неизменны. [Краткий отчёт](PB-023-evidence/review4_verify.json), [лог тестов](PB-023-evidence/review4-unit-tests.log). Полный отчёт `work/verification/PB-023/3c6d606b598c454b84e1c5f313c3f563/report.json` находится в игнорируемом `work/` и может отсутствовать в другом checkout. SHA-256 модулей после проверки совпадают со снимком. После записи протокола и отметок приёмки повторены `index`, `check --ready`, `git diff --check`; эти документные правки не входят в снимок verify.
+ 
+ **Границы и передача:** macOS, Python 3.14.6, незакоммиченное дерево `dev`, HEAD `0744f938ddd571d179a598b7dd92f5b73267ccba`. Это приёмка engine/gate и исправлений PB-023; Windows, новые lifecycle-команды PB-024+, пилот полной схемы и общий блок AUDIT-006 не приняты этим протоколом. Код и self-manifest аудитором не менялись. Следующий шаг — принятие протокола инженером и закрытие PB-023; до этого зависимость PB-024 формально не завершена.
++
++<!-- playbook-meta:start -->
++```json
++{
++  "schema_version": 1,
++  "relations": [],
++  "materials": [
++    {
++      "id": "recovered-evidence",
++      "role": "report",
++      "source": "docs/archive/tasks/PB-023-evidence",
++      "storage": "local",
++      "required": true,
++      "immutable": true,
++      "used_by": []
++    }
++  ],
++  "moves": [
++    {
++      "from": "docs/tasks/PB-023-evidence",
++      "to": "docs/archive/tasks/PB-023-evidence"
++    }
++  ]
++}
++```
++<!-- playbook-meta:end -->
+--- a/docs/archive/tasks/PB-024.md
++++ b/docs/archive/tasks/PB-024.md
+@@ -81,7 +81,7 @@
+ 
+ **Индексы.** `index --documents` обновляет только области `<!-- playbook-index:* -->` индексов коллекций; `--all` дополнительно обновляет индекс задач (прежняя семантика сохранена — вызов без флагов = задачи). Файл индекса без маркеров — отказ без записи; ручное содержимое вне области сохраняется. `check` расширен: при настроенных `documents` сверяет каждый индекс коллекции с каталогом и сообщает «устарел»/«повреждён», не исправляя файлы; установка без `documents` не требует миграции.
+ 
+-**Проверки.** Новый `tests/test_document_cli.py` — 22 поведенческих теста реального CLI на временном configured-проекте (нестандартные paths, пользовательский индекс): preview без записи, apply и receipt операции, коллизии, legacy-тело, schema_version 99, регистрация вне коллекции/файла индекса, отказ без маркеров, область маркеров, устаревший индекс и check. `python3 -m unittest discover -s tests -v` — **348 тестов, OK** (2026-10-02, macOS). `check --ready` — OK. `verify PB-024` — **passed**, отчёт `work/verification/PB-024/a99183f70c49485199fbddac6b26695d/report.json` (unit-tests + self-check). Доказательства: [cli-probe.py](../../tasks/PB-024-evidence/cli-probe.py) (22/22 сценариев реального CLI, [лог](../../tasks/PB-024-evidence/cli-probe.log)), [unit-tests.log](../../tasks/PB-024-evidence/unit-tests.log), [inputs.json](../../tasks/PB-024-evidence/inputs.json) (SHA-256 затронутых файлов). Обновлены `docs/architecture.md`, `docs/code-map.md`; self-manifest пересобран (`adopt --force --apply`, 34 управляемых файла, два `.DS_Store` оставлены неизвестными).
++**Проверки.** Новый `tests/test_document_cli.py` — 22 поведенческих теста реального CLI на временном configured-проекте (нестандартные paths, пользовательский индекс): preview без записи, apply и receipt операции, коллизии, legacy-тело, schema_version 99, регистрация вне коллекции/файла индекса, отказ без маркеров, область маркеров, устаревший индекс и check. `python3 -m unittest discover -s tests -v` — **348 тестов, OK** (2026-10-02, macOS). `check --ready` — OK. `verify PB-024` — **passed**, отчёт `work/verification/PB-024/a99183f70c49485199fbddac6b26695d/report.json` (unit-tests + self-check). Доказательства: [cli-probe.py](PB-024-evidence/cli-probe.py) (22/22 сценариев реального CLI, [лог](PB-024-evidence/cli-probe.log)), [unit-tests.log](PB-024-evidence/unit-tests.log), [inputs.json](PB-024-evidence/inputs.json) (SHA-256 затронутых файлов). Обновлены `docs/architecture.md`, `docs/code-map.md`; self-manifest пересобран (`adopt --force --apply`, 34 управляемых файла, два `.DS_Store` оставлены неизвестными).
+ 
+ **Ограничения и границы.** Архивация документов не реализована (PB-025); `init` не заполняет `documents` по умолчанию и путь upgrade не добавлен (PB-028); шаблоны минимальные, процессные инструкции — PB-027. `check` структурный и поведение CLI не доказывает. Независимая приёмка не выполнялась — карточка в `in_review`; закрытие только после независимого аудита.
+ 
+@@ -107,3 +107,28 @@
+ **Границы и ограничения:**
+ Реализация строго соответствует границам PB-024: архивация документов остаётся за PB-025; процессные инструкции в шаблонах — за PB-027; настройки по умолчанию в `init` и процедуры upgrade — за PB-028. Карточка остаётся в `in_review` до подтверждения закрытия инженером.
+ 
++<!-- playbook-meta:start -->
++```json
++{
++  "schema_version": 1,
++  "relations": [],
++  "materials": [
++    {
++      "id": "recovered-evidence",
++      "role": "report",
++      "source": "docs/archive/tasks/PB-024-evidence",
++      "storage": "local",
++      "required": true,
++      "immutable": true,
++      "used_by": []
++    }
++  ],
++  "moves": [
++    {
++      "from": "docs/tasks/PB-024-evidence",
++      "to": "docs/archive/tasks/PB-024-evidence"
++    }
++  ]
++}
++```
++<!-- playbook-meta:end -->
+--- a/docs/archive/tasks/PB-025.md
++++ b/docs/archive/tasks/PB-025.md
+@@ -80,7 +80,7 @@
+ 
+ **Реализация.** Новый `ai-dev-playbook/scripts/lifecycle.py` — request/plan/apply/status/restore для действия `archive_document` (design §6–7, ADR-0002). `lifecycle plan request.json` валидирует запрос (schema_version 1, actor, basis, scope ⇔ actions, отказ для `close_task`/`reopen`/`promote_change` — граница PB-026), строит детерминированный план: карта переносов документа и локальных материалов (файлы и каталоги) в архивный каталог коллекции, новые тексты с метаданными `archive`/`moves`/источниками материалов, переписанные ссылки затронутых файлов, индексы коллекций, сопровождающий JSON; снимок входов покрывает конфиг, весь scan-set ссылок, отсутствие будущих путей и состав каталогов. `--save` пишет план с хешами в `work/lifecycle/plans/<plan_id>.json`; preview без `--save` не пишет ничего. `apply` пересобирает план из сохранённого запроса и отклоняет несовпадение plan_id/входов/хешей до записи; применение через `file_operations.run_operation` со staged/final-проверками (каталог, индексы, ссылки дерева), повторный apply отвечает `already_completed` под gate+lock. `status`/`restore` показывают и восстанавливают незавершённые операции. `file_operations.py` расширен примитивом `create_dirs` (до writes) для опустевших каталогов материалов; `playbook.py` диспетчит lifecycle-команды через общий gate и whitelist pending. Отказы до записи: документ уже в архиве/без метаданных/не в финальном состоянии, открытые задачи плана, коллизии назначений, неучтённые файлы в каталогах материалов, неподтверждённый required external, материалы в `work/` вне `work/verification/` и `work/lifecycle/plans/`, successor внутри той же операции.
+ 
+-**Проверки.** Новый `tests/test_lifecycle.py` — 33 сценарных теста реального CLI на временном configured-проекте (коллекции spec и plan): preview без записи, перенос документа с материалами и переписью ссылок, два документа в одном запросе, архивирование plan с done-задачами, `already_completed`, отказы (архивный/незавершённый/legacy документ, коллизия, неучтённые и недостающие материалы, work/, successor, конфликт wikilink, будущие действия, невалидный запрос, отсутствие `documents`), stale входы/каталог/новый evidence-файл, подмена плана и запроса, план с чужого root, прерывание на записи и откат, restore после сбоя, status. `python3 -m unittest discover -s tests -v` — **381 тест, OK** (2026-10-02, macOS). `check --ready` — OK. `verify PB-025` — **passed**, отчёт `work/verification/PB-025/10224c7d2adf4864a1fbb78f386374b7/report.json` (unit-tests + self-check). `git diff --check` — чисто. Доказательства: [unit-tests.log](../../tasks/PB-025-evidence/unit-tests.log), [inputs.json](../../tasks/PB-025-evidence/inputs.json) (SHA-256 затронутых файлов). Обновлены `docs/architecture.md`, `docs/code-map.md`; self-manifest пересобран (`adopt --force --apply`, 35 управляемых файлов, два `.DS_Store` оставлены неизвестными).
++**Проверки.** Новый `tests/test_lifecycle.py` — 33 сценарных теста реального CLI на временном configured-проекте (коллекции spec и plan): preview без записи, перенос документа с материалами и переписью ссылок, два документа в одном запросе, архивирование plan с done-задачами, `already_completed`, отказы (архивный/незавершённый/legacy документ, коллизия, неучтённые и недостающие материалы, work/, successor, конфликт wikilink, будущие действия, невалидный запрос, отсутствие `documents`), stale входы/каталог/новый evidence-файл, подмена плана и запроса, план с чужого root, прерывание на записи и откат, restore после сбоя, status. `python3 -m unittest discover -s tests -v` — **381 тест, OK** (2026-10-02, macOS). `check --ready` — OK. `verify PB-025` — **passed**, отчёт `work/verification/PB-025/10224c7d2adf4864a1fbb78f386374b7/report.json` (unit-tests + self-check). `git diff --check` — чисто. Доказательства: [unit-tests.log](PB-025-evidence/unit-tests.log), [inputs.json](PB-025-evidence/inputs.json) (SHA-256 затронутых файлов). Обновлены `docs/architecture.md`, `docs/code-map.md`; self-manifest пересобран (`adopt --force --apply`, 35 управляемых файлов, два `.DS_Store` оставлены неизвестными).
+ 
+ **Ограничения и границы.** `close_task`/`reopen`/`promote_change` и приёмка задач не реализованы (PB-026); CLI проверяет структуру и границы запроса, содержательное основание подтверждает исполнитель; отдельной команды `lifecycle request` нет — запрос подаётся файлом в `plan`. `check` структурный и поведение CLI не доказывает. Независимая приёмка не выполнялась — карточка в `in_review`; закрытие только после независимого аудита.
+ 
+@@ -90,7 +90,7 @@
+ 
+ **Проверки и доказательства:**
+ 1. `python3 -m unittest discover -s tests -v` — **381 тест, OK** (включая 33 теста `test_lifecycle.py`, 22 теста `test_document_cli.py`, 45 тестов `test_file_operations.py`, тесты ссылок и каталога документов).
+-2. `python3 docs/tasks/PB-025-evidence/audit-probe.py` — **33/33 сценариев реального CLI пройдены успешно** ([audit-probe.log](../../tasks/PB-025-evidence/audit-probe.log)), включая:
++2. `python3 docs/tasks/PB-025-evidence/audit-probe.py` — **33/33 сценариев реального CLI пройдены успешно** ([audit-probe.log](PB-025-evidence/audit-probe.log)), включая:
+    - preview `lifecycle plan` без `--save` не изменяет проектные файлы и не создаёт планов в `work/`;
+    - `lifecycle plan --save` детерминированно сохраняет план в `work/lifecycle/plans/<plan_id>.json`;
+    - `lifecycle apply` требует явный путь к плану и повторно валидирует соответствие входов и хешей;
+@@ -109,8 +109,33 @@
+ 3. `python3 ai-dev-playbook/scripts/playbook.py check --ready` — **OK**.
+ 4. `python3 ai-dev-playbook/scripts/playbook.py adopt . --force` — **35 файлов совпадают с эталоном** (self-manifest актуален).
+ 5. `git diff --check` — чисто.
+-6. Отпечатки проверенных файлов зафиксированы в [audit-inputs.json](../../tasks/PB-025-evidence/audit-inputs.json).
++6. Отпечатки проверенных файлов зафиксированы в [audit-inputs.json](PB-025-evidence/audit-inputs.json).
+ 
+ **Границы и ограничения:**
+ Реализация строго ограничена границами PB-025: действие `archive_document` для зарегистрированных документов с локальными и внешними материалами. Действия `close_task`, `reopen`, `promote_change` и связывание приёмки задач отнесены к PB-026. Карточка остаётся в `in_review` до подтверждения закрытия инженером.
+ 
++<!-- playbook-meta:start -->
++```json
++{
++  "schema_version": 1,
++  "relations": [],
++  "materials": [
++    {
++      "id": "recovered-evidence",
++      "role": "report",
++      "source": "docs/archive/tasks/PB-025-evidence",
++      "storage": "local",
++      "required": true,
++      "immutable": true,
++      "used_by": []
++    }
++  ],
++  "moves": [
++    {
++      "from": "docs/tasks/PB-025-evidence",
++      "to": "docs/archive/tasks/PB-025-evidence"
++    }
++  ]
++}
++```
++<!-- playbook-meta:end -->
+
+--- a/docs/update-plan.md
++++ b/docs/update-plan.md
+@@ -66,4 +66,4 @@
+ 
+ ## Результат повторного аудита 2026-09-30
+ 
+-Все восемь замечаний AUDIT-005 закрыты повторными сценарными проверками; индивидуальная приёмка PB-014–PB-019 и протокола пилота PB-006 оформлена. [Итоговый протокол](tasks/AUDIT-005-evidence/recheck03-report.md) содержит доказательства и границы, включая отсутствие нового полного прогона пилота на исправленном комплекте. Протокол общей проверки ожидает принятия инженером; релиз не выпускался.
++Все восемь замечаний AUDIT-005 закрыты повторными сценарными проверками; индивидуальная приёмка PB-014–PB-019 и протокола пилота PB-006 оформлена. [Итоговый протокол](archive/tasks/AUDIT-005-evidence/recheck03-report.md) содержит доказательства и границы, включая отсутствие нового полного прогона пилота на исправленном комплекте. Протокол общей проверки ожидает принятия инженером; релиз не выпускался.
+
+Предпросмотр, без записи; сохранение плана: --save

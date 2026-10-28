@@ -1,0 +1,20 @@
+{
+  "e0dba436be484456ada0ac4d09fe271b": {
+    "status": "passed",
+    "inputs_unchanged": true,
+    "fresh": false,
+    "diff_excluding_audit_files": [
+      "docs/tasks/PB-038-evidence/execution.log",
+      "ai-dev-playbook/manifest.json",
+      "docs/tasks/index.md"
+    ]
+  },
+  "c6b953f541c04fc28815b5a8c2b3bead": {
+    "status": "passed",
+    "inputs_unchanged": true,
+    "fresh": false,
+    "diff_excluding_audit_files": [
+      "docs/tasks/index.md"
+    ]
+  }
+}

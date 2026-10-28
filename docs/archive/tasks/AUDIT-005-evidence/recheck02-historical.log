@@ -1,0 +1,137 @@
+test_A1_new_file_after_preview_is_overwritten (__main__.Probes.test_A1_new_file_after_preview_is_overwritten) ... FAIL
+test_A2_drift_allowed_by_plan_fails_apply (__main__.Probes.test_A2_drift_allowed_by_plan_fails_apply) ... FAIL
+test_A3_keep_removed_file_produces_invalid_manifest (__main__.Probes.test_A3_keep_removed_file_produces_invalid_manifest) ... FAIL
+test_A4_nested_set_loses_parent_value (__main__.Probes.test_A4_nested_set_loses_parent_value) ... FAIL
+test_A4_rename_collision_loses_existing_value (__main__.Probes.test_A4_rename_collision_loses_existing_value) ... FAIL
+test_A5_schema_upgrade_succeeds_but_installed_CLI_breaks (__main__.Probes.test_A5_schema_upgrade_succeeds_but_installed_CLI_breaks) ... FAIL
+test_A6_missing_backup_is_reported_as_success (__main__.Probes.test_A6_missing_backup_is_reported_as_success) ... FAIL
+test_A6_standalone_missing_index_is_success (__main__.Probes.test_A6_standalone_missing_index_is_success) ... FAIL
+test_A7_live_edit_during_staging_is_overwritten (__main__.Probes.test_A7_live_edit_during_staging_is_overwritten) ... FAIL
+test_A8_manifest_reserved_setting_path_is_deleted (__main__.Probes.test_A8_manifest_reserved_setting_path_is_deleted) ... FAIL
+test_control_SIGKILL_restore_full_hash_match (__main__.Probes.test_control_SIGKILL_restore_full_hash_match) ... ok
+
+======================================================================
+FAIL: test_A1_new_file_after_preview_is_overwritten (__main__.Probes.test_A1_new_file_after_preview_is_overwritten)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/docs/tasks/AUDIT-005-evidence/probes.py", line 50, in test_A1_new_file_after_preview_is_overwritten
+    self.ok("update", "apply")
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/docs/tasks/AUDIT-005-evidence/probes.py", line 33, in ok
+    self.assertEqual(result[0], 0, result)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 1 != 0 : (1, '', 'ERROR: План устарел: файлы проекта изменились после предпросмотра; выполните update plan заново\n')
+
+======================================================================
+FAIL: test_A2_drift_allowed_by_plan_fails_apply (__main__.Probes.test_A2_drift_allowed_by_plan_fails_apply)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/docs/tasks/AUDIT-005-evidence/probes.py", line 64, in test_A2_drift_allowed_by_plan_fails_apply
+    self.assertEqual(code, 1, out + err)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+AssertionError: 0 != 1 : Обновление 0.0.2 → 0.0.3 применено: записано 2 + настроек 1, удалено 0. Журнал и резервная копия: work/update/20260930-161119-2e6885a08e29
+
+
+======================================================================
+FAIL: test_A3_keep_removed_file_produces_invalid_manifest (__main__.Probes.test_A3_keep_removed_file_produces_invalid_manifest)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/docs/tasks/AUDIT-005-evidence/probes.py", line 76, in test_A3_keep_removed_file_produces_invalid_manifest
+    self.assertEqual(code, 1, out + err)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+AssertionError: 0 != 1 : Обновление 0.0.2 → 0.0.3 применено: записано 2 + настроек 1, удалено 0. Журнал и резервная копия: work/update/20260930-161119-ad728c9750e3
+
+
+======================================================================
+FAIL: test_A4_nested_set_loses_parent_value (__main__.Probes.test_A4_nested_set_loses_parent_value)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/docs/tasks/AUDIT-005-evidence/probes.py", line 102, in test_A4_nested_set_loses_parent_value
+    self.saved(release)
+    ~~~~~~~~~~^^^^^^^^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/docs/tasks/AUDIT-005-evidence/probes.py", line 42, in saved
+    self.ok("update", "plan", str(release), "--save", *args)
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/docs/tasks/AUDIT-005-evidence/probes.py", line 33, in ok
+    self.assertEqual(result[0], 0, result)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 1 != 0 : (1, '', 'ERROR: коллизия миграции: custom.child: путь custom занят не-объектом — запись отклонена, чтобы не потерять значение\n')
+
+======================================================================
+FAIL: test_A4_rename_collision_loses_existing_value (__main__.Probes.test_A4_rename_collision_loses_existing_value)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/docs/tasks/AUDIT-005-evidence/probes.py", line 88, in test_A4_rename_collision_loses_existing_value
+    self.saved(release)
+    ~~~~~~~~~~^^^^^^^^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/docs/tasks/AUDIT-005-evidence/probes.py", line 42, in saved
+    self.ok("update", "plan", str(release), "--save", *args)
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/docs/tasks/AUDIT-005-evidence/probes.py", line 33, in ok
+    self.assertEqual(result[0], 0, result)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 1 != 0 : (1, '', 'ERROR: json_rename: custom.new уже содержит другое значение — коллизия требует ручного разрешения, перенос отклонён\n')
+
+======================================================================
+FAIL: test_A5_schema_upgrade_succeeds_but_installed_CLI_breaks (__main__.Probes.test_A5_schema_upgrade_succeeds_but_installed_CLI_breaks)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/docs/tasks/AUDIT-005-evidence/probes.py", line 116, in test_A5_schema_upgrade_succeeds_but_installed_CLI_breaks
+    self.ok("update", "apply")
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/docs/tasks/AUDIT-005-evidence/probes.py", line 33, in ok
+    self.assertEqual(result[0], 0, result)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 1 != 0 : (1, '', 'ERROR: Целевой CLI не принимает итоговое состояние: Traceback (most recent call last):\n  File "<string>", line 1, in <module>\n    import sys; from pathlib import Path; sys.path.insert(0, sys.argv[1]); import playbook; root = Path(sys.argv[2]).resolve(); playbook.config(root); playbook.resources(root)\n                                                                                                                                ~~~~~~~~~~~~~~~^^^^^^\n  File "/private/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/tmpqdjmdfok/work/update/20260930-161120-ae3d90a22fb4/staged/ai-dev-playbook/scripts/playbook.py", line 78, in config\n    require(data.get("schema_version") == 1, "Неподдерживаемая схема project.json")\n    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "/private/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/tmpqdjmdfok/work/update/20260930-161120-ae3d90a22fb4/staged/ai-dev-playbook/scripts/playbook.py", line 53, in require\n    raise ValueError(message)\nValueError: Неподдерживаемая схема project.json. Проект не изменён; артефакт неконсистентен или требует иного перехода.\n')
+
+======================================================================
+FAIL: test_A6_missing_backup_is_reported_as_success (__main__.Probes.test_A6_missing_backup_is_reported_as_success)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/docs/tasks/AUDIT-005-evidence/probes.py", line 165, in test_A6_missing_backup_is_reported_as_success
+    self.ok("update", "restore")
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/docs/tasks/AUDIT-005-evidence/probes.py", line 33, in ok
+    self.assertEqual(result[0], 0, result)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 1 != 0 : (1, '', 'ERROR: Резервная копия неполна или повреждена: ai-dev-playbook/VERSION (нет копии) — восстановление отклонено, маркер сохранён\n')
+
+======================================================================
+FAIL: test_A6_standalone_missing_index_is_success (__main__.Probes.test_A6_standalone_missing_index_is_success)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/docs/tasks/AUDIT-005-evidence/probes.py", line 176, in test_A6_standalone_missing_index_is_success
+    self.assertEqual(result.returncode, 0, result.stderr)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 1 != 0 : Нет backup_index.json: пред-образ недоступен, восстановление невозможно. Маркер незавершённой операции сохранён.
+
+
+======================================================================
+FAIL: test_A7_live_edit_during_staging_is_overwritten (__main__.Probes.test_A7_live_edit_during_staging_is_overwritten)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/docs/tasks/AUDIT-005-evidence/probes.py", line 194, in test_A7_live_edit_during_staging_is_overwritten
+    self.ok("update", "apply")
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/docs/tasks/AUDIT-005-evidence/probes.py", line 33, in ok
+    self.assertEqual(result[0], 0, result)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 1 != 0 : (1, 'RUN: editor\npassed: /private/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/tmp7ns4hb6y/work/update/20260930-161122-f92b4ffbac6f/staged/work/verification/UPDATE/fcb0d0a3217a4bb9926a7a0ddef7de6d/report.json\n', 'ERROR: План устарел: файлы проекта изменились после предпросмотра; выполните update plan заново\n')
+
+======================================================================
+FAIL: test_A8_manifest_reserved_setting_path_is_deleted (__main__.Probes.test_A8_manifest_reserved_setting_path_is_deleted)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/docs/tasks/AUDIT-005-evidence/probes.py", line 206, in test_A8_manifest_reserved_setting_path_is_deleted
+    self.ok("check", "--ready")
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/docs/tasks/AUDIT-005-evidence/probes.py", line 33, in ok
+    self.assertEqual(result[0], 0, result)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 1 != 0 : (1, '', 'ERROR: manifest: зарезервированные пути не могут быть управляемыми: ai-dev-playbook/resources.json\n')
+
+----------------------------------------------------------------------
+Ran 11 tests in 6.527s
+
+FAILED (failures=10)
+CONTROL: real SIGKILL after first write; CLI restore returns all preimage hashes

@@ -1,0 +1,108 @@
+{
+  "previous_probes": {
+    "previous_scenarios": {
+      "original_fix_scenarios": [
+        {
+          "case": "temp_collision",
+          "restore": "engine",
+          "observation": "completed; unrelated docs/a.md.fop-tmp preserved"
+        },
+        {
+          "case": "temp_kill",
+          "restore": "engine",
+          "observation": "restored; op temp cleaned; a.md=OLD"
+        },
+        {
+          "case": "temp_kill",
+          "restore": "standalone",
+          "observation": "Восстановлено файлов: 1; удалено добавленных: 0; маркер снят.; op temp cleaned; a.md=OLD"
+        },
+        {
+          "case": "receipt_kill",
+          "restore": "engine",
+          "observation": "restored; receipt neutralized; retry=completed, a.md=NEW"
+        },
+        {
+          "case": "receipt_kill",
+          "restore": "standalone",
+          "observation": "Восстановлено файлов: 1; удалено добавленных: 0; маркер снят.; receipt neutralized; retry=completed, a.md=NEW"
+        },
+        {
+          "case": "lost_index",
+          "restore": "engine",
+          "observation": "engine refused: Нет backup_index.json: пред-образ утрачен — восстановление невозможно, маркер сохранён; pending kept; a.md=NEW (preimage lost, nothing touched)"
+        },
+        {
+          "case": "lost_index",
+          "restore": "standalone",
+          "observation": "standalone refused; pending kept; a.md=NEW (preimage lost, nothing touched)"
+        },
+        {
+          "case": "directory_mode",
+          "restore": "engine",
+          "observation": "rollback restored directory mode 0o700"
+        }
+      ],
+      "boundary_probes": [
+        {
+          "case": "foreign_temp_name",
+          "restore": "engine",
+          "foreign_preserved": true,
+          "pending": false
+        },
+        {
+          "case": "foreign_temp_name",
+          "restore": "standalone",
+          "foreign_preserved": true,
+          "pending": false
+        },
+        {
+          "case": "kill_restore_before_receipt_neutralization",
+          "retry": "completed",
+          "actual": "NEW",
+          "planned": "NEW",
+          "pending": false
+        },
+        {
+          "case": "standalone_directory_modes",
+          "umask": "0o22",
+          "restored_mode": "0o700",
+          "passed": true
+        },
+        {
+          "case": "standalone_directory_modes",
+          "umask": "0o77",
+          "restored_mode": "0o700",
+          "passed": true
+        }
+      ]
+    },
+    "remaining_A2": {
+      "interleaving": "pending refuse -> restore -> retry applies under gate",
+      "retry": "completed",
+      "actual": "NEW",
+      "planned": "NEW",
+      "pending": false,
+      "defect_reproduced": false
+    }
+  },
+  "independent_checks": [
+    {
+      "case": "receipt_read_vs_standalone_restore",
+      "status": "already_completed",
+      "restore": "refused_by_gate",
+      "content": "NEW",
+      "passed": true
+    },
+    {
+      "case": "completed_plan_with_pending",
+      "marker": "work/lifecycle/pending.json",
+      "refused": true
+    },
+    {
+      "case": "completed_plan_with_pending",
+      "marker": "work/update/pending.json",
+      "refused": true
+    }
+  ]
+}

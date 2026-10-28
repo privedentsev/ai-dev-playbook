@@ -1,0 +1,36 @@
+{
+  "pilot-workspace-handoff.tar.gz": {
+    "ticket": {
+      "schema_version": 1,
+      "task_id": "TASK-101",
+      "actor": "Antigravity",
+      "model": "Gemini 3.8 Flash (High)",
+      "summary": "исправление ошибки валидации",
+      "timestamp": "2026-10-22T08:00:00+03:00",
+      "card_projection": "sha256:d94ca465e2205ef279b39ba2048c94458d746d5a953b108d3369c7b292f45108",
+      "verification_report_hash": "b90e142c14d677e2174faccf5acdadef2a80c3403225e8ab4614aeee9cf3cd80",
+      "workspace": "/Users/privedentsev1/Dev/ai-dev-playbook/work/pilot-workspace"
+    },
+    "task101_in_review": true,
+    "projection_matches": true,
+    "verification_hash_matches": true,
+    "acceptance": null
+  },
+  "pilot-workspace.tar.gz": {
+    "ticket": {
+      "schema_version": 1,
+      "task_id": "TASK-101",
+      "actor": "Antigravity",
+      "model": "Gemini 3.8 Flash (High)",
+      "summary": "исправление ошибки валидации",
+      "timestamp": "2026-10-22T08:00:00+03:00",
+      "card_projection": "sha256:d94ca465e2205ef279b39ba2048c94458d746d5a953b108d3369c7b292f45108",
+      "verification_report_hash": "b90e142c14d677e2174faccf5acdadef2a80c3403225e8ab4614aeee9cf3cd80",
+      "workspace": "/Users/privedentsev1/Dev/ai-dev-playbook/work/pilot-workspace"
+    },
+    "task101_in_review": true,
+    "projection_matches": true,
+    "verification_hash_matches": true,
+    "acceptance": null
+  }
+}

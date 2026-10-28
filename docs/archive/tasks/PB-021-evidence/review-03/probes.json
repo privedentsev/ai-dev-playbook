@@ -1,0 +1,114 @@
+{
+  "python": "3.14.6 (main, Jun 10 2026, 10:03:53) [Clang 21.0.0 (clang-2100.0.123.102)]",
+  "platform": "macOS-27.0.1-x86_64-i386-64bit-Mach-O",
+  "cases": [
+    {
+      "case": "baseline-impact",
+      "returncode": 0,
+      "stdout": "spec:alpha — spec, состояние accepted, ревизия 1\nПуть: docs/specs/alpha.md (активен)\nОбновлён: 2026-10-01T00:00:00+03:00\nИсходящие связи:\n  —\nОбратные связи:\n  spec:beta → based_on\nСвязанные задачи: —\nДействующая ревизия: 1; запланированные изменения: 0\nМатериалы: 0\nПотенциально затронутые при изменении: spec:beta\n",
+      "stderr": "",
+      "added": [],
+      "removed": [],
+      "changed": []
+    },
+    {
+      "case": "baseline-materials",
+      "returncode": 0,
+      "stdout": "Владелец: документ spec:alpha [accepted]\nМатериалы не зарегистрированы.\n",
+      "stderr": "",
+      "added": [],
+      "removed": [],
+      "changed": []
+    },
+    {
+      "case": "baseline-list",
+      "returncode": 0,
+      "stdout": "# Каталог документов\n\n## spec\n- spec:alpha [accepted, активен] docs/specs/alpha.md\n- spec:beta [accepted, активен] docs/specs/beta.md\n- (legacy, активен) docs/specs/legacy.md\n",
+      "stderr": "",
+      "added": [],
+      "removed": [],
+      "changed": []
+    },
+    {
+      "case": "document-symlink-outside-root",
+      "returncode": 1,
+      "stdout": "",
+      "stderr": "ERROR: docs/specs/outside.md: символическая ссылка в коллекции spec\n",
+      "added": [],
+      "removed": [],
+      "changed": []
+    },
+    {
+      "case": "material-contains-component-roots",
+      "returncode": 1,
+      "stdout": "",
+      "stderr": "ERROR: docs/specs/alpha.md: поле 'materials': материал 'proof': app — код/тесты компонента, не evidence\n",
+      "added": [],
+      "removed": [],
+      "changed": []
+    },
+    {
+      "case": "migration-is-material",
+      "returncode": 1,
+      "stdout": "",
+      "stderr": "ERROR: docs/specs/alpha.md: поле 'materials': материал 'proof': db — код/тесты компонента, не evidence\n",
+      "added": [],
+      "removed": [],
+      "changed": []
+    },
+    {
+      "case": "two-external-owners",
+      "returncode": 1,
+      "stdout": "",
+      "stderr": "ERROR: docs/specs/beta.md: материал 'proof': https://example.invalid/proof уже принадлежит spec:alpha\n",
+      "added": [],
+      "removed": [],
+      "changed": []
+    },
+    {
+      "case": "malformed-state-diagnostic",
+      "returncode": 1,
+      "stdout": "",
+      "stderr": "ERROR: <fixture>/project/docs/specs/alpha.md: поле 'state': state [] недопустим для kind 'spec'\n",
+      "added": [],
+      "removed": [],
+      "changed": []
+    },
+    {
+      "case": "partially-registered-evidence",
+      "returncode": 0,
+      "stdout": "# Каталог документов\n\n## spec\n- spec:alpha [accepted, активен] docs/specs/alpha.md\n\n## Кандидаты на учёт\n- docs/specs/alpha-evidence/missed.log (владелец: spec:alpha; файл evidence без учёта в материалах)\n",
+      "stderr": "",
+      "added": [],
+      "removed": [],
+      "changed": []
+    },
+    {
+      "case": "symlink-inside-material-directory",
+      "returncode": 1,
+      "stdout": "",
+      "stderr": "ERROR: docs/specs/alpha-evidence/link.log: символическая ссылка в коллекции spec\ndocs/specs/alpha.md: поле 'materials': материал 'proof': символическая ссылка docs/specs/alpha-evidence/link.log\ndocs/specs/alpha-evidence/link.log: символическая ссылка в evidence-каталоге\n",
+      "added": [],
+      "removed": [],
+      "changed": []
+    },
+    {
+      "case": "fenced-example-registered",
+      "returncode": 0,
+      "stdout": "# Каталог документов\n\n## spec\n- (legacy, активен) docs/specs/alpha.md\n",
+      "stderr": "",
+      "added": [],
+      "removed": [],
+      "changed": []
+    },
+    {
+      "case": "read-only-default-python",
+      "returncode": 0,
+      "stdout": "# Каталог документов\n\n## spec\n- spec:alpha [accepted, активен] docs/specs/alpha.md\n- spec:beta [accepted, активен] docs/specs/beta.md\n- (legacy, активен) docs/specs/legacy.md\n",
+      "stderr": "",
+      "added": [],
+      "removed": [],
+      "changed": []
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "schema_version": 2,
+  "registry": [
+    {
+      "id": "lint",
+      "kind": "command",
+      "argv": ["git", "diff", "--check"],
+      "timeout_seconds": 30,
+      "default_inputs": [
+        {
+          "type": "file",
+          "unexpected": true
+        }
+      ]
+    }
+  ]
+}

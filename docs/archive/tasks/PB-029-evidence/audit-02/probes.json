@@ -1,0 +1,29 @@
+{
+  "accept": {
+    "argv": [
+      "lifecycle",
+      "accept",
+      "PB-029",
+      "--result",
+      "accepted",
+      "--kind",
+      "acceptance",
+      "--actor",
+      "Codex",
+      "--model",
+      "GPT-6"
+    ],
+    "rc": 0,
+    "stdout": "PB-029: записана приёмка result=accepted kind=acceptance.\n",
+    "stderr": ""
+  },
+  "close": {
+    "argv": [
+      "close",
+      "PB-029"
+    ],
+    "rc": 1,
+    "stdout": "",
+    "stderr": "ERROR: PB-029: нет свежего успешного прогона verify — входы изменились после проверки; повторите verify и handoff\n"
+  }
+}

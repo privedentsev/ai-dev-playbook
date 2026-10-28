@@ -1,0 +1,145 @@
+{
+  "schema_version": 1,
+  "plan_id": "lc-4353b915f3bdc137",
+  "at": "2026-10-26T13:42:20+03:00",
+  "actor": {
+    "model": "GPT-6",
+    "name": "Codex",
+    "role": "executor"
+  },
+  "basis": "Инженер разрешил исправление исторических остатков материалов; PB-044",
+  "action": "repair_task_materials",
+  "files": [
+    {
+      "from": "docs/tasks/PB-021-evidence/audit-inputs.json",
+      "to": "docs/archive/tasks/PB-021-evidence/audit-inputs.json",
+      "sha256": "sha256:23559f61e8de467bf2ccfd29836eee7c035954b60e5e5d01dc2398f7072c5dbf",
+      "bytes": 1314
+    },
+    {
+      "from": "docs/tasks/PB-021-evidence/audit-results.json",
+      "to": "docs/archive/tasks/PB-021-evidence/audit-results.json",
+      "sha256": "sha256:8e22f06b0ed6d8c2dead06df76bc96d1f337ae29e628c1e956f83dd6d10c60ff",
+      "bytes": 4319
+    },
+    {
+      "from": "docs/tasks/PB-021-evidence/audit_probe.py",
+      "to": "docs/archive/tasks/PB-021-evidence/audit_probe.py",
+      "sha256": "sha256:96f410c7720f6b65d9f6edf663011e2f9b634f2b8a008c358064c39590663590",
+      "bytes": 6845
+    },
+    {
+      "from": "docs/tasks/PB-021-evidence/concurrent-run.log",
+      "to": "docs/archive/tasks/PB-021-evidence/concurrent-run.log",
+      "sha256": "sha256:820d280bb022dfdcd41160a00fed21649b21bd1bf4bcd298afa890beb177ca18",
+      "bytes": 39206
+    },
+    {
+      "from": "docs/tasks/PB-021-evidence/review-02/extra-results.json",
+      "to": "docs/archive/tasks/PB-021-evidence/review-02/extra-results.json",
+      "sha256": "sha256:fd1111dffb563ee391daeb60a660e13d79c53fdcb372571d25b05a34002c0c6d",
+      "bytes": 628
+    },
+    {
+      "from": "docs/tasks/PB-021-evidence/review-02/extra_probe.py",
+      "to": "docs/archive/tasks/PB-021-evidence/review-02/extra_probe.py",
+      "sha256": "sha256:ffec8eb7cf689ada417190bab346c6a5b98552337ca794e2c48991fc78a557a6",
+      "bytes": 1286
+    },
+    {
+      "from": "docs/tasks/PB-021-evidence/review-02/inputs.json",
+      "to": "docs/archive/tasks/PB-021-evidence/review-02/inputs.json",
+      "sha256": "sha256:8e23b014d32cd728dda3e5c49d75b48dd508be349a60e16676958cd940e0c00a",
+      "bytes": 3955
+    },
+    {
+      "from": "docs/tasks/PB-021-evidence/review-02/probes.json",
+      "to": "docs/archive/tasks/PB-021-evidence/review-02/probes.json",
+      "sha256": "sha256:c5794642fef5ce9dffc2eba81c3c2ec419ac53a69d103778bfcb1b4d6669c5d8",
+      "bytes": 4706
+    },
+    {
+      "from": "docs/tasks/PB-021-evidence/review-02/report.json",
+      "to": "docs/archive/tasks/PB-021-evidence/review-02/report.json",
+      "sha256": "sha256:2451736520fcc8ab5088c72444d8616d49af577e4a4f3d4774a0940f1b914408",
+      "bytes": 31292
+    },
+    {
+      "from": "docs/tasks/PB-021-evidence/review-02/self-check.stdout.log",
+      "to": "docs/archive/tasks/PB-021-evidence/review-02/self-check.stdout.log",
+      "sha256": "sha256:6f25128a20792b600e29272e9e865ef663d184e7318536151eeb9ca93e2565bb",
+      "bytes": 126
+    },
+    {
+      "from": "docs/tasks/PB-021-evidence/review-02/stability.json",
+      "to": "docs/archive/tasks/PB-021-evidence/review-02/stability.json",
+      "sha256": "sha256:7963f9ffc6631057e2ce3f9ed9385d8d60ce395486501f0aee5860a66ecdada5",
+      "bytes": 4143
+    },
+    {
+      "from": "docs/tasks/PB-021-evidence/review-02/unit-tests.stderr.log",
+      "to": "docs/archive/tasks/PB-021-evidence/review-02/unit-tests.stderr.log",
+      "sha256": "sha256:eb601d02376bbdc98be5bf90717cc1a0e5fbcbc0db0aaf7892088f177ebd3926",
+      "bytes": 30319
+    },
+    {
+      "from": "docs/tasks/PB-021-evidence/review-03/extra-results.json",
+      "to": "docs/archive/tasks/PB-021-evidence/review-03/extra-results.json",
+      "sha256": "sha256:e67ba83d3c9486df73c50ce9c31555feb09a20363287dca0520ab706f71d9a24",
+      "bytes": 863
+    },
+    {
+      "from": "docs/tasks/PB-021-evidence/review-03/inputs.json",
+      "to": "docs/archive/tasks/PB-021-evidence/review-03/inputs.json",
+      "sha256": "sha256:8a9423dca9f5baf324294a73c07ee56ae42ae5827c9d5adc0ff4fbe42b9570d9",
+      "bytes": 3955
+    },
+    {
+      "from": "docs/tasks/PB-021-evidence/review-03/probes.json",
+      "to": "docs/archive/tasks/PB-021-evidence/review-03/probes.json",
+      "sha256": "sha256:c5794642fef5ce9dffc2eba81c3c2ec419ac53a69d103778bfcb1b4d6669c5d8",
+      "bytes": 4706
+    },
+    {
+      "from": "docs/tasks/PB-021-evidence/review-03/report.json",
+      "to": "docs/archive/tasks/PB-021-evidence/review-03/report.json",
+      "sha256": "sha256:d04e93fb4f623f2d017fadd04c2d573eeb654867104e0facbc607e3aa6ef6969",
+      "bytes": 33116
+    },
+    {
+      "from": "docs/tasks/PB-021-evidence/review-03/self-check.stdout.log",
+      "to": "docs/archive/tasks/PB-021-evidence/review-03/self-check.stdout.log",
+      "sha256": "sha256:6f25128a20792b600e29272e9e865ef663d184e7318536151eeb9ca93e2565bb",
+      "bytes": 126
+    },
+    {
+      "from": "docs/tasks/PB-021-evidence/review-03/stability.json",
+      "to": "docs/archive/tasks/PB-021-evidence/review-03/stability.json",
+      "sha256": "sha256:3bbe6bb5287b85d32b120728086259de0d37de9c1483571afd26d9d1f6d94129",
+      "bytes": 4143
+    },
+    {
+      "from": "docs/tasks/PB-021-evidence/review-03/unit-tests.stderr.log",
+      "to": "docs/archive/tasks/PB-021-evidence/review-03/unit-tests.stderr.log",
+      "sha256": "sha256:70537a748fca9340d7431d90b4d5e94836379f5d897b220df1634e1a23d6562c",
+      "bytes": 30665
+    },
+    {
+      "from": "docs/tasks/PB-021-evidence/unit-tests.log",
+      "to": "docs/archive/tasks/PB-021-evidence/unit-tests.log",
+      "sha256": "sha256:fd8819866e6e2f74fda6948121ffc4cbfb421b5055cd6e032846cba81f0fd97a",
+      "bytes": 22911
+    }
+  ],
+  "moves": [
+    {
+      "from": "docs/tasks/PB-021-evidence",
+      "to": "docs/archive/tasks/PB-021-evidence"
+    }
+  ],
+  "materials": [],
+  "external": [],
+  "type": "lifecycle-material-repair",
+  "task": "PB-021",
+  "reason": "Старый close перенёс карточку без evidence; восстановление размещения без повторной приёмки"
+}

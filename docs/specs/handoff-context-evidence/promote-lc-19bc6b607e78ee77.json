@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "plan_id": "lc-19bc6b607e78ee77",
+  "at": "2026-10-26T08:11:14+03:00",
+  "actor": {
+    "model": "GPT-6",
+    "name": "Codex",
+    "role": "auditor"
+  },
+  "basis": "Независимый аудит PB-043 accepted; закрытие разрешено инженером",
+  "action": "promote_change",
+  "files": [],
+  "moves": [],
+  "materials": [],
+  "external": [],
+  "type": "lifecycle-promote",
+  "document": "spec:handoff-context",
+  "change": "handoff-reading-and-sequence",
+  "revision_from": 1,
+  "revision_to": 2,
+  "acceptance": "work/pb043-spec-acceptance.json",
+  "acceptance_record": {
+    "schema_version": 1,
+    "document": "spec:handoff-context",
+    "change": "handoff-reading-and-sequence",
+    "revision": 1,
+    "result": "accepted",
+    "kind": "acceptance",
+    "actor": {
+      "name": "Codex",
+      "model": "GPT-6",
+      "role": "auditor"
+    },
+    "at": "2026-10-26T08:11:14+03:00",
+    "document_sha256": "sha256:3b630a03fc1aa8ff8eb37e64b66349e328e48608e42e2e252d7a33003af1e600",
+    "payload_sha256": "sha256:1346c2281a510a507170d09ea46aea7e213f4b0554ee2a599e14fe7a5df90520"
+  },
+  "payload_sha256": "sha256:1346c2281a510a507170d09ea46aea7e213f4b0554ee2a599e14fe7a5df90520"
+}

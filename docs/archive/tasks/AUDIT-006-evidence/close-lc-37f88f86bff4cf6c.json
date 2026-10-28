@@ -1,0 +1,377 @@
+{
+  "schema_version": 1,
+  "plan_id": "lc-37f88f86bff4cf6c",
+  "at": "2026-10-22T13:36:15+03:00",
+  "actor": {
+    "model": "human",
+    "name": "Engineer",
+    "role": "engineer"
+  },
+  "basis": "Применять только после явной приёмки инженером итогового протокола AUDIT-006 и регистрации lifecycle accept",
+  "action": "close_task",
+  "files": [
+    {
+      "from": "docs/tasks/AUDIT-006-evidence/audit-time.txt",
+      "to": "docs/archive/tasks/AUDIT-006-evidence/audit-time.txt",
+      "sha256": "sha256:065ee6714c9e0a19bc1d7a2add014094993ec48b04d170a8912f30039eab373c",
+      "bytes": 26
+    },
+    {
+      "from": "docs/tasks/AUDIT-006-evidence/final-a3/closure-request.json",
+      "to": "docs/archive/tasks/AUDIT-006-evidence/final-a3/closure-request.json",
+      "sha256": "sha256:b874e658ed9d6905b9d19b3044c3f153d5d74af8ed017ef2f348f2c3e8c21b42",
+      "bytes": 776
+    },
+    {
+      "from": "docs/tasks/AUDIT-006-evidence/final-a3/code-inputs.json",
+      "to": "docs/archive/tasks/AUDIT-006-evidence/final-a3/code-inputs.json",
+      "sha256": "sha256:4f9294514d1ccd6057899751b72703555039b442e9977664a4d9920a64892932",
+      "bytes": 2177
+    },
+    {
+      "from": "docs/tasks/AUDIT-006-evidence/final-a3/rehearsal-plan.json",
+      "to": "docs/archive/tasks/AUDIT-006-evidence/final-a3/rehearsal-plan.json",
+      "sha256": "sha256:149ead47d473346213fae9e7a7e4feef09422a885f346f13d4f98a792ad8d31d",
+      "bytes": 34290
+    },
+    {
+      "from": "docs/tasks/AUDIT-006-evidence/final-a3/rehearsal-result.json",
+      "to": "docs/archive/tasks/AUDIT-006-evidence/final-a3/rehearsal-result.json",
+      "sha256": "sha256:d033a794e6fa3878c0a5e926a4b955191125b205510065038d10a1ffe3597b25",
+      "bytes": 343
+    },
+    {
+      "from": "docs/tasks/AUDIT-006-evidence/final-a3/rehearsal.py",
+      "to": "docs/archive/tasks/AUDIT-006-evidence/final-a3/rehearsal.py",
+      "sha256": "sha256:560bde59bd8d8f2a15d21cd882e5babae20c6e3a22c3bfdff15caf71d9f15e72",
+      "bytes": 4265
+    },
+    {
+      "from": "docs/tasks/AUDIT-006-evidence/final-a3/report.md",
+      "to": "docs/archive/tasks/AUDIT-006-evidence/final-a3/report.md",
+      "sha256": "sha256:3aeeda717fc6888482825669780e4171009a0dd3a06c8ea864ddd4fe784c07b2",
+      "bytes": 8099
+    },
+    {
+      "from": "docs/tasks/AUDIT-006-evidence/final-a3/structural-check.log",
+      "to": "docs/archive/tasks/AUDIT-006-evidence/final-a3/structural-check.log",
+      "sha256": "sha256:c29de4aec5a2d1ec2dbf666b87b6f5a8e43280c534bb04021be2939019507d81",
+      "bytes": 197
+    },
+    {
+      "from": "docs/tasks/AUDIT-006-evidence/final-checks.log",
+      "to": "docs/archive/tasks/AUDIT-006-evidence/final-checks.log",
+      "sha256": "sha256:95a86f2b885838840378824d3a7ad36cbb1ac2158a22e51540811c7b234a0148",
+      "bytes": 197
+    },
+    {
+      "from": "docs/tasks/AUDIT-006-evidence/freshness.json",
+      "to": "docs/archive/tasks/AUDIT-006-evidence/freshness.json",
+      "sha256": "sha256:79a6c15d1a839be0a08e1137fc9cc011f7644809052bf59552c218951d3539cb",
+      "bytes": 421
+    },
+    {
+      "from": "docs/tasks/AUDIT-006-evidence/inputs-before.json",
+      "to": "docs/archive/tasks/AUDIT-006-evidence/inputs-before.json",
+      "sha256": "sha256:8fd44705651b86a249fd204282a4bcff9bfc8abc9c0b782e57be3233a930516a",
+      "bytes": 49794
+    },
+    {
+      "from": "docs/tasks/AUDIT-006-evidence/pilot-recheck.json",
+      "to": "docs/archive/tasks/AUDIT-006-evidence/pilot-recheck.json",
+      "sha256": "sha256:05dee625255bbfc4c38f5c3a22be81cecb502f98abc6542fa6eb192e7ad8a68a",
+      "bytes": 2767
+    },
+    {
+      "from": "docs/tasks/AUDIT-006-evidence/probes.json",
+      "to": "docs/archive/tasks/AUDIT-006-evidence/probes.json",
+      "sha256": "sha256:78a956401d523119f7c19b0bcb66854e9a1277b1de737095e59ebe22dad1fea1",
+      "bytes": 3716
+    },
+    {
+      "from": "docs/tasks/AUDIT-006-evidence/probes.py",
+      "to": "docs/archive/tasks/AUDIT-006-evidence/probes.py",
+      "sha256": "sha256:75bb14cea64df16224ae48c28a579436559d095a2a97f8af991024c444ed5a41",
+      "bytes": 2810
+    },
+    {
+      "from": "docs/tasks/AUDIT-006-evidence/reaudit-01/final-checks.log",
+      "to": "docs/archive/tasks/AUDIT-006-evidence/reaudit-01/final-checks.log",
+      "sha256": "sha256:1ae350b4264176b4216806a320db352494604b0400dabee9fb6d33a51226d022",
+      "bytes": 228
+    },
+    {
+      "from": "docs/tasks/AUDIT-006-evidence/reaudit-01/freshness.json",
+      "to": "docs/archive/tasks/AUDIT-006-evidence/reaudit-01/freshness.json",
+      "sha256": "sha256:d8792e871784dea774bc8ce86c1e1cf02e79b0b27575b90ba3ad8cff598b3c17",
+      "bytes": 214
+    },
+    {
+      "from": "docs/tasks/AUDIT-006-evidence/reaudit-01/initial-check.log",
+      "to": "docs/archive/tasks/AUDIT-006-evidence/reaudit-01/initial-check.log",
+      "sha256": "sha256:95a86f2b885838840378824d3a7ad36cbb1ac2158a22e51540811c7b234a0148",
+      "bytes": 197
+    },
+    {
+      "from": "docs/tasks/AUDIT-006-evidence/reaudit-01/inputs.json",
+      "to": "docs/archive/tasks/AUDIT-006-evidence/reaudit-01/inputs.json",
+      "sha256": "sha256:c3fdb4d79c552af3c737185a2d7fe4008f73b6a7b0bc0a3fa2b0df42b4e3c6cc",
+      "bytes": 8851
+    },
+    {
+      "from": "docs/tasks/AUDIT-006-evidence/reaudit-01/original-probes.json",
+      "to": "docs/archive/tasks/AUDIT-006-evidence/reaudit-01/original-probes.json",
+      "sha256": "sha256:3b6b2e79b3636533157143e8bdfe418d03a7924a75ed92739da0164d78b9ba68",
+      "bytes": 9455
+    },
+    {
+      "from": "docs/tasks/AUDIT-006-evidence/reaudit-01/probes.json",
+      "to": "docs/archive/tasks/AUDIT-006-evidence/reaudit-01/probes.json",
+      "sha256": "sha256:529330e1d4ce700e62e05f32d988022d2365c2cc31895a4d3d2f28f4bc159502",
+      "bytes": 4244
+    },
+    {
+      "from": "docs/tasks/AUDIT-006-evidence/reaudit-01/probes.py",
+      "to": "docs/archive/tasks/AUDIT-006-evidence/reaudit-01/probes.py",
+      "sha256": "sha256:90b94ee8aa143b3a31b0146c1e07c525936ccf26d3ee822c92b6f60a2b977bcd",
+      "bytes": 4526
+    },
+    {
+      "from": "docs/tasks/AUDIT-006-evidence/reaudit-01/report.md",
+      "to": "docs/archive/tasks/AUDIT-006-evidence/reaudit-01/report.md",
+      "sha256": "sha256:4af351178ae5a7a971142bf9844f406406edc553c51510cd44ba3d7f2945a090",
+      "bytes": 8634
+    },
+    {
+      "from": "docs/tasks/AUDIT-006-evidence/reaudit-01/stability.json",
+      "to": "docs/archive/tasks/AUDIT-006-evidence/reaudit-01/stability.json",
+      "sha256": "sha256:fe863f64e0cbfbdb03209fcd653083093eb6ce4a327d976396fed3b916763fed",
+      "bytes": 37
+    },
+    {
+      "from": "docs/tasks/AUDIT-006-evidence/reaudit-01/unittest.log",
+      "to": "docs/archive/tasks/AUDIT-006-evidence/reaudit-01/unittest.log",
+      "sha256": "sha256:c274effaa94839261fe819845c4a3ae16804b33e819d248b7054ab2cb1397db5",
+      "bytes": 55837
+    },
+    {
+      "from": "docs/tasks/AUDIT-006-evidence/reopen-plan.json",
+      "to": "docs/archive/tasks/AUDIT-006-evidence/reopen-plan.json",
+      "sha256": "sha256:c5b773d15dcf412fd0af9b37dc91d58cdb8d4c20958fea15cc788500b1a0c0da",
+      "bytes": 85654
+    },
+    {
+      "from": "docs/tasks/AUDIT-006-evidence/reopen-preview.log",
+      "to": "docs/archive/tasks/AUDIT-006-evidence/reopen-preview.log",
+      "sha256": "sha256:337956a843bcfde0e11c8e77c549bd97ee10aa49500465f5d7734ceffaf6f64d",
+      "bytes": 321545
+    },
+    {
+      "from": "docs/tasks/AUDIT-006-evidence/reopen-request.json",
+      "to": "docs/archive/tasks/AUDIT-006-evidence/reopen-request.json",
+      "sha256": "sha256:651298e15a231283579c38eeb230b97eb4c7204c3d44c011ad730841d8a42b3e",
+      "bytes": 1073
+    },
+    {
+      "from": "docs/tasks/AUDIT-006-evidence/report.md",
+      "to": "docs/archive/tasks/AUDIT-006-evidence/report.md",
+      "sha256": "sha256:9e3565c5d176c3cb5b816b029197f91cdb3a7543015d4941b7c96d2de45132ef",
+      "bytes": 13843
+    },
+    {
+      "from": "docs/tasks/AUDIT-006-evidence/stability.json",
+      "to": "docs/archive/tasks/AUDIT-006-evidence/stability.json",
+      "sha256": "sha256:d9d4d1cb1f96763dc4af1cab77164b71033457c8f740a872c5df4c1dd8b0435f",
+      "bytes": 151
+    },
+    {
+      "from": "docs/tasks/AUDIT-006-evidence/unittest.log",
+      "to": "docs/archive/tasks/AUDIT-006-evidence/unittest.log",
+      "sha256": "sha256:d9c91bd393960053f7051a4eb5ff8081cb997001eeb1ad49a9d4012f1ed1e819",
+      "bytes": 55099
+    },
+    {
+      "from": "docs/tasks/AUDIT-006-evidence/upgrade.log",
+      "to": "docs/archive/tasks/AUDIT-006-evidence/upgrade.log",
+      "sha256": "sha256:3124928d8a9e0ce3de0a3165d23fffb3b859442e275f6905564cad0a0d694301",
+      "bytes": 367
+    },
+    {
+      "from": "docs/tasks/AUDIT-006.md",
+      "to": "docs/archive/tasks/AUDIT-006.md",
+      "sha256": "sha256:fbd30313bd453f847bce43039d4a01f2fc8d0bc2ac55f2956180a02a190db1fc",
+      "bytes": 19745
+    },
+    {
+      "from": "work/verification/AUDIT-006/2685f3308352423c9c3a63c6598cad1a/report.json",
+      "to": "docs/archive/tasks/AUDIT-006-evidence/work/verification/AUDIT-006/2685f3308352423c9c3a63c6598cad1a/report.json",
+      "sha256": "sha256:c32c34956d57a39c44efac3c3fc834d91e1bf2db7a5d89c6e59142fedb5c39a1",
+      "bytes": 133851
+    },
+    {
+      "from": "work/verification/AUDIT-006/2685f3308352423c9c3a63c6598cad1a/unit-tests.stderr.log",
+      "to": "docs/archive/tasks/AUDIT-006-evidence/work/verification/AUDIT-006/2685f3308352423c9c3a63c6598cad1a/unit-tests.stderr.log",
+      "sha256": "sha256:2847ead2ef27a41e22086b422331fe29483f8c48e3ad0bbff0f5491b4fff0e3b",
+      "bytes": 52695
+    },
+    {
+      "from": "work/verification/AUDIT-006/2685f3308352423c9c3a63c6598cad1a/unit-tests.stdout.log",
+      "to": "docs/archive/tasks/AUDIT-006-evidence/work/verification/AUDIT-006/2685f3308352423c9c3a63c6598cad1a/unit-tests.stdout.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "work/verification/AUDIT-006/8e7f3e5755e341b1be1474b88331bf1c/report.json",
+      "to": "docs/archive/tasks/AUDIT-006-evidence/work/verification/AUDIT-006/8e7f3e5755e341b1be1474b88331bf1c/report.json",
+      "sha256": "sha256:a5b60df1db8cda55f43276f6ade0eb57c899ddb54787177e2632a1100f7160c6",
+      "bytes": 134221
+    },
+    {
+      "from": "work/verification/AUDIT-006/8e7f3e5755e341b1be1474b88331bf1c/self-check.stderr.log",
+      "to": "docs/archive/tasks/AUDIT-006-evidence/work/verification/AUDIT-006/8e7f3e5755e341b1be1474b88331bf1c/self-check.stderr.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "work/verification/AUDIT-006/8e7f3e5755e341b1be1474b88331bf1c/self-check.stdout.log",
+      "to": "docs/archive/tasks/AUDIT-006-evidence/work/verification/AUDIT-006/8e7f3e5755e341b1be1474b88331bf1c/self-check.stdout.log",
+      "sha256": "sha256:c29de4aec5a2d1ec2dbf666b87b6f5a8e43280c534bb04021be2939019507d81",
+      "bytes": 197
+    },
+    {
+      "from": "work/verification/AUDIT-006/8e7f3e5755e341b1be1474b88331bf1c/unit-tests.stderr.log",
+      "to": "docs/archive/tasks/AUDIT-006-evidence/work/verification/AUDIT-006/8e7f3e5755e341b1be1474b88331bf1c/unit-tests.stderr.log",
+      "sha256": "sha256:0c7b0c8b7d183add98e83107c8d868d7f97ceb2d3afc23d2af54d71393f0fb16",
+      "bytes": 55837
+    },
+    {
+      "from": "work/verification/AUDIT-006/8e7f3e5755e341b1be1474b88331bf1c/unit-tests.stdout.log",
+      "to": "docs/archive/tasks/AUDIT-006-evidence/work/verification/AUDIT-006/8e7f3e5755e341b1be1474b88331bf1c/unit-tests.stdout.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "work/verification/AUDIT-006/9819acea8dc3422fae1177fd488c0807/report.json",
+      "to": "docs/archive/tasks/AUDIT-006-evidence/work/verification/AUDIT-006/9819acea8dc3422fae1177fd488c0807/report.json",
+      "sha256": "sha256:454ffe784bcd811cbb0f29d0b6ae755b87f4f3f6b8f013b76a6ec88411db15f7",
+      "bytes": 131979
+    },
+    {
+      "from": "work/verification/AUDIT-006/9819acea8dc3422fae1177fd488c0807/unit-tests.stderr.log",
+      "to": "docs/archive/tasks/AUDIT-006-evidence/work/verification/AUDIT-006/9819acea8dc3422fae1177fd488c0807/unit-tests.stderr.log",
+      "sha256": "sha256:6f330468070b0218599489bf475eccc244803c4172a8b6d2620e1c7f7fb74087",
+      "bytes": 56669
+    },
+    {
+      "from": "work/verification/AUDIT-006/9819acea8dc3422fae1177fd488c0807/unit-tests.stdout.log",
+      "to": "docs/archive/tasks/AUDIT-006-evidence/work/verification/AUDIT-006/9819acea8dc3422fae1177fd488c0807/unit-tests.stdout.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    }
+  ],
+  "moves": [
+    {
+      "from": "docs/tasks/AUDIT-006-evidence",
+      "to": "docs/archive/tasks/AUDIT-006-evidence"
+    },
+    {
+      "from": "work/verification/AUDIT-006/2685f3308352423c9c3a63c6598cad1a",
+      "to": "docs/archive/tasks/AUDIT-006-evidence/work/verification/AUDIT-006/2685f3308352423c9c3a63c6598cad1a"
+    },
+    {
+      "from": "work/verification/AUDIT-006/8e7f3e5755e341b1be1474b88331bf1c",
+      "to": "docs/archive/tasks/AUDIT-006-evidence/work/verification/AUDIT-006/8e7f3e5755e341b1be1474b88331bf1c"
+    },
+    {
+      "from": "work/verification/AUDIT-006/9819acea8dc3422fae1177fd488c0807",
+      "to": "docs/archive/tasks/AUDIT-006-evidence/work/verification/AUDIT-006/9819acea8dc3422fae1177fd488c0807"
+    },
+    {
+      "from": "docs/tasks/AUDIT-006.md",
+      "to": "docs/archive/tasks/AUDIT-006.md"
+    }
+  ],
+  "materials": [
+    {
+      "id": "audit-006-evidence",
+      "role": "report",
+      "storage": "local",
+      "source_old": "docs/tasks/AUDIT-006-evidence",
+      "source_new": "docs/archive/tasks/AUDIT-006-evidence",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "AUDIT-006"
+      ]
+    },
+    {
+      "id": "verify-2685f3308352423c9c3a63c6598cad1a",
+      "role": "report",
+      "storage": "local",
+      "source_old": "work/verification/AUDIT-006/2685f3308352423c9c3a63c6598cad1a",
+      "source_new": "docs/archive/tasks/AUDIT-006-evidence/work/verification/AUDIT-006/2685f3308352423c9c3a63c6598cad1a",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "AUDIT-006"
+      ]
+    },
+    {
+      "id": "verify-8e7f3e5755e341b1be1474b88331bf1c",
+      "role": "report",
+      "storage": "local",
+      "source_old": "work/verification/AUDIT-006/8e7f3e5755e341b1be1474b88331bf1c",
+      "source_new": "docs/archive/tasks/AUDIT-006-evidence/work/verification/AUDIT-006/8e7f3e5755e341b1be1474b88331bf1c",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "AUDIT-006"
+      ]
+    },
+    {
+      "id": "verify-9819acea8dc3422fae1177fd488c0807",
+      "role": "report",
+      "storage": "local",
+      "source_old": "work/verification/AUDIT-006/9819acea8dc3422fae1177fd488c0807",
+      "source_new": "docs/archive/tasks/AUDIT-006-evidence/work/verification/AUDIT-006/9819acea8dc3422fae1177fd488c0807",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "AUDIT-006"
+      ]
+    }
+  ],
+  "external": [],
+  "type": "lifecycle-close",
+  "task": "AUDIT-006",
+  "outcome": "done",
+  "previous_status": "in_review",
+  "reason": null,
+  "acceptance_ref": null,
+  "policy": "managed",
+  "handoff": {
+    "at": "2026-10-22T13:36:14+03:00",
+    "actor": {
+      "name": "Codex",
+      "model": "GPT-6"
+    },
+    "summary": "Итоговый протокол и ограничения приняты инженером; критерии приёмки обновлены. Совместный перенос аудита и общего плана подготовлен, 435 тестов PASS.",
+    "reports": [
+      "verify-8e7f3e5755e341b1be1474b88331bf1c"
+    ],
+    "card_projection": "sha256:eb6734f06fd15b0189b117d73d4488f21f7d516a53f1a67ee93f5a7e34bdb3b6"
+  },
+  "acceptance": {
+    "at": "2026-10-22T13:36:14+03:00",
+    "actor": {
+      "name": "Engineer",
+      "model": "human"
+    },
+    "role": "engineer",
+    "kind": "acceptance",
+    "result": "accepted",
+    "handoff_at": "2026-10-22T13:36:14+03:00",
+    "session": null,
+    "detail": "Инженер в текущем чате: «я принимаю» — принят итоговый протокол после A3 и ограничения. Критерии карточки отмечены по принятому протоколу; приёмка распространяется на совместное закрытие."
+  }
+}

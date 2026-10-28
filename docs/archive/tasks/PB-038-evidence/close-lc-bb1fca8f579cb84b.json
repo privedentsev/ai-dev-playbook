@@ -1,0 +1,279 @@
+{
+  "schema_version": 1,
+  "plan_id": "lc-bb1fca8f579cb84b",
+  "at": "2026-10-23T12:33:10+03:00",
+  "actor": {
+    "model": null,
+    "name": "cli:privedentsev1",
+    "role": "cli"
+  },
+  "basis": "playbook.py close PB-038",
+  "action": "close_task",
+  "files": [
+    {
+      "from": "docs/tasks/PB-038-evidence/audit-freshness.json",
+      "to": "docs/archive/tasks/PB-038-evidence/audit-freshness.json",
+      "sha256": "sha256:9973bd387f4fbd90ef1b09e53d09b3a3b7334ccb25ba5e808914f99c768071bd",
+      "bytes": 470
+    },
+    {
+      "from": "docs/tasks/PB-038-evidence/audit-probes.log",
+      "to": "docs/archive/tasks/PB-038-evidence/audit-probes.log",
+      "sha256": "sha256:780d2f73fa7b346bef5592fa4ff01fef2c267c5865d745ea98e1debdb6415288",
+      "bytes": 159
+    },
+    {
+      "from": "docs/tasks/PB-038-evidence/audit-probes.py",
+      "to": "docs/archive/tasks/PB-038-evidence/audit-probes.py",
+      "sha256": "sha256:1f2e32b3ed8ce1ec2f6fe83fc4e577e84811ec1947744afdd8d25fdfe8b07eba",
+      "bytes": 2774
+    },
+    {
+      "from": "docs/tasks/PB-038-evidence/audit-suite.log",
+      "to": "docs/archive/tasks/PB-038-evidence/audit-suite.log",
+      "sha256": "sha256:56e0e5f8e8cb5744f0ae231db781724194806757c7cb3e381b7e341ab3eab8d1",
+      "bytes": 61868
+    },
+    {
+      "from": "docs/tasks/PB-038-evidence/execution.log",
+      "to": "docs/archive/tasks/PB-038-evidence/execution.log",
+      "sha256": "sha256:91ac8ff6772fe86d27471994fd2f138bc720de03b9f48d442e695f1cf5ade5d3",
+      "bytes": 2074
+    },
+    {
+      "from": "docs/tasks/PB-038.md",
+      "to": "docs/archive/tasks/PB-038.md",
+      "sha256": "sha256:d169e3a66fff4a8fbe8a5c50c3d8885d3cd3e7159574847a20919ce78384932d",
+      "bytes": 22204
+    },
+    {
+      "from": "work/verification/PB-038/c20e67daa2c54f5eb702364c3807127a/report.json",
+      "to": "docs/archive/tasks/PB-038-evidence/work/verification/PB-038/c20e67daa2c54f5eb702364c3807127a/report.json",
+      "sha256": "sha256:baab7be7dcdfff6e87e14169d0ee3d003f29cc26058556d19ed9d6ac6a1967db",
+      "bytes": 163209
+    },
+    {
+      "from": "work/verification/PB-038/c20e67daa2c54f5eb702364c3807127a/self-check.stderr.log",
+      "to": "docs/archive/tasks/PB-038-evidence/work/verification/PB-038/c20e67daa2c54f5eb702364c3807127a/self-check.stderr.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "work/verification/PB-038/c20e67daa2c54f5eb702364c3807127a/self-check.stdout.log",
+      "to": "docs/archive/tasks/PB-038-evidence/work/verification/PB-038/c20e67daa2c54f5eb702364c3807127a/self-check.stdout.log",
+      "sha256": "sha256:9ad99b47ba402ea27e3d49401acb40876d62aa12339db5d36f73a599ec106d75",
+      "bytes": 197
+    },
+    {
+      "from": "work/verification/PB-038/c20e67daa2c54f5eb702364c3807127a/unit-tests.stderr.log",
+      "to": "docs/archive/tasks/PB-038-evidence/work/verification/PB-038/c20e67daa2c54f5eb702364c3807127a/unit-tests.stderr.log",
+      "sha256": "sha256:eb7d68030778fb37bb8e158105ab0a2cc8e3c0d79136a3e0b0965a270164311b",
+      "bytes": 61868
+    },
+    {
+      "from": "work/verification/PB-038/c20e67daa2c54f5eb702364c3807127a/unit-tests.stdout.log",
+      "to": "docs/archive/tasks/PB-038-evidence/work/verification/PB-038/c20e67daa2c54f5eb702364c3807127a/unit-tests.stdout.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "work/verification/PB-038/c6b953f541c04fc28815b5a8c2b3bead/report.json",
+      "to": "docs/archive/tasks/PB-038-evidence/work/verification/PB-038/c6b953f541c04fc28815b5a8c2b3bead/report.json",
+      "sha256": "sha256:205f6de77f89619b9000799f3eea36d587378f42f3c011a9a62bc8861ba6f16f",
+      "bytes": 162237
+    },
+    {
+      "from": "work/verification/PB-038/c6b953f541c04fc28815b5a8c2b3bead/self-check.stderr.log",
+      "to": "docs/archive/tasks/PB-038-evidence/work/verification/PB-038/c6b953f541c04fc28815b5a8c2b3bead/self-check.stderr.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "work/verification/PB-038/c6b953f541c04fc28815b5a8c2b3bead/self-check.stdout.log",
+      "to": "docs/archive/tasks/PB-038-evidence/work/verification/PB-038/c6b953f541c04fc28815b5a8c2b3bead/self-check.stdout.log",
+      "sha256": "sha256:9ad99b47ba402ea27e3d49401acb40876d62aa12339db5d36f73a599ec106d75",
+      "bytes": 197
+    },
+    {
+      "from": "work/verification/PB-038/c6b953f541c04fc28815b5a8c2b3bead/unit-tests.stderr.log",
+      "to": "docs/archive/tasks/PB-038-evidence/work/verification/PB-038/c6b953f541c04fc28815b5a8c2b3bead/unit-tests.stderr.log",
+      "sha256": "sha256:f99b47c09bf71a84a446e9bbf2c1bfe821add486cb1e238252ce41cc4327d379",
+      "bytes": 61868
+    },
+    {
+      "from": "work/verification/PB-038/c6b953f541c04fc28815b5a8c2b3bead/unit-tests.stdout.log",
+      "to": "docs/archive/tasks/PB-038-evidence/work/verification/PB-038/c6b953f541c04fc28815b5a8c2b3bead/unit-tests.stdout.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "work/verification/PB-038/e0dba436be484456ada0ac4d09fe271b/report.json",
+      "to": "docs/archive/tasks/PB-038-evidence/work/verification/PB-038/e0dba436be484456ada0ac4d09fe271b/report.json",
+      "sha256": "sha256:175a6541a821aacdac5b96e26c7a32955b7f69b8f30a1d06ae0eac8685645f19",
+      "bytes": 162001
+    },
+    {
+      "from": "work/verification/PB-038/e0dba436be484456ada0ac4d09fe271b/self-check.stderr.log",
+      "to": "docs/archive/tasks/PB-038-evidence/work/verification/PB-038/e0dba436be484456ada0ac4d09fe271b/self-check.stderr.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "work/verification/PB-038/e0dba436be484456ada0ac4d09fe271b/self-check.stdout.log",
+      "to": "docs/archive/tasks/PB-038-evidence/work/verification/PB-038/e0dba436be484456ada0ac4d09fe271b/self-check.stdout.log",
+      "sha256": "sha256:9ad99b47ba402ea27e3d49401acb40876d62aa12339db5d36f73a599ec106d75",
+      "bytes": 197
+    },
+    {
+      "from": "work/verification/PB-038/e0dba436be484456ada0ac4d09fe271b/unit-tests.stderr.log",
+      "to": "docs/archive/tasks/PB-038-evidence/work/verification/PB-038/e0dba436be484456ada0ac4d09fe271b/unit-tests.stderr.log",
+      "sha256": "sha256:dccf2c525db9852fd0580a7b2906530681dce62d7a4b63ccafae586ad38047ad",
+      "bytes": 61868
+    },
+    {
+      "from": "work/verification/PB-038/e0dba436be484456ada0ac4d09fe271b/unit-tests.stdout.log",
+      "to": "docs/archive/tasks/PB-038-evidence/work/verification/PB-038/e0dba436be484456ada0ac4d09fe271b/unit-tests.stdout.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "work/verification/PB-038/reaudit-01/close.log",
+      "to": "docs/archive/tasks/PB-038-evidence/work/verification/PB-038/reaudit-01/close.log",
+      "sha256": "sha256:152d872c3ed7e5f6411b3fb4e60439cdfa957c726cbd7a68c8ed824639441fb0",
+      "bytes": 5163
+    },
+    {
+      "from": "work/verification/PB-038/reaudit-01/lifecycle.log",
+      "to": "docs/archive/tasks/PB-038-evidence/work/verification/PB-038/reaudit-01/lifecycle.log",
+      "sha256": "sha256:b62df6ec2cf34e03b9bda28c7d29d5b8a348ddc613005894e67de5972522cda6",
+      "bytes": 3937
+    },
+    {
+      "from": "work/verification/PB-038/reaudit-01/probes.log",
+      "to": "docs/archive/tasks/PB-038-evidence/work/verification/PB-038/reaudit-01/probes.log",
+      "sha256": "sha256:780d2f73fa7b346bef5592fa4ff01fef2c267c5865d745ea98e1debdb6415288",
+      "bytes": 159
+    }
+  ],
+  "moves": [
+    {
+      "from": "work/verification/PB-038/c6b953f541c04fc28815b5a8c2b3bead",
+      "to": "docs/archive/tasks/PB-038-evidence/work/verification/PB-038/c6b953f541c04fc28815b5a8c2b3bead"
+    },
+    {
+      "from": "work/verification/PB-038/e0dba436be484456ada0ac4d09fe271b",
+      "to": "docs/archive/tasks/PB-038-evidence/work/verification/PB-038/e0dba436be484456ada0ac4d09fe271b"
+    },
+    {
+      "from": "work/verification/PB-038/c20e67daa2c54f5eb702364c3807127a",
+      "to": "docs/archive/tasks/PB-038-evidence/work/verification/PB-038/c20e67daa2c54f5eb702364c3807127a"
+    },
+    {
+      "from": "docs/tasks/PB-038-evidence",
+      "to": "docs/archive/tasks/PB-038-evidence"
+    },
+    {
+      "from": "work/verification/PB-038/reaudit-01",
+      "to": "docs/archive/tasks/PB-038-evidence/work/verification/PB-038/reaudit-01"
+    },
+    {
+      "from": "docs/tasks/PB-038.md",
+      "to": "docs/archive/tasks/PB-038.md"
+    }
+  ],
+  "materials": [
+    {
+      "id": "verify-c6b953f541c04fc28815b5a8c2b3bead",
+      "role": "report",
+      "storage": "local",
+      "source_old": "work/verification/PB-038/c6b953f541c04fc28815b5a8c2b3bead",
+      "source_new": "docs/archive/tasks/PB-038-evidence/work/verification/PB-038/c6b953f541c04fc28815b5a8c2b3bead",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-038"
+      ]
+    },
+    {
+      "id": "verify-e0dba436be484456ada0ac4d09fe271b",
+      "role": "report",
+      "storage": "local",
+      "source_old": "work/verification/PB-038/e0dba436be484456ada0ac4d09fe271b",
+      "source_new": "docs/archive/tasks/PB-038-evidence/work/verification/PB-038/e0dba436be484456ada0ac4d09fe271b",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-038"
+      ]
+    },
+    {
+      "id": "verify-c20e67daa2c54f5eb702364c3807127a",
+      "role": "report",
+      "storage": "local",
+      "source_old": "work/verification/PB-038/c20e67daa2c54f5eb702364c3807127a",
+      "source_new": "docs/archive/tasks/PB-038-evidence/work/verification/PB-038/c20e67daa2c54f5eb702364c3807127a",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-038"
+      ]
+    },
+    {
+      "id": "pb038-evidence",
+      "role": "report",
+      "storage": "local",
+      "source_old": "docs/tasks/PB-038-evidence",
+      "source_new": "docs/archive/tasks/PB-038-evidence",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-038"
+      ]
+    },
+    {
+      "id": "pb038-reaudit-01",
+      "role": "report",
+      "storage": "local",
+      "source_old": "work/verification/PB-038/reaudit-01",
+      "source_new": "docs/archive/tasks/PB-038-evidence/work/verification/PB-038/reaudit-01",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-038"
+      ]
+    }
+  ],
+  "external": [],
+  "type": "lifecycle-close",
+  "task": "PB-038",
+  "outcome": "done",
+  "previous_status": "in_review",
+  "reason": null,
+  "acceptance_ref": null,
+  "policy": "managed",
+  "handoff": {
+    "at": "2026-10-23T11:08:40+03:00",
+    "actor": {
+      "name": "cli:privedentsev1",
+      "model": null
+    },
+    "summary": "Сохранение ссылок индексов коллекций при close/reopen (PB-038)",
+    "reports": [
+      "verify-c20e67daa2c54f5eb702364c3807127a"
+    ],
+    "card_projection": "sha256:229c35aedfae77f83cc3c55b7b0a809ea0750c65fea86cb29f2fc796c2b5b164"
+  },
+  "acceptance": {
+    "at": "2026-10-23T11:11:16+03:00",
+    "actor": {
+      "name": "Codex",
+      "model": "GPT-6.1 Sol"
+    },
+    "role": "auditor",
+    "kind": "acceptance",
+    "result": "accepted",
+    "handoff_at": "2026-10-23T11:08:40+03:00",
+    "session": null,
+    "detail": "Повторный независимый аудит: PB-038-A1 устранено; verify свежий, 72 профильных теста и CLI-пробы пройдены. Закрытие не запрашивалось."
+  }
+}

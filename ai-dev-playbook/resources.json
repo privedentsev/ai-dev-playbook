@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "policy_revision": 2,
+  "updated_at": "2026-09-29",
+  "tools": [
+    {
+      "id": "devin-desktop",
+      "availability": "confirmed",
+      "models": [
+        {"id": "SWE-2 High", "availability": "confirmed", "roles": ["executor"], "fallbacks": []}
+      ]
+    },
+    {
+      "id": "codex",
+      "availability": "reported",
+      "models": [
+        {"id": "GPT-6 Sol", "availability": "reported", "roles": ["auditor"], "fallbacks": []}
+      ]
+    }
+  ],
+  "budgets": {"per_task": null, "verification_reserve": null},
+  "quota_snapshots": [],
+  "on_unavailable": "ask_engineer",
+  "note": "devin-desktop/SWE-2 High подтверждены фактом этой сессии; codex/GPT-6 Sol записаны как аудитор в карточках AUDIT-001/002/003/004 (reported, не проверено в этой среде). Квоты и бюджеты неизвестны: измерить их здесь нечем, значения не предполагаются."
+}

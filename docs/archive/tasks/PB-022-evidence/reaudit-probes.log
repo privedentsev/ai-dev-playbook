@@ -1,0 +1,112 @@
+test_A1_angle_query_fragment_stays_inside_token (__main__.Reaudit.test_A1_angle_query_fragment_stays_inside_token) ... FAIL
+test_A1_close_preserves_clickable_angle_link (__main__.Reaudit.test_A1_close_preserves_clickable_angle_link) ... FAIL
+test_A2_escaped_backtick_does_not_hide_real_link (__main__.Reaudit.test_A2_escaped_backtick_does_not_hide_real_link) ... FAIL
+test_A2_unmatched_backtick_does_not_disable_later_code_span (__main__.Reaudit.test_A2_unmatched_backtick_does_not_disable_later_code_span) ... FAIL
+test_A3_controls_source_target_managed_and_frozen (__main__.Reaudit.test_A3_controls_source_target_managed_and_frozen) ... ok
+test_A4_image_and_enclosing_link_both_relocated (__main__.Reaudit.test_A4_image_and_enclosing_link_both_relocated) ... FAIL
+test_A4_missing_image_inside_link_is_checked (__main__.Reaudit.test_A4_missing_image_inside_link_is_checked) ... FAIL
+test_A5_joint_move_wikilink_does_not_conflict (__main__.Reaudit.test_A5_joint_move_wikilink_does_not_conflict) ... FAIL
+
+======================================================================
+FAIL: test_A1_angle_query_fragment_stays_inside_token (__main__.Reaudit.test_A1_angle_query_fragment_stays_inside_token)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/docs/tasks/PB-022-evidence/reaudit-probes.py", line 30, in test_A1_angle_query_fragment_stays_inside_token
+    self.assertEqual(self.rewrite(text), '[x](<../a b.md?raw=1#sec> "title")\n')
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: '[x](<../a b.md>?raw=1#sec "title")\n' != '[x](<../a b.md?raw=1#sec> "title")\n'
+- [x](<../a b.md>?raw=1#sec "title")
+?               -
++ [x](<../a b.md?raw=1#sec> "title")
+?                         +
+
+
+======================================================================
+FAIL: test_A1_close_preserves_clickable_angle_link (__main__.Reaudit.test_A1_close_preserves_clickable_angle_link)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/docs/tasks/PB-022-evidence/reaudit-probes.py", line 50, in test_A1_close_preserves_clickable_angle_link
+    self.assertEqual(readme.read_text(), text,
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+                     "close AND check succeed despite destroying link syntax")
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: '[target](<docs/a b.md>?raw=1#sec)\n' != '[target](<docs/a b.md?raw=1#sec>)\n'
+- [target](<docs/a b.md>?raw=1#sec)
+?                      -
++ [target](<docs/a b.md?raw=1#sec>)
+?                                +
+ : close AND check succeed despite destroying link syntax
+
+======================================================================
+FAIL: test_A2_escaped_backtick_does_not_hide_real_link (__main__.Reaudit.test_A2_escaped_backtick_does_not_hide_real_link)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/docs/tasks/PB-022-evidence/reaudit-probes.py", line 59, in test_A2_escaped_backtick_does_not_hide_real_link
+    self.assertEqual(self.rewrite(text), "\\` literal [real](../b.md) `\n")
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: '\\` literal [real](b.md) `\n' != '\\` literal [real](../b.md) `\n'
+- \` literal [real](b.md) `
++ \` literal [real](../b.md) `
+?                   +++
+
+
+======================================================================
+FAIL: test_A2_unmatched_backtick_does_not_disable_later_code_span (__main__.Reaudit.test_A2_unmatched_backtick_does_not_disable_later_code_span)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/docs/tasks/PB-022-evidence/reaudit-probes.py", line 55, in test_A2_unmatched_backtick_does_not_disable_later_code_span
+    self.assertEqual(self.rewrite(text), text)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'stray ` then ``[example](../b.md)``\n' != 'stray ` then ``[example](b.md)``\n'
+- stray ` then ``[example](../b.md)``
+?                          ---
++ stray ` then ``[example](b.md)``
+
+
+======================================================================
+FAIL: test_A4_image_and_enclosing_link_both_relocated (__main__.Reaudit.test_A4_image_and_enclosing_link_both_relocated)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/docs/tasks/PB-022-evidence/reaudit-probes.py", line 62, in test_A4_image_and_enclosing_link_both_relocated
+    self.assertEqual(self.rewrite("[![i](i.png)](b.md)\n"),
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                     "[![i](../i.png)](../b.md)\n")
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: '[![i](i.png)](../b.md)\n' != '[![i](../i.png)](../b.md)\n'
+- [![i](i.png)](../b.md)
++ [![i](../i.png)](../b.md)
+?       +++
+
+
+======================================================================
+FAIL: test_A4_missing_image_inside_link_is_checked (__main__.Reaudit.test_A4_missing_image_inside_link_is_checked)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/docs/tasks/PB-022-evidence/reaudit-probes.py", line 69, in test_A4_missing_image_inside_link_is_checked
+    self.assertTrue(errors, "Broken image silently passes check")
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: [] is not true : Broken image silently passes check
+
+======================================================================
+FAIL: test_A5_joint_move_wikilink_does_not_conflict (__main__.Reaudit.test_A5_joint_move_wikilink_does_not_conflict)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/docs/tasks/PB-022-evidence/reaudit-probes.py", line 95, in test_A5_joint_move_wikilink_does_not_conflict
+    self.assertEqual(links.plan_rewrites([self.old], together, self.root)["conflicts"], [])
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Lists differ: [{'path': '/private/var/folders/53/qpdfw9l[97 chars]md'}] != []
+
+First list contains 1 additional elements.
+First extra element 0:
+{'path': '/private/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/tmpc0a43kgw/docs/a.md', 'line': 1, 'kind': 'unsupported', 'detail': 'b.md'}
+
++ []
+- [{'detail': 'b.md',
+-   'kind': 'unsupported',
+-   'line': 1,
+-   'path': '/private/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/tmpc0a43kgw/docs/a.md'}]
+
+----------------------------------------------------------------------
+Ran 8 tests in 1.069s
+
+FAILED (failures=7)

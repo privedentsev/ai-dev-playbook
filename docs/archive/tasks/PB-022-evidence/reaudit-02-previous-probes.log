@@ -1,0 +1,13 @@
+test_A1_angle_query_fragment_stays_inside_token (__main__.Reaudit.test_A1_angle_query_fragment_stays_inside_token) ... ok
+test_A1_close_preserves_clickable_angle_link (__main__.Reaudit.test_A1_close_preserves_clickable_angle_link) ... ok
+test_A2_escaped_backtick_does_not_hide_real_link (__main__.Reaudit.test_A2_escaped_backtick_does_not_hide_real_link) ... ok
+test_A2_unmatched_backtick_does_not_disable_later_code_span (__main__.Reaudit.test_A2_unmatched_backtick_does_not_disable_later_code_span) ... ok
+test_A3_controls_source_target_managed_and_frozen (__main__.Reaudit.test_A3_controls_source_target_managed_and_frozen) ... ok
+test_A4_image_and_enclosing_link_both_relocated (__main__.Reaudit.test_A4_image_and_enclosing_link_both_relocated) ... ok
+test_A4_missing_image_inside_link_is_checked (__main__.Reaudit.test_A4_missing_image_inside_link_is_checked) ... ok
+test_A5_joint_move_wikilink_does_not_conflict (__main__.Reaudit.test_A5_joint_move_wikilink_does_not_conflict) ... ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 1.027s
+
+OK

@@ -1,0 +1,21 @@
+test_ac02_discussion_lifecycle_and_transition_to_spec (test_pb029.Pb029EndToEndRoutesTest.test_ac02_discussion_lifecycle_and_transition_to_spec)
+AC-02: Обсуждения без файлов по умолчанию; CLI create создаёт discussion и index; ... ok
+test_ac07_feature_deprecation_and_adr_archival_e2e (test_pb029.Pb029EndToEndRoutesTest.test_ac07_feature_deprecation_and_adr_archival_e2e)
+AC-07: Частичное удаление (SMS) обновляет общую спецификацию и design; ... ok
+test_ac10_ac11_lifecycle_controls_and_missing_evidence (test_pb029.Pb029EndToEndRoutesTest.test_ac10_ac11_lifecycle_controls_and_missing_evidence)
+AC-10, AC-11: Потерянное обязательное доказательство блокирует закрытие; ... ok
+test_large_block_route_e2e (test_pb029.Pb029EndToEndRoutesTest.test_large_block_route_e2e)
+AC-05, AC-06, AC-08: Большая задача (блок подзадач + общий аудит); ... ok
+test_link_and_archive_immutability_e2e (test_pb029.Pb029EndToEndRoutesTest.test_link_and_archive_immutability_e2e)
+AC-08, AC-09: Перемещение в архив сохраняет целостность ссылок; ... ok
+test_medium_task_route_e2e (test_pb029.Pb029EndToEndRoutesTest.test_medium_task_route_e2e)
+AC-04, AC-07: Средняя задача (feature) с отдельной спецификацией; ... ok
+test_self_project_copy_pilot (test_pb029.Pb029EndToEndRoutesTest.test_self_project_copy_pilot)
+AC-12: Копия собственного проекта ai-dev-playbook со всеми незакоммиченными ... ok
+test_small_task_route_e2e (test_pb029.Pb029EndToEndRoutesTest.test_small_task_route_e2e)
+AC-03: Маленькая задача (баг) в одной карточке, без отдельного spec/plan; ... ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 30.800s
+
+OK

@@ -1,0 +1,76 @@
+[
+  {
+    "label": "independent-unittest",
+    "argv": [
+      "/usr/local/opt/python@3.14/bin/python3.14",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tests",
+      "-v"
+    ],
+    "rc": 0,
+    "stdout": "",
+    "stderr": "test_parse_basic (test_parser.TestParser.test_parse_basic) ... ok\ntest_empty_and_whitespace_return_none (test_validator.TestValidator.test_empty_and_whitespace_return_none) ... ok\ntest_invalid_nonempty_value_still_raises (test_validator.TestValidator.test_invalid_nonempty_value_still_raises) ... ok\ntest_numeric_values_are_preserved (test_validator.TestValidator.test_numeric_values_are_preserved) ... ok\ntest_valid_age (test_validator.TestValidator.test_valid_age) ... ok\ntest_whitespace_age (test_validator.TestValidator.test_whitespace_age) ... ok\n\n----------------------------------------------------------------------\nRan 6 tests in 0.001s\n\nOK\n"
+  },
+  {
+    "label": "independent-probe",
+    "argv": [
+      "/usr/local/opt/python@3.14/bin/python3.14",
+      "/Users/privedentsev1/Dev/ai-dev-playbook/docs/tasks/PB-029-evidence/independent-pilot/acceptance_probe.py"
+    ],
+    "rc": 0,
+    "stdout": "'' => None\n' ' => None\n'\\t\\n' => None\n'\\xa0' => None\n'0' => 0\n'25' => 25\n' 42 ' => 42\n'\\t17\\n' => 17\nnon-numeric input: existing ValueError behavior preserved\nPASS: 9 independent cases\n",
+    "stderr": ""
+  },
+  {
+    "label": "accept",
+    "argv": [
+      "/usr/local/opt/python@3.14/bin/python3.14",
+      "/Users/privedentsev1/Dev/ai-dev-playbook/ai-dev-playbook/scripts/playbook.py",
+      "lifecycle",
+      "accept",
+      "TASK-101",
+      "--result",
+      "accepted",
+      "--kind",
+      "acceptance",
+      "--role",
+      "auditor",
+      "--actor",
+      "Codex",
+      "--model",
+      "GPT-6",
+      "--note",
+      "Независимый аудитор /root; сессия 01a162f1-a308-7c12-9380-08445b6a30d0. Доработка /root/pilot_executor после реального возврата проверена: 6 тестов и 9 независимых случаев PASS; PILOT-A1 устранено."
+    ],
+    "rc": 0,
+    "stdout": "TASK-101: записана приёмка result=accepted kind=acceptance.\n",
+    "stderr": ""
+  },
+  {
+    "label": "close",
+    "argv": [
+      "/usr/local/opt/python@3.14/bin/python3.14",
+      "/Users/privedentsev1/Dev/ai-dev-playbook/ai-dev-playbook/scripts/playbook.py",
+      "close",
+      "TASK-101"
+    ],
+    "rc": 0,
+    "stdout": "TASK-101: done. Карточка в архиве, индексы и ссылки обновлены. План: work/lifecycle/plans/lc-e67a175205ddb83f.json. Операция: work/lifecycle/20261022-123758-0b355359\n",
+    "stderr": ""
+  },
+  {
+    "label": "check",
+    "argv": [
+      "/usr/local/opt/python@3.14/bin/python3.14",
+      "/Users/privedentsev1/Dev/ai-dev-playbook/ai-dev-playbook/scripts/playbook.py",
+      "check",
+      "--ready"
+    ],
+    "rc": 0,
+    "stdout": "OK: структура, ссылки и 1 карточки; каталог документов: 0 документов, 0 legacy. Поведение продукта не проверялось.\n",
+    "stderr": ""
+  }
+]

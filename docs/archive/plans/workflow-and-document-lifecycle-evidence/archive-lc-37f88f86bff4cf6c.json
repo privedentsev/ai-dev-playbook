@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "plan_id": "lc-37f88f86bff4cf6c",
+  "at": "2026-10-22T13:36:15+03:00",
+  "actor": {
+    "model": "human",
+    "name": "Engineer",
+    "role": "engineer"
+  },
+  "basis": "Применять только после явной приёмки инженером итогового протокола AUDIT-006 и регистрации lifecycle accept",
+  "action": "archive_document",
+  "files": [
+    {
+      "from": "docs/plans/workflow-and-document-lifecycle-evidence/pre-a3-20261022.txt",
+      "to": "docs/archive/plans/workflow-and-document-lifecycle-evidence/pre-a3-20261022.txt",
+      "sha256": "sha256:1fb104a19c60b2169695cd3156749c0d9a1b3a45bc8a453ff5e27298ed62bbd8",
+      "bytes": 24646
+    },
+    {
+      "from": "docs/plans/workflow-and-document-lifecycle.md",
+      "to": "docs/archive/plans/workflow-and-document-lifecycle.md",
+      "sha256": "sha256:10a12370de4ade52ee6513fd0272c315cb1691d498fcb71428e0a60c3ddabb9a",
+      "bytes": 27086
+    }
+  ],
+  "moves": [
+    {
+      "from": "docs/plans/workflow-and-document-lifecycle-evidence/pre-a3-20261022.txt",
+      "to": "docs/archive/plans/workflow-and-document-lifecycle-evidence/pre-a3-20261022.txt"
+    },
+    {
+      "from": "docs/plans/workflow-and-document-lifecycle.md",
+      "to": "docs/archive/plans/workflow-and-document-lifecycle.md"
+    }
+  ],
+  "materials": [
+    {
+      "id": "pre-a3-history",
+      "role": "other",
+      "storage": "local",
+      "source_old": "docs/plans/workflow-and-document-lifecycle-evidence/pre-a3-20261022.txt",
+      "source_new": "docs/archive/plans/workflow-and-document-lifecycle-evidence/pre-a3-20261022.txt",
+      "required": true,
+      "immutable": true,
+      "used_by": []
+    }
+  ],
+  "external": [],
+  "type": "lifecycle-archive",
+  "document": "plan:workflow-and-document-lifecycle",
+  "reason": "Завершение принятого блока PB-021–PB-029 и AUDIT-006",
+  "successor": null
+}

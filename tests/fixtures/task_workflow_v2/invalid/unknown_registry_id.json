@@ -1,0 +1,19 @@
+{
+  "schema_version": 2,
+  "workflow": {
+    "route": "small"
+  },
+  "verification_plan": {
+    "revision": 1,
+    "rationale": "Ссылка на несуществующую команду реестра",
+    "scope": ["tests"],
+    "checks": [
+      {
+        "id": "bad-ref",
+        "kind": "command",
+        "purpose": "Ссылка на неизвестный id",
+        "registry_id": "nonexistent-command-id"
+      }
+    ]
+  }
+}

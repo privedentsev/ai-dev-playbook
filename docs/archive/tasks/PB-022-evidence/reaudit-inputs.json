@@ -1,0 +1,32 @@
+{
+  "files_before": {
+    "ai-dev-playbook/scripts/document_links.py": "bc4a8c81720521f8849f9fa0de116d19c32297f78c3ac262313982034c14a4d3",
+    "ai-dev-playbook/scripts/documents.py": "4596e7a440aa31ca1c7b4010c4c217c6826d3106f0393ef0ee1edde521c38da5",
+    "ai-dev-playbook/scripts/playbook.py": "317744b00db7e091fa78f80f4e2a9c6c906e5a4640377ead4e5fb1d386b70189",
+    "ai-dev-playbook/scripts/updating.py": "01cfd3f71467a557504e02128e732cdaf65c112790cd9bab4308915bfdf49af4",
+    "ai-dev-playbook/scripts/verification.py": "0bb563b8f17a1c9c2eb3e1e12dff78bb3f923bca85447d8a1f983ff7e2e127b9",
+    "tests/test_cli.py": "b725d3a34eeea35289192249b490d0828125cf84a0c26417bd348f8bdab0ecdc",
+    "tests/test_document_links.py": "c4987ff85acc98621b00d683cbbd077787dc30063f9a36635deced44e3698e28",
+    "tests/test_documents.py": "295a67c97f0f7b10289c5216de6644cd0bfbb0035d1b36c04b31cb439ceb0e39",
+    "tests/test_playbook.py": "c3ab2fbe200ceb85d4d1eecfaf8c71df2fcaa04186b20ac887b5931cf3e7f605"
+  },
+  "files_after": {
+    "ai-dev-playbook/scripts/document_links.py": "bc4a8c81720521f8849f9fa0de116d19c32297f78c3ac262313982034c14a4d3",
+    "ai-dev-playbook/scripts/documents.py": "4596e7a440aa31ca1c7b4010c4c217c6826d3106f0393ef0ee1edde521c38da5",
+    "ai-dev-playbook/scripts/playbook.py": "317744b00db7e091fa78f80f4e2a9c6c906e5a4640377ead4e5fb1d386b70189",
+    "ai-dev-playbook/scripts/updating.py": "01cfd3f71467a557504e02128e732cdaf65c112790cd9bab4308915bfdf49af4",
+    "ai-dev-playbook/scripts/verification.py": "0bb563b8f17a1c9c2eb3e1e12dff78bb3f923bca85447d8a1f983ff7e2e127b9",
+    "tests/test_cli.py": "b725d3a34eeea35289192249b490d0828125cf84a0c26417bd348f8bdab0ecdc",
+    "tests/test_document_links.py": "c4987ff85acc98621b00d683cbbd077787dc30063f9a36635deced44e3698e28",
+    "tests/test_documents.py": "295a67c97f0f7b10289c5216de6644cd0bfbb0035d1b36c04b31cb439ceb0e39",
+    "tests/test_playbook.py": "c3ab2fbe200ceb85d4d1eecfaf8c71df2fcaa04186b20ac887b5931cf3e7f605"
+  },
+  "unchanged": true,
+  "at": "2026-10-01T14:10:59+03:00",
+  "evidence_sha256": {
+    "reaudit-probes.py": "34e667192d6aa5d25aed4eec55abd99f0805b9e16d3b6405dcee36883b936a45",
+    "reaudit-probes.log": "ac3d3520d74427b2827ac2f4bbbdf82fa3334f613ef9f9cc0910459e1f662461",
+    "reaudit-unit-tests.log": "5360493908150fdfad9a86dcc0c3d2789fd0c57fee25bc4b872fbf534b1ccfdf",
+    "reaudit-original-probes.log": "587d0cffdd6e30917ceddf96d372fa0dcb3e7a0b69f1c8275d50c0cf8f925af6"
+  }
+}

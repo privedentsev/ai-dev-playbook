@@ -1,0 +1,47 @@
+=== Начало независимого аудита PB-026 ===
+[PASS] 1.1. verify DEV-1 
+[PASS] 1.2. lifecycle handoff DEV-1 
+[PASS] 1.3. lifecycle accept DEV-1 
+[PASS] 1.4. close DEV-1 
+[PASS] 1.5. карточка перенесена в архив 
+[PASS] 1.6. сформирован сопровождающий close-<plan_id>.json 
+[PASS] 1.7. прогон verify перемещён в evidence архива 
+[PASS] 2.1. отказ close done без handoff ERROR: DEV-2: нет записи передачи на приёмку — выполните lifecycle handoff после последних изменений
+[PASS] 2.2. отказ close done без accept ERROR: DEV-2: нет записи приёмки — выполните lifecycle accept
+[PASS] 2.3. отказ close done с diagnostic accept ERROR: DEV-2: diagnostic-протокол не является приёмкой — нужна запись kind=acceptance
+[PASS] 2.4. отказ close done при изменении цели карточки после передачи ERROR: DEV-3: карточка изменилась после передачи (цель, зависимости или критерии приёмки) — повторите затронутую проверку и lifecycle handoff
+[PASS] 2.5. отказ close done при изменении входов verify (stale inputs) ERROR: DEV-4: нет свежего успешного прогона verify — входы изменились после проверки; повторите verify и handoff
+[PASS] 2.6. отказ close done для карточки in_progress ERROR: DEV-5: done только из in_review (после аудита), сейчас in_progress
+[PASS] 3.1. добавление протокола аудита не ломает handoff и позволяет close 
+[PASS] 4.1. отказ close cancelled без --reason ERROR: --reason обязателен при --status cancelled в проекте с разделом documents — причина сохраняется в истории
+[PASS] 4.2. отказ close cancelled без accept(cancelled) ERROR: DEV-72: отмена карточки с метаданными требует записи приёмки с result=cancelled — выполните lifecycle accept --result cancelled
+[PASS] 4.3. close cancelled c --reason и accept(cancelled) 
+[PASS] 4.4. статус cancelled в архиве 
+[PASS] 5.1. close --dry-run успешен и показывает план 
+[PASS] 5.2. close --dry-run не изменил файлы проекта 
+[PASS] 6.1. close legacy карточки в managed-проекте 
+[PASS] 6.2. legacy карточка и каталог evidence перенесены в архив 
+[PASS] 6.3. маркер неподтверждённой модели блокирует legacy close в done ERROR: DEV-10: модель не подтверждена — маркер '(не подтверждено)' в карточке (строки 8). Инженер вписывает точное название или 'неизвестна' вместо маркера, затем повторяет close
+[PASS] 7.1. reopen DEV-1 в in_progress 
+[PASS] 7.2. DEV-1 вернулась в active 
+[PASS] 7.3. статус in_progress, Closed сброшен, секция Возврат добавлена 
+[PASS] 7.4. создана квитанция reopen-<plan_id>.json 
+[PASS] 8.1. отказ reopen DEV-1 при done-зависимом DEV-11 (недопустимый граф) ERROR: Операция оставила бы недопустимый граф статусов: DEV-11 требует завершённый DEV-1
+[PASS] 8.2. совместный возврат DEV-1 и DEV-11 успешен 
+[PASS] 8.3. DEV-11 получила статус blocked 
+[PASS] 8.4. возврат DEV-20 перевёл активный DEV-21 в blocked 
+[PASS] 9.1. lifecycle plan promote_change 
+[PASS] 9.2. lifecycle apply promote_change 
+[PASS] 9.3. новое тело спецификации применено 
+[PASS] 9.4. снимок прежней редакции сохранён в auth-evidence/revision-1.md 
+[PASS] 9.5. current_revision инкрементирован до 2 
+[PASS] 9.6. change переведён в accepted 
+[PASS] 9.7. создана квитанция promote-<plan_id>.json 
+[PASS] 9.8. отказ promote_change если change не в implemented ERROR: spec:billing: изменение 'chg-2' в состоянии 'approved' — promotion требует implemented
+[PASS] 10.1. повторный apply возвращает already_completed под gate+lock 
+[PASS] 10.2a. симуляция сбоя записи вернула код 42 
+[PASS] 10.2b. активный pending блокирует изменяющие команды 
+[PASS] 10.3. lifecycle restore восстанавливает проект и снимает pending 
+
+ИТОГ: 43/43 проверок пройдено.
+Все сценарные проверки успешно пройдены!

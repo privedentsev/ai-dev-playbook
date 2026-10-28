@@ -1,0 +1,39 @@
+{
+  "started_at": "2026-10-02T07:02:40+03:00",
+  "files_before": {
+    "ai-dev-playbook/scripts/document_links.py": "03be42c18746071428da4c3aab3d5a257257f7ebcda519cb4ad7c215d6007bad",
+    "ai-dev-playbook/scripts/documents.py": "4596e7a440aa31ca1c7b4010c4c217c6826d3106f0393ef0ee1edde521c38da5",
+    "ai-dev-playbook/scripts/file_operations.py": "84c378607e3e395a52cc51984c1681893b169768493b1cf7bd475b604b95b92b",
+    "ai-dev-playbook/scripts/playbook.py": "b149383df3ad5ddc47219026b85bd50cee9e86ffa7043b83714b58afc2c0b89e",
+    "ai-dev-playbook/scripts/updating.py": "ba98f79da19a60a787c93e910c246ea2faf9a5d78eb44992d2efb6e11b4d174a",
+    "ai-dev-playbook/scripts/verification.py": "630bd0b6d527783f1639682fb9ad307dac15aa4d910121c29c62572ee41983d7",
+    "tests/test_cli.py": "cb088c054e5a953c16a69cc83d20e1178ecfaf021647bbee154de966cdb99bf4",
+    "tests/test_document_links.py": "fcddecb338108100a6fa5f169c0ade517e58ebe247d509fbc5bb51002c551db8",
+    "tests/test_documents.py": "295a67c97f0f7b10289c5216de6644cd0bfbb0035d1b36c04b31cb439ceb0e39",
+    "tests/test_file_operations.py": "a26e1df01b7097ce65164a34fb27e03c4b1aa9868640a54284c1cfcb9056714b",
+    "tests/test_playbook.py": "c3ab2fbe200ceb85d4d1eecfaf8c71df2fcaa04186b20ac887b5931cf3e7f605"
+  },
+  "files_after": {
+    "ai-dev-playbook/scripts/document_links.py": "03be42c18746071428da4c3aab3d5a257257f7ebcda519cb4ad7c215d6007bad",
+    "ai-dev-playbook/scripts/documents.py": "4596e7a440aa31ca1c7b4010c4c217c6826d3106f0393ef0ee1edde521c38da5",
+    "ai-dev-playbook/scripts/file_operations.py": "84c378607e3e395a52cc51984c1681893b169768493b1cf7bd475b604b95b92b",
+    "ai-dev-playbook/scripts/playbook.py": "b149383df3ad5ddc47219026b85bd50cee9e86ffa7043b83714b58afc2c0b89e",
+    "ai-dev-playbook/scripts/updating.py": "ba98f79da19a60a787c93e910c246ea2faf9a5d78eb44992d2efb6e11b4d174a",
+    "ai-dev-playbook/scripts/verification.py": "630bd0b6d527783f1639682fb9ad307dac15aa4d910121c29c62572ee41983d7",
+    "tests/test_cli.py": "cb088c054e5a953c16a69cc83d20e1178ecfaf021647bbee154de966cdb99bf4",
+    "tests/test_document_links.py": "fcddecb338108100a6fa5f169c0ade517e58ebe247d509fbc5bb51002c551db8",
+    "tests/test_documents.py": "295a67c97f0f7b10289c5216de6644cd0bfbb0035d1b36c04b31cb439ceb0e39",
+    "tests/test_file_operations.py": "a26e1df01b7097ce65164a34fb27e03c4b1aa9868640a54284c1cfcb9056714b",
+    "tests/test_playbook.py": "c3ab2fbe200ceb85d4d1eecfaf8c71df2fcaa04186b20ac887b5931cf3e7f605"
+  },
+  "unchanged": true,
+  "finished_at": "2026-10-02T07:05:50+03:00",
+  "evidence_sha256": {
+    "reaudit-03-probes.py": "a790474219e18eba51ad547b279cff00e6cc8e11f6333e2167ca326bad51005a",
+    "reaudit-03-probes.log": "58072241c68cb38029ddff22e1f56b2983dd9dd678fd9cc4108d8daadd953e08",
+    "reaudit-03-unit-tests.log": "6fb16f8a913153776cad675f369e4ce85d2873165f98162bfcf855aa07101dd7",
+    "reaudit-03-original-probes.log": "988b5bdd4ae9eff8e938413752254ce33c4fdfd28064e0fe43c9faff40d8c980",
+    "reaudit-03-previous-probes.log": "9f1e8aba6d290fbe4a08adc64c8219e8c74e1564ffb4233405abfb1e51fb7cc2",
+    "reaudit-03-last-probes.log": "c4fa4122f076d7c6a04ec17e01db452c5f5e2680ebfacaff38ebced5d66c5d17"
+  }
+}

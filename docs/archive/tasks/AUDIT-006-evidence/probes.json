@@ -1,0 +1,133 @@
+[
+  {
+    "scenario": "combined_close_and_plan_archive",
+    "request": {
+      "schema_version": 1,
+      "actor": {
+        "name": "Devin",
+        "role": "executor",
+        "model": "SWE-2 High"
+      },
+      "basis": "Инженер подтвердил операцию",
+      "scope": {
+        "tasks": [
+          "DEV-1"
+        ],
+        "documents": [
+          "plan:block"
+        ]
+      },
+      "actions": [
+        {
+          "action": "close_task",
+          "task": "DEV-1",
+          "outcome": "done"
+        },
+        {
+          "action": "archive_document",
+          "document": "plan:block",
+          "reason": "accepted block"
+        }
+      ]
+    },
+    "rc": 1,
+    "stdout": "",
+    "stderr": "ERROR: plan:block: план с незавершёнными задачами ['DEV-1'] — завершите или отмените их до архивирования\n",
+    "unchanged": true,
+    "expected_rc": 0
+  },
+  {
+    "scenario": "promotion_without_acceptance",
+    "request": {
+      "schema_version": 1,
+      "actor": {
+        "name": "Devin",
+        "role": "executor",
+        "model": "SWE-2 High"
+      },
+      "basis": "Executor finished implementation; independent audit has not happened",
+      "scope": {
+        "documents": [
+          "spec:alpha"
+        ]
+      },
+      "actions": [
+        {
+          "action": "promote_change",
+          "document": "spec:alpha",
+          "change": "chg-1",
+          "payload": "UNREVIEWED replacement\n",
+          "acceptance": null
+        }
+      ]
+    },
+    "rc": 0,
+    "stdout": "План lc-09c6145d0ce0d902 применён. Операция: work/lifecycle/20261022-124646-12fcf0fe\n",
+    "stderr": "",
+    "result_metadata": {
+      "schema_version": 1,
+      "document_id": "spec:alpha",
+      "kind": "spec",
+      "state": "accepted",
+      "created_at": "2026-01-01T00:00:00Z",
+      "updated_at": "2026-10-22T12:46:46+03:00",
+      "current_revision": 2,
+      "relations": [],
+      "tasks": [],
+      "changes": [
+        {
+          "id": "chg-1",
+          "state": "accepted",
+          "section": "Область",
+          "basis": {
+            "type": "engineer_approval",
+            "who": "engineer",
+            "at": "2026-01-02T00:00:00Z",
+            "detail": "утверждено",
+            "source": "review"
+          },
+          "tasks": [],
+          "acceptance": null
+        }
+      ],
+      "materials": [
+        {
+          "id": "revision-1",
+          "role": "other",
+          "source": "docs/specs/alpha-evidence/revision-1.md",
+          "storage": "local",
+          "required": true,
+          "immutable": true,
+          "used_by": []
+        },
+        {
+          "id": "lifecycle-lc-09c6145d0ce0d902",
+          "role": "report",
+          "source": "docs/specs/alpha-evidence/promote-lc-09c6145d0ce0d902.json",
+          "storage": "local",
+          "required": true,
+          "immutable": true,
+          "used_by": []
+        }
+      ],
+      "archive": null
+    },
+    "expected_rc": 1
+  },
+  {
+    "scenario": "stale_input_close",
+    "rc": 1,
+    "stdout": "",
+    "stderr": "ERROR: DEV-1: нет свежего успешного прогона verify — входы изменились после проверки; повторите verify и handoff\n",
+    "unchanged": true,
+    "expected_rc": 1
+  },
+  {
+    "scenario": "missing_required_report",
+    "rc": 1,
+    "stdout": "",
+    "stderr": "ERROR: Нет отчёта прогона: /private/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/tmpin5tiodd/work/verification/DEV-1/0b8d23291f0645c1be1e2fd6982966fc/report.json\n",
+    "unchanged": true,
+    "expected_rc": 1
+  }
+]

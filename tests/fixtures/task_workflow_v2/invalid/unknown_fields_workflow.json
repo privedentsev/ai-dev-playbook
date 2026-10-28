@@ -1,0 +1,7 @@
+{
+  "schema_version": 2,
+  "workflow": {
+    "route": "quick",
+    "unsupported_field": "disallowed"
+  }
+}

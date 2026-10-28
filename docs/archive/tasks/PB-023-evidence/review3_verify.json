@@ -1,0 +1,46 @@
+{
+  "run_id": "c2bf45ef98f145b982bff876b59c5ee4",
+  "status": "passed",
+  "started_at": "2026-10-02T04:06:19.215990+00:00",
+  "finished_at": "2026-10-02T04:06:46.592724+00:00",
+  "checks": [
+    {
+      "id": "unit-tests",
+      "argv": [
+        "python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-v"
+      ],
+      "timeout_seconds": 120,
+      "status": "passed",
+      "started_at": "2026-10-02T04:06:19.216581+00:00",
+      "stdout": "work/verification/PB-023/c2bf45ef98f145b982bff876b59c5ee4/unit-tests.stdout.log",
+      "stderr": "work/verification/PB-023/c2bf45ef98f145b982bff876b59c5ee4/unit-tests.stderr.log",
+      "exit_code": 0,
+      "duration_seconds": 26.782,
+      "finished_at": "2026-10-02T04:06:45.999138+00:00"
+    },
+    {
+      "id": "self-check",
+      "argv": [
+        "python3",
+        "ai-dev-playbook/scripts/playbook.py",
+        "check",
+        "--ready"
+      ],
+      "timeout_seconds": 60,
+      "status": "passed",
+      "started_at": "2026-10-02T04:06:46.000237+00:00",
+      "stdout": "work/verification/PB-023/c2bf45ef98f145b982bff876b59c5ee4/self-check.stdout.log",
+      "stderr": "work/verification/PB-023/c2bf45ef98f145b982bff876b59c5ee4/self-check.stderr.log",
+      "exit_code": 0,
+      "duration_seconds": 0.525,
+      "finished_at": "2026-10-02T04:06:46.525357+00:00"
+    }
+  ],
+  "inputs_unchanged": true
+}

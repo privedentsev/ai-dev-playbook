@@ -1,0 +1,5 @@
+PASS init absent and nested target; installed CLI check
+PASS rollback after actual first file write; new parent removed
+PASS frozen artifact integrity
+Frozen fixture: sha256:86d50af609096ccea693f841a909c2d6a8cac036bef4ba045b7c3a99bcec6327 files: 26
+PASS update via installed 0.0.2 CLI; custom config and all 11 project files preserved byte-for-byte; target CLI ready

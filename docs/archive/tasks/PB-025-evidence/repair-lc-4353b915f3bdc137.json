@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "plan_id": "lc-4353b915f3bdc137",
+  "at": "2026-10-26T13:42:20+03:00",
+  "actor": {
+    "model": "GPT-6",
+    "name": "Codex",
+    "role": "executor"
+  },
+  "basis": "Инженер разрешил исправление исторических остатков материалов; PB-044",
+  "action": "repair_task_materials",
+  "files": [
+    {
+      "from": "docs/tasks/PB-025-evidence/audit-inputs.json",
+      "to": "docs/archive/tasks/PB-025-evidence/audit-inputs.json",
+      "sha256": "sha256:4c1e2869459a941edd347b7279a7b415fae5e685d6ac5a43e79fd7886ed0cc2c",
+      "bytes": 1274
+    },
+    {
+      "from": "docs/tasks/PB-025-evidence/audit-probe.log",
+      "to": "docs/archive/tasks/PB-025-evidence/audit-probe.log",
+      "sha256": "sha256:d514013b9f0eee72b19c4f0de80049ba8d1faa3931cc43b2c00f410940b40c9b",
+      "bytes": 2700
+    },
+    {
+      "from": "docs/tasks/PB-025-evidence/audit-probe.py",
+      "to": "docs/archive/tasks/PB-025-evidence/audit-probe.py",
+      "sha256": "sha256:d891376135465bdf49aacb9400a6c497a163da434fd2f106f710a8e26962f4b0",
+      "bytes": 24714
+    },
+    {
+      "from": "docs/tasks/PB-025-evidence/inputs.json",
+      "to": "docs/archive/tasks/PB-025-evidence/inputs.json",
+      "sha256": "sha256:0aef36d1c70ef4c233094b790b5e4393559eae0036ce6381e4dc48363217ff63",
+      "bytes": 816
+    },
+    {
+      "from": "docs/tasks/PB-025-evidence/unit-tests.log",
+      "to": "docs/archive/tasks/PB-025-evidence/unit-tests.log",
+      "sha256": "sha256:fed07c9b8c50a515b131b802d5afd8175752a0245c7e0e2e530da9e54e5b5e03",
+      "bytes": 482
+    }
+  ],
+  "moves": [
+    {
+      "from": "docs/tasks/PB-025-evidence",
+      "to": "docs/archive/tasks/PB-025-evidence"
+    }
+  ],
+  "materials": [],
+  "external": [],
+  "type": "lifecycle-material-repair",
+  "task": "PB-025",
+  "reason": "Старый close перенёс карточку без evidence; восстановление размещения без повторной приёмки"
+}

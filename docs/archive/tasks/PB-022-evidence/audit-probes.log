@@ -1,0 +1,204 @@
+test_A1_close_preserves_unrelated_links (__main__.AuditProbes.test_A1_close_preserves_unrelated_links) ... FAIL
+test_A1_encoded_destination_keeps_identity (__main__.AuditProbes.test_A1_encoded_destination_keeps_identity) ... 
+  test_A1_encoded_destination_keeps_identity (__main__.AuditProbes.test_A1_encoded_destination_keeps_identity) (token='a%23b.md') ... FAIL
+  test_A1_encoded_destination_keeps_identity (__main__.AuditProbes.test_A1_encoded_destination_keeps_identity) (token='a%3Fb.md') ... FAIL
+  test_A1_encoded_destination_keeps_identity (__main__.AuditProbes.test_A1_encoded_destination_keeps_identity) (token='a%2520b.md') ... FAIL
+  test_A1_encoded_destination_keeps_identity (__main__.AuditProbes.test_A1_encoded_destination_keeps_identity) (token='./a%3Ab.md') ... FAIL
+test_A1_generated_index_destination_keeps_identity (__main__.AuditProbes.test_A1_generated_index_destination_keeps_identity) ... FAIL
+test_A2_code_examples_preserved (__main__.AuditProbes.test_A2_code_examples_preserved) ... 
+  test_A2_code_examples_preserved (__main__.AuditProbes.test_A2_code_examples_preserved) (text='`example\n[x](b.md)\nend`\n') ... FAIL
+  test_A2_code_examples_preserved (__main__.AuditProbes.test_A2_code_examples_preserved) (text='    [x](b.md)\n') ... FAIL
+test_A3_moved_source_unsupported_outgoing_conflict (__main__.AuditProbes.test_A3_moved_source_unsupported_outgoing_conflict) ... 
+  test_A3_moved_source_unsupported_outgoing_conflict (__main__.AuditProbes.test_A3_moved_source_unsupported_outgoing_conflict) (text='<a href="b.md">x</a>\n') ... FAIL
+  test_A3_moved_source_unsupported_outgoing_conflict (__main__.AuditProbes.test_A3_moved_source_unsupported_outgoing_conflict) (text='[[b.md]]\n') ... FAIL
+test_A3_unquoted_html_affected_target_conflict (__main__.AuditProbes.test_A3_unquoted_html_affected_target_conflict) ... FAIL
+test_A4_nested_inline_label_checked (__main__.AuditProbes.test_A4_nested_inline_label_checked) ... FAIL
+test_A4_nested_inline_label_relocated (__main__.AuditProbes.test_A4_nested_inline_label_relocated) ... FAIL
+test_index_manual_regions_and_determinism_positive (__main__.AuditProbes.test_index_manual_regions_and_determinism_positive) ... ok
+test_supported_full_map_and_immutable_positive (__main__.AuditProbes.test_supported_full_map_and_immutable_positive) ... ok
+
+======================================================================
+FAIL: test_A1_close_preserves_unrelated_links (__main__.AuditProbes.test_A1_close_preserves_unrelated_links)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/docs/tasks/PB-022-evidence/audit-probes.py", line 61, in test_A1_close_preserves_unrelated_links
+    self.assertEqual(code, 0, f"After close: {readme.read_text()!r}; {err}")
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 1 != 0 : After close: '[unrelated](docs/a#b.md)\n'; ERROR: README.md: битая или внешняя локальная ссылка docs/a#b.md
+
+
+======================================================================
+FAIL: test_A1_encoded_destination_keeps_identity (__main__.AuditProbes.test_A1_encoded_destination_keeps_identity) (token='a%23b.md')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/docs/tasks/PB-022-evidence/audit-probes.py", line 44, in test_A1_encoded_destination_keeps_identity
+    self.assertEqual((result.scheme, actual), ("", expected), text)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Tuples differ: ('', [31 chars]/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/tmp3j5mjz84/docs/a')) != ('', [31 chars]/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/tmp3j5mjz84/docs/a#b.md'))
+
+First differing element 1:
+Posix[25 chars]s/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/tmp3j5mjz84/docs/a')
+Posix[25 chars]s/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/tmp3j5mjz84/docs/a#b.md')
+
+  ('',
+-  PosixPath('/private/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/tmp3j5mjz84/docs/a'))
++  PosixPath('/private/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/tmp3j5mjz84/docs/a#b.md'))
+?                                                                                        +++++
+ : [x](a#b.md)
+
+
+======================================================================
+FAIL: test_A1_encoded_destination_keeps_identity (__main__.AuditProbes.test_A1_encoded_destination_keeps_identity) (token='a%3Fb.md')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/docs/tasks/PB-022-evidence/audit-probes.py", line 44, in test_A1_encoded_destination_keeps_identity
+    self.assertEqual((result.scheme, actual), ("", expected), text)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Tuples differ: ('', [31 chars]/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/tmp3j5mjz84/docs/a')) != ('', [31 chars]/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/tmp3j5mjz84/docs/a?b.md'))
+
+First differing element 1:
+Posix[25 chars]s/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/tmp3j5mjz84/docs/a')
+Posix[25 chars]s/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/tmp3j5mjz84/docs/a?b.md')
+
+  ('',
+-  PosixPath('/private/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/tmp3j5mjz84/docs/a'))
++  PosixPath('/private/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/tmp3j5mjz84/docs/a?b.md'))
+?                                                                                        +++++
+ : [x](a?b.md)
+
+
+======================================================================
+FAIL: test_A1_encoded_destination_keeps_identity (__main__.AuditProbes.test_A1_encoded_destination_keeps_identity) (token='a%2520b.md')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/docs/tasks/PB-022-evidence/audit-probes.py", line 44, in test_A1_encoded_destination_keeps_identity
+    self.assertEqual((result.scheme, actual), ("", expected), text)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Tuples differ: ('', [33 chars]3/qpdfw9ls555gkkcwh7dv04dw0000gp/T/tmp3j5mjz84/docs/a b.md')) != ('', [33 chars]3/qpdfw9ls555gkkcwh7dv04dw0000gp/T/tmp3j5mjz84/docs/a%20b.md'))
+
+First differing element 1:
+Posix[27 chars]53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/tmp3j5mjz84/docs/a b.md')
+Posix[27 chars]53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/tmp3j5mjz84/docs/a%20b.md')
+
+  ('',
+-  PosixPath('/private/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/tmp3j5mjz84/docs/a b.md'))
+?                                                                                        ^
+
++  PosixPath('/private/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/tmp3j5mjz84/docs/a%20b.md'))
+?                                                                                        ^^^
+ : [x](a%20b.md)
+
+
+======================================================================
+FAIL: test_A1_encoded_destination_keeps_identity (__main__.AuditProbes.test_A1_encoded_destination_keeps_identity) (token='./a%3Ab.md')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/docs/tasks/PB-022-evidence/audit-probes.py", line 44, in test_A1_encoded_destination_keeps_identity
+    self.assertEqual((result.scheme, actual), ("", expected), text)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Tuples differ: ('a', PosixPath('/private/var/folders/53/qp[50 chars]md')) != ('', PosixPath('/private/var/folders/53/qpd[51 chars]md'))
+
+First differing element 0:
+'a'
+''
+
+- ('a',
+?   -
+
++ ('',
+-  PosixPath('/private/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/tmp3j5mjz84/docs/b.md'))
++  PosixPath('/private/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/tmp3j5mjz84/docs/a:b.md'))
+?                                                                                       ++
+ : [x](a:b.md)
+
+
+======================================================================
+FAIL: test_A1_generated_index_destination_keeps_identity (__main__.AuditProbes.test_A1_generated_index_destination_keeps_identity)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/docs/tasks/PB-022-evidence/audit-probes.py", line 68, in test_A1_generated_index_destination_keeps_identity
+    self.assertEqual(actual, path, token)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Posix[25 chars]s/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/tmpwwnz08r_/docs/a') != Posix[25 chars]s/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/tmpwwnz08r_/docs/a#b.md') : a#b.md
+
+======================================================================
+FAIL: test_A2_code_examples_preserved (__main__.AuditProbes.test_A2_code_examples_preserved) (text='`example\n[x](b.md)\nend`\n')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/docs/tasks/PB-022-evidence/audit-probes.py", line 75, in test_A2_code_examples_preserved
+    self.assertEqual(result["text"], text)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: '`example\n[x](../b.md)\nend`\n' != '`example\n[x](b.md)\nend`\n'
+  `example
+- [x](../b.md)
+?     ---
++ [x](b.md)
+  end`
+
+
+======================================================================
+FAIL: test_A2_code_examples_preserved (__main__.AuditProbes.test_A2_code_examples_preserved) (text='    [x](b.md)\n')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/docs/tasks/PB-022-evidence/audit-probes.py", line 75, in test_A2_code_examples_preserved
+    self.assertEqual(result["text"], text)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: '    [x](../b.md)\n' != '    [x](b.md)\n'
+-     [x](../b.md)
+?         ---
++     [x](b.md)
+
+
+======================================================================
+FAIL: test_A3_moved_source_unsupported_outgoing_conflict (__main__.AuditProbes.test_A3_moved_source_unsupported_outgoing_conflict) (text='<a href="b.md">x</a>\n')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/docs/tasks/PB-022-evidence/audit-probes.py", line 83, in test_A3_moved_source_unsupported_outgoing_conflict
+    self.assertTrue(plan["conflicts"], repr(plan))
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: [] is not true : {'updates': {}, 'conflicts': [], 'frozen': []}
+
+======================================================================
+FAIL: test_A3_moved_source_unsupported_outgoing_conflict (__main__.AuditProbes.test_A3_moved_source_unsupported_outgoing_conflict) (text='[[b.md]]\n')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/docs/tasks/PB-022-evidence/audit-probes.py", line 83, in test_A3_moved_source_unsupported_outgoing_conflict
+    self.assertTrue(plan["conflicts"], repr(plan))
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: [] is not true : {'updates': {}, 'conflicts': [], 'frozen': []}
+
+======================================================================
+FAIL: test_A3_unquoted_html_affected_target_conflict (__main__.AuditProbes.test_A3_unquoted_html_affected_target_conflict)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/docs/tasks/PB-022-evidence/audit-probes.py", line 90, in test_A3_unquoted_html_affected_target_conflict
+    self.assertTrue(plan["conflicts"], repr(plan))
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: [] is not true : {'updates': {}, 'conflicts': [], 'frozen': []}
+
+======================================================================
+FAIL: test_A4_nested_inline_label_checked (__main__.AuditProbes.test_A4_nested_inline_label_checked)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/docs/tasks/PB-022-evidence/audit-probes.py", line 101, in test_A4_nested_inline_label_checked
+    self.assertTrue(errors, "Missing target is silently ignored")
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: [] is not true : Missing target is silently ignored
+
+======================================================================
+FAIL: test_A4_nested_inline_label_relocated (__main__.AuditProbes.test_A4_nested_inline_label_relocated)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/docs/tasks/PB-022-evidence/audit-probes.py", line 96, in test_A4_nested_inline_label_relocated
+    self.assertEqual(result["text"], "[a [b] c](../b.md)\n")
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: '[a [b] c](b.md)\n' != '[a [b] c](../b.md)\n'
+- [a [b] c](b.md)
++ [a [b] c](../b.md)
+?           +++
+
+
+----------------------------------------------------------------------
+Ran 10 tests in 1.134s
+
+FAILED (failures=13)

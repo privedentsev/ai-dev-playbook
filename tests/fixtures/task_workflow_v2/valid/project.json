@@ -1,0 +1,87 @@
+{
+  "schema_version": 1,
+  "playbook_version": "0.0.3",
+  "name": "fixture-project",
+  "setup_status": "configured",
+  "paths": {
+    "docs": "docs",
+    "tasks": "docs/tasks",
+    "archive": "docs/archive/tasks",
+    "task_index": "docs/tasks/index.md"
+  },
+  "documents": {
+    "schema_version": 1,
+    "collections": {
+      "spec": {
+        "active": "docs/specs",
+        "archive": "docs/archive/specs",
+        "index": "docs/specs/index.md"
+      }
+    }
+  },
+  "components": [
+    {"name": "core", "code": "ai-dev-playbook", "tests": ["tests"], "migrations": null}
+  ],
+  "commands": {
+    "test": "python3 -m unittest discover -s tests -v"
+  },
+  "git": {
+    "commit": "explicit_request",
+    "push": "explicit_request",
+    "merge": "explicit_request",
+    "release": "explicit_request"
+  },
+  "task_workflow": {
+    "schema_version": 2,
+    "registry": [
+      {
+        "id": "unit-tests",
+        "kind": "command",
+        "purpose": "Запуск unit-тестов проекта",
+        "argv": ["python3", "-m", "unittest", "discover", "-s", "tests", "-v"],
+        "timeout_seconds": 120,
+        "default_inputs": ["tests", "ai-dev-playbook"],
+        "applicability": {
+          "kind": "always"
+        }
+      },
+      {
+        "id": "lint",
+        "kind": "command",
+        "purpose": "Проверка форматирования",
+        "argv": ["git", "diff", "--check"],
+        "timeout_seconds": 30,
+        "default_inputs": ["ai-dev-playbook"],
+        "applicability": {
+          "kind": "when_paths",
+          "paths": ["ai-dev-playbook/**", "tests/**"]
+        }
+      },
+      {
+        "id": "visual-check",
+        "kind": "manual",
+        "purpose": "Ручная визуальная проверка",
+        "scenario": "Проверить корректность отображения кнопки в браузере",
+        "applicability": {
+          "kind": "when_paths",
+          "paths": ["docs/**"]
+        }
+      },
+      {
+        "id": "self-check",
+        "kind": "command",
+        "purpose": "Самопроверка структуры и ссылок",
+        "argv": ["python3", "ai-dev-playbook/scripts/playbook.py", "check", "--ready"],
+        "timeout_seconds": 60,
+        "applicability": {
+          "kind": "checkpoint",
+          "checkpoint": "release"
+        }
+      }
+    ],
+    "checkpoints": {
+      "merge": ["unit-tests", "lint"],
+      "release": ["unit-tests", "lint", "self-check"]
+    }
+  }
+}

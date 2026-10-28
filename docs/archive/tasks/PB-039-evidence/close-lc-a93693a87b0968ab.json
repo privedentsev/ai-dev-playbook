@@ -1,0 +1,181 @@
+{
+  "schema_version": 1,
+  "plan_id": "lc-a93693a87b0968ab",
+  "at": "2026-10-24T10:34:43+03:00",
+  "actor": {
+    "model": null,
+    "name": "cli:privedentsev1",
+    "role": "cli"
+  },
+  "basis": "playbook.py close PB-039",
+  "action": "close_task",
+  "files": [
+    {
+      "from": "docs/tasks/PB-039-evidence/close-regressions.log",
+      "to": "docs/archive/tasks/PB-039-evidence/close-regressions.log",
+      "sha256": "sha256:feffe76dc5c740a667aad029e80ef72ca195940bbbf2d3d693e763c7ff790a42",
+      "bytes": 5163
+    },
+    {
+      "from": "docs/tasks/PB-039-evidence/material-registration.log",
+      "to": "docs/archive/tasks/PB-039-evidence/material-registration.log",
+      "sha256": "sha256:f4c3f850ceae55fa322c756f508fa815bcaa5e9c2cc683e224a089e94770e30a",
+      "bytes": 1499
+    },
+    {
+      "from": "docs/tasks/PB-039.md",
+      "to": "docs/archive/tasks/PB-039.md",
+      "sha256": "sha256:bf2aa086815bce0c428990fc81c77d5c48f916216528563595b98236a83abc9e",
+      "bytes": 13333
+    },
+    {
+      "from": "work/verification/PB-039/6ce4b7f232374b668e40256b71e95558/report.json",
+      "to": "docs/archive/tasks/PB-039-evidence/work/verification/PB-039/6ce4b7f232374b668e40256b71e95558/report.json",
+      "sha256": "sha256:d1a60425ab0a02195138190ca37ade88e68b9a5b33b79afcc3f13aa92d1bc430",
+      "bytes": 171181
+    },
+    {
+      "from": "work/verification/PB-039/6ce4b7f232374b668e40256b71e95558/self-check.stderr.log",
+      "to": "docs/archive/tasks/PB-039-evidence/work/verification/PB-039/6ce4b7f232374b668e40256b71e95558/self-check.stderr.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "work/verification/PB-039/6ce4b7f232374b668e40256b71e95558/self-check.stdout.log",
+      "to": "docs/archive/tasks/PB-039-evidence/work/verification/PB-039/6ce4b7f232374b668e40256b71e95558/self-check.stdout.log",
+      "sha256": "sha256:688df8a122e7837bb8a5a917817a3216163328a798bc6b6569f6b4f0cde693e0",
+      "bytes": 197
+    },
+    {
+      "from": "work/verification/PB-039/6ce4b7f232374b668e40256b71e95558/unit-tests.stderr.log",
+      "to": "docs/archive/tasks/PB-039-evidence/work/verification/PB-039/6ce4b7f232374b668e40256b71e95558/unit-tests.stderr.log",
+      "sha256": "sha256:2188454923336d5724ff05d7bbaac8faf649663782c7c93b5f3e0ffd9eaa064c",
+      "bytes": 63269
+    },
+    {
+      "from": "work/verification/PB-039/6ce4b7f232374b668e40256b71e95558/unit-tests.stdout.log",
+      "to": "docs/archive/tasks/PB-039-evidence/work/verification/PB-039/6ce4b7f232374b668e40256b71e95558/unit-tests.stdout.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "work/verification/PB-039/audit-20261024/close-dry-run.log",
+      "to": "docs/archive/tasks/PB-039-evidence/work/verification/PB-039/audit-20261024/close-dry-run.log",
+      "sha256": "sha256:e4cfa3e3fe9d282fefe6908a473e7d39abf7bc38317a294ac2699145d3053cae",
+      "bytes": 19260
+    },
+    {
+      "from": "work/verification/PB-039/audit-20261024/probes-first.log",
+      "to": "docs/archive/tasks/PB-039-evidence/work/verification/PB-039/audit-20261024/probes-first.log",
+      "sha256": "sha256:eeee82a4e1de5db88df4a63ad3ff9c9e6984d4d9bbaa4ee29b95462fd1e8bfdb",
+      "bytes": 6289
+    },
+    {
+      "from": "work/verification/PB-039/audit-20261024/probes.log",
+      "to": "docs/archive/tasks/PB-039-evidence/work/verification/PB-039/audit-20261024/probes.log",
+      "sha256": "sha256:a1291f31fbc4969bcb3dc732853247f566748f8d5d70c04bf66cd3251edc2d80",
+      "bytes": 364
+    },
+    {
+      "from": "work/verification/PB-039/audit-20261024/probes.py",
+      "to": "docs/archive/tasks/PB-039-evidence/work/verification/PB-039/audit-20261024/probes.py",
+      "sha256": "sha256:06fdcbb72f14f4c690a8d113625366349ed83d6505d2b657415f800cdeebb945",
+      "bytes": 2247
+    },
+    {
+      "from": "work/verification/PB-039/audit-20261024/registration.log",
+      "to": "docs/archive/tasks/PB-039-evidence/work/verification/PB-039/audit-20261024/registration.log",
+      "sha256": "sha256:abafcbb6fae054863d97f4970eb6cc5a495d06a54bde4b71aca3b86c5f8bff84",
+      "bytes": 1499
+    }
+  ],
+  "moves": [
+    {
+      "from": "docs/tasks/PB-039-evidence",
+      "to": "docs/archive/tasks/PB-039-evidence"
+    },
+    {
+      "from": "work/verification/PB-039/6ce4b7f232374b668e40256b71e95558",
+      "to": "docs/archive/tasks/PB-039-evidence/work/verification/PB-039/6ce4b7f232374b668e40256b71e95558"
+    },
+    {
+      "from": "work/verification/PB-039/audit-20261024",
+      "to": "docs/archive/tasks/PB-039-evidence/work/verification/PB-039/audit-20261024"
+    },
+    {
+      "from": "docs/tasks/PB-039.md",
+      "to": "docs/archive/tasks/PB-039.md"
+    }
+  ],
+  "materials": [
+    {
+      "id": "pb039-evidence",
+      "role": "report",
+      "storage": "local",
+      "source_old": "docs/tasks/PB-039-evidence",
+      "source_new": "docs/archive/tasks/PB-039-evidence",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-039"
+      ]
+    },
+    {
+      "id": "verify-6ce4b7f232374b668e40256b71e95558",
+      "role": "report",
+      "storage": "local",
+      "source_old": "work/verification/PB-039/6ce4b7f232374b668e40256b71e95558",
+      "source_new": "docs/archive/tasks/PB-039-evidence/work/verification/PB-039/6ce4b7f232374b668e40256b71e95558",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-039"
+      ]
+    },
+    {
+      "id": "pb039-independent-audit",
+      "role": "report",
+      "storage": "local",
+      "source_old": "work/verification/PB-039/audit-20261024",
+      "source_new": "docs/archive/tasks/PB-039-evidence/work/verification/PB-039/audit-20261024",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-039"
+      ]
+    }
+  ],
+  "external": [],
+  "type": "lifecycle-close",
+  "task": "PB-039",
+  "outcome": "done",
+  "previous_status": "in_review",
+  "reason": null,
+  "acceptance_ref": null,
+  "policy": "managed",
+  "handoff": {
+    "at": "2026-10-24T10:26:13+03:00",
+    "actor": {
+      "name": "Codex",
+      "model": "GPT-6.1 Sol"
+    },
+    "summary": "Ранняя проверка материалов handoff и явная регистрация через CLI; 488 тестов и self-check пройдены. Нужен отдельный независимый аудит.",
+    "reports": [
+      "verify-6ce4b7f232374b668e40256b71e95558"
+    ],
+    "card_projection": "sha256:f988cbfc6dadbf61f6b47ca8bccdd7d7c8783162d9ede0b66f6b9099d00107c6"
+  },
+  "acceptance": {
+    "at": "2026-10-24T10:33:08+03:00",
+    "actor": {
+      "name": "Codex",
+      "model": "GPT-6"
+    },
+    "role": "auditor",
+    "kind": "acceptance",
+    "result": "accepted",
+    "handoff_at": "2026-10-24T10:26:13+03:00",
+    "session": null,
+    "detail": "Независимый аудит: 9 тестов регистрации, 38 регрессий, 3 дополнительных сценария; свежесть handoff подтверждена; замечаний нет."
+  }
+}

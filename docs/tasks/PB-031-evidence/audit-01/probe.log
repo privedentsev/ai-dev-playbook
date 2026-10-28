@@ -1,0 +1,9 @@
+missing_plan []
+missing_inputs []
+file_without_path []
+invalid_environment_names []
+report_without_provenance True
+registry_unknown_input_field True
+symlink_scope catalog_accepted=True
+unknown_registry_without_opt_in catalog_accepted=True
+executor_report inputs_unchanged= True fresh= False diff= ["docs/tasks/PB-031-evidence/audit-01/probe.log", "docs/tasks/PB-031-evidence/audit-01/probe.py", "docs/tasks/PB-031-evidence/test_task_workflow_schema.log", "docs/tasks/PB-031-evidence/verify-run/report.json", "docs/tasks/PB-031-evidence/verify-run/self-check.stderr.log", "docs/tasks/PB-031-evidence/verify-run/self-check.stdout.log", "docs/tasks/PB-031-evidence/verify-run/unit-tests.stderr.log", "docs/tasks/PB-031-evidence/verify-run/unit-tests.stdout.log", "docs/tasks/index.md"]

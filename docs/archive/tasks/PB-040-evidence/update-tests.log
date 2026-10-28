@@ -1,0 +1,29 @@
+test_init_absent_destination_creates_target_directory (test_pb028.Pb028CompatibilityAndUpdateTest.test_init_absent_destination_creates_target_directory)
+PB-028-A3: init успешно устанавливает комплект в отсутствующий целевой каталог. ... ok
+test_init_absent_destination_rollback_on_failure_cleans_up_created_dirs (test_pb028.Pb028CompatibilityAndUpdateTest.test_init_absent_destination_rollback_on_failure_cleans_up_created_dirs)
+PB-028-A3: при ошибке записи в отсутствующий целевой каталог все созданные каталоги очищаются. ... ok
+test_init_archive_dir_conflict_leaves_clean_tree (test_pb028.Pb028CompatibilityAndUpdateTest.test_init_archive_dir_conflict_leaves_clean_tree)
+PB-028-A1: конфликт архивного пути (файл или symlink) отклоняется до записи без мусора на диске. ... ok
+test_init_foreign_file_conflict_stops_writes (test_pb028.Pb028CompatibilityAndUpdateTest.test_init_foreign_file_conflict_stops_writes)
+Конфликт чужого файла останавливает init до начала записи. ... ok
+test_init_fresh_creates_collections_and_indexes (test_pb028.Pb028CompatibilityAndUpdateTest.test_init_fresh_creates_collections_and_indexes)
+Init создаёт рабочие коллекции, 5 индексов и архивы коллекций. ... ok
+test_init_nested_absent_destination_creates_parents (test_pb028.Pb028CompatibilityAndUpdateTest.test_init_nested_absent_destination_creates_parents)
+PB-028-A3: init создаёт вложенные отсутствующие родительские каталоги целевого пути. ... ok
+test_real_002_artifact_update_with_custom_paths_and_evidence (test_pb028.Pb028CompatibilityAndUpdateTest.test_real_002_artifact_update_with_custom_paths_and_evidence)
+PB-028-A2: реальное обновление артефакта 0.0.2 до 0.0.3 с добавлением модулей и сохранением custom paths. ... ok
+test_real_sigkill_interrupted_lifecycle_locks_update_and_restores (test_pb028.Pb028CompatibilityAndUpdateTest.test_real_sigkill_interrupted_lifecycle_locks_update_and_restores)
+PB-028-A2: реальное SIGKILL-прерывание lifecycle блокирует update plan/apply/restore и восстанавливается автономно. ... ok
+test_real_sigkill_interrupted_update_locks_lifecycle_and_cli_restores (test_pb028.Pb028CompatibilityAndUpdateTest.test_real_sigkill_interrupted_update_locks_lifecycle_and_cli_restores)
+PB-028-A2: реальное прерывание update (SIGKILL mid-write) блокирует lifecycle и восстанавливается через CLI update restore. ... ok
+test_real_sigkill_interrupted_update_standalone_script_restores (test_pb028.Pb028CompatibilityAndUpdateTest.test_real_sigkill_interrupted_update_standalone_script_restores)
+PB-028-A2: автономный restore.py восстанавливает реальное SIGKILL-прерывание update. ... ok
+test_schema_backward_compatibility (test_pb028.Pb028CompatibilityAndUpdateTest.test_schema_backward_compatibility)
+0.0.2 без documents работает; documents опционален с собственной схемой. ... ok
+test_unannounced_update_transition_rejected (test_pb028.Pb028CompatibilityAndUpdateTest.test_unannounced_update_transition_rejected)
+Необъявленный переход отклоняется до записи. ... ok
+
+----------------------------------------------------------------------
+Ran 12 tests in 5.805s
+
+OK

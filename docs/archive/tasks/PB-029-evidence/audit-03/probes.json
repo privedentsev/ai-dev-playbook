@@ -1,0 +1,29 @@
+{
+  "accept": {
+    "argv": [
+      "lifecycle",
+      "accept",
+      "PB-029",
+      "--result",
+      "accepted",
+      "--kind",
+      "acceptance",
+      "--actor",
+      "Codex",
+      "--model",
+      "GPT-6"
+    ],
+    "rc": 0,
+    "stdout": "PB-029: записана приёмка result=accepted kind=acceptance.\n",
+    "stderr": ""
+  },
+  "close": {
+    "argv": [
+      "close",
+      "PB-029"
+    ],
+    "rc": 0,
+    "stdout": "PB-029: done. Карточка в архиве, индексы и ссылки обновлены. План: work/lifecycle/plans/lc-287af4f7ada3f5c7.json. Операция: work/lifecycle/20261022-094727-8d3711ba\n",
+    "stderr": ""
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "actor": {
+    "name": "Codex",
+    "model": "GPT-6 Astra",
+    "role": "auditor"
+  },
+  "basis": "AUDIT-006: combined block closure refused and promotion without acceptance; controlled return required by task rules",
+  "scope": {
+    "tasks": [
+      "PB-026",
+      "PB-027",
+      "PB-028",
+      "PB-029"
+    ]
+  },
+  "actions": [
+    {
+      "action": "reopen",
+      "task": "PB-026",
+      "status": "in_progress",
+      "reason": "AUDIT-006-A1/A2: fix lifecycle acceptance and combined closure"
+    },
+    {
+      "action": "reopen",
+      "task": "PB-027",
+      "status": "blocked",
+      "reason": "Dependency PB-026 reopened by AUDIT-006; revalidate after correction"
+    },
+    {
+      "action": "reopen",
+      "task": "PB-028",
+      "status": "blocked",
+      "reason": "Dependency PB-026 reopened by AUDIT-006; revalidate after correction"
+    },
+    {
+      "action": "reopen",
+      "task": "PB-029",
+      "status": "blocked",
+      "reason": "Dependency PB-026 reopened by AUDIT-006; revalidate after correction"
+    }
+  ]
+}

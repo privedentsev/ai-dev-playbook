@@ -1,0 +1,44 @@
+test_PB_031_A1_symlink_in_scope_and_inputs_rejected (test_task_workflow_schema.AuditFindingsCoverageTest.test_PB_031_A1_symlink_in_scope_and_inputs_rejected) ... ok
+test_PB_031_A2_null_plan_and_null_inputs_rejected (test_task_workflow_schema.AuditFindingsCoverageTest.test_PB_031_A2_null_plan_and_null_inputs_rejected) ... ok
+test_PB_031_A3_report_snapshots_and_actor_strictly_validated (test_task_workflow_schema.AuditFindingsCoverageTest.test_PB_031_A3_report_snapshots_and_actor_strictly_validated) ... ok
+test_PB_031_A4_v2_card_rejected_without_task_workflow_opt_in (test_task_workflow_schema.AuditFindingsCoverageTest.test_PB_031_A4_v2_card_rejected_without_task_workflow_opt_in) ... ok
+test_all_invalid_fixtures_fail (test_task_workflow_schema.FixturesLoadTest.test_all_invalid_fixtures_fail) ... ok
+test_all_valid_fixtures (test_task_workflow_schema.FixturesLoadTest.test_all_valid_fixtures) ... ok
+test_legacy_v1_report (test_task_workflow_schema.LegacyPreservationTest.test_legacy_v1_report) ... ok
+test_legacy_v1_task_meta (test_task_workflow_schema.LegacyPreservationTest.test_legacy_v1_task_meta) ... ok
+test_task_card_without_workflow_has_none_route (test_task_workflow_schema.LegacyPreservationTest.test_task_card_without_workflow_has_none_route) ... ok
+test_legacy_v1_task_meta_rejects_v2_schema_when_schema_version_is_1 (test_task_workflow_schema.OldValidatorRejectionTest.test_legacy_v1_task_meta_rejects_v2_schema_when_schema_version_is_1) ... ok
+test_legacy_verification_validate_rejects_task_workflow (test_task_workflow_schema.OldValidatorRejectionTest.test_legacy_verification_validate_rejects_task_workflow) ... ok
+test_read_tasks_extracts_route (test_task_workflow_schema.PlaybookReadTasksRouteIntegrationTest.test_read_tasks_extracts_route) ... ok
+test_read_tasks_rejects_unknown_route (test_task_workflow_schema.PlaybookReadTasksRouteIntegrationTest.test_read_tasks_rejects_unknown_route) ... ok
+test_missing_reason_for_not_applicable_rejected (test_task_workflow_schema.ReportV2Test.test_missing_reason_for_not_applicable_rejected) ... ok
+test_missing_required_coverage_field_rejected (test_task_workflow_schema.ReportV2Test.test_missing_required_coverage_field_rejected) ... ok
+test_not_applicable_with_reason_accepted (test_task_workflow_schema.ReportV2Test.test_not_applicable_with_reason_accepted) ... ok
+test_unknown_fields_in_report_rejected (test_task_workflow_schema.ReportV2Test.test_unknown_fields_in_report_rejected) ... ok
+test_unknown_report_version_rejected (test_task_workflow_schema.ReportV2Test.test_unknown_report_version_rejected) ... ok
+test_unknown_route_in_report_rejected (test_task_workflow_schema.ReportV2Test.test_unknown_route_in_report_rejected) ... ok
+test_valid_report_v2 (test_task_workflow_schema.ReportV2Test.test_valid_report_v2) ... ok
+test_allowed_routes (test_task_workflow_schema.TaskMetadataV2Test.test_allowed_routes) ... ok
+test_arbitrary_argv_in_card_rejected (test_task_workflow_schema.TaskMetadataV2Test.test_arbitrary_argv_in_card_rejected) ... ok
+test_duplicate_check_id_rejected (test_task_workflow_schema.TaskMetadataV2Test.test_duplicate_check_id_rejected) ... ok
+test_escape_path_in_inputs_rejected (test_task_workflow_schema.TaskMetadataV2Test.test_escape_path_in_inputs_rejected) ... ok
+test_escape_path_in_scope_rejected (test_task_workflow_schema.TaskMetadataV2Test.test_escape_path_in_scope_rejected) ... ok
+test_unknown_field_in_workflow_rejected (test_task_workflow_schema.TaskMetadataV2Test.test_unknown_field_in_workflow_rejected) ... ok
+test_unknown_registry_id_rejected (test_task_workflow_schema.TaskMetadataV2Test.test_unknown_registry_id_rejected) ... ok
+test_unknown_route_rejected (test_task_workflow_schema.TaskMetadataV2Test.test_unknown_route_rejected) ... ok
+test_unknown_schema_version_rejected (test_task_workflow_schema.TaskMetadataV2Test.test_unknown_schema_version_rejected) ... ok
+test_valid_v2_metadata (test_task_workflow_schema.TaskMetadataV2Test.test_valid_v2_metadata) ... ok
+test_work_path_in_scope_rejected (test_task_workflow_schema.TaskMetadataV2Test.test_work_path_in_scope_rejected) ... ok
+test_checkpoint_with_unknown_check_rejected (test_task_workflow_schema.TaskWorkflowV2ConfigTest.test_checkpoint_with_unknown_check_rejected) ... ok
+test_command_check_with_scenario_rejected (test_task_workflow_schema.TaskWorkflowV2ConfigTest.test_command_check_with_scenario_rejected) ... ok
+test_duplicate_registry_id_rejected (test_task_workflow_schema.TaskWorkflowV2ConfigTest.test_duplicate_registry_id_rejected) ... ok
+test_manual_check_with_argv_rejected (test_task_workflow_schema.TaskWorkflowV2ConfigTest.test_manual_check_with_argv_rejected) ... ok
+test_schema_version_not_2_rejected (test_task_workflow_schema.TaskWorkflowV2ConfigTest.test_schema_version_not_2_rejected) ... ok
+test_unknown_field_in_task_workflow_rejected (test_task_workflow_schema.TaskWorkflowV2ConfigTest.test_unknown_field_in_task_workflow_rejected) ... ok
+test_valid_task_workflow (test_task_workflow_schema.TaskWorkflowV2ConfigTest.test_valid_task_workflow) ... ok
+test_work_path_in_default_inputs_rejected (test_task_workflow_schema.TaskWorkflowV2ConfigTest.test_work_path_in_default_inputs_rejected) ... ok
+
+----------------------------------------------------------------------
+Ran 39 tests in 0.090s
+
+OK

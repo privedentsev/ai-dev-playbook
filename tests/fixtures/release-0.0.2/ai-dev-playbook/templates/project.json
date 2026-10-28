@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "playbook_version": "TODO",
+  "name": "TODO: название проекта",
+  "setup_status": "needs_review",
+  "paths": {
+    "docs": "docs",
+    "tasks": "docs/tasks",
+    "archive": "docs/archive/tasks",
+    "task_index": "docs/tasks/index.md"
+  },
+  "components": [],
+  "commands": {
+    "test": "python3 -c 0",
+    "check": "python3 ai-dev-playbook/scripts/playbook.py check --ready"
+  },
+  "git": {
+    "commit": "explicit_request",
+    "push": "explicit_request",
+    "merge": "explicit_request",
+    "release": "explicit_request"
+  }
+}

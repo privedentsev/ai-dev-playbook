@@ -1,0 +1,93 @@
+test_archive_and_installed_cli (test_handoff_context.HandoffContextTest.test_archive_and_installed_cli) ... ok
+test_failed_verify_does_not_confirm_prepared_review (test_handoff_context.HandoffContextTest.test_failed_verify_does_not_confirm_prepared_review) ... ok
+test_linked_records_findings_and_unhanded_work_are_read_only (test_handoff_context.HandoffContextTest.test_linked_records_findings_and_unhanded_work_are_read_only) ... ok
+test_no_handoff_and_unsupported_fallback (test_handoff_context.HandoffContextTest.test_no_handoff_and_unsupported_fallback) ... ok
+test_prepared_status_one_verify_and_stale_inputs (test_handoff_context.HandoffContextTest.test_prepared_status_one_verify_and_stale_inputs) ... ok
+test_view_flags_are_exclusive_and_old_json_is_unchanged (test_handoff_context.HandoffContextTest.test_view_flags_are_exclusive_and_old_json_is_unchanged) ... ok
+test_context_selection_is_read_only_and_exposes_unhanded_work (test_compact_context.CompactContextTest.test_context_selection_is_read_only_and_exposes_unhanded_work) ... ok
+test_create_preview_pair_and_no_overwrite (test_compact_context.CompactContextTest.test_create_preview_pair_and_no_overwrite) ... ok
+test_create_title_marker_and_duplicate_real_markers (test_compact_context.CompactContextTest.test_create_title_marker_and_duplicate_real_markers) ... ok
+test_explicit_card_snapshot_includes_sidecar_and_old_report_goes_stale (test_compact_context.CompactContextTest.test_explicit_card_snapshot_includes_sidecar_and_old_report_goes_stale) ... ok
+test_full_two_close_cycles_and_immutable_proof (test_compact_context.CompactContextTest.test_full_two_close_cycles_and_immutable_proof) ... ok
+test_installed_cli_creates_pair_and_sigkill_restores_partial_creation (test_compact_context.CompactContextTest.test_installed_cli_creates_pair_and_sigkill_restores_partial_creation) ... ok
+test_lost_corrupt_conflicting_symlink_and_orphan_metadata (test_compact_context.CompactContextTest.test_lost_corrupt_conflicting_symlink_and_orphan_metadata) ... ok
+test_many_iterations_have_small_context_and_full_json_remains_available (test_compact_context.CompactContextTest.test_many_iterations_have_small_context_and_full_json_remains_available) ... ok
+test_marker_examples_roundtrip_views_and_sync_preserve_card (test_compact_context.CompactContextTest.test_marker_examples_roundtrip_views_and_sync_preserve_card) ... ok
+test_metadata_write_failure_restores_pair (test_compact_context.CompactContextTest.test_metadata_write_failure_restores_pair) ... ok
+test_sidecar_is_not_a_material_and_saved_plan_detects_sidecar_change (test_compact_context.CompactContextTest.test_sidecar_is_not_a_material_and_saved_plan_detects_sidecar_change) ... ok
+test_cli_show_legacy_and_future (test_task_cards.CardLifecycleTest.test_cli_show_legacy_and_future) ... ok
+test_handoff_accept_close_and_tamper (test_task_cards.CardLifecycleTest.test_handoff_accept_close_and_tamper) ... ok
+test_return_fix_new_handoff_requires_new_audit (test_task_cards.CardLifecycleTest.test_return_fix_new_handoff_requires_new_audit) ... ok
+test_default_template_is_supported (test_task_cards.ParserTest.test_default_template_is_supported) ... ok
+test_fenced_examples_and_duplicate_fields (test_task_cards.ParserTest.test_fenced_examples_and_duplicate_fields) ... ok
+test_markdown_colons_urls_and_paragraphs_are_not_fields (test_task_cards.ParserTest.test_markdown_colons_urls_and_paragraphs_are_not_fields) ... ok
+test_negative_grammar_and_links (test_task_cards.ParserTest.test_negative_grammar_and_links) ... ok
+test_projection_and_journal_binding (test_task_cards.ParserTest.test_projection_and_journal_binding) ... ok
+test_two_fixes_three_audits (test_task_cards.ParserTest.test_two_fixes_three_audits) ... ok
+test_unknown_header_field_and_extra_task_heading_rejected (test_task_cards.ParserTest.test_unknown_header_field_and_extra_task_heading_rejected) ... ok
+test_unsupported_versions_and_bad_markers (test_task_cards.ParserTest.test_unsupported_versions_and_bad_markers) ... ok
+test_altered_earlier_exec_with_subsequent_exec_invalidates_binding_and_blocks_close (test_criterion_checkboxes.CriterionCliTest.test_altered_earlier_exec_with_subsequent_exec_invalidates_binding_and_blocks_close) ... ok
+test_altered_exec_invalidates_existing_binding_and_blocks_close_until_new_verify (test_criterion_checkboxes.CriterionCliTest.test_altered_exec_invalidates_existing_binding_and_blocks_close_until_new_verify) ... ok
+test_close_card_with_relative_link_preserves_historical_checkboxes_and_supports_reopen (test_criterion_checkboxes.CriterionCliTest.test_close_card_with_relative_link_preserves_historical_checkboxes_and_supports_reopen) ... ok
+test_close_card_with_relative_links_in_journal_entries_preserves_historical_bindings_and_supports_second_close (test_criterion_checkboxes.CriterionCliTest.test_close_card_with_relative_links_in_journal_entries_preserves_historical_bindings_and_supports_second_close) ... ok
+test_finding_affects_only_linked_criteria_and_fix_needs_check_and_audit (test_criterion_checkboxes.CriterionCliTest.test_finding_affects_only_linked_criteria_and_fix_needs_check_and_audit) ... ok
+test_latest_failed_or_not_run_overrides_passed (test_criterion_checkboxes.CriterionCliTest.test_latest_failed_or_not_run_overrides_passed) ... ok
+test_legacy_v2_findings_preserved_on_explicit_sync (test_criterion_checkboxes.CriterionCliTest.test_legacy_v2_findings_preserved_on_explicit_sync) ... ok
+test_manual_marker_tamper_does_not_open_acceptance (test_criterion_checkboxes.CriterionCliTest.test_manual_marker_tamper_does_not_open_acceptance) ... ok
+test_preview_read_only_partial_coverage_and_repeat (test_criterion_checkboxes.CriterionCliTest.test_preview_read_only_partial_coverage_and_repeat) ... ok
+test_requirement_or_work_change_without_verify_rejects_check_and_close (test_criterion_checkboxes.CriterionCliTest.test_requirement_or_work_change_without_verify_rejects_check_and_close) ... ok
+test_snapshot_and_handoff_ignore_only_checkbox_rendering (test_criterion_checkboxes.CriterionCliTest.test_snapshot_and_handoff_ignore_only_checkbox_rendering) ... ok
+test_stale_inputs_do_not_rebind_existing_check (test_criterion_checkboxes.CriterionCliTest.test_stale_inputs_do_not_rebind_existing_check) ... FAIL
+test_sync_gate_and_final_failure_rollback (test_criterion_checkboxes.CriterionCliTest.test_sync_gate_and_final_failure_rollback) ... FAIL
+test_new_finding_requires_valid_criterion_links (test_criterion_checkboxes.CriterionParserTest.test_new_finding_requires_valid_criterion_links) ... ok
+test_only_real_markers_are_normalized (test_criterion_checkboxes.CriterionParserTest.test_only_real_markers_are_normalized) ... ok
+
+======================================================================
+FAIL: test_stale_inputs_do_not_rebind_existing_check (test_criterion_checkboxes.CriterionCliTest.test_stale_inputs_do_not_rebind_existing_check)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_close_lifecycle.py", line 69, in setUp
+    super().setUp()
+    ~~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_lifecycle.py", line 48, in setUp
+    super().setUp()
+    ~~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_document_cli.py", line 16, in setUp
+    super().setUp()
+    ~~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_documents.py", line 120, in setUp
+    self.install()
+    ~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_cli.py", line 44, in install
+    self.assertEqual(code, 0, err)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+AssertionError: 1 != 0 : ERROR: Незавершённая операция документов (20261026-075604-c11dffa2): обычные команды заблокированы. Восстановление: python3 work/lifecycle/20261026-075604-c11dffa2/restore.py
+
+
+======================================================================
+FAIL: test_sync_gate_and_final_failure_rollback (test_criterion_checkboxes.CriterionCliTest.test_sync_gate_and_final_failure_rollback)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_close_lifecycle.py", line 69, in setUp
+    super().setUp()
+    ~~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_lifecycle.py", line 48, in setUp
+    super().setUp()
+    ~~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_document_cli.py", line 16, in setUp
+    super().setUp()
+    ~~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_documents.py", line 120, in setUp
+    self.install()
+    ~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_cli.py", line 44, in install
+    self.assertEqual(code, 0, err)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+AssertionError: 1 != 0 : ERROR: Незавершённая операция документов (20261026-075604-c11dffa2): обычные команды заблокированы. Восстановление: python3 work/lifecycle/20261026-075604-c11dffa2/restore.py
+
+
+----------------------------------------------------------------------
+Ran 43 tests in 34.872s
+
+FAILED (failures=2)
+Context sample: full_chars=39508 compact_chars=842

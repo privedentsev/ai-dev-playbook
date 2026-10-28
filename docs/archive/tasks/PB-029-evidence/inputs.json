@@ -1,0 +1,23 @@
+{
+  "task": "PB-029",
+  "timestamp": "2026-10-22T11:45:00+03:00",
+  "platform": {
+    "system": "Darwin",
+    "release": "27.0.0",
+    "version": "Darwin Kernel Version 27.0.0: Tue Aug 11 21:22:49 PDT 2026; root:xnu-13432.1.9~1/RELEASE_ARM64_T6000",
+    "machine": "x86_64",
+    "python_version": "3.14.6"
+  },
+  "files": {
+    "ai-dev-playbook/project.json": "e4b70432e5d923fbeadc1f81d725af58c4d2bffcf57435d068f25a1e5162d113",
+    "ai-dev-playbook/scripts/documents.py": "68b1ef633f83ab3b63c6e41d4c29e494a618d4324e939f9c7be174ad6df6f32b",
+    "ai-dev-playbook/scripts/file_operations.py": "9faa9cde835821c7c71c4166d17acb738e6be239786ff4ddfe845c955c22f0d6",
+    "tests/test_pb029.py": "261931c9d5b32abd490bfdf4a0766f0cdde18a8e63d8d4d1a355ffb4e6a06ac5",
+    "docs/tasks/PB-029-evidence/e2e_pilot.py": "cc1dadbf61e249ac018e46487aa5b72dd6ed76dec5bc783a8589677f73151410",
+    "docs/tasks/PB-029-evidence/mapping-ac.md": "abaab3eadb1dae0a400249aae45ae0ad368b0b8ea127eabc9e89d74821a0ccb9",
+    "docs/tasks/PB-029-evidence/process-log.md": "1ccf2fe1e8f8fea4b562b177a08bee24df5c4d1a4e8721d6b32b668961c4a234",
+    "docs/tasks/PB-029-evidence/handoff-ticket.json": "01da28d8a84a904ffa7e614aa0ea1a91437ee35319fd195e1a3255137794d8a3",
+    "docs/tasks/PB-029-evidence/pilot-workspace-handoff.tar.gz": "4ed143b26d15a5a261dfc5961f1eb082cb89a96a99824b6834fa018f60aa842c",
+    "docs/tasks/PB-029-evidence/pilot-workspace.tar.gz": "421b5a068b6d13e25b0ee9fbeae88d8680bfbfba6753861fd020c998801ecded"
+  }
+}

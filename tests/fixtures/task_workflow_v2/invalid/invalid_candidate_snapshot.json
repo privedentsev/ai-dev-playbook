@@ -1,0 +1,44 @@
+{
+  "schema_version": 2,
+  "run_id": "run-test-01",
+  "task_id": "PB-031",
+  "route": "quick",
+  "plan_revision": 1,
+  "plan_hash": "hash-plan",
+  "policy_hash": "hash-policy",
+  "at": "2026-10-23T08:30:00+03:00",
+  "status": "passed",
+  "results": [
+    {
+      "check_id": "visual-check",
+      "definition_hash": "def-hash-visual-check",
+      "kind": "manual",
+      "scenario_hash": "scenario-hash-visual-check",
+      "status": "passed",
+      "actor": "Инженер",
+      "environment": {
+        "browser": "Chrome 120"
+      },
+      "input_snapshot": {
+        "files": {
+          "docs/tasks/PB-031.md": "hash3"
+        }
+      },
+      "started_at": "2026-10-23T08:29:56+03:00",
+      "finished_at": "2026-10-23T08:29:59+03:00",
+      "duration_seconds": 3.0,
+      "observation": "Кнопка проверена",
+      "candidate_snapshot": {
+        "files": 123
+      }
+    }
+  ],
+  "coverage": {
+    "total_checks": 1,
+    "passed": ["visual-check"],
+    "failed": [],
+    "not_applicable": [],
+    "not_run": [],
+    "satisfied": true
+  }
+}

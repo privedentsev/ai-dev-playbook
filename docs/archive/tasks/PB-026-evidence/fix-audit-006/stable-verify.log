@@ -1,0 +1,3 @@
+RUN: unit-tests
+RUN: self-check
+passed: /Users/privedentsev1/Dev/ai-dev-playbook/work/verification/PB-026/ab18434230c34631ac12e3c40cccbc2a/report.json

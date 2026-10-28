@@ -1,0 +1,10 @@
+test_A1_angle_suffix_matrix_positive (__main__.Reaudit02.test_A1_angle_suffix_matrix_positive) ... ok
+test_A2_even_backslashes_before_code_span (__main__.Reaudit02.test_A2_even_backslashes_before_code_span) ... ok
+test_A4_nested_inline_and_reference_images_positive (__main__.Reaudit02.test_A4_nested_inline_and_reference_images_positive) ... ok
+test_A5_extensionless_fragment_detects_moved_target (__main__.Reaudit02.test_A5_extensionless_fragment_detects_moved_target) ... ok
+test_A5_extensionless_joint_move_has_no_false_conflict (__main__.Reaudit02.test_A5_extensionless_joint_move_has_no_false_conflict) ... ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.008s
+
+OK

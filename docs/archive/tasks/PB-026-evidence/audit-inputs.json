@@ -1,0 +1,17 @@
+{
+  "ai-dev-playbook/manifest.json": "377f508012afb13ad7b5af9f9de82037c9be160a31c0218656f918df4aac976b",
+  "ai-dev-playbook/rules/tasks.md": "76c43145896cb146c4ccf1949d61bb8db21148186f46e06f92d53f3da29454db",
+  "ai-dev-playbook/rules/verification.md": "78dcc37a233a785977f2b90912ffbd001c87d889d54f92232fcb5285c330ce67",
+  "ai-dev-playbook/scripts/documents.py": "c0ff4e37b7c835d42752420cc7d43f4e53bf3c27394a9d8810aa4742052857fe",
+  "ai-dev-playbook/scripts/file_operations.py": "e459e8221f05e93c9b9511b23576dca1c7083f89f9f0dec03090097e2ca7436f",
+  "ai-dev-playbook/scripts/lifecycle.py": "6653cc0cc409b05f89881dced8244f99705ba9f42a0b62adb1137bf4627a8baf",
+  "ai-dev-playbook/scripts/playbook.py": "f0374f2b55d621fb69ab3c18cd074edec09422e77f5e53f218a89f7146e17b19",
+  "ai-dev-playbook/scripts/verification.py": "4e40c247880d7adadc98bb5236486f481b65cd2572bea6197be2e35e88cc1d51",
+  "docs/tasks/PB-026-evidence/audit-probe.log": "0f47fc089712a9b8b7fc15922842c43d1cd581e57077928a507c65912747a8a5",
+  "docs/tasks/PB-026-evidence/audit-probe.py": "af0cca9b15f23753ef4312499ac558317ac00592dff321cb770f275ee485ed98",
+  "docs/tasks/PB-026-evidence/inputs.json": "baf651f81e5a5f5d3b0d178d7f19def84725a21aa60b860a3764878cc0607d7e",
+  "docs/tasks/PB-026-evidence/unit-tests.log": "f0ecf62d0beaec113e79815cb627792af19b2b441e78ec909122b5cbe9eb19ac",
+  "docs/tasks/PB-026.md": "5694a5e2c8f7008f96817ebc1f00bf6ef22d116064e20d33a61edc493e3908dc",
+  "tests/test_close_lifecycle.py": "46b04fdcf292f5e456510c440fc7c5ece865999063b432edb25a322ac5ed40f6",
+  "tests/test_lifecycle.py": "79e973d7dede2fcbb1f47415f1835a50d9017ec76dc60e8515ae6c0eac5e0740"
+}

@@ -1,0 +1,2 @@
+{"case": "file", "returncode": 1, "stderr": "ERROR: Конфликт: docs/archive/specs. Запись не начата; требуется ручное объединение.", "added_count": 0, "added_sample": [], "kit_remains": false, "outside_unchanged": true}
+{"case": "symlink", "returncode": 1, "stderr": "ERROR: Символическая ссылка в управляемом пути: docs/archive/specs", "added_count": 0, "added_sample": [], "kit_remains": false, "outside_unchanged": true}

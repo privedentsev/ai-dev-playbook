@@ -1,0 +1,27 @@
+{
+  "schema_version": 2,
+  "run_id": "run-001",
+  "task_id": "PB-031",
+  "route": "quick",
+  "plan_revision": 1,
+  "plan_hash": "hash1",
+  "policy_hash": "hash2",
+  "at": "2026-10-23T08:00:00+03:00",
+  "status": "passed",
+  "results": [
+    {
+      "check_id": "db-tests",
+      "definition_hash": "def-1",
+      "kind": "command",
+      "status": "not_applicable"
+    }
+  ],
+  "coverage": {
+    "total_checks": 1,
+    "passed": [],
+    "failed": [],
+    "not_applicable": ["db-tests"],
+    "not_run": [],
+    "satisfied": true
+  }
+}

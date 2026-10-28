@@ -1,0 +1,22 @@
+{
+  "branch": "dev",
+  "head": "0744f93",
+  "scope": "Snapshot before the repeated probes/unit suite; concurrent source changes detected, not a stable final revision",
+  "sha256": {
+    "ai-dev-playbook/scripts/documents.py": "270c3836a2e69e98a93616aee36f62a24f8122245b392abef07728a803fae38a",
+    "ai-dev-playbook/scripts/playbook.py": "c8d0de84bd80fe4bf57592fc4fc2c21054b47a109a9d2f832abd0d2e9cd3c4bd",
+    "tests/test_documents.py": "2f51f42c204bf1271aa8ad6363643c9d0fb4340aa4722fe0ad7412a42c8bd5ad",
+    "tests/test_cli.py": "b725d3a34eeea35289192249b490d0828125cf84a0c26417bd348f8bdab0ecdc",
+    "tests/test_playbook.py": "c3ab2fbe200ceb85d4d1eecfaf8c71df2fcaa04186b20ac887b5931cf3e7f605"
+  },
+  "after_sha256": {
+    "ai-dev-playbook/scripts/documents.py": "270c3836a2e69e98a93616aee36f62a24f8122245b392abef07728a803fae38a",
+    "ai-dev-playbook/scripts/playbook.py": "948429082fed95759f7b146fa3699de34b4978fa85effeff5eb575375d661144",
+    "tests/test_documents.py": "2f51f42c204bf1271aa8ad6363643c9d0fb4340aa4722fe0ad7412a42c8bd5ad",
+    "tests/test_cli.py": "b725d3a34eeea35289192249b490d0828125cf84a0c26417bd348f8bdab0ecdc",
+    "tests/test_playbook.py": "c3ab2fbe200ceb85d4d1eecfaf8c71df2fcaa04186b20ac887b5931cf3e7f605"
+  },
+  "changed_during_recheck": [
+    "ai-dev-playbook/scripts/playbook.py"
+  ]
+}

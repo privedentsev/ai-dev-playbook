@@ -1,0 +1,10 @@
+{
+  "historical_verify": "docs/archive/tasks/PB-029-evidence/work/verification/PB-029/c2a4f709830e44bb84234400ffe033bd/report.json",
+  "core_files": 75,
+  "core_changed": [],
+  "closed_files_checked": 100,
+  "closed_hash_differences": [
+    "docs/archive/tasks/PB-029.md"
+  ],
+  "note": "99 moved evidence files match receipt. Task card differs because closure result was appended after close; not immutable evidence."
+}

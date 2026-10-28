@@ -1,0 +1,114 @@
+[
+  {
+    "scenario": "combined_close_and_plan_archive",
+    "request": {
+      "schema_version": 1,
+      "actor": {
+        "name": "Devin",
+        "role": "executor",
+        "model": "SWE-2 High"
+      },
+      "basis": "Инженер подтвердил операцию",
+      "scope": {
+        "tasks": [
+          "DEV-1"
+        ],
+        "documents": [
+          "plan:block"
+        ]
+      },
+      "actions": [
+        {
+          "action": "close_task",
+          "task": "DEV-1",
+          "outcome": "done"
+        },
+        {
+          "action": "archive_document",
+          "document": "plan:block",
+          "reason": "accepted block"
+        }
+      ]
+    },
+    "rc": 0,
+    "stdout": "План lc-9c43583a111c9bab (lifecycle):\nОснование: Инженер подтвердил операцию\nИсполнитель: Devin (executor, SWE-2 High)\nДействия:\n  close_task DEV-1: docs/tasks/DEV-1.md → docs/archive/tasks/DEV-1.md (done)\n  archive_document plan:block: docs/plans/block.md → docs/archive/plans/block.md (материалов: 0, причина: accepted block)\nПереносы:\n  docs/plans/block.md → docs/archive/plans/block.md\n  docs/tasks/DEV-1.md → docs/archive/tasks/DEV-1.md\n  work/verification/DEV-1/cefe0dcde7344c4cb01671f9887a830b → docs/archive/tasks/DEV-1-evidence/work/verification/DEV-1/cefe0dcde7344c4cb01671f9887a830b\n  work/verification/DEV-1/cefe0dcde7344c4cb01671f9887a830b/report.json → docs/archive/tasks/DEV-1-evidence/work/verification/DEV-1/cefe0dcde7344c4cb01671f9887a830b/report.json\n  work/verification/DEV-1/cefe0dcde7344c4cb01671f9887a830b/unit.stderr.log → docs/archive/tasks/DEV-1-evidence/work/verification/DEV-1/cefe0dcde7344c4cb01671f9887a830b/unit.stderr.log\n  work/verification/DEV-1/cefe0dcde7344c4cb01671f9887a830b/unit.stdout.log → docs/archive/tasks/DEV-1-evidence/work/verification/DEV-1/cefe0dcde7344c4cb01671f9887a830b/unit.stdout.log\nУдаляются каталоги:\n  work/verification/DEV-1/cefe0dcde7344c4cb01671f9887a830b\nЗаписей: 9, удалений файлов: 5\nDiff записей (.md):\n--- /dev/null\n+++ b/docs/archive/plans/block.md\n@@ -0,0 +1,46 @@\n+# block.md\n+\n+<!-- playbook-meta:start -->\n+```json\n+{\n+  \"schema_version\": 1,\n+  \"document_id\": \"plan:block\",\n+  \"kind\": \"plan\",\n+  \"state\": \"completed\",\n+  \"created_at\": \"2026-01-01T00:00:00Z\",\n+  \"updated_at\": \"2026-10-22T13:05:28+03:00\",\n+  \"current_revision\": 1,\n+  \"relations\": [],\n+  \"tasks\": [\n+    \"DEV-1\"\n+  ],\n+  \"changes\": [],\n+  \"materials\": [\n+    {\n+      \"id\": \"lifecycle-lc-9c43583a111c9bab\",\n+      \"role\": \"report\",\n+      \"source\": \"docs/archive/plans/block-evidence/archive-lc-9c43583a111c9bab.json\",\n+      \"storage\": \"local\",\n+      \"required\": true,\n+      \"immutable\": true,\n+      \"used_by\": []\n+    }\n+  ],\n+  \"archive\": {\n+    \"at\": \"2026-10-22T13:05:28+03:00\",\n+    \"reason\": \"accepted block\",\n+    \"successor\": null,\n+    \"operation_id\": \"lc-9c43583a111c9bab\",\n+    \"original_path\": \"docs/plans/block.md\"\n+  },\n+  \"moves\": [\n+    {\n+      \"from\": \"docs/plans/block.md\",\n+      \"to\": \"docs/archive/plans/block.md\"\n+    }\n+  ]\n+}\n+```\n+<!-- playbook-meta:end -->\n+\n+Текст документа.\n--- /dev/null\n+++ b/docs/archive/tasks/DEV-1.md\n@@ -0,0 +1,76 @@\n+# DEV-1: test\n+\n+ID: DEV-1\n+Status: done\n+Priority: P2\n+Depends-On: -\n+Executor: Devin\n+Model: SWE-2 High\n+Created: 2026-01-01T00:00:00Z\n+Closed: 2026-10-22T13:05:28+03:00\n+\n+<!-- playbook-meta:start -->\n+```json\n+{\n+  \"schema_version\": 1,\n+  \"relations\": [],\n+  \"materials\": [\n+    {\n+      \"id\": \"verify-cefe0dcde7344c4cb01671f9887a830b\",\n+      \"role\": \"report\",\n+      \"source\": \"docs/archive/tasks/DEV-1-evidence/work/verification/DEV-1/cefe0dcde7344c4cb01671f9887a830b\",\n+      \"storage\": \"local\",\n+      \"required\": true,\n+      \"immutable\": true,\n+      \"used_by\": [\n+        \"DEV-1\"\n+      ]\n+    },\n+    {\n+      \"id\": \"lifecycle-lc-9c43583a111c9bab\",\n+      \"role\": \"report\",\n+      \"source\": \"docs/archive/tasks/DEV-1-evidence/close-lc-9c43583a111c9bab.json\",\n+      \"storage\": \"local\",\n+      \"required\": true,\n+      \"immutable\": true,\n+      \"used_by\": []\n+    }\n+  ],\n+  \"moves\": [\n+    {\n+      \"from\": \"work/verification/DEV-1/cefe0dcde7344c4cb01671f9887a830b\",\n+      \"to\": \"docs/archive/tasks/DEV-1-evidence/work/verification/DEV-1/cefe0dcde7344c4cb01671f9887a830b\"\n+    },\n+    {\n+      \"from\": \"docs/tasks/DEV-1.md\",\n+      \"to\": \"docs/archive/tasks/DEV-1.md\"\n+    }\n+  ],\n+  \"handoff\": {\n+    \"at\": \"2026-10-22T13:05:28+03:00\",\n+    \"actor\": {\n+      \"name\": \"Devin\",\n+      \"model\": \"SWE-2 High\"\n+    },\n+    \"summary\": \"реализация готова\",\n+    \"reports\": [\n+      \"verify-cefe0dcde7344c4cb01671f9887a830b\"\n+    ],\n+    \"card_projection\": \"sha256:b953e12a814d37946c7f8d45498d31701f95026e60c7cbd1cae63626fcc9c72c\"\n+  },\n+  \"acceptance\": {\n+    \"at\": \"2026-10-22T13:05:28+03:00\",\n+    \"actor\": {\n+      \"name\": \"Auditor\",\n+      \"model\": \"SWE-2 High\"\n+    },\n+    \"role\": \"auditor\",\n+    \"kind\": \"acceptance\",\n+    \"result\": \"accepted\",\n+    \"handoff_at\": \"2026-10-22T13:05:28+03:00\",\n+    \"session\": null,\n+    \"detail\": null\n+  }\n+}\n+```\n+<!-- playbook-meta:end -->\n--- a/docs/plans/index.md\n+++ b/docs/plans/index.md\n@@ -3,11 +3,11 @@\n <!-- playbook-index:start -->\n ## Актуальные\n \n-| Документ | Состояние | Обновлён | Задачи |\n-|---|---|---|---|\n-| [block.md](block.md) | completed | 2026-01-02 | [DEV-1](../tasks/DEV-1.md) |\n+Актуальных документов пока нет.\n \n ## Архив\n \n-Архивных документов пока нет.\n+| Документ | Состояние | Архивирован | Причина | Преемник | Задачи |\n+|---|---|---|---|---|---|\n+| [block.md](../archive/plans/block.md) | completed | 2026-10-22 | accepted block | — | [DEV-1](../archive/tasks/DEV-1.md) |\n <!-- playbook-index:end -->\n--- a/docs/tasks/index.md\n+++ b/docs/tasks/index.md\n@@ -6,11 +6,11 @@\n \n | ID | Задача | Статус | Приоритет | Исполнитель | Создана | Закрыта | Зависимости |\n |---|---|---|---|---|---|---|---|\n-| DEV-1 | [DEV-1: test](DEV-1.md) | in_review | P2 | Devin / SWE-2 High | 2026-01-01 00:00 | — | — |\n+\n+Активных карточек пока нет.\n \n ## Архив\n \n | ID | Задача | Статус | Приоритет | Исполнитель | Создана | Закрыта | Зависимости |\n |---|---|---|---|---|---|---|---|\n-\n-Архивных карточек пока нет.\n+| DEV-1 | [DEV-1: test](../archive/tasks/DEV-1.md) | done | P2 | Devin / SWE-2 High | 2026-01-01 00:00 | 2026-10-22 13:05 | — |\n\nПредпросмотр, без записи; сохранение плана: --save\n",
+    "stderr": "",
+    "unchanged": true,
+    "expected_rc": 0
+  },
+  {
+    "scenario": "promotion_without_acceptance",
+    "request": {
+      "schema_version": 1,
+      "actor": {
+        "name": "Devin",
+        "role": "executor",
+        "model": "SWE-2 High"
+      },
+      "basis": "Executor finished implementation; independent audit has not happened",
+      "scope": {
+        "documents": [
+          "spec:alpha"
+        ]
+      },
+      "actions": [
+        {
+          "action": "promote_change",
+          "document": "spec:alpha",
+          "change": "chg-1",
+          "payload": "UNREVIEWED replacement\n",
+          "acceptance": null
+        }
+      ]
+    },
+    "rc": 1,
+    "stdout": "",
+    "stderr": "ERROR: spec:alpha: нужна запись приёмки promotion\n",
+    "result_metadata": {
+      "schema_version": 1,
+      "document_id": "spec:alpha",
+      "kind": "spec",
+      "state": "accepted",
+      "created_at": "2026-01-01T00:00:00Z",
+      "updated_at": "2026-01-02T00:00:00Z",
+      "current_revision": 1,
+      "relations": [],
+      "tasks": [],
+      "changes": [
+        {
+          "id": "chg-1",
+          "state": "implemented",
+          "section": "Область",
+          "basis": {
+            "type": "engineer_approval",
+            "who": "engineer",
+            "at": "2026-01-02T00:00:00Z",
+            "detail": "утверждено",
+            "source": "review"
+          },
+          "tasks": [],
+          "acceptance": null
+        }
+      ],
+      "materials": [],
+      "archive": null
+    },
+    "expected_rc": 1
+  },
+  {
+    "scenario": "stale_input_close",
+    "rc": 1,
+    "stdout": "",
+    "stderr": "ERROR: DEV-1: нет свежего успешного прогона verify — входы изменились после проверки; повторите verify и handoff\n",
+    "unchanged": true,
+    "expected_rc": 1
+  },
+  {
+    "scenario": "missing_required_report",
+    "rc": 1,
+    "stdout": "",
+    "stderr": "ERROR: Нет отчёта прогона: /private/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/tmpb205pp2d/work/verification/DEV-1/dbaa0986a1264a7783f03dbebb242ee3/report.json\n",
+    "unchanged": true,
+    "expected_rc": 1
+  }
+]

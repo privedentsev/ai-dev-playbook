@@ -1,0 +1,108 @@
+{
+  "schema_version": 1,
+  "card_format_version": 2,
+  "relations": [],
+  "materials": [
+    {
+      "id": "pb053-evidence",
+      "role": "report",
+      "source": "docs/archive/tasks/PB-053-evidence",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-053"
+      ]
+    },
+    {
+      "id": "verify-bcac3a2dcdfd436cb2dad18474334f9a",
+      "role": "report",
+      "source": "docs/archive/tasks/PB-053-evidence/work/verification/PB-053/bcac3a2dcdfd436cb2dad18474334f9a",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-053"
+      ]
+    },
+    {
+      "id": "audit-20261027",
+      "role": "report",
+      "source": "docs/archive/tasks/PB-053-evidence/work/verification/PB-053/audit-20261027",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-053"
+      ]
+    },
+    {
+      "id": "lifecycle-lc-e7a1a8d816bc4b43",
+      "role": "report",
+      "source": "docs/archive/tasks/PB-053-evidence/close-lc-e7a1a8d816bc4b43.json",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": []
+    }
+  ],
+  "criterion_evidence": {
+    "CHECK-01": {
+      "check_sha256": "sha256:4e199087b55e2b22742929d866607214b5542f74d96d9c84afc07e1ac5e60c2e",
+      "card_projection": "sha256:92fe9ce471f4aeaeea8188c48e254a6feb90f0d6ab9c09e5d3e3be8db21e5b7a",
+      "report_id": "verify-bcac3a2dcdfd436cb2dad18474334f9a",
+      "report_sha256": "sha256:0340d220cca6f21c0f94f497f832609b1f1ae997e8670785c9867f305d366503"
+    }
+  },
+  "handoff": {
+    "at": "2026-10-27T09:14:06+03:00",
+    "actor": {
+      "name": "Codex",
+      "model": "GPT-6"
+    },
+    "summary": "HANDOFF-01",
+    "reports": [
+      "verify-bcac3a2dcdfd436cb2dad18474334f9a"
+    ],
+    "card_projection": "sha256:92fe9ce471f4aeaeea8188c48e254a6feb90f0d6ab9c09e5d3e3be8db21e5b7a",
+    "entry_id": "HANDOFF-01",
+    "journal_sha256": "sha256:6660d1aeebcf6ae438b91f91c903e15650e5ab55aaa7778f275563c2fb176052"
+  },
+  "acceptance": {
+    "at": "2026-10-27T09:19:11+03:00",
+    "actor": {
+      "name": "Codex",
+      "model": "GPT-6"
+    },
+    "role": "auditor",
+    "kind": "acceptance",
+    "result": "accepted",
+    "handoff_at": "2026-10-27T09:14:06+03:00",
+    "session": null,
+    "detail": null,
+    "audit_id": "AUDIT-01",
+    "audit_sha256": "sha256:4c6b76fe7738cc073e5be99be9341e70bb141fd32c9b358ab8c1d519b3db9033"
+  },
+  "moves": [
+    {
+      "from": "docs/tasks/PB-053-evidence",
+      "to": "docs/archive/tasks/PB-053-evidence"
+    },
+    {
+      "from": "work/verification/PB-053/bcac3a2dcdfd436cb2dad18474334f9a",
+      "to": "docs/archive/tasks/PB-053-evidence/work/verification/PB-053/bcac3a2dcdfd436cb2dad18474334f9a"
+    },
+    {
+      "from": "work/verification/PB-053/audit-20261027",
+      "to": "docs/archive/tasks/PB-053-evidence/work/verification/PB-053/audit-20261027"
+    },
+    {
+      "from": "docs/tasks/PB-053.md",
+      "to": "docs/archive/tasks/PB-053.md"
+    },
+    {
+      "from": "docs/tasks/PB-053.meta.json",
+      "to": "docs/archive/tasks/PB-053.meta.json"
+    }
+  ]
+}

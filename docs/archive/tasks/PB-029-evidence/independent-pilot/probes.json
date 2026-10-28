@@ -1,0 +1,109 @@
+[
+  {
+    "label": "handoff-tests",
+    "cwd": "work/pb029-independent-pilot/handoff/pilot-workspace",
+    "argv": [
+      "/usr/local/opt/python@3.14/bin/python3.14",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tests",
+      "-v"
+    ],
+    "rc": 0,
+    "stdout": "",
+    "stderr": "test_parse_basic (test_parser.TestParser.test_parse_basic) ... ok\ntest_valid_age (test_validator.TestValidator.test_valid_age) ... ok\ntest_whitespace_age (test_validator.TestValidator.test_whitespace_age) ... ok\n\n----------------------------------------------------------------------\nRan 3 tests in 0.000s\n\nOK\n"
+  },
+  {
+    "label": "handoff-probe",
+    "cwd": "work/pb029-independent-pilot/handoff/pilot-workspace",
+    "argv": [
+      "/usr/local/opt/python@3.14/bin/python3.14",
+      "-c",
+      "from src.validator import parse_age; cases=['', ' ', '\\t\\n', '25', ' 42 ']; print([(repr(x),parse_age(x)) for x in cases])"
+    ],
+    "rc": 1,
+    "stdout": "",
+    "stderr": "Traceback (most recent call last):\n  File \"<string>\", line 1, in <module>\n    from src.validator import parse_age; cases=['', ' ', '\\t\\n', '25', ' 42 ']; print([(repr(x),parse_age(x)) for x in cases])\n                                                                                                ~~~~~~~~~^^^\n  File \"/Users/privedentsev1/Dev/ai-dev-playbook/work/pb029-independent-pilot/handoff/pilot-workspace/src/validator.py\", line 6, in parse_age\n    return int(value)\nValueError: invalid literal for int() with base 10: ''\n"
+  },
+  {
+    "label": "corrected-tests",
+    "cwd": "work/pb029-independent-pilot/corrected/pilot-workspace",
+    "argv": [
+      "/usr/local/opt/python@3.14/bin/python3.14",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tests",
+      "-v"
+    ],
+    "rc": 0,
+    "stdout": "",
+    "stderr": "test_edge_case_fixed (test_parser.TestParser.test_edge_case_fixed) ... ok\ntest_parse_basic (test_parser.TestParser.test_parse_basic) ... ok\ntest_empty_age_returns_none (test_validator.TestValidator.test_empty_age_returns_none) ... ok\ntest_valid_age (test_validator.TestValidator.test_valid_age) ... ok\ntest_whitespace_age (test_validator.TestValidator.test_whitespace_age) ... ok\n\n----------------------------------------------------------------------\nRan 5 tests in 0.000s\n\nOK\n"
+  },
+  {
+    "label": "corrected-probe",
+    "cwd": "work/pb029-independent-pilot/corrected/pilot-workspace",
+    "argv": [
+      "/usr/local/opt/python@3.14/bin/python3.14",
+      "-c",
+      "from src.validator import parse_age; cases=['', ' ', '\\t\\n', '25', ' 42 ']; print([(repr(x),parse_age(x)) for x in cases])"
+    ],
+    "rc": 0,
+    "stdout": "[(\"''\", None), (\"' '\", None), (\"'\\\\t\\\\n'\", None), (\"'25'\", 25), (\"' 42 '\", 42)]\n",
+    "stderr": ""
+  },
+  {
+    "label": "diagnostic",
+    "cwd": "work/pb029-independent-pilot/handoff/pilot-workspace",
+    "argv": [
+      "/usr/local/opt/python@3.14/bin/python3.14",
+      "/Users/privedentsev1/Dev/ai-dev-playbook/ai-dev-playbook/scripts/playbook.py",
+      "lifecycle",
+      "accept",
+      "TASK-101",
+      "--result",
+      "accepted",
+      "--kind",
+      "diagnostic",
+      "--role",
+      "auditor",
+      "--actor",
+      "Codex",
+      "--model",
+      "GPT-6",
+      "--note",
+      "PILOT-A1: независимый аудит: пустой/пробельный ввод вызывает ValueError вместо None. Требуются исправление, regression test, verify и новая передача. Сессия 01a162f1-a308-7c12-9380-08445b6a30d0"
+    ],
+    "rc": 0,
+    "stdout": "TASK-101: записана приёмка result=accepted kind=diagnostic.\n",
+    "stderr": ""
+  },
+  {
+    "label": "close-rejected",
+    "cwd": "work/pb029-independent-pilot/handoff/pilot-workspace",
+    "argv": [
+      "/usr/local/opt/python@3.14/bin/python3.14",
+      "/Users/privedentsev1/Dev/ai-dev-playbook/ai-dev-playbook/scripts/playbook.py",
+      "close",
+      "TASK-101"
+    ],
+    "rc": 1,
+    "stdout": "",
+    "stderr": "ERROR: TASK-101: diagnostic-протокол не является приёмкой — нужна запись kind=acceptance\n"
+  },
+  {
+    "label": "returned-index",
+    "cwd": "work/pb029-independent-pilot/handoff/pilot-workspace",
+    "argv": [
+      "/usr/local/opt/python@3.14/bin/python3.14",
+      "/Users/privedentsev1/Dev/ai-dev-playbook/ai-dev-playbook/scripts/playbook.py",
+      "index"
+    ],
+    "rc": 0,
+    "stdout": "Индекс обновлён.\n",
+    "stderr": ""
+  }
+]

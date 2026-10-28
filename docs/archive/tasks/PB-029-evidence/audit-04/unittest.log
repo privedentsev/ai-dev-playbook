@@ -1,0 +1,476 @@
+test_adopt_clean (test_cli.AdoptTest.test_adopt_clean) ... ok
+test_adopt_erroneous_label_010 (test_cli.AdoptTest.test_adopt_erroneous_label_010) ... ok
+test_adopt_refuses_managed_and_force_overwrites (test_cli.AdoptTest.test_adopt_refuses_managed_and_force_overwrites) ... ok
+test_adopt_release_restores_and_keep_preserves (test_cli.AdoptTest.test_adopt_release_restores_and_keep_preserves) ... ok
+test_adopt_requires_resolutions (test_cli.AdoptTest.test_adopt_requires_resolutions) ... ok
+test_adopt_version_keep_forbidden (test_cli.AdoptTest.test_adopt_version_keep_forbidden) ... ok
+test_broken_link_detected (test_cli.CheckTest.test_broken_link_detected) ... ok
+test_check_no_warning_for_archived_card (test_cli.CheckTest.test_check_no_warning_for_archived_card) ... ok
+test_check_no_warning_for_marker_in_code (test_cli.CheckTest.test_check_no_warning_for_marker_in_code) ... ok
+test_check_warns_unconfirmed_model (test_cli.CheckTest.test_check_warns_unconfirmed_model) ... ok
+test_fresh_install_passes_check (test_cli.CheckTest.test_fresh_install_passes_check) ... ok
+test_missing_playbook_fails (test_cli.CheckTest.test_missing_playbook_fails) ... ok
+test_ready_passes_after_setup (test_cli.CheckTest.test_ready_passes_after_setup) ... ok
+test_ready_rejects_unfinished_setup (test_cli.CheckTest.test_ready_rejects_unfinished_setup) ... ok
+test_stale_index_detected (test_cli.CheckTest.test_stale_index_detected) ... ok
+test_close_cancelled_from_draft (test_cli.CloseTest.test_close_cancelled_from_draft) ... ok
+test_close_done_blocked_by_audit_marker (test_cli.CloseTest.test_close_done_blocked_by_audit_marker) ... ok
+test_close_done_blocked_by_work_record_marker (test_cli.CloseTest.test_close_done_blocked_by_work_record_marker) ... ok
+test_close_done_marker_in_code_allowed (test_cli.CloseTest.test_close_done_marker_in_code_allowed) ... ok
+test_close_done_marker_in_tilde_fence_allowed (test_cli.CloseTest.test_close_done_marker_in_tilde_fence_allowed) ... ok
+test_close_done_moves_stamps_and_indexes (test_cli.CloseTest.test_close_done_moves_stamps_and_indexes) ... ok
+test_close_done_requires_confirmed_model (test_cli.CloseTest.test_close_done_requires_confirmed_model) ... ok
+test_close_done_requires_in_review (test_cli.CloseTest.test_close_done_requires_in_review) ... ok
+test_close_done_unknown_model_allowed (test_cli.CloseTest.test_close_done_unknown_model_allowed) ... ok
+test_close_failure_keeps_original_state (test_cli.CloseTest.test_close_failure_keeps_original_state) ... ok
+test_close_relocates_card_own_links (test_cli.CloseTest.test_close_relocates_card_own_links) ... ok
+test_close_relocates_card_self_link (test_cli.CloseTest.test_close_relocates_card_self_link) ... ok
+test_close_rolls_back_on_index_conflict (test_cli.CloseTest.test_close_rolls_back_on_index_conflict) ... ok
+test_close_unknown_task (test_cli.CloseTest.test_close_unknown_task) ... ok
+test_close_updates_incoming_links (test_cli.CloseTest.test_close_updates_incoming_links) ... ok
+test_apply_creates_kit (test_cli.InitTest.test_apply_creates_kit) ... ok
+test_conflict_aborts_before_writes (test_cli.InitTest.test_conflict_aborts_before_writes) ... ok
+test_install_over_source_rejected (test_cli.InitTest.test_install_over_source_rejected) ... ok
+test_preview_writes_nothing (test_cli.InitTest.test_preview_writes_nothing) ... ok
+test_reapply_conflicts_and_keeps_files (test_cli.InitTest.test_reapply_conflicts_and_keeps_files) ... ok
+test_check_requires_manifest (test_cli.ManifestTest.test_check_requires_manifest) ... ok
+test_corrupt_manifest_rejected (test_cli.ManifestTest.test_corrupt_manifest_rejected) ... ok
+test_init_substitutes_version_from_VERSION (test_cli.ManifestTest.test_init_substitutes_version_from_VERSION) ... ok
+test_init_writes_manifest (test_cli.ManifestTest.test_init_writes_manifest) ... ok
+test_manifest_missing_required_core_rejected (test_cli.ManifestTest.test_manifest_missing_required_core_rejected) ... ok
+test_manifest_noncanonical_path_rejected (test_cli.ManifestTest.test_manifest_noncanonical_path_rejected) ... ok
+test_manifest_release_id_mismatch_rejected (test_cli.ManifestTest.test_manifest_release_id_mismatch_rejected) ... ok
+test_manifest_reserved_path_rejected_any_release_id (test_cli.ManifestTest.test_manifest_reserved_path_rejected_any_release_id)
+AUDIT-005-A8: зарезервированный путь в files отклоняется при любом release_id. ... ok
+test_release_id_deterministic (test_cli.ManifestTest.test_release_id_deterministic) ... ok
+test_card_format_change_noted (test_cli.MigrationTest.test_card_format_change_noted) ... ok
+test_migration_steps_applied_and_values_preserved (test_cli.MigrationTest.test_migration_steps_applied_and_values_preserved) ... ok
+test_migrations_idempotent (test_cli.MigrationTest.test_migrations_idempotent) ... ok
+test_rename_converged_destination_allowed (test_cli.MigrationTest.test_rename_converged_destination_allowed)
+Равные значения в источнике и назначении — схождение без потерь, идемпотентно. ... ok
+test_rename_intersecting_paths_rejected (test_cli.MigrationTest.test_rename_intersecting_paths_rejected)
+AUDIT-005-A4: перенос внутрь собственного поддерева отклоняется. ... ok
+test_rename_occupied_destination_rejected (test_cli.MigrationTest.test_rename_occupied_destination_rejected)
+AUDIT-005-A4: rename в занятое назначение с иным значением отклоняется. ... ok
+test_schema_change_without_steps_blocked (test_cli.MigrationTest.test_schema_change_without_steps_blocked) ... ok
+test_schema_migration_compatible_cli_applies (test_cli.MigrationTest.test_schema_migration_compatible_cli_applies)
+Артефакт с CLI, принимающим новую схему, применяется; установленный CLI работает. ... ok
+test_schema_migration_incompatible_cli_rejected (test_cli.MigrationTest.test_schema_migration_incompatible_cli_rejected)
+AUDIT-005-A5: смена схемы без поддержки в целевом CLI отклоняется до записи. ... ok
+test_set_over_null_parent_rejected (test_cli.MigrationTest.test_set_over_null_parent_rejected)
+Явный null в родителе — тоже коллизия, а не заменяемый плейсхолдер. ... ok
+test_set_through_scalar_parent_rejected (test_cli.MigrationTest.test_set_through_scalar_parent_rejected)
+AUDIT-005-A4: вложенный set через скалярного родителя отклоняется. ... ok
+test_apply_aborts_on_failed_staged_check (test_cli.UpdateApplyTest.test_apply_aborts_on_failed_staged_check) ... ok
+test_apply_end_to_end (test_cli.UpdateApplyTest.test_apply_end_to_end) ... ok
+test_apply_is_noop_when_plan_empty (test_cli.UpdateApplyTest.test_apply_is_noop_when_plan_empty) ... ok
+test_apply_passes_staged_check (test_cli.UpdateApplyTest.test_apply_passes_staged_check) ... ok
+test_drift_allowed_by_plan_survives_apply (test_cli.UpdateApplyTest.test_drift_allowed_by_plan_survives_apply)
+AUDIT-005-A2: нетронутый обновлением drift сохраняется и не ломает apply. ... ok
+test_keep_removed_file_exits_management_and_survives (test_cli.UpdateApplyTest.test_keep_removed_file_exits_management_and_survives)
+AUDIT-005-A3: keep для удаляемого из релиза файла выводит его из управления. ... ok
+test_keep_resolution_preserves_local_edit (test_cli.UpdateApplyTest.test_keep_resolution_preserves_local_edit) ... ok
+test_pending_blocks_commands_and_restore_recovers (test_cli.UpdateApplyTest.test_pending_blocks_commands_and_restore_recovers) ... ok
+test_release_resolution_overwrites_local_edit (test_cli.UpdateApplyTest.test_release_resolution_overwrites_local_edit) ... ok
+test_restore_corrupt_backup_file_fails_and_keeps_pending (test_cli.UpdateApplyTest.test_restore_corrupt_backup_file_fails_and_keeps_pending)
+AUDIT-005-A6: повреждённая копия (хеш не совпадает) — отказ, маркер сохранён. ... ok
+test_restore_missing_backup_file_fails_and_keeps_pending (test_cli.UpdateApplyTest.test_restore_missing_backup_file_fails_and_keeps_pending)
+AUDIT-005-A6: неполная резервная копия — отказ до записи, маркер сохранён. ... ok
+test_restore_missing_index_fails_then_recovers (test_cli.UpdateApplyTest.test_restore_missing_index_fails_then_recovers)
+AUDIT-005-A6: без backup_index — отказ и маркер; с индексом — восстановление. ... ok
+test_second_plan_after_update_is_empty (test_cli.UpdateApplyTest.test_second_plan_after_update_is_empty) ... ok
+test_standalone_restore_missing_index_fails_and_keeps_pending (test_cli.UpdateApplyTest.test_standalone_restore_missing_index_fails_and_keeps_pending)
+AUDIT-005-A6: автономный скрипт без индекса возвращает ненулевой код. ... ok
+test_standalone_restore_script (test_cli.UpdateApplyTest.test_standalone_restore_script) ... ok
+test_unknown_kit_files_untouched (test_cli.UpdateApplyTest.test_unknown_kit_files_untouched) ... ok
+test_write_failure_restores_previous_state (test_cli.UpdateApplyTest.test_write_failure_restores_previous_state) ... ok
+test_collision_change_after_resolution_rejects_apply (test_cli.UpdatePlanProtectionTest.test_collision_change_after_resolution_rejects_apply) ... ok
+test_edit_during_staged_checks_rejects_apply (test_cli.UpdatePlanProtectionTest.test_edit_during_staged_checks_rejects_apply) ... ok
+test_managed_path_removed_after_plan_rejects_apply (test_cli.UpdatePlanProtectionTest.test_managed_path_removed_after_plan_rejects_apply) ... ok
+test_new_release_path_created_after_plan_rejects_apply (test_cli.UpdatePlanProtectionTest.test_new_release_path_created_after_plan_rejects_apply) ... ok
+test_parallel_apply_rejected (test_cli.UpdatePlanProtectionTest.test_parallel_apply_rejected) ... ok
+test_pending_release_checks_owner (test_cli.UpdatePlanProtectionTest.test_pending_release_checks_owner) ... ok
+test_restore_refused_for_running_apply (test_cli.UpdatePlanProtectionTest.test_restore_refused_for_running_apply) ... ok
+test_downgrade_blocked (test_cli.UpdatePlanTest.test_downgrade_blocked) ... ok
+test_empty_plan_for_same_state (test_cli.UpdatePlanTest.test_empty_plan_for_same_state) ... ok
+test_modified_managed_file_blocks_apply (test_cli.UpdatePlanTest.test_modified_managed_file_blocks_apply) ... ok
+test_plan_lists_changes_without_writes (test_cli.UpdatePlanTest.test_plan_lists_changes_without_writes) ... ok
+test_plan_save_and_stale_detection (test_cli.UpdatePlanTest.test_plan_save_and_stale_detection) ... ok
+test_same_version_different_content_rejected (test_cli.UpdatePlanTest.test_same_version_different_content_rejected) ... ok
+test_tampered_release_json_rejected (test_cli.UpdatePlanTest.test_tampered_release_json_rejected) ... ok
+test_unsupported_transition_blocked (test_cli.UpdatePlanTest.test_unsupported_transition_blocked) ... ok
+test_cli_restore_rejects_marker_outside_ops_dir (test_cli.UpdateRestoreGuardTest.test_cli_restore_rejects_marker_outside_ops_dir)
+A7: CLI не следует маркеру за пределы work/update/<op_id>. ... ok
+test_index_entry_dropped_from_backed_rejected_then_restored (test_cli.UpdateRestoreGuardTest.test_index_entry_dropped_from_backed_rejected_then_restored)
+A6: копия и хеш сохранились, но путь выпал из backed — отказ. ... ok
+test_index_inconsistent_variants_rejected (test_cli.UpdateRestoreGuardTest.test_index_inconsistent_variants_rejected)
+A6: дубли, пересечение backed/added, лишняя копия и пустой backed. ... ok
+test_stale_standalone_restore_refused_and_own_restores (test_cli.UpdateRestoreGuardTest.test_stale_standalone_restore_refused_and_own_restores)
+A7: restore.py чужой операции отказывает; своей — восстанавливает. ... ok
+test_standalone_restore_without_pending_refused (test_cli.UpdateRestoreGuardTest.test_standalone_restore_without_pending_refused)
+A7: без маркера автономный восстановитель не откатывает проект. ... ok
+test_draft_task_rejected (test_cli.VerifyTest.test_draft_task_rejected) ... ok
+test_dry_run_prints_plan_without_work (test_cli.VerifyTest.test_dry_run_prints_plan_without_work) ... ok
+test_failed_check_skips_rest (test_cli.VerifyTest.test_failed_check_skips_rest) ... ok
+test_missing_verification_block (test_cli.VerifyTest.test_missing_verification_block) ... ok
+test_modified_input_marks_stale (test_cli.VerifyTest.test_modified_input_marks_stale) ... ok
+test_passed_run_writes_report_and_logs (test_cli.VerifyTest.test_passed_run_writes_report_and_logs) ... ok
+test_timeout_check (test_cli.VerifyTest.test_timeout_check) ... ok
+test_unknown_task_rejected (test_cli.VerifyTest.test_unknown_task_rejected) ... ok
+test_accept_records_result_and_link (test_close_lifecycle.HandoffAcceptTest.test_accept_records_result_and_link) ... ok
+test_accept_without_handoff_refused (test_close_lifecycle.HandoffAcceptTest.test_accept_without_handoff_refused) ... ok
+test_handoff_legacy_card_refused (test_close_lifecycle.HandoffAcceptTest.test_handoff_legacy_card_refused) ... ok
+test_handoff_registers_runs_and_projection (test_close_lifecycle.HandoffAcceptTest.test_handoff_registers_runs_and_projection) ... ok
+test_handoff_without_verify_refused (test_close_lifecycle.HandoffAcceptTest.test_handoff_without_verify_refused) ... ok
+test_close_cancelled_with_acceptance (test_close_lifecycle.ManagedCloseTest.test_close_cancelled_with_acceptance) ... ok
+test_close_cancelled_without_acceptance_refused (test_close_lifecycle.ManagedCloseTest.test_close_cancelled_without_acceptance_refused) ... ok
+test_close_cancelled_without_reason_refused (test_close_lifecycle.ManagedCloseTest.test_close_cancelled_without_reason_refused) ... ok
+test_close_done_card_changed_after_handoff_refused (test_close_lifecycle.ManagedCloseTest.test_close_done_card_changed_after_handoff_refused) ... ok
+test_close_done_in_progress_refused (test_close_lifecycle.ManagedCloseTest.test_close_done_in_progress_refused) ... ok
+test_close_done_managed_card (test_close_lifecycle.ManagedCloseTest.test_close_done_managed_card) ... ok
+test_close_done_stale_inputs_refused (test_close_lifecycle.ManagedCloseTest.test_close_done_stale_inputs_refused) ... ok
+test_close_done_without_acceptance_refused (test_close_lifecycle.ManagedCloseTest.test_close_done_without_acceptance_refused) ... ok
+test_close_done_without_handoff_refused (test_close_lifecycle.ManagedCloseTest.test_close_done_without_handoff_refused) ... ok
+test_close_dry_run_writes_nothing (test_close_lifecycle.ManagedCloseTest.test_close_dry_run_writes_nothing) ... ok
+test_close_legacy_card_in_managed_project (test_close_lifecycle.ManagedCloseTest.test_close_legacy_card_in_managed_project)
+Карточка без метаданных в проекте с documents — legacy-политика. ... ok
+test_diagnostic_acceptance_not_enough (test_close_lifecycle.ManagedCloseTest.test_diagnostic_acceptance_not_enough) ... ok
+test_promote_archived_refused (test_close_lifecycle.PromoteChangeTest.test_promote_archived_refused) ... ok
+test_promote_not_implemented_refused (test_close_lifecycle.PromoteChangeTest.test_promote_not_implemented_refused) ... ok
+test_promote_unknown_change_refused (test_close_lifecycle.PromoteChangeTest.test_promote_unknown_change_refused) ... ok
+test_promote_writes_revision_and_bumps (test_close_lifecycle.PromoteChangeTest.test_promote_writes_revision_and_bumps) ... ok
+test_reopen_active_card_refused (test_close_lifecycle.ReopenTest.test_reopen_active_card_refused) ... ok
+test_reopen_active_dependent_blocked (test_close_lifecycle.ReopenTest.test_reopen_active_dependent_blocked) ... ok
+test_reopen_blocks_dependents (test_close_lifecycle.ReopenTest.test_reopen_blocks_dependents) ... ok
+test_reopen_combined_with_dependent (test_close_lifecycle.ReopenTest.test_reopen_combined_with_dependent) ... ok
+test_reopen_legacy_card (test_close_lifecycle.ReopenTest.test_reopen_legacy_card) ... ok
+test_reopen_returns_card_and_clears_acceptance (test_close_lifecycle.ReopenTest.test_reopen_returns_card_and_clears_acceptance) ... ok
+test_reopen_with_done_dependent_refused (test_close_lifecycle.ReopenTest.test_reopen_with_done_dependent_refused) ... ok
+test_apply_creates_document_and_index (test_document_cli.DocumentCreateTest.test_apply_creates_document_and_index) ... ok
+test_create_bad_slug_refused (test_document_cli.DocumentCreateTest.test_create_bad_slug_refused) ... ok
+test_create_collision_refused (test_document_cli.DocumentCreateTest.test_create_collision_refused) ... ok
+test_create_discussion_initial_state_open (test_document_cli.DocumentCreateTest.test_create_discussion_initial_state_open) ... ok
+test_create_slug_of_index_refused (test_document_cli.DocumentCreateTest.test_create_slug_of_index_refused) ... ok
+test_create_unknown_kind_collection_refused (test_document_cli.DocumentCreateTest.test_create_unknown_kind_collection_refused) ... ok
+test_create_without_documents_section_refused (test_document_cli.DocumentCreateTest.test_create_without_documents_section_refused) ... ok
+test_preview_writes_nothing (test_document_cli.DocumentCreateTest.test_preview_writes_nothing) ... ok
+test_apply_inserts_meta_keeps_body_updates_index (test_document_cli.DocumentRegisterTest.test_apply_inserts_meta_keeps_body_updates_index) ... ok
+test_metadata_from_file (test_document_cli.DocumentRegisterTest.test_metadata_from_file) ... ok
+test_preview_keeps_body_and_writes_nothing (test_document_cli.DocumentRegisterTest.test_preview_keeps_body_and_writes_nothing) ... ok
+test_register_collection_index_refused (test_document_cli.DocumentRegisterTest.test_register_collection_index_refused) ... ok
+test_register_duplicate_document_id_refused (test_document_cli.DocumentRegisterTest.test_register_duplicate_document_id_refused) ... ok
+test_register_outside_collection_refused (test_document_cli.DocumentRegisterTest.test_register_outside_collection_refused) ... ok
+test_register_twice_refused (test_document_cli.DocumentRegisterTest.test_register_twice_refused) ... ok
+test_unknown_schema_version_not_treated_as_legacy (test_document_cli.DocumentRegisterTest.test_unknown_schema_version_not_treated_as_legacy) ... ok
+test_check_detects_stale_index_without_fixing (test_document_cli.IndexDocumentsTest.test_check_detects_stale_index_without_fixing) ... ok
+test_index_all_writes_task_and_document_indexes (test_document_cli.IndexDocumentsTest.test_index_all_writes_task_and_document_indexes) ... ok
+test_index_documents_idempotent (test_document_cli.IndexDocumentsTest.test_index_documents_idempotent) ... ok
+test_index_splices_only_marked_region (test_document_cli.IndexDocumentsTest.test_index_splices_only_marked_region) ... ok
+test_index_without_markers_refused_and_untouched (test_document_cli.IndexDocumentsTest.test_index_without_markers_refused_and_untouched) ... ok
+test_index_and_check_work_without_documents (test_document_cli.LegacyInstallTest.test_index_and_check_work_without_documents) ... ok
+test_angle_query_fragment_stay_inside_token (test_document_links.AuditRegressionTest.test_angle_query_fragment_stay_inside_token) ... ok
+test_backslash_parity_around_code_span (test_document_links.AuditRegressionTest.test_backslash_parity_around_code_span) ... ok
+test_encoded_angle_destination_identity (test_document_links.AuditRegressionTest.test_encoded_angle_destination_identity) ... ok
+test_encoded_destination_identity (test_document_links.AuditRegressionTest.test_encoded_destination_identity) ... ok
+test_escaped_backtick_does_not_open_span (test_document_links.AuditRegressionTest.test_escaped_backtick_does_not_open_span) ... ok
+test_escaped_brackets_in_label (test_document_links.AuditRegressionTest.test_escaped_brackets_in_label) ... ok
+test_image_inside_label (test_document_links.AuditRegressionTest.test_image_inside_label) ... ok
+test_image_inside_link_both_relocated (test_document_links.AuditRegressionTest.test_image_inside_link_both_relocated) ... ok
+test_indented_code_not_checked (test_document_links.AuditRegressionTest.test_indented_code_not_checked) ... ok
+test_indented_code_not_scanned_or_rewritten (test_document_links.AuditRegressionTest.test_indented_code_not_scanned_or_rewritten) ... ok
+test_indented_continuation_of_paragraph_is_scanned (test_document_links.AuditRegressionTest.test_indented_continuation_of_paragraph_is_scanned) ... ok
+test_index_link_encodes_fragment_chars (test_document_links.AuditRegressionTest.test_index_link_encodes_fragment_chars) ... ok
+test_joint_move_wikilink_no_conflict (test_document_links.AuditRegressionTest.test_joint_move_wikilink_no_conflict) ... ok
+test_missing_image_inside_link_checked (test_document_links.AuditRegressionTest.test_missing_image_inside_link_checked) ... ok
+test_moved_source_html_and_wikilink_conflict (test_document_links.AuditRegressionTest.test_moved_source_html_and_wikilink_conflict) ... ok
+test_multiline_code_span_not_rewritten (test_document_links.AuditRegressionTest.test_multiline_code_span_not_rewritten) ... ok
+test_multiline_code_span_not_scanned (test_document_links.AuditRegressionTest.test_multiline_code_span_not_scanned) ... ok
+test_nested_label_relocated_and_checked (test_document_links.AuditRegressionTest.test_nested_label_relocated_and_checked) ... ok
+test_unaffected_unsupported_link_is_silent (test_document_links.AuditRegressionTest.test_unaffected_unsupported_link_is_silent) ... ok
+test_unmatched_backtick_keeps_later_span_masked (test_document_links.AuditRegressionTest.test_unmatched_backtick_keeps_later_span_masked) ... ok
+test_unquoted_html_affected_target_conflict (test_document_links.AuditRegressionTest.test_unquoted_html_affected_target_conflict) ... ok
+test_wikilink_ambiguous_candidates_conflict (test_document_links.AuditRegressionTest.test_wikilink_ambiguous_candidates_conflict) ... ok
+test_wikilink_extensionless_joint_move_no_conflict (test_document_links.AuditRegressionTest.test_wikilink_extensionless_joint_move_no_conflict) ... ok
+test_wikilink_fragment_detects_moved_target (test_document_links.AuditRegressionTest.test_wikilink_fragment_detects_moved_target) ... ok
+test_wikilink_suffix_still_resolves (test_document_links.AuditRegressionTest.test_wikilink_suffix_still_resolves) ... ok
+test_broken_and_fine (test_document_links.CheckTextTest.test_broken_and_fine) ... ok
+test_fragment_only_not_checked (test_document_links.CheckTextTest.test_fragment_only_not_checked) ... ok
+test_historical_missing_target_reported (test_document_links.CheckTextTest.test_historical_missing_target_reported) ... ok
+test_historical_resolution_via_moves (test_document_links.CheckTextTest.test_historical_resolution_via_moves) ... ok
+test_image_target_checked (test_document_links.CheckTextTest.test_image_target_checked) ... ok
+test_reference_requires_definition (test_document_links.CheckTextTest.test_reference_requires_definition) ... ok
+test_archived_document_in_archive_group (test_document_links.IndexCase.test_archived_document_in_archive_group) ... ok
+test_check_accepts_fresh_index (test_document_links.IndexCase.test_check_accepts_fresh_index) ... ok
+test_check_detects_manual_index_without_markers (test_document_links.IndexCase.test_check_detects_manual_index_without_markers) ... ok
+test_check_detects_missing_index (test_document_links.IndexCase.test_check_detects_missing_index) ... ok
+test_check_detects_stale_index (test_document_links.IndexCase.test_check_detects_stale_index) ... ok
+test_empty_collection_renders_groups (test_document_links.IndexCase.test_empty_collection_renders_groups) ... ok
+test_index_lists_states_and_dates (test_document_links.IndexCase.test_index_lists_states_and_dates) ... ok
+test_plan_index_links_tasks_without_status (test_document_links.IndexCase.test_plan_index_links_tasks_without_status) ... ok
+test_render_is_deterministic (test_document_links.IndexCase.test_render_is_deterministic) ... ok
+test_splice_preserves_manual_parts (test_document_links.IndexCase.test_splice_preserves_manual_parts) ... ok
+test_splice_without_markers_rejected (test_document_links.IndexCase.test_splice_without_markers_rejected) ... ok
+test_conflicting_move_maps_rejected (test_document_links.MovesCase.test_conflicting_move_maps_rejected) ... ok
+test_immutable_link_resolved_via_move_map (test_document_links.MovesCase.test_immutable_link_resolved_via_move_map) ... ok
+test_immutable_without_map_is_broken (test_document_links.MovesCase.test_immutable_without_map_is_broken) ... ok
+test_move_self_target_rejected (test_document_links.MovesCase.test_move_self_target_rejected) ... ok
+test_moves_do_not_mask_stale_links_in_normal_docs (test_document_links.MovesCase.test_moves_do_not_mask_stale_links_in_normal_docs) ... ok
+test_affected_html_is_conflict (test_document_links.PlanRewritesTest.test_affected_html_is_conflict) ... ok
+test_affected_wikilink_is_conflict (test_document_links.PlanRewritesTest.test_affected_wikilink_is_conflict) ... ok
+test_frozen_file_skipped (test_document_links.PlanRewritesTest.test_frozen_file_skipped) ... ok
+test_incoming_update (test_document_links.PlanRewritesTest.test_incoming_update) ... ok
+test_managed_core_conflict_not_rewritten (test_document_links.PlanRewritesTest.test_managed_core_conflict_not_rewritten) ... ok
+test_unaffected_wikilink_ignored (test_document_links.PlanRewritesTest.test_unaffected_wikilink_ignored) ... ok
+test_angle_target_with_spaces_keeps_style (test_document_links.RewriteTest.test_angle_target_with_spaces_keeps_style) ... ok
+test_bare_fragment_unchanged (test_document_links.RewriteTest.test_bare_fragment_unchanged) ... ok
+test_code_blocks_not_rewritten (test_document_links.RewriteTest.test_code_blocks_not_rewritten) ... ok
+test_encoded_target_stays_encoded (test_document_links.RewriteTest.test_encoded_target_stays_encoded) ... ok
+test_external_links_unchanged (test_document_links.RewriteTest.test_external_links_unchanged) ... ok
+test_image_rewritten (test_document_links.RewriteTest.test_image_rewritten) ... ok
+test_incoming_link_rewritten (test_document_links.RewriteTest.test_incoming_link_rewritten) ... ok
+test_mutual_links (test_document_links.RewriteTest.test_mutual_links) ... ok
+test_no_cascading_replacement (test_document_links.RewriteTest.test_no_cascading_replacement) ... ok
+test_outgoing_link_in_moved_doc (test_document_links.RewriteTest.test_outgoing_link_in_moved_doc) ... ok
+test_query_and_fragment_preserved (test_document_links.RewriteTest.test_query_and_fragment_preserved) ... ok
+test_reference_definition_rewritten (test_document_links.RewriteTest.test_reference_definition_rewritten) ... ok
+test_self_link_keeps_filename (test_document_links.RewriteTest.test_self_link_keeps_filename) ... ok
+test_title_preserved (test_document_links.RewriteTest.test_title_preserved) ... ok
+test_balanced_parens_in_target (test_document_links.ScanTest.test_balanced_parens_in_target) ... ok
+test_code_is_not_scanned (test_document_links.ScanTest.test_code_is_not_scanned) ... ok
+test_inline_title_and_angle_target (test_document_links.ScanTest.test_inline_title_and_angle_target) ... ok
+test_other_fence_inside_block_is_content (test_document_links.ScanTest.test_other_fence_inside_block_is_content) ... ok
+test_shortcut_reference_is_not_a_link (test_document_links.ScanTest.test_shortcut_reference_is_not_a_link) ... ok
+test_supported_constructs (test_document_links.ScanTest.test_supported_constructs) ... ok
+test_unsupported_constructs_detected (test_document_links.ScanTest.test_unsupported_constructs_detected) ... ok
+test_wikilink_alias_target (test_document_links.ScanTest.test_wikilink_alias_target) ... ok
+test_external_material_shared_between_owners_rejected (test_documents.AuditRegressionTest.test_external_material_shared_between_owners_rejected) ... ok
+test_false_fence_close_keeps_example_inside (test_documents.AuditRegressionTest.test_false_fence_close_keeps_example_inside) ... ok
+test_malformed_change_id_reported (test_documents.AuditRegressionTest.test_malformed_change_id_reported) ... ok
+test_malformed_change_state_reported (test_documents.AuditRegressionTest.test_malformed_change_state_reported) ... ok
+test_malformed_external_uri_reported (test_documents.AuditRegressionTest.test_malformed_external_uri_reported) ... ok
+test_malformed_material_fields_reported (test_documents.AuditRegressionTest.test_malformed_material_fields_reported) ... ok
+test_malformed_material_id_reported (test_documents.AuditRegressionTest.test_malformed_material_id_reported) ... ok
+test_malformed_relation_type_reported (test_documents.AuditRegressionTest.test_malformed_relation_type_reported) ... ok
+test_malformed_state_reported_with_document_and_field (test_documents.AuditRegressionTest.test_malformed_state_reported_with_document_and_field) ... ok
+test_malformed_state_subprocess_diagnostic (test_documents.AuditRegressionTest.test_malformed_state_subprocess_diagnostic) ... ok
+test_malformed_used_by_reported (test_documents.AuditRegressionTest.test_malformed_used_by_reported) ... ok
+test_material_containing_component_root_rejected (test_documents.AuditRegressionTest.test_material_containing_component_root_rejected) ... ok
+test_migrations_dir_rejected_as_material (test_documents.AuditRegressionTest.test_migrations_dir_rejected_as_material) ... ok
+test_nested_non_markdown_file_is_candidate (test_documents.AuditRegressionTest.test_nested_non_markdown_file_is_candidate) ... ok
+test_partially_registered_evidence_listed (test_documents.AuditRegressionTest.test_partially_registered_evidence_listed) ... ok
+test_symlink_inside_material_dir_rejected (test_documents.AuditRegressionTest.test_symlink_inside_material_dir_rejected) ... ok
+test_symlinked_dir_in_collection_rejected (test_documents.AuditRegressionTest.test_symlinked_dir_in_collection_rejected) ... ok
+test_symlinked_document_rejected_before_read (test_documents.AuditRegressionTest.test_symlinked_document_rejected_before_read) ... ok
+test_absent_section_means_unconfigured (test_documents.CollectionsConfigTest.test_absent_section_means_unconfigured) ... ok
+test_collection_inside_tasks_rejected (test_documents.CollectionsConfigTest.test_collection_inside_tasks_rejected) ... ok
+test_collection_outside_docs_rejected (test_documents.CollectionsConfigTest.test_collection_outside_docs_rejected) ... ok
+test_collection_outside_root_rejected (test_documents.CollectionsConfigTest.test_collection_outside_root_rejected) ... ok
+test_overlapping_collections_rejected (test_documents.CollectionsConfigTest.test_overlapping_collections_rejected) ... ok
+test_symlink_in_collection_path_rejected (test_documents.CollectionsConfigTest.test_symlink_in_collection_path_rejected) ... ok
+test_unknown_kind_rejected (test_documents.CollectionsConfigTest.test_unknown_kind_rejected) ... ok
+test_unknown_schema_version_rejected (test_documents.CollectionsConfigTest.test_unknown_schema_version_rejected) ... ok
+test_check_validates_catalog (test_documents.DocumentCommandsTest.test_check_validates_catalog) ... ok
+test_commands_require_documents_section (test_documents.DocumentCommandsTest.test_commands_require_documents_section) ... ok
+test_impact_shows_relations_and_materials (test_documents.DocumentCommandsTest.test_impact_shows_relations_and_materials) ... ok
+test_impact_shows_reverse_relations (test_documents.DocumentCommandsTest.test_impact_shows_reverse_relations) ... ok
+test_impact_unknown_document_rejected (test_documents.DocumentCommandsTest.test_impact_unknown_document_rejected) ... ok
+test_list_shows_legacy (test_documents.DocumentCommandsTest.test_list_shows_legacy) ... ok
+test_materials_for_document (test_documents.DocumentCommandsTest.test_materials_for_document) ... ok
+test_materials_for_task_owner (test_documents.DocumentCommandsTest.test_materials_for_task_owner) ... ok
+test_read_only_commands_do_not_change_tree (test_documents.DocumentCommandsTest.test_read_only_commands_do_not_change_tree) ... ok
+test_archive_location_consistency (test_documents.DocumentValidationTest.test_archive_location_consistency) ... ok
+test_archived_active_state_rejected (test_documents.DocumentValidationTest.test_archived_active_state_rejected) ... ok
+test_archived_doc_in_active_dir_needs_archive_field (test_documents.DocumentValidationTest.test_archived_doc_in_active_dir_needs_archive_field) ... ok
+test_archived_doc_with_terminal_state_accepted (test_documents.DocumentValidationTest.test_archived_doc_with_terminal_state_accepted) ... ok
+test_change_unknown_task_rejected (test_documents.DocumentValidationTest.test_change_unknown_task_rejected) ... ok
+test_document_id_kind_mismatch_rejected (test_documents.DocumentValidationTest.test_document_id_kind_mismatch_rejected) ... ok
+test_duplicate_document_id_casefold_rejected (test_documents.DocumentValidationTest.test_duplicate_document_id_casefold_rejected) ... ok
+test_duplicate_document_id_rejected (test_documents.DocumentValidationTest.test_duplicate_document_id_rejected) ... ok
+test_invalid_state_for_kind_rejected (test_documents.DocumentValidationTest.test_invalid_state_for_kind_rejected) ... ok
+test_legacy_listed_not_registered (test_documents.DocumentValidationTest.test_legacy_listed_not_registered) ... ok
+test_meta_block_outside_collections_rejected (test_documents.DocumentValidationTest.test_meta_block_outside_collections_rejected) ... ok
+test_missing_fields_rejected (test_documents.DocumentValidationTest.test_missing_fields_rejected) ... ok
+test_registered_document_in_catalog (test_documents.DocumentValidationTest.test_registered_document_in_catalog) ... ok
+test_relation_target_must_exist (test_documents.DocumentValidationTest.test_relation_target_must_exist) ... ok
+test_relation_to_self_rejected (test_documents.DocumentValidationTest.test_relation_to_self_rejected) ... ok
+test_replaces_cycle_rejected (test_documents.DocumentValidationTest.test_replaces_cycle_rejected) ... ok
+test_revision_and_planned_changes_distinct (test_documents.DocumentValidationTest.test_revision_and_planned_changes_distinct) ... ok
+test_unknown_field_rejected (test_documents.DocumentValidationTest.test_unknown_field_rejected) ... ok
+test_unknown_meta_schema_rejected_not_legacy (test_documents.DocumentValidationTest.test_unknown_meta_schema_rejected_not_legacy) ... ok
+test_unknown_task_reference_rejected (test_documents.DocumentValidationTest.test_unknown_task_reference_rejected) ... ok
+test_updated_before_created_rejected (test_documents.DocumentValidationTest.test_updated_before_created_rejected) ... ok
+test_component_code_not_material (test_documents.MaterialsTest.test_component_code_not_material) ... ok
+test_duplicate_ownership_rejected (test_documents.MaterialsTest.test_duplicate_ownership_rejected) ... ok
+test_external_material_needs_access (test_documents.MaterialsTest.test_external_material_needs_access) ... ok
+test_material_path_escape_rejected (test_documents.MaterialsTest.test_material_path_escape_rejected) ... ok
+test_missing_optional_material_allowed (test_documents.MaterialsTest.test_missing_optional_material_allowed) ... ok
+test_missing_required_material_rejected (test_documents.MaterialsTest.test_missing_required_material_rejected) ... ok
+test_owner_dirs_overlap_rejected (test_documents.MaterialsTest.test_owner_dirs_overlap_rejected) ... ok
+test_single_owner_accepted (test_documents.MaterialsTest.test_single_owner_accepted) ... ok
+test_unknown_consumer_rejected (test_documents.MaterialsTest.test_unknown_consumer_rejected) ... ok
+test_untracked_evidence_dir_is_candidate (test_documents.MaterialsTest.test_untracked_evidence_dir_is_candidate) ... ok
+test_duplicate_json_key_rejected (test_documents.MetaParseTest.test_duplicate_json_key_rejected) ... ok
+test_end_without_start_rejected (test_documents.MetaParseTest.test_end_without_start_rejected) ... ok
+test_example_inside_outer_fence_ignored (test_documents.MetaParseTest.test_example_inside_outer_fence_ignored) ... ok
+test_fence_close_with_suffix_is_not_a_close (test_documents.MetaParseTest.test_fence_close_with_suffix_is_not_a_close) ... ok
+test_invalid_json_rejected (test_documents.MetaParseTest.test_invalid_json_rejected) ... ok
+test_no_block (test_documents.MetaParseTest.test_no_block) ... ok
+test_non_object_json_rejected (test_documents.MetaParseTest.test_non_object_json_rejected) ... ok
+test_second_meta_block_rejected (test_documents.MetaParseTest.test_second_meta_block_rejected) ... ok
+test_unclosed_block_rejected (test_documents.MetaParseTest.test_unclosed_block_rejected) ... ok
+test_valid_block (test_documents.MetaParseTest.test_valid_block) ... ok
+test_header_fields_in_meta_rejected (test_documents.TaskMetaTest.test_header_fields_in_meta_rejected) ... ok
+test_task_relation_to_document (test_documents.TaskMetaTest.test_task_relation_to_document) ... ok
+test_task_relation_to_missing_document_rejected (test_documents.TaskMetaTest.test_task_relation_to_missing_document_rejected) ... ok
+test_task_supplement_accepted (test_documents.TaskMetaTest.test_task_supplement_accepted) ... ok
+test_apply_writes_removes_and_creates_dirs (test_file_operations.EngineTest.test_apply_writes_removes_and_creates_dirs) ... ok
+test_completed_decision_under_gate_after_pending (test_file_operations.EngineTest.test_completed_decision_under_gate_after_pending) ... ok
+test_final_check_failure_restores_preimage (test_file_operations.EngineTest.test_final_check_failure_restores_preimage) ... ok
+test_foreign_temp_like_file_untouched (test_file_operations.EngineTest.test_foreign_temp_like_file_untouched) ... ok
+test_inputs_rechecked_before_write (test_file_operations.EngineTest.test_inputs_rechecked_before_write) ... ok
+test_interrupted_operation_restored_by_engine (test_file_operations.EngineTest.test_interrupted_operation_restored_by_engine) ... ok
+test_late_external_edit_preserved_as_conflict (test_file_operations.EngineTest.test_late_external_edit_preserved_as_conflict) ... ok
+test_missing_index_after_backup_refuses (test_file_operations.EngineTest.test_missing_index_after_backup_refuses) ... ok
+test_missing_index_with_write_journal_refuses (test_file_operations.EngineTest.test_missing_index_with_write_journal_refuses) ... ok
+test_own_temp_leftover_cleaned_by_restore (test_file_operations.EngineTest.test_own_temp_leftover_cleaned_by_restore) ... ok
+test_pending_blocks_new_operation (test_file_operations.EngineTest.test_pending_blocks_new_operation) ... ok
+test_pre_write_interruption_clears_marker (test_file_operations.EngineTest.test_pre_write_interruption_clears_marker) ... ok
+test_receipt_after_rollback_is_not_completed (test_file_operations.EngineTest.test_receipt_after_rollback_is_not_completed) ... ok
+test_remove_dirs (test_file_operations.EngineTest.test_remove_dirs) ... ok
+test_removed_dir_mode_restored_by_engine_restore (test_file_operations.EngineTest.test_removed_dir_mode_restored_by_engine_restore) ... ok
+test_removed_dir_mode_restored_on_rollback (test_file_operations.EngineTest.test_removed_dir_mode_restored_on_rollback) ... ok
+test_repeated_plan_is_idempotent (test_file_operations.EngineTest.test_repeated_plan_is_idempotent) ... ok
+test_restore_kill_before_neutralize_blocks_retry (test_file_operations.EngineTest.test_restore_kill_before_neutralize_blocks_retry) ... ok
+test_restore_refuses_live_operation (test_file_operations.EngineTest.test_restore_refuses_live_operation) ... ok
+test_restore_rejects_corrupt_backup_copy (test_file_operations.EngineTest.test_restore_rejects_corrupt_backup_copy) ... ok
+test_restore_rejects_foreign_pending (test_file_operations.EngineTest.test_restore_rejects_foreign_pending) ... ok
+test_restore_rejects_incomplete_backup_index (test_file_operations.EngineTest.test_restore_rejects_incomplete_backup_index) ... ok
+test_restore_without_pending_refused (test_file_operations.EngineTest.test_restore_without_pending_refused) ... ok
+test_snapshot_marks_missing_and_dir (test_file_operations.EngineTest.test_snapshot_marks_missing_and_dir) ... ok
+test_spec_validation_rejects_bad_input (test_file_operations.EngineTest.test_spec_validation_rejects_bad_input) ... ok
+test_staged_check_failure_aborts_before_write (test_file_operations.EngineTest.test_staged_check_failure_aborts_before_write) ... ok
+test_write_error_mid_apply_rolls_back (test_file_operations.EngineTest.test_write_error_mid_apply_rolls_back) ... ok
+test_lifecycle_pending_blocks_commands (test_file_operations.GateTest.test_lifecycle_pending_blocks_commands) ... ok
+test_mutating_commands_share_gate (test_file_operations.GateTest.test_mutating_commands_share_gate) ... ok
+test_nested_token_allows_child (test_file_operations.GateTest.test_nested_token_allows_child) ... ok
+test_read_only_check_while_gate_held (test_file_operations.GateTest.test_read_only_check_while_gate_held) ... ok
+test_stale_token_does_not_bypass_busy_gate (test_file_operations.GateTest.test_stale_token_does_not_bypass_busy_gate) ... ok
+test_update_apply_lock_order_with_gate (test_file_operations.GateTest.test_update_apply_lock_order_with_gate)
+update apply держит специализированный lock под общим gate. ... ok
+test_update_pending_blocks_commands (test_file_operations.GateTest.test_update_pending_blocks_commands) ... ok
+test_verify_holds_gate_and_nests_children (test_file_operations.GateTest.test_verify_holds_gate_and_nests_children) ... ok
+test_sigkill_after_receipt_then_rerun (test_file_operations.SubprocessTest.test_sigkill_after_receipt_then_rerun) ... ok
+test_sigkill_before_backup_clears_marker (test_file_operations.SubprocessTest.test_sigkill_before_backup_clears_marker) ... ok
+test_sigkill_during_replace_cleans_own_temp (test_file_operations.SubprocessTest.test_sigkill_during_replace_cleans_own_temp) ... ok
+test_sigkill_lost_index_refuses_restore (test_file_operations.SubprocessTest.test_sigkill_lost_index_refuses_restore) ... ok
+test_sigkill_mid_write_then_standalone_restore (test_file_operations.SubprocessTest.test_sigkill_mid_write_then_standalone_restore) ... ok
+test_standalone_restore_needs_no_kit (test_file_operations.SubprocessTest.test_standalone_restore_needs_no_kit) ... ok
+test_standalone_restore_preserves_foreign_fop_name (test_file_operations.SubprocessTest.test_standalone_restore_preserves_foreign_fop_name) ... ok
+test_standalone_restore_refuses_corrupt_backup (test_file_operations.SubprocessTest.test_standalone_restore_refuses_corrupt_backup) ... ok
+test_standalone_restore_refuses_foreign_marker (test_file_operations.SubprocessTest.test_standalone_restore_refuses_foreign_marker) ... ok
+test_standalone_restore_refuses_live_operation (test_file_operations.SubprocessTest.test_standalone_restore_refuses_live_operation) ... ok
+test_apply_moves_document_materials_and_rewrites_links (test_lifecycle.ArchiveApplyTest.test_apply_moves_document_materials_and_rewrites_links) ... ok
+test_apply_twice_is_already_completed (test_lifecycle.ArchiveApplyTest.test_apply_twice_is_already_completed) ... ok
+test_apply_two_documents_in_one_request (test_lifecycle.ArchiveApplyTest.test_apply_two_documents_in_one_request) ... ok
+test_archive_plan_document_with_done_tasks (test_lifecycle.ArchiveApplyTest.test_archive_plan_document_with_done_tasks) ... ok
+test_plan_preview_writes_nothing (test_lifecycle.ArchiveApplyTest.test_plan_preview_writes_nothing) ... ok
+test_already_archived_refused (test_lifecycle.ArchiveRefusalTest.test_already_archived_refused) ... ok
+test_bad_request_shapes_refused (test_lifecycle.ArchiveRefusalTest.test_bad_request_shapes_refused) ... ok
+test_close_task_unknown_task_refused (test_lifecycle.ArchiveRefusalTest.test_close_task_unknown_task_refused) ... ok
+test_destination_collision_refused (test_lifecycle.ArchiveRefusalTest.test_destination_collision_refused) ... ok
+test_legacy_document_refused (test_lifecycle.ArchiveRefusalTest.test_legacy_document_refused) ... ok
+test_missing_material_refused (test_lifecycle.ArchiveRefusalTest.test_missing_material_refused) ... ok
+test_no_documents_section_refused (test_lifecycle.ArchiveRefusalTest.test_no_documents_section_refused) ... ok
+test_non_final_state_refused (test_lifecycle.ArchiveRefusalTest.test_non_final_state_refused) ... ok
+test_plan_document_with_open_tasks_refused (test_lifecycle.ArchiveRefusalTest.test_plan_document_with_open_tasks_refused) ... ok
+test_scope_mismatch_refused (test_lifecycle.ArchiveRefusalTest.test_scope_mismatch_refused) ... ok
+test_scope_tasks_mismatch_refused (test_lifecycle.ArchiveRefusalTest.test_scope_tasks_mismatch_refused) ... ok
+test_successor_missing_refused (test_lifecycle.ArchiveRefusalTest.test_successor_missing_refused) ... ok
+test_successor_within_same_operation_refused (test_lifecycle.ArchiveRefusalTest.test_successor_within_same_operation_refused) ... ok
+test_unaccounted_evidence_refused (test_lifecycle.ArchiveRefusalTest.test_unaccounted_evidence_refused) ... ok
+test_unconfirmed_external_required_refused (test_lifecycle.ArchiveRefusalTest.test_unconfirmed_external_required_refused) ... ok
+test_unknown_action_refused (test_lifecycle.ArchiveRefusalTest.test_unknown_action_refused) ... ok
+test_unknown_confirmed_material_refused (test_lifecycle.ArchiveRefusalTest.test_unknown_confirmed_material_refused) ... ok
+test_wikilink_conflict_refused (test_lifecycle.ArchiveRefusalTest.test_wikilink_conflict_refused) ... ok
+test_work_area_material_refused (test_lifecycle.ArchiveRefusalTest.test_work_area_material_refused) ... ok
+test_apply_failure_restores_preimage (test_lifecycle.InterruptRestoreTest.test_apply_failure_restores_preimage) ... ok
+test_crash_mid_apply_then_restore (test_lifecycle.InterruptRestoreTest.test_crash_mid_apply_then_restore) ... ok
+test_restore_without_pending_refused (test_lifecycle.InterruptRestoreTest.test_restore_without_pending_refused) ... ok
+test_catalog_change_after_plan_refused (test_lifecycle.StalePlanTest.test_catalog_change_after_plan_refused) ... ok
+test_input_change_after_plan_refused (test_lifecycle.StalePlanTest.test_input_change_after_plan_refused) ... ok
+test_new_evidence_file_after_plan_refused (test_lifecycle.StalePlanTest.test_new_evidence_file_after_plan_refused) ... ok
+test_plan_from_other_root_refused (test_lifecycle.StalePlanTest.test_plan_from_other_root_refused) ... ok
+test_tampered_plan_refused (test_lifecycle.StalePlanTest.test_tampered_plan_refused) ... ok
+test_tampered_request_in_plan_refused (test_lifecycle.StalePlanTest.test_tampered_request_in_plan_refused) ... ok
+test_status_lists_saved_plans (test_lifecycle.StatusTest.test_status_lists_saved_plans) ... ok
+test_init_absent_destination_creates_target_directory (test_pb028.Pb028CompatibilityAndUpdateTest.test_init_absent_destination_creates_target_directory)
+PB-028-A3: init успешно устанавливает комплект в отсутствующий целевой каталог. ... ok
+test_init_absent_destination_rollback_on_failure_cleans_up_created_dirs (test_pb028.Pb028CompatibilityAndUpdateTest.test_init_absent_destination_rollback_on_failure_cleans_up_created_dirs)
+PB-028-A3: при ошибке записи в отсутствующий целевой каталог все созданные каталоги очищаются. ... ok
+test_init_archive_dir_conflict_leaves_clean_tree (test_pb028.Pb028CompatibilityAndUpdateTest.test_init_archive_dir_conflict_leaves_clean_tree)
+PB-028-A1: конфликт архивного пути (файл или symlink) отклоняется до записи без мусора на диске. ... ok
+test_init_foreign_file_conflict_stops_writes (test_pb028.Pb028CompatibilityAndUpdateTest.test_init_foreign_file_conflict_stops_writes)
+Конфликт чужого файла останавливает init до начала записи. ... ok
+test_init_fresh_creates_collections_and_indexes (test_pb028.Pb028CompatibilityAndUpdateTest.test_init_fresh_creates_collections_and_indexes)
+Init создаёт рабочие коллекции, 5 индексов и архивы коллекций. ... ok
+test_init_nested_absent_destination_creates_parents (test_pb028.Pb028CompatibilityAndUpdateTest.test_init_nested_absent_destination_creates_parents)
+PB-028-A3: init создаёт вложенные отсутствующие родительские каталоги целевого пути. ... ok
+test_real_002_artifact_update_with_custom_paths_and_evidence (test_pb028.Pb028CompatibilityAndUpdateTest.test_real_002_artifact_update_with_custom_paths_and_evidence)
+PB-028-A2: реальное обновление артефакта 0.0.2 до 0.0.3 с добавлением модулей и сохранением custom paths. ... ok
+test_real_sigkill_interrupted_lifecycle_locks_update_and_restores (test_pb028.Pb028CompatibilityAndUpdateTest.test_real_sigkill_interrupted_lifecycle_locks_update_and_restores)
+PB-028-A2: реальное SIGKILL-прерывание lifecycle блокирует update plan/apply/restore и восстанавливается автономно. ... ok
+test_real_sigkill_interrupted_update_locks_lifecycle_and_cli_restores (test_pb028.Pb028CompatibilityAndUpdateTest.test_real_sigkill_interrupted_update_locks_lifecycle_and_cli_restores)
+PB-028-A2: реальное прерывание update (SIGKILL mid-write) блокирует lifecycle и восстанавливается через CLI update restore. ... ok
+test_real_sigkill_interrupted_update_standalone_script_restores (test_pb028.Pb028CompatibilityAndUpdateTest.test_real_sigkill_interrupted_update_standalone_script_restores)
+PB-028-A2: автономный restore.py восстанавливает реальное SIGKILL-прерывание update. ... ok
+test_schema_backward_compatibility (test_pb028.Pb028CompatibilityAndUpdateTest.test_schema_backward_compatibility)
+0.0.2 без documents работает; documents опционален с собственной схемой. ... ok
+test_unannounced_update_transition_rejected (test_pb028.Pb028CompatibilityAndUpdateTest.test_unannounced_update_transition_rejected)
+Необъявленный переход отклоняется до записи. ... ok
+test_ac02_discussion_lifecycle_and_transition_to_spec (test_pb029.Pb029EndToEndRoutesTest.test_ac02_discussion_lifecycle_and_transition_to_spec)
+AC-02: Обсуждения без файлов по умолчанию; CLI create создаёт discussion и index; ... ok
+test_ac07_feature_deprecation_and_adr_archival_e2e (test_pb029.Pb029EndToEndRoutesTest.test_ac07_feature_deprecation_and_adr_archival_e2e)
+AC-07: Частичное удаление (SMS) обновляет общую спецификацию и design; ... ok
+test_ac10_ac11_lifecycle_controls_and_missing_evidence (test_pb029.Pb029EndToEndRoutesTest.test_ac10_ac11_lifecycle_controls_and_missing_evidence)
+AC-10, AC-11: Потерянное обязательное доказательство блокирует закрытие; ... ok
+test_large_block_route_e2e (test_pb029.Pb029EndToEndRoutesTest.test_large_block_route_e2e)
+AC-05, AC-06, AC-08: Большая задача (блок подзадач + общий аудит); ... ok
+test_link_and_archive_immutability_e2e (test_pb029.Pb029EndToEndRoutesTest.test_link_and_archive_immutability_e2e)
+AC-08, AC-09: Перемещение в архив сохраняет целостность ссылок; ... ok
+test_medium_task_route_e2e (test_pb029.Pb029EndToEndRoutesTest.test_medium_task_route_e2e)
+AC-04, AC-07: Средняя задача (feature) с отдельной спецификацией; ... ok
+test_self_project_copy_pilot (test_pb029.Pb029EndToEndRoutesTest.test_self_project_copy_pilot)
+AC-12: Копия собственного проекта ai-dev-playbook со всеми незакоммиченными ... ok
+test_small_task_route_e2e (test_pb029.Pb029EndToEndRoutesTest.test_small_task_route_e2e)
+AC-03: Маленькая задача (баг) в одной карточке, без отдельного spec/plan; ... ok
+test_active_card_with_closed_rejected (test_playbook.TaskPlacementTest.test_active_card_with_closed_rejected) ... ok
+test_bad_timestamp_rejected (test_playbook.TaskPlacementTest.test_bad_timestamp_rejected) ... ok
+test_closed_before_created_rejected (test_playbook.TaskPlacementTest.test_closed_before_created_rejected) ... ok
+test_created_closed_parsed (test_playbook.TaskPlacementTest.test_created_closed_parsed) ... ok
+test_created_unset_rejected (test_playbook.TaskPlacementTest.test_created_unset_rejected) ... ok
+test_dependency_on_archived_done (test_playbook.TaskPlacementTest.test_dependency_on_archived_done) ... ok
+test_done_in_archive_accepted (test_playbook.TaskPlacementTest.test_done_in_archive_accepted) ... ok
+test_done_in_tasks_rejected (test_playbook.TaskPlacementTest.test_done_in_tasks_rejected) ... ok
+test_done_without_closed_rejected (test_playbook.TaskPlacementTest.test_done_without_closed_rejected) ... ok
+test_executor_model_absent (test_playbook.TaskPlacementTest.test_executor_model_absent) ... ok
+test_executor_model_parsed (test_playbook.TaskPlacementTest.test_executor_model_parsed) ... ok
+test_missing_created_closed_lines_rejected (test_playbook.TaskPlacementTest.test_missing_created_closed_lines_rejected) ... ok
+test_open_card_in_archive_rejected (test_playbook.TaskPlacementTest.test_open_card_in_archive_rejected) ... ok
+test_render_index_archive_newest_first (test_playbook.TaskPlacementTest.test_render_index_archive_newest_first) ... ok
+test_render_index_archive_sorted_by_closed (test_playbook.TaskPlacementTest.test_render_index_archive_sorted_by_closed) ... ok
+test_render_index_executor_column (test_playbook.TaskPlacementTest.test_render_index_executor_column) ... ok
+test_render_index_lists_active_and_archive (test_playbook.TaskPlacementTest.test_render_index_lists_active_and_archive) ... ok
+test_render_index_model_without_executor_dash (test_playbook.TaskPlacementTest.test_render_index_model_without_executor_dash) ... ok
+test_render_index_stamp_columns (test_playbook.TaskPlacementTest.test_render_index_stamp_columns) ... ok
+test_timestamp_without_timezone_rejected (test_playbook.TaskPlacementTest.test_timestamp_without_timezone_rejected) ... ok
+test_backtick_fence_ignored (test_playbook.UnconfirmedLinesTest.test_backtick_fence_ignored) ... ok
+test_inline_code_ignored (test_playbook.UnconfirmedLinesTest.test_inline_code_ignored) ... ok
+test_other_fence_inside_block_is_content (test_playbook.UnconfirmedLinesTest.test_other_fence_inside_block_is_content) ... ok
+test_plain_text_flagged (test_playbook.UnconfirmedLinesTest.test_plain_text_flagged) ... ok
+test_shorter_fence_does_not_close (test_playbook.UnconfirmedLinesTest.test_shorter_fence_does_not_close) ... ok
+test_tilde_fence_ignored (test_playbook.UnconfirmedLinesTest.test_tilde_fence_ignored) ... ok
+
+----------------------------------------------------------------------
+Ran 430 tests in 95.882s
+
+OK

@@ -1,0 +1,25 @@
+{
+  "schema_version": 2,
+  "workflow": {
+    "route": "small"
+  },
+  "verification_plan": {
+    "revision": 1,
+    "rationale": "Тест дублирования ID проверок",
+    "scope": ["tests"],
+    "checks": [
+      {
+        "id": "test-run",
+        "kind": "command",
+        "purpose": "Первый прогон",
+        "registry_id": "unit-tests"
+      },
+      {
+        "id": "test-run",
+        "kind": "command",
+        "purpose": "Дублирующий прогон",
+        "registry_id": "unit-tests"
+      }
+    ]
+  }
+}

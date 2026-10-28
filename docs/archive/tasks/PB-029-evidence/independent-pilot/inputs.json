@@ -1,0 +1,19 @@
+{
+  "session": "01a162f1-a308-7c12-9380-08445b6a30d0",
+  "archives": {
+    "pilot-workspace-handoff.tar.gz": "4ed143b26d15a5a261dfc5961f1eb082cb89a96a99824b6834fa018f60aa842c",
+    "pilot-workspace.tar.gz": "421b5a068b6d13e25b0ee9fbeae88d8680bfbfba6753861fd020c998801ecded"
+  },
+  "source_files": {
+    "handoff/pilot-workspace/src/validator.py": "d8278046bdbb74870a91bd1d291046850236aaa3e60b99c6aca8fe71c3bd60ca",
+    "handoff/pilot-workspace/src/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "handoff/pilot-workspace/tests/test_parser.py": "c65c2e24087875b4320a1b2c144f9151bb70211785bc94ca91478dcf9349eb80",
+    "handoff/pilot-workspace/tests/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "handoff/pilot-workspace/tests/test_validator.py": "adece3d6235fbca3220a53371a94166f21c3e5b3e0cc85cca7680f584e7f6f29",
+    "corrected/pilot-workspace/src/validator.py": "f2f53b963e343bc013e5847b26066fd633514a9de81608332790fe92eb199a9e",
+    "corrected/pilot-workspace/src/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "corrected/pilot-workspace/tests/test_parser.py": "a8399b0bd1de04b2d59b170997bae20eedf1816f3c034bac3cc5ab719f43d230",
+    "corrected/pilot-workspace/tests/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "corrected/pilot-workspace/tests/test_validator.py": "94bd18cea8ccf8edde0928d6eb292302a75ea047e29ad5fecb088c65a2ac3eff"
+  }
+}

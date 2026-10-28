@@ -1,0 +1,22 @@
+{
+  "ai-dev-playbook/scripts/verification.py": "4e40c247880d7adadc98bb5236486f481b65cd2572bea6197be2e35e88cc1d51",
+  "ai-dev-playbook/scripts/playbook.py": "8652371c69953ff44a3df0561e8a8a392c56c17aee7e23cce8a642e1218b3114",
+  "ai-dev-playbook/scripts/documents.py": "68b1ef633f83ab3b63c6e41d4c29e494a618d4324e939f9c7be174ad6df6f32b",
+  "ai-dev-playbook/scripts/lifecycle.py": "6a0b677dfa597221a25816eba734b291acc01014fce5bab2d7efaf48c83fb5ab",
+  "ai-dev-playbook/scripts/updating.py": "47cc34758e94f96bdd6e61c08dc0851ac7a22f55e47f2341a0f2fa81568227f4",
+  "ai-dev-playbook/scripts/file_operations.py": "9faa9cde835821c7c71c4166d17acb738e6be239786ff4ddfe845c955c22f0d6",
+  "ai-dev-playbook/scripts/document_links.py": "03be42c18746071428da4c3aab3d5a257257f7ebcda519cb4ad7c215d6007bad",
+  "tests/test_lifecycle.py": "79e973d7dede2fcbb1f47415f1835a50d9017ec76dc60e8515ae6c0eac5e0740",
+  "tests/test_document_cli.py": "e206a6821ea4a755f8a127fafeb3b52544164ab776fc29fb2789adef887a75c9",
+  "tests/test_document_links.py": "afbf0ed3d0dffb5179442ce3d85563c569ab84363877bb10a12deb23f6011932",
+  "tests/test_file_operations.py": "9f00df294fef0bb857f9b00ba71c8513f2834fe9ed0f049033aea0d88b0ba9d8",
+  "tests/test_pb028.py": "71a364af4444e3206700b35731b2d0ecf33cc6a1cdccc3d145466675782eea7e",
+  "tests/test_pb029.py": "e131b0c72251e1a43c2bd563bfd696dbe826cce8b2c8883f8e9abb4657dfde67",
+  "tests/test_playbook.py": "c3ab2fbe200ceb85d4d1eecfaf8c71df2fcaa04186b20ac887b5931cf3e7f605",
+  "tests/test_close_lifecycle.py": "a5e4ac6c5d8676616b5eaf7d1963fc94fee5c19b0ad451ed8b0d89c1a72ff874",
+  "tests/test_cli.py": "1b6cda3c020a6fff6398ac8bcdabbc8acaaad31fff6a2dbc298251b1c9a765b0",
+  "tests/test_documents.py": "3ca7e1c43a800c67f8dc8cedd61c9cc2a4f3ec33459bfb128ad23cc9c14403dd",
+  "tests/fixtures/release-0.0.2/ai-dev-playbook/scripts/verification.py": "0bb563b8f17a1c9c2eb3e1e12dff78bb3f923bca85447d8a1f983ff7e2e127b9",
+  "tests/fixtures/release-0.0.2/ai-dev-playbook/scripts/playbook.py": "51a5efdb989711ef8de23854f70d7032a11816b46ccbee2dc2123a1103fee92d",
+  "tests/fixtures/release-0.0.2/ai-dev-playbook/scripts/updating.py": "01cfd3f71467a557504e02128e732cdaf65c112790cd9bab4308915bfdf49af4"
+}

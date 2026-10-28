@@ -1,0 +1,3 @@
+RUN: controlled-pass
+passed: /var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/tmpe1mqk2ma/work/verification/PROBE-51/cfd96184dd624ff6bb61fa55db6c85f8/report.json
+{"fixed_finding": "A-02", "report_status": "passed", "inputs_unchanged": true, "changelog_changed_after_report": true, "inputs_fresh": false, "differences": ["CHANGELOG.md"], "limitation": "Controlled passing check on a temporary project; exact repository input list; not PB-051 final verify"}

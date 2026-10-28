@@ -1,0 +1,11 @@
+{
+  "audited_at": "2026-10-02T06:43:37+03:00",
+  "platform": "macOS-27.0.1-x86_64-i386-64bit-Mach-O",
+  "python": "3.14.6",
+  "sha256": {
+    "ai-dev-playbook/scripts/file_operations.py": "b9a8cae42a82823075bf2e14914c1e2576f7d4f92ce72efff22b748ffaf019f0",
+    "ai-dev-playbook/scripts/playbook.py": "b149383df3ad5ddc47219026b85bd50cee9e86ffa7043b83714b58afc2c0b89e",
+    "ai-dev-playbook/scripts/verification.py": "630bd0b6d527783f1639682fb9ad307dac15aa4d910121c29c62572ee41983d7",
+    "ai-dev-playbook/scripts/updating.py": "ba98f79da19a60a787c93e910c246ea2faf9a5d78eb44992d2efb6e11b4d174a"
+  }
+}

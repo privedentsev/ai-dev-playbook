@@ -1,0 +1,108 @@
+{
+  "schema_version": 1,
+  "card_format_version": 2,
+  "relations": [],
+  "materials": [
+    {
+      "id": "implementation-checks",
+      "role": "report",
+      "source": "docs/archive/tasks/PB-052-evidence",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-052"
+      ]
+    },
+    {
+      "id": "verify-c44cade656b64407b61f02a286ff2b26",
+      "role": "report",
+      "source": "docs/archive/tasks/PB-052-evidence/work/verification/PB-052/c44cade656b64407b61f02a286ff2b26",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-052"
+      ]
+    },
+    {
+      "id": "audit-01",
+      "role": "report",
+      "source": "docs/archive/tasks/PB-052-evidence/work/verification/PB-052/audit-01",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-052"
+      ]
+    },
+    {
+      "id": "lifecycle-lc-e5f9d931c8501e2a",
+      "role": "report",
+      "source": "docs/archive/tasks/PB-052-evidence/close-lc-e5f9d931c8501e2a.json",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": []
+    }
+  ],
+  "criterion_evidence": {
+    "CHECK-01": {
+      "check_sha256": "sha256:cd7c6536b9b49ea7c31405142fab81da1e70faa31e96e3277b588bdb322149cb",
+      "card_projection": "sha256:7476bd503ff83bed9ac20e0085a2b6be42ce5c1f6484e4be36512f5624bec5a4",
+      "report_id": "verify-c44cade656b64407b61f02a286ff2b26",
+      "report_sha256": "sha256:5494cfa2ef1fd2491e422f815170634b2a7997c50c6884a324043686aca09e71"
+    }
+  },
+  "handoff": {
+    "at": "2026-10-27T00:33:21+03:00",
+    "actor": {
+      "name": "Codex",
+      "model": "GPT-6"
+    },
+    "summary": "HANDOFF-01",
+    "reports": [
+      "verify-c44cade656b64407b61f02a286ff2b26"
+    ],
+    "card_projection": "sha256:7476bd503ff83bed9ac20e0085a2b6be42ce5c1f6484e4be36512f5624bec5a4",
+    "entry_id": "HANDOFF-01",
+    "journal_sha256": "sha256:251d0c87dc976ec522fbb661b11ec1f23fb6b72c27ea86df3203de020c571280"
+  },
+  "acceptance": {
+    "at": "2026-10-27T08:33:41+03:00",
+    "actor": {
+      "name": "Codex",
+      "model": "GPT-6.1 Sol"
+    },
+    "role": "auditor",
+    "kind": "acceptance",
+    "result": "accepted",
+    "handoff_at": "2026-10-27T00:33:21+03:00",
+    "session": null,
+    "detail": null,
+    "audit_id": "AUDIT-01",
+    "audit_sha256": "sha256:8fb000eb7e89834c337ab5c5acb2e8a3de4545af18c8e11504cbb04172bec58a"
+  },
+  "moves": [
+    {
+      "from": "docs/tasks/PB-052-evidence",
+      "to": "docs/archive/tasks/PB-052-evidence"
+    },
+    {
+      "from": "work/verification/PB-052/c44cade656b64407b61f02a286ff2b26",
+      "to": "docs/archive/tasks/PB-052-evidence/work/verification/PB-052/c44cade656b64407b61f02a286ff2b26"
+    },
+    {
+      "from": "work/verification/PB-052/audit-01",
+      "to": "docs/archive/tasks/PB-052-evidence/work/verification/PB-052/audit-01"
+    },
+    {
+      "from": "docs/tasks/PB-052.md",
+      "to": "docs/archive/tasks/PB-052.md"
+    },
+    {
+      "from": "docs/tasks/PB-052.meta.json",
+      "to": "docs/archive/tasks/PB-052.meta.json"
+    }
+  ]
+}

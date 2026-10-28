@@ -1,0 +1,63 @@
+{
+  "schema_version": 2,
+  "workflow": {
+    "route": "quick",
+    "reason": "Локальное изменение стилей кнопки без изменения серверного кода",
+    "history": [
+      {
+        "at": "2026-10-23T08:00:00+03:00",
+        "from_route": null,
+        "to_route": "quick",
+        "reason": "Первоначальный выбор быстрого маршрута",
+        "actor": "Antigravity"
+      }
+    ]
+  },
+  "verification_plan": {
+    "revision": 1,
+    "rationale": "Проверка охватывает модульные тесты и ручной просмотр изменённого компонента",
+    "scope": [
+      "ai-dev-playbook/scripts/documents.py",
+      "tests/test_documents.py"
+    ],
+    "checks": [
+      {
+        "id": "unit-tests",
+        "kind": "command",
+        "purpose": "Проверка схемы документов и задач",
+        "registry_id": "unit-tests",
+        "inputs": [
+          "ai-dev-playbook/scripts/documents.py",
+          "tests/test_documents.py"
+        ],
+        "applicability": {
+          "kind": "always"
+        }
+      },
+      {
+        "id": "visual-check",
+        "kind": "manual",
+        "purpose": "Визуальный контроль стилей",
+        "scenario": "Проверить корректность стилей кнопки в браузере при разрешении 1920x1080",
+        "inputs": [
+          "docs/tasks/PB-031.md"
+        ],
+        "applicability": {
+          "kind": "when_paths",
+          "paths": ["docs/**"]
+        }
+      }
+    ],
+    "decisions": []
+  },
+  "relations": [
+    {
+      "relation": "based_on",
+      "target": "spec:proportional-workflow"
+    }
+  ],
+  "materials": [],
+  "moves": [],
+  "handoff": null,
+  "acceptance": null
+}

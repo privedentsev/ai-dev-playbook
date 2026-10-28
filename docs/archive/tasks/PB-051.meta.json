@@ -1,0 +1,253 @@
+{
+  "schema_version": 1,
+  "card_format_version": 2,
+  "relations": [],
+  "materials": [
+    {
+      "id": "recheck-tests",
+      "role": "report",
+      "source": "docs/archive/tasks/PB-051-evidence/recheck-tests.log",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-051"
+      ]
+    },
+    {
+      "id": "audit-20261027",
+      "role": "report",
+      "source": "docs/archive/tasks/PB-051-evidence/work/verification/PB-051/audit-20261027",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-051"
+      ]
+    },
+    {
+      "id": "freshness-fixed-probe",
+      "role": "report",
+      "source": "docs/archive/tasks/PB-051-evidence/freshness-fixed.py",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-051"
+      ]
+    },
+    {
+      "id": "freshness-fixed-log",
+      "role": "report",
+      "source": "docs/archive/tasks/PB-051-evidence/freshness-fixed.log",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-051"
+      ]
+    },
+    {
+      "id": "freshness-fixed-report",
+      "role": "report",
+      "source": "docs/archive/tasks/PB-051-evidence/freshness-fixed-report.json",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-051"
+      ]
+    },
+    {
+      "id": "historical-failed-verify",
+      "role": "report",
+      "source": "docs/archive/tasks/PB-051-evidence/work/verification/PB-051/caa4fbbcf01d4f9090dfe3dd4364c9ea",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-051"
+      ]
+    },
+    {
+      "id": "verify-5c8c667b64754818a21f6e2a2c34e433",
+      "role": "report",
+      "source": "docs/archive/tasks/PB-051-evidence/work/verification/PB-051/5c8c667b64754818a21f6e2a2c34e433",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-051"
+      ]
+    },
+    {
+      "id": "reaudit-02",
+      "role": "report",
+      "source": "docs/archive/tasks/PB-051-evidence/work/verification/PB-051/reaudit-02",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-051"
+      ]
+    },
+    {
+      "id": "finder-fix",
+      "role": "report",
+      "source": "docs/archive/tasks/PB-051-evidence/finder-fix",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-051"
+      ]
+    },
+    {
+      "id": "verify-c34964a993774221bf3e6c4bbf225348",
+      "role": "report",
+      "source": "docs/archive/tasks/PB-051-evidence/work/verification/PB-051/c34964a993774221bf3e6c4bbf225348",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-051"
+      ]
+    },
+    {
+      "id": "reaudit-03",
+      "role": "report",
+      "source": "docs/archive/tasks/PB-051-evidence/work/verification/PB-051/reaudit-03",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-051"
+      ]
+    },
+    {
+      "id": "closure-proof",
+      "role": "report",
+      "source": "docs/archive/tasks/PB-051-evidence/work/verification/PB-051/closure-proof",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-051"
+      ]
+    },
+    {
+      "id": "lifecycle-lc-430c78d4f5f52465",
+      "role": "report",
+      "source": "docs/archive/tasks/PB-051-evidence/close-lc-430c78d4f5f52465.json",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": []
+    }
+  ],
+  "criterion_evidence": {
+    "CHECK-07": {
+      "check_sha256": "sha256:f053f814181a26a73dc9d8cd64c169a64e54c27fde96cbe92c5b475aa499a8d5",
+      "card_projection": "sha256:201d54c28ddb15649e4bb7606d2b4554f2c9b00a7b5d8dbc26b47d32abf86fa4",
+      "report_id": "verify-5c8c667b64754818a21f6e2a2c34e433",
+      "report_sha256": "sha256:ebdca078a11a52a5df2873ef83d2646f73c7c3cc8ae4aa650420bda3881e8130"
+    },
+    "CHECK-08": {
+      "check_sha256": "sha256:e4380383fcec53bfdddb9887e91393bab807bf30c9e9a4169e432dda8a3506c0",
+      "card_projection": "sha256:dc62e1392f115de0f6180b13dd9464c54392e87d3e7c2b911a6d321f34ce3a10",
+      "report_id": "verify-c34964a993774221bf3e6c4bbf225348",
+      "report_sha256": "sha256:e8b7d574d830b9d40abc28748ffcee84e397be5876c75c3a472c8c3ac47d837b"
+    }
+  },
+  "handoff": {
+    "at": "2026-10-27T09:58:00+03:00",
+    "actor": {
+      "name": "Codex",
+      "model": "GPT-6"
+    },
+    "summary": "HANDOFF-02",
+    "reports": [
+      "verify-c34964a993774221bf3e6c4bbf225348"
+    ],
+    "card_projection": "sha256:dc62e1392f115de0f6180b13dd9464c54392e87d3e7c2b911a6d321f34ce3a10",
+    "entry_id": "HANDOFF-02",
+    "journal_sha256": "sha256:a222dad723785f1f1b4f008ef20fca05eb02cc600d6149f26a67aa25f1c7b78d"
+  },
+  "acceptance": {
+    "at": "2026-10-27T10:18:06+03:00",
+    "actor": {
+      "name": "Codex",
+      "model": "GPT-6"
+    },
+    "role": "auditor",
+    "kind": "acceptance",
+    "result": "accepted",
+    "handoff_at": "2026-10-27T09:58:00+03:00",
+    "session": null,
+    "detail": null,
+    "audit_id": "AUDIT-03",
+    "audit_sha256": "sha256:da8ef38b7dd9988cab70dc9f4093ac01324ed2b655e54faf8eee87f796deaedb"
+  },
+  "moves": [
+    {
+      "from": "work/verification/PB-051/audit-20261027/card-original.md",
+      "to": "work/verification/PB-051/audit-20261027/card-original.txt"
+    },
+    {
+      "from": "docs/tasks/PB-051-evidence/recheck-tests.log",
+      "to": "docs/archive/tasks/PB-051-evidence/recheck-tests.log"
+    },
+    {
+      "from": "work/verification/PB-051/audit-20261027",
+      "to": "docs/archive/tasks/PB-051-evidence/work/verification/PB-051/audit-20261027"
+    },
+    {
+      "from": "docs/tasks/PB-051-evidence/freshness-fixed.py",
+      "to": "docs/archive/tasks/PB-051-evidence/freshness-fixed.py"
+    },
+    {
+      "from": "docs/tasks/PB-051-evidence/freshness-fixed.log",
+      "to": "docs/archive/tasks/PB-051-evidence/freshness-fixed.log"
+    },
+    {
+      "from": "docs/tasks/PB-051-evidence/freshness-fixed-report.json",
+      "to": "docs/archive/tasks/PB-051-evidence/freshness-fixed-report.json"
+    },
+    {
+      "from": "work/verification/PB-051/caa4fbbcf01d4f9090dfe3dd4364c9ea",
+      "to": "docs/archive/tasks/PB-051-evidence/work/verification/PB-051/caa4fbbcf01d4f9090dfe3dd4364c9ea"
+    },
+    {
+      "from": "work/verification/PB-051/5c8c667b64754818a21f6e2a2c34e433",
+      "to": "docs/archive/tasks/PB-051-evidence/work/verification/PB-051/5c8c667b64754818a21f6e2a2c34e433"
+    },
+    {
+      "from": "work/verification/PB-051/reaudit-02",
+      "to": "docs/archive/tasks/PB-051-evidence/work/verification/PB-051/reaudit-02"
+    },
+    {
+      "from": "docs/tasks/PB-051-evidence/finder-fix",
+      "to": "docs/archive/tasks/PB-051-evidence/finder-fix"
+    },
+    {
+      "from": "work/verification/PB-051/c34964a993774221bf3e6c4bbf225348",
+      "to": "docs/archive/tasks/PB-051-evidence/work/verification/PB-051/c34964a993774221bf3e6c4bbf225348"
+    },
+    {
+      "from": "work/verification/PB-051/reaudit-03",
+      "to": "docs/archive/tasks/PB-051-evidence/work/verification/PB-051/reaudit-03"
+    },
+    {
+      "from": "work/verification/PB-051/closure-proof",
+      "to": "docs/archive/tasks/PB-051-evidence/work/verification/PB-051/closure-proof"
+    },
+    {
+      "from": "docs/tasks/PB-051.md",
+      "to": "docs/archive/tasks/PB-051.md"
+    },
+    {
+      "from": "docs/tasks/PB-051.meta.json",
+      "to": "docs/archive/tasks/PB-051.meta.json"
+    }
+  ]
+}

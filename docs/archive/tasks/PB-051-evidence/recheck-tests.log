@@ -1,0 +1,104 @@
+test_adopt_erroneous_label_010 (test_cli.AdoptTest.test_adopt_erroneous_label_010) ... FAIL
+test_real_002_artifact_update_with_custom_paths_and_evidence (test_pb028.Pb028CompatibilityAndUpdateTest.test_real_002_artifact_update_with_custom_paths_and_evidence)
+PB-028-A2: реальное обновление артефакта 0.0.2 до 0.0.3 с добавлением модулей и сохранением custom paths. ... FAIL
+test_self_project_copy_pilot (test_pb029.Pb029EndToEndRoutesTest.test_self_project_copy_pilot)
+AC-12: Копия собственного проекта ai-dev-playbook со всеми незакоммиченными ... FAIL
+test_PB_031_A1_symlink_in_scope_and_inputs_rejected (test_task_workflow_schema.AuditFindingsCoverageTest.test_PB_031_A1_symlink_in_scope_and_inputs_rejected) ... ERROR
+test_PB_031_A2_null_plan_and_null_inputs_rejected (test_task_workflow_schema.AuditFindingsCoverageTest.test_PB_031_A2_null_plan_and_null_inputs_rejected) ... ERROR
+test_PB_031_A4_v2_card_rejected_without_task_workflow_opt_in (test_task_workflow_schema.AuditFindingsCoverageTest.test_PB_031_A4_v2_card_rejected_without_task_workflow_opt_in) ... ERROR
+
+======================================================================
+ERROR: test_PB_031_A1_symlink_in_scope_and_inputs_rejected (test_task_workflow_schema.AuditFindingsCoverageTest.test_PB_031_A1_symlink_in_scope_and_inputs_rejected)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_task_workflow_schema.py", line 677, in test_PB_031_A1_symlink_in_scope_and_inputs_rejected
+    data, paths = playbook.config(self.root)
+                  ~~~~~~~~~~~~~~~^^^^^^^^^^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/ai-dev-playbook/scripts/playbook.py", line 91, in config
+    require(manifest["playbook_version"] == data["playbook_version"],
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            "manifest: playbook_version не совпадает с project.json")
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/ai-dev-playbook/scripts/playbook.py", line 60, in require
+    raise ValueError(message)
+ValueError: manifest: playbook_version не совпадает с project.json
+
+======================================================================
+ERROR: test_PB_031_A2_null_plan_and_null_inputs_rejected (test_task_workflow_schema.AuditFindingsCoverageTest.test_PB_031_A2_null_plan_and_null_inputs_rejected)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_task_workflow_schema.py", line 750, in test_PB_031_A2_null_plan_and_null_inputs_rejected
+    data, paths = playbook.config(self.root)
+                  ~~~~~~~~~~~~~~~^^^^^^^^^^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/ai-dev-playbook/scripts/playbook.py", line 91, in config
+    require(manifest["playbook_version"] == data["playbook_version"],
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            "manifest: playbook_version не совпадает с project.json")
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/ai-dev-playbook/scripts/playbook.py", line 60, in require
+    raise ValueError(message)
+ValueError: manifest: playbook_version не совпадает с project.json
+
+======================================================================
+ERROR: test_PB_031_A4_v2_card_rejected_without_task_workflow_opt_in (test_task_workflow_schema.AuditFindingsCoverageTest.test_PB_031_A4_v2_card_rejected_without_task_workflow_opt_in)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_task_workflow_schema.py", line 739, in test_PB_031_A4_v2_card_rejected_without_task_workflow_opt_in
+    data, paths = playbook.config(self.root)
+                  ~~~~~~~~~~~~~~~^^^^^^^^^^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/ai-dev-playbook/scripts/playbook.py", line 91, in config
+    require(manifest["playbook_version"] == data["playbook_version"],
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            "manifest: playbook_version не совпадает с project.json")
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/ai-dev-playbook/scripts/playbook.py", line 60, in require
+    raise ValueError(message)
+ValueError: manifest: playbook_version не совпадает с project.json
+
+======================================================================
+FAIL: test_adopt_erroneous_label_010 (test_cli.AdoptTest.test_adopt_erroneous_label_010)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_cli.py", line 724, in test_adopt_erroneous_label_010
+    self.assertEqual(code, 0, err + out)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+AssertionError: 1 != 0 : ERROR: Разрешения указаны для файлов без расхождения: ai-dev-playbook/VERSION
+
+
+======================================================================
+FAIL: test_real_002_artifact_update_with_custom_paths_and_evidence (test_pb028.Pb028CompatibilityAndUpdateTest.test_real_002_artifact_update_with_custom_paths_and_evidence)
+PB-028-A2: реальное обновление артефакта 0.0.2 до 0.0.3 с добавлением модулей и сохранением custom paths.
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_pb028.py", line 232, in test_real_002_artifact_update_with_custom_paths_and_evidence
+    self.assertIn("0.0.2 → 0.0.3", out)
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: '0.0.2 → 0.0.3' not found in 'Артефакт: /Users/privedentsev1/Dev/ai-dev-playbook (checkout), версия 0.1.0, release_id sha256:4a08737fc9ec…\nУстановлено: 0.0.2, release_id sha256:86d50af60909…\nПереход: 0.0.2 → 0.1.0, шагов миграции: 1\nДобавления (12):\n  + ai-dev-playbook/rules/task-card-format.md\n  + ai-dev-playbook/scripts/document_links.py\n  + ai-dev-playbook/scripts/documents.py\n  + ai-dev-playbook/scripts/file_operations.py\n  + ai-dev-playbook/scripts/lifecycle.py\n  + ai-dev-playbook/scripts/task_cards.py\n  + ai-dev-playbook/templates/documents/adr.md\n  + ai-dev-playbook/templates/documents/design.md\n  + ai-dev-playbook/templates/documents/discussion.md\n  + ai-dev-playbook/templates/documents/plan.md\n  + ai-dev-playbook/templates/documents/spec.md\n  + ai-dev-playbook/templates/task.meta.json\nЗамены (14):\n  ~ ai-dev-playbook/README.md\n  ~ ai-dev-playbook/VERSION\n  ~ ai-dev-playbook/rules/context.md\n  ~ ai-dev-playbook/rules/tasks.md\n  ~ ai-dev-playbook/rules/verification.md\n  ~ ai-dev-playbook/rules/workflow.md\n  ~ ai-dev-playbook/scripts/playbook.py\n  ~ ai-dev-playbook/scripts/updating.py\n  ~ ai-dev-playbook/scripts/verification.py\n  ~ ai-dev-playbook/templates/AGENTS.md\n  ~ ai-dev-playbook/templates/docs/index.md\n  ~ ai-dev-playbook/templates/project.json\n  ~ ai-dev-playbook/templates/task.md\n  ~ ai-dev-playbook/updates.json\nМиграции:\n  ai-dev-playbook/project.json: schema 1→1, шагов: 0\n    --- a/ai-dev-playbook/project.json\n    +++ b/ai-dev-playbook/project.json\n    @@ -1,6 +1,6 @@\n     {\n       "schema_version": 1,\n    -  "playbook_version": "0.0.2",\n    +  "playbook_version": "0.1.0",\n       "name": "real-002-project",\n       "setup_status": "configured",\n       "paths": {\n\nРучные шаги и предупреждения:\n  * Комплект обновлён до версии 0.1.0 с поддержкой коллекций документов и 8 режимов работы. Для подключения коллекций настройте раздел documents в project.json.\n  * Шаблон AGENTS.md изменился: проектные инструкции сохраняются, проверьте подключение правил вручную\nПлан записан: work/update/plan.json\n'
+
+======================================================================
+FAIL: test_self_project_copy_pilot (test_pb029.Pb029EndToEndRoutesTest.test_self_project_copy_pilot)
+AC-12: Копия собственного проекта ai-dev-playbook со всеми незакоммиченными
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_pb029.py", line 775, in test_self_project_copy_pilot
+    self.assertEqual(actual_hash, expected_hash, f"Файл {rel_path} изменился!")
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: '1b4ec009bc0598a08b4525b9ea9ce25cab2567451b40f66e08648bbb9bc67f52' != '51860ab9908ecd302d3ea11090d2328bac4c65b843f61617ab6f4d959c3c0fbe'
+- 1b4ec009bc0598a08b4525b9ea9ce25cab2567451b40f66e08648bbb9bc67f52
++ 51860ab9908ecd302d3ea11090d2328bac4c65b843f61617ab6f4d959c3c0fbe
+ : Файл docs/specs/workflow-and-document-lifecycle.md изменился!
+
+----------------------------------------------------------------------
+Ran 6 tests in 181.297s
+
+FAILED (failures=3, errors=3)
+PB-051: чекбоксы уже актуальны.
+PB-041: чекбоксы уже актуальны.
+PB-045: чекбоксы уже актуальны.
+PB-044: чекбоксы уже актуальны.
+PB-050: чекбоксы уже актуальны.
+PB-049: чекбоксы уже актуальны.
+PB-048: чекбоксы уже актуальны.
+AUDIT-008: чекбоксы уже актуальны.
+PB-047: чекбоксы уже актуальны.
+PB-046: чекбоксы уже актуальны.

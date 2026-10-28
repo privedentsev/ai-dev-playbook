@@ -1,0 +1,29 @@
+[
+  {
+    "case": "material-id-list",
+    "returncode": 1,
+    "stdout": "",
+    "stderr": "ERROR: cannot use 'list' as a set element (unhashable type: 'list')\n",
+    "added": [],
+    "removed": [],
+    "changed": []
+  },
+  {
+    "case": "change-id-object",
+    "returncode": 1,
+    "stdout": "",
+    "stderr": "ERROR: cannot use 'dict' as a set element (unhashable type: 'dict')\n",
+    "added": [],
+    "removed": [],
+    "changed": []
+  },
+  {
+    "case": "malformed-external-uri",
+    "returncode": 1,
+    "stdout": "",
+    "stderr": "ERROR: Invalid IPv6 URL\n",
+    "added": [],
+    "removed": [],
+    "changed": []
+  }
+]

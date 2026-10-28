@@ -1,0 +1,14 @@
+{
+  "sample": "PB-042, existing history unchanged",
+  "selected_ids": [
+    "EXEC-01",
+    "CHECK-02",
+    "HANDOFF-02"
+  ],
+  "separate_calls": 4,
+  "combined_calls": 1,
+  "separate_output_chars": 4304,
+  "combined_output_chars": 4337,
+  "raw_entries_preserved": true,
+  "limitations": "Characters, not tokens; this measures navigation, not agent comprehension. Old HANDOFF free-text references are not recursively followed."
+}

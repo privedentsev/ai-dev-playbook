@@ -1,0 +1,15 @@
+test_A1_close_preserves_unrelated_links (__main__.AuditProbes.test_A1_close_preserves_unrelated_links) ... ok
+test_A1_encoded_destination_keeps_identity (__main__.AuditProbes.test_A1_encoded_destination_keeps_identity) ... ok
+test_A1_generated_index_destination_keeps_identity (__main__.AuditProbes.test_A1_generated_index_destination_keeps_identity) ... ok
+test_A2_code_examples_preserved (__main__.AuditProbes.test_A2_code_examples_preserved) ... ok
+test_A3_moved_source_unsupported_outgoing_conflict (__main__.AuditProbes.test_A3_moved_source_unsupported_outgoing_conflict) ... ok
+test_A3_unquoted_html_affected_target_conflict (__main__.AuditProbes.test_A3_unquoted_html_affected_target_conflict) ... ok
+test_A4_nested_inline_label_checked (__main__.AuditProbes.test_A4_nested_inline_label_checked) ... ok
+test_A4_nested_inline_label_relocated (__main__.AuditProbes.test_A4_nested_inline_label_relocated) ... ok
+test_index_manual_regions_and_determinism_positive (__main__.AuditProbes.test_index_manual_regions_and_determinism_positive) ... ok
+test_supported_full_map_and_immutable_positive (__main__.AuditProbes.test_supported_full_map_and_immutable_positive) ... ok
+
+----------------------------------------------------------------------
+Ran 10 tests in 1.067s
+
+OK

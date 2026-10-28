@@ -1,0 +1,13 @@
+{
+  "platform": "macOS-27.0.1-x86_64-i386-64bit-Mach-O",
+  "python": "3.14.6",
+  "branch": "dev",
+  "head": "0744f938ddd571d179a598b7dd92f5b73267ccba",
+  "sha256": {
+    "ai-dev-playbook/scripts/playbook.py": "51a5efdb989711ef8de23854f70d7032a11816b46ccbee2dc2123a1103fee92d",
+    "ai-dev-playbook/scripts/updating.py": "554cca2948df9de31e4bc8f8a6394634a6013b14b781fd265056a803b01bb654",
+    "ai-dev-playbook/scripts/verification.py": "0bb563b8f17a1c9c2eb3e1e12dff78bb3f923bca85447d8a1f983ff7e2e127b9",
+    "tests/test_cli.py": "7fb93ad0ca5a2501dc6f967f97ccdee22f213bb0a1b36a6728045662fccb6d50",
+    "tests/test_playbook.py": "c3ab2fbe200ceb85d4d1eecfaf8c71df2fcaa04186b20ac887b5931cf3e7f605"
+  }
+}

@@ -1,0 +1,42 @@
+[
+  {
+    "case": "temp_collision",
+    "restore": "engine",
+    "observation": "completed; unrelated docs/a.md.fop-tmp deleted"
+  },
+  {
+    "case": "temp_kill",
+    "restore": "engine",
+    "observation": "restored; untracked temp file remains; a.md=OLD"
+  },
+  {
+    "case": "temp_kill",
+    "restore": "standalone",
+    "observation": "Восстановлено файлов: 1; удалено добавленных: 0; маркер снят.; untracked temp file remains; a.md=OLD"
+  },
+  {
+    "case": "receipt_kill",
+    "restore": "engine",
+    "observation": "restored; retry=already_completed but a.md=OLD"
+  },
+  {
+    "case": "receipt_kill",
+    "restore": "standalone",
+    "observation": "Восстановлено файлов: 1; удалено добавленных: 0; маркер снят.; retry=already_completed but a.md=OLD"
+  },
+  {
+    "case": "lost_index",
+    "restore": "engine",
+    "observation": "aborted_before_write; missing backup-index accepted; a.md=NEW; pending cleared"
+  },
+  {
+    "case": "lost_index",
+    "restore": "standalone",
+    "observation": "Операция прервана до записи в проект: восстановление не требуется, маркер снят.; missing backup-index accepted; a.md=NEW; pending cleared"
+  },
+  {
+    "case": "directory_mode",
+    "restore": "engine",
+    "observation": "rollback cleared marker; directory mode 0o700 -> 0o755"
+  }
+]

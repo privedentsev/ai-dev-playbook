@@ -1,0 +1,3 @@
+close: (0, 'DEV-1: done. Карточка в архиве, индексы и ссылки обновлены. План: work/lifecycle/plans/lc-520a4bac54ff43fd.json. Операция: work/lifecycle/20261024-220700-6ab9ef2a\n', '')
+check after close: (1, '', "ERROR: DEV-1: чекбоксы не соответствуют журналу/свежести ['AC-01']; выполните card sync DEV-1 --apply\n")
+REPRODUCED A-05: relative link relocation makes historical checkboxes stale

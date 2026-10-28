@@ -1,0 +1,97 @@
+{
+  "schema_version": 1,
+  "playbook_version": "0.1.0",
+  "name": "ai-dev-playbook",
+  "setup_status": "configured",
+  "paths": {
+    "docs": "docs",
+    "tasks": "docs/tasks",
+    "archive": "docs/archive/tasks",
+    "task_index": "docs/tasks/index.md"
+  },
+  "documents": {
+    "schema_version": 1,
+    "collections": {
+      "discussion": {
+        "active": "docs/discussions",
+        "archive": "docs/archive/discussions",
+        "index": "docs/discussions/index.md"
+      },
+      "spec": {
+        "active": "docs/specs",
+        "archive": "docs/archive/specs",
+        "index": "docs/specs/index.md"
+      },
+      "design": {
+        "active": "docs/designs",
+        "archive": "docs/archive/designs",
+        "index": "docs/designs/index.md"
+      },
+      "adr": {
+        "active": "docs/adr",
+        "archive": "docs/archive/adr",
+        "index": "docs/adr/index.md"
+      },
+      "plan": {
+        "active": "docs/plans",
+        "archive": "docs/archive/plans",
+        "index": "docs/plans/index.md"
+      }
+    }
+  },
+  "components": [
+    {
+      "name": "playbook",
+      "code": "ai-dev-playbook",
+      "tests": [
+        "tests"
+      ],
+      "migrations": null
+    }
+  ],
+  "commands": {
+    "test": "python3 -m unittest discover -s tests -v",
+    "check": "python3 ai-dev-playbook/scripts/playbook.py check --ready"
+  },
+  "verification": {
+    "inputs": [
+      "AGENTS.md",
+      "README.md",
+      "CHANGELOG.md",
+      "ai-dev-playbook",
+      "docs",
+      "tests"
+    ],
+    "checks": [
+      {
+        "id": "unit-tests",
+        "argv": [
+          "python3",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tests",
+          "-v"
+        ],
+        "timeout_seconds": 600
+      },
+      {
+        "id": "self-check",
+        "argv": [
+          "python3",
+          "ai-dev-playbook/scripts/playbook.py",
+          "check",
+          "--ready"
+        ],
+        "timeout_seconds": 60
+      }
+    ]
+  },
+  "git": {
+    "commit": "explicit_request",
+    "push": "explicit_request",
+    "merge": "explicit_request",
+    "release": "explicit_request"
+  }
+}

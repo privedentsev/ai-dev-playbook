@@ -1,0 +1,3 @@
+PASS: /Users/privedentsev1/Dev/ai-dev-playbook: seven SHA-256 values, exact card link-only diff, unchanged metadata, report links
+PASS: /var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/pb053-staged-rzargq1r/staged: seven SHA-256 values, exact card link-only diff, unchanged metadata, report links
+PASS: original evidence unchanged; real _prepare_staged executed

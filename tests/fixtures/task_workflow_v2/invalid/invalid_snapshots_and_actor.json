@@ -1,0 +1,44 @@
+{
+  "schema_version": 2,
+  "run_id": "run-test-01",
+  "task_id": "PB-031",
+  "route": "quick",
+  "plan_revision": 1,
+  "plan_hash": "hash-plan",
+  "policy_hash": "hash-policy",
+  "at": "2026-10-23T08:30:00+03:00",
+  "status": "passed",
+  "results": [
+    {
+      "check_id": "unit-tests",
+      "definition_hash": "def-hash-unit-tests",
+      "kind": "command",
+      "status": "passed",
+      "actor": {
+        "name": 42
+      },
+      "environment": {
+        "os": "posix"
+      },
+      "input_snapshot": {
+        "files": 123
+      },
+      "snapshot_before": "bad",
+      "snapshot_after": false,
+      "started_at": "2026-10-23T08:29:50+03:00",
+      "finished_at": "2026-10-23T08:29:55+03:00",
+      "duration_seconds": 5.0,
+      "exit_code": 0,
+      "stdout_log": "unit-tests.stdout.log",
+      "stderr_log": "unit-tests.stderr.log"
+    }
+  ],
+  "coverage": {
+    "total_checks": 1,
+    "passed": ["unit-tests"],
+    "failed": [],
+    "not_applicable": [],
+    "not_run": [],
+    "satisfied": true
+  }
+}

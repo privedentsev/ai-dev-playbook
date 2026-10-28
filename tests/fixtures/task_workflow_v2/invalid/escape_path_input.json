@@ -1,0 +1,20 @@
+{
+  "schema_version": 2,
+  "workflow": {
+    "route": "small"
+  },
+  "verification_plan": {
+    "revision": 1,
+    "rationale": "Путь к каталогу work в inputs",
+    "scope": ["tests"],
+    "checks": [
+      {
+        "id": "check1",
+        "kind": "command",
+        "purpose": "Проверка",
+        "registry_id": "unit-tests",
+        "inputs": ["work/internal_cache.json"]
+      }
+    ]
+  }
+}

@@ -1,0 +1,48 @@
+[
+  {
+    "archive": "resubmitted-workspace.tar.gz",
+    "command": [
+      "/usr/local/opt/python@3.14/bin/python3.14",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tests",
+      "-v"
+    ],
+    "rc": 0,
+    "out": "test_parse_basic (test_parser.TestParser.test_parse_basic) ... ok\ntest_empty_and_whitespace_return_none (test_validator.TestValidator.test_empty_and_whitespace_return_none) ... ok\ntest_invalid_nonempty_value_still_raises (test_validator.TestValidator.test_invalid_nonempty_value_still_raises) ... ok\ntest_numeric_values_are_preserved (test_validator.TestValidator.test_numeric_values_are_preserved) ... ok\ntest_valid_age (test_validator.TestValidator.test_valid_age) ... ok\ntest_whitespace_age (test_validator.TestValidator.test_whitespace_age) ... ok\n\n----------------------------------------------------------------------\nRan 6 tests in 0.000s\n\nOK\n"
+  },
+  {
+    "archive": "resubmitted-workspace.tar.gz",
+    "command": [
+      "/usr/local/opt/python@3.14/bin/python3.14",
+      "/Users/privedentsev1/Dev/ai-dev-playbook/docs/archive/tasks/PB-029-evidence/independent-pilot/acceptance_probe.py"
+    ],
+    "rc": 0,
+    "out": "'' => None\n' ' => None\n'\\t\\n' => None\n'\\xa0' => None\n'0' => 0\n'25' => 25\n' 42 ' => 42\n'\\t17\\n' => 17\nnon-numeric input: existing ValueError behavior preserved\nPASS: 9 independent cases\n"
+  },
+  {
+    "archive": "accepted-workspace.tar.gz",
+    "command": [
+      "/usr/local/opt/python@3.14/bin/python3.14",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tests",
+      "-v"
+    ],
+    "rc": 0,
+    "out": "test_parse_basic (test_parser.TestParser.test_parse_basic) ... ok\ntest_empty_and_whitespace_return_none (test_validator.TestValidator.test_empty_and_whitespace_return_none) ... ok\ntest_invalid_nonempty_value_still_raises (test_validator.TestValidator.test_invalid_nonempty_value_still_raises) ... ok\ntest_numeric_values_are_preserved (test_validator.TestValidator.test_numeric_values_are_preserved) ... ok\ntest_valid_age (test_validator.TestValidator.test_valid_age) ... ok\ntest_whitespace_age (test_validator.TestValidator.test_whitespace_age) ... ok\n\n----------------------------------------------------------------------\nRan 6 tests in 0.000s\n\nOK\n"
+  },
+  {
+    "archive": "accepted-workspace.tar.gz",
+    "command": [
+      "/usr/local/opt/python@3.14/bin/python3.14",
+      "/Users/privedentsev1/Dev/ai-dev-playbook/docs/archive/tasks/PB-029-evidence/independent-pilot/acceptance_probe.py"
+    ],
+    "rc": 0,
+    "out": "'' => None\n' ' => None\n'\\t\\n' => None\n'\\xa0' => None\n'0' => 0\n'25' => 25\n' 42 ' => 42\n'\\t17\\n' => 17\nnon-numeric input: existing ValueError behavior preserved\nPASS: 9 independent cases\n"
+  }
+]

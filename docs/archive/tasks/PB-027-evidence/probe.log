@@ -1,0 +1,19 @@
+Starting PB-027 behavioral probe...
+=== 1. Checking Markdown links in rules and templates ===
+OK: Verified 7 documents with 23 links; all targets exist.
+=== 2. Testing document create and templates for all kinds ===
+Created document: spec:notifications
+Created document: design:notifications
+Created document: discussion:channels
+Created document: plan:notifications
+Created document: adr:0001-queue
+OK: All 5 document templates instantiated with metadata and structured sections.
+=== 3. Testing 3 Workflow Routes (Small, Medium, Large) ===
+--- Testing Route 1: Small Task ---
+OK: Route 1 (Small task) verified.
+--- Testing Route 2: Medium Task (Spec + Promotion) ---
+OK: Route 2 (Medium task with change promotion) verified.
+--- Testing Route 3: Large Block (Subtasks + Block Audit) ---
+OK: Route 3 (Large block) verified.
+
+ALL PB-027 BEHAVIORAL VERIFICATIONS PASSED SUCCESSFULLY!

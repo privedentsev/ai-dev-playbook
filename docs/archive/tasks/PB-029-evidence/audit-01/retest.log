@@ -1,0 +1,15 @@
+test_large_block_route_e2e (test_pb029.Pb029EndToEndRoutesTest.test_large_block_route_e2e)
+AC-05, AC-06, AC-08: Большая задача (блок подзадач + общий аудит); ... ok
+test_link_and_archive_immutability_e2e (test_pb029.Pb029EndToEndRoutesTest.test_link_and_archive_immutability_e2e)
+AC-08, AC-09: Перемещение в архив сохраняет целостность ссылок; ... ok
+test_medium_task_route_e2e (test_pb029.Pb029EndToEndRoutesTest.test_medium_task_route_e2e)
+AC-04, AC-07: Средняя задача (feature) с отдельной спецификацией; ... ok
+test_self_project_copy_pilot (test_pb029.Pb029EndToEndRoutesTest.test_self_project_copy_pilot)
+AC-12: Копия собственного проекта ai-dev-playbook со всеми незакоммиченными ... ok
+test_small_task_route_e2e (test_pb029.Pb029EndToEndRoutesTest.test_small_task_route_e2e)
+AC-03: Маленькая задача (баг) в одной карточке, без отдельного spec/plan; ... ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 13.940s
+
+OK

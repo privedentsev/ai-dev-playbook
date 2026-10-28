@@ -7,6 +7,7 @@
 | Код и проверки | Поиск точки изменения | [Карта](code-map.md) |
 | План | Выбор следующего этапа | [Roadmap](roadmap.md) |
 | Задачи | Выбор/передача работы | [Индекс](tasks/index.md) |
+| Коллекции | Обсуждения, требования, архитектура, решения, планы | [Обсуждения](discussions/index.md), [Спецификации](specs/index.md), [Дизайны](designs/index.md), [ADR](adr/index.md), [Планы](plans/index.md) |
 | Правила чтения | Старт любой задачи | [Контекст](../ai-dev-playbook/rules/context.md) |
 | Режимы | Выбор режима, обследование | [Режимы](../ai-dev-playbook/rules/workflow.md) |
 | Задачи | Создание и смена статуса | [Задачи](../ai-dev-playbook/rules/tasks.md) |

@@ -1,0 +1,12 @@
+PASS init absent and nested target; installed CLI check
+PASS rollback after actual first file write; new parent removed
+FAIL frozen artifact integrity: release.json: release_id не совпадает с содержимым computed: sha256:0993f53b242fab94cf44e3939d9936bfdd9f57eabf3cf86b72e00311de474514
+Frozen fixture: sha256:f4f44dbc0ba408ddb00b9aad9b7658777c4951e17a6df66fc8b60b15cfa5eb35 files: 26
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/docs/tasks/PB-028-evidence/reaudit-03-probe.py", line 88, in <module>
+    cli(installed, '--root', root, 'update', 'plan', REPO, '--save')
+    ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/docs/tasks/PB-028-evidence/reaudit-03-probe.py", line 20, in cli
+    assert r.returncode == 0, (args, r.stdout, r.stderr)
+           ^^^^^^^^^^^^^^^^^
+AssertionError: (('--root', PosixPath('/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/tmpmjr4xosf/upgrade'), 'update', 'plan', PosixPath('/Users/privedentsev1/Dev/ai-dev-playbook'), '--save'), '', 'Traceback (most recent call last):\n  File "/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/tmpmjr4xosf/upgrade/ai-dev-playbook/scripts/playbook.py", line 407, in <module>\n    sys.exit(main())\n             ~~~~^^\n  File "/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/tmpmjr4xosf/upgrade/ai-dev-playbook/scripts/playbook.py", line 400, in main\n    return dispatch(root, args) or 0\n           ~~~~~~~~^^^^^^^^^^^^\n  File "/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/tmpmjr4xosf/upgrade/ai-dev-playbook/scripts/playbook.py", line 352, in dispatch\n    updating.update_plan(root, paths, args.release_dir,\n    ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n                         updating.parse_resolves(args.resolve, require),\n                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n                         args.save, safe_path, require)\n                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "/private/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/tmpmjr4xosf/upgrade/ai-dev-playbook/scripts/updating.py", line 611, in update_plan\n    _require_no_lifecycle_pending(root, require)\n    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^\n  File "/private/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/tmpmjr4xosf/upgrade/ai-dev-playbook/scripts/updating.py", line 294, in _require_no_lifecycle_pending\n    import file_operations\nModuleNotFoundError: No module named \'file_operations\'\n')

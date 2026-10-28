@@ -1,0 +1,13 @@
+{
+  "fixed_at": "2026-10-02T06:52:28+03:00",
+  "platform": "macOS-27.0.1-x86_64-i386-64bit-Mach-O",
+  "python": "3.14.6",
+  "sha256": {
+    "ai-dev-playbook/scripts/file_operations.py": "a3aec14252991902c5841a460027a152391cf5ed0addc8b0b56ee56b77f6b6c4",
+    "ai-dev-playbook/scripts/playbook.py": "b149383df3ad5ddc47219026b85bd50cee9e86ffa7043b83714b58afc2c0b89e",
+    "ai-dev-playbook/scripts/verification.py": "630bd0b6d527783f1639682fb9ad307dac15aa4d910121c29c62572ee41983d7",
+    "ai-dev-playbook/scripts/updating.py": "ba98f79da19a60a787c93e910c246ea2faf9a5d78eb44992d2efb6e11b4d174a",
+    "tests/test_file_operations.py": "9628d4fee79acc43bbec2b1ed6f9f4b93b6347e116104bcb286c80e6a5e6d86b",
+    "docs/tasks/PB-023-evidence/audit_repro.py": "26be20afdaac86901255bcf3208499315eda28bbc611c1e9660350f5a50001ee"
+  }
+}

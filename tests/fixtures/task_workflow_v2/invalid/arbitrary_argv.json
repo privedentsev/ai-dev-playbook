@@ -1,0 +1,19 @@
+{
+  "schema_version": 2,
+  "workflow": {
+    "route": "small"
+  },
+  "verification_plan": {
+    "revision": 1,
+    "rationale": "Попытка запуска произвольного argv в карточке задачи",
+    "scope": ["tests"],
+    "checks": [
+      {
+        "id": "exploit",
+        "kind": "command",
+        "purpose": "Запрещённый произвольный argv",
+        "argv": ["rm", "-rf", "/"]
+      }
+    ]
+  }
+}
