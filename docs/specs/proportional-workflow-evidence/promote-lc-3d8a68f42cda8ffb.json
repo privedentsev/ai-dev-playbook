@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "plan_id": "lc-3d8a68f42cda8ffb",
+  "at": "2026-11-06T18:29:44+03:00",
+  "actor": {
+    "model": "GPT-6.1",
+    "name": "Codex",
+    "role": "auditor"
+  },
+  "basis": "Инженер поручил аудит PB-033 и закрытие всех заблокированных из-за неё задач; подзадачи повторно приняты, итоговый аудит блока успешен.",
+  "action": "promote_change",
+  "files": [],
+  "moves": [],
+  "materials": [],
+  "external": [],
+  "type": "lifecycle-promote",
+  "document": "spec:proportional-workflow",
+  "change": "proportional-workflow",
+  "revision_from": 1,
+  "revision_to": 2,
+  "acceptance": "work/verification/AUDIT-007/audit-007-02/proportional-workflow-acceptance-v2.json",
+  "acceptance_record": {
+    "schema_version": 1,
+    "document": "spec:proportional-workflow",
+    "change": "proportional-workflow",
+    "revision": 1,
+    "result": "accepted",
+    "kind": "acceptance",
+    "actor": {
+      "name": "Codex",
+      "role": "auditor",
+      "model": "GPT-6.1"
+    },
+    "at": "2026-11-06T18:27:52+03:00",
+    "document_sha256": "sha256:a3d3158acffe9c88a560633c132efdc9eb0e2d296cad2c78c7b2da69ef5f1ad2",
+    "payload_sha256": "sha256:88325e71f2bfa82a01fda7116e42b353036c3765e70d2f20134c428ced4cabfb"
+  },
+  "payload_sha256": "sha256:88325e71f2bfa82a01fda7116e42b353036c3765e70d2f20134c428ced4cabfb"
+}

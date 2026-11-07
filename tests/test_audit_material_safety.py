@@ -36,23 +36,23 @@ class AuditMaterialSafetyTest(CloseLifecycleCase):
         path = self.root / 'work/count'
         return int(path.read_text()) if path.exists() else 0
 
-    def test_missing_staged_target_blocks_before_process_and_preserves_tree(self):
+    def test_unchanged_root_target_is_available_without_physical_staging(self):
         self.counter()
         audit = self.root / 'work/audits/report.txt'
         audit.parent.mkdir(parents=True)
         audit.write_text('proof')
         card = self.tasks_dir() / 'DEV-1.md'
         card.write_text(card.read_text() + '\n[proof](../../work/audits/report.txt)\n')
-        self.assertEqual(self.cli('check', '--ready')[0], 0)
         before = tree_fingerprint(self.root)
-        for flag in ('--preflight', ''):
-            result = self.cli('verify', 'DEV-1', *([flag] if flag else []))
-            self.assertEqual(result[0], 1, result)
-            self.assertIn('исключённый из staged', result[2])
-            self.assertEqual(self.count(), 0)
-        # A real command may create only its service gate file.
-        self.assertEqual({k: v for k, v in tree_fingerprint(self.root).items() if k != 'work/gate.lock'},
-                         {k: v for k, v in before.items() if k != 'work/gate.lock'})
+        result = self.cli('verify', 'DEV-1', '--preflight')
+        self.assertEqual(result[0], 0, result)
+        self.assertEqual(self.count(), 0)
+        self.assertEqual(before, tree_fingerprint(self.root))
+        result = self.cli('verify', 'DEV-1')
+        self.assertEqual(result[0], 0, result)
+        self.assertEqual(self.count(), 1)
+        self.assertEqual(audit.read_text(), 'proof')
+
 
     def test_registration_preview_and_apply_both_reject_finder_file(self):
         path = self.tasks_dir() / 'DEV-1-evidence'

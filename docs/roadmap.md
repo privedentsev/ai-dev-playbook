@@ -7,7 +7,7 @@
 - Защита актуальности плана и записи по находкам AUDIT-005: [PB-019](archive/tasks/PB-019.md), общая для PB-016/PB-018.
 - Режимы работы и жизненный цикл документов: [PB-020](archive/tasks/PB-020.md), [спецификация](specs/workflow-and-document-lifecycle.md), [техническое предложение](designs/workflow-and-document-lifecycle.md), [ADR](adr/index.md), [план реализации](archive/plans/workflow-and-document-lifecycle.md). Декомпозиция: PB-021–PB-029 → [AUDIT-006](archive/tasks/AUDIT-006.md); порядок и зависимости — в плане и карточках. Интеграция playbook обсуждается отдельно; планирование не разрешает реализацию.
 
-- Соразмерные маршруты, проверки и приёмка: [спецификация](specs/proportional-workflow.md), [design](designs/proportional-workflow.md), [ADR-0003](adr/0003-task-scoped-verification.md), [план](plans/proportional-workflow.md). Карточки PB-031–PB-037 и AUDIT-007 подготовлены в draft; статусы — в [индексе задач](tasks/index.md). Планирование не разрешает реализацию и не меняет очередь существующих работ.
+- Соразмерные маршруты, проверки и приёмка: [спецификация](specs/proportional-workflow.md), [design](designs/proportional-workflow.md), [ADR-0003](adr/0003-task-scoped-verification.md), [план](archive/plans/proportional-workflow.md). Карточки PB-031–PB-037 и AUDIT-007 подготовлены в draft; статусы — в [индексе задач](tasks/index.md). Планирование не разрешает реализацию и не меняет очередь существующих работ.
 
 ## План: компактное чтение карточек и внешние метаданные
 
@@ -33,3 +33,11 @@
 ## Выборочные файловые операции и ограниченная история
 
 Подготовлены [спецификация](specs/scoped-file-operations.md), [design](designs/scoped-file-operations.md), [ADR-0005](adr/0005-scoped-file-operations.md) и [план PB-045–PB-050 / AUDIT-008](plans/scoped-file-operations.md). Направление: staged только затрагиваемых файлов, поздний backup, обязательное значение хранения 15, безопасная очистка с отзывом старых планов. Выполнение ожидает отдельного поручения; статусы только в карточках. Приёмка локальными временными сценариями, без обязательного пилота на реальном большом проекте.
+
+## Автоматический выбор проверок и доверенные результаты
+
+Подготовлены [требования](specs/dependency-aware-verification.md), [design](designs/dependency-aware-verification.md), [ADR-0006](adr/0006-dependency-aware-verification.md) и [план PB-057–064 / AUDIT-009](plans/dependency-aware-verification.md). Git-независимые снимки, автоматические зависимости, выбор/reuse, фактический каталог тестов, защищённый executor, релизное покрытие и совместимый opt-in. Технический проект ожидает принятия; кодирование и включение режима не разрешены этой подготовкой. Статусы — в карточках; существующая очередь не изменяется.
+
+## Варианты аудита плана и исправления без возврата архива
+
+Подготовлены [требования](specs/block-acceptance.md), [design](designs/block-acceptance.md), [ADR-0007](adr/0007-block-acceptance.md) и [план PB-065–071 / AUDIT-010](plans/block-acceptance.md). Выбор per_task/final/mixed при согласовании плана, выполнение по проверенным передачам, приёмка конечного candidate и новые задачи исправлений по находкам. Документы и карточки draft; реализация не разрешена. Этот блок выполняется по действующему порядку отдельных приёмок; существующая очередь не изменяется.

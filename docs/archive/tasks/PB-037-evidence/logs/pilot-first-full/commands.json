@@ -1,0 +1,71 @@
+[
+  {
+    "argv": [
+      "workflow",
+      "enable-v2"
+    ],
+    "returncode": 0,
+    "seconds": 0.41
+  },
+  {
+    "argv": [
+      "workflow",
+      "enable-v2",
+      "--apply"
+    ],
+    "returncode": 0,
+    "seconds": 0.628
+  },
+  {
+    "argv": [
+      "workflow",
+      "migrate-card",
+      "PB-037",
+      "--route",
+      "small",
+      "--verification-plan",
+      "work/pilot-plan.json",
+      "--actor",
+      "Codex",
+      "--model",
+      "GPT-6",
+      "--reason",
+      "Isolated PB-037 pilot",
+      "--apply"
+    ],
+    "returncode": 0,
+    "seconds": 44.22
+  },
+  {
+    "argv": [
+      "lifecycle",
+      "start",
+      "PB-037",
+      "--actor",
+      "Codex",
+      "--model",
+      "GPT-6",
+      "--reason",
+      "Isolated pilot"
+    ],
+    "returncode": 0,
+    "seconds": 129.368
+  },
+  {
+    "argv": [
+      "verify",
+      "PB-037",
+      "--preflight"
+    ],
+    "returncode": 0,
+    "seconds": 28.817
+  },
+  {
+    "argv": [
+      "verify",
+      "PB-037"
+    ],
+    "returncode": 1,
+    "seconds": 1264.404
+  }
+]

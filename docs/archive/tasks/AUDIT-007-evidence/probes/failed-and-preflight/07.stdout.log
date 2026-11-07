@@ -1,0 +1,3 @@
+OK: структура, ссылки и 1 карточки; каталог документов: 0 документов, 0 legacy. Поведение продукта не проверялось.
+RUN: a (предыдущий запуск ab9d590b8bed4bc2b7ca4798a440a71d завершился с ошибкой (failed))
+failed: /private/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/tmp8blu2vj6/work/verification/DEV-1/389b58862d2a41e687e0f0775a834129/report.json

@@ -87,6 +87,7 @@ file_operations.restore_operation. Записи передачи и приёмк
 отдельные команды playbook.py ``lifecycle handoff``/``accept``.
 """
 
+import copy
 import datetime as dt
 import difflib
 import json
@@ -100,6 +101,8 @@ import documents
 import task_cards
 import file_operations
 import verification
+import verification_policy
+import block_workflow
 
 PLAN_SCHEMA = 1
 PLANS_DIR = file_operations.WORK_DIR + "/plans"
@@ -145,7 +148,8 @@ PROTOCOL_PREFIXES = ("Аудит", "Повторный аудит", "Испра�
 
 
 def _rel(root, path):
-    return path.relative_to(root).as_posix()
+    base = root if hasattr(path, "view") else file_operations.scoped_operations.physical_root(root)
+    return path.relative_to(base).as_posix()
 
 
 def _unknown_fields(data, allowed, label, require):
@@ -546,6 +550,8 @@ def _blocked_text(text, dep_id, source_id, stamp, actor, require):
 
 def _handoff_evidence(root, task_id, rel, text, task_meta, safe_path, require):
     """The same freshness gate for closing and read-only context display."""
+    if task_meta.get('schema_version') == 2:
+        return _handoff_v2_evidence(root, task_id, rel, text, task_meta, safe_path, require)
     handoff = task_meta.get('handoff')
     require(isinstance(handoff, dict),
             f"{task_id}: нет записи передачи на приёмку — выполните "
@@ -605,6 +611,14 @@ def _close_evidence(root, task_id, rec, text, outcome, task_meta,
     является.
     """
     rel = _rel(root, rec["path"])
+    if task_meta.get('schema_version') == 2 and outcome != 'cancelled':
+        _handoff_v2_evidence(root, task_id, rel, text, task_meta, safe_path, require)
+        handoff, acceptance = task_meta.get('handoff'), task_meta.get('acceptance')
+        require(isinstance(acceptance, dict) and acceptance.get('result_hash') == handoff.get('result_hash'),
+                f'{task_id}: приёмка относится к другой версии результата')
+        require(acceptance.get('role') == 'engineer' or
+                (task_meta['workflow']['route'] != 'quick' and acceptance.get('role') == 'auditor'),
+                f'{task_id}: быстрый маршрут требует приёмку инженером')
     if outcome != "cancelled":
         task_cards.receipt(text, task_meta, acceptance=True)
         if task_cards.version(text) == 2:
@@ -956,10 +970,24 @@ def _emptied_dirs(root, doc_parent_rel, removes, require):
     return result
 
 
+
+def _validate_moved_task_meta(root, meta, rel, errors, safe_path):
+    data = json.loads((root / 'ai-dev-playbook/project.json').read_text(encoding='utf-8'))
+    tw = data.get('task_workflow')
+    documents._validate_task_meta(meta, rel, errors,
+        registry={item['id']: item for item in tw['registry']} if tw else None,
+        task_workflow_enabled=tw is not None, root=root, safe_path=safe_path,
+        block_enabled=block_workflow.CAPABILITY in documents.capabilities_of(data))
+
 def _remap_meta_materials(meta, moves, companion_rel, plan_id, root,
                           safe_path):
     """Источники локальных материалов по карте переносов + запись
     сопровождающего доказательства этой операции."""
+    if meta.get('schema_version') == 2 and meta.get('workflow', {}).get('baseline'):
+        meta['workflow'] = copy.deepcopy(meta['workflow'])
+        baseline = meta['workflow']['baseline']
+        baseline['source'] = document_links.map_path(
+            safe_path(root, baseline['source']).resolve(), moves).relative_to(root).as_posix()
     new_materials = []
     for material in meta.get("materials") or []:
         item = dict(material)
@@ -1015,7 +1043,7 @@ def _unit_summary(root, unit):
 def _companion_body(unit, plan_id, at, norm, root):
     """Сопровождающий JSON-доказательство действия."""
     files = [{"from": _rel(root, old), "to": _rel(root, new),
-              "sha256": file_operations.sha256(old.read_bytes()),
+              "sha256": file_operations.scoped_operations.file_digest(old),
               "bytes": old.stat().st_size}
              for old, new in sorted(unit["file_moves"].items())]
     body = {"schema_version": 1, "plan_id": plan_id, "at": at,
@@ -1082,7 +1110,7 @@ def _write_close(root, unit, moves, inputs, plan_id, at, projected_records,
         meta["materials"] = _remap_meta_materials(meta, moves, companion_rel,
                                                   plan_id, root, safe_path)
         errors = []
-        documents._validate_task_meta(meta, new_rel, errors)
+        _validate_moved_task_meta(root, meta, new_rel, errors, safe_path)
         require(not errors, "\n".join(errors))
         merged = _splice_meta(text, meta)
         require(merged is not None, f"{old_rel}: блок метаданных не найден")
@@ -1120,7 +1148,7 @@ def _write_close(root, unit, moves, inputs, plan_id, at, projected_records,
                 meta_updated = True
         if meta_updated:
             errors = []
-            documents._validate_task_meta(meta, new_rel, errors)
+            _validate_moved_task_meta(root, meta, new_rel, errors, safe_path)
             require(not errors, "\n".join(errors))
             merged = _splice_meta(text, meta)
             require(merged is not None, f"{new_rel}: блок метаданных не найден")
@@ -1160,7 +1188,7 @@ def _write_reopen(root, unit, moves, inputs, plan_id, at, norm, records,
         meta["materials"] = _remap_meta_materials(meta, moves, companion_rel,
                                                   plan_id, root, safe_path)
         errors = []
-        documents._validate_task_meta(meta, new_rel, errors)
+        _validate_moved_task_meta(root, meta, new_rel, errors, safe_path)
         require(not errors, "\n".join(errors))
         merged = _splice_meta(text, meta)
         require(merged is not None, f"{old_rel}: блок метаданных не найден")
@@ -1232,8 +1260,10 @@ def _write_promote(root, unit, inputs, plan_id, at, projected_docs,
          "source": companion_rel, "storage": "local",
          "required": True, "immutable": True, "used_by": []}]
     errors = []
+    _caps = documents.capabilities_of(json.loads(
+        (root / 'ai-dev-playbook/project.json').read_text(encoding='utf-8')))
     documents._validate_document(meta, old_path, unit["entry"]["kind"],
-                                 False, errors)
+                                 False, errors, capabilities=_caps)
     require(not errors, "\n".join(errors))
     merged = _splice_meta(new_text, meta)
     require(merged is not None, f"{old_rel}: блок метаданных не найден")
@@ -1262,6 +1292,8 @@ def build_plan(root, request, at, ctx, safe_path, require):
     Повторный вызов при неизменных входах и том же ``at`` даёт идентичный
     результат — именно это проверяет apply.
     """
+    physical = file_operations.scoped_operations.physical_root(root)
+    root = file_operations.scoped_operations.project_view.ProjectView(physical).path
     data, paths = ctx["config"](root)
     records = ctx["read_tasks"](root, paths)
     norm = validate_request(request, require)
@@ -1468,8 +1500,11 @@ def build_plan(root, request, at, ctx, safe_path, require):
             meta["materials"] = _remap_meta_materials(
                 meta, moves, companion_rel, plan_id, root, safe_path)
             errors = []
+            _caps = documents.capabilities_of(json.loads(
+                (root / 'ai-dev-playbook/project.json')
+                .read_text(encoding='utf-8')))
             documents._validate_document(meta, new_path, entry["kind"], True,
-                                         errors)
+                                         errors, capabilities=_caps)
             require(not errors, "\n".join(errors))
             merged = _splice_meta(documents.read_text(old_path),
                                   meta)
@@ -1530,7 +1565,7 @@ def build_plan(root, request, at, ctx, safe_path, require):
         if info is not None:
             writes[_rel(root, new)] = info["updated"].encode("utf-8")
         else:
-            writes[_rel(root, new)] = old.read_bytes()
+            writes[_rel(root, new)] = file_operations.scoped_operations.Payload(old)
     for path, info in updates.items():
         resolved = path.resolve()
         if resolved in file_moves or resolved in index_paths \
@@ -1602,7 +1637,7 @@ def build_plan(root, request, at, ctx, safe_path, require):
                 "writes": {rel: file_operations.sha256(content)
                            for rel, content in sorted(writes.items())},
                 "removes": removes, "remove_dirs": remove_dirs,
-                "create_dirs": create_dirs}
+                "create_dirs": create_dirs, "read_set": json.loads(json.dumps(root.view.read_set.snapshot()))}
     return plan_obj, writes
 
 
@@ -1632,6 +1667,9 @@ def _preview(root, plan, writes):
                  f"удалений файлов: {len(plan['removes'])}")
     lines.append("Diff записей (.md):")
     for rel in sorted(plan["writes"]):
+        if isinstance(writes[rel], file_operations.scoped_operations.Payload):
+            lines.append(f"  {rel}: prepared stream {writes[rel].sha256}")
+            continue
         if not rel.endswith(".md"):
             continue
         path = root / rel
@@ -1659,6 +1697,7 @@ def _read_request(root, rel, safe_path, require):
 
 def _save_plan(root, plan, safe_path, require):
     """Атомарная запись плана в work/lifecycle/plans/<plan_id>.json."""
+    root = file_operations.scoped_operations.physical_root(root)
     directory = safe_path(root, PLANS_DIR)
     directory.mkdir(parents=True, exist_ok=True)
     target = directory / f"{plan['plan_id']}.json"
@@ -1772,7 +1811,7 @@ def operation_spec(root, plan, writes, ctx, safe_path, require):
             "writes": writes, "removes": plan["removes"],
             "remove_dirs": plan["remove_dirs"],
             "create_dirs": plan["create_dirs"],
-            "inputs": plan["inputs"],
+            "inputs": plan["inputs"], "read_set": plan.get("read_set"),
             "staged_checks": [checks[0]], "final_checks": [checks[1]],
             "moves": plan["moves"],
             "receipt": {"actions": plan["summary"],
@@ -1810,8 +1849,8 @@ def apply_command(root, plan_rel, ctx, safe_path, require):
     rebuilt, writes = build_plan(root, plan["request"], plan["created_at"],
                                  ctx, safe_path, require)
     stale = [field for field in ("plan_id", "inputs", "writes", "removes",
-                                 "remove_dirs", "create_dirs", "moves")
-             if rebuilt[field] != plan[field]]
+                                 "remove_dirs", "create_dirs", "moves", "read_set")
+             if rebuilt.get(field) != plan.get(field)]
     require(not stale,
             f"План устарел или подменён ({', '.join(stale)}): входы "
             "изменились — постройте план заново командой lifecycle plan")
@@ -1904,7 +1943,12 @@ def _write_card_meta(root, rel, text, meta, label, actor, basis, ctx,
                      safe_path, require, extra_writes=None, read_inputs=()):
     """Splice + валидация + запись карточки одной операцией engine."""
     errors = []
-    documents._validate_task_meta(meta, rel, errors)
+    data, paths = ctx['config'](root)
+    tw = data.get('task_workflow')
+    documents._validate_task_meta(meta, rel, errors,
+        registry={r['id']: r for r in tw['registry']} if tw else None,
+        task_workflow_enabled=tw is not None, root=root, safe_path=safe_path,
+        block_enabled=block_workflow.CAPABILITY in documents.capabilities_of(data))
     require(not errors, "\n".join(errors))
     merged = _splice_meta(text, meta)
     require(merged is not None, f"{rel}: блок метаданных не найден")
@@ -1922,11 +1966,21 @@ def _write_card_meta(root, rel, text, meta, label, actor, basis, ctx,
                 f"{label}: карточка изменилась после подготовки записи")
 
     if label in {"sync-criteria", "handoff", "accept"} and task_cards.version(text) == 2:
-        original_check = check
-        def check(staged_root):
-            original_check(staged_root)
+        def check(staged_root, base_check=check):
+            base_check(staged_root)
             _, mismatches = criterion_view(staged_root, Path(rel).stem, rel, merged, meta, safe_path, require)
             require(not mismatches, f"{label}: чекбоксы не соответствуют доказательствам {mismatches}")
+    if meta.get('schema_version') == 2:
+        index_rel = _rel(root, paths['task_index'])
+        records = ctx['read_tasks'](root, paths)
+        header = task_cards.HEADER.match(merged)
+        records[Path(rel).stem] = dict(records[Path(rel).stem],
+            status=header.group(3), executor=header.group(6), model=header.group(7),
+            route=meta['workflow']['route'])
+        writes[index_rel] = ctx['render_task_index'](records, paths['task_index'].parent).encode('utf-8')
+        def check(staged_root, base_check=check):
+            base_check(staged_root)
+            _consistency(ctx, set(), True, label, safe_path, require)(staged_root)
     inputs = file_operations.snapshot_paths(root, sorted(set(writes) | set(read_inputs)), safe_path, require)
     plan_id = "lc-" + file_operations.sha256(_canonical(
         {"op": label, "path": rel,
@@ -1934,7 +1988,9 @@ def _write_card_meta(root, rel, text, meta, label, actor, basis, ctx,
          "inputs": inputs}).encode("utf-8"))[7:23]
     spec = {"operation": f"lifecycle {label}", "plan_id": plan_id,
             "actor": actor, "basis": basis, "writes": writes,
-            "inputs": inputs, "staged_checks": [check],
+            "inputs": inputs,
+            "read_set": root.view.read_set.snapshot() if hasattr(root, 'view') else None,
+            "staged_checks": [check],
             "final_checks": [check]}
     result = ctx["run_operation"](root, spec)
     return result
@@ -2098,6 +2154,24 @@ def portable_materials(root, catalog, paths, ctx, safe_path, require, existing_l
                         f"{target_rel}; сохраните материал в owner-evidence или work/verification/<ID>/")
 
 
+def audit_preflight(root, task_id, ctx, safe_path, require):
+    """Check a handed-off result before spending time on independent review."""
+    data, paths = ctx['config'](root)
+    records = ctx['read_tasks'](root, paths)
+    rec, rel, text, meta = _managed_card(root, records, task_id, safe_path, require)
+    require(rec['status'] == 'in_review', f'{task_id}: аудит требует in_review')
+    catalog = documents.load_catalog(root, data, paths, records, safe_path, require)
+    meta = _task_meta_entry(catalog, task_id, meta, require)
+    task_cards.receipt(text, meta)
+    handoff = _handoff_evidence(root, task_id, rel, text, meta, safe_path, require)
+    require(not data.get('verification') or handoff.get('reports'),
+            f'{task_id}: передача не содержит отчётов verify')
+    if task_cards.version(text) == 2:
+        states, mismatches = criterion_view(root, task_id, rel, text, meta, safe_path, require)
+        require(not mismatches and all(s['checked'] for s in states.values()),
+                f'{task_id}: критерии не подтверждены свежими проверками; обновите CHECK/handoff')
+
+
 def verification_preflight(root, task_id, ctx, safe_path, require):
     data, paths = ctx['config'](root)
     records = ctx['read_tasks'](root, paths)
@@ -2217,7 +2291,8 @@ def register_material_command(root, task_id, source, material_id, role,
     _write_card_meta(root, rel, text, meta, "register-material", actor,
                      "Явная регистрация материала", checked_ctx,
                      safe_path, require)
-    _, saved = _task_meta(safe_path(root, rel), rel, require)
+    physical = file_operations.scoped_operations.physical_root(root)
+    _, saved = _task_meta(safe_path(physical, rel), rel, require)
     require(saved == meta,
             f"{task_id}: операция не записала регистрацию; проверьте lifecycle status")
     print(f"{task_id}: материал '{material_id}' зарегистрирован.")
@@ -2236,6 +2311,9 @@ def handoff_command(root, task_id, summary, actor_name, actor_model,
     records = ctx["read_tasks"](root, paths)
     rec, rel, text, meta = _managed_card(root, records, task_id, safe_path,
                                          require)
+    if meta.get('schema_version') == 2:
+        return handoff_v2_command(root, task_id, summary, actor_name, actor_model,
+                                  reports, ctx, safe_path, require)
     materials = [dict(item) for item in meta.get("materials") or []]
     material_ids = {item.get("id") for item in materials}
     candidates = []
@@ -2360,6 +2438,21 @@ def accept_command(root, task_id, result, kind, role, actor_name,
     records = ctx["read_tasks"](root, paths)
     rec, rel, text, meta = _managed_card(root, records, task_id, safe_path,
                                          require)
+    if meta.get('schema_version') == 2:
+        root = _tracking_root(root)
+        data, paths = ctx['config'](root)
+        records = ctx['read_tasks'](root, paths)
+        rec, rel, text, meta = _managed_card(root, records, task_id, safe_path, require)
+        if result == 'accepted':
+            _dependencies_done(task_id, records, require)
+            require(rec['status'] == 'in_review', 'Приёмка требует in_review')
+            _handoff_v2_evidence(root, task_id, rel, text, meta, safe_path, require)
+            require(role == 'engineer' or meta['workflow']['route'] != 'quick',
+                    'Быстрый маршрут требует приёмку инженером')
+            require(kind == 'acceptance', 'V2 требует kind=acceptance')
+            if role == 'engineer':
+                require(note and note.strip() and actor_name != 'cli',
+                        'Приёмка инженера требует автора и --note с явным основанием')
     handoff = meta.get("handoff")
     if result == "accepted":
         require(isinstance(handoff, dict),
@@ -2380,6 +2473,15 @@ def accept_command(root, task_id, result, kind, role, actor_name,
                 audit["fields"]["Модель"] == (actor_model or "—"), "Атрибуция accept не совпадает с журналом")
         binding = {"audit_id": audit["id"], "audit_sha256": audit["sha256"]}
         note = None
+    previous = meta.get('acceptance')
+    if (meta.get('schema_version') == 2 and previous and previous.get('result') == result
+            and previous.get('kind') == kind and previous.get('role') == role
+            and previous.get('actor') == {'name': actor_name, 'model': actor_model}
+            and previous.get('handoff_at') == (handoff or {}).get('at')
+            and previous.get('detail') == note
+            and all(previous.get(k) == v for k, v in binding.items())):
+        print(f'{task_id}: приёмка уже записана.')
+        return {'status': 'already_completed'}
     at = file_operations.now_iso()
     meta = dict(meta)
     meta["acceptance"] = {"at": at,
@@ -2389,6 +2491,8 @@ def accept_command(root, task_id, result, kind, role, actor_name,
                           "handoff_at": handoff.get("at")
                           if isinstance(handoff, dict) else None,
                           "session": None, "detail": note, **binding}
+    if meta.get('schema_version') == 2 and result == 'accepted':
+        meta['acceptance']['result_hash'] = handoff['result_hash']
     if task_cards.version(text) == 2:
         text, meta = _prepare_criteria(root, task_id, rel, text, meta, safe_path, require)
     applied = _write_card_meta(root, rel, text, meta, "accept",
@@ -2419,6 +2523,11 @@ def criterion_view(root, task_id, rel, text, meta, safe_path, require,
                 path = source / 'report.json' if source.is_dir() else source
                 require(file_operations.sha256(path.read_bytes()) == key[1], 'Отчёт изменён')
                 report = verification.load_report(path, require)
+                if report.get('schema_version') == 2:
+                    valid = _criterion_v2_report(root, task_id, rel, text, meta, report,
+                                                 safe_path, require, historical)
+                    cache[key] = valid
+                    return cache[key]
                 valid = (report.get('task_id') == task_id and report.get('status') == 'passed'
                          and report.get('inputs_unchanged') is True)
                 if not historical and report.get('card_projection') is not None and report.get('card_projection') != card_projection(text):
@@ -2477,6 +2586,10 @@ def _prepare_criteria(root, task_id, rel, text, meta, safe_path, require, bind=T
         for ident, (source, path) in candidates.items():
             try:
                 report = verification.load_report(path, require)
+                if report.get('schema_version') == 2:
+                    if _criterion_v2_report(root, task_id, rel, text, meta, report, safe_path, require):
+                        eligible.append((report['started_at'], ident, source, path))
+                    continue
                 if (report.get('task_id') == task_id and report.get('status') == 'passed'
                         and report.get('inputs_unchanged') is True
                         and verification.inputs_fresh(root, report, {rel}, safe_path, require)[0]):
@@ -2526,6 +2639,260 @@ def sync_criteria_command(root, task_id, apply, ctx, safe_path, require, bind=Tr
     _task_material_catalog(root, task_id, updated_meta, ctx, safe_path, require)
     _write_card_meta(root, rel, updated, updated_meta, 'sync-criteria',
                      'cli', 'Пересчёт чекбоксов по журналу', ctx, safe_path, require)
-    require(documents.read_text(safe_path(root, rel)) == _splice_meta(updated, updated_meta),
+    physical = file_operations.scoped_operations.physical_root(root)
+    require(documents.read_text(safe_path(physical, rel)) == _splice_meta(updated, updated_meta),
             'Пересчёт не записан; проверьте lifecycle status')
     print(f'{task_id}: чекбоксы синхронизированы.')
+
+
+# Workflow v2 uses the same operation engine, gate and recovery as legacy cards.
+def _tracking_root(root):
+    if hasattr(root, 'view'):
+        return root
+    return file_operations.scoped_operations.project_view.ProjectView(root).path
+
+
+def _v2_context(root, task_id, ctx, safe_path, require):
+    root = _tracking_root(root)
+    data, paths = ctx['config'](root)
+    records = ctx['read_tasks'](root, paths)
+    rec, rel, text, meta = _managed_card(root, records, task_id, safe_path, require)
+    require(meta.get('schema_version') == 2 and data.get('task_workflow'),
+            'Переход требует явных metadata/task_workflow v2; legacy не мигрируется')
+    documents.load_catalog(root, data, paths, records, safe_path, require)
+    return root, data, paths, records, rec, rel, text, meta
+
+
+def _dependencies_done(task_id, records, require):
+    require(all(records.get(dep, {}).get('status') == 'done' for dep in records[task_id]['deps']),
+            f'{task_id}: зависимости не завершены')
+
+
+def transition_command(root, task_id, action, actor, model, reason, to_route,
+                       approval, ctx, safe_path, require):
+    root, data, paths, records, rec, rel, text, meta = _v2_context(
+        root, task_id, ctx, safe_path, require)
+    require(actor and actor != 'cli' and model and ctx['model_unconfirmed'] not in model,
+            'Переход требует точные --actor и --model')
+    require(reason and reason.strip(), 'Требуется непустая причина')
+    _dependencies_done(task_id, records, require)
+    meta = copy.deepcopy(meta)
+    wf = meta['workflow']
+    writes = {}
+    at = file_operations.now_iso()
+    if action == 'start':
+        if rec['status'] == 'in_progress' and wf.get('baseline'):
+            verification_policy.baseline_files(root, meta)
+            print(f'{task_id}: работа уже начата, baseline сохранён.')
+            return {'status': 'already_completed'}
+        require(rec['status'] in {'draft', 'ready'}, 'start требует draft/ready')
+        require(wf.get('reason'), 'Маршрут требует reason')
+        # Both supported Markdown formats must describe a real goal and AC.
+        goal = re.search(r'^#{2,3} Цель и границы\s*\n(.*?)(?=^#{2,3} |\Z)', text, re.M | re.S)
+        criteria = re.findall(r'^- \[ \] (.+)$', text, re.M)
+        require(goal and goal.group(1).strip() and 'TODO' not in goal.group(1)
+                and criteria and all(c.strip() and 'TODO' not in c for c in criteria),
+                'Заполните цель и проверяемую приёмку до start')
+        require(meta['verification_plan']['checks'], 'План проверок пуст')
+        text = re.sub(r'^Executor:.*$', f'Executor: {actor}', text, flags=re.M)
+        text = re.sub(r'^Model:.*$', f'Model: {model}', text, flags=re.M)
+        source = _rel(root, paths['tasks'] / f'{task_id}-evidence/baseline.json')
+        require(not safe_path(root, source).exists(), 'Baseline уже существует; автоматическая замена запрещена')
+        files = verification_policy.applicability_files(root, rel, text, meta, _rel(root, paths['task_index']))
+        required = verification_policy.required_checks(data['task_workflow'], meta['verification_plan'],
+            baseline=files, current=files)
+        require(required['ready'], '\n'.join(required['errors']))
+        baseline = {'schema_version': 1, 'task_id': task_id, 'at': at, 'files': files}
+        payload = (_canonical(baseline) + '\n').encode('utf-8')
+        wf['baseline'] = {'source': source, 'sha256': file_operations.sha256(payload)}
+        writes[source] = payload
+        meta.setdefault('materials', []).append({'id': 'workflow-baseline', 'role': 'report',
+            'source': source, 'storage': 'local', 'required': True, 'immutable': True, 'used_by': [task_id]})
+        wf.setdefault('transitions', []).append({'at': at, 'action': action, 'reason': reason, 'actor': actor})
+        text = re.sub(r'^Status:.*$', 'Status: in_progress', text, flags=re.M)
+    elif action == 'route':
+        require(rec['status'] in {'ready', 'in_progress'}, 'route требует ready/in_progress; после передачи сначала revise')
+        old = wf['route']
+        require(to_route in documents.ROUTES, 'Неизвестный маршрут')
+        if old == to_route and wf.get('reason') == reason:
+            return {'status': 'already_completed'}
+        order = ['quick', 'small', 'medium', 'large']
+        if order.index(to_route) < order.index(old) and (wf.get('baseline') or rec['status'] == 'in_progress'):
+            require(approval and approval.strip(), 'Понижение после старта требует --engineer-approval с автором/основанием')
+        event = {'at': at, 'from_route': old, 'to_route': to_route, 'reason': reason, 'actor': actor}
+        if approval:
+            event['engineer_approval'] = approval
+        wf.setdefault('history', []).append(event)
+        wf['route'], wf['reason'] = to_route, reason
+    elif action == 'revise':
+        if rec['status'] == 'in_progress' and wf.get('transitions', []) and wf['transitions'][-1]['action'] == 'revise' and wf['transitions'][-1]['reason'] == reason:
+            return {'status': 'already_completed'}
+        require(rec['status'] == 'in_review', 'revise требует in_review')
+        wf.setdefault('transitions', []).append({'at': at, 'action': action, 'reason': reason,
+            'actor': actor, 'handoff': meta.pop('handoff', None), 'acceptance': meta.pop('acceptance', None)})
+        text = re.sub(r'^Status:.*$', 'Status: in_progress', text, flags=re.M)
+    result = _write_card_meta(root, rel, text, meta, action, actor, reason, ctx,
+                             safe_path, require, extra_writes=writes)
+    print(f'{task_id}: {action} записан; карточка и индекс согласованы.')
+    return result
+
+
+def _v2_coverage(root, task_id, rel, text, meta, safe_path, require):
+    # Shared runner evaluation; no commands and no writes.
+    data = json.loads((root / 'ai-dev-playbook/project.json').read_text(encoding='utf-8'))
+    pre = verification.preflight_v2(root,
+        {'id': task_id, 'path': root / rel, 'status': 'in_review'},
+        data['task_workflow'], None, safe_path, require, print_output=False)
+    require(pre['ready'], '\n'.join(pre['errors']))
+    cov = verification_policy.coverage(pre['required_checks'], pre['reusable_map'])
+    require(cov['satisfied'], f'{task_id}: неполное или устаревшее coverage: {cov["checks"]}')
+    return cov, pre
+
+
+def _result_hash(root, rel, text, meta):
+    data = json.loads((root / 'ai-dev-playbook/project.json').read_text(encoding='utf-8'))
+    excluded = {data['paths']['task_index'], rel, str(documents.meta_path(rel))}
+    evidence_root = str(Path(rel).parent / (Path(rel).stem + '-evidence'))
+    excluded.update(m['source'] for m in meta.get('materials', [])
+                    if m.get('storage') == 'local' and m.get('immutable')
+                    and (m['source'] == evidence_root or m['source'].startswith(evidence_root + '/')))
+    files = verification_policy.project_files(root, exclude=excluded)
+    return verification_policy.fingerprint({'files': files,
+        'task': verification_policy.task_projection(text, task_cards.metadata(text))})
+
+
+
+def _evidence_hash(path):
+    if path.is_symlink():
+        raise ValueError('Symlink в материале: ' + str(path))
+    if path.is_file():
+        return verification_policy.fingerprint({'kind': 'file', 'sha256': file_operations.sha256(path.read_bytes())})
+    if not path.is_dir():
+        raise ValueError('Непереносимый материал: ' + str(path))
+    return verification_policy.fingerprint({'kind': 'directory', 'entries': {
+        child.name: _evidence_hash(child) for child in sorted(path.iterdir())}})
+
+def _handoff_v2_evidence(root, task_id, rel, text, meta, safe_path, require):
+    handoff = meta.get('handoff')
+    require(isinstance(handoff, dict) and handoff.get('result_hash'), f'{task_id}: нет v2 передачи')
+    require(card_projection(text) == handoff.get('card_projection'), 'Требования изменились после передачи')
+    hashes = handoff.get('evidence_hashes', {})
+    require(set(handoff.get('reports', [])) <= set(hashes), 'Передача не связывает байты всех отчётов')
+    materials = {m['id']: m for m in meta.get('materials', [])}
+    for ident, material in materials.items():
+        if (material.get('storage') != 'local' or not material.get('immutable')
+                or ident in hashes or ident in meta.get('audit_packages', {})):
+            continue
+        source = material['source']
+        known_run = (source.startswith(f'work/verification/{task_id}/')
+                     and verification.runner_directory(safe_path(root, source)))
+        require(known_run, 'Новый материал требует новой передачи: ' + ident)
+    for ident, expected in hashes.items():
+        material = materials.get(ident, {})
+        require(material.get('storage') == 'local' and material.get('immutable'), 'Нет immutable отчёта')
+        path = safe_path(root, material['source'])
+        report = path / 'report.json' if path.is_dir() else path
+        require(_evidence_hash(path) == expected, 'Байты отчёта изменились после передачи')
+        if ident in handoff['reports']:
+            verification.load_report(report, require)
+    cov, _ = _v2_coverage(root, task_id, rel, text, meta, safe_path, require)
+    require(cov == handoff.get('coverage'), 'Покрытие изменилось после передачи')
+    require(_result_hash(root, rel, text, meta) == handoff['result_hash'],
+            'Результат изменился после передачи; повторите затронутые проверки и handoff')
+    return handoff
+
+
+def handoff_v2_command(root, task_id, summary, actor_name, actor_model,
+                       reports, ctx, safe_path, require):
+    root, data, paths, records, rec, rel, text, meta = _v2_context(
+        root, task_id, ctx, safe_path, require)
+    require(rec['status'] in {'in_progress', 'in_review'}, 'handoff требует in_progress/in_review')
+    require(actor_name and actor_model and ctx['model_unconfirmed'] not in actor_model, 'Требуется точная атрибуция')
+    _dependencies_done(task_id, records, require)
+    cov, _ = _v2_coverage(root, task_id, rel, text, meta, safe_path, require)
+    meta = copy.deepcopy(meta)
+    audit_sources = {m['source'] for m in meta.get('materials', []) if m['id'] in meta.get('audit_packages', {})}
+    registered = {m['source'] for m in meta.get('materials', []) if m.get('storage') == 'local'}
+    candidates = [(d, p) for d, p in _verify_runs(root, task_id, safe_path)
+                  if verification.runner_directory(d) or _rel(root, d) not in registered]
+    # --report adds explicit evidence; it cannot hide newer failed history.
+    for report_rel in reports:
+        p = safe_path(root, report_rel)
+        rp = p / 'report.json' if p.is_dir() else p
+        value = verification.load_report(rp, require)
+        require(value.get('schema_version') == 2 and value.get('task_id') == task_id, 'Нужен v2 отчёт этой задачи')
+        pair = (rp.parent, rp)
+        if pair not in candidates:
+            candidates.append(pair)
+    hashes = {}
+    refs = []
+    for directory, path in candidates:
+        source = _rel(root, directory)
+        if source in audit_sources:
+            continue
+        require(path.is_file(), f'Нет report.json: {source}')
+        try:
+            report = verification.load_report(path, require)
+            require(report.get('schema_version') == 2 and report.get('task_id') == task_id, 'Чужой отчёт')
+        except (ValueError, OSError):
+            require(verification.runner_directory(directory), f'Повреждённый материал {source}')
+            report = None  # preserved history, never evidence
+        ident = 'verify-' + directory.name
+        existing = next((m for m in meta['materials'] if m['id'] == ident), None)
+        if existing:
+            require(existing['source'] == source and existing.get('immutable'), 'Конфликт материала отчёта')
+        else:
+            meta['materials'].append({'id': ident, 'role': 'report', 'source': source,
+                'storage': 'local', 'required': True, 'immutable': True, 'used_by': [task_id]})
+        if report is not None:
+            refs.append(ident)
+            hashes[ident] = _evidence_hash(directory)
+    catalog = _task_material_catalog(root, task_id, meta, ctx, safe_path, require)
+    stray = [i['path'] for i in catalog['candidates'] if i.get('owner') == task_id]
+    require(not stray, f'Неучтённые материалы: {stray}; выполните register-material')
+    binding = {}
+    if task_cards.version(text) == 2:
+        entries = task_cards.parse(text)['entries']
+        last = entries[-1] if entries else None
+        require(last and last['type'] == 'handoff', 'Добавьте последнюю HANDOFF-запись')
+        require(last['fields']['Исполнитель'] == actor_name and last['fields']['Модель'] == actor_model, 'Атрибуция handoff не совпадает с журналом')
+        binding = {'entry_id': last['id'], 'journal_sha256': last['journal_sha256']}
+        text, meta = _prepare_criteria(root, task_id, rel, text, meta, safe_path, require)
+    for material in meta['materials']:
+        if (material.get('storage') == 'local' and material.get('immutable')
+                and material['id'] not in meta.get('audit_packages', {})):
+            hashes[material['id']] = _evidence_hash(safe_path(root, material['source']))
+    result_hash = _result_hash(root, rel, text, meta)
+    previous = meta.get('handoff')
+    if (rec['status'] == 'in_review' and previous and previous.get('result_hash') == result_hash
+            and previous.get('evidence_hashes') == hashes and previous.get('coverage') == cov
+            and previous.get('actor') == {'name': actor_name, 'model': actor_model}
+            and all(previous.get(k) == v for k, v in binding.items())):
+        print(f'{task_id}: передача уже актуальна.')
+        return {'status': 'already_completed'}
+    if previous:
+        meta['workflow'].setdefault('transitions', []).append({
+            'at': file_operations.now_iso(), 'action': 'revise', 'actor': actor_name,
+            'reason': 'Новая передача заменила прежнюю',
+            'handoff': previous, 'acceptance': meta.get('acceptance')})
+    meta['handoff'] = {'at': file_operations.now_iso(), 'actor': {'name': actor_name, 'model': actor_model},
+        'summary': summary, 'reports': sorted(refs), 'card_projection': card_projection(text),
+        'result_hash': result_hash, 'coverage': cov, 'evidence_hashes': hashes, **binding}
+    meta.pop('acceptance', None)
+    text = re.sub(r'^Status:.*$', 'Status: in_review', text, flags=re.M)
+    result = _write_card_meta(root, rel, text, meta, 'handoff', actor_name, summary,
+                             ctx, safe_path, require)
+    print(f'{task_id}: v2 передача записана, coverage полное; статус и индекс in_review.')
+    return result
+
+
+def _criterion_v2_report(root, task_id, rel, text, meta, report, safe_path, require, historical=False):
+    if report.get('task_id') != task_id or report.get('status') != 'passed':
+        return False
+    if historical:
+        return report.get('coverage', {}).get('satisfied') is True
+    raw = task_cards.metadata(text)
+    if report.get('plan_hash') != verification_policy.fingerprint(raw['verification_plan']):
+        return False
+    cov, _ = _v2_coverage(root, task_id, rel, text, meta, safe_path, require)
+    return cov['satisfied']

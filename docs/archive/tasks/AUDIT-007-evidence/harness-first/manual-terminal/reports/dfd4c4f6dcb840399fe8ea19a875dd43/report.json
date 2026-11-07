@@ -1,0 +1,62 @@
+{
+  "schema_version": 2,
+  "run_id": "dfd4c4f6dcb840399fe8ea19a875dd43",
+  "task_id": "DEV-1",
+  "route": "quick",
+  "plan_revision": 1,
+  "plan_hash": "sha256:ed0d249da78dc287c7e59ab68549633c27cd1c7b195df7dc51f6adab8e6b664a",
+  "policy_hash": "sha256:e5f5c4c7be9de6ba1f36ac34635a2e565f9ae78e921c8e3c19cfbfb951f5a962",
+  "at": "2026-11-06T10:48:04.396399+00:00",
+  "started_at": "2026-11-06T10:48:04.396403+00:00",
+  "finished_at": "2026-11-06T10:48:04.396405+00:00",
+  "cwd": "/private/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/tmpdjri43fx",
+  "status": "passed",
+  "results": [
+    {
+      "check_id": "a",
+      "definition_hash": "sha256:1cc7f0cf468ad8da317bf815253875eac7418b53f25a3a4111dccbc4124b9071",
+      "kind": "manual",
+      "scenario_hash": "sha256:6feadc1c94212fd81aea25c818b6fd6ceb6a6864347b0bf4e3bfe2a4041b8967",
+      "status": "passed",
+      "actor": "Fixture executor",
+      "environment": {
+        "os": "posix",
+        "platform": "macOS-27.0.1-x86_64-i386-64bit-Mach-O",
+        "python": "3.14.6",
+        "architecture": "x86_64",
+        "terminal": "Synthetic terminal fixture",
+        "browser": "Synthetic browser, no real browser used"
+      },
+      "input_snapshot": {
+        "files": {
+          "path:src/a.txt": "sha256:cbb0d9fd3a37024fb81ec10fa78f1221ef510c148453f580b56a4227737e32fd"
+        }
+      },
+      "candidate_snapshot": {
+        "files": {
+          "path:src/a.txt": "sha256:cbb0d9fd3a37024fb81ec10fa78f1221ef510c148453f580b56a4227737e32fd"
+        },
+        "sha256": "sha256:62dcd84279524bafd8ac457eff0e78c717a6f4832ad289aabbb7bf62a6313e88"
+      },
+      "observation": "Synthetic terminal review: expected wording verified.",
+      "started_at": "2026-11-06T10:48:04.395900+00:00",
+      "finished_at": "2026-11-06T10:48:04.396031+00:00",
+      "duration_seconds": 0.0,
+      "engineer_confirmation": {
+        "who": "Fixture engineer",
+        "at": "2026-11-06T15:00:00+03:00",
+        "statement": "Synthetic explicit confirmation of current text"
+      }
+    }
+  ],
+  "coverage": {
+    "total_checks": 1,
+    "passed": [
+      "a"
+    ],
+    "failed": [],
+    "not_applicable": [],
+    "not_run": [],
+    "satisfied": true
+  }
+}

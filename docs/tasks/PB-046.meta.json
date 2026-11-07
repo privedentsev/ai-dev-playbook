@@ -15,5 +15,83 @@
       "target": "plan:scoped-file-operations"
     }
   ],
-  "materials": []
+  "materials": [
+    {
+      "id": "implementation-evidence",
+      "role": "report",
+      "source": "docs/tasks/PB-046-evidence",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-046"
+      ]
+    },
+    {
+      "id": "verify-06abb305393d4c29ab97813a17d68b04",
+      "role": "report",
+      "source": "work/verification/PB-046/06abb305393d4c29ab97813a17d68b04",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-046"
+      ]
+    },
+    {
+      "id": "verify-33799751112940d0a8960d42575761be",
+      "role": "report",
+      "source": "work/verification/PB-046/33799751112940d0a8960d42575761be",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-046"
+      ]
+    },
+    {
+      "id": "verify-a41d941f7d1a45d99a34e1612625acd3",
+      "role": "report",
+      "source": "work/verification/PB-046/a41d941f7d1a45d99a34e1612625acd3",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-046"
+      ]
+    },
+    {
+      "id": "verify-b57a2d5405d24c049e10b2082ef309f8",
+      "role": "report",
+      "source": "work/verification/PB-046/b57a2d5405d24c049e10b2082ef309f8",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-046"
+      ]
+    }
+  ],
+  "criterion_evidence": {
+    "CHECK-01": {
+      "check_sha256": "sha256:86fa65596539d322a245fc21d7f2f299168b0c154d7c13ca453bf0235d2a7f01",
+      "card_projection": "sha256:8bb3c72fc03e76a48a9b6f263f127c2795a32af8f93d038e858c95d3524958cf",
+      "report_id": "verify-06abb305393d4c29ab97813a17d68b04",
+      "report_sha256": "sha256:c0bb6c37ba536f7cefdb33bcea9878b3bdf471d9885e040d231eec3a4056d0ca"
+    }
+  },
+  "handoff": {
+    "at": "2026-10-28T11:26:59+03:00",
+    "actor": {
+      "name": "Antigravity",
+      "model": "Gemini 3.8 Flash (High)"
+    },
+    "summary": "HANDOFF-01",
+    "reports": [
+      "verify-06abb305393d4c29ab97813a17d68b04"
+    ],
+    "card_projection": "sha256:8bb3c72fc03e76a48a9b6f263f127c2795a32af8f93d038e858c95d3524958cf",
+    "entry_id": "HANDOFF-01",
+    "journal_sha256": "sha256:0e6a9c1ba0f2064b76c6ae01434e97ec716be40585384d871c15190f34dbd6be"
+  }
 }

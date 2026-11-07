@@ -1,0 +1,10 @@
+{
+  "inputs": ["AGENTS.md", "ai-dev-playbook", "docs"],
+  "checks": [
+    {
+      "id": "self-check",
+      "argv": ["python3", "ai-dev-playbook/scripts/playbook.py", "check", "--ready"],
+      "timeout_seconds": 60
+    }
+  ]
+}

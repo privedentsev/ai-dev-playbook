@@ -161,8 +161,7 @@ class EngineTest(EngineCase):
         self.assertTrue((self.root / "docs/b.md").exists())
         self.assertFalse((self.root / "docs/new").exists())
         self.assertIsNone(fops.pending_info(self.root))
-        events = [row["event"] for row in self.journal(self.op_dirs()[0])]
-        self.assertIn("abort", events)
+        self.assertEqual(self.op_dirs(), [])  # no backup: no durable operation history
 
     def test_final_check_failure_restores_preimage(self):
         os.chmod(self.root / "docs/a.md", 0o640)

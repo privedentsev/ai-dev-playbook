@@ -1,0 +1,93 @@
+{
+  "schema_version": 1,
+  "card_format_version": 2,
+  "relations": [],
+  "materials": [
+    {
+      "id": "release-check",
+      "role": "report",
+      "source": "docs/archive/tasks/PB-055-evidence/release-check.json",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-055"
+      ]
+    },
+    {
+      "id": "verify-7992eb0ce28d483bbb5d16e266ad4e32",
+      "role": "report",
+      "source": "docs/archive/tasks/PB-055-evidence/work/verification/PB-055/7992eb0ce28d483bbb5d16e266ad4e32",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-055"
+      ]
+    },
+    {
+      "id": "lifecycle-lc-21969d8e75c9c0cf",
+      "role": "report",
+      "source": "docs/archive/tasks/PB-055-evidence/close-lc-21969d8e75c9c0cf.json",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": []
+    }
+  ],
+  "criterion_evidence": {
+    "CHECK-02": {
+      "check_sha256": "sha256:6656497568112ff50889d1b1c9b17871cca1d9ef7c503159803b8b2946ffa1b4",
+      "card_projection": "sha256:5829e44a73eb116f2db4fdf61fdf30a789c8e59b6fcdcfa1ddf01d1097f29a15",
+      "report_id": "verify-7992eb0ce28d483bbb5d16e266ad4e32",
+      "report_sha256": "sha256:c141c1616176438720b953f1e040212f22cd63a27237d2746612eb41df4d577e"
+    }
+  },
+  "handoff": {
+    "at": "2026-10-28T05:49:21+03:00",
+    "actor": {
+      "name": "Codex",
+      "model": "GPT-6"
+    },
+    "summary": "HANDOFF-01",
+    "reports": [
+      "verify-7992eb0ce28d483bbb5d16e266ad4e32"
+    ],
+    "card_projection": "sha256:5829e44a73eb116f2db4fdf61fdf30a789c8e59b6fcdcfa1ddf01d1097f29a15",
+    "entry_id": "HANDOFF-01",
+    "journal_sha256": "sha256:9e2666c63164dcbbfd36a7360dc2946e983384b6a9406eb554597cba34cc094f"
+  },
+  "acceptance": {
+    "at": "2026-10-28T05:49:56+03:00",
+    "actor": {
+      "name": "Инженер",
+      "model": "—"
+    },
+    "role": "engineer",
+    "kind": "acceptance",
+    "result": "accepted",
+    "handoff_at": "2026-10-28T05:49:21+03:00",
+    "session": null,
+    "detail": null,
+    "audit_id": "AUDIT-01",
+    "audit_sha256": "sha256:74d91c9f7ad5172cee2af8eab0c8d3fc8bed3d5e7126cfe67b483d1cf9e92d63"
+  },
+  "moves": [
+    {
+      "from": "docs/tasks/PB-055-evidence/release-check.json",
+      "to": "docs/archive/tasks/PB-055-evidence/release-check.json"
+    },
+    {
+      "from": "work/verification/PB-055/7992eb0ce28d483bbb5d16e266ad4e32",
+      "to": "docs/archive/tasks/PB-055-evidence/work/verification/PB-055/7992eb0ce28d483bbb5d16e266ad4e32"
+    },
+    {
+      "from": "docs/tasks/PB-055.md",
+      "to": "docs/archive/tasks/PB-055.md"
+    },
+    {
+      "from": "docs/tasks/PB-055.meta.json",
+      "to": "docs/archive/tasks/PB-055.meta.json"
+    }
+  ]
+}

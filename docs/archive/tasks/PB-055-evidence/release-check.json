@@ -1,0 +1,12 @@
+{
+  "time": "2026-10-28T05:38:07+03:00",
+  "version": "0.1.0",
+  "release_date": "28.10.2026",
+  "head": "086e2704d093353dc1466cfe0f9a471dc2b75ba2",
+  "remote_dev": "086e2704d093353dc1466cfe0f9a471dc2b75ba2",
+  "remote_checked_with": "git ls-remote origin refs/heads/dev",
+  "manifest_mismatches": [],
+  "root_work_in_commit": false,
+  "engineer_acceptance": "Коммит выполнен, можно закрыть задачу.",
+  "scope": "Приёмка инженером результата PB-055; отдельные PB-041/PB-044 не принимаются."
+}

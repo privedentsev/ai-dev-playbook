@@ -45,6 +45,7 @@ import json
 import os
 import re
 import shutil
+import scoped_operations
 import stat
 import tempfile
 import uuid
@@ -68,17 +69,20 @@ STAGED_ANY_IGNORE = {"__pycache__", ".DS_Store"}
 
 
 def staged_path_available(rel):
-    """Whether the current physical staging contract carries this path."""
+    """Scoped validation reads unchanged paths in place; reject cache/service evidence."""
     parts = PurePosixPath(rel).parts
     if not parts or any(p in STAGED_ANY_IGNORE or p.endswith('.pyc') for p in parts):
         return False
-    if parts[0] == 'work':
-        return len(parts) >= 2 and parts[1] == 'verification'
-    return parts[0] not in STAGED_ROOT_IGNORE
+    if parts[0] == '.git':
+        return False
+    return rel not in {GATE_FILE, PENDING_FILE, UPDATE_PENDING_FILE,
+                       'work', WORK_DIR, 'work/update',
+                       WORK_DIR + '/lock', 'work/update/lock'}
 
 
 def preview_operation(root, spec, safe_path, require):
     """Run the real staged checks outside the project, without backup/pending."""
+    root, spec = scoped_operations.bind_planning_reads(root, spec)
     plan = _validate_spec(root, spec, safe_path, require)
     _require_inputs(root, plan['inputs'], safe_path, require)
     require(not Path(tempfile.gettempdir()).resolve().is_relative_to(root.resolve()),
@@ -89,16 +93,27 @@ def preview_operation(root, spec, safe_path, require):
 
 
 SPEC_KEYS = {"operation", "plan_id", "actor", "basis", "writes", "removes",
-             "remove_dirs", "create_dirs", "inputs", "staged_checks",
+             "remove_dirs", "create_dirs", "inputs", "read_set", "staged_checks",
              "final_checks", "moves", "receipt"}
 
 
 def sha256(data):
+    if isinstance(data, scoped_operations.Payload):
+        return data.sha256
     return "sha256:" + hashlib.sha256(data).hexdigest()
 
 
 def now_iso():
     return dt.datetime.now().astimezone().isoformat(timespec="seconds")
+
+
+def _sync_dir(directory):
+    if os.name == "posix":
+        descriptor = os.open(directory, os.O_RDONLY)
+        try:
+            os.fsync(descriptor)
+        finally:
+            os.close(descriptor)
 
 
 def _journal(op_dir, event, **fields):
@@ -122,6 +137,7 @@ def _flock(stream):
 
 def _lock_stream(root, safe_path, rel):
     """Открыть lock-файл и взять эксклюзивную блокировку; None — занято."""
+    root = scoped_operations.physical_root(root)
     path = safe_path(root, rel)
     path.parent.mkdir(parents=True, exist_ok=True)
     stream = path.open("a+b")
@@ -162,6 +178,7 @@ class Gate:
 
 
 def _gate_holder(root):
+    root = scoped_operations.physical_root(root)
     try:
         data = json.loads((root / GATE_FILE).read_text(encoding="utf-8"))
     except (OSError, ValueError):
@@ -171,6 +188,7 @@ def _gate_holder(root):
 
 def pending_info(root):
     """Маркер незавершённой операции документов либо None."""
+    root = scoped_operations.physical_root(root)
     path = root / PENDING_FILE
     if not path.is_file():
         return None
@@ -199,6 +217,23 @@ def pending_hint(root, rel):
     return (f"Незавершённая операция документов ({marker.get('op_id', '?')}): "
             f"обычные команды заблокированы. Восстановление: "
             f"python3 {op}/{RESTORE_FILE}")
+
+
+def read_only_gate_check(root, safe_path, require, token=None):
+    """Probe existing state without creating/truncating a lock or pending file."""
+    for rel in (UPDATE_PENDING_FILE, PENDING_FILE):
+        require(not safe_path(root, rel).exists(), pending_hint(root, rel))
+    path = safe_path(root, GATE_FILE)
+    if not path.exists():
+        return
+    with path.open('rb') as stream:
+        try:
+            _flock(stream)
+        except OSError:
+            holder = _gate_holder(root)
+            nested = token or os.environ.get(GATE_ENV)
+            require(nested and holder and holder.get('token') == nested,
+                    'Другая команда удерживает блокировку записи — дождитесь её завершения')
 
 
 def acquire_gate(root, safe_path, require, owner, allowed_pending=()):
@@ -265,6 +300,7 @@ def _release_pending(root, op_id):
     if not isinstance(data, dict) or data.get("op_id") != op_id:
         return False
     path.unlink()
+    _sync_dir(path.parent)
     return True
 
 
@@ -274,7 +310,7 @@ def snapshot_paths(root, rels, safe_path, require):
     for rel in rels:
         path = safe_path(root, rel)
         if path.is_file():
-            result[rel] = sha256(path.read_bytes())
+            result[rel] = scoped_operations.file_digest(path)
         elif path.is_dir():
             result[rel] = "dir"
         elif not path.exists() and not path.is_symlink():
@@ -331,7 +367,7 @@ def _validate_spec(root, spec, safe_path, require):
             "removes/remove_dirs/create_dirs должны быть списками")
     for rel, content in writes.items():
         _check_rel(root, rel, safe_path, require, write=True)
-        require(isinstance(content, (bytes, bytearray)),
+        require(isinstance(content, (bytes, bytearray, scoped_operations.Payload)),
                 f"writes[{rel}]: содержимое должно быть bytes")
     for rel in removes + remove_dirs + create_dirs:
         _check_rel(root, rel, safe_path, require, write=True)
@@ -389,17 +425,18 @@ def _validate_spec(root, spec, safe_path, require):
                 f"{field} должен быть списком вызываемых проверок")
     moves = spec.get("moves")
     require(moves is None or isinstance(moves, dict), "moves должен быть объектом")
-    expected = {rel: sha256(bytes(content)) for rel, content in writes.items()}
+    expected = {rel: sha256(content) for rel, content in writes.items()}
     for rel in removes + remove_dirs:
         expected[rel] = "absent"
     for rel in create_dirs:
         expected[rel] = "dir"
     return {"operation": operation.strip(), "plan_id": plan_id,
             "actor": actor or "unknown", "basis": spec.get("basis"),
-            "writes": {rel: bytes(content) for rel, content in writes.items()},
+            "writes": {rel: bytes(content) if not isinstance(content, scoped_operations.Payload) else content
+                       for rel, content in writes.items()},
             "removes": sorted(set(removes)), "remove_dirs": remove_dirs,
             "create_dirs": create_dirs,
-            "inputs": dict(inputs),
+            "inputs": dict(inputs), "read_set": spec.get("read_set"),
             "staged_checks": spec.get("staged_checks") or [],
             "final_checks": spec.get("final_checks") or [],
             "moves": moves or {}, "receipt": spec.get("receipt") or {},
@@ -408,6 +445,7 @@ def _validate_spec(root, spec, safe_path, require):
 
 def find_completed(root, plan_id):
     """op_id успешно завершённой операции с этим plan_id либо None."""
+    root = scoped_operations.physical_root(root)
     base = root / WORK_DIR
     if not base.is_dir():
         return None
@@ -436,10 +474,17 @@ def _verify_expected(root, expected, safe_path, require):
                 problems.append(f"{rel} (нет каталога)")
         elif not path.is_file():
             problems.append(f"{rel} (нет файла)")
-        elif sha256(path.read_bytes()) != want:
+        elif scoped_operations.file_digest(path) != want:
             problems.append(f"{rel} (содержимое не совпадает)")
     require(not problems,
             "Итоговое состояние не совпадает с планом: " + "; ".join(problems))
+
+
+def _verify_post_modes(root, index, safe_path, require):
+    for rel, mode in {**index["planned_modes"], **index["planned_dir_modes"]}.items():
+        target = safe_path(root, rel)
+        require(target.exists() and stat.S_IMODE(target.stat().st_mode) == mode,
+                f"Итоговые права не совпадают с планом: {rel}")
 
 
 def _atomic_write(target, content, op_id):
@@ -455,12 +500,18 @@ def _atomic_write(target, content, op_id):
     descriptor = os.open(temporary, os.O_WRONLY | os.O_CREAT | os.O_EXCL, 0o666)
     try:
         with os.fdopen(descriptor, "wb") as stream:
-            stream.write(content)
+            if isinstance(content, scoped_operations.Payload):
+                content.copy_to(stream)
+            else:
+                stream.write(content)
             stream.flush()
             os.fsync(stream.fileno())
-        if target.exists():
+        if isinstance(content, scoped_operations.Payload):
+            os.chmod(temporary, content.mode)
+        elif target.exists():
             os.chmod(temporary, stat.S_IMODE(target.stat().st_mode))
         temporary.replace(target)
+        _sync_dir(target.parent)
     except BaseException:
         temporary.unlink(missing_ok=True)
         raise
@@ -486,38 +537,9 @@ def _remove_own_temps(root, op_dir, index, safe_path):
 
 
 def _prepare_staged(root, op_dir, plan, safe_path, require):
-    """Копия проекта с применённым write-set и проверки результата в ней."""
-    staged = op_dir / "staged"
-    root_resolved = root.resolve()
-
-    def ignore(directory, names):
-        is_root = Path(directory).resolve() == root_resolved
-        return [name for name in names
-                if (is_root and name in STAGED_ROOT_IGNORE)
-                or name in STAGED_ANY_IGNORE
-                or name.endswith(".pyc")]
-
-    shutil.copytree(root, staged, ignore=ignore, symlinks=True)
-    verification_dir = root / "work" / "verification"
-    if verification_dir.is_dir():
-        shutil.copytree(verification_dir, staged / "work" / "verification",
-                        symlinks=True, dirs_exist_ok=True)
-    for rel, content in plan["writes"].items():
-        target = staged / rel
-        target.parent.mkdir(parents=True, exist_ok=True)
-        target.write_bytes(content)
-    for rel in plan["removes"]:
-        (staged / rel).unlink(missing_ok=True)
-    for rel in plan["create_dirs"]:
-        (staged / rel).mkdir(parents=True, exist_ok=False)
-    for rel in plan["remove_dirs"]:
-        target = staged / rel
-        if target.exists():
-            target.rmdir()
-    _verify_expected(staged, plan["expected"], safe_path, require)
-    for check in plan["staged_checks"]:
-        check(staged)
-    _journal(op_dir, "staged")
+    """Prepare only payload files, then validate a read-only future tree."""
+    return scoped_operations.prepare(root, op_dir, plan, safe_path, require,
+                                     _journal, _verify_expected)
 
 
 def _write_backup(root, op_dir, plan, safe_path, require):
@@ -531,8 +553,10 @@ def _write_backup(root, op_dir, plan, safe_path, require):
             copy = backup / rel
             copy.parent.mkdir(parents=True, exist_ok=True)
             shutil.copyfile(source, copy)
+            with copy.open("rb") as backup_stream:
+                os.fsync(backup_stream.fileno())
             backed.append(rel)
-            hashes[rel] = sha256(copy.read_bytes())
+            hashes[rel] = scoped_operations.file_digest(copy)
             modes[rel] = stat.S_IMODE(source.stat().st_mode)
         elif source.exists():
             require(False, f"Затрагиваемый путь не является файлом: {rel}")
@@ -568,7 +592,11 @@ def _write_backup(root, op_dir, plan, safe_path, require):
              "planned": {rel: plan["expected"][rel]
                          for rel in backed + added + missing},
              "created_dirs": created_dirs, "removed_dirs": removed_dirs,
-             "dir_modes": dir_modes}
+             "dir_modes": dir_modes,
+             "planned_modes": {rel: modes.get(rel, plan["_staged_modes"][rel])
+                               for rel in plan["writes"]},
+             "planned_dir_modes": {rel: stat.S_IMODE((op_dir / "staged" / rel).stat().st_mode)
+                                   for rel in created_dirs}}
     # Индекс пишется атомарно и сбрасывается на диск: его наличие — граница,
     # после которой операция могла начать запись в проект.
     index_tmp = (op_dir / BACKUP_INDEX).with_suffix(".tmp")
@@ -577,6 +605,7 @@ def _write_backup(root, op_dir, plan, safe_path, require):
         stream.flush()
         os.fsync(stream.fileno())
     index_tmp.replace(op_dir / BACKUP_INDEX)
+    _sync_dir(op_dir)
     _journal(op_dir, "backup_complete", backed=len(backed), added=len(added))
     return index
 
@@ -591,7 +620,7 @@ def _read_backup_index(root, op_dir, safe_path, require):
     восстановление, а не пропускается молча.
     """
     index_path = op_dir / BACKUP_INDEX
-    require(index_path.is_file(),
+    require(index_path.is_file() and not index_path.is_symlink(),
             f"Нет {BACKUP_INDEX} в {op_dir.relative_to(root)}: пред-образ "
             f"недоступен, восстановление невозможно — маркер сохранён")
     index = json.loads(index_path.read_text(encoding="utf-8"))
@@ -645,6 +674,12 @@ def _read_backup_index(root, op_dir, safe_path, require):
                     or (isinstance(value, str) and HASH_RE.fullmatch(value))
                     for value in planned.values())):
         problems.append("planned не соответствует затрагиваемым путям")
+    for field, wanted in (("planned_modes", {rel for rel, value in (planned or {}).items() if value != "absent"}),
+                          ("planned_dir_modes", set(lists["created_dirs"]))):
+        extra = index.get(field)
+        if extra is not None and not (isinstance(extra, dict) and set(extra) == wanted
+                and all(type(mode) is int and 0 <= mode <= 0o7777 for mode in extra.values())):
+            problems.append(field + " не соответствует планируемым путям")
     for rel in touched + lists["created_dirs"] + lists["removed_dirs"]:
         try:
             _check_rel(root, rel, safe_path, require, write=True)
@@ -656,18 +691,17 @@ def _read_backup_index(root, op_dir, safe_path, require):
         for path in backup_dir.rglob("*"):
             if path.is_file():
                 rel = path.relative_to(backup_dir).as_posix()
-                if not any(part.startswith(".") for part in PurePosixPath(rel).parts):
-                    on_disk.add(rel)
+                on_disk.add(rel)
     unlisted = sorted(on_disk - set(backed))
     if unlisted:
         problems.append("копии без записи в backed: " + ", ".join(unlisted))
     if isinstance(hashes, dict):
         for rel in backed:
             source = backup_dir / rel
-            if not source.is_file():
-                problems.append(f"{rel} (нет копии)")
+            if not source.is_file() or source.is_symlink() or source.stat().st_nlink != 1:
+                problems.append(f"{rel} (нет независимой обычной копии)")
             elif isinstance(hashes.get(rel), str) \
-                    and sha256(source.read_bytes()) != hashes[rel]:
+                    and scoped_operations.file_digest(source) != hashes[rel]:
                 problems.append(f"{rel} (копия повреждена)")
     require(not problems,
             "Резервная копия неполна или повреждена: " + "; ".join(problems)
@@ -679,6 +713,12 @@ def _keep_conflict(op_dir, root, target, rel):
     """Сохранить чужое содержимое в conflicts/ вместо молчаливого удаления."""
     destination = op_dir / "conflicts" / rel
     destination.parent.mkdir(parents=True, exist_ok=True)
+    if destination.exists() or destination.is_symlink():
+        stem = destination.name
+        counter = 1
+        while destination.exists() or destination.is_symlink():
+            destination = destination.with_name(stem + f".conflict-{counter:02d}")
+            counter += 1
     shutil.move(str(target), str(destination))
 
 
@@ -699,20 +739,45 @@ def _restore_from_backup(root, op_dir, safe_path, require):
 
     def state_of(path):
         if path.is_symlink():
-            return "other"
+            return ("other", None)
         if path.is_file():
-            return sha256(path.read_bytes())
+            return (scoped_operations.file_digest(path), stat.S_IMODE(path.stat().st_mode))
         if path.exists():
-            return "other"
-        return "absent"
+            return ("other", stat.S_IMODE(path.stat().st_mode))
+        return ("absent", None)
+
+    def matches_planned(rel, state):
+        expected_mode = index.get("planned_modes", {}).get(rel, index["modes"].get(rel))
+        return expected_mode is not None and state == (planned[rel], expected_mode)
+
+    def directory_matches_preimage(directory):
+        for path in [directory] + list(directory.rglob("*")):
+            rel = path.relative_to(root).as_posix()
+            if path.is_symlink():
+                return False
+            if path.is_dir():
+                if rel not in index["dir_modes"] or stat.S_IMODE(path.stat().st_mode) != index["dir_modes"][rel]:
+                    return False
+            elif rel not in index["hashes"] or state_of(path) != (index["hashes"][rel], index["modes"][rel]):
+                return False
+        return True
+
+    # Restore directory permissions before files; preserve foreign trees first.
+    for rel in sorted(index["removed_dirs"], key=lambda p: len(PurePosixPath(p).parts)):
+        target = safe_path(root, rel)
+        if target.exists() and (not target.is_dir() or not directory_matches_preimage(target)):
+            _keep_conflict(op_dir, root, target, rel)
+            conflicts.append(rel)
+        target.mkdir(parents=True, exist_ok=True)
+        os.chmod(target, index["dir_modes"][rel] | 0o700)
 
     removed = 0
     for rel in index["added"] + index["missing"]:
         target = safe_path(root, rel)
         current = state_of(target)
-        if current == "absent":
+        if current[0] == "absent":
             continue
-        if rel in index["added"] and current == planned[rel]:
+        if rel in index["added"] and matches_planned(rel, current):
             target.unlink()
             removed += 1
         else:
@@ -723,17 +788,19 @@ def _restore_from_backup(root, op_dir, safe_path, require):
     for rel in index["backed"]:
         target = safe_path(root, rel)
         current = state_of(target)
-        if current == index["hashes"][rel]:
+        if current == (index["hashes"][rel], index["modes"][rel]):
             pass
         else:
-            if current not in ("absent", planned[rel]):
+            if current[0] != "absent" and not matches_planned(rel, current):
                 _keep_conflict(op_dir, root, target, rel)
                 conflicts.append(rel)
             copy = backup_dir / rel
             target.parent.mkdir(parents=True, exist_ok=True)
-            shutil.copyfile(copy, target)
+            _atomic_write(target, scoped_operations.Payload(copy, index["hashes"][rel], mode=index["modes"][rel]), op_dir.name)
         os.chmod(target, index["modes"][rel])
-        require(target.read_bytes() == (backup_dir / rel).read_bytes(),
+        with target.open("rb") as restored_file:
+            os.fsync(restored_file.fileno())
+        require(scoped_operations.file_digest(target) == index["hashes"][rel],
                 f"Восстановленный файл не совпадает с резервной копией: {rel}")
         restored += 1
     # Родители раньше потомков: mkdir родителя может создать вложенный
@@ -751,11 +818,18 @@ def _restore_from_backup(root, op_dir, safe_path, require):
                 f"Режим восстановленного каталога не совпадает: {rel}")
     for rel in index["created_dirs"]:
         target = safe_path(root, rel)
-        if target.is_dir():
-            try:
-                target.rmdir()
-            except OSError:
-                conflicts.append(f"{rel} (каталог не пуст, оставлен)")
+        if not target.exists():
+            continue
+        expected_mode = index.get("planned_dir_modes", {}).get(rel)
+        if not target.is_dir() or expected_mode is None or stat.S_IMODE(target.stat().st_mode) != expected_mode:
+            _keep_conflict(op_dir, root, target, rel)
+            conflicts.append(rel)
+            continue
+        try:
+            target.rmdir()
+        except OSError:
+            _keep_conflict(op_dir, root, target, rel)
+            conflicts.append(rel)
     return restored, removed, conflicts
 
 
@@ -770,6 +844,7 @@ def run_operation(root, spec, safe_path, require):
     (метаданные квитанции). Повторный запуск успешно завершённого plan_id
     сообщает already_completed.
     """
+    root, spec = scoped_operations.bind_planning_reads(root, spec)
     plan = _validate_spec(root, spec, safe_path, require)
     # Ответ already_completed принимается только под удерживаемым gate после
     # проверки pending (в _apply_operation): квитанция completed может
@@ -802,6 +877,12 @@ def _apply_operation(root, plan, safe_path, require):
     op_id = dt.datetime.now().strftime("%Y%m%d-%H%M%S-") + uuid.uuid4().hex[:8]
     op_dir = safe_path(root, WORK_DIR) / op_id
     op_dir.mkdir(parents=True, exist_ok=False)
+    with (op_dir / RESTORE_FILE).open("x", encoding="utf-8") as restore_file:
+        restore_file.write(RESTORE_SCRIPT)
+        restore_file.flush()
+        os.fsync(restore_file.fileno())
+    _sync_dir(op_dir)
+    _sync_dir(op_dir.parent)
     _journal(op_dir, "start", operation=plan["operation"],
              plan_id=plan["plan_id"], actor=plan["actor"])
     marker = root / PENDING_FILE
@@ -818,25 +899,37 @@ def _apply_operation(root, plan, safe_path, require):
         _journal(op_dir, "abort", reason="pending marker appeared concurrently")
         require(False, pending_hint(root, PENDING_FILE))
     # Автономный restore доступен с любой точки прерывания: пишется до staged.
-    (op_dir / RESTORE_FILE).write_text(RESTORE_SCRIPT, encoding="utf-8")
     try:
-        _prepare_staged(root, op_dir, plan, safe_path, require)
-        _write_backup(root, op_dir, plan, safe_path, require)
-        _read_backup_index(root, op_dir, safe_path, require)
         _require_inputs(root, plan["inputs"], safe_path, require)
+        _prepare_staged(root, op_dir, plan, safe_path, require)
+        _require_inputs(root, plan["inputs"], safe_path, require)
+        scoped_operations.recheck(root, plan, safe_path, require, _verify_expected)
+        _write_backup(root, op_dir, plan, safe_path, require)
+        backup_index = _read_backup_index(root, op_dir, safe_path, require)
+        scoped_operations.validate_backup(backup_index, plan, require)
+        _require_inputs(root, plan["inputs"], safe_path, require)
+        scoped_operations.recheck(root, plan, safe_path, require, _verify_expected)
         _journal(op_dir, "rechecked")
     except Exception as error:
         # Запись в проект ещё не начиналась: отмена и снятие маркера безопасны.
         _journal(op_dir, "abort", reason="pre-write failure", error=str(error))
-        _release_pending(root, op_id)
+        released = _release_pending(root, op_id)
+        if released:
+            scoped_operations.cleanup_staged(op_dir)
+            if not (op_dir / BACKUP_INDEX).exists():
+                shutil.rmtree(op_dir)
         raise
     failed = None
     try:
+        _journal(op_dir, "write_started")
         for rel in plan["create_dirs"]:
             safe_path(root, rel).mkdir(parents=True, exist_ok=False)
             _journal(op_dir, "create_dir", path=rel)
         for rel, content in plan["writes"].items():
-            _atomic_write(safe_path(root, rel), content, op_id)
+            payload = scoped_operations.Payload(op_dir / "staged" / rel,
+                                                plan["expected"][rel],
+                                                mode=backup_index["planned_modes"][rel])
+            _atomic_write(safe_path(root, rel), payload, op_id)
             _journal(op_dir, "write", path=rel)
         for rel in plan["removes"]:
             safe_path(root, rel).unlink(missing_ok=True)
@@ -847,8 +940,11 @@ def _apply_operation(root, plan, safe_path, require):
                 target.rmdir()
             _journal(op_dir, "remove_dir", path=rel)
         _verify_expected(root, plan["expected"], safe_path, require)
+        _verify_post_modes(root, backup_index, safe_path, require)
         for check in plan["final_checks"]:
             check(root)
+        _verify_expected(root, plan["expected"], safe_path, require)
+        _verify_post_modes(root, backup_index, safe_path, require)
         _journal(op_dir, "verified")
     except Exception as error:
         failed = error
@@ -867,6 +963,7 @@ def _apply_operation(root, plan, safe_path, require):
                     f"причины выполните {op_dir.relative_to(root)}/{RESTORE_FILE}. "
                     f"Журнал: {op_dir.relative_to(root)}")
         _release_pending(root, op_id)
+        scoped_operations.cleanup_staged(op_dir)
         note = (" Конфликтующее содержимое сохранено в "
                 f"{op_dir.relative_to(root)}/conflicts/: {', '.join(conflicts)}"
                 if conflicts else "")
@@ -877,7 +974,8 @@ def _apply_operation(root, plan, safe_path, require):
     _write_receipt(op_dir, plan)
     _journal(op_dir, "done")
     _release_pending(root, op_id)
-    return {"status": "completed", "op_id": op_id, "plan_id": plan["plan_id"],
+    warning = scoped_operations.cleanup_staged(op_dir)
+    return {"warnings": [warning] if warning else [], "status": "completed", "op_id": op_id, "plan_id": plan["plan_id"],
             "op_dir": op_dir.relative_to(root).as_posix()}
 
 
@@ -926,9 +1024,14 @@ def _write_receipt(op_dir, plan):
                "result": "completed", "finished_at": now_iso(),
                "expected": plan["expected"], "moves": plan["moves"],
                "details": plan["receipt"]}
-    (op_dir / "receipt.json").write_text(
-        json.dumps(receipt, ensure_ascii=False, indent=2) + "\n",
-        encoding="utf-8")
+    target = op_dir / "receipt.json"
+    temporary = op_dir / ".receipt.tmp"
+    with temporary.open("x", encoding="utf-8") as output:
+        output.write(json.dumps(receipt, ensure_ascii=False, indent=2) + "\n")
+        output.flush()
+        os.fsync(output.fileno())
+    temporary.replace(target)
+    _sync_dir(op_dir)
 
 
 def restore_operation(root, safe_path, require):
@@ -968,12 +1071,14 @@ def restore_operation(root, safe_path, require):
                 _require_pre_write(op_dir, require)
                 _journal(op_dir, "pre_write_abort", op_id=pending["op_id"])
                 _release_pending(root, pending["op_id"])
+                scoped_operations.cleanup_staged(op_dir)
                 return {"status": "aborted_before_write",
                         "restored": 0, "removed": 0, "conflicts": [],
                         "op_dir": op_dir.relative_to(root).as_posix()}
             restored, removed, conflicts = _restore_from_backup(
                 root, op_dir, safe_path, require)
             _neutralize_receipt(op_dir)
+            scoped_operations.cleanup_staged(op_dir)
             _journal(op_dir, "restored_by_command", restored=restored,
                      removed=removed, conflicts=conflicts)
             if not _release_pending(root, pending["op_id"]):
@@ -1000,6 +1105,7 @@ import os
 import re
 import shutil
 import sys
+import uuid
 from pathlib import Path
 
 op_dir = Path(__file__).resolve().parent
@@ -1052,22 +1158,78 @@ def refuse(message):
 
 
 def digest(path):
-    return "sha256:" + hashlib.sha256(path.read_bytes()).hexdigest()
+    if path.is_symlink() or any(parent.is_symlink() for parent in path.parents):
+        fail("Symlink in recovery data: " + str(path))
+    checksum = hashlib.sha256()
+    with path.open("rb") as incoming:
+        for chunk in iter(lambda: incoming.read(1024 * 1024), b""):
+            checksum.update(chunk)
+    return "sha256:" + checksum.hexdigest()
 
 
 def state_of(path):
     if path.is_symlink():
-        return "other"
+        return ("other", None)
     if path.is_file():
-        return digest(path)
+        return (digest(path), path.stat().st_mode & 0o7777)
     if path.exists():
-        return "other"
-    return "absent"
+        return ("other", path.stat().st_mode & 0o7777)
+    return ("absent", None)
+
+
+def matches_planned(rel, state):
+    expected_mode = index.get("planned_modes", {}).get(rel, modes.get(rel))
+    return expected_mode is not None and state == (planned[rel], expected_mode)
+
+
+def restore_file(source, target, expected, mode):
+    target.parent.mkdir(parents=True, exist_ok=True)
+    temporary = target.parent / ("." + target.name + ".fop-" + op_dir.name
+                                + "-" + uuid.uuid4().hex[:8] + ".tmp")
+    descriptor = os.open(temporary, os.O_WRONLY | os.O_CREAT | os.O_EXCL, 0o666)
+    try:
+        checksum = hashlib.sha256()
+        with os.fdopen(descriptor, "wb") as outgoing, source.open("rb") as incoming:
+            for chunk in iter(lambda: incoming.read(1024 * 1024), b""):
+                checksum.update(chunk)
+                outgoing.write(chunk)
+            outgoing.flush()
+            if "sha256:" + checksum.hexdigest() != expected:
+                fail("Backup changed during restore: " + str(source))
+            os.chmod(temporary, mode)
+            os.fsync(outgoing.fileno())
+        temporary.replace(target)
+        if os.name == "posix":
+            directory = os.open(target.parent, os.O_RDONLY)
+            try:
+                os.fsync(directory)
+            finally:
+                os.close(directory)
+    except BaseException:
+        temporary.unlink(missing_ok=True)
+        raise
+
+
+def cleanup_staged():
+    staged = op_dir / "staged"
+    try:
+        if staged.is_symlink():
+            raise ValueError("staged became a symlink")
+        if staged.exists():
+            shutil.rmtree(staged)
+    except (OSError, ValueError) as error:
+        print("Restore completed; staged cleanup failed: " + str(error), file=sys.stderr)
 
 
 def keep_conflict(target, rel):
     destination = op_dir / "conflicts" / rel
     destination.parent.mkdir(parents=True, exist_ok=True)
+    if destination.exists() or destination.is_symlink():
+        stem = destination.name
+        counter = 1
+        while destination.exists() or destination.is_symlink():
+            destination = destination.with_name(stem + f".conflict-{counter:02d}")
+            counter += 1
     shutil.move(str(target), str(destination))
 
 
@@ -1093,6 +1255,8 @@ if not own:
            f"этот пред-образ относится к операции {op_dir.name}.")
 
 index_path = op_dir / "backup_index.json"
+if index_path.is_symlink():
+    fail("Backup index is a symlink.")
 if not index_path.is_file():
     # Индекс создаётся строго до первой записи в проект, а событие
     # 'backup_complete' журналируется после его записи: журнал из одних
@@ -1110,6 +1274,7 @@ if not index_path.is_file():
         fail("Нет backup_index.json: пред-образ утрачен, восстановление "
              "невозможно.")
     pending.unlink()
+    cleanup_staged()
     print("Операция прервана до записи в проект: восстановление не "
           "требуется, маркер снят.")
     sys.exit(0)
@@ -1123,6 +1288,12 @@ try:
     removed_dirs = index["removed_dirs"]
     hashes, modes, planned = index["hashes"], index["modes"], index["planned"]
     dir_modes = index["dir_modes"]
+    for field, wanted in (("planned_modes", {rel for rel, value in planned.items() if value != "absent"}),
+                          ("planned_dir_modes", set(created_dirs))):
+        extra = index.get(field)
+        if extra is not None:
+            assert isinstance(extra, dict) and set(extra) == wanted
+            assert all(type(mode) is int and 0 <= mode <= 0o7777 for mode in extra.values())
     for value in (backed, added, missing, created_dirs, removed_dirs):
         assert isinstance(value, list)
         assert all(isinstance(rel, str) for rel in value)
@@ -1159,8 +1330,7 @@ if backup_dir.is_dir():
     for path in backup_dir.rglob("*"):
         if path.is_file():
             rel = path.relative_to(backup_dir).as_posix()
-            if not any(part.startswith(".") for part in Path(rel).parts):
-                on_disk.add(rel)
+            on_disk.add(rel)
 unlisted = sorted(on_disk - set(backed))
 if unlisted:
     fail("backup_index.json неполон: копии без записи в backed: "
@@ -1168,8 +1338,8 @@ if unlisted:
 problems = []
 for rel in backed:
     source = backup_dir / rel
-    if not source.is_file():
-        problems.append(rel + " (нет копии)")
+    if not source.is_file() or source.is_symlink() or source.stat().st_nlink != 1:
+        problems.append(rel + " (нет независимой обычной копии)")
     elif digest(source) != hashes[rel]:
         problems.append(rel + " (копия повреждена)")
 if problems:
@@ -1191,14 +1361,34 @@ for rel in backed + added + missing:
         if stray.is_file() or stray.is_symlink():
             stray.unlink()
 
+def directory_matches_preimage(directory):
+    for path in [directory] + list(directory.rglob("*")):
+        rel = path.relative_to(root).as_posix()
+        if path.is_symlink():
+            return False
+        if path.is_dir():
+            if rel not in dir_modes or path.stat().st_mode & 0o7777 != dir_modes[rel]:
+                return False
+        elif rel not in hashes or state_of(path) != (hashes[rel], modes[rel]):
+            return False
+    return True
+
+
 restored = removed = 0
 conflicts = []
+for rel in sorted(removed_dirs, key=lambda p: len(Path(p).parts)):
+    target = root / rel
+    if target.exists() and (not target.is_dir() or not directory_matches_preimage(target)):
+        keep_conflict(target, rel)
+        conflicts.append(rel)
+    target.mkdir(parents=True, exist_ok=True)
+    os.chmod(target, dir_modes[rel] | 0o700)
 for rel in added + missing:
     target = root / rel
     current = state_of(target)
-    if current == "absent":
+    if current[0] == "absent":
         continue
-    if rel in added and current == planned[rel]:
+    if rel in added and matches_planned(rel, current):
         target.unlink()
         removed += 1
     else:
@@ -1208,15 +1398,15 @@ for rel in added + missing:
 for rel in backed:
     target = root / rel
     current = state_of(target)
-    if current != hashes[rel]:
-        if current not in ("absent", planned[rel]):
+    if current != (hashes[rel], modes[rel]):
+        if current[0] != "absent" and not matches_planned(rel, current):
             keep_conflict(target, rel)
             conflicts.append(rel)
         source = backup_dir / rel
         target.parent.mkdir(parents=True, exist_ok=True)
-        shutil.copyfile(source, target)
+        restore_file(source, target, hashes[rel], modes[rel])
     os.chmod(target, modes[rel])
-    if digest(target) != digest(backup_dir / rel):
+    if digest(target) != hashes[rel]:
         fail(f"Восстановленный файл не совпадает с резервной копией: {rel}.")
     restored += 1
 for rel in sorted(removed_dirs, key=lambda p: len(Path(p).parts)):
@@ -1231,11 +1421,18 @@ for rel in sorted(removed_dirs, key=lambda p: len(Path(p).parts)):
         fail(f"Режим восстановленного каталога не совпадает: {rel}.")
 for rel in created_dirs:
     target = root / rel
-    if target.is_dir():
-        try:
-            target.rmdir()
-        except OSError:
-            conflicts.append(rel + " (каталог не пуст, оставлен)")
+    if not target.exists():
+        continue
+    expected_mode = index.get("planned_dir_modes", {}).get(rel)
+    if not target.is_dir() or expected_mode is None or target.stat().st_mode & 0o7777 != expected_mode:
+        keep_conflict(target, rel)
+        conflicts.append(rel)
+        continue
+    try:
+        target.rmdir()
+    except OSError:
+        keep_conflict(target, rel)
+        conflicts.append(rel)
 # Квитанция completed после отката ложно подтверждала бы применение плана:
 # переводится в restored, чтобы повторный запуск плана применил его заново.
 receipt = op_dir / "receipt.json"
@@ -1257,6 +1454,7 @@ removed_marker = isinstance(current, dict) \\
     and current.get("op_id") == op_dir.name
 if removed_marker:
     pending.unlink()
+    cleanup_staged()
 note = ""
 if conflicts:
     note = (" Конфликтующее содержимое сохранено в "

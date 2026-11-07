@@ -1,0 +1,931 @@
+[
+  {
+    "task": "PB-031",
+    "sha256": "b0c811ebe52445150c34e1daff2921c2d37b6affcd8460c55acfc14f7284ac22",
+    "status": "done",
+    "handoff": {
+      "at": "2026-10-29T05:09:36+03:00",
+      "actor": {
+        "name": "Codex",
+        "model": "GPT-6"
+      },
+      "summary": "PB-031-A5: свежий полный verify passed, 619/619 тестов; CHECK/HANDOFF обновлены, передано на повторный независимый аудит",
+      "reports": [
+        "verify-a01cb14755a444749f0f372c636b995e"
+      ],
+      "card_projection": "sha256:f52875468ec739744e7b9e6cf116a8e253e0ec7c1bfc69d4a2821215fc7bdcf6"
+    },
+    "acceptance": {
+      "at": "2026-10-29T05:15:46+03:00",
+      "actor": {
+        "name": "Codex",
+        "model": "GPT-6"
+      },
+      "role": "auditor",
+      "kind": "acceptance",
+      "result": "accepted",
+      "handoff_at": "2026-10-29T05:09:36+03:00",
+      "session": null,
+      "detail": "Независимый повторный аудит PASS: A5 снято, свежая передача a01cb14755a444749f0f372c636b995e; 39 целевых тестов и CLI/loader/registry-пробы PASS. Протокол audit-20261029-02."
+    },
+    "materials": [
+      {
+        "id": "verify-b8ecc26dfd91400da68877ae8b37bebc",
+        "role": "report",
+        "source": "docs/archive/tasks/PB-031-evidence/work/verification/PB-031/b8ecc26dfd91400da68877ae8b37bebc",
+        "storage": "local",
+        "required": true,
+        "immutable": true,
+        "used_by": [
+          "PB-031"
+        ]
+      },
+      {
+        "id": "verify-25e917c29ee54b6a876e355457eb6073",
+        "role": "report",
+        "source": "docs/archive/tasks/PB-031-evidence/work/verification/PB-031/25e917c29ee54b6a876e355457eb6073",
+        "storage": "local",
+        "required": true,
+        "immutable": true,
+        "used_by": [
+          "PB-031"
+        ]
+      },
+      {
+        "id": "verify-a85d901919f240afbd87076c686bf9c6",
+        "role": "report",
+        "source": "docs/archive/tasks/PB-031-evidence/work/verification/PB-031/a85d901919f240afbd87076c686bf9c6",
+        "storage": "local",
+        "required": true,
+        "immutable": true,
+        "used_by": [
+          "PB-031"
+        ]
+      },
+      {
+        "id": "verify-997ef4c8f383423c88b67133319f5188",
+        "role": "report",
+        "source": "docs/archive/tasks/PB-031-evidence/work/verification/PB-031/997ef4c8f383423c88b67133319f5188",
+        "storage": "local",
+        "required": true,
+        "immutable": true,
+        "used_by": [
+          "PB-031"
+        ]
+      },
+      {
+        "id": "verify-667765ae60914590a9d90f0a66ed9452",
+        "role": "report",
+        "source": "docs/archive/tasks/PB-031-evidence/work/verification/PB-031/667765ae60914590a9d90f0a66ed9452",
+        "storage": "local",
+        "required": true,
+        "immutable": true,
+        "used_by": [
+          "PB-031"
+        ]
+      },
+      {
+        "id": "audit-reaudit-02",
+        "role": "report",
+        "source": "docs/archive/tasks/PB-031-evidence/work/verification/PB-031/audit-reaudit-02",
+        "storage": "local",
+        "required": true,
+        "immutable": true,
+        "used_by": [
+          "PB-031"
+        ]
+      },
+      {
+        "id": "pb031-evidence",
+        "role": "report",
+        "source": "docs/archive/tasks/PB-031-evidence",
+        "storage": "local",
+        "required": true,
+        "immutable": true,
+        "used_by": [
+          "PB-031"
+        ]
+      },
+      {
+        "id": "audit-20261029",
+        "role": "report",
+        "source": "docs/archive/tasks/PB-031-evidence/work/verification/PB-031/audit-20261029",
+        "storage": "local",
+        "immutable": true,
+        "required": true,
+        "used_by": [
+          "PB-031"
+        ]
+      },
+      {
+        "id": "verify-a01cb14755a444749f0f372c636b995e",
+        "role": "report",
+        "source": "docs/archive/tasks/PB-031-evidence/work/verification/PB-031/a01cb14755a444749f0f372c636b995e",
+        "storage": "local",
+        "required": true,
+        "immutable": true,
+        "used_by": [
+          "PB-031"
+        ]
+      },
+      {
+        "id": "audit-20261029-02",
+        "role": "report",
+        "source": "docs/archive/tasks/PB-031-evidence/work/verification/PB-031/audit-20261029-02",
+        "storage": "local",
+        "immutable": true,
+        "required": true,
+        "used_by": [
+          "PB-031"
+        ]
+      },
+      {
+        "id": "lifecycle-lc-3e54b841aea7d3c0",
+        "role": "report",
+        "source": "docs/archive/tasks/PB-031-evidence/close-lc-3e54b841aea7d3c0.json",
+        "storage": "local",
+        "required": true,
+        "immutable": true,
+        "used_by": []
+      }
+    ],
+    "moves": [
+      {
+        "from": "work/verification/PB-031/b8ecc26dfd91400da68877ae8b37bebc",
+        "to": "docs/archive/tasks/PB-031-evidence/work/verification/PB-031/b8ecc26dfd91400da68877ae8b37bebc"
+      },
+      {
+        "from": "work/verification/PB-031/25e917c29ee54b6a876e355457eb6073",
+        "to": "docs/archive/tasks/PB-031-evidence/work/verification/PB-031/25e917c29ee54b6a876e355457eb6073"
+      },
+      {
+        "from": "work/verification/PB-031/a85d901919f240afbd87076c686bf9c6",
+        "to": "docs/archive/tasks/PB-031-evidence/work/verification/PB-031/a85d901919f240afbd87076c686bf9c6"
+      },
+      {
+        "from": "work/verification/PB-031/997ef4c8f383423c88b67133319f5188",
+        "to": "docs/archive/tasks/PB-031-evidence/work/verification/PB-031/997ef4c8f383423c88b67133319f5188"
+      },
+      {
+        "from": "work/verification/PB-031/667765ae60914590a9d90f0a66ed9452",
+        "to": "docs/archive/tasks/PB-031-evidence/work/verification/PB-031/667765ae60914590a9d90f0a66ed9452"
+      },
+      {
+        "from": "work/verification/PB-031/audit-reaudit-02",
+        "to": "docs/archive/tasks/PB-031-evidence/work/verification/PB-031/audit-reaudit-02"
+      },
+      {
+        "from": "docs/tasks/PB-031-evidence",
+        "to": "docs/archive/tasks/PB-031-evidence"
+      },
+      {
+        "from": "work/verification/PB-031/audit-20261029",
+        "to": "docs/archive/tasks/PB-031-evidence/work/verification/PB-031/audit-20261029"
+      },
+      {
+        "from": "work/verification/PB-031/a01cb14755a444749f0f372c636b995e",
+        "to": "docs/archive/tasks/PB-031-evidence/work/verification/PB-031/a01cb14755a444749f0f372c636b995e"
+      },
+      {
+        "from": "work/verification/PB-031/audit-20261029-02",
+        "to": "docs/archive/tasks/PB-031-evidence/work/verification/PB-031/audit-20261029-02"
+      },
+      {
+        "from": "docs/tasks/PB-031.md",
+        "to": "docs/archive/tasks/PB-031.md"
+      }
+    ]
+  },
+  {
+    "task": "PB-032",
+    "sha256": "46b22f0e0a56b0784d54959871699c36737e92ae61e7b7df868c1b437e76764b",
+    "status": "done",
+    "handoff": {
+      "at": "2026-10-29T06:11:17+03:00",
+      "actor": {
+        "name": "Codex",
+        "model": "GPT-6"
+      },
+      "summary": "Исправлен A-01: согласованность input/before/after и input/candidate; 18 целевых и 637 полных тестов PASS. На повторный независимый аудит.",
+      "reports": [
+        "verify-72c275f507434fd58dee55a8c8969339"
+      ],
+      "card_projection": "sha256:5b742b3dbf78e7374025905e2bfbbeef01f67bbd5e13585d1055117d8c0a6547"
+    },
+    "acceptance": {
+      "at": "2026-10-29T06:16:21+03:00",
+      "actor": {
+        "name": "Codex",
+        "model": "GPT-6"
+      },
+      "role": "auditor",
+      "kind": "acceptance",
+      "result": "accepted",
+      "handoff_at": "2026-10-29T06:11:17+03:00",
+      "session": null,
+      "detail": "Повторный независимый аудит audit-02: A-01 устранён, 18 целевых тестов и 40 независимых проб PASS; новых замечаний нет."
+    },
+    "materials": [
+      {
+        "id": "PB-032-implementation",
+        "role": "report",
+        "source": "docs/archive/tasks/PB-032-evidence/implementation.md",
+        "storage": "local",
+        "required": true,
+        "immutable": true,
+        "used_by": [
+          "PB-032"
+        ]
+      },
+      {
+        "id": "verify-4799df4fdd774dbc9bc92f7ae4770f90",
+        "role": "report",
+        "source": "docs/archive/tasks/PB-032-evidence/work/verification/PB-032/4799df4fdd774dbc9bc92f7ae4770f90",
+        "storage": "local",
+        "required": true,
+        "immutable": true,
+        "used_by": [
+          "PB-032"
+        ]
+      },
+      {
+        "id": "audit-01",
+        "role": "report",
+        "source": "docs/archive/tasks/PB-032-evidence/work/verification/PB-032/audit-01",
+        "storage": "local",
+        "immutable": true,
+        "required": true,
+        "used_by": [
+          "PB-032"
+        ]
+      },
+      {
+        "id": "PB-032-fix-01",
+        "role": "report",
+        "source": "docs/archive/tasks/PB-032-evidence/fix-01",
+        "storage": "local",
+        "required": true,
+        "immutable": true,
+        "used_by": [
+          "PB-032"
+        ]
+      },
+      {
+        "id": "verify-72c275f507434fd58dee55a8c8969339",
+        "role": "report",
+        "source": "docs/archive/tasks/PB-032-evidence/work/verification/PB-032/72c275f507434fd58dee55a8c8969339",
+        "storage": "local",
+        "required": true,
+        "immutable": true,
+        "used_by": [
+          "PB-032"
+        ]
+      },
+      {
+        "id": "audit-02",
+        "role": "report",
+        "source": "docs/archive/tasks/PB-032-evidence/work/verification/PB-032/audit-02",
+        "storage": "local",
+        "immutable": true,
+        "required": true,
+        "used_by": [
+          "PB-032"
+        ]
+      },
+      {
+        "id": "lifecycle-lc-ffafb709d66ef761",
+        "role": "report",
+        "source": "docs/archive/tasks/PB-032-evidence/close-lc-ffafb709d66ef761.json",
+        "storage": "local",
+        "required": true,
+        "immutable": true,
+        "used_by": []
+      }
+    ],
+    "moves": [
+      {
+        "from": "docs/tasks/PB-032-evidence/implementation.md",
+        "to": "docs/archive/tasks/PB-032-evidence/implementation.md"
+      },
+      {
+        "from": "work/verification/PB-032/4799df4fdd774dbc9bc92f7ae4770f90",
+        "to": "docs/archive/tasks/PB-032-evidence/work/verification/PB-032/4799df4fdd774dbc9bc92f7ae4770f90"
+      },
+      {
+        "from": "work/verification/PB-032/audit-01",
+        "to": "docs/archive/tasks/PB-032-evidence/work/verification/PB-032/audit-01"
+      },
+      {
+        "from": "docs/tasks/PB-032-evidence/fix-01",
+        "to": "docs/archive/tasks/PB-032-evidence/fix-01"
+      },
+      {
+        "from": "work/verification/PB-032/72c275f507434fd58dee55a8c8969339",
+        "to": "docs/archive/tasks/PB-032-evidence/work/verification/PB-032/72c275f507434fd58dee55a8c8969339"
+      },
+      {
+        "from": "work/verification/PB-032/audit-02",
+        "to": "docs/archive/tasks/PB-032-evidence/work/verification/PB-032/audit-02"
+      },
+      {
+        "from": "docs/tasks/PB-032.md",
+        "to": "docs/archive/tasks/PB-032.md"
+      }
+    ]
+  },
+  {
+    "task": "PB-033",
+    "sha256": "80d46adea22d2ec79125336f5089951270ccc62539ad19d319b899942f946a61",
+    "status": "done",
+    "handoff": {
+      "at": "2026-10-29T19:15:52+03:00",
+      "actor": {
+        "name": "Codex",
+        "model": "GPT-6.1 Sol"
+      },
+      "summary": "Исправлен A-03: candidate связан с задачей, сценарием, определением и политикой; 655 тестов PASS, CHECK-03/HANDOFF-03",
+      "reports": [
+        "verify-3c2f0b60bb3241f882e1e7a8cde35ad9"
+      ],
+      "card_projection": "sha256:f1ee5c170dcf6b848ccacfbbad954093af00f98b2e241d00a3833a862c35f2ed"
+    },
+    "acceptance": {
+      "at": "2026-10-29T19:28:51+03:00",
+      "actor": {
+        "name": "Codex",
+        "model": "GPT-6.1 Sol"
+      },
+      "role": "auditor",
+      "kind": "acceptance",
+      "result": "accepted",
+      "handoff_at": "2026-10-29T19:15:52+03:00",
+      "session": null,
+      "detail": "Независимый аудит audit-033-04: A-01–A-03 закрыты; 11 CLI-сценариев и 18 целевых тестов PASS; свежий полный verify подтверждён."
+    },
+    "materials": [
+      {
+        "id": "verify-20b69c14863b4c76a8fb5a5ae51f4c09",
+        "role": "report",
+        "source": "docs/archive/tasks/PB-033-evidence/work/verification/PB-033/20b69c14863b4c76a8fb5a5ae51f4c09",
+        "storage": "local",
+        "required": true,
+        "immutable": true,
+        "used_by": [
+          "PB-033"
+        ]
+      },
+      {
+        "id": "verify-be74e3dd53434e57b7a8b6478eed0bf4",
+        "role": "report",
+        "source": "docs/archive/tasks/PB-033-evidence/work/verification/PB-033/be74e3dd53434e57b7a8b6478eed0bf4",
+        "storage": "local",
+        "required": true,
+        "immutable": true,
+        "used_by": [
+          "PB-033"
+        ]
+      },
+      {
+        "id": "audit-033-02",
+        "role": "report",
+        "source": "docs/archive/tasks/PB-033-evidence/work/verification/PB-033/audit-033-02",
+        "storage": "local",
+        "immutable": true,
+        "required": true,
+        "used_by": [
+          "PB-033"
+        ]
+      },
+      {
+        "id": "verify-4b4b520c20ad40709c55cd6f43d56709",
+        "role": "report",
+        "source": "docs/archive/tasks/PB-033-evidence/work/verification/PB-033/4b4b520c20ad40709c55cd6f43d56709",
+        "storage": "local",
+        "required": true,
+        "immutable": true,
+        "used_by": [
+          "PB-033"
+        ]
+      },
+      {
+        "id": "verify-ba52a29e22e54135b43f5afd07e96c0e",
+        "role": "report",
+        "source": "docs/archive/tasks/PB-033-evidence/work/verification/PB-033/ba52a29e22e54135b43f5afd07e96c0e",
+        "storage": "local",
+        "required": true,
+        "immutable": true,
+        "used_by": [
+          "PB-033"
+        ]
+      },
+      {
+        "id": "audit-033-03",
+        "role": "report",
+        "source": "docs/archive/tasks/PB-033-evidence/work/verification/PB-033/audit-033-03",
+        "storage": "local",
+        "immutable": true,
+        "required": true,
+        "used_by": [
+          "PB-033"
+        ]
+      },
+      {
+        "id": "verify-3c2f0b60bb3241f882e1e7a8cde35ad9",
+        "role": "report",
+        "source": "docs/archive/tasks/PB-033-evidence/work/verification/PB-033/3c2f0b60bb3241f882e1e7a8cde35ad9",
+        "storage": "local",
+        "required": true,
+        "immutable": true,
+        "used_by": [
+          "PB-033"
+        ]
+      },
+      {
+        "id": "audit-033-04",
+        "role": "report",
+        "source": "docs/archive/tasks/PB-033-evidence/work/verification/PB-033/audit-033-04",
+        "storage": "local",
+        "immutable": true,
+        "required": true,
+        "used_by": [
+          "PB-033"
+        ]
+      },
+      {
+        "id": "lifecycle-lc-da00edf0b131deb9",
+        "role": "report",
+        "source": "docs/archive/tasks/PB-033-evidence/close-lc-da00edf0b131deb9.json",
+        "storage": "local",
+        "required": true,
+        "immutable": true,
+        "used_by": []
+      }
+    ],
+    "moves": [
+      {
+        "from": "work/verification/PB-033/20b69c14863b4c76a8fb5a5ae51f4c09",
+        "to": "docs/archive/tasks/PB-033-evidence/work/verification/PB-033/20b69c14863b4c76a8fb5a5ae51f4c09"
+      },
+      {
+        "from": "work/verification/PB-033/be74e3dd53434e57b7a8b6478eed0bf4",
+        "to": "docs/archive/tasks/PB-033-evidence/work/verification/PB-033/be74e3dd53434e57b7a8b6478eed0bf4"
+      },
+      {
+        "from": "work/verification/PB-033/audit-033-02",
+        "to": "docs/archive/tasks/PB-033-evidence/work/verification/PB-033/audit-033-02"
+      },
+      {
+        "from": "work/verification/PB-033/4b4b520c20ad40709c55cd6f43d56709",
+        "to": "docs/archive/tasks/PB-033-evidence/work/verification/PB-033/4b4b520c20ad40709c55cd6f43d56709"
+      },
+      {
+        "from": "work/verification/PB-033/ba52a29e22e54135b43f5afd07e96c0e",
+        "to": "docs/archive/tasks/PB-033-evidence/work/verification/PB-033/ba52a29e22e54135b43f5afd07e96c0e"
+      },
+      {
+        "from": "work/verification/PB-033/audit-033-03",
+        "to": "docs/archive/tasks/PB-033-evidence/work/verification/PB-033/audit-033-03"
+      },
+      {
+        "from": "work/verification/PB-033/3c2f0b60bb3241f882e1e7a8cde35ad9",
+        "to": "docs/archive/tasks/PB-033-evidence/work/verification/PB-033/3c2f0b60bb3241f882e1e7a8cde35ad9"
+      },
+      {
+        "from": "work/verification/PB-033/audit-033-04",
+        "to": "docs/archive/tasks/PB-033-evidence/work/verification/PB-033/audit-033-04"
+      },
+      {
+        "from": "docs/tasks/PB-033.md",
+        "to": "docs/archive/tasks/PB-033.md"
+      }
+    ]
+  },
+  {
+    "task": "PB-034",
+    "sha256": "129ce823c52cf3a06c73008b0bff4a8e38ac23313edef1349e100bf92fa5a0b7",
+    "status": "done",
+    "handoff": {
+      "at": "2026-11-05T18:53:40+03:00",
+      "actor": {
+        "name": "Codex",
+        "model": "GPT-6"
+      },
+      "summary": "PB-034 реализована; свежий полный verify passed; передача на независимый аудит",
+      "reports": [
+        "verify-28a701efac404bd7993d04cba4aa9173"
+      ],
+      "card_projection": "sha256:dbb1849d8f9511ecc2c990a83433f3c73a401ddad8831dcc8e2bc92c0d8caa14"
+    },
+    "acceptance": {
+      "at": "2026-11-05T19:00:12+03:00",
+      "actor": {
+        "name": "Codex",
+        "model": "GPT-6"
+      },
+      "role": "auditor",
+      "kind": "acceptance",
+      "result": "accepted",
+      "handoff_at": "2026-11-05T18:53:40+03:00",
+      "session": null,
+      "detail": "Независимый аудит: замечаний нет; свежий полный verify 678 тестов, 23 lifecycle-сценария и 4 независимые пробы passed; протокол audit-01."
+    },
+    "materials": [
+      {
+        "id": "implementation-evidence",
+        "role": "report",
+        "source": "docs/archive/tasks/PB-034-evidence",
+        "storage": "local",
+        "required": true,
+        "immutable": true,
+        "used_by": [
+          "PB-034"
+        ]
+      },
+      {
+        "id": "verify-28a701efac404bd7993d04cba4aa9173",
+        "role": "report",
+        "source": "docs/archive/tasks/PB-034-evidence/work/verification/PB-034/28a701efac404bd7993d04cba4aa9173",
+        "storage": "local",
+        "required": true,
+        "immutable": true,
+        "used_by": [
+          "PB-034"
+        ]
+      },
+      {
+        "id": "verify-8111f3a084ab436bb1e2cb11b5a10ae7",
+        "role": "report",
+        "source": "docs/archive/tasks/PB-034-evidence/work/verification/PB-034/8111f3a084ab436bb1e2cb11b5a10ae7",
+        "storage": "local",
+        "required": true,
+        "immutable": true,
+        "used_by": [
+          "PB-034"
+        ]
+      },
+      {
+        "id": "audit-01",
+        "role": "report",
+        "source": "docs/archive/tasks/PB-034-evidence/work/verification/PB-034/audit-01",
+        "storage": "local",
+        "immutable": true,
+        "required": true,
+        "used_by": [
+          "PB-034"
+        ]
+      },
+      {
+        "id": "lifecycle-lc-66484cfd2b5c3166",
+        "role": "report",
+        "source": "docs/archive/tasks/PB-034-evidence/close-lc-66484cfd2b5c3166.json",
+        "storage": "local",
+        "required": true,
+        "immutable": true,
+        "used_by": []
+      }
+    ],
+    "moves": [
+      {
+        "from": "docs/tasks/PB-034-evidence",
+        "to": "docs/archive/tasks/PB-034-evidence"
+      },
+      {
+        "from": "work/verification/PB-034/28a701efac404bd7993d04cba4aa9173",
+        "to": "docs/archive/tasks/PB-034-evidence/work/verification/PB-034/28a701efac404bd7993d04cba4aa9173"
+      },
+      {
+        "from": "work/verification/PB-034/8111f3a084ab436bb1e2cb11b5a10ae7",
+        "to": "docs/archive/tasks/PB-034-evidence/work/verification/PB-034/8111f3a084ab436bb1e2cb11b5a10ae7"
+      },
+      {
+        "from": "work/verification/PB-034/audit-01",
+        "to": "docs/archive/tasks/PB-034-evidence/work/verification/PB-034/audit-01"
+      },
+      {
+        "from": "docs/tasks/PB-034.md",
+        "to": "docs/archive/tasks/PB-034.md"
+      }
+    ]
+  },
+  {
+    "task": "PB-035",
+    "sha256": "c41bb9bb335ac5179597c72fa307b84eeb0d0846e5a2eabef28e87fdc5e3fe89",
+    "status": "done",
+    "handoff": {
+      "at": "2026-11-05T19:58:09+03:00",
+      "actor": {
+        "name": "Codex",
+        "model": "GPT-6"
+      },
+      "summary": "Quick-шаблон, итерации и правила реализованы; целевые CLI-тесты и полный verify passed",
+      "reports": [
+        "verify-571982c636f04a5590ecaf461fbd7491"
+      ],
+      "card_projection": "sha256:a8dd0b3dd2a4f6ac4ab5c3ceb4287c6c8bf65300ac3bf75d93ba5819710eb63a"
+    },
+    "acceptance": {
+      "at": "2026-11-06T05:47:35+03:00",
+      "actor": {
+        "name": "Codex",
+        "model": "GPT-6"
+      },
+      "role": "auditor",
+      "kind": "acceptance",
+      "result": "accepted",
+      "handoff_at": "2026-11-05T19:58:09+03:00",
+      "session": null,
+      "detail": "Независимый аудит: замечаний нет; свежесть handoff и полный отчёт подтверждены, 5 CLI-тестов quick воспроизведены. Протокол audit-01/report.md."
+    },
+    "materials": [
+      {
+        "id": "implementation",
+        "role": "report",
+        "source": "docs/archive/tasks/PB-035-evidence",
+        "storage": "local",
+        "required": true,
+        "immutable": true,
+        "used_by": [
+          "PB-035"
+        ]
+      },
+      {
+        "id": "verify-571982c636f04a5590ecaf461fbd7491",
+        "role": "report",
+        "source": "docs/archive/tasks/PB-035-evidence/work/verification/PB-035/571982c636f04a5590ecaf461fbd7491",
+        "storage": "local",
+        "required": true,
+        "immutable": true,
+        "used_by": [
+          "PB-035"
+        ]
+      },
+      {
+        "id": "audit-01",
+        "role": "report",
+        "source": "docs/archive/tasks/PB-035-evidence/work/verification/PB-035/audit-01",
+        "storage": "local",
+        "immutable": true,
+        "required": true,
+        "used_by": [
+          "PB-035"
+        ]
+      },
+      {
+        "id": "lifecycle-lc-875ae7c30fffc2ec",
+        "role": "report",
+        "source": "docs/archive/tasks/PB-035-evidence/close-lc-875ae7c30fffc2ec.json",
+        "storage": "local",
+        "required": true,
+        "immutable": true,
+        "used_by": []
+      }
+    ],
+    "moves": [
+      {
+        "from": "docs/tasks/PB-035-evidence",
+        "to": "docs/archive/tasks/PB-035-evidence"
+      },
+      {
+        "from": "work/verification/PB-035/571982c636f04a5590ecaf461fbd7491",
+        "to": "docs/archive/tasks/PB-035-evidence/work/verification/PB-035/571982c636f04a5590ecaf461fbd7491"
+      },
+      {
+        "from": "work/verification/PB-035/audit-01",
+        "to": "docs/archive/tasks/PB-035-evidence/work/verification/PB-035/audit-01"
+      },
+      {
+        "from": "docs/tasks/PB-035.md",
+        "to": "docs/archive/tasks/PB-035.md"
+      }
+    ]
+  },
+  {
+    "task": "PB-036",
+    "sha256": "6e08708ef4ca1a3fcf1402bce9f0035f1c10a06af26f6ab549f8e60a7affed46",
+    "status": "done",
+    "handoff": {
+      "at": "2026-11-06T06:31:48+03:00",
+      "actor": {
+        "name": "Codex",
+        "model": "GPT-6"
+      },
+      "summary": "0.2.0: явные init/enable-v2/migrate-card, legacy always, bootstrap и restore; 698 тестов passed",
+      "reports": [
+        "verify-98f4b77b93124d0c874aa4b576f19752"
+      ],
+      "card_projection": "sha256:46aa3e288e1de411e248150afe1087370e855a0d618deaa2bb76dd7a22571578"
+    },
+    "acceptance": {
+      "at": "2026-11-06T06:39:03+03:00",
+      "actor": {
+        "name": "Codex",
+        "model": "GPT-6"
+      },
+      "role": "auditor",
+      "kind": "acceptance",
+      "result": "accepted",
+      "handoff_at": "2026-11-06T06:31:48+03:00",
+      "session": null,
+      "detail": "Независимый аудит: замечаний нет; 27 целевых тестов, 2 теста схем и 2 дополнительных сценария passed; свежий полный verify на 698 тестов подтверждён. Протокол audit-01/report.md."
+    },
+    "materials": [
+      {
+        "id": "implementation",
+        "role": "report",
+        "source": "docs/archive/tasks/PB-036-evidence",
+        "storage": "local",
+        "required": true,
+        "immutable": true,
+        "used_by": [
+          "PB-036"
+        ]
+      },
+      {
+        "id": "verify-98f4b77b93124d0c874aa4b576f19752",
+        "role": "report",
+        "source": "docs/archive/tasks/PB-036-evidence/work/verification/PB-036/98f4b77b93124d0c874aa4b576f19752",
+        "storage": "local",
+        "required": true,
+        "immutable": true,
+        "used_by": [
+          "PB-036"
+        ]
+      },
+      {
+        "id": "audit-01",
+        "role": "report",
+        "source": "docs/archive/tasks/PB-036-evidence/work/verification/PB-036/audit-01",
+        "storage": "local",
+        "immutable": true,
+        "required": true,
+        "used_by": [
+          "PB-036"
+        ]
+      },
+      {
+        "id": "lifecycle-lc-e357ba6d08c11498",
+        "role": "report",
+        "source": "docs/archive/tasks/PB-036-evidence/close-lc-e357ba6d08c11498.json",
+        "storage": "local",
+        "required": true,
+        "immutable": true,
+        "used_by": []
+      }
+    ],
+    "moves": [
+      {
+        "from": "docs/tasks/PB-036-evidence",
+        "to": "docs/archive/tasks/PB-036-evidence"
+      },
+      {
+        "from": "work/verification/PB-036/98f4b77b93124d0c874aa4b576f19752",
+        "to": "docs/archive/tasks/PB-036-evidence/work/verification/PB-036/98f4b77b93124d0c874aa4b576f19752"
+      },
+      {
+        "from": "work/verification/PB-036/audit-01",
+        "to": "docs/archive/tasks/PB-036-evidence/work/verification/PB-036/audit-01"
+      },
+      {
+        "from": "docs/tasks/PB-036.md",
+        "to": "docs/archive/tasks/PB-036.md"
+      }
+    ]
+  },
+  {
+    "task": "PB-037",
+    "sha256": "161f0adcce2ddde90490ed8525e0337d4154cf87275119c2eeb2ece8819055b7",
+    "status": "done",
+    "handoff": {
+      "at": "2026-11-06T13:16:23+03:00",
+      "actor": {
+        "name": "Codex",
+        "model": "GPT-6"
+      },
+      "summary": "HANDOFF-01: EXEC-01–04, CHECK-01; 702 tests, AC-01–14 and isolated v2 pilot",
+      "reports": [
+        "verify-40b3745a514f4acbae68ec5d6aed61aa"
+      ],
+      "card_projection": "sha256:f82ef8052e990dee45caa506a58327c986a538f49048ef65538e26bd796164fa"
+    },
+    "acceptance": {
+      "at": "2026-11-06T13:26:06+03:00",
+      "actor": {
+        "name": "Codex",
+        "model": "GPT-6"
+      },
+      "role": "auditor",
+      "kind": "acceptance",
+      "result": "accepted",
+      "handoff_at": "2026-11-06T13:16:23+03:00",
+      "session": null,
+      "detail": "Независимый аудит: все критерии выполнены; 4 E2E OK; audit-01/report.md."
+    },
+    "materials": [
+      {
+        "id": "targeted-logs",
+        "role": "report",
+        "source": "docs/archive/tasks/PB-037-evidence/logs",
+        "storage": "local",
+        "required": true,
+        "immutable": true,
+        "used_by": [
+          "PB-037"
+        ]
+      },
+      {
+        "id": "matrix",
+        "role": "report",
+        "source": "docs/archive/tasks/PB-037-evidence/matrix.md",
+        "storage": "local",
+        "required": true,
+        "immutable": true,
+        "used_by": [
+          "PB-037"
+        ]
+      },
+      {
+        "id": "pilot-script",
+        "role": "report",
+        "source": "docs/archive/tasks/PB-037-evidence/self_pilot.py",
+        "storage": "local",
+        "required": true,
+        "immutable": true,
+        "used_by": [
+          "PB-037"
+        ]
+      },
+      {
+        "id": "self-pilot",
+        "role": "report",
+        "source": "docs/archive/tasks/PB-037-evidence/pilot",
+        "storage": "local",
+        "required": true,
+        "immutable": true,
+        "used_by": [
+          "PB-037"
+        ]
+      },
+      {
+        "id": "verify-40b3745a514f4acbae68ec5d6aed61aa",
+        "role": "report",
+        "source": "docs/archive/tasks/PB-037-evidence/work/verification/PB-037/40b3745a514f4acbae68ec5d6aed61aa",
+        "storage": "local",
+        "required": true,
+        "immutable": true,
+        "used_by": [
+          "PB-037"
+        ]
+      },
+      {
+        "id": "audit-01",
+        "role": "report",
+        "source": "docs/archive/tasks/PB-037-evidence/work/verification/PB-037/audit-01",
+        "storage": "local",
+        "immutable": true,
+        "required": true,
+        "used_by": [
+          "PB-037"
+        ]
+      },
+      {
+        "id": "lifecycle-lc-b1dfe88907f734dd",
+        "role": "report",
+        "source": "docs/archive/tasks/PB-037-evidence/close-lc-b1dfe88907f734dd.json",
+        "storage": "local",
+        "required": true,
+        "immutable": true,
+        "used_by": []
+      }
+    ],
+    "moves": [
+      {
+        "from": "docs/tasks/PB-037-evidence/logs",
+        "to": "docs/archive/tasks/PB-037-evidence/logs"
+      },
+      {
+        "from": "docs/tasks/PB-037-evidence/matrix.md",
+        "to": "docs/archive/tasks/PB-037-evidence/matrix.md"
+      },
+      {
+        "from": "docs/tasks/PB-037-evidence/self_pilot.py",
+        "to": "docs/archive/tasks/PB-037-evidence/self_pilot.py"
+      },
+      {
+        "from": "docs/tasks/PB-037-evidence/pilot",
+        "to": "docs/archive/tasks/PB-037-evidence/pilot"
+      },
+      {
+        "from": "work/verification/PB-037/40b3745a514f4acbae68ec5d6aed61aa",
+        "to": "docs/archive/tasks/PB-037-evidence/work/verification/PB-037/40b3745a514f4acbae68ec5d6aed61aa"
+      },
+      {
+        "from": "work/verification/PB-037/audit-01",
+        "to": "docs/archive/tasks/PB-037-evidence/work/verification/PB-037/audit-01"
+      },
+      {
+        "from": "docs/tasks/PB-037.md",
+        "to": "docs/archive/tasks/PB-037.md"
+      }
+    ]
+  }
+]

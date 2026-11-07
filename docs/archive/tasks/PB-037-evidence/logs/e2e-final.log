@@ -1,0 +1,8 @@
+test_independent_counters_add_remove_and_service_cycle (test_workflow_e2e.WorkflowE2ETest.test_independent_counters_add_remove_and_service_cycle) ... ok
+test_nonquick_routes_with_auditor_and_archive (test_workflow_e2e.WorkflowE2ETest.test_nonquick_routes_with_auditor_and_archive) ... ok
+test_three_manual_iterations_stale_candidate_then_archive (test_workflow_e2e.WorkflowE2ETest.test_three_manual_iterations_stale_candidate_then_archive) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 55.323s
+
+OK

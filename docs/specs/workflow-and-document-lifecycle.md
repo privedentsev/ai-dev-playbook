@@ -8,8 +8,8 @@
   "kind": "spec",
   "state": "accepted",
   "created_at": "2026-10-01T03:05:15+03:00",
-  "updated_at": "2026-10-26T18:07:07+03:00",
-  "current_revision": 1,
+  "updated_at": "2026-11-06T18:29:44+03:00",
+  "current_revision": 2,
   "relations": [],
   "tasks": [
     "PB-021",
@@ -21,7 +21,15 @@
     "PB-027",
     "PB-028",
     "PB-029",
-    "AUDIT-006"
+    "AUDIT-006",
+    "PB-031",
+    "PB-032",
+    "PB-033",
+    "PB-034",
+    "PB-035",
+    "PB-036",
+    "PB-037",
+    "AUDIT-007"
   ],
   "changes": [
     {
@@ -45,6 +53,29 @@
         "AUDIT-008"
       ],
       "acceptance": null
+    },
+    {
+      "id": "proportional-workflow",
+      "state": "accepted",
+      "section": "Действующий opt-in workflow v2",
+      "tasks": [
+        "PB-031",
+        "PB-032",
+        "PB-033",
+        "PB-034",
+        "PB-035",
+        "PB-036",
+        "PB-037",
+        "AUDIT-007"
+      ],
+      "basis": {
+        "type": "authorized_scope",
+        "who": "Инженер",
+        "at": "2026-11-06T18:03:07+03:00",
+        "detail": "Провести аудит PB-033 и закрыть все задачи, заблокированные из-за неё. Повторная приёмка включает AUDIT-007 и предусмотренное планом принятие требований.",
+        "source": "docs/tasks/AUDIT-007.md"
+      },
+      "acceptance": "docs/specs/workflow-and-document-lifecycle-evidence/promote-lc-3d8a68f42cda8ffb.json"
     }
   ],
   "materials": [
@@ -52,6 +83,24 @@
       "id": "pre-a3-history",
       "role": "other",
       "source": "docs/specs/workflow-and-document-lifecycle-evidence/pre-a3-20261022.txt",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": []
+    },
+    {
+      "id": "revision-1",
+      "role": "other",
+      "source": "docs/specs/workflow-and-document-lifecycle-evidence/revision-1.md",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": []
+    },
+    {
+      "id": "lifecycle-lc-3d8a68f42cda8ffb",
+      "role": "report",
+      "source": "docs/specs/workflow-and-document-lifecycle-evidence/promote-lc-3d8a68f42cda8ffb.json",
       "storage": "local",
       "required": true,
       "immutable": true,
@@ -291,3 +340,17 @@ Promotion допускается только при наличии приёмо
 ## Предложение: выборочная подготовка и хранение операций
 
 Согласовано направление и подготовка до задач; реализация не разрешена. [Спецификация](../specs/scoped-file-operations.md), [design](../designs/scoped-file-operations.md), [план](../plans/scoped-file-operations.md): выборочный staged на диске, поздний backup, обязательный лимит 15 завершённых операций и отзыв старых планов перед очисткой. Действующее поведение выше сохраняет силу до реализации и независимой приёмки. Реальный большой проект/внешний пилот не является условием приёмки этого изменения.
+
+## Действующий opt-in workflow v2
+
+Принятые [требования соразмерных маршрутов](proportional-workflow.md), design и ADR-0003 дополняют исторический контракт выше для явно включённого task_workflow.schema_version=2 и карточек schema_version=2. Восемь режимов и legacy сохраняются.
+
+Quick — маршрут обычной карточки для локальной цели низкого риска без нового поведения. Итерации сохраняют ID; route/revise фиксируют историю. После проверки актуальной версии quick требует явную личную приёмку инженера. Small/medium/large сохраняют независимый аудит, блок — итоговую AUDIT-карточку.
+
+Verification_plan и доверенный registry определяют применимые обязательные command/manual проверки; failed/timeout/stale не дают handoff или закрытие. Manual связан с предъявленным candidate, сценарием и политикой; требуется наблюдение и подтверждение инженера. Требования среды задаёт registry.required_environment: по умолчанию browser; невизуальному terminal-сценарию браузер не нужен.
+
+Результаты связываются с определением, входами, относящейся политикой и средой. Command сохраняет только отпечаток наследуемого окружения без значений секретов; служебный PLAYBOOK_GATE исключён. Изменение независимого check не повторяет другие доказанно независимые проверки. Неизвестная связь инвалидируется консервативно; поздняя правка входов не даёт passed. Служебные handoff/accept/close не запускают тесты реализации повторно.
+
+Start сохраняет baseline, handoff согласованно записывает статус/индекс/coverage, acceptance и close проверяют актуальный результат и байты доказательств. Gate, recovery, SIGKILL/restore и сохранность immutable остаются обязательными. Update/opt-in явные, сохраняют обязательные legacy-команды и историю; v1-отчёт не становится v2 coverage автоматически.
+
+Итоговая приёмка — AUDIT-007; реального UI и внешнего CI в проверках не было, ручные заявления fixtures синтетические. CLI не удостоверяет личность инженера и не разрешает commit/push/merge/release. Исходный self-project сохраняет legacy.

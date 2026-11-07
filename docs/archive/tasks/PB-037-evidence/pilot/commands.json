@@ -1,0 +1,127 @@
+[
+  {
+    "argv": [
+      "workflow",
+      "enable-v2"
+    ],
+    "returncode": 0,
+    "seconds": 0.46
+  },
+  {
+    "argv": [
+      "workflow",
+      "enable-v2",
+      "--apply"
+    ],
+    "returncode": 0,
+    "seconds": 0.676
+  },
+  {
+    "argv": [
+      "workflow",
+      "migrate-card",
+      "PB-037",
+      "--route",
+      "small",
+      "--verification-plan",
+      "work/pilot-plan.json",
+      "--actor",
+      "Codex",
+      "--model",
+      "GPT-6",
+      "--reason",
+      "Isolated PB-037 pilot",
+      "--apply"
+    ],
+    "returncode": 0,
+    "seconds": 24.801
+  },
+  {
+    "argv": [
+      "lifecycle",
+      "start",
+      "PB-037",
+      "--actor",
+      "Codex",
+      "--model",
+      "GPT-6",
+      "--reason",
+      "Isolated pilot"
+    ],
+    "returncode": 0,
+    "seconds": 103.601
+  },
+  {
+    "argv": [
+      "verify",
+      "PB-037",
+      "--preflight"
+    ],
+    "returncode": 0,
+    "seconds": 27.793
+  },
+  {
+    "argv": [
+      "verify",
+      "PB-037"
+    ],
+    "returncode": 0,
+    "seconds": 1158.341
+  },
+  {
+    "argv": [
+      "verify",
+      "PB-037"
+    ],
+    "returncode": 0,
+    "seconds": 41.3
+  },
+  {
+    "argv": [
+      "lifecycle",
+      "handoff",
+      "PB-037",
+      "--summary",
+      "Self-copy pilot, no independent acceptance",
+      "--actor",
+      "Codex",
+      "--model",
+      "GPT-6"
+    ],
+    "returncode": 0,
+    "seconds": 161.504
+  },
+  {
+    "argv": [
+      "lifecycle",
+      "handoff",
+      "PB-037",
+      "--summary",
+      "Self-copy pilot, no independent acceptance",
+      "--actor",
+      "Codex",
+      "--model",
+      "GPT-6"
+    ],
+    "returncode": 0,
+    "seconds": 76.966
+  },
+  {
+    "argv": [
+      "verify",
+      "PB-037",
+      "--audit-ready"
+    ],
+    "returncode": 0,
+    "seconds": 33.552
+  },
+  {
+    "argv": [
+      "close",
+      "PB-037",
+      "--dry-run"
+    ],
+    "returncode": 1,
+    "seconds": 43.729
+  }
+]

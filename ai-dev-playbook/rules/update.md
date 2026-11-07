@@ -2,6 +2,32 @@
 
 Контракт, на который опираются `init`, `adopt`, `update plan|apply|restore`. План и предпросмотр ничего не пишут; запись выполняют `init --apply`, `adopt --apply`, `update apply`.
 
+## Локальный артефакт 0.2.0 и workflow v2 (PB-036)
+
+Инженером согласованы прямые переходы из 0.0.2, 0.0.3 и 0.1.0 в 0.2.0. Это локальная версия, без публикации/тега. Установка без manifest сначала проходит `adopt` по известному исходному эталону. Необъявленные переходы, downgrade и неоднозначное содержимое при одинаковом номере отклоняются.
+
+Артефакт использует `updates.json.schema_version: 2`, `minimum_cli_version: 0.2.0` и `supported_project_schemas: [1, 2]`. Новый CLI читает updates schemas 1/2 и проверяет minimum до планирования; прежний updater со schema 1 отклоняет новый артефакт. Legacy project.json сохраняет schema 1, явный opt-in переводит project.json в schema 2 с обязательным task_workflow v2: так старый CLI отказывает и при прямом запуске против подключённого проекта. Последующие обновления сохраняют schema 2 только если целевой артефакт явно её поддерживает; иначе требуется объявленная миграция. Для обновления запускай CLI **целевого артефакта**, указав установленный проект через `--root`:
+
+```sh
+python3 /path/to/artifact/ai-dev-playbook/scripts/playbook.py --root /path/to/project update plan /path/to/artifact
+python3 /path/to/artifact/ai-dev-playbook/scripts/playbook.py --root /path/to/project update plan /path/to/artifact --save
+python3 /path/to/artifact/ai-dev-playbook/scripts/playbook.py --root /path/to/project update apply
+```
+
+Update сохраняет verification и пользовательские настройки/пути; подключение workflow v2 не выполняется автоматически. Новая установка по умолчанию также legacy. Для явного выбора при установке: `init /path/to/project --workflow-v2` (preview), затем та же команда с `--apply`. Такой init добавляет verification из `templates/verification.json` и task_workflow; начальная self-check проверяет структуру. До реальной работы инженер настраивает проверки поведения проекта и завершает needs_review.
+
+В существующей установке 0.2.0: `workflow enable-v2` показывает diff, `workflow enable-v2 --apply` применяет его через общий gate и восстанавливаемый engine. Нужен настроенный legacy verification.inputs/checks; shell-строки commands автоматически не преобразуются в argv. Все прежние проверки копируются в registry с теми же ID, argv, timeout и inputs как always; добавляются контрольные точки merge/release с теми же ID. Исходный verification остаётся для legacy-карточек. Сужение обязательности требует отдельного инженерского решения с diff; само включение v2 ускорения не обещает. Существующий task_workflow не перезаписывается.
+
+Перевод отдельной активной карточки выполняется явно:
+
+```sh
+python3 ai-dev-playbook/scripts/playbook.py workflow migrate-card TASK-001 --route small --verification-plan plan.json --actor Executor --model Model --reason "Согласованный переход на v2"
+```
+
+Без `--apply` это preview. С `--apply` сохраняются Markdown и metadata v1 в зарегистрированный immutable workflow-v1.json, маршрут/причина — в history, прежние handoff/acceptance — в transitions. Новая metadata v2 и конкретный план валидируются, все обязательные registry ID должны быть покрыты. Карточка получает ready для нового `lifecycle start` и baseline; выполненная работа и журнал сохраняются. Встроенное/внешнее хранение и версия Markdown не меняются. Архив, карточки без metadata и уже включённый v2 не переводятся автоматически. Отчёты v1 сохраняются как история и не дают coverage v2; необходимы новые проверки и передача.
+
+Прерывание enable/migrate-card восстанавливается через `lifecycle restore` либо автономный restore.py операции. Прерывание update — через `update restore` либо его автономный restore.py. Повреждённая копия/чужой gate не разрешают частичную запись. Локальная проверка и close не означают прохождение merge/release checkpoint; внешняя блокировка merge/release без интеграции не заявляется.
+
 ## Версии
 
 - **Версия комплекта** — `X.Y.Z` (только числа), единственный источник — `ai-dev-playbook/VERSION`. `project.json → playbook_version` — производная копия, проставляется установкой/обновлением из VERSION и проверяется на совпадение в `config()`. В шаблоне номер не хранится: при `init` подставляется содержимое VERSION.

@@ -355,7 +355,7 @@ def _check_matches_historical(check, binding, meta, card_path=None, root=None):
     raw = check.get('raw')
     if not raw:
         return False
-    base_root = Path.cwd() if root is None else Path(root)
+    base_root = Path.cwd() if root is None else root if hasattr(root, "view") else Path(root)
     moves = meta.get('moves', [])
     card_move = None
     if card_path:

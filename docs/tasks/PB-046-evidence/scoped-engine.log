@@ -1,0 +1,18 @@
+test_backup_corruption_is_rejected_before_first_write (test_scoped_operations.ScopedEngineTest.test_backup_corruption_is_rejected_before_first_write) ... ok
+test_cleanup_failure_does_not_rollback_completed_write (test_scoped_operations.ScopedEngineTest.test_cleanup_failure_does_not_rollback_completed_write) ... staged cleanup failed: injected cleanup failure
+ok
+test_collection_addition_during_backup_is_detected (test_scoped_operations.ScopedEngineTest.test_collection_addition_during_backup_is_detected) ... ok
+test_large_payload_never_uses_read_bytes (test_scoped_operations.ScopedEngineTest.test_large_payload_never_uses_read_bytes) ... ok
+test_only_planned_payloads_staged_and_no_tree_copy (test_scoped_operations.ScopedEngineTest.test_only_planned_payloads_staged_and_no_tree_copy) ... ok
+test_original_drift_during_backup_preserves_external_change (test_scoped_operations.ScopedEngineTest.test_original_drift_during_backup_preserves_external_change) ... ok
+test_payload_source_bytes_are_part_of_read_set (test_scoped_operations.ScopedEngineTest.test_payload_source_bytes_are_part_of_read_set) ... ok
+test_read_bytes_and_source_modes_rechecked_after_backup (test_scoped_operations.ScopedEngineTest.test_read_bytes_and_source_modes_rechecked_after_backup) ... ok
+test_repeated_restore_preserves_distinct_external_versions (test_scoped_operations.ScopedEngineTest.test_repeated_restore_preserves_distinct_external_versions) ... ok
+test_restore_rechecks_original_digest_during_atomic_copy (test_scoped_operations.ScopedEngineTest.test_restore_rechecks_original_digest_during_atomic_copy) ... ok
+test_staged_corruption_is_rejected_before_first_write (test_scoped_operations.ScopedEngineTest.test_staged_corruption_is_rejected_before_first_write) ... ok
+test_unknown_callback_has_no_clone_fallback_or_backup (test_scoped_operations.ScopedEngineTest.test_unknown_callback_has_no_clone_fallback_or_backup) ... ok
+
+----------------------------------------------------------------------
+Ran 12 tests in 0.958s
+
+OK

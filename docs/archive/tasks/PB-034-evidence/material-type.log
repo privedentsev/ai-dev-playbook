@@ -1,0 +1,6 @@
+test_immutable_material_file_directory_swap_cannot_preserve_receipt (test_task_workflow_lifecycle.TaskWorkflowLifecycleTest.test_immutable_material_file_directory_swap_cannot_preserve_receipt) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 5.496s
+
+OK

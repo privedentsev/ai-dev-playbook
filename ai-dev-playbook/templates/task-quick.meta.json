@@ -1,0 +1,30 @@
+{
+  "schema_version": 2,
+  "card_format_version": 2,
+  "workflow": {
+    "route": "quick",
+    "reason": "TODO: обоснование локальной цели и низкого риска",
+    "history": []
+  },
+  "verification_plan": {
+    "revision": 1,
+    "rationale": "TODO: достаточность проверок",
+    "scope": [
+      "TODO"
+    ],
+    "checks": [
+      {
+        "id": "visual",
+        "kind": "manual",
+        "purpose": "TODO: визуальная проверка",
+        "scenario": "TODO: применимые состояния, размеры, читаемость и фокус",
+        "inputs": [
+          "TODO"
+        ]
+      }
+    ],
+    "decisions": []
+  },
+  "relations": [],
+  "materials": []
+}

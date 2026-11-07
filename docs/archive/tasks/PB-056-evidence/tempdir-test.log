@@ -1,0 +1,6 @@
+test_temporary_directory_inside_project_rejected_before_tests (test_verification_readiness.VerificationReadinessTest.test_temporary_directory_inside_project_rejected_before_tests) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 1.287s
+
+OK

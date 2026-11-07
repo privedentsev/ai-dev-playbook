@@ -899,23 +899,23 @@ class MigrationTest(CliCase):
         self.assertEqual(code, 1)
         self.assertIn("схемы", err)
 
-    def schema2_release(self, steps=None, cli_accepts=False):
+    def schema3_release(self, steps=None, cli_accepts=False):
         steps = steps or [{"op": "json_set", "file": "ai-dev-playbook/project.json",
-                           "key": "schema_version", "value": 2}]
+                           "key": "schema_version", "value": 3}]
 
         def mutate(kit):
             template = json.loads((kit / "templates" / "project.json")
                                   .read_text(encoding="utf-8"))
-            template["schema_version"] = 2
+            template["schema_version"] = 3
             (kit / "templates" / "project.json").write_text(
                 json.dumps(template) + "\n", encoding="utf-8")
             if cli_accepts:
                 script = kit / "scripts" / "playbook.py"
                 text = script.read_text(encoding="utf-8")
-                assert 'data.get("schema_version") == 1' in text
+                assert 'data.get("schema_version") in {1, 2}' in text
                 script.write_text(text.replace(
-                    'data.get("schema_version") == 1',
-                    'data.get("schema_version") in (1, 2)'), encoding="utf-8")
+                    'data.get("schema_version") in {1, 2}',
+                    'data.get("schema_version") in {1, 2, 3}'), encoding="utf-8")
 
         return self.fixture_release(
             updates_from={"0.0.2": {"steps": steps}}, mutate=mutate)
@@ -923,7 +923,7 @@ class MigrationTest(CliCase):
     def test_schema_migration_incompatible_cli_rejected(self):
         """AUDIT-005-A5: смена схемы без поддержки в целевом CLI отклоняется до записи."""
         self.install()
-        release = self.schema2_release()
+        release = self.schema3_release()
         code, _, err = self.cli("update", "plan", str(release), "--save")
         self.assertEqual(code, 0, err)
         code, _, err = self.cli("update", "apply")
@@ -942,14 +942,14 @@ class MigrationTest(CliCase):
     def test_schema_migration_compatible_cli_applies(self):
         """Артефакт с CLI, принимающим новую схему, применяется; установленный CLI работает."""
         self.install()
-        release = self.schema2_release(cli_accepts=True)
+        release = self.schema3_release(cli_accepts=True)
         code, _, err = self.cli("update", "plan", str(release), "--save")
         self.assertEqual(code, 0, err)
         code, out, err = self.cli("update", "apply")
         self.assertEqual(code, 0, err + out)
         project = json.loads((self.root / "ai-dev-playbook" / "project.json")
                              .read_text(encoding="utf-8"))
-        self.assertEqual(project["schema_version"], 2)
+        self.assertEqual(project["schema_version"], 3)
         # Установленный новый CLI выдерживает следующий запуск check/index/plan.
         script = self.root / "ai-dev-playbook" / "scripts" / "playbook.py"
         for argv in (("check",), ("index",), ("update", "plan", str(release))):

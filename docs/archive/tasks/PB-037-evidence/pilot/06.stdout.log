@@ -1,0 +1,5 @@
+OK: структура, ссылки и 64 карточки; каталог документов: 18 документов, 2 legacy. Поведение продукта не проверялось.
+RUN: self-check (требуется новый запуск)
+RUN: preflight-regressions (требуется новый запуск)
+RUN: unit-tests (требуется новый запуск)
+passed: /private/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/pb037-self-5w8eddie/project/work/verification/PB-037/2919f876d0e348fc8c79875051219fbc/report.json

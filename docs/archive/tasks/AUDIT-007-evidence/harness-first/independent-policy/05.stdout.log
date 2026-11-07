@@ -1,0 +1,4 @@
+OK: структура, ссылки и 1 карточки; каталог документов: 0 документов, 0 legacy. Поведение продукта не проверялось.
+RUN: a (изменилось определение команды/проверки)
+RUN: b (изменилась политика проверок)
+passed: /private/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/tmpk2p6_nv6/work/verification/DEV-1/32fec0d9050d4756b30395a7bf0f87cd/report.json
