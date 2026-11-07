@@ -1,0 +1,92 @@
+[
+  {
+    "argv": [
+      "index"
+    ],
+    "returncode": 0,
+    "duration_seconds": 0.536
+  },
+  {
+    "argv": [
+      "lifecycle",
+      "start",
+      "DEV-1",
+      "--actor",
+      "Fixture executor",
+      "--model",
+      "Synthetic model",
+      "--reason",
+      "Synthetic engineer instruction"
+    ],
+    "returncode": 0,
+    "duration_seconds": 1.385
+  },
+  {
+    "argv": [
+      "verify",
+      "DEV-1"
+    ],
+    "returncode": 0,
+    "duration_seconds": 0.748
+  },
+  {
+    "argv": [
+      "verify",
+      "DEV-1"
+    ],
+    "returncode": 0,
+    "duration_seconds": 0.661
+  },
+  {
+    "argv": [
+      "lifecycle",
+      "handoff",
+      "DEV-1",
+      "--summary",
+      "Auditor synthetic fixture",
+      "--actor",
+      "Fixture executor",
+      "--model",
+      "Synthetic model"
+    ],
+    "returncode": 0,
+    "duration_seconds": 2.049
+  },
+  {
+    "argv": [
+      "lifecycle",
+      "accept",
+      "DEV-1",
+      "--result",
+      "accepted",
+      "--role",
+      "engineer",
+      "--actor",
+      "Fixture engineer",
+      "--model",
+      "Synthetic model",
+      "--note",
+      "Synthetic explicit final version acceptance"
+    ],
+    "returncode": 0,
+    "duration_seconds": 1.581
+  },
+  {
+    "argv": [
+      "close",
+      "DEV-1",
+      "--dry-run"
+    ],
+    "returncode": 0,
+    "duration_seconds": 2.127
+  },
+  {
+    "argv": [
+      "verify",
+      "DEV-1",
+      "--no-reuse"
+    ],
+    "returncode": 1,
+    "duration_seconds": 0.799
+  }
+]

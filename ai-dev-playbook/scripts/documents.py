@@ -70,6 +70,7 @@ from pathlib import Path
 from urllib.parse import urlsplit
 
 import document_links
+import block_workflow
 
 META_START = "<!-- playbook-meta:start -->"
 META_END = "<!-- playbook-meta:end -->"
@@ -123,7 +124,7 @@ def _card_id(text):
 
 
 def meta_path(path):
-    return Path(path).with_suffix('.meta.json')
+    return path.with_suffix('.meta.json') if hasattr(path, 'view') else Path(path).with_suffix('.meta.json')
 
 
 def read_text(path):
@@ -132,7 +133,8 @@ def read_text(path):
     Other files and inline cards retain their original representation.
     Never writes, follows sidecar symlinks, or silently falls back on lost state.
     """
-    path = Path(path)
+    if not hasattr(path, 'view'):
+        path = Path(path)
     text = path.read_text(encoding='utf-8')
     if path.suffix != '.md':
         return text
@@ -164,7 +166,7 @@ def split_card_writes(writes):
     """Serialize hydrated cards before planning a single recoverable operation."""
     result = dict(writes)
     for rel, content in writes.items():
-        if not rel.endswith('.md'):
+        if not rel.endswith('.md') or not isinstance(content, (bytes, bytearray)):
             continue
         text = content.decode('utf-8')
         if not external_card(text):
@@ -206,16 +208,16 @@ ROUTES = {"quick", "small", "medium", "large"}
 
 DOC_FIELDS = {"schema_version", "document_id", "kind", "state", "created_at",
               "updated_at", "current_revision", "relations", "tasks", "changes",
-              "materials", "archive", "moves"}
+              "materials", "archive", "moves", "acceptance_policy"}
 # У карточки шапка — единственный источник ID/Status/дат/исполнителя;
 # дополнительный блок содержит только связи, материалы и сведения передачи.
 TASK_FIELDS_V1 = {"schema_version", "relations", "materials", "handoff",
-                  "acceptance", "moves", "card_format_version", "criterion_evidence", "checkbox_legacy_findings", "audit_packages"}
+                  "acceptance", "moves", "card_format_version", "criterion_evidence", "checkbox_legacy_findings", "audit_packages", "block"}
 TASK_FIELDS = TASK_FIELDS_V1
 TASK_FIELDS_V2 = {"schema_version", "workflow", "verification_plan",
-                  "relations", "materials", "handoff", "acceptance", "moves", "card_format_version", "criterion_evidence", "checkbox_legacy_findings", "audit_packages"}
-WORKFLOW_FIELDS = {"route", "reason", "history"}
-ROUTE_HISTORY_FIELDS = {"at", "from_route", "to_route", "reason", "actor"}
+                  "relations", "materials", "handoff", "acceptance", "moves", "card_format_version", "criterion_evidence", "checkbox_legacy_findings", "audit_packages", "block"}
+WORKFLOW_FIELDS = {"route", "reason", "history", "baseline", "transitions"}
+ROUTE_HISTORY_FIELDS = {"at", "from_route", "to_route", "reason", "actor", "engineer_approval"}
 PLAN_FIELDS = {"revision", "rationale", "scope", "checks", "decisions"}
 CHECK_FIELDS = {"id", "kind", "purpose", "registry_id", "scenario", "inputs",
                 "applicability", "timeout_seconds"}
@@ -561,15 +563,18 @@ def _walk_files(base):
     в links вместе с файлами-symlink — ни один адресат не читается.
     """
     files, links = [], []
-    for dirpath, dirnames, filenames in os.walk(base, followlinks=False):
-        current = Path(dirpath)
-        for name in dirnames:
-            entry = current / name
+    pending = [base]
+    while pending:
+        current = pending.pop()
+        if not current.exists():
+            continue
+        for entry in current.iterdir():
             if entry.is_symlink():
                 links.append(entry)
-        for name in filenames:
-            entry = current / name
-            (links if entry.is_symlink() else files).append(entry)
+            elif entry.is_dir():
+                pending.append(entry)
+            elif entry.is_file():
+                files.append(entry)
     return files, links
 
 
@@ -601,9 +606,11 @@ def _doc_title(text):
     return None
 
 
-def _validate_document(meta, path, kind, in_archive, errors):
+def _validate_document(meta, path, kind, in_archive, errors,
+                       capabilities=frozenset()):
     label = str(path)
-    _fields(meta, DOC_FIELDS, DOC_FIELDS - {"moves"}, label, errors)
+    _fields(meta, DOC_FIELDS,
+            DOC_FIELDS - {"moves", "acceptance_policy"}, label, errors)
     if meta.get("schema_version") != 1:
         _err(errors, label, f"неизвестная версия {meta.get('schema_version')!r}",
              field="schema_version")
@@ -642,6 +649,18 @@ def _validate_document(meta, path, kind, in_archive, errors):
     materials = _materials(meta.get("materials"), label, errors)
     archive = _archive(meta.get("archive"), label, errors)
     moves = _moves(meta.get("moves", []), label, errors)
+    acceptance_policy = None
+    if "acceptance_policy" in meta:
+        if block_workflow.CAPABILITY not in capabilities:
+            _err(errors, label, "поле требует явной capability "
+                 f"'{block_workflow.CAPABILITY}' в project.json → "
+                 "documents.capabilities", field="acceptance_policy")
+        elif kind_meta != "plan":
+            _err(errors, label, "acceptance_policy допускается только "
+                 "в документе kind 'plan'", field="acceptance_policy")
+        else:
+            acceptance_policy = block_workflow.validate_policy(
+                meta["acceptance_policy"], label, errors)
     if in_archive and archive is None:
         errors.append(f"{label}: файл в архивном каталоге, но archive равен null")
     if not in_archive and archive is not None:
@@ -654,14 +673,16 @@ def _validate_document(meta, path, kind, in_archive, errors):
             "archived": in_archive, "revision": meta.get("current_revision"),
             "updated_at": meta.get("updated_at"), "relations": relations,
             "tasks": tasks, "changes": changes, "materials": materials,
-            "archive": archive, "moves": moves, "title": None}
+            "archive": archive, "moves": moves,
+            "acceptance_policy": acceptance_policy,
+            "has_policy": "acceptance_policy" in meta, "title": None}
 
 
 ACTOR_FIELDS = {"name", "model"}
 HANDOFF_FIELDS = {"at", "actor", "summary", "reports", "card_projection",
-                  "entry_id", "journal_sha256"}
+                  "entry_id", "journal_sha256", "result_hash", "coverage", "evidence_hashes"}
 ACCEPTANCE_FIELDS = {"at", "actor", "role", "kind", "result", "handoff_at",
-                     "session", "detail", "audit_id", "audit_sha256"}
+                     "session", "detail", "audit_id", "audit_sha256", "result_hash"}
 ACCEPTANCE_ROLES = {"auditor", "engineer"}
 ACCEPTANCE_KINDS = {"diagnostic", "acceptance"}
 ACCEPTANCE_RESULTS = {"accepted", "cancelled"}
@@ -690,7 +711,7 @@ def _handoff(value, label, errors, material_ids):
     if not isinstance(value, dict):
         _err(errors, label, "ожидается объект", field="handoff")
         return
-    _fields(value, HANDOFF_FIELDS, HANDOFF_FIELDS - {"entry_id", "journal_sha256"}, label, errors)
+    _fields(value, HANDOFF_FIELDS, HANDOFF_FIELDS - {"entry_id", "journal_sha256", "result_hash", "coverage", "evidence_hashes"}, label, errors)
     if _iso(value.get("at")) is None:
         _err(errors, label, "at должно быть ISO-временем с часовым поясом",
              field="handoff")
@@ -720,6 +741,21 @@ def _handoff(value, label, errors, material_ids):
     if ("entry_id" in value) != ("journal_sha256" in value):
         _err(errors, label, "entry_id и journal_sha256 задаются вместе", field="handoff")
 
+    if "result_hash" in value and not DIGEST.fullmatch(str(value["result_hash"])):
+        _err(errors, label, "некорректный result_hash", field="handoff")
+    if "coverage" in value:
+        cov = value["coverage"]
+        if (not isinstance(cov, dict) or set(cov) != {"checks", "satisfied"}
+                or type(cov.get("satisfied")) is not bool or not isinstance(cov.get("checks"), dict)
+                or any(v not in {"passed", "not_applicable", "not_run", "failed", "timeout"}
+                       for v in cov.get("checks", {}).values())):
+            _err(errors, label, "некорректное coverage", field="handoff")
+    if "evidence_hashes" in value:
+        hashes = value["evidence_hashes"]
+        if (not isinstance(hashes, dict) or not all(k in material_ids
+                and DIGEST.fullmatch(str(v)) for k, v in hashes.items())):
+            _err(errors, label, "некорректные evidence_hashes", field="handoff")
+
 
 def _acceptance(value, label, errors):
     """Протокол приёмки: кто, когда и что принял либо отменил.
@@ -747,6 +783,8 @@ def _acceptance(value, label, errors):
     if value.get("result") not in ACCEPTANCE_RESULTS:
         _err(errors, label, "result ожидается accepted|cancelled",
              field="acceptance")
+    if "result_hash" in value and not DIGEST.fullmatch(str(value["result_hash"])):
+        _err(errors, label, "некорректный result_hash", field="acceptance")
     handoff_at = value.get("handoff_at")
     if handoff_at is not None and _iso(handoff_at) is None:
         _err(errors, label, "handoff_at — ISO-время либо null",
@@ -803,7 +841,7 @@ def _check_fs_path(root, path_str, label, errors, field, safe_path=None):
             _err(errors, label, str(exc), field=field)
             return False
         return True
-    cur = Path(root)
+    cur = root if hasattr(root, "view") else Path(root)
     for part in Path(path_str).parts:
         cur = cur / part
         if cur.is_symlink():
@@ -848,10 +886,30 @@ def _workflow(value, label, errors):
                     _err(errors, item_label, f"неизвестный from_route: {from_route!r}", field="from_route")
                 if not _str(item.get("reason")):
                     _err(errors, item_label, "reason должен быть непустой строкой", field="reason")
+                if "engineer_approval" in item and not _str(item["engineer_approval"]):
+                    _err(errors, item_label, "engineer_approval — непустое основание инженера", field="engineer_approval")
                 if item.get("actor") is not None and not _str(item.get("actor")):
                     _err(errors, item_label, "actor должен быть непустой строкой либо null", field="actor")
                 norm_history.append(item)
-    return {"route": route, "reason": reason, "history": norm_history}
+    baseline = value.get("baseline")
+    if baseline is not None:
+        if (not isinstance(baseline, dict) or set(baseline) != {"source", "sha256"}
+                or not _str(baseline.get("source")) or not DIGEST.fullmatch(str(baseline.get("sha256")))):
+            _err(errors, label, "baseline требует source и sha256", field="workflow.baseline")
+    transitions = value.get("transitions", [])
+    if not isinstance(transitions, list):
+        _err(errors, label, "transitions — список", field="workflow.transitions")
+    else:
+        for event in transitions:
+            if (not isinstance(event, dict) or set(event) - {"at", "action", "reason", "actor", "handoff", "acceptance"}
+                    or not _iso(event.get("at")) or event.get("action") not in {"start", "revise"}
+                    or not _str(event.get("reason")) or not _str(event.get("actor"))):
+                _err(errors, label, "некорректное событие transitions", field="workflow.transitions")
+    result = {"route": route, "reason": reason, "history": norm_history}
+    for key in ("baseline", "transitions"):
+        if key in value:
+            result[key] = value[key]
+    return result
 
 
 def _verification_plan(value, label, errors, registry=None, root=None, safe_path=None):
@@ -1060,7 +1118,7 @@ def _verification_plan(value, label, errors, registry=None, root=None, safe_path
     }
 
 
-def _validate_task_meta(meta, label, errors, registry=None, task_workflow_enabled=None, root=None, safe_path=None):
+def _validate_task_meta(meta, label, errors, registry=None, task_workflow_enabled=None, root=None, safe_path=None, block_enabled=False):
     card_version = meta.get("card_format_version", 1)
     if type(card_version) is not int or card_version < 1:
         _err(errors, label, "ожидается положительное целое", field="card_format_version")
@@ -1121,8 +1179,18 @@ def _validate_task_meta(meta, label, errors, registry=None, task_workflow_enable
     if (not isinstance(legacy_findings, list) or not all(isinstance(item, str) and re.fullmatch(r"A-[0-9]{2,}", item) for item in legacy_findings)
             or len(legacy_findings) != len(set(legacy_findings))):
         _err(errors, label, "ожидаются уникальные ID прежних находок", field="checkbox_legacy_findings")
+    block = None
+    if "block" in meta:
+        if not block_enabled:
+            _err(errors, label, "поле требует явной capability "
+                 f"'{block_workflow.CAPABILITY}' в project.json → "
+                 "documents.capabilities", field="block")
+        else:
+            block = block_workflow.validate_card_block(meta["block"],
+                                                       label, errors)
     res = {"schema_version": version, "relations": relations, "materials": materials,
-           "moves": moves, "handoff": handoff, "acceptance": acceptance}
+           "moves": moves, "handoff": handoff, "acceptance": acceptance,
+           "block": block, "has_block": "block" in meta}
     if "checkbox_legacy_findings" in meta:
         res["checkbox_legacy_findings"] = legacy_findings
     if "criterion_evidence" in meta:
@@ -1144,11 +1212,25 @@ def collections_config(root, data, paths, safe_path, require):
         return None
     label = "project.json documents"
     require(isinstance(raw, dict), f"{label}: ожидается объект")
-    unknown = sorted(set(raw) - {"schema_version", "collections"})
+    unknown = sorted(set(raw) - {"schema_version", "collections",
+                               "capabilities"})
     require(not unknown, f"{label}: неизвестные поля {unknown}")
     require(raw.get("schema_version") == 1,
             f"{label}: неподдерживаемая schema_version "
             f"{raw.get('schema_version')!r}")
+    capabilities = raw.get("capabilities")
+    if capabilities is not None:
+        require(isinstance(capabilities, list)
+                and all(isinstance(c, str) for c in capabilities),
+                f"{label}.capabilities: ожидается список строк")
+        require(len(capabilities) == len(set(capabilities)),
+                f"{label}.capabilities: повторное значение")
+        unknown_caps = sorted(set(capabilities)
+                              - block_workflow.KNOWN_CAPABILITIES)
+        require(not unknown_caps,
+                f"{label}.capabilities: неизвестные значения "
+                f"{unknown_caps}; известные: "
+                f"{sorted(block_workflow.KNOWN_CAPABILITIES)}")
     raw_cols = raw.get("collections")
     require(isinstance(raw_cols, dict) and raw_cols,
             f"{label}: collections должен быть непустым объектом")
@@ -1189,6 +1271,13 @@ def collections_config(root, data, paths, safe_path, require):
                     and not entry["index"].is_relative_to(other_entry["archive"]),
                     f"{kind}.index: внутри коллекции {other}")
     return cols
+
+
+def capabilities_of(data):
+    """Явно включённые documents.capabilities → frozenset имён."""
+    raw = data.get("documents") if isinstance(data, dict) else None
+    caps = raw.get("capabilities") if isinstance(raw, dict) else None
+    return frozenset(caps) if isinstance(caps, list) else frozenset()
 
 
 def _cross_check(root, documents, task_meta, records, component_roots,
@@ -1334,6 +1423,14 @@ def _cross_check(root, documents, task_meta, records, component_roots,
                               f"с картой владельца {owner}")
                 continue
             moves[old] = new
+    policies = {ident: {"policy": entry["acceptance_policy"],
+                        "path": str(entry["path"].relative_to(root)),
+                        "archived": entry["archived"]}
+                for ident, entry in documents.items()
+                if entry["has_policy"]}
+    blocks = {ident: meta["block"] for ident, meta in task_meta.items()
+              if meta is not None and meta.get("has_block")}
+    block_workflow.validate_block_graph(policies, blocks, records, errors)
     return moves
 
 
@@ -1379,6 +1476,8 @@ def load_catalog(root, data, paths, records, safe_path, require,
     cols = collections_config(root, data, paths, safe_path, require)
     if cols is None:
         return None
+    capabilities = capabilities_of(data)
+    block_enabled = block_workflow.CAPABILITY in capabilities
     component_roots = []
     for component in data.get("components") or []:
         component_roots.append(safe_path(root, component["code"]))
@@ -1426,7 +1525,8 @@ def load_catalog(root, data, paths, records, safe_path, require,
                                    "archived": place == "archive",
                                    "title": title})
                     continue
-                entry = _validate_document(meta, path, kind, place == "archive", errors)
+                entry = _validate_document(meta, path, kind, place == "archive",
+                                           errors, capabilities=capabilities)
                 entry["title"] = title
                 ident = entry["id"]
                 if ident is None:
@@ -1463,7 +1563,8 @@ def load_catalog(root, data, paths, records, safe_path, require,
                 registry=registry_map,
                 task_workflow_enabled=(tw is not None),
                 root=root,
-                safe_path=safe_path
+                safe_path=safe_path,
+                block_enabled=block_enabled
             )
     stray_files, stray_links = _walk_files(paths["docs"])
     for link in stray_links:
@@ -1560,7 +1661,8 @@ def load_catalog(root, data, paths, records, safe_path, require,
     return {"documents": documents, "legacy": legacy, "task_meta": task_meta,
             "owners": owners, "incoming": incoming, "candidates": candidates,
             "collections": cols, "records": records, "root": root,
-            "moves": moves, "immutable": immutable}
+            "moves": moves, "immutable": immutable,
+            "capabilities": capabilities}
 
 
 INDEX_KIND_TITLES = {"discussion": "обсуждений", "spec": "спецификаций",
@@ -1574,7 +1676,7 @@ def _escape_cell(value):
 
 
 def _index_link(root, index_dir, path):
-    relative = Path(os.path.relpath(path, index_dir)).as_posix()
+    relative = Path(os.path.relpath(str(path), str(index_dir))).as_posix()
     return document_links.format_dest(relative, "", "",
                                       any(char.isspace() for char in relative))
 

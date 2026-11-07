@@ -1,0 +1,11 @@
+1: ('workflow', 'enable-v2'): 0
+2: ('workflow', 'enable-v2', '--apply'): 0
+3: ('workflow', 'migrate-card', 'PB-037', '--route', 'small', '--verification-plan', 'work/pilot-plan.json', '--actor', 'Codex', '--model', 'GPT-6', '--reason', 'Isolated PB-037 pilot', '--apply'): 0
+4: ('lifecycle', 'start', 'PB-037', '--actor', 'Codex', '--model', 'GPT-6', '--reason', 'Isolated pilot'): 0
+5: ('verify', 'PB-037', '--preflight'): 0
+6: ('verify', 'PB-037'): 0
+7: ('verify', 'PB-037'): 0
+8: ('lifecycle', 'handoff', 'PB-037', '--summary', 'Self-copy pilot, no independent acceptance', '--actor', 'Codex', '--model', 'GPT-6'): 0
+9: ('lifecycle', 'handoff', 'PB-037', '--summary', 'Self-copy pilot, no independent acceptance', '--actor', 'Codex', '--model', 'GPT-6'): 0
+10: ('verify', 'PB-037', '--audit-ready'): 0
+11: ('close', 'PB-037', '--dry-run'): 1

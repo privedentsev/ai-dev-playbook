@@ -1,0 +1,63 @@
+{
+  "schema_version": 2,
+  "run_id": "5270166147dc49f0b8ea1697294d90f0",
+  "task_id": "DEV-1",
+  "route": "quick",
+  "plan_revision": 1,
+  "plan_hash": "sha256:3ca6d14601990edd33a084d4fef167f6a02986a346a952c3f8b8372e53ec6b41",
+  "policy_hash": "sha256:7c68af9179f78959e1699d329480362b4c80423a1623f8f4de8a07eb0605a429",
+  "at": "2026-11-06T10:49:54.844677+00:00",
+  "started_at": "2026-11-06T10:49:54.844683+00:00",
+  "finished_at": "2026-11-06T10:49:54.844687+00:00",
+  "cwd": "/private/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/tmpyzy1ma30",
+  "status": "passed",
+  "results": [
+    {
+      "check_id": "a",
+      "definition_hash": "sha256:327493b03aa3dcb4cff8dd2ea46d7b52c2501b8873320383bcca83b01699338f",
+      "kind": "command",
+      "status": "passed",
+      "actor": {
+        "name": "Fixture executor",
+        "model": "Synthetic model"
+      },
+      "environment": {
+        "os": "posix",
+        "platform": "macOS-27.0.1-x86_64-i386-64bit-Mach-O",
+        "python": "3.14.6",
+        "architecture": "x86_64"
+      },
+      "input_snapshot": {
+        "files": {
+          "path:src/a.txt": "sha256:cbe3e66524cb62b29edb3e6dda742af5a20de7ceff3c0ba1818cf57c454b542c"
+        }
+      },
+      "started_at": "2026-11-06T10:49:54.760016+00:00",
+      "finished_at": "2026-11-06T10:49:54.843051+00:00",
+      "duration_seconds": 0.083,
+      "exit_code": 0,
+      "stdout_log": "work/verification/DEV-1/5270166147dc49f0b8ea1697294d90f0/a.stdout.log",
+      "stderr_log": "work/verification/DEV-1/5270166147dc49f0b8ea1697294d90f0/a.stderr.log",
+      "snapshot_before": {
+        "files": {
+          "path:src/a.txt": "sha256:cbe3e66524cb62b29edb3e6dda742af5a20de7ceff3c0ba1818cf57c454b542c"
+        }
+      },
+      "snapshot_after": {
+        "files": {
+          "path:src/a.txt": "sha256:cbe3e66524cb62b29edb3e6dda742af5a20de7ceff3c0ba1818cf57c454b542c"
+        }
+      }
+    }
+  ],
+  "coverage": {
+    "total_checks": 1,
+    "passed": [
+      "a"
+    ],
+    "failed": [],
+    "not_applicable": [],
+    "not_run": [],
+    "satisfied": true
+  }
+}

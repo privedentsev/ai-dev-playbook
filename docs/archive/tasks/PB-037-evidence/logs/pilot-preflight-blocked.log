@@ -1,0 +1,17 @@
+1: ('workflow', 'enable-v2'): 0
+2: ('workflow', 'enable-v2', '--apply'): 0
+3: ('workflow', 'migrate-card', 'PB-037', '--route', 'small', '--verification-plan', 'work/pilot-plan.json', '--actor', 'Codex', '--model', 'GPT-6', '--reason', 'Isolated PB-037 pilot', '--apply'): 0
+4: ('lifecycle', 'start', 'PB-037', '--actor', 'Codex', '--model', 'GPT-6', '--reason', 'Isolated pilot'): 0
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/docs/tasks/PB-037-evidence/self_pilot.py", line 99, in <module>
+    main()
+    ~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/docs/tasks/PB-037-evidence/self_pilot.py", line 75, in main
+    run('verify', 'PB-037', '--preflight')
+    ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/docs/tasks/PB-037-evidence/self_pilot.py", line 48, in run
+    raise RuntimeError(f'{args}: {proc.returncode}\n{proc.stdout}\n{proc.stderr}')
+RuntimeError: ('verify', 'PB-037', '--preflight'): 1
+
+ERROR: PB-037: неучтённые материалы до verify: docs/tasks/PB-037-evidence/e2e-first.log, docs/tasks/PB-037-evidence/e2e-second.log, docs/tasks/PB-037-evidence/self_pilot.py, docs/tasks/PB-037-evidence/e2e-checkpoint-first.log, docs/tasks/PB-037-evidence/pilot-interrupted-02.log, docs/tasks/PB-037-evidence/pilot-interrupted.log, docs/tasks/PB-037-evidence/matrix.md, docs/tasks/PB-037-evidence/e2e-complete.log, docs/tasks/PB-037-evidence/e2e-final.log, docs/tasks/PB-037-evidence/pilot-interrupted/01.stderr.log, docs/tasks/PB-037-evidence/pilot-interrupted/04.stderr.log, docs/tasks/PB-037-evidence/pilot-interrupted/03.stderr.log, docs/tasks/PB-037-evidence/pilot-interrupted/02.stdout.log, docs/tasks/PB-037-evidence/pilot-interrupted/commands.json, docs/tasks/PB-037-evidence/pilot-interrupted/01.stdout.log, docs/tasks/PB-037-evidence/pilot-interrupted/04.stdout.log, docs/tasks/PB-037-evidence/pilot-interrupted/03.stdout.log, docs/tasks/PB-037-evidence/pilot-interrupted/02.stderr.log, docs/tasks/PB-037-evidence/pilot-interrupted-02/01.stderr.log, docs/tasks/PB-037-evidence/pilot-interrupted-02/04.stderr.log, docs/tasks/PB-037-evidence/pilot-interrupted-02/03.stderr.log, docs/tasks/PB-037-evidence/pilot-interrupted-02/02.stdout.log, docs/tasks/PB-037-evidence/pilot-interrupted-02/commands.json, docs/tasks/PB-037-evidence/pilot-interrupted-02/01.stdout.log, docs/tasks/PB-037-evidence/pilot-interrupted-02/04.stdout.log, docs/tasks/PB-037-evidence/pilot-interrupted-02/03.stdout.log, docs/tasks/PB-037-evidence/pilot-interrupted-02/02.stderr.log; выполните lifecycle register-material
+

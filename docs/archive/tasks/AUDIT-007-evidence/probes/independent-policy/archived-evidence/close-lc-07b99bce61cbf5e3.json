@@ -1,0 +1,250 @@
+{
+  "schema_version": 1,
+  "plan_id": "lc-07b99bce61cbf5e3",
+  "at": "2026-11-06T13:48:57+03:00",
+  "actor": {
+    "model": null,
+    "name": "cli:privedentsev1",
+    "role": "cli"
+  },
+  "basis": "playbook.py close DEV-1",
+  "action": "close_task",
+  "files": [
+    {
+      "from": "docs/tasks/DEV-1-evidence/baseline.json",
+      "to": "docs/archive/tasks/DEV-1-evidence/baseline.json",
+      "sha256": "sha256:59eec651a0e58a6524ebb9d0a0227fde1dac00ad8893751351b53d1501bad875",
+      "bytes": 7518
+    },
+    {
+      "from": "docs/tasks/DEV-1.md",
+      "to": "docs/archive/tasks/DEV-1.md",
+      "sha256": "sha256:1189e9cd521005487b758ad3756c1491702b92b79cc5a73d2621e923ecdc1ae1",
+      "bytes": 4683
+    },
+    {
+      "from": "work/verification/DEV-1/07e9e11c28494f1887673a46596a1b5f/report.json",
+      "to": "docs/archive/tasks/DEV-1-evidence/work/verification/DEV-1/07e9e11c28494f1887673a46596a1b5f/report.json",
+      "sha256": "sha256:b28bf4ac2f4a6c718ebbea896b3d439a78ef3e00a215c5ec058a42431184fcde",
+      "bytes": 3390
+    },
+    {
+      "from": "work/verification/DEV-1/2ff63cb34ee44802b76e2ca56e96380a/a.stderr.log",
+      "to": "docs/archive/tasks/DEV-1-evidence/work/verification/DEV-1/2ff63cb34ee44802b76e2ca56e96380a/a.stderr.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "work/verification/DEV-1/2ff63cb34ee44802b76e2ca56e96380a/a.stdout.log",
+      "to": "docs/archive/tasks/DEV-1-evidence/work/verification/DEV-1/2ff63cb34ee44802b76e2ca56e96380a/a.stdout.log",
+      "sha256": "sha256:4f44764a3f9633e5727ddabcb4aec1c0d03024e7f5066f4b0c455078d5c4776b",
+      "bytes": 12
+    },
+    {
+      "from": "work/verification/DEV-1/2ff63cb34ee44802b76e2ca56e96380a/b.stderr.log",
+      "to": "docs/archive/tasks/DEV-1-evidence/work/verification/DEV-1/2ff63cb34ee44802b76e2ca56e96380a/b.stderr.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "work/verification/DEV-1/2ff63cb34ee44802b76e2ca56e96380a/b.stdout.log",
+      "to": "docs/archive/tasks/DEV-1-evidence/work/verification/DEV-1/2ff63cb34ee44802b76e2ca56e96380a/b.stdout.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "work/verification/DEV-1/2ff63cb34ee44802b76e2ca56e96380a/report.json",
+      "to": "docs/archive/tasks/DEV-1-evidence/work/verification/DEV-1/2ff63cb34ee44802b76e2ca56e96380a/report.json",
+      "sha256": "sha256:7062bca753fd30b773e098d8283105376157e8f38661f352bc1f02a2c9908d24",
+      "bytes": 3390
+    },
+    {
+      "from": "work/verification/DEV-1/874ecfe0b0f34348b2e7462a676377fa/a.stderr.log",
+      "to": "docs/archive/tasks/DEV-1-evidence/work/verification/DEV-1/874ecfe0b0f34348b2e7462a676377fa/a.stderr.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "work/verification/DEV-1/874ecfe0b0f34348b2e7462a676377fa/a.stdout.log",
+      "to": "docs/archive/tasks/DEV-1-evidence/work/verification/DEV-1/874ecfe0b0f34348b2e7462a676377fa/a.stdout.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "work/verification/DEV-1/874ecfe0b0f34348b2e7462a676377fa/b.stderr.log",
+      "to": "docs/archive/tasks/DEV-1-evidence/work/verification/DEV-1/874ecfe0b0f34348b2e7462a676377fa/b.stderr.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "work/verification/DEV-1/874ecfe0b0f34348b2e7462a676377fa/b.stdout.log",
+      "to": "docs/archive/tasks/DEV-1-evidence/work/verification/DEV-1/874ecfe0b0f34348b2e7462a676377fa/b.stdout.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "work/verification/DEV-1/874ecfe0b0f34348b2e7462a676377fa/report.json",
+      "to": "docs/archive/tasks/DEV-1-evidence/work/verification/DEV-1/874ecfe0b0f34348b2e7462a676377fa/report.json",
+      "sha256": "sha256:39ccb071cd827a643713ed0b44721f9a59765fe4a203f79db04680700723a7c8",
+      "bytes": 3390
+    },
+    {
+      "from": "work/verification/DEV-1/e263783d0eec4ee5b033c6868f83593b/a.stderr.log",
+      "to": "docs/archive/tasks/DEV-1-evidence/work/verification/DEV-1/e263783d0eec4ee5b033c6868f83593b/a.stderr.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "work/verification/DEV-1/e263783d0eec4ee5b033c6868f83593b/a.stdout.log",
+      "to": "docs/archive/tasks/DEV-1-evidence/work/verification/DEV-1/e263783d0eec4ee5b033c6868f83593b/a.stdout.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "work/verification/DEV-1/e263783d0eec4ee5b033c6868f83593b/report.json",
+      "to": "docs/archive/tasks/DEV-1-evidence/work/verification/DEV-1/e263783d0eec4ee5b033c6868f83593b/report.json",
+      "sha256": "sha256:4d83f2d32b944fa9daa90d0343f282f10c178a56a6fc0e53916da311af1e1d98",
+      "bytes": 3390
+    }
+  ],
+  "moves": [
+    {
+      "from": "docs/tasks/DEV-1-evidence/baseline.json",
+      "to": "docs/archive/tasks/DEV-1-evidence/baseline.json"
+    },
+    {
+      "from": "work/verification/DEV-1/07e9e11c28494f1887673a46596a1b5f",
+      "to": "docs/archive/tasks/DEV-1-evidence/work/verification/DEV-1/07e9e11c28494f1887673a46596a1b5f"
+    },
+    {
+      "from": "work/verification/DEV-1/2ff63cb34ee44802b76e2ca56e96380a",
+      "to": "docs/archive/tasks/DEV-1-evidence/work/verification/DEV-1/2ff63cb34ee44802b76e2ca56e96380a"
+    },
+    {
+      "from": "work/verification/DEV-1/874ecfe0b0f34348b2e7462a676377fa",
+      "to": "docs/archive/tasks/DEV-1-evidence/work/verification/DEV-1/874ecfe0b0f34348b2e7462a676377fa"
+    },
+    {
+      "from": "work/verification/DEV-1/e263783d0eec4ee5b033c6868f83593b",
+      "to": "docs/archive/tasks/DEV-1-evidence/work/verification/DEV-1/e263783d0eec4ee5b033c6868f83593b"
+    },
+    {
+      "from": "docs/tasks/DEV-1.md",
+      "to": "docs/archive/tasks/DEV-1.md"
+    }
+  ],
+  "materials": [
+    {
+      "id": "workflow-baseline",
+      "role": "report",
+      "storage": "local",
+      "source_old": "docs/tasks/DEV-1-evidence/baseline.json",
+      "source_new": "docs/archive/tasks/DEV-1-evidence/baseline.json",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "DEV-1"
+      ]
+    },
+    {
+      "id": "verify-07e9e11c28494f1887673a46596a1b5f",
+      "role": "report",
+      "storage": "local",
+      "source_old": "work/verification/DEV-1/07e9e11c28494f1887673a46596a1b5f",
+      "source_new": "docs/archive/tasks/DEV-1-evidence/work/verification/DEV-1/07e9e11c28494f1887673a46596a1b5f",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "DEV-1"
+      ]
+    },
+    {
+      "id": "verify-2ff63cb34ee44802b76e2ca56e96380a",
+      "role": "report",
+      "storage": "local",
+      "source_old": "work/verification/DEV-1/2ff63cb34ee44802b76e2ca56e96380a",
+      "source_new": "docs/archive/tasks/DEV-1-evidence/work/verification/DEV-1/2ff63cb34ee44802b76e2ca56e96380a",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "DEV-1"
+      ]
+    },
+    {
+      "id": "verify-874ecfe0b0f34348b2e7462a676377fa",
+      "role": "report",
+      "storage": "local",
+      "source_old": "work/verification/DEV-1/874ecfe0b0f34348b2e7462a676377fa",
+      "source_new": "docs/archive/tasks/DEV-1-evidence/work/verification/DEV-1/874ecfe0b0f34348b2e7462a676377fa",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "DEV-1"
+      ]
+    },
+    {
+      "id": "verify-e263783d0eec4ee5b033c6868f83593b",
+      "role": "report",
+      "storage": "local",
+      "source_old": "work/verification/DEV-1/e263783d0eec4ee5b033c6868f83593b",
+      "source_new": "docs/archive/tasks/DEV-1-evidence/work/verification/DEV-1/e263783d0eec4ee5b033c6868f83593b",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "DEV-1"
+      ]
+    }
+  ],
+  "external": [],
+  "type": "lifecycle-close",
+  "task": "DEV-1",
+  "outcome": "done",
+  "previous_status": "in_review",
+  "reason": null,
+  "acceptance_ref": null,
+  "policy": "managed",
+  "handoff": {
+    "at": "2026-11-06T13:48:51+03:00",
+    "actor": {
+      "name": "Fixture executor",
+      "model": "Synthetic model"
+    },
+    "summary": "Auditor synthetic fixture",
+    "reports": [
+      "verify-07e9e11c28494f1887673a46596a1b5f",
+      "verify-2ff63cb34ee44802b76e2ca56e96380a",
+      "verify-874ecfe0b0f34348b2e7462a676377fa",
+      "verify-e263783d0eec4ee5b033c6868f83593b"
+    ],
+    "card_projection": "sha256:c2428775294751c0f9f5d09ee7bddb9111caec1a3cac6c333caaf90daa566a25",
+    "result_hash": "sha256:21bb2144d2a4cc837a7dcde3fe088cb218f22a0aca2e3c008ade61e5926f9dc2",
+    "coverage": {
+      "checks": {
+        "a": "passed",
+        "b": "passed"
+      },
+      "satisfied": true
+    },
+    "evidence_hashes": {
+      "verify-07e9e11c28494f1887673a46596a1b5f": "sha256:d6789cac8622946e1231e587f0874678315455fe74290cdfe7bd2dd721439d22",
+      "verify-2ff63cb34ee44802b76e2ca56e96380a": "sha256:12730fbd6c4f6fccbef6cce819c0a93f922e880b21f3086ca0e016782b2694e6",
+      "verify-874ecfe0b0f34348b2e7462a676377fa": "sha256:b64c6cbaad47ad888eed428dabc2c753cc658923d489bc1a69aa9cadabb6f421",
+      "verify-e263783d0eec4ee5b033c6868f83593b": "sha256:6a70baf400f17b9069f89d1ed5523efb361367418da94d076e80f1d4c7cb1098",
+      "workflow-baseline": "sha256:4418d8531f76dea2b9d65506167426154c0ed747fde1d0cf41618f33ff90f2a7"
+    }
+  },
+  "acceptance": {
+    "at": "2026-11-06T13:48:56+03:00",
+    "actor": {
+      "name": "Fixture engineer",
+      "model": "Synthetic model"
+    },
+    "role": "engineer",
+    "kind": "acceptance",
+    "result": "accepted",
+    "handoff_at": "2026-11-06T13:48:51+03:00",
+    "session": null,
+    "detail": "Synthetic explicit final version acceptance",
+    "result_hash": "sha256:21bb2144d2a4cc837a7dcde3fe088cb218f22a0aca2e3c008ade61e5926f9dc2"
+  }
+}

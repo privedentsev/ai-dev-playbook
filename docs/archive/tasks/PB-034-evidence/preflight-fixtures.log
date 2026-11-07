@@ -1,0 +1,12 @@
+test_preflight_detects_missing_required_registry_check (test_verification_preflight.VerificationPreflightTest.test_preflight_detects_missing_required_registry_check) ... ok
+test_preflight_detects_stale_index_and_gives_remediation (test_verification_preflight.VerificationPreflightTest.test_preflight_detects_stale_index_and_gives_remediation) ... ok
+test_preflight_detects_unaccounted_materials (test_verification_preflight.VerificationPreflightTest.test_preflight_detects_unaccounted_materials) ... ok
+test_preflight_detects_unapproved_exclusion_of_failed_check (test_verification_preflight.VerificationPreflightTest.test_preflight_detects_unapproved_exclusion_of_failed_check) ... ok
+test_preflight_does_not_execute_commands_or_write_files (test_verification_preflight.VerificationPreflightTest.test_preflight_does_not_execute_commands_or_write_files) ... ok
+test_preflight_does_not_require_future_reports (test_verification_preflight.VerificationPreflightTest.test_preflight_does_not_require_future_reports) ... ok
+test_preflight_shows_applicability_and_freshness (test_verification_preflight.VerificationPreflightTest.test_preflight_shows_applicability_and_freshness) ... ok
+
+----------------------------------------------------------------------
+Ran 7 tests in 6.841s
+
+OK

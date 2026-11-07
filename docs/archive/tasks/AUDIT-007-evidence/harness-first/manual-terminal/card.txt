@@ -1,0 +1,227 @@
+# DEV-1: test
+
+ID: DEV-1
+Status: in_review
+Priority: P2
+Depends-On: -
+Executor: Fixture executor
+Model: Synthetic model
+Created: 2026-01-01T00:00:00Z
+Closed: -
+
+<!-- playbook-meta:start -->
+```json
+{
+  "schema_version": 2,
+  "workflow": {
+    "route": "quick",
+    "reason": "Local low risk fixture",
+    "history": [],
+    "baseline": {
+      "source": "docs/tasks/DEV-1-evidence/baseline.json",
+      "sha256": "sha256:6b20341d925957fca07608215abfc5a95c599a6351b031da98884154cacb3784"
+    },
+    "transitions": [
+      {
+        "at": "2026-11-06T13:47:56+03:00",
+        "action": "start",
+        "reason": "Synthetic engineer instruction",
+        "actor": "Fixture executor"
+      }
+    ]
+  },
+  "verification_plan": {
+    "revision": 1,
+    "rationale": "Independent explicit files",
+    "scope": [
+      "src"
+    ],
+    "checks": [
+      {
+        "id": "a",
+        "kind": "manual",
+        "purpose": "Auditor probe a",
+        "registry_id": "a",
+        "inputs": [
+          "src/a.txt"
+        ]
+      }
+    ],
+    "decisions": []
+  },
+  "relations": [],
+  "materials": [
+    {
+      "id": "workflow-baseline",
+      "role": "report",
+      "source": "docs/tasks/DEV-1-evidence/baseline.json",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "DEV-1"
+      ]
+    },
+    {
+      "id": "verify-0a3663d03fd44e2cb5288d8d7a3343e8",
+      "role": "report",
+      "source": "work/verification/DEV-1/0a3663d03fd44e2cb5288d8d7a3343e8",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "DEV-1"
+      ]
+    },
+    {
+      "id": "verify-27fce9caaf4f403ea5c9754bee5205fa",
+      "role": "report",
+      "source": "work/verification/DEV-1/27fce9caaf4f403ea5c9754bee5205fa",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "DEV-1"
+      ]
+    },
+    {
+      "id": "verify-35f886b49cab47d1829c5afe43a0833d",
+      "role": "report",
+      "source": "work/verification/DEV-1/35f886b49cab47d1829c5afe43a0833d",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "DEV-1"
+      ]
+    },
+    {
+      "id": "verify-39671c2a86b245fcb9615cdec9e19390",
+      "role": "report",
+      "source": "work/verification/DEV-1/39671c2a86b245fcb9615cdec9e19390",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "DEV-1"
+      ]
+    },
+    {
+      "id": "verify-3beed64c6ecc41ab80ba1522628cc763",
+      "role": "report",
+      "source": "work/verification/DEV-1/3beed64c6ecc41ab80ba1522628cc763",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "DEV-1"
+      ]
+    },
+    {
+      "id": "verify-6989d28b214a49d190fa5f2af0064af8",
+      "role": "report",
+      "source": "work/verification/DEV-1/6989d28b214a49d190fa5f2af0064af8",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "DEV-1"
+      ]
+    },
+    {
+      "id": "verify-9333626e901640839cc6ae7f2b717255",
+      "role": "report",
+      "source": "work/verification/DEV-1/9333626e901640839cc6ae7f2b717255",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "DEV-1"
+      ]
+    },
+    {
+      "id": "verify-9fdf122d0e14434f83c3a3c33fb4750c",
+      "role": "report",
+      "source": "work/verification/DEV-1/9fdf122d0e14434f83c3a3c33fb4750c",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "DEV-1"
+      ]
+    },
+    {
+      "id": "verify-dfd4c4f6dcb840399fe8ea19a875dd43",
+      "role": "report",
+      "source": "work/verification/DEV-1/dfd4c4f6dcb840399fe8ea19a875dd43",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "DEV-1"
+      ]
+    }
+  ],
+  "moves": [],
+  "handoff": {
+    "at": "2026-11-06T13:48:05+03:00",
+    "actor": {
+      "name": "Fixture executor",
+      "model": "Synthetic model"
+    },
+    "summary": "Auditor synthetic fixture",
+    "reports": [
+      "verify-0a3663d03fd44e2cb5288d8d7a3343e8",
+      "verify-27fce9caaf4f403ea5c9754bee5205fa",
+      "verify-35f886b49cab47d1829c5afe43a0833d",
+      "verify-39671c2a86b245fcb9615cdec9e19390",
+      "verify-3beed64c6ecc41ab80ba1522628cc763",
+      "verify-6989d28b214a49d190fa5f2af0064af8",
+      "verify-9333626e901640839cc6ae7f2b717255",
+      "verify-9fdf122d0e14434f83c3a3c33fb4750c",
+      "verify-dfd4c4f6dcb840399fe8ea19a875dd43"
+    ],
+    "card_projection": "sha256:c2428775294751c0f9f5d09ee7bddb9111caec1a3cac6c333caaf90daa566a25",
+    "result_hash": "sha256:7e66cbbeb0159db850fa9ea76acd2867c83e4305845b53d87152b72e4023acfc",
+    "coverage": {
+      "checks": {
+        "a": "passed"
+      },
+      "satisfied": true
+    },
+    "evidence_hashes": {
+      "verify-0a3663d03fd44e2cb5288d8d7a3343e8": "sha256:11a671409506bb562479f470e9dfdaec79460351d4ed3850973c4f25a5eed6d6",
+      "verify-27fce9caaf4f403ea5c9754bee5205fa": "sha256:c0f11fd7fff2a424ad37328cea9c3fc6c44ba919408294379dae869b48e4d440",
+      "verify-35f886b49cab47d1829c5afe43a0833d": "sha256:ce4b7e775918a0fa157cdc2a2410e5330215a82f010d7a2fa435237b5a98cfe9",
+      "verify-39671c2a86b245fcb9615cdec9e19390": "sha256:a381d5cb3d58b5e8c5cea0cbfa0fa23a309b5da1ae97db5834d9431e7dfa2c25",
+      "verify-3beed64c6ecc41ab80ba1522628cc763": "sha256:329731389915c666df202e0a048dad2463ba257f493bf90ec954f2b1ce9c83d0",
+      "verify-6989d28b214a49d190fa5f2af0064af8": "sha256:c0cee2f62eeb544fe6bb9cd191f72de01defe34239a1b91dacac25b99608cb38",
+      "verify-9333626e901640839cc6ae7f2b717255": "sha256:9fa8f72f538f9f9bfb72695c48261f153a79378639c1a61e78f3c9e663a0df05",
+      "verify-9fdf122d0e14434f83c3a3c33fb4750c": "sha256:608a04542174289e5ff6e9a8f04f93de88f3ff6a6d1bdf3cc573c835d39958ce",
+      "verify-dfd4c4f6dcb840399fe8ea19a875dd43": "sha256:016b2285433c4b0b612bfcdf8d855730c31430d22fe92617a3c1d3a1b9f9fbe8",
+      "workflow-baseline": "sha256:6da03ebc83d35a0b27b205b73e8cf22394d6ab38bc51bce5580550eeb0a12780"
+    }
+  },
+  "acceptance": {
+    "at": "2026-11-06T13:48:07+03:00",
+    "actor": {
+      "name": "Fixture engineer",
+      "model": "Synthetic model"
+    },
+    "role": "engineer",
+    "kind": "acceptance",
+    "result": "accepted",
+    "handoff_at": "2026-11-06T13:48:05+03:00",
+    "session": null,
+    "detail": "Synthetic explicit final version acceptance",
+    "result_hash": "sha256:7e66cbbeb0159db850fa9ea76acd2867c83e4305845b53d87152b72e4023acfc"
+  }
+}
+```
+<!-- playbook-meta:end -->
+
+## Цель и границы
+Проверить изолированный пример.
+
+## Приёмка
+- [ ] Актуальный результат принят.

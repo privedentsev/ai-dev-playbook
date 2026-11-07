@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "playbook_version": "0.1.0",
+  "playbook_version": "0.2.0",
   "name": "ai-dev-playbook",
   "setup_status": "configured",
   "paths": {
@@ -64,6 +64,31 @@
     ],
     "checks": [
       {
+        "id": "self-check",
+        "argv": [
+          "python3",
+          "ai-dev-playbook/scripts/playbook.py",
+          "check",
+          "--ready"
+        ],
+        "timeout_seconds": 60
+      },
+      {
+        "id": "preflight-regressions",
+        "argv": [
+          "python3",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "tests",
+          "-p",
+          "test_verification_smoke.py",
+          "-v"
+        ],
+        "timeout_seconds": 120
+      },
+      {
         "id": "unit-tests",
         "argv": [
           "python3",
@@ -74,17 +99,7 @@
           "tests",
           "-v"
         ],
-        "timeout_seconds": 600
-      },
-      {
-        "id": "self-check",
-        "argv": [
-          "python3",
-          "ai-dev-playbook/scripts/playbook.py",
-          "check",
-          "--ready"
-        ],
-        "timeout_seconds": 60
+        "timeout_seconds": 1800
       }
     ]
   },

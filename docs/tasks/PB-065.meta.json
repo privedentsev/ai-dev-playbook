@@ -1,0 +1,75 @@
+{
+  "schema_version": 1,
+  "card_format_version": 2,
+  "relations": [
+    {
+      "relation": "based_on",
+      "target": "spec:block-acceptance"
+    },
+    {
+      "relation": "based_on",
+      "target": "design:block-acceptance"
+    },
+    {
+      "relation": "based_on",
+      "target": "plan:block-acceptance"
+    }
+  ],
+  "materials": [
+    {
+      "id": "evidence-commands",
+      "role": "report",
+      "source": "docs/tasks/PB-065-evidence/commands.md",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-065"
+      ]
+    },
+    {
+      "id": "verify-19dc9f231b7a44ef95c2ddc7183befc9",
+      "role": "report",
+      "source": "work/verification/PB-065/19dc9f231b7a44ef95c2ddc7183befc9",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-065"
+      ]
+    },
+    {
+      "id": "verify-6e07d4401b454e5aad7c1b25948945d9",
+      "role": "report",
+      "source": "work/verification/PB-065/6e07d4401b454e5aad7c1b25948945d9",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-065"
+      ]
+    }
+  ],
+  "criterion_evidence": {
+    "CHECK-01": {
+      "check_sha256": "sha256:cfa083a3457c9d089176b3d121e64ac4cde0d9790bc99e458253a7fdb0fd91f1",
+      "card_projection": "sha256:3f375cfb522dc8854e097693b031439f74439551e01124abff24eeae7e8f1cee",
+      "report_id": "verify-19dc9f231b7a44ef95c2ddc7183befc9",
+      "report_sha256": "sha256:5c0bb773e01477b085a1fb1b015c94c4f965cf244aedf0cb54ffbfaf9147b2d7"
+    }
+  },
+  "handoff": {
+    "at": "2026-11-07T10:54:07+03:00",
+    "actor": {
+      "name": "Devin",
+      "model": "SWE-2 High"
+    },
+    "summary": "HANDOFF-01",
+    "reports": [
+      "verify-19dc9f231b7a44ef95c2ddc7183befc9"
+    ],
+    "card_projection": "sha256:3f375cfb522dc8854e097693b031439f74439551e01124abff24eeae7e8f1cee",
+    "entry_id": "HANDOFF-01",
+    "journal_sha256": "sha256:2f11000a38a5f0f615f279952542ead096f103b332dc538bb01abb2c767a4be9"
+  }
+}

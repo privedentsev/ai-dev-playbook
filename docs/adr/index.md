@@ -8,6 +8,8 @@
 | [ADR-0003: Проверки под задачу и раздельные снимки свежести](0003-task-scoped-verification.md) | accepted | 2026-10-23 |
 | [ADR-0004: Служебные метаданные задачи в соседнем JSON](0004-external-task-metadata.md) | draft | 2026-10-25 |
 | [ADR-0005: Подготовка затрагиваемых файлов на диске и ограниченная история](0005-scoped-file-operations.md) | draft | 2026-10-26 |
+| [ADR-0006: Проверки по зависимостям и отдельная граница доверия](0006-dependency-aware-verification.md) | draft | 2026-11-07 |
+| [ADR-0007: Проверенная передача и совместная приёмка блока](0007-block-acceptance.md) | draft | 2026-11-07 |
 | [ADR-0001: Метаданные принадлежат документу, индексы вычисляются](0001-document-owned-metadata.md) | legacy | — |
 | [ADR-0002: Завершение работы — проверяемая операция с восстановлением](0002-recoverable-lifecycle-operations.md) | legacy | — |
 

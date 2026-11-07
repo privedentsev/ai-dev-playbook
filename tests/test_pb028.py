@@ -223,8 +223,16 @@ class Pb028CompatibilityAndUpdateTest(CliCase):
 
         before_tree = tree_snapshot(self.root)
 
-        # 3. Планируем обновление на текущей версии (из REPO) через собственный установленный CLI 0.0.2
+        # 3. Старый CLI отклоняет updates schema 2 до записи; bootstrap
+        # выполняет CLI целевого локального артефакта (PB-036).
         res = subprocess.run([sys.executable, str(inst_cli_002), "--root", str(self.root),
+                              "update", "plan", str(REPO), "--save"],
+                             capture_output=True, text=True)
+        self.assertNotEqual(res.returncode, 0, res.stderr + res.stdout)
+        self.assertIn("неподдерживаемая схема", res.stderr)
+        self.assertEqual(tree_snapshot(self.root), before_tree)
+        target_cli = REPO / "ai-dev-playbook/scripts/playbook.py"
+        res = subprocess.run([sys.executable, str(target_cli), "--root", str(self.root),
                               "update", "plan", str(REPO), "--save"],
                              capture_output=True, text=True)
         self.assertEqual(res.returncode, 0, res.stderr + res.stdout)
@@ -234,8 +242,8 @@ class Pb028CompatibilityAndUpdateTest(CliCase):
         self.assertIn("+ ai-dev-playbook/scripts/lifecycle.py", out)
         self.assertIn("+ ai-dev-playbook/templates/documents/spec.md", out)
 
-        # 4. Применяем обновление через собственный установленный CLI 0.0.2
-        res = subprocess.run([sys.executable, str(inst_cli_002), "--root", str(self.root),
+        # 4. Применяем обновление CLI целевого артефакта.
+        res = subprocess.run([sys.executable, str(target_cli), "--root", str(self.root),
                               "update", "apply"],
                              capture_output=True, text=True)
         self.assertEqual(res.returncode, 0, res.stderr + res.stdout)

@@ -1,0 +1,136 @@
+# DEV-1: test
+
+ID: DEV-1
+Status: in_review
+Priority: P2
+Depends-On: -
+Executor: Fixture executor
+Model: Synthetic model
+Created: 2026-01-01T00:00:00Z
+Closed: -
+
+<!-- playbook-meta:start -->
+```json
+{
+  "schema_version": 2,
+  "workflow": {
+    "route": "quick",
+    "reason": "Local low risk fixture",
+    "history": [],
+    "baseline": {
+      "source": "docs/tasks/DEV-1-evidence/baseline.json",
+      "sha256": "sha256:b9a1759114638bd72a1dbe85217358902f6861317bf0c6df9590018df01a0273"
+    },
+    "transitions": [
+      {
+        "at": "2026-11-06T13:49:23+03:00",
+        "action": "start",
+        "reason": "Synthetic engineer instruction",
+        "actor": "Fixture executor"
+      }
+    ]
+  },
+  "verification_plan": {
+    "revision": 1,
+    "rationale": "Independent explicit files",
+    "scope": [
+      "src"
+    ],
+    "checks": [
+      {
+        "id": "a",
+        "kind": "command",
+        "purpose": "Auditor probe a",
+        "registry_id": "a",
+        "inputs": [
+          "src/a.txt"
+        ]
+      }
+    ],
+    "decisions": []
+  },
+  "relations": [],
+  "materials": [
+    {
+      "id": "workflow-baseline",
+      "role": "report",
+      "source": "docs/tasks/DEV-1-evidence/baseline.json",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "DEV-1"
+      ]
+    },
+    {
+      "id": "verify-cf8f02014a794db8b4d8ccf68034955e",
+      "role": "report",
+      "source": "work/verification/DEV-1/cf8f02014a794db8b4d8ccf68034955e",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "DEV-1"
+      ]
+    },
+    {
+      "id": "verify-d877b296e51647e295e26911c0a3ec95",
+      "role": "report",
+      "source": "work/verification/DEV-1/d877b296e51647e295e26911c0a3ec95",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "DEV-1"
+      ]
+    }
+  ],
+  "moves": [],
+  "handoff": {
+    "at": "2026-11-06T13:49:26+03:00",
+    "actor": {
+      "name": "Fixture executor",
+      "model": "Synthetic model"
+    },
+    "summary": "Auditor synthetic fixture",
+    "reports": [
+      "verify-cf8f02014a794db8b4d8ccf68034955e",
+      "verify-d877b296e51647e295e26911c0a3ec95"
+    ],
+    "card_projection": "sha256:c2428775294751c0f9f5d09ee7bddb9111caec1a3cac6c333caaf90daa566a25",
+    "result_hash": "sha256:00492512671f4f5b096ae69f2b306f932fe97a6d687e5e1899357483783cea92",
+    "coverage": {
+      "checks": {
+        "a": "passed"
+      },
+      "satisfied": true
+    },
+    "evidence_hashes": {
+      "verify-cf8f02014a794db8b4d8ccf68034955e": "sha256:1c80c6012043fd9ecd218e12bf6fa379e7a25d88599b1c88e526f291ad8842f6",
+      "verify-d877b296e51647e295e26911c0a3ec95": "sha256:946522fbd9243343549bc65583eaac2cb137f734b9d30bdd488100de893127bc",
+      "workflow-baseline": "sha256:d2036792b514dcb5e95584bba377482f432e96bfa2acdf14e7adefaf2ea41238"
+    }
+  },
+  "acceptance": {
+    "at": "2026-11-06T13:49:28+03:00",
+    "actor": {
+      "name": "Fixture engineer",
+      "model": "Synthetic model"
+    },
+    "role": "engineer",
+    "kind": "acceptance",
+    "result": "accepted",
+    "handoff_at": "2026-11-06T13:49:26+03:00",
+    "session": null,
+    "detail": "Synthetic explicit final version acceptance",
+    "result_hash": "sha256:00492512671f4f5b096ae69f2b306f932fe97a6d687e5e1899357483783cea92"
+  }
+}
+```
+<!-- playbook-meta:end -->
+
+## Цель и границы
+Проверить изолированный пример.
+
+## Приёмка
+- [ ] Актуальный результат принят.

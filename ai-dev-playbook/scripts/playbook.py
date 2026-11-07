@@ -23,6 +23,8 @@ import lifecycle
 import updating
 import verification
 import task_cards
+import project_view
+import block_workflow
 
 
 CORE = "ai-dev-playbook"
@@ -82,7 +84,11 @@ def read_json(path):
 
 def config(root):
     data = read_json(safe_path(root, f"{CORE}/project.json"))
-    require(data.get("schema_version") == 1, "Неподдерживаемая схема project.json")
+    require(data.get("schema_version") in {1, 2}, "Неподдерживаемая схема project.json")
+    if data["schema_version"] == 2:
+        require(isinstance(data.get("task_workflow"), dict)
+                and data["task_workflow"].get("schema_version") == 2,
+                "project.json schema 2 требует task_workflow v2")
     require(isinstance(data.get("name"), str) and data["name"].strip(), "Нет имени проекта")
     require(data.get("setup_status") in {"needs_review", "configured"}, "Некорректный setup_status")
     require(data.get("playbook_version") == safe_path(root, f"{CORE}/VERSION").read_text().strip(),
@@ -277,7 +283,7 @@ def render_index(records, index_dir=None):
     def link(task):
         if index_dir is None:
             return task["path"].name
-        return Path(os.path.relpath(task["path"], index_dir)).as_posix()
+        return Path(os.path.relpath(str(task["path"]), str(index_dir))).as_posix()
 
     def cell(raw, parsed):
         if parsed is not None:
@@ -373,7 +379,8 @@ def retarget_links(root, paths, old_path, new_path):
 
 
 def _rel(root, path):
-    return path.relative_to(root).as_posix()
+    base = root if hasattr(path, "view") else file_operations.scoped_operations.physical_root(root)
+    return path.relative_to(base).as_posix()
 
 
 def _actor():
@@ -659,7 +666,9 @@ def document_register(root, catalog, target_rel, metadata_arg, apply, gate):
             + (": " + "; ".join(errors) if errors else ""))
     meta = _metadata_arg(root, metadata_arg)
     errors = []
-    entry = documents._validate_document(meta, target, kind, in_archive, errors)
+    entry = documents._validate_document(meta, target, kind, in_archive,
+                                         errors,
+                                         capabilities=catalog["capabilities"])
     require(not errors, "\n".join(errors))
     doc_id = entry["id"]
     _unique_document(catalog, doc_id)
@@ -788,7 +797,7 @@ def close_command(root, args, gate):
         require(not args.dry_run,
                 "--dry-run доступен при настроенном разделе documents "
                 "project.json")
-        return close_task(root, args.task_id, args.status)
+        return close_task(file_operations.scoped_operations.physical_root(root), args.task_id, args.status)
     action = {"action": "close_task", "task": args.task_id,
               "outcome": args.status}
     if args.status == "cancelled":
@@ -851,7 +860,7 @@ def check_links(root, paths, catalog=None):
     require(not errors, "\n".join(errors))
 
 
-def check(root, ready):
+def check(root, ready, skip_criteria=()):
     data, paths = config(root)
     resources(root)
     records = read_tasks(root, paths)
@@ -865,7 +874,7 @@ def check(root, ready):
     check_links(root, paths, catalog)
     for ident, rec in records.items():
         text = documents.read_text(rec["path"])
-        if task_cards.version(text) == 2:
+        if ident not in skip_criteria and task_cards.version(text) == 2:
             parsed = task_cards.parse(text)
             if any(v is not None for v in parsed["criterion_markers"].values()):
                 _, mismatches = lifecycle.criterion_view(root, ident, str(rec["path"].relative_to(root)),
@@ -899,7 +908,118 @@ def check(root, ready):
           "Поведение продукта не проверялось.")
 
 
-def install(source, target, apply):
+def workflow_settings(root, data, validate_inputs=True):
+    """Conservative explicit opt-in; legacy settings remain the source of truth."""
+    require("task_workflow" not in data, "task_workflow уже настроен; автоматическая перезапись запрещена")
+    require("verification" in data,
+            "Сначала настройте verification.inputs/checks; команды commands автоматически не мигрируются")
+    legacy = (verification.validate(root, data["verification"], safe_path, require)
+              if validate_inputs else data["verification"])
+    registry = [{"id": item["id"], "kind": "command",
+                 "purpose": "Обязательная проверка из legacy verification",
+                 "argv": list(item["argv"]), "timeout_seconds": item["timeout_seconds"],
+                 "default_inputs": list(legacy["inputs"]), "applicability": "always"}
+                for item in legacy["checks"]]
+    settings = {"schema_version": 2, "registry": registry,
+                "checkpoints": {"merge": [item["id"] for item in registry],
+                                "release": [item["id"] for item in registry]}}
+    verification.validate_task_workflow(root, settings, safe_path, require)
+    return settings
+
+
+def workflow_enable(root, args, gate):
+    data, _ = config(root)
+    version = safe_path(root, CORE + "/VERSION").read_text(encoding="utf-8").strip()
+    require(updating.parse_version(version, require) >= (0, 2, 0),
+            "Сначала обновите установленный комплект до 0.2.0 или новее")
+    data["task_workflow"] = workflow_settings(root, data)
+    data["schema_version"] = 2  # Older CLI must refuse before interpreting v2.
+    rel = CORE + "/project.json"
+    writes = {rel: (json.dumps(data, ensure_ascii=False, indent=2) + "\n").encode("utf-8")}
+    if not args.apply:
+        print(_preview(root, writes))
+        return
+    spec = _write_spec(root, "workflow-enable-v2", "workflow-v2", writes,
+                       [lambda staged: config(staged)])
+    spec["basis"] = "Явное подключение workflow v2; legacy-команды сохранены как always"
+    spec["inputs"].update(file_operations.snapshot_paths(
+        root, [CORE + "/VERSION", CORE + "/resources.json", updating.MANIFEST_PATH],
+        safe_path, require))
+    result = _run_operation(root, spec, gate)
+    print(f"Workflow v2 подключён; карточки и отчёты сохранены. Операция: {result['op_dir']}")
+
+
+def workflow_migrate_card(root, args, gate):
+    data, paths = config(root)
+    require(data.get("task_workflow", {}).get("schema_version") == 2,
+            "Сначала явно подключите task_workflow v2")
+    require(args.actor.strip() and args.model.strip() and MODEL_UNCONFIRMED not in args.model
+            and not any(c in args.actor + args.model for c in "\r\n")
+            and args.reason.strip(), "Нужны точные actor/model и причина перехода")
+    records = read_tasks(root, paths)
+    rec, rel, text, meta = lifecycle._managed_card(root, records, args.task_id, safe_path, require)
+    require(not rec.get("archived") and rec["status"] in {"draft", "ready", "in_progress", "in_review"},
+            "Перевод допускается только для активной незакрытой карточки")
+    require(meta.get("schema_version") == 1, "Перевод требует metadata v1; v2 не перезаписывается")
+    plan_rel = _rel(root, safe_path(root, args.verification_plan))
+    plan = read_json(safe_path(root, plan_rel))
+    at = updating.now_iso()
+    original = (json.dumps({"markdown": safe_path(root, rel).read_text(encoding="utf-8"),
+                            "metadata": meta}, ensure_ascii=False, indent=2) + "\n").encode("utf-8")
+    source = _rel(root, paths["tasks"] / (args.task_id + "-evidence/workflow-v1.json"))
+    require(not safe_path(root, source).exists(), "История миграции уже существует")
+    event = {"at": at, "action": "revise", "reason": args.reason,
+             "actor": f"{args.actor} / {args.model}"}
+    for key in ("handoff", "acceptance"):
+        if key in meta:
+            event[key] = meta.pop(key)
+    meta.pop("criterion_evidence", None)
+    meta["schema_version"] = 2
+    meta["workflow"] = {"route": args.route, "reason": args.reason,
+        "history": [{"at": at, "to_route": args.route, "reason": args.reason, "actor": event["actor"]}],
+        "transitions": [event]}
+    meta["verification_plan"] = plan
+    meta.setdefault("materials", []).append({"id": "workflow-v1", "role": "report",
+        "source": source, "storage": "local", "required": True, "immutable": True,
+        "used_by": [args.task_id]})
+    # The original bytes preserve status, protocol and metadata; new start is
+    # required to capture a trustworthy baseline for this explicitly new plan.
+    text = re.sub(r"^Status:.*$", "Status: ready", text, flags=re.M)
+    if task_cards.version(text) == 2:
+        text = task_cards.render_checkboxes(text, {
+            ident: {"checked": False} for _, ident, _ in task_cards.criterion_lines(text)})
+    else:
+        text = re.sub(r"(^## Приёмка\s*\n)(.*?)(?=^## |\Z)",
+                      lambda m: m[1] + re.sub(r"^- \[x\]", "- [ ]", m[2], flags=re.M),
+                      text, flags=re.M | re.S)
+    merged = lifecycle._splice_meta(text, meta)
+    errors = []
+    documents._validate_task_meta(meta, rel, errors,
+        registry={r["id"]: r for r in data["task_workflow"]["registry"]},
+        task_workflow_enabled=True, root=root, safe_path=safe_path)
+    require(not errors, "\n".join(errors))
+    required = verification.verification_policy.required_checks(
+        data["task_workflow"], plan, baseline=None, current=None)
+    require(required["ready"], "\n".join(required["errors"]))
+    projected = dict(records)
+    projected[args.task_id] = dict(rec, status="ready", route=args.route)
+    index_rel = _rel(root, paths["task_index"])
+    writes = documents.split_card_writes({rel: merged.encode("utf-8")})
+    writes.update({source: original, index_rel: render_index(projected, paths["task_index"].parent).encode("utf-8")})
+    if not args.apply:
+        print(_preview(root, writes))
+        return
+    checks = [lambda staged: _catalog_consistency(staged, "workflow migrate-card", set()),
+              lambda staged: _task_index_fresh(staged, "workflow migrate-card")]
+    spec = _write_spec(root, "workflow-migrate-card", "migrate-" + args.task_id, writes, checks)
+    spec["actor"] = event["actor"]
+    spec["basis"] = args.reason
+    spec["inputs"].update(file_operations.snapshot_paths(root, [plan_rel, CORE + "/project.json"], safe_path, require))
+    _run_operation(root, spec, gate)
+    print(f"{args.task_id}: metadata v2, ready; история сохранена. Выполните lifecycle start и новые проверки.")
+
+
+def install(source, target, apply, workflow_v2=False):
     require(not target.is_symlink(), "Каталог назначения — символическая ссылка")
     target = target.resolve()
     cur = target
@@ -917,6 +1037,13 @@ def install(source, target, apply):
     planned = dict(managed)
     project_template = json.loads((base / "templates" / "project.json").read_text(encoding="utf-8"))
     project_template["playbook_version"] = version_text
+    if workflow_v2:
+        require(version >= (0, 2, 0), "init --workflow-v2 требует комплект 0.2.0 или новее")
+        defaults = json.loads((base / "templates" / "verification.json").read_text(encoding="utf-8"))
+        project_template["verification"] = defaults
+        # Bundled init inputs are created below; artifacts need not contain docs.
+        project_template["task_workflow"] = workflow_settings(target, project_template, validate_inputs=False)
+        project_template["schema_version"] = 2
     planned[f"{CORE}/project.json"] = \
         (json.dumps(project_template, ensure_ascii=False, indent=2) + "\n").encode("utf-8")
     resources_template = json.loads((base / "templates" / "resources.json").read_text(encoding="utf-8"))
@@ -1029,19 +1156,24 @@ def command_gate(root, args):
     action = getattr(args, "action", None)
     mutating = (
         args.command == "index"
+        or (args.command == "workflow" and args.apply)
         or (args.command == "card" and action in {"sync", "create"} and args.apply)
         or (args.command == "close" and not args.dry_run)
         or (args.command == "document"
             and action in {"create", "register"} and args.apply)
-        or (args.command == "verify" and not args.dry_run and not args.preflight)
+        or (args.command == "verify" and not args.dry_run and not args.preflight and not args.audit_ready)
         or (args.command == "adopt" and args.apply)
         or (args.command == "update"
             and (action in {"apply", "restore"}
                  or (action == "plan" and getattr(args, "save", False))))
         or (args.command == "lifecycle"
-            and (action in {"apply", "restore", "handoff", "accept"}
+            and (action in {"apply", "restore", "handoff", "accept", "start", "route", "revise"}
                  or (action in {"register-material", "prepare-audit"} and args.apply)
-                 or (action == "plan" and getattr(args, "save", False)))))
+                 or (action == "plan" and getattr(args, "save", False))))
+        or (args.command == "policy" and action == "apply")
+        or (args.command == "block"
+            and action in {"create-fix", "accept", "close"}
+            and getattr(args, "apply", False)))
     if not mutating:
         return None
     allowed = ()
@@ -1052,6 +1184,265 @@ def command_gate(root, args):
     owner = args.command + (f" {action}" if action else "")
     return file_operations.acquire_gate(root, safe_path, require,
                                         owner=owner, allowed_pending=allowed)
+
+
+def _catalog_policies(catalog):
+    """{document_id: entry} планов с полем acceptance_policy."""
+    return {ident: {"policy": entry["acceptance_policy"],
+                    "path": str(entry["path"].relative_to(catalog["root"])),
+                    "archived": entry["archived"], "entry": entry}
+            for ident, entry in catalog["documents"].items()
+            if entry.get("has_policy")}
+
+
+def _policy_command(root, args, gate):
+    """policy preview/apply: проверка и запись acceptance_policy плана.
+
+    Политика — единственный источник порядка приёмки блока; команда лишь
+    валидирует payload и записывает его в метаданные plan-документа
+    штатной восстанавливаемой операцией. Никаких статусов задач она
+    не копирует и выполнение не разрешает.
+    """
+    data, paths = config(root)
+    records = read_tasks(root, paths)
+    catalog = documents.load_catalog(root, data, paths, records,
+                                     safe_path, require)
+    require(catalog is not None, "Раздел documents не настроен в project.json")
+    require(block_workflow.CAPABILITY in catalog["capabilities"],
+            f"Политика блока требует явной capability "
+            f"'{block_workflow.CAPABILITY}' в project.json → "
+            "documents.capabilities")
+    entry = catalog["documents"].get(args.document_id)
+    require(entry is not None and entry["kind"] == "plan",
+            f"{args.document_id}: политика записывается только "
+            "в документ kind 'plan'")
+    require(not entry["archived"],
+            f"{args.document_id}: политика архивированного плана "
+            "не изменяется")
+    payload = _metadata_arg(root, args.policy)
+    label = f"policy {args.document_id}"
+    errors = []
+    block_workflow.validate_policy(payload, label, errors)
+    require(not errors, "\n".join(errors))
+    rel = _rel(root, entry["path"])
+    text = documents.read_text(entry["path"])
+    meta = documents.parse_meta(text, rel, [])
+    existing = meta.get("acceptance_policy")
+    if existing is not None:
+        errors = []
+        block_workflow.validate_policy(existing, label, errors)
+        require(not errors, "\n".join(errors))
+        require(payload.get("policy_id") == existing.get("policy_id"),
+                "policy_id неизменяем — новая политика оформляется "
+                "отдельным документом")
+        if payload == existing:
+            print(f"{args.document_id}: такая политика уже записана.")
+            return
+        require(type(payload.get("revision")) is int
+                and payload["revision"] > existing.get("revision", 0),
+                "Изменение политики требует новой ревизии: "
+                f"{existing.get('revision')} → {payload.get('revision')}")
+    # Проекция ссылок: существующие refs получают новую revision, у новых
+    # members/final_audit создаётся минимальная ссылка — одна операция
+    # поддерживает инвариант «политика ↔ ссылки карточек». Ссылка на эту
+    # политику вне её состава (кроме fix) отклоняется, не затирается.
+    policies = _catalog_policies(catalog)
+    projected = dict(policies)
+    projected[args.document_id] = {"policy": payload, "path": rel,
+                                   "archived": False}
+    new_revision = payload["revision"]
+    ref_writes, projected_blocks = {}, {}
+    for ident, tmeta in catalog["task_meta"].items():
+        if tmeta is None or not tmeta.get("has_block"):
+            continue
+        ref = tmeta["block"]
+        if ref is not None and ref.get("document") == args.document_id:
+            ref = {**ref, "policy_id": payload["policy_id"],
+                   "revision": new_revision}
+            ref_writes[ident] = ref
+        projected_blocks[ident] = ref
+    for ident in projected_blocks:
+        ref = projected_blocks[ident]
+        if ref is None or ref.get("document") != args.document_id \
+                or ref.get("role") == "fix":
+            continue
+        require(ident in payload["members"]
+                or ident == payload["final_audit"],
+                f"{ident}: ссылается на политику, но не входит в её "
+                "состав — уберите ссылку или добавьте задачу в политику")
+    for ident in [*payload["members"],
+                  *([payload["final_audit"]] if payload["final_audit"]
+                    else [])]:
+        if ident in projected_blocks:
+            continue
+        rec = records.get(ident)
+        require(rec is not None and not rec["archived"],
+                f"{ident}: политика ссылается на отсутствующую "
+                "активную карточку")
+        ref = {"schema_version": block_workflow.CARD_BLOCK_VERSION,
+               "document": args.document_id,
+               "policy_id": payload["policy_id"], "revision": new_revision}
+        ref_writes[ident] = ref
+        projected_blocks[ident] = ref
+    graph_errors = []
+    block_workflow.validate_block_graph(projected, projected_blocks,
+                                        records, graph_errors)
+    require(not graph_errors, "\n".join(graph_errors))
+    meta = dict(meta)
+    meta["acceptance_policy"] = payload
+    meta["updated_at"] = file_operations.now_iso()
+    merged = lifecycle._splice_meta(text, meta)
+    require(merged is not None, f"{rel}: блок метаданных не найден")
+    writes = {rel: merged.encode("utf-8")}
+    for ident, ref in sorted(ref_writes.items()):
+        rec = records[ident]
+        card_rel = _rel(root, rec["path"])
+        card_text = documents.read_text(rec["path"])
+        card_meta = documents.parse_meta(card_text, card_rel, [])
+        require(card_meta is not None,
+                f"{card_rel}: карточка без метаданных — ссылка block "
+                "не записывается")
+        if card_meta.get("block") == ref:
+            continue
+        card_meta = dict(card_meta)
+        card_meta["block"] = ref
+        merged = lifecycle._splice_meta(card_text, card_meta)
+        require(merged is not None,
+                f"{card_rel}: блок метаданных не найден")
+        writes.update(documents.split_card_writes(
+            {card_rel: merged.encode("utf-8")}))
+    # Индекс коллекции — по проецированному каталогу (updated_at новой
+    # редакции уже вошёл в регион); файл без маркеров не трогаем.
+    index = catalog["collections"]["plan"]["index"]
+    if index.is_file() and not index.is_symlink():
+        projected_catalog = dict(catalog)
+        projected_docs = dict(catalog["documents"])
+        updated_entry = dict(projected_docs[args.document_id])
+        updated_entry["updated_at"] = meta["updated_at"]
+        projected_docs[args.document_id] = updated_entry
+        projected_catalog["documents"] = projected_docs
+        index_text = index.read_text(encoding="utf-8")
+        merged_index = documents.splice_index(
+            index_text, documents.index_region(projected_catalog, "plan"))
+        if merged_index is not None and merged_index != index_text:
+            writes[_rel(root, index)] = merged_index.encode("utf-8")
+    if args.action == "preview":
+        print(_preview(root, writes))
+        print("Политика проверена: граф согласован, противоречий нет.")
+        return
+    checks = [lambda staged: _catalog_consistency(staged, "staged", {"plan"})]
+    seed = "policy-" + re.sub(r"[^A-Za-z0-9_-]", "-", args.document_id)
+    spec = _write_spec(root, "policy apply", seed, writes, checks)
+    result = _run_operation(root, spec, gate)
+    print(f"{args.document_id}: политика записана "
+          f"(revision {payload['revision']}). Операция: {result['op_dir']}")
+
+
+def _handoff_evidence(catalog, records):
+    """Факты актуальных передач для evaluator: v2 — журнальная привязка."""
+    handoffs = {}
+    for ident, meta in catalog["task_meta"].items():
+        if meta is None:
+            continue
+        record = meta.get("handoff")
+        if record is None:
+            continue
+        current = records[ident]["status"] == "in_review"
+        if current:
+            text = documents.read_text(records[ident]["path"])
+            try:
+                task_cards.receipt(text, meta)
+            except ValueError:
+                current = False
+        handoffs[ident] = {"current": current,
+                           "id": record.get("entry_id")
+                           or record.get("at")}
+    return handoffs
+
+
+def _block_status_command(root, args):
+    """block status: read-only диагностика общего evaluator."""
+    data, paths = config(root)
+    records = read_tasks(root, paths)
+    catalog = documents.load_catalog(root, data, paths, records,
+                                     safe_path, require)
+    require(catalog is not None, "Раздел documents не настроен в project.json")
+    policies = _catalog_policies(catalog)
+    require(policies, "Ни один план не содержит acceptance_policy")
+    target = args.id
+    if target in policies:
+        doc_id = target
+    else:
+        meta = (catalog["task_meta"].get(target) or {})
+        ref = meta.get("block")
+        require(meta and ref is not None,
+                f"{target}: нет ни политики, ни карточки со ссылкой block")
+        doc_id = ref.get("document")
+        require(doc_id in policies, f"{target}: политика '{doc_id}' "
+                "не найдена")
+    entry = policies[doc_id]
+    policy = entry["policy"]
+    require(policy is not None,
+            f"{doc_id}: политика не проходит структурную проверку — "
+            "см. check")
+    evidence = {"handoffs": _handoff_evidence(catalog, records)}
+    blocks = {ident: meta["block"]
+              for ident, meta in catalog["task_meta"].items()
+              if meta is not None and meta.get("has_block")}
+    tasks_view = {ident: {"status": rec["status"], "deps": rec["deps"],
+                          "archived": rec["archived"]}
+                  for ident, rec in records.items()}
+    status = block_workflow.block_status(policy, tasks_view, evidence)
+    members = [t for t in policy["members"]
+               + ([policy["final_audit"]] if policy["final_audit"] else [])
+               if t in records]
+    fixes = sorted(t for t, ref in blocks.items()
+                   if ref and ref.get("document") == doc_id
+                   and ref.get("role") == "fix" and t in records)
+    report = {"policy": {"document": doc_id,
+                         "policy_id": policy["policy_id"],
+                         "revision": policy["revision"],
+                         "mode": policy["mode"],
+                         "archived": entry["archived"]},
+              "block": status, "tasks": {}}
+    for ident in members + fixes:
+        rec = records[ident]
+        task = {"id": ident, "status": rec["status"], "deps": rec["deps"],
+                "block": blocks.get(ident)}
+        readiness = {}
+        for operation in ("check", "audit_ready", "accept", "close"):
+            verdict = block_workflow.evaluate(
+                operation, task, policy, tasks_view, evidence)
+            readiness[operation] = {
+                "allowed": verdict["allowed"],
+                "reason_codes": verdict["reason_codes"]}
+        report["tasks"][ident] = {"status": rec["status"],
+                                  "archived": rec["archived"],
+                                  "readiness": readiness}
+    if args.json:
+        print(json.dumps(report, ensure_ascii=False, indent=2))
+        return
+    print(f"{doc_id}: политика '{policy['policy_id']}' "
+          f"revision {policy['revision']}, mode={policy['mode']}"
+          + (" (архивирована)" if entry["archived"] else ""))
+    print(f"Статус блока: {status['status']} — {status['next']}")
+    if status["findings_open"]:
+        print(f"Открытые находки: {', '.join(status['findings_open'])}")
+    for ident in members + fixes:
+        item = report["tasks"][ident]
+        parts = []
+        for operation, verdict in item["readiness"].items():
+            mark = "+" if verdict["allowed"] else "-"
+            reasons = (f" ({', '.join(verdict['reason_codes'])})"
+                       if verdict["reason_codes"] else "")
+            parts.append(f"{operation}{mark}{reasons}")
+        print(f"  {ident} [{item['status']}]: " + "; ".join(parts))
+
+
+def _block_deferred(action, owner):
+    require(False, f"Команда 'block {action}' зафиксирована контрактом "
+            f"PB-065; операция реализуется {owner}. "
+            "Синтаксис и форматы уже действуют.")
 
 
 def card_create(root, args, gate):
@@ -1067,13 +1458,28 @@ def card_create(root, args, gate):
     for target in (path, sidecar):
         safe_path(root, str(target.relative_to(root)))
         require(not target.exists(), f'Назначение занято: {target}')
-    template = Path(__file__).parents[1] / 'templates/task.md'
+    quick = args.template == 'quick'
+    require(quick or (args.reason is None and args.verification_plan is None),
+            '--reason и --verification-plan применяются только к --template quick')
+    if quick:
+        require(data.get('task_workflow', {}).get('schema_version') == 2,
+                'quick требует явно включённый task_workflow.schema_version: 2; legacy не мигрируется')
+        require(args.reason and args.reason.strip(), 'quick требует --reason с обоснованием низкого риска')
+        require(args.verification_plan, 'quick требует --verification-plan <JSON> с конкретными проверками')
+    template = Path(__file__).parents[1] / ('templates/task-quick.md' if quick else 'templates/task.md')
     text = template.read_text(encoding="utf-8")
     text = text.replace('# TASK-001: Краткое название', f'# {args.task_id}: {args.title}', 1)
     text = text.replace('ID: TASK-001', f'ID: {args.task_id}', 1)
     text = text.replace('Created: -', 'Created: ' + dt.datetime.now().astimezone().isoformat(timespec='seconds'), 1)
     raw_meta = documents.meta_path(template).read_text(encoding='utf-8')
-    text = documents.hydrate_card(text, json.loads(raw_meta, object_pairs_hook=documents._unique_pairs))
+    meta = json.loads(raw_meta, object_pairs_hook=documents._unique_pairs)
+    if quick:
+        plan_path = safe_path(root, args.verification_plan)
+        require(plan_path.is_file(), 'Файл verification-plan не найден')
+        meta['workflow']['reason'] = args.reason.strip()
+        meta['verification_plan'] = json.loads(plan_path.read_text(encoding='utf-8'),
+                                               object_pairs_hook=documents._unique_pairs)
+    text = documents.hydrate_card(text, meta)
     rel = str(path.relative_to(root))
     task_cards.parse(text, rel)
     writes = documents.split_card_writes({rel: text.encode('utf-8')})
@@ -1081,7 +1487,7 @@ def card_create(root, args, gate):
     projected[args.task_id] = dict(id=args.task_id, title=f'{args.task_id}: {args.title}', status='draft',
         priority='P2', deps=[], executor=None, model=None, created=re.search(r'(?m)^Created: (.+)$', text)[1],
         closed='-', created_ts=dt.datetime.fromisoformat(re.search(r'(?m)^Created: (.+)$', text)[1]),
-        closed_ts=None, path=path, archived=False, route=None)
+        closed_ts=None, path=path, archived=False, route='quick' if quick else None)
     writes[str(paths['task_index'].relative_to(root))] = render_index(projected, paths['task_index'].parent).encode('utf-8')
     if not args.apply:
         print(_preview(root, writes))
@@ -1094,6 +1500,15 @@ def card_create(root, args, gate):
 
 
 def dispatch(root, args, gate):
+    tracked = (args.command in {"index", "close"}
+               or args.command == "workflow"
+               or (args.command == "card" and args.action in {"create", "sync"})
+               or (args.command == "document" and args.action in {"create", "register"})
+               or args.command == "policy"
+               or (args.command == "block" and args.action != "status")
+               or (args.command == "lifecycle" and args.action not in {"status", "restore"}))
+    if tracked:
+        root = project_view.ProjectView(root).path
     """Выполнить команду; gate — удерживаемая общая блокировка либо None."""
     if args.command == "card" and args.action == "create":
         card_create(root, args, gate)
@@ -1102,7 +1517,12 @@ def dispatch(root, args, gate):
         lifecycle.sync_criteria_command(root, args.task_id, args.apply, _lifecycle_ctx(gate), safe_path, require)
         return 0
     if args.command == "init":
-        install(Path(__file__).resolve().parents[2], args.target, args.apply)
+        install(Path(__file__).resolve().parents[2], args.target, args.apply, args.workflow_v2)
+    elif args.command == "workflow":
+        if args.action == "enable-v2":
+            workflow_enable(root, args, gate)
+        else:
+            workflow_migrate_card(root, args, gate)
     elif args.command == "check":
         check(root, args.ready)
     elif args.command == "card":
@@ -1180,15 +1600,84 @@ def dispatch(root, args, gate):
         task = records[args.task_id]
         require(not task["archived"] and task["status"] in {"ready", "in_progress", "in_review"},
                 "verify требует активную задачу ready/in_progress/in_review")
+
+        task_content = documents.read_text(task["path"])
+        task_meta = task_cards.metadata(task_content) or {}
+        is_v2 = verification.is_v2_task(task_content, task_meta)
+
+        task_index_path = paths["task_index"]
+        expected_index = render_index(records, task_index_path.parent)
+
+        # Preflight and dry-run are read-only: never modify task index.
+        # Regular mutating verify for v2 tasks synchronizes task index before taking test snapshot.
+        if is_v2 and not args.dry_run and not args.preflight and not args.audit_ready:
+            if not task_index_path.is_file() or task_index_path.read_text(encoding="utf-8") != expected_index:
+                try:
+                    write_index(root, paths)
+                    print("Индекс задач синхронизирован перед проверкой.")
+                except Exception as e:
+                    require(False, f"Ошибка синхронизации индекса задач: {e}")
+
+        manual_arg = getattr(args, "record_manual", None)
+        if manual_arg:
+            require(is_v2, "--record-manual применим только к карточкам v2")
+            require("task_workflow" in data, "Раздел task_workflow отсутствует в project.json")
+            tw_settings = verification.validate_task_workflow(root, data["task_workflow"], safe_path, require)
+            return verification.record_manual_v2(root, task, tw_settings, manual_arg, safe_path, require)
+
+        if is_v2:
+            require("task_workflow" in data, "Карточка v2 требует раздел task_workflow в project.json")
+            tw_settings = verification.validate_task_workflow(root, data["task_workflow"], safe_path, require)
+            checkpoint = getattr(args, "checkpoint", None)
+            if args.preflight or args.audit_ready or not args.dry_run:
+                file_operations.read_only_gate_check(root, safe_path, require,
+                                                      token=gate.token if gate else None)
+                try:
+                    lifecycle.verification_preflight(root, args.task_id, _lifecycle_ctx(gate), safe_path, require)
+                except ValueError as err:
+                    if args.preflight and "индекс задач" in str(err):
+                        require(False, f"Индекс задач устарел. Способ исправления: выполните 'python3 ai-dev-playbook/scripts/playbook.py index'")
+                    raise
+                if not args.preflight and not args.audit_ready:
+                    check(root, True, skip_criteria={args.task_id})
+            if args.preflight or args.audit_ready:
+                res = verification.preflight_v2(root, task, tw_settings, policy["policy_revision"],
+                                                safe_path, require, checkpoint=checkpoint,
+                                                task_index_path=task_index_path, expected_index=expected_index)
+                if args.audit_ready:
+                    lifecycle.audit_preflight(root, args.task_id, _lifecycle_ctx(gate), safe_path, require)
+                    print('audit-ready: свежая передача и проверки подтверждены; независимый аудит не выполнен')
+                return 0 if res["ready"] else 1
+            if not args.dry_run and task_cards.version(documents.read_text(task['path'])) == 2:
+                lifecycle.sync_criteria_command(project_view.ProjectView(root).path, args.task_id, True, _lifecycle_ctx(gate), safe_path, require, bind=False)
+            env = {file_operations.GATE_ENV: gate.token} if gate is not None else None
+            return verification.run_v2(root, task, tw_settings, policy["policy_revision"], safe_path,
+                                      require, dry_run=args.dry_run, extra_env=env,
+                                      reuse=not getattr(args, "no_reuse", False),
+                                      checkpoint=checkpoint)
+
+        # Legacy v1 path
         settings = verification.validate(root, data.get("verification"), safe_path, require)
-        if args.preflight or not args.dry_run:
+        if args.preflight or args.audit_ready or not args.dry_run:
+            file_operations.read_only_gate_check(root, safe_path, require,
+                                                  token=gate.token if gate else None)
             lifecycle.verification_preflight(root, args.task_id, _lifecycle_ctx(gate), safe_path, require)
-        if args.preflight:
-            print('preflight: готовность материалов проверена; поведение CLI и приёмка не подтверждены')
+            # The target's stale criterion markers are synchronized by verify
+            # below; preflight must remain read-only and accept that transition.
+            if args.preflight:
+                if not task_index_path.is_file() or task_index_path.read_text(encoding="utf-8") != expected_index:
+                    require(False, "Индекс устарел; выполните index")
+            check(root, True, skip_criteria={args.task_id})
+            verification.readiness(root, settings, safe_path, require, archive=paths['archive'])
+        if args.audit_ready:
+            lifecycle.audit_preflight(root, args.task_id, _lifecycle_ctx(gate), safe_path, require)
+            print('audit-ready: свежая передача и проверки подтверждены; независимый аудит не выполнен')
+        if args.preflight or args.audit_ready:
+            print('preflight: структура, материалы, блокировки, команды и лимиты проверены; поведение CLI и приёмка не подтверждены')
             return verification.run(root, task, settings, policy['policy_revision'], safe_path,
                                     require, dry_run=True)
         if not args.dry_run and task_cards.version(documents.read_text(task['path'])) == 2:
-            lifecycle.sync_criteria_command(root, args.task_id, True, _lifecycle_ctx(gate), safe_path, require, bind=False)
+            lifecycle.sync_criteria_command(project_view.ProjectView(root).path, args.task_id, True, _lifecycle_ctx(gate), safe_path, require, bind=False)
         env = {file_operations.GATE_ENV: gate.token} if gate is not None else None
         return verification.run(root, task, settings, policy["policy_revision"], safe_path,
                                 require, dry_run=args.dry_run, extra_env=env, reuse=args.reuse)
@@ -1213,6 +1702,17 @@ def dispatch(root, args, gate):
                               args.apply, gate)
         else:
             print(documents.list_text(catalog))
+    elif args.command == "policy":
+        _policy_command(root, args, gate)
+    elif args.command == "block":
+        if args.action == "status":
+            _block_status_command(root, args)
+        elif args.action in {"prepare-review", "revalidate"}:
+            _block_deferred(args.action, "PB-067")
+        elif args.action == "create-fix":
+            _block_deferred(args.action, "PB-068")
+        else:
+            _block_deferred(args.action, "PB-069")
     elif args.command == "adopt":
         updating.adopt(root, args.release_dir,
                        updating.parse_resolves(args.resolve, require),
@@ -1248,6 +1748,11 @@ def dispatch(root, args, gate):
                 root, args.task_id, args.source, args.material_id, args.role,
                 args.immutable, args.required, args.apply,
                 args.actor or _actor(), _lifecycle_ctx(gate), safe_path, require)
+        elif args.action in {"start", "route", "revise"}:
+            lifecycle.transition_command(root, args.task_id, args.action,
+                args.actor or _actor(), args.model, args.reason,
+                getattr(args, 'to_route', None), getattr(args, 'engineer_approval', None),
+                _lifecycle_ctx(gate), safe_path, require)
         elif args.action == "handoff":
             lifecycle.handoff_command(
                 root, args.task_id, args.summary, args.actor or _actor(),
@@ -1273,6 +1778,19 @@ def main(argv=None):
     command = sub.add_parser("init", help="Предпросмотр установки; запись только с --apply")
     command.add_argument("target", type=Path)
     command.add_argument("--apply", action="store_true")
+    command.add_argument("--workflow-v2", action="store_true", help="Явно подключить workflow v2")
+    command = sub.add_parser("workflow", help="Явное подключение workflow v2")
+    actions = command.add_subparsers(dest="action", required=True)
+    action = actions.add_parser("enable-v2", help="Diff настроек; запись только с --apply")
+    action.add_argument("--apply", action="store_true")
+    action = actions.add_parser("migrate-card", help="Явный перевод metadata v1 с сохранением истории")
+    action.add_argument("task_id")
+    action.add_argument("--route", choices=("quick", "small", "medium", "large"), required=True)
+    action.add_argument("--verification-plan", required=True)
+    action.add_argument("--actor", required=True)
+    action.add_argument("--model", required=True)
+    action.add_argument("--reason", required=True)
+    action.add_argument("--apply", action="store_true")
     command = sub.add_parser("check", help="Проверить структуру и ссылки")
     command.add_argument("--ready", action="store_true")
     command = sub.add_parser("card", help="Просмотр версионированной карточки")
@@ -1287,6 +1805,10 @@ def main(argv=None):
     action = actions.add_parser("create", help="Новая карточка и JSON; запись только с --apply")
     action.add_argument("task_id")
     action.add_argument("--title", required=True)
+    action.add_argument("--template", choices=("standard", "quick"), default="standard",
+                        help="Сокращённый quick требует явно включённый workflow v2")
+    action.add_argument("--reason", help="Обоснование quick: локальная цель и низкий риск")
+    action.add_argument("--verification-plan", help="Путь в проекте к JSON verification_plan для quick")
     action.add_argument("--apply", action="store_true")
     action = actions.add_parser("sync", help="Пересчитать чекбоксы; запись только с --apply")
     action.add_argument("task_id")
@@ -1296,7 +1818,11 @@ def main(argv=None):
     preview = command.add_mutually_exclusive_group()
     preview.add_argument("--dry-run", action="store_true", help="Показать план без запуска и записи")
     preview.add_argument("--preflight", action="store_true", help="Проверить материалы и показать план без записи и команд")
+    preview.add_argument("--audit-ready", action="store_true", help="Без записи и команд проверить готовность и свежую передачу до аудита")
     command.add_argument("--reuse", action="store_true", help="Повторно использовать только свежий полный passed-отчёт; иначе новый прогон")
+    command.add_argument("--no-reuse", action="store_true", help="Отключить reuse для v2 (полный перезапуск всех проверок)")
+    command.add_argument("--record-manual", metavar="FILE", help="Зарегистрировать заявление о ручной проверке из JSON-файла")
+    command.add_argument("--checkpoint", help="Контрольная точка обязательности (например, merge или release)")
     command = sub.add_parser("close", help="Закрыть задачу: статус, Closed, перенос в архив, индекс")
     command.add_argument("task_id")
     command.add_argument("--status", choices=["done", "cancelled"], default="done")
@@ -1337,6 +1863,15 @@ def main(argv=None):
     action.add_argument("plan", help="JSON-файл плана в проекте")
     actions.add_parser("status", help="Показать незавершённую операцию и планы")
     actions.add_parser("restore", help="Восстановить прерванную операцию")
+    for transition in ('start', 'route', 'revise'):
+        action = actions.add_parser(transition, help='Переход workflow v2 одной восстанавливаемой операцией')
+        action.add_argument('task_id')
+        action.add_argument('--actor', required=True)
+        action.add_argument('--model', required=True)
+        action.add_argument('--reason', required=True)
+        if transition == 'route':
+            action.add_argument('--to', dest='to_route', choices=sorted(documents.ROUTES), required=True)
+            action.add_argument('--engineer-approval', help='Автор и явное основание согласования понижения')
     action = actions.add_parser('prepare-audit', help='Подготовить переносимый сырой snapshot и зарегистрировать материалы аудита')
     action.add_argument('task_id')
     action.add_argument('--id', dest='audit_id', required=True)
@@ -1407,6 +1942,46 @@ def main(argv=None):
     action = actions.add_parser("materials", help="Материалы владельца (документ или карточка)")
     action.add_argument("owner_id")
     actions.add_parser("list", help="Зарегистрированные документы, legacy и кандидаты")
+    command = sub.add_parser("policy",
+                             help="Политика приёмки блока; запись только с apply")
+    actions = command.add_subparsers(dest="action", required=True)
+    for verb in ("preview", "apply"):
+        action = actions.add_parser(
+            verb, help="Проверить и " + ("записать" if verb == "apply"
+                                         else "показать diff")
+            + " acceptance_policy плана")
+        action.add_argument("document_id",
+                            help="ID plan-документа (plan:<slug>)")
+        action.add_argument("--policy", required=True,
+                            help="JSON-объект acceptance_policy либо путь "
+                                 "к .json в проекте")
+    command = sub.add_parser("block",
+                             help="Граф совместной приёмки блока задач")
+    actions = command.add_subparsers(dest="action", required=True)
+    action = actions.add_parser("status",
+                                help="Вычисляемый статус блока; read-only")
+    action.add_argument("id", help="plan:<slug> либо ID карточки блока")
+    action.add_argument("--json", action="store_true")
+    for deferred, owner in (("prepare-review", "PB-067"),
+                            ("revalidate", "PB-067"),
+                            ("create-fix", "PB-068"),
+                            ("accept", "PB-069"),
+                            ("close", "PB-069")):
+        action = actions.add_parser(
+            deferred,
+            help=f"Контракт PB-065; операция реализуется {owner}")
+        action.add_argument("id", help="ID карточки итогового аудита")
+        if deferred == "create-fix":
+            action.add_argument("--report", required=True,
+                                help="JSON-протокол находок в проекте")
+            action.add_argument("--task", required=True,
+                                help="ID новой карточки исправлений")
+        if deferred in {"create-fix", "accept", "close"}:
+            action.add_argument("--apply", action="store_true",
+                                help="Записать; без apply — предпросмотр")
+        if deferred == "close":
+            action.add_argument("--dry-run", action="store_true",
+                                help="Проверить конечный граф без записи")
     command = sub.add_parser("index", help="Обновить индекс задач")
     command.add_argument("--documents", action="store_true",
                          help="Обновить только индексы коллекций документов")

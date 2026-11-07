@@ -1,0 +1,417 @@
+# PB-037: Проверить сквозные маршруты и выполнить пилот v2
+
+ID: PB-037
+Status: in_review
+Priority: P2
+Depends-On: PB-036
+Executor: Codex
+Model: GPT-6
+Created: 2026-10-23T03:34:58+03:00
+Closed: -
+
+<!-- playbook-meta:start -->
+```json
+{
+  "schema_version": 2,
+  "relations": [
+    {
+      "relation": "based_on",
+      "target": "spec:proportional-workflow"
+    },
+    {
+      "relation": "based_on",
+      "target": "design:proportional-workflow"
+    }
+  ],
+  "materials": [
+    {
+      "id": "targeted-logs",
+      "role": "report",
+      "source": "docs/tasks/PB-037-evidence/logs",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-037"
+      ]
+    },
+    {
+      "id": "matrix",
+      "role": "report",
+      "source": "docs/tasks/PB-037-evidence/matrix.md",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-037"
+      ]
+    },
+    {
+      "id": "pilot-script",
+      "role": "report",
+      "source": "docs/tasks/PB-037-evidence/self_pilot.py",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-037"
+      ]
+    },
+    {
+      "id": "workflow-v1",
+      "role": "report",
+      "source": "docs/tasks/PB-037-evidence/workflow-v1.json",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-037"
+      ]
+    },
+    {
+      "id": "workflow-baseline",
+      "role": "report",
+      "source": "docs/tasks/PB-037-evidence/baseline.json",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-037"
+      ]
+    },
+    {
+      "id": "verify-2919f876d0e348fc8c79875051219fbc",
+      "role": "report",
+      "source": "work/verification/PB-037/2919f876d0e348fc8c79875051219fbc",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-037"
+      ]
+    },
+    {
+      "id": "verify-e2c2d4d7e452402388257cb23b3dcbe5",
+      "role": "report",
+      "source": "work/verification/PB-037/e2c2d4d7e452402388257cb23b3dcbe5",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-037"
+      ]
+    }
+  ],
+  "workflow": {
+    "route": "small",
+    "reason": "Isolated PB-037 pilot",
+    "history": [
+      {
+        "at": "2026-11-06T07:33:05+03:00",
+        "to_route": "small",
+        "reason": "Isolated PB-037 pilot",
+        "actor": "Codex / GPT-6"
+      }
+    ],
+    "transitions": [
+      {
+        "at": "2026-11-06T07:33:05+03:00",
+        "action": "revise",
+        "reason": "Isolated PB-037 pilot",
+        "actor": "Codex / GPT-6"
+      },
+      {
+        "at": "2026-11-06T07:33:42+03:00",
+        "action": "start",
+        "reason": "Isolated pilot",
+        "actor": "Codex"
+      }
+    ],
+    "baseline": {
+      "source": "docs/tasks/PB-037-evidence/baseline.json",
+      "sha256": "sha256:3b253365d1f72dae9a64954426ae8dee32f5e69d87ac40be0d14ea875e7a029a"
+    }
+  },
+  "verification_plan": {
+    "revision": 1,
+    "rationale": "Preserve all mandatory commands and existing document files; task requirements/policy are projected, generated task index is service data. Directory membership is preserved; new task-root files require plan revision.",
+    "scope": [
+      "AGENTS.md",
+      "README.md",
+      "CHANGELOG.md",
+      "ai-dev-playbook",
+      "docs",
+      "tests"
+    ],
+    "checks": [
+      {
+        "id": "self-check",
+        "kind": "command",
+        "purpose": "Preserved mandatory regression",
+        "registry_id": "self-check",
+        "inputs": [
+          "AGENTS.md",
+          "README.md",
+          "CHANGELOG.md",
+          "ai-dev-playbook",
+          "tests",
+          "docs/adr",
+          "docs/architecture.md",
+          "docs/archive",
+          "docs/code-map.md",
+          "docs/designs",
+          "docs/discussions",
+          "docs/index.md",
+          "docs/plans",
+          "docs/product.md",
+          "docs/roadmap.md",
+          "docs/specs",
+          "docs/tasks/AUDIT-004.md",
+          "docs/tasks/AUDIT-007.md",
+          "docs/tasks/AUDIT-008.md",
+          "docs/tasks/AUDIT-008.meta.json",
+          "docs/tasks/PB-007.md",
+          "docs/tasks/PB-008.md",
+          "docs/tasks/PB-037-evidence/logs",
+          "docs/tasks/PB-037-evidence/matrix.md",
+          "docs/tasks/PB-037-evidence/self_pilot.py",
+          "docs/tasks/PB-041-evidence",
+          "docs/tasks/PB-041.md",
+          "docs/tasks/PB-046-evidence",
+          "docs/tasks/PB-046.md",
+          "docs/tasks/PB-046.meta.json",
+          "docs/tasks/PB-047.md",
+          "docs/tasks/PB-047.meta.json",
+          "docs/tasks/PB-048.md",
+          "docs/tasks/PB-048.meta.json",
+          "docs/tasks/PB-049.md",
+          "docs/tasks/PB-049.meta.json",
+          "docs/tasks/PB-050.md",
+          "docs/tasks/PB-050.meta.json",
+          "docs/update-plan.md",
+          "docs/user-guide",
+          {
+            "type": "task_projection"
+          },
+          {
+            "type": "policy_projection"
+          }
+        ]
+      },
+      {
+        "id": "preflight-regressions",
+        "kind": "command",
+        "purpose": "Preserved mandatory regression",
+        "registry_id": "preflight-regressions",
+        "inputs": [
+          "AGENTS.md",
+          "README.md",
+          "CHANGELOG.md",
+          "ai-dev-playbook",
+          "tests",
+          "docs/adr",
+          "docs/architecture.md",
+          "docs/archive",
+          "docs/code-map.md",
+          "docs/designs",
+          "docs/discussions",
+          "docs/index.md",
+          "docs/plans",
+          "docs/product.md",
+          "docs/roadmap.md",
+          "docs/specs",
+          "docs/tasks/AUDIT-004.md",
+          "docs/tasks/AUDIT-007.md",
+          "docs/tasks/AUDIT-008.md",
+          "docs/tasks/AUDIT-008.meta.json",
+          "docs/tasks/PB-007.md",
+          "docs/tasks/PB-008.md",
+          "docs/tasks/PB-037-evidence/logs",
+          "docs/tasks/PB-037-evidence/matrix.md",
+          "docs/tasks/PB-037-evidence/self_pilot.py",
+          "docs/tasks/PB-041-evidence",
+          "docs/tasks/PB-041.md",
+          "docs/tasks/PB-046-evidence",
+          "docs/tasks/PB-046.md",
+          "docs/tasks/PB-046.meta.json",
+          "docs/tasks/PB-047.md",
+          "docs/tasks/PB-047.meta.json",
+          "docs/tasks/PB-048.md",
+          "docs/tasks/PB-048.meta.json",
+          "docs/tasks/PB-049.md",
+          "docs/tasks/PB-049.meta.json",
+          "docs/tasks/PB-050.md",
+          "docs/tasks/PB-050.meta.json",
+          "docs/update-plan.md",
+          "docs/user-guide",
+          {
+            "type": "task_projection"
+          },
+          {
+            "type": "policy_projection"
+          }
+        ]
+      },
+      {
+        "id": "unit-tests",
+        "kind": "command",
+        "purpose": "Preserved mandatory regression",
+        "registry_id": "unit-tests",
+        "inputs": [
+          "AGENTS.md",
+          "README.md",
+          "CHANGELOG.md",
+          "ai-dev-playbook",
+          "tests",
+          "docs/adr",
+          "docs/architecture.md",
+          "docs/archive",
+          "docs/code-map.md",
+          "docs/designs",
+          "docs/discussions",
+          "docs/index.md",
+          "docs/plans",
+          "docs/product.md",
+          "docs/roadmap.md",
+          "docs/specs",
+          "docs/tasks/AUDIT-004.md",
+          "docs/tasks/AUDIT-007.md",
+          "docs/tasks/AUDIT-008.md",
+          "docs/tasks/AUDIT-008.meta.json",
+          "docs/tasks/PB-007.md",
+          "docs/tasks/PB-008.md",
+          "docs/tasks/PB-037-evidence/logs",
+          "docs/tasks/PB-037-evidence/matrix.md",
+          "docs/tasks/PB-037-evidence/self_pilot.py",
+          "docs/tasks/PB-041-evidence",
+          "docs/tasks/PB-041.md",
+          "docs/tasks/PB-046-evidence",
+          "docs/tasks/PB-046.md",
+          "docs/tasks/PB-046.meta.json",
+          "docs/tasks/PB-047.md",
+          "docs/tasks/PB-047.meta.json",
+          "docs/tasks/PB-048.md",
+          "docs/tasks/PB-048.meta.json",
+          "docs/tasks/PB-049.md",
+          "docs/tasks/PB-049.meta.json",
+          "docs/tasks/PB-050.md",
+          "docs/tasks/PB-050.meta.json",
+          "docs/update-plan.md",
+          "docs/user-guide",
+          {
+            "type": "task_projection"
+          },
+          {
+            "type": "policy_projection"
+          }
+        ]
+      }
+    ]
+  },
+  "handoff": {
+    "at": "2026-11-06T07:56:58+03:00",
+    "actor": {
+      "name": "Codex",
+      "model": "GPT-6"
+    },
+    "summary": "Self-copy pilot, no independent acceptance",
+    "reports": [
+      "verify-2919f876d0e348fc8c79875051219fbc",
+      "verify-e2c2d4d7e452402388257cb23b3dcbe5"
+    ],
+    "card_projection": "sha256:22d911058febe92adbb62ebfa2d7a5aaddab9a7fc9be572c25bd29c6e9559059",
+    "result_hash": "sha256:939b7890cef8ce4fd87fde18a4688e66ce836759b43189d3d1c4291dfc50f3d7",
+    "coverage": {
+      "checks": {
+        "preflight-regressions": "passed",
+        "self-check": "passed",
+        "unit-tests": "passed"
+      },
+      "satisfied": true
+    },
+    "evidence_hashes": {
+      "verify-2919f876d0e348fc8c79875051219fbc": "sha256:31562f1b27f83f1ea1ae4c386f5bbebb44bc7c6002458d43e5a8d869a42a3eec",
+      "verify-e2c2d4d7e452402388257cb23b3dcbe5": "sha256:7d4458d78b3458f0e00e2b9e45c75033923160d24bc4e3167013f8510efbf0b6",
+      "targeted-logs": "sha256:34a0d681be86a8d17f08e8c5d3424dbfbc19359c51abdbd98189fbe046969cec",
+      "matrix": "sha256:d36d9d33ca0475027be2a867538f73e597c3a0400bfa5dcc73bfbf487e5f6846",
+      "pilot-script": "sha256:2cde7f4b18777187ef25fe9bd64b9c1ec453f17efb2d04ae6a7c6c7a68f258cb",
+      "workflow-v1": "sha256:af33ddb322d5019a65210ddfc6561002b391d003484c2ad85398b9a5fc49e334",
+      "workflow-baseline": "sha256:2239a994a7fd9de64d8d4cd74c194ff530612cf542dd4beafe138e3e37e78c69"
+    }
+  }
+}
+```
+<!-- playbook-meta:end -->
+
+## Цель и границы
+
+На изолированных проектах и копии self-project воспроизвести все AC, подтвердить сокращение лишних запусков и согласованность документации. Не заменяет независимый итоговый аудит блока.
+
+## Приоритет и зависимости
+
+P2, часть согласованного направления развития. Порядок существующих работ не меняется. Зависимости: PB-036. 2026-11-06 инженер поручил начать выполнение PB-037; PB-036 завершена и независимо принята.
+
+## Контекст
+
+- [План](../plans/proportional-workflow.md).
+- [Спецификация](../specs/proportional-workflow.md): R-01–26; AC-01–14.
+- [Design](../designs/proportional-workflow.md).
+- [ADR-0003](../adr/0003-task-scoped-verification.md).
+
+## Область изменений
+
+tests и материалы пилота, актуализация архитектуры/карты/руководства по обнаруженным расхождениям. Изменение требований — возврат к спецификации, а не подгонка под тест.
+
+## Условия готовности
+
+План/границы согласованы инженером; зависимости завершены; поля/интерфейсы соответствующего этапа однозначны. Исполнитель назначается только при старте. Изменение требований/архитектуры возвращается к соответствующему этапу, не решается скрытым расширением задачи.
+
+## План
+
+1. Собрать воспроизводимую сквозную матрицу на нескольких типах фикстур.
+2. Провести self-project pilot на копии и замер числа запусков/переходов.
+3. Сохранить входные hashes, результаты и ограничения для AUDIT-007.
+
+## Приёмка
+
+- [ ] Все AC-01–14 покрыты матрицей сценариев с командами и результатами; непроверенное явно указано.
+- [ ] Визуальная задача: три итерации, ручной путь, финальная инженерская приёмка, один ID и штатный архив.
+- [ ] Служебные переходы не перезапускают дорогую проверку; изменение одного независимого входа повторяет только нужную проверку. Число запусков измерено.
+- [ ] Новое поведение, обязательный failed, устаревший manual candidate, старый CLI и прерывание дают ожидаемые отказы; старые три маршрута и block audit сохранены.
+- [ ] Полная регрессия и документационная сверка выполнены на финальных входах; исходный проект не используется для fault injection.
+- [ ] Самопроверка и handoff зарегистрированы, независимая приёмка выполнена в отдельной сессии либо инженером перед закрытием.
+
+## Проверки и доказательства
+
+E2E в tmp-проектах: docs/visual/local logic/module, v1/v2 и recovery; полный unittest/verify и сверка руководства. Не обещать универсальные экономию токенов или скорость.
+
+Команды основы: целевые `python3 -m unittest discover -s tests -p '<согласованный файл тестов>' -v`, затем настроенный `python3 ai-dev-playbook/scripts/playbook.py verify PB-037` по действующему на этапе контракту. Перед запуском проверить argv/inputs и готовность служебных данных. Проверить `index --all`, `check --ready`, `git diff --check`; после изменения файлов комплекта выполнить `adopt . --force --apply` до финального прогона. Существующий timeout не обходить скрытым изменением runner: заранее согласовать настройку при необходимости.
+
+Материалы: `docs/tasks/PB-037-evidence/` и зарегистрированные verify-прогоны. Неизменяемые отчёты не переписывать. Структурные проверки не являются доказательством поведения CLI.
+
+## Ресурсы
+
+Python 3.10+ и стандартная библиотека, локальные временные проекты без секретов; независимый аудитор отдельной сессией либо инженер. policy_revision — действующая конфигурация на момент старта; бюджет отдельно не согласован. Общие материалы принадлежат AUDIT-007, не архивируются с подзадачей.
+
+## Выполнение и проверки
+
+### EXEC-01 — 2026-11-06; исполнитель: Codex; модель: GPT-6.
+
+Начато по поручению инженера. Режим: выполнение; ветка dev. Исходное дерево содержит изменения предыдущих задач, они сохраняются. PB-036: done, независимая приёмка от 2026-11-06. Исходный self-project остаётся legacy; opt-in и fault injection выполняются только на копиях. План: CLI-матрица AC-01–14, ручные три итерации в синтетической fixture, измеряемый reuse, один интеграционный пилот копии, полная финальная регрессия. Ручные заявления инженера в fixtures синтетические и не являются реальной визуальной приёмкой. resources policy_revision: 2, бюджет/квоты не определены; текущий исполнитель назначен запросом инженера. Независимый аудит остаётся отдельным этапом.
+
+
+### EXEC-02 — 2026-11-06; исполнитель: Codex; модель: GPT-6.
+
+Добавлены четыре составных CLI-сценария в tests/test_workflow_e2e.py: три ручные итерации/устаревший candidate/архив; счётчики независимых входов, удаление/добавление и service cycle; small/medium/large; release checkpoint. Целевой прогон: 4 теста OK, 56.503 с. [Матрица AC-01–14 и ограничения](PB-037-evidence/matrix.md), [целевой лог](PB-037-evidence/logs/e2e-complete.log), [воспроизводимый self-copy pilot](PB-037-evidence/self_pilot.py). Ошибочные ожидания fixtures исправлены без изменения CLI; неуспехи сохранены. Обновлена карта кода, устранена устаревшая формулировка о PB-036 в архитектуре, руководство уточняет границы semantic quick/атрибуции/checkpoint.
+
+Pilot выполняет opt-in/миграцию только на копии, сохраняет реестр обязательных команд и использует явные task/policy projections. Добавление новых документов после фиксации плана в этом пилоте не моделируется; membership кода/tests и отдельные негативные fixtures проверяются отдельно. Окружение pilot: PYTHONDONTWRITEBYTECODE=1. Ранний отказ из-за учёта новых материалов устранён их штатной регистрацией; до него дорогие команды не выполнялись. Исходные project.json/manifest и Git-полномочия не менялись. Итоговый результат pilot и полной регрессии будет зарегистрирован в CHECK.
+
+## Передача
+
+После реализации сохранить команды воспроизведения, отчёты, ограничения и фактическую ветку/состояние входов; зарегистрировать `lifecycle handoff PB-037` и in_review по действующему контракту. Исполнитель не закрывает задачу сам без инженерского поручения. Закрытие — только после независимой приёмки через штатный CLI.
+
+## Уточнение после PB-051–053
+
+В сквозную матрицу включить регрессии [PB-054](../archive/tasks/PB-054.md): work/audits, служебный Finder-файл, сырой Markdown-снимок и безопасный .txt, добавление аудита после verify, будущий архив и побайтовая сохранность, условная следующая версия. Не повторять весь self-project pilot для каждого негативного случая: использовать маленькие синтетические temporary fixtures и отдельный финальный интеграционный пилот.
+
+Дополнительная приёмка: счётчик подтверждает один запуск при неизменном результате и служебных переходах, новый связанный запуск после содержательной правки, блокировку при повреждении доказательства. Failed/timeout, смена среды/команды/policy, добавление и удаление входа не переиспользуются. Показать команду, результат, причину повтора и границы независимости; секунды не являются единственным доказательством.

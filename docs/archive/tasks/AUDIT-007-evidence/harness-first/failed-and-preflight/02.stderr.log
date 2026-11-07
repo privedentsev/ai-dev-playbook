@@ -1,0 +1,1 @@
+ERROR: Индекс задач устарел. Способ исправления: выполните 'python3 ai-dev-playbook/scripts/playbook.py index'

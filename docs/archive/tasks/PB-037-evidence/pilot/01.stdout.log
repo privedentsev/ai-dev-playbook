@@ -1,0 +1,104 @@
+Предпросмотр, без записи:
+--- a/ai-dev-playbook/project.json
++++ b/ai-dev-playbook/project.json
+@@ -1,5 +1,5 @@
+ {
+-  "schema_version": 1,
++  "schema_version": 2,
+   "playbook_version": "0.2.0",
+   "name": "ai-dev-playbook",
+   "setup_status": "configured",
+@@ -108,5 +108,93 @@
+     "push": "explicit_request",
+     "merge": "explicit_request",
+     "release": "explicit_request"
++  },
++  "task_workflow": {
++    "schema_version": 2,
++    "registry": [
++      {
++        "id": "self-check",
++        "kind": "command",
++        "purpose": "Обязательная проверка из legacy verification",
++        "argv": [
++          "python3",
++          "ai-dev-playbook/scripts/playbook.py",
++          "check",
++          "--ready"
++        ],
++        "timeout_seconds": 60,
++        "default_inputs": [
++          "AGENTS.md",
++          "README.md",
++          "CHANGELOG.md",
++          "ai-dev-playbook",
++          "docs",
++          "tests"
++        ],
++        "applicability": "always"
++      },
++      {
++        "id": "preflight-regressions",
++        "kind": "command",
++        "purpose": "Обязательная проверка из legacy verification",
++        "argv": [
++          "python3",
++          "-m",
++          "unittest",
++          "discover",
++          "-s",
++          "tests",
++          "-p",
++          "test_verification_smoke.py",
++          "-v"
++        ],
++        "timeout_seconds": 120,
++        "default_inputs": [
++          "AGENTS.md",
++          "README.md",
++          "CHANGELOG.md",
++          "ai-dev-playbook",
++          "docs",
++          "tests"
++        ],
++        "applicability": "always"
++      },
++      {
++        "id": "unit-tests",
++        "kind": "command",
++        "purpose": "Обязательная проверка из legacy verification",
++        "argv": [
++          "python3",
++          "-m",
++          "unittest",
++          "discover",
++          "-s",
++          "tests",
++          "-v"
++        ],
++        "timeout_seconds": 1200,
++        "default_inputs": [
++          "AGENTS.md",
++          "README.md",
++          "CHANGELOG.md",
++          "ai-dev-playbook",
++          "docs",
++          "tests"
++        ],
++        "applicability": "always"
++      }
++    ],
++    "checkpoints": {
++      "merge": [
++        "self-check",
++        "preflight-regressions",
++        "unit-tests"
++      ],
++      "release": [
++        "self-check",
++        "preflight-regressions",
++        "unit-tests"
++      ]
++    }
+   }
+ }

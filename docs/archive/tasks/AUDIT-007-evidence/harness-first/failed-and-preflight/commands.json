@@ -1,0 +1,40 @@
+[
+  {
+    "argv": [
+      "index"
+    ],
+    "returncode": 0,
+    "duration_seconds": 0.549
+  },
+  {
+    "argv": [
+      "lifecycle",
+      "start",
+      "DEV-1",
+      "--actor",
+      "Fixture executor",
+      "--model",
+      "Synthetic model",
+      "--reason",
+      "Synthetic engineer instruction"
+    ],
+    "returncode": 0,
+    "duration_seconds": 1.41
+  },
+  {
+    "argv": [
+      "verify",
+      "DEV-1",
+      "--preflight"
+    ],
+    "returncode": 1,
+    "duration_seconds": 0.372
+  },
+  {
+    "argv": [
+      "index"
+    ],
+    "returncode": 1,
+    "duration_seconds": 0.384
+  }
+]

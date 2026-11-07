@@ -1,0 +1,46 @@
+{
+  "at": "2026-11-06T14:21:19+03:00",
+  "plan": "lc-af476d60549624fc",
+  "checks": [
+    {
+      "task": "PB-033",
+      "status": "in_progress",
+      "evidence_files": 63,
+      "mismatches": [],
+      "current_acceptance": null,
+      "current_handoff": null
+    },
+    {
+      "task": "PB-034",
+      "status": "blocked",
+      "evidence_files": 35,
+      "mismatches": [],
+      "current_acceptance": null,
+      "current_handoff": null
+    },
+    {
+      "task": "PB-035",
+      "status": "blocked",
+      "evidence_files": 17,
+      "mismatches": [],
+      "current_acceptance": null,
+      "current_handoff": null
+    },
+    {
+      "task": "PB-036",
+      "status": "blocked",
+      "evidence_files": 22,
+      "mismatches": [],
+      "current_acceptance": null,
+      "current_handoff": null
+    },
+    {
+      "task": "PB-037",
+      "status": "blocked",
+      "evidence_files": 127,
+      "mismatches": [],
+      "current_acceptance": null,
+      "current_handoff": null
+    }
+  ]
+}

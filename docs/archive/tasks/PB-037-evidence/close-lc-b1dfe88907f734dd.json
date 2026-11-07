@@ -1,0 +1,919 @@
+{
+  "schema_version": 1,
+  "plan_id": "lc-b1dfe88907f734dd",
+  "at": "2026-11-06T13:28:12+03:00",
+  "actor": {
+    "model": null,
+    "name": "cli:privedentsev1",
+    "role": "cli"
+  },
+  "basis": "playbook.py close PB-037",
+  "action": "close_task",
+  "files": [
+    {
+      "from": "docs/tasks/PB-037-evidence/logs/e2e-checkpoint-first.log",
+      "to": "docs/archive/tasks/PB-037-evidence/logs/e2e-checkpoint-first.log",
+      "sha256": "sha256:e42f986b4b66c0659099e29ccb98d5b42207dabcffe34819261e71b6ed605420",
+      "bytes": 1391
+    },
+    {
+      "from": "docs/tasks/PB-037-evidence/logs/e2e-complete.log",
+      "to": "docs/archive/tasks/PB-037-evidence/logs/e2e-complete.log",
+      "sha256": "sha256:a55f099bd3835ecf7e900ab1e6e0ff0fbec53b19405e8bbf5dae2f53b7da8c85",
+      "bytes": 709
+    },
+    {
+      "from": "docs/tasks/PB-037-evidence/logs/e2e-final.log",
+      "to": "docs/archive/tasks/PB-037-evidence/logs/e2e-final.log",
+      "sha256": "sha256:0b85ab812c25918eae51c3f60cf970f1c3f66c51e4c2c86be26be9d329e12579",
+      "bytes": 546
+    },
+    {
+      "from": "docs/tasks/PB-037-evidence/logs/e2e-first.log",
+      "to": "docs/archive/tasks/PB-037-evidence/logs/e2e-first.log",
+      "sha256": "sha256:66c35912be14d141dca5d58a22a81fa3fd749ee2017b5574b7c0488ac52405d1",
+      "bytes": 1262
+    },
+    {
+      "from": "docs/tasks/PB-037-evidence/logs/e2e-second.log",
+      "to": "docs/archive/tasks/PB-037-evidence/logs/e2e-second.log",
+      "sha256": "sha256:4dca36ea610ef1ebbf73cb8d42a7fc3aaa1a18d64be6577930e916ff5743c2fe",
+      "bytes": 1262
+    },
+    {
+      "from": "docs/tasks/PB-037-evidence/logs/pilot-first-full/01.stderr.log",
+      "to": "docs/archive/tasks/PB-037-evidence/logs/pilot-first-full/01.stderr.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "docs/tasks/PB-037-evidence/logs/pilot-first-full/01.stdout.log",
+      "to": "docs/archive/tasks/PB-037-evidence/logs/pilot-first-full/01.stdout.log",
+      "sha256": "sha256:5594fdc2976255f0357075d5bea2e9ef816c5981f37d5167f3c3e8a6d7c30a0f",
+      "bytes": 2539
+    },
+    {
+      "from": "docs/tasks/PB-037-evidence/logs/pilot-first-full/02.stderr.log",
+      "to": "docs/archive/tasks/PB-037-evidence/logs/pilot-first-full/02.stderr.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "docs/tasks/PB-037-evidence/logs/pilot-first-full/02.stdout.log",
+      "to": "docs/archive/tasks/PB-037-evidence/logs/pilot-first-full/02.stdout.log",
+      "sha256": "sha256:ae6bb4cdc273b1b32a9f1f9a1d120865e5e15dc1198ce8a58db25f50feaa1585",
+      "bytes": 143
+    },
+    {
+      "from": "docs/tasks/PB-037-evidence/logs/pilot-first-full/03.stderr.log",
+      "to": "docs/archive/tasks/PB-037-evidence/logs/pilot-first-full/03.stderr.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "docs/tasks/PB-037-evidence/logs/pilot-first-full/03.stdout.log",
+      "to": "docs/archive/tasks/PB-037-evidence/logs/pilot-first-full/03.stdout.log",
+      "sha256": "sha256:6d94a897c817418b2ec8803a1ec138377d7cd0a36689fefda242c86339ea6bd3",
+      "bytes": 130
+    },
+    {
+      "from": "docs/tasks/PB-037-evidence/logs/pilot-first-full/04.stderr.log",
+      "to": "docs/archive/tasks/PB-037-evidence/logs/pilot-first-full/04.stderr.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "docs/tasks/PB-037-evidence/logs/pilot-first-full/04.stdout.log",
+      "to": "docs/archive/tasks/PB-037-evidence/logs/pilot-first-full/04.stdout.log",
+      "sha256": "sha256:a265d68b493c7afcdb650738a26ce41ef477be6c6362a1b7b252069ca3949491",
+      "bytes": 87
+    },
+    {
+      "from": "docs/tasks/PB-037-evidence/logs/pilot-first-full/05.stderr.log",
+      "to": "docs/archive/tasks/PB-037-evidence/logs/pilot-first-full/05.stderr.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "docs/tasks/PB-037-evidence/logs/pilot-first-full/05.stdout.log",
+      "to": "docs/archive/tasks/PB-037-evidence/logs/pilot-first-full/05.stdout.log",
+      "sha256": "sha256:d420c8aa931e9f81ac9a08b3bc966ff728f0a302fa0cd4f590107b763a159335",
+      "bytes": 736
+    },
+    {
+      "from": "docs/tasks/PB-037-evidence/logs/pilot-first-full/06.stderr.log",
+      "to": "docs/archive/tasks/PB-037-evidence/logs/pilot-first-full/06.stderr.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "docs/tasks/PB-037-evidence/logs/pilot-first-full/06.stdout.log",
+      "to": "docs/archive/tasks/PB-037-evidence/logs/pilot-first-full/06.stdout.log",
+      "sha256": "sha256:2763978218ffe55dbf6b7b36830fade0a63fc56797223f770553b182a9bb7c87",
+      "bytes": 555
+    },
+    {
+      "from": "docs/tasks/PB-037-evidence/logs/pilot-first-full/commands.json",
+      "to": "docs/archive/tasks/PB-037-evidence/logs/pilot-first-full/commands.json",
+      "sha256": "sha256:7f4bba7b6b923245e57b25feabc223be09ad1bf98058e11140d9e752e4ebb1a8",
+      "bytes": 1043
+    },
+    {
+      "from": "docs/tasks/PB-037-evidence/logs/pilot-first-full/driver.log",
+      "to": "docs/archive/tasks/PB-037-evidence/logs/pilot-first-full/driver.log",
+      "sha256": "sha256:fbdf3861115d363264bb6197baaded6f7c83593cc6c3bfe688bdd2740802c72b",
+      "bytes": 1572
+    },
+    {
+      "from": "docs/tasks/PB-037-evidence/logs/pilot-first-full/partial-runs/9c6737d9cede4622b168ab5eef60dcbe/preflight-regressions.stderr.log",
+      "to": "docs/archive/tasks/PB-037-evidence/logs/pilot-first-full/partial-runs/9c6737d9cede4622b168ab5eef60dcbe/preflight-regressions.stderr.log",
+      "sha256": "sha256:82d7c05247a562295adb9c81be6b5c9e5c7dcc16a512b2708708e04d2f2b3aac",
+      "bytes": 1204
+    },
+    {
+      "from": "docs/tasks/PB-037-evidence/logs/pilot-first-full/partial-runs/9c6737d9cede4622b168ab5eef60dcbe/preflight-regressions.stdout.log",
+      "to": "docs/archive/tasks/PB-037-evidence/logs/pilot-first-full/partial-runs/9c6737d9cede4622b168ab5eef60dcbe/preflight-regressions.stdout.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "docs/tasks/PB-037-evidence/logs/pilot-first-full/partial-runs/9c6737d9cede4622b168ab5eef60dcbe/self-check.stderr.log",
+      "to": "docs/archive/tasks/PB-037-evidence/logs/pilot-first-full/partial-runs/9c6737d9cede4622b168ab5eef60dcbe/self-check.stderr.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "docs/tasks/PB-037-evidence/logs/pilot-first-full/partial-runs/9c6737d9cede4622b168ab5eef60dcbe/self-check.stdout.log",
+      "to": "docs/archive/tasks/PB-037-evidence/logs/pilot-first-full/partial-runs/9c6737d9cede4622b168ab5eef60dcbe/self-check.stdout.log",
+      "sha256": "sha256:fa39452b5b278a3d56e8837a598c98e35015dee8a8655e5553f6972f055b053e",
+      "bytes": 198
+    },
+    {
+      "from": "docs/tasks/PB-037-evidence/logs/pilot-first-full/partial-runs/9c6737d9cede4622b168ab5eef60dcbe/unit-tests.stderr.log",
+      "to": "docs/archive/tasks/PB-037-evidence/logs/pilot-first-full/partial-runs/9c6737d9cede4622b168ab5eef60dcbe/unit-tests.stderr.log",
+      "sha256": "sha256:6f57d844b23aaf9de1ed5395f474f795e12470b3b68dd3287b71178c2f37a2ad",
+      "bytes": 94454
+    },
+    {
+      "from": "docs/tasks/PB-037-evidence/logs/pilot-first-full/partial-runs/9c6737d9cede4622b168ab5eef60dcbe/unit-tests.stdout.log",
+      "to": "docs/archive/tasks/PB-037-evidence/logs/pilot-first-full/partial-runs/9c6737d9cede4622b168ab5eef60dcbe/unit-tests.stdout.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "docs/tasks/PB-037-evidence/logs/pilot-first-full/pilot-input-sha256.json",
+      "to": "docs/archive/tasks/PB-037-evidence/logs/pilot-first-full/pilot-input-sha256.json",
+      "sha256": "sha256:05ac6218434f1179bde949122a1c7b4a82951f1033a951639a89610d880bfaad",
+      "bytes": 220210
+    },
+    {
+      "from": "docs/tasks/PB-037-evidence/logs/pilot-first-full/state/baseline.json",
+      "to": "docs/archive/tasks/PB-037-evidence/logs/pilot-first-full/state/baseline.json",
+      "sha256": "sha256:0dc266de861c68409118f14b3d33203f33f5d28b5910429971cd87e87821c618",
+      "bytes": 246254
+    },
+    {
+      "from": "docs/tasks/PB-037-evidence/logs/pilot-first-full/state/card.txt",
+      "to": "docs/archive/tasks/PB-037-evidence/logs/pilot-first-full/state/card.txt",
+      "sha256": "sha256:bd694af123790269d01a2dee9131d3206c5bb2a906be468314a562ead45f4800",
+      "bytes": 387323
+    },
+    {
+      "from": "docs/tasks/PB-037-evidence/logs/pilot-first-full/state/project.json",
+      "to": "docs/archive/tasks/PB-037-evidence/logs/pilot-first-full/state/project.json",
+      "sha256": "sha256:233aa9129732e90230af4831f7dc8418eb7819338d1d54391cde8cf72f581995",
+      "bytes": 4479
+    },
+    {
+      "from": "docs/tasks/PB-037-evidence/logs/pilot-first-full/state/workflow-v1.json",
+      "to": "docs/archive/tasks/PB-037-evidence/logs/pilot-first-full/state/workflow-v1.json",
+      "sha256": "sha256:ebf474a501c15d5b9388f2898c9ce6a9c6219d9ceb30984a0c6ab2db71ae1f4a",
+      "bytes": 11532
+    },
+    {
+      "from": "docs/tasks/PB-037-evidence/logs/pilot-interrupted-02.log",
+      "to": "docs/archive/tasks/PB-037-evidence/logs/pilot-interrupted-02.log",
+      "sha256": "sha256:3ace3485c4a9f99c6a6e3b4f964e2caadd608de64d164591749f8d4f53bc9901",
+      "bytes": 1089
+    },
+    {
+      "from": "docs/tasks/PB-037-evidence/logs/pilot-interrupted-02/01.stderr.log",
+      "to": "docs/archive/tasks/PB-037-evidence/logs/pilot-interrupted-02/01.stderr.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "docs/tasks/PB-037-evidence/logs/pilot-interrupted-02/01.stdout.log",
+      "to": "docs/archive/tasks/PB-037-evidence/logs/pilot-interrupted-02/01.stdout.log",
+      "sha256": "sha256:5594fdc2976255f0357075d5bea2e9ef816c5981f37d5167f3c3e8a6d7c30a0f",
+      "bytes": 2539
+    },
+    {
+      "from": "docs/tasks/PB-037-evidence/logs/pilot-interrupted-02/02.stderr.log",
+      "to": "docs/archive/tasks/PB-037-evidence/logs/pilot-interrupted-02/02.stderr.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "docs/tasks/PB-037-evidence/logs/pilot-interrupted-02/02.stdout.log",
+      "to": "docs/archive/tasks/PB-037-evidence/logs/pilot-interrupted-02/02.stdout.log",
+      "sha256": "sha256:260e33a111fdd92f521d14ec69eb6fbb162cee0beb2eb9a89500deb98c2cfcab",
+      "bytes": 143
+    },
+    {
+      "from": "docs/tasks/PB-037-evidence/logs/pilot-interrupted-02/03.stderr.log",
+      "to": "docs/archive/tasks/PB-037-evidence/logs/pilot-interrupted-02/03.stderr.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "docs/tasks/PB-037-evidence/logs/pilot-interrupted-02/03.stdout.log",
+      "to": "docs/archive/tasks/PB-037-evidence/logs/pilot-interrupted-02/03.stdout.log",
+      "sha256": "sha256:6d94a897c817418b2ec8803a1ec138377d7cd0a36689fefda242c86339ea6bd3",
+      "bytes": 130
+    },
+    {
+      "from": "docs/tasks/PB-037-evidence/logs/pilot-interrupted-02/04.stderr.log",
+      "to": "docs/archive/tasks/PB-037-evidence/logs/pilot-interrupted-02/04.stderr.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "docs/tasks/PB-037-evidence/logs/pilot-interrupted-02/04.stdout.log",
+      "to": "docs/archive/tasks/PB-037-evidence/logs/pilot-interrupted-02/04.stdout.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "docs/tasks/PB-037-evidence/logs/pilot-interrupted-02/commands.json",
+      "to": "docs/archive/tasks/PB-037-evidence/logs/pilot-interrupted-02/commands.json",
+      "sha256": "sha256:4fa7a65a3a5b01a198daa66f654de196189bf07dbfee74180c5768e960a4180f",
+      "bytes": 815
+    },
+    {
+      "from": "docs/tasks/PB-037-evidence/logs/pilot-interrupted.log",
+      "to": "docs/archive/tasks/PB-037-evidence/logs/pilot-interrupted.log",
+      "sha256": "sha256:dc6a813a6ce003fbc17552bf701a1d13789c1d3b70b1ceb514d7995a257a5dfe",
+      "bytes": 1090
+    },
+    {
+      "from": "docs/tasks/PB-037-evidence/logs/pilot-interrupted/01.stderr.log",
+      "to": "docs/archive/tasks/PB-037-evidence/logs/pilot-interrupted/01.stderr.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "docs/tasks/PB-037-evidence/logs/pilot-interrupted/01.stdout.log",
+      "to": "docs/archive/tasks/PB-037-evidence/logs/pilot-interrupted/01.stdout.log",
+      "sha256": "sha256:5594fdc2976255f0357075d5bea2e9ef816c5981f37d5167f3c3e8a6d7c30a0f",
+      "bytes": 2539
+    },
+    {
+      "from": "docs/tasks/PB-037-evidence/logs/pilot-interrupted/02.stderr.log",
+      "to": "docs/archive/tasks/PB-037-evidence/logs/pilot-interrupted/02.stderr.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "docs/tasks/PB-037-evidence/logs/pilot-interrupted/02.stdout.log",
+      "to": "docs/archive/tasks/PB-037-evidence/logs/pilot-interrupted/02.stdout.log",
+      "sha256": "sha256:7ba7b0f74de873641abf9ccb4f918f02eb041ac13d6b192c4032d5aef632436e",
+      "bytes": 143
+    },
+    {
+      "from": "docs/tasks/PB-037-evidence/logs/pilot-interrupted/03.stderr.log",
+      "to": "docs/archive/tasks/PB-037-evidence/logs/pilot-interrupted/03.stderr.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "docs/tasks/PB-037-evidence/logs/pilot-interrupted/03.stdout.log",
+      "to": "docs/archive/tasks/PB-037-evidence/logs/pilot-interrupted/03.stdout.log",
+      "sha256": "sha256:6d94a897c817418b2ec8803a1ec138377d7cd0a36689fefda242c86339ea6bd3",
+      "bytes": 130
+    },
+    {
+      "from": "docs/tasks/PB-037-evidence/logs/pilot-interrupted/04.stderr.log",
+      "to": "docs/archive/tasks/PB-037-evidence/logs/pilot-interrupted/04.stderr.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "docs/tasks/PB-037-evidence/logs/pilot-interrupted/04.stdout.log",
+      "to": "docs/archive/tasks/PB-037-evidence/logs/pilot-interrupted/04.stdout.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "docs/tasks/PB-037-evidence/logs/pilot-interrupted/commands.json",
+      "to": "docs/archive/tasks/PB-037-evidence/logs/pilot-interrupted/commands.json",
+      "sha256": "sha256:913b28bcbf56a7093114bb5c1ecd26ae3c5f8695f69b9331c07618e4262b8554",
+      "bytes": 814
+    },
+    {
+      "from": "docs/tasks/PB-037-evidence/logs/pilot-preflight-blocked.log",
+      "to": "docs/archive/tasks/PB-037-evidence/logs/pilot-preflight-blocked.log",
+      "sha256": "sha256:00332b8bc65d514ae51275a25ffb3673c8bc1d0d4aaf6a126a17770f9860b514",
+      "bytes": 2625
+    },
+    {
+      "from": "docs/tasks/PB-037-evidence/logs/pilot-preflight-blocked/01.stderr.log",
+      "to": "docs/archive/tasks/PB-037-evidence/logs/pilot-preflight-blocked/01.stderr.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "docs/tasks/PB-037-evidence/logs/pilot-preflight-blocked/01.stdout.log",
+      "to": "docs/archive/tasks/PB-037-evidence/logs/pilot-preflight-blocked/01.stdout.log",
+      "sha256": "sha256:5594fdc2976255f0357075d5bea2e9ef816c5981f37d5167f3c3e8a6d7c30a0f",
+      "bytes": 2539
+    },
+    {
+      "from": "docs/tasks/PB-037-evidence/logs/pilot-preflight-blocked/02.stderr.log",
+      "to": "docs/archive/tasks/PB-037-evidence/logs/pilot-preflight-blocked/02.stderr.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "docs/tasks/PB-037-evidence/logs/pilot-preflight-blocked/02.stdout.log",
+      "to": "docs/archive/tasks/PB-037-evidence/logs/pilot-preflight-blocked/02.stdout.log",
+      "sha256": "sha256:bcbc9c8bace2bf74713a8803f559c92051b3b62fd9b842679093b50cdbc8923c",
+      "bytes": 143
+    },
+    {
+      "from": "docs/tasks/PB-037-evidence/logs/pilot-preflight-blocked/03.stderr.log",
+      "to": "docs/archive/tasks/PB-037-evidence/logs/pilot-preflight-blocked/03.stderr.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "docs/tasks/PB-037-evidence/logs/pilot-preflight-blocked/03.stdout.log",
+      "to": "docs/archive/tasks/PB-037-evidence/logs/pilot-preflight-blocked/03.stdout.log",
+      "sha256": "sha256:6d94a897c817418b2ec8803a1ec138377d7cd0a36689fefda242c86339ea6bd3",
+      "bytes": 130
+    },
+    {
+      "from": "docs/tasks/PB-037-evidence/logs/pilot-preflight-blocked/04.stderr.log",
+      "to": "docs/archive/tasks/PB-037-evidence/logs/pilot-preflight-blocked/04.stderr.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "docs/tasks/PB-037-evidence/logs/pilot-preflight-blocked/04.stdout.log",
+      "to": "docs/archive/tasks/PB-037-evidence/logs/pilot-preflight-blocked/04.stdout.log",
+      "sha256": "sha256:a265d68b493c7afcdb650738a26ce41ef477be6c6362a1b7b252069ca3949491",
+      "bytes": 87
+    },
+    {
+      "from": "docs/tasks/PB-037-evidence/logs/pilot-preflight-blocked/05.stderr.log",
+      "to": "docs/archive/tasks/PB-037-evidence/logs/pilot-preflight-blocked/05.stderr.log",
+      "sha256": "sha256:539eec7fe4ec5d2b899198acccb42565345216716351dfb40c8e114f461bacbd",
+      "bytes": 1630
+    },
+    {
+      "from": "docs/tasks/PB-037-evidence/logs/pilot-preflight-blocked/05.stdout.log",
+      "to": "docs/archive/tasks/PB-037-evidence/logs/pilot-preflight-blocked/05.stdout.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "docs/tasks/PB-037-evidence/logs/pilot-preflight-blocked/commands.json",
+      "to": "docs/archive/tasks/PB-037-evidence/logs/pilot-preflight-blocked/commands.json",
+      "sha256": "sha256:8f7c108aaf5cdec10de7948fa4ffae69ebcd89d498655a64248aac28e2d4223a",
+      "bytes": 938
+    },
+    {
+      "from": "docs/tasks/PB-037-evidence/logs/pilot-preflight-blocked/pilot-input-sha256.json",
+      "to": "docs/archive/tasks/PB-037-evidence/logs/pilot-preflight-blocked/pilot-input-sha256.json",
+      "sha256": "sha256:51065e317975c106260fab5876a6fa3568c381c73dd47f4dccfadfe945f4f68f",
+      "bytes": 218226
+    },
+    {
+      "from": "docs/tasks/PB-037-evidence/logs/pilot-stopped-projected-inputs.log",
+      "to": "docs/archive/tasks/PB-037-evidence/logs/pilot-stopped-projected-inputs.log",
+      "sha256": "sha256:54f7ac25aa8f785cdaf11e40092c9a841eb9884c059a86bc8f44830a318c897c",
+      "bytes": 1034
+    },
+    {
+      "from": "docs/tasks/PB-037-evidence/logs/pilot-stopped-projected-inputs/01.stderr.log",
+      "to": "docs/archive/tasks/PB-037-evidence/logs/pilot-stopped-projected-inputs/01.stderr.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "docs/tasks/PB-037-evidence/logs/pilot-stopped-projected-inputs/01.stdout.log",
+      "to": "docs/archive/tasks/PB-037-evidence/logs/pilot-stopped-projected-inputs/01.stdout.log",
+      "sha256": "sha256:5594fdc2976255f0357075d5bea2e9ef816c5981f37d5167f3c3e8a6d7c30a0f",
+      "bytes": 2539
+    },
+    {
+      "from": "docs/tasks/PB-037-evidence/logs/pilot-stopped-projected-inputs/02.stderr.log",
+      "to": "docs/archive/tasks/PB-037-evidence/logs/pilot-stopped-projected-inputs/02.stderr.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "docs/tasks/PB-037-evidence/logs/pilot-stopped-projected-inputs/02.stdout.log",
+      "to": "docs/archive/tasks/PB-037-evidence/logs/pilot-stopped-projected-inputs/02.stdout.log",
+      "sha256": "sha256:dc5c07b54df9f53c21f862f2fc789f845d8e4ee90141c3696eb902929f687ac9",
+      "bytes": 143
+    },
+    {
+      "from": "docs/tasks/PB-037-evidence/logs/pilot-stopped-projected-inputs/03.stderr.log",
+      "to": "docs/archive/tasks/PB-037-evidence/logs/pilot-stopped-projected-inputs/03.stderr.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "docs/tasks/PB-037-evidence/logs/pilot-stopped-projected-inputs/03.stdout.log",
+      "to": "docs/archive/tasks/PB-037-evidence/logs/pilot-stopped-projected-inputs/03.stdout.log",
+      "sha256": "sha256:6d94a897c817418b2ec8803a1ec138377d7cd0a36689fefda242c86339ea6bd3",
+      "bytes": 130
+    },
+    {
+      "from": "docs/tasks/PB-037-evidence/logs/pilot-stopped-projected-inputs/04.stderr.log",
+      "to": "docs/archive/tasks/PB-037-evidence/logs/pilot-stopped-projected-inputs/04.stderr.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "docs/tasks/PB-037-evidence/logs/pilot-stopped-projected-inputs/04.stdout.log",
+      "to": "docs/archive/tasks/PB-037-evidence/logs/pilot-stopped-projected-inputs/04.stdout.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "docs/tasks/PB-037-evidence/logs/pilot-stopped-projected-inputs/commands.json",
+      "to": "docs/archive/tasks/PB-037-evidence/logs/pilot-stopped-projected-inputs/commands.json",
+      "sha256": "sha256:75f85c7bbb932ea3bf98a2edf840680e3b71c6a411f823b3dc715f9330c17fef",
+      "bytes": 813
+    },
+    {
+      "from": "docs/tasks/PB-037-evidence/matrix.md",
+      "to": "docs/archive/tasks/PB-037-evidence/matrix.md",
+      "sha256": "sha256:b49e4fc917d8d493c8a0d9deda85bc509f2945738c95e2b051a11c934b51856f",
+      "bytes": 14950
+    },
+    {
+      "from": "docs/tasks/PB-037-evidence/pilot/01.stderr.log",
+      "to": "docs/archive/tasks/PB-037-evidence/pilot/01.stderr.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "docs/tasks/PB-037-evidence/pilot/01.stdout.log",
+      "to": "docs/archive/tasks/PB-037-evidence/pilot/01.stdout.log",
+      "sha256": "sha256:5594fdc2976255f0357075d5bea2e9ef816c5981f37d5167f3c3e8a6d7c30a0f",
+      "bytes": 2539
+    },
+    {
+      "from": "docs/tasks/PB-037-evidence/pilot/02.stderr.log",
+      "to": "docs/archive/tasks/PB-037-evidence/pilot/02.stderr.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "docs/tasks/PB-037-evidence/pilot/02.stdout.log",
+      "to": "docs/archive/tasks/PB-037-evidence/pilot/02.stdout.log",
+      "sha256": "sha256:c762ff99e9548d879550eefedf0b50f0358626bb20aefd89b4a169adedff20a9",
+      "bytes": 143
+    },
+    {
+      "from": "docs/tasks/PB-037-evidence/pilot/03.stderr.log",
+      "to": "docs/archive/tasks/PB-037-evidence/pilot/03.stderr.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "docs/tasks/PB-037-evidence/pilot/03.stdout.log",
+      "to": "docs/archive/tasks/PB-037-evidence/pilot/03.stdout.log",
+      "sha256": "sha256:6d94a897c817418b2ec8803a1ec138377d7cd0a36689fefda242c86339ea6bd3",
+      "bytes": 130
+    },
+    {
+      "from": "docs/tasks/PB-037-evidence/pilot/04.stderr.log",
+      "to": "docs/archive/tasks/PB-037-evidence/pilot/04.stderr.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "docs/tasks/PB-037-evidence/pilot/04.stdout.log",
+      "to": "docs/archive/tasks/PB-037-evidence/pilot/04.stdout.log",
+      "sha256": "sha256:a265d68b493c7afcdb650738a26ce41ef477be6c6362a1b7b252069ca3949491",
+      "bytes": 87
+    },
+    {
+      "from": "docs/tasks/PB-037-evidence/pilot/05.stderr.log",
+      "to": "docs/archive/tasks/PB-037-evidence/pilot/05.stderr.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "docs/tasks/PB-037-evidence/pilot/05.stdout.log",
+      "to": "docs/archive/tasks/PB-037-evidence/pilot/05.stdout.log",
+      "sha256": "sha256:d420c8aa931e9f81ac9a08b3bc966ff728f0a302fa0cd4f590107b763a159335",
+      "bytes": 736
+    },
+    {
+      "from": "docs/tasks/PB-037-evidence/pilot/06.stderr.log",
+      "to": "docs/archive/tasks/PB-037-evidence/pilot/06.stderr.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "docs/tasks/PB-037-evidence/pilot/06.stdout.log",
+      "to": "docs/archive/tasks/PB-037-evidence/pilot/06.stdout.log",
+      "sha256": "sha256:a770e5eddfe73e892d80bf69add4949d989ed38a8f97139b36125e62d9107bff",
+      "bytes": 555
+    },
+    {
+      "from": "docs/tasks/PB-037-evidence/pilot/07.stderr.log",
+      "to": "docs/archive/tasks/PB-037-evidence/pilot/07.stderr.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "docs/tasks/PB-037-evidence/pilot/07.stdout.log",
+      "to": "docs/archive/tasks/PB-037-evidence/pilot/07.stdout.log",
+      "sha256": "sha256:4e7a5acfc3f6b92ab571de6bbfd2f5a7649251e7428d671c1917d9f97c3bf801",
+      "bytes": 618
+    },
+    {
+      "from": "docs/tasks/PB-037-evidence/pilot/08.stderr.log",
+      "to": "docs/archive/tasks/PB-037-evidence/pilot/08.stderr.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "docs/tasks/PB-037-evidence/pilot/08.stdout.log",
+      "to": "docs/archive/tasks/PB-037-evidence/pilot/08.stdout.log",
+      "sha256": "sha256:d5ece4d7183f312bcfbaab678dab471c8c71d88447b96835942884e8382b3657",
+      "bytes": 109
+    },
+    {
+      "from": "docs/tasks/PB-037-evidence/pilot/09.stderr.log",
+      "to": "docs/archive/tasks/PB-037-evidence/pilot/09.stderr.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "docs/tasks/PB-037-evidence/pilot/09.stdout.log",
+      "to": "docs/archive/tasks/PB-037-evidence/pilot/09.stdout.log",
+      "sha256": "sha256:7122acab3128f3f156c3b6e403557a7ae816b8412d0c74833d772b7aaddfeea2",
+      "bytes": 52
+    },
+    {
+      "from": "docs/tasks/PB-037-evidence/pilot/10.stderr.log",
+      "to": "docs/archive/tasks/PB-037-evidence/pilot/10.stderr.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "docs/tasks/PB-037-evidence/pilot/10.stdout.log",
+      "to": "docs/archive/tasks/PB-037-evidence/pilot/10.stdout.log",
+      "sha256": "sha256:9ee9b579063f06fdd9848532fc3ec9dc5439718ad39c913ea0aaecb447324fa4",
+      "bytes": 935
+    },
+    {
+      "from": "docs/tasks/PB-037-evidence/pilot/11.stderr.log",
+      "to": "docs/archive/tasks/PB-037-evidence/pilot/11.stderr.log",
+      "sha256": "sha256:391b8fde33b93070b43c0b78664e26de68ff7bd2906597ba494db7ad2f547c04",
+      "bytes": 99
+    },
+    {
+      "from": "docs/tasks/PB-037-evidence/pilot/11.stdout.log",
+      "to": "docs/archive/tasks/PB-037-evidence/pilot/11.stdout.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "docs/tasks/PB-037-evidence/pilot/commands.json",
+      "to": "docs/archive/tasks/PB-037-evidence/pilot/commands.json",
+      "sha256": "sha256:56adce507c58761af5b65604f582f04931b87e02f9046500053a826fac097dcc",
+      "bytes": 1914
+    },
+    {
+      "from": "docs/tasks/PB-037-evidence/pilot/driver.log",
+      "to": "docs/archive/tasks/PB-037-evidence/pilot/driver.log",
+      "sha256": "sha256:7066bc148623f55cb703a235760ca960c2a6882e70724aad16c4c4eae9de3129",
+      "bytes": 845
+    },
+    {
+      "from": "docs/tasks/PB-037-evidence/pilot/input-sha256.json",
+      "to": "docs/archive/tasks/PB-037-evidence/pilot/input-sha256.json",
+      "sha256": "sha256:7332511118a567f151db2861b35933808098231ba8ff3e01190fcbbc29377a2e",
+      "bytes": 225918
+    },
+    {
+      "from": "docs/tasks/PB-037-evidence/pilot/pilot-input-sha256.json",
+      "to": "docs/archive/tasks/PB-037-evidence/pilot/pilot-input-sha256.json",
+      "sha256": "sha256:91890775a57bc41e453b7429aa5f812513cb93a47cce90bf7da7db003013a06b",
+      "bytes": 225474
+    },
+    {
+      "from": "docs/tasks/PB-037-evidence/pilot/runs/2919f876d0e348fc8c79875051219fbc/preflight-regressions.stderr.log",
+      "to": "docs/archive/tasks/PB-037-evidence/pilot/runs/2919f876d0e348fc8c79875051219fbc/preflight-regressions.stderr.log",
+      "sha256": "sha256:a716a84962b5d94c161f77c8e81b66cdb1a227ef6283e4bd78e27b47a99e2980",
+      "bytes": 1204
+    },
+    {
+      "from": "docs/tasks/PB-037-evidence/pilot/runs/2919f876d0e348fc8c79875051219fbc/preflight-regressions.stdout.log",
+      "to": "docs/archive/tasks/PB-037-evidence/pilot/runs/2919f876d0e348fc8c79875051219fbc/preflight-regressions.stdout.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "docs/tasks/PB-037-evidence/pilot/runs/2919f876d0e348fc8c79875051219fbc/report.json",
+      "to": "docs/archive/tasks/PB-037-evidence/pilot/runs/2919f876d0e348fc8c79875051219fbc/report.json",
+      "sha256": "sha256:063b8c7ff844ab8a8b393aaac36727e08e2114202146715f82e291a3ef3d3e98",
+      "bytes": 46689
+    },
+    {
+      "from": "docs/tasks/PB-037-evidence/pilot/runs/2919f876d0e348fc8c79875051219fbc/self-check.stderr.log",
+      "to": "docs/archive/tasks/PB-037-evidence/pilot/runs/2919f876d0e348fc8c79875051219fbc/self-check.stderr.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "docs/tasks/PB-037-evidence/pilot/runs/2919f876d0e348fc8c79875051219fbc/self-check.stdout.log",
+      "to": "docs/archive/tasks/PB-037-evidence/pilot/runs/2919f876d0e348fc8c79875051219fbc/self-check.stdout.log",
+      "sha256": "sha256:fa39452b5b278a3d56e8837a598c98e35015dee8a8655e5553f6972f055b053e",
+      "bytes": 198
+    },
+    {
+      "from": "docs/tasks/PB-037-evidence/pilot/runs/2919f876d0e348fc8c79875051219fbc/unit-tests.stderr.log",
+      "to": "docs/archive/tasks/PB-037-evidence/pilot/runs/2919f876d0e348fc8c79875051219fbc/unit-tests.stderr.log",
+      "sha256": "sha256:b3607041b2800d23ec0e4ddd00b32349eec0a14b02dfd67b19f4616f0da9fb94",
+      "bytes": 97190
+    },
+    {
+      "from": "docs/tasks/PB-037-evidence/pilot/runs/2919f876d0e348fc8c79875051219fbc/unit-tests.stdout.log",
+      "to": "docs/archive/tasks/PB-037-evidence/pilot/runs/2919f876d0e348fc8c79875051219fbc/unit-tests.stdout.log",
+      "sha256": "sha256:33bb46bea56c7e171b8af20752e50348c1b4896e361e2fec684173512ecebb64",
+      "bytes": 418
+    },
+    {
+      "from": "docs/tasks/PB-037-evidence/pilot/runs/e2c2d4d7e452402388257cb23b3dcbe5/report.json",
+      "to": "docs/archive/tasks/PB-037-evidence/pilot/runs/e2c2d4d7e452402388257cb23b3dcbe5/report.json",
+      "sha256": "sha256:3d351b987650af2c1cdf537cdd4f608d0f16a98d7126242a68aa7eb97fe45ea5",
+      "bytes": 46689
+    },
+    {
+      "from": "docs/tasks/PB-037-evidence/pilot/state/baseline.json",
+      "to": "docs/archive/tasks/PB-037-evidence/pilot/state/baseline.json",
+      "sha256": "sha256:3b253365d1f72dae9a64954426ae8dee32f5e69d87ac40be0d14ea875e7a029a",
+      "bytes": 252017
+    },
+    {
+      "from": "docs/tasks/PB-037-evidence/pilot/state/card.txt",
+      "to": "docs/archive/tasks/PB-037-evidence/pilot/state/card.txt",
+      "sha256": "sha256:b29c01c4e31940f818f1b6b67ca04bd5e0091ef863d1e991926c6b97d041aa7f",
+      "bytes": 21008
+    },
+    {
+      "from": "docs/tasks/PB-037-evidence/pilot/state/project.json",
+      "to": "docs/archive/tasks/PB-037-evidence/pilot/state/project.json",
+      "sha256": "sha256:233aa9129732e90230af4831f7dc8418eb7819338d1d54391cde8cf72f581995",
+      "bytes": 4479
+    },
+    {
+      "from": "docs/tasks/PB-037-evidence/pilot/state/workflow-v1.json",
+      "to": "docs/archive/tasks/PB-037-evidence/pilot/state/workflow-v1.json",
+      "sha256": "sha256:9d9d82a1ab3632c5b44a17872d61fe99caf35d31ed0fd4090927894a9f6cb2df",
+      "bytes": 13578
+    },
+    {
+      "from": "docs/tasks/PB-037-evidence/pilot/summary.json",
+      "to": "docs/archive/tasks/PB-037-evidence/pilot/summary.json",
+      "sha256": "sha256:d64f1755bb48af0ef60c28a7ee028e01919416cc32c19ba323f975ccb78d4347",
+      "bytes": 181
+    },
+    {
+      "from": "docs/tasks/PB-037-evidence/self_pilot.py",
+      "to": "docs/archive/tasks/PB-037-evidence/self_pilot.py",
+      "sha256": "sha256:b809d97c900f49012d65d291954745c8a4cb483c936f4ab5587d3f806589154f",
+      "bytes": 7593
+    },
+    {
+      "from": "docs/tasks/PB-037.md",
+      "to": "docs/archive/tasks/PB-037.md",
+      "sha256": "sha256:4583c3d5f195442af9e1d9304a01dc515f336b7e1a1ec3206825bd1e5388345a",
+      "bytes": 22120
+    },
+    {
+      "from": "work/verification/PB-037/40b3745a514f4acbae68ec5d6aed61aa/preflight-regressions.stderr.log",
+      "to": "docs/archive/tasks/PB-037-evidence/work/verification/PB-037/40b3745a514f4acbae68ec5d6aed61aa/preflight-regressions.stderr.log",
+      "sha256": "sha256:1995f09e6c0ff2e59e04eea24d9b58e3e957fcd34f79516506dce7224ffa2a41",
+      "bytes": 1204
+    },
+    {
+      "from": "work/verification/PB-037/40b3745a514f4acbae68ec5d6aed61aa/preflight-regressions.stdout.log",
+      "to": "docs/archive/tasks/PB-037-evidence/work/verification/PB-037/40b3745a514f4acbae68ec5d6aed61aa/preflight-regressions.stdout.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "work/verification/PB-037/40b3745a514f4acbae68ec5d6aed61aa/report.json",
+      "to": "docs/archive/tasks/PB-037-evidence/work/verification/PB-037/40b3745a514f4acbae68ec5d6aed61aa/report.json",
+      "sha256": "sha256:ec943a6cb860e6aed8fc38e8e59683d819a7fc645b41bc3144f97aadb21a48d9",
+      "bytes": 476051
+    },
+    {
+      "from": "work/verification/PB-037/40b3745a514f4acbae68ec5d6aed61aa/self-check.stderr.log",
+      "to": "docs/archive/tasks/PB-037-evidence/work/verification/PB-037/40b3745a514f4acbae68ec5d6aed61aa/self-check.stderr.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "work/verification/PB-037/40b3745a514f4acbae68ec5d6aed61aa/self-check.stdout.log",
+      "to": "docs/archive/tasks/PB-037-evidence/work/verification/PB-037/40b3745a514f4acbae68ec5d6aed61aa/self-check.stdout.log",
+      "sha256": "sha256:fa39452b5b278a3d56e8837a598c98e35015dee8a8655e5553f6972f055b053e",
+      "bytes": 198
+    },
+    {
+      "from": "work/verification/PB-037/40b3745a514f4acbae68ec5d6aed61aa/unit-tests.stderr.log",
+      "to": "docs/archive/tasks/PB-037-evidence/work/verification/PB-037/40b3745a514f4acbae68ec5d6aed61aa/unit-tests.stderr.log",
+      "sha256": "sha256:8636923a15c738abf918b1869dbbff43bc4b061569948d9cf16252d37b055df4",
+      "bytes": 97190
+    },
+    {
+      "from": "work/verification/PB-037/40b3745a514f4acbae68ec5d6aed61aa/unit-tests.stdout.log",
+      "to": "docs/archive/tasks/PB-037-evidence/work/verification/PB-037/40b3745a514f4acbae68ec5d6aed61aa/unit-tests.stdout.log",
+      "sha256": "sha256:33bb46bea56c7e171b8af20752e50348c1b4896e361e2fec684173512ecebb64",
+      "bytes": 418
+    },
+    {
+      "from": "work/verification/PB-037/audit-01/blocked-e2e.log",
+      "to": "docs/archive/tasks/PB-037-evidence/work/verification/PB-037/audit-01/blocked-e2e.log",
+      "sha256": "sha256:accb248fd38103417de0e0b1ec16befbe8ed4df90ac3937ea496d07463b9ae03",
+      "bytes": 6483
+    },
+    {
+      "from": "work/verification/PB-037/audit-01/e2e.log",
+      "to": "docs/archive/tasks/PB-037-evidence/work/verification/PB-037/audit-01/e2e.log",
+      "sha256": "sha256:2ad4ee5839bdf9d863f7cc6cc5051306869f3c5b273f987f08b10b7a7e633758",
+      "bytes": 709
+    },
+    {
+      "from": "work/verification/PB-037/audit-01/provenance.json",
+      "to": "docs/archive/tasks/PB-037-evidence/work/verification/PB-037/audit-01/provenance.json",
+      "sha256": "sha256:77d935c0e043b517276b8aa382e6d51692a051e19b338ac050919149249cf8da",
+      "bytes": 320
+    },
+    {
+      "from": "work/verification/PB-037/audit-01/provenance.sha256",
+      "to": "docs/archive/tasks/PB-037-evidence/work/verification/PB-037/audit-01/provenance.sha256",
+      "sha256": "sha256:28c6c4273dd2f85e1ab11eedf85c0b0ca65467ef8bb917f70486ce07c1a429bd",
+      "bytes": 72
+    },
+    {
+      "from": "work/verification/PB-037/audit-01/report.md",
+      "to": "docs/archive/tasks/PB-037-evidence/work/verification/PB-037/audit-01/report.md",
+      "sha256": "sha256:31b9e355a159fcfa176261d3b9de4ce9d3d566a0f9767d912f3537fe4aa146e0",
+      "bytes": 4016
+    },
+    {
+      "from": "work/verification/PB-037/audit-01/snapshot.txt",
+      "to": "docs/archive/tasks/PB-037-evidence/work/verification/PB-037/audit-01/snapshot.txt",
+      "sha256": "sha256:5df2c46bc22110f873e6e90fcaaf0a799c2c92f91e3ddd91af94bd2b4896d377",
+      "bytes": 20112
+    }
+  ],
+  "moves": [
+    {
+      "from": "docs/tasks/PB-037-evidence/logs",
+      "to": "docs/archive/tasks/PB-037-evidence/logs"
+    },
+    {
+      "from": "docs/tasks/PB-037-evidence/matrix.md",
+      "to": "docs/archive/tasks/PB-037-evidence/matrix.md"
+    },
+    {
+      "from": "docs/tasks/PB-037-evidence/self_pilot.py",
+      "to": "docs/archive/tasks/PB-037-evidence/self_pilot.py"
+    },
+    {
+      "from": "docs/tasks/PB-037-evidence/pilot",
+      "to": "docs/archive/tasks/PB-037-evidence/pilot"
+    },
+    {
+      "from": "work/verification/PB-037/40b3745a514f4acbae68ec5d6aed61aa",
+      "to": "docs/archive/tasks/PB-037-evidence/work/verification/PB-037/40b3745a514f4acbae68ec5d6aed61aa"
+    },
+    {
+      "from": "work/verification/PB-037/audit-01",
+      "to": "docs/archive/tasks/PB-037-evidence/work/verification/PB-037/audit-01"
+    },
+    {
+      "from": "docs/tasks/PB-037.md",
+      "to": "docs/archive/tasks/PB-037.md"
+    }
+  ],
+  "materials": [
+    {
+      "id": "targeted-logs",
+      "role": "report",
+      "storage": "local",
+      "source_old": "docs/tasks/PB-037-evidence/logs",
+      "source_new": "docs/archive/tasks/PB-037-evidence/logs",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-037"
+      ]
+    },
+    {
+      "id": "matrix",
+      "role": "report",
+      "storage": "local",
+      "source_old": "docs/tasks/PB-037-evidence/matrix.md",
+      "source_new": "docs/archive/tasks/PB-037-evidence/matrix.md",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-037"
+      ]
+    },
+    {
+      "id": "pilot-script",
+      "role": "report",
+      "storage": "local",
+      "source_old": "docs/tasks/PB-037-evidence/self_pilot.py",
+      "source_new": "docs/archive/tasks/PB-037-evidence/self_pilot.py",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-037"
+      ]
+    },
+    {
+      "id": "self-pilot",
+      "role": "report",
+      "storage": "local",
+      "source_old": "docs/tasks/PB-037-evidence/pilot",
+      "source_new": "docs/archive/tasks/PB-037-evidence/pilot",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-037"
+      ]
+    },
+    {
+      "id": "verify-40b3745a514f4acbae68ec5d6aed61aa",
+      "role": "report",
+      "storage": "local",
+      "source_old": "work/verification/PB-037/40b3745a514f4acbae68ec5d6aed61aa",
+      "source_new": "docs/archive/tasks/PB-037-evidence/work/verification/PB-037/40b3745a514f4acbae68ec5d6aed61aa",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-037"
+      ]
+    },
+    {
+      "id": "audit-01",
+      "role": "report",
+      "storage": "local",
+      "source_old": "work/verification/PB-037/audit-01",
+      "source_new": "docs/archive/tasks/PB-037-evidence/work/verification/PB-037/audit-01",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-037"
+      ]
+    }
+  ],
+  "external": [],
+  "type": "lifecycle-close",
+  "task": "PB-037",
+  "outcome": "done",
+  "previous_status": "in_review",
+  "reason": null,
+  "acceptance_ref": null,
+  "policy": "managed",
+  "handoff": {
+    "at": "2026-11-06T13:16:23+03:00",
+    "actor": {
+      "name": "Codex",
+      "model": "GPT-6"
+    },
+    "summary": "HANDOFF-01: EXEC-01–04, CHECK-01; 702 tests, AC-01–14 and isolated v2 pilot",
+    "reports": [
+      "verify-40b3745a514f4acbae68ec5d6aed61aa"
+    ],
+    "card_projection": "sha256:f82ef8052e990dee45caa506a58327c986a538f49048ef65538e26bd796164fa"
+  },
+  "acceptance": {
+    "at": "2026-11-06T13:26:06+03:00",
+    "actor": {
+      "name": "Codex",
+      "model": "GPT-6"
+    },
+    "role": "auditor",
+    "kind": "acceptance",
+    "result": "accepted",
+    "handoff_at": "2026-11-06T13:16:23+03:00",
+    "session": null,
+    "detail": "Независимый аудит: все критерии выполнены; 4 E2E OK; audit-01/report.md."
+  }
+}

@@ -1,0 +1,143 @@
+{
+  "schema_version": 1,
+  "plan_id": "lc-21969d8e75c9c0cf",
+  "at": "2026-10-28T05:50:58+03:00",
+  "actor": {
+    "model": null,
+    "name": "cli:privedentsev1",
+    "role": "cli"
+  },
+  "basis": "playbook.py close PB-055",
+  "action": "close_task",
+  "files": [
+    {
+      "from": "docs/tasks/PB-055-evidence/release-check.json",
+      "to": "docs/archive/tasks/PB-055-evidence/release-check.json",
+      "sha256": "sha256:ed067d1bc986cbd13d73a613c02e26d98288daadf258eab0a24971dcee8c70fb",
+      "bytes": 573
+    },
+    {
+      "from": "docs/tasks/PB-055.md",
+      "to": "docs/archive/tasks/PB-055.md",
+      "sha256": "sha256:33b823a3a631e7f3e9386c8f60df4f91dababa59862d7a00640cdb6eef236433",
+      "bytes": 8935
+    },
+    {
+      "from": "docs/tasks/PB-055.meta.json",
+      "to": "docs/archive/tasks/PB-055.meta.json",
+      "sha256": "sha256:1dc1de112772e9f95050d4560578c71266b8d6a3e5d95129067624705966c0c4",
+      "bytes": 1918
+    },
+    {
+      "from": "work/verification/PB-055/7992eb0ce28d483bbb5d16e266ad4e32/report.json",
+      "to": "docs/archive/tasks/PB-055-evidence/work/verification/PB-055/7992eb0ce28d483bbb5d16e266ad4e32/report.json",
+      "sha256": "sha256:c141c1616176438720b953f1e040212f22cd63a27237d2746612eb41df4d577e",
+      "bytes": 314169
+    },
+    {
+      "from": "work/verification/PB-055/7992eb0ce28d483bbb5d16e266ad4e32/self-check.stderr.log",
+      "to": "docs/archive/tasks/PB-055-evidence/work/verification/PB-055/7992eb0ce28d483bbb5d16e266ad4e32/self-check.stderr.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "work/verification/PB-055/7992eb0ce28d483bbb5d16e266ad4e32/self-check.stdout.log",
+      "to": "docs/archive/tasks/PB-055-evidence/work/verification/PB-055/7992eb0ce28d483bbb5d16e266ad4e32/self-check.stdout.log",
+      "sha256": "sha256:d3a9a2aa6548f8d543b13e1cb915a6408afdbbd5e093a3c9af2713ed9028f70d",
+      "bytes": 198
+    },
+    {
+      "from": "work/verification/PB-055/7992eb0ce28d483bbb5d16e266ad4e32/unit-tests.stderr.log",
+      "to": "docs/archive/tasks/PB-055-evidence/work/verification/PB-055/7992eb0ce28d483bbb5d16e266ad4e32/unit-tests.stderr.log",
+      "sha256": "sha256:f50ec07671f210323e106b2add204cba963b626801287add561fbd093409cd7d",
+      "bytes": 76730
+    },
+    {
+      "from": "work/verification/PB-055/7992eb0ce28d483bbb5d16e266ad4e32/unit-tests.stdout.log",
+      "to": "docs/archive/tasks/PB-055-evidence/work/verification/PB-055/7992eb0ce28d483bbb5d16e266ad4e32/unit-tests.stdout.log",
+      "sha256": "sha256:595e12ba74dc0b56da4aa9f80fb2653b6b0b589aa52112d3784fb612e1c43043",
+      "bytes": 574
+    }
+  ],
+  "moves": [
+    {
+      "from": "docs/tasks/PB-055-evidence/release-check.json",
+      "to": "docs/archive/tasks/PB-055-evidence/release-check.json"
+    },
+    {
+      "from": "work/verification/PB-055/7992eb0ce28d483bbb5d16e266ad4e32",
+      "to": "docs/archive/tasks/PB-055-evidence/work/verification/PB-055/7992eb0ce28d483bbb5d16e266ad4e32"
+    },
+    {
+      "from": "docs/tasks/PB-055.md",
+      "to": "docs/archive/tasks/PB-055.md"
+    },
+    {
+      "from": "docs/tasks/PB-055.meta.json",
+      "to": "docs/archive/tasks/PB-055.meta.json"
+    }
+  ],
+  "materials": [
+    {
+      "id": "release-check",
+      "role": "report",
+      "storage": "local",
+      "source_old": "docs/tasks/PB-055-evidence/release-check.json",
+      "source_new": "docs/archive/tasks/PB-055-evidence/release-check.json",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-055"
+      ]
+    },
+    {
+      "id": "verify-7992eb0ce28d483bbb5d16e266ad4e32",
+      "role": "report",
+      "storage": "local",
+      "source_old": "work/verification/PB-055/7992eb0ce28d483bbb5d16e266ad4e32",
+      "source_new": "docs/archive/tasks/PB-055-evidence/work/verification/PB-055/7992eb0ce28d483bbb5d16e266ad4e32",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-055"
+      ]
+    }
+  ],
+  "external": [],
+  "type": "lifecycle-close",
+  "task": "PB-055",
+  "outcome": "done",
+  "previous_status": "in_review",
+  "reason": null,
+  "acceptance_ref": null,
+  "policy": "managed",
+  "handoff": {
+    "at": "2026-10-28T05:49:21+03:00",
+    "actor": {
+      "name": "Codex",
+      "model": "GPT-6"
+    },
+    "summary": "HANDOFF-01",
+    "reports": [
+      "verify-7992eb0ce28d483bbb5d16e266ad4e32"
+    ],
+    "card_projection": "sha256:5829e44a73eb116f2db4fdf61fdf30a789c8e59b6fcdcfa1ddf01d1097f29a15",
+    "entry_id": "HANDOFF-01",
+    "journal_sha256": "sha256:50dcc76a410d6e3f6fd4f2eaccf68123c348e711f29a0dd923870b801a5fb279"
+  },
+  "acceptance": {
+    "at": "2026-10-28T05:49:56+03:00",
+    "actor": {
+      "name": "Инженер",
+      "model": "—"
+    },
+    "role": "engineer",
+    "kind": "acceptance",
+    "result": "accepted",
+    "handoff_at": "2026-10-28T05:49:21+03:00",
+    "session": null,
+    "detail": null,
+    "audit_id": "AUDIT-01",
+    "audit_sha256": "sha256:74d91c9f7ad5172cee2af8eab0c8d3fc8bed3d5e7126cfe67b483d1cf9e92d63"
+  }
+}

@@ -1,0 +1,51 @@
+test_apply_writes_removes_and_creates_dirs (test_file_operations.EngineTest.test_apply_writes_removes_and_creates_dirs) ... ok
+test_completed_decision_under_gate_after_pending (test_file_operations.EngineTest.test_completed_decision_under_gate_after_pending) ... ok
+test_final_check_failure_restores_preimage (test_file_operations.EngineTest.test_final_check_failure_restores_preimage) ... ok
+test_foreign_temp_like_file_untouched (test_file_operations.EngineTest.test_foreign_temp_like_file_untouched) ... ok
+test_inputs_rechecked_before_write (test_file_operations.EngineTest.test_inputs_rechecked_before_write) ... ok
+test_interrupted_operation_restored_by_engine (test_file_operations.EngineTest.test_interrupted_operation_restored_by_engine) ... ok
+test_late_external_edit_preserved_as_conflict (test_file_operations.EngineTest.test_late_external_edit_preserved_as_conflict) ... ok
+test_missing_index_after_backup_refuses (test_file_operations.EngineTest.test_missing_index_after_backup_refuses) ... ok
+test_missing_index_with_write_journal_refuses (test_file_operations.EngineTest.test_missing_index_with_write_journal_refuses) ... ok
+test_own_temp_leftover_cleaned_by_restore (test_file_operations.EngineTest.test_own_temp_leftover_cleaned_by_restore) ... ok
+test_pending_blocks_new_operation (test_file_operations.EngineTest.test_pending_blocks_new_operation) ... ok
+test_pre_write_interruption_clears_marker (test_file_operations.EngineTest.test_pre_write_interruption_clears_marker) ... ok
+test_receipt_after_rollback_is_not_completed (test_file_operations.EngineTest.test_receipt_after_rollback_is_not_completed) ... ok
+test_remove_dirs (test_file_operations.EngineTest.test_remove_dirs) ... ok
+test_removed_dir_mode_restored_by_engine_restore (test_file_operations.EngineTest.test_removed_dir_mode_restored_by_engine_restore) ... ok
+test_removed_dir_mode_restored_on_rollback (test_file_operations.EngineTest.test_removed_dir_mode_restored_on_rollback) ... ok
+test_repeated_plan_is_idempotent (test_file_operations.EngineTest.test_repeated_plan_is_idempotent) ... ok
+test_restore_kill_before_neutralize_blocks_retry (test_file_operations.EngineTest.test_restore_kill_before_neutralize_blocks_retry) ... ok
+test_restore_refuses_live_operation (test_file_operations.EngineTest.test_restore_refuses_live_operation) ... ok
+test_restore_rejects_corrupt_backup_copy (test_file_operations.EngineTest.test_restore_rejects_corrupt_backup_copy) ... ok
+test_restore_rejects_foreign_pending (test_file_operations.EngineTest.test_restore_rejects_foreign_pending) ... ok
+test_restore_rejects_incomplete_backup_index (test_file_operations.EngineTest.test_restore_rejects_incomplete_backup_index) ... ok
+test_restore_without_pending_refused (test_file_operations.EngineTest.test_restore_without_pending_refused) ... ok
+test_snapshot_marks_missing_and_dir (test_file_operations.EngineTest.test_snapshot_marks_missing_and_dir) ... ok
+test_spec_validation_rejects_bad_input (test_file_operations.EngineTest.test_spec_validation_rejects_bad_input) ... ok
+test_staged_check_failure_aborts_before_write (test_file_operations.EngineTest.test_staged_check_failure_aborts_before_write) ... ok
+test_write_error_mid_apply_rolls_back (test_file_operations.EngineTest.test_write_error_mid_apply_rolls_back) ... ok
+test_lifecycle_pending_blocks_commands (test_file_operations.GateTest.test_lifecycle_pending_blocks_commands) ... ok
+test_mutating_commands_share_gate (test_file_operations.GateTest.test_mutating_commands_share_gate) ... ok
+test_nested_token_allows_child (test_file_operations.GateTest.test_nested_token_allows_child) ... ok
+test_read_only_check_while_gate_held (test_file_operations.GateTest.test_read_only_check_while_gate_held) ... ok
+test_stale_token_does_not_bypass_busy_gate (test_file_operations.GateTest.test_stale_token_does_not_bypass_busy_gate) ... ok
+test_update_apply_lock_order_with_gate (test_file_operations.GateTest.test_update_apply_lock_order_with_gate)
+update apply держит специализированный lock под общим gate. ... ok
+test_update_pending_blocks_commands (test_file_operations.GateTest.test_update_pending_blocks_commands) ... ok
+test_verify_holds_gate_and_nests_children (test_file_operations.GateTest.test_verify_holds_gate_and_nests_children) ... ok
+test_sigkill_after_receipt_then_rerun (test_file_operations.SubprocessTest.test_sigkill_after_receipt_then_rerun) ... ok
+test_sigkill_before_backup_clears_marker (test_file_operations.SubprocessTest.test_sigkill_before_backup_clears_marker) ... ok
+test_sigkill_during_replace_cleans_own_temp (test_file_operations.SubprocessTest.test_sigkill_during_replace_cleans_own_temp) ... ok
+test_sigkill_lost_index_refuses_restore (test_file_operations.SubprocessTest.test_sigkill_lost_index_refuses_restore) ... ok
+test_sigkill_mid_write_then_standalone_restore (test_file_operations.SubprocessTest.test_sigkill_mid_write_then_standalone_restore) ... ok
+test_standalone_restore_needs_no_kit (test_file_operations.SubprocessTest.test_standalone_restore_needs_no_kit) ... ok
+test_standalone_restore_preserves_foreign_fop_name (test_file_operations.SubprocessTest.test_standalone_restore_preserves_foreign_fop_name) ... ok
+test_standalone_restore_refuses_corrupt_backup (test_file_operations.SubprocessTest.test_standalone_restore_refuses_corrupt_backup) ... ok
+test_standalone_restore_refuses_foreign_marker (test_file_operations.SubprocessTest.test_standalone_restore_refuses_foreign_marker) ... ok
+test_standalone_restore_refuses_live_operation (test_file_operations.SubprocessTest.test_standalone_restore_refuses_live_operation) ... ok
+
+----------------------------------------------------------------------
+Ran 45 tests in 6.769s
+
+OK

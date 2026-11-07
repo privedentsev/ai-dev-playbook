@@ -19,7 +19,7 @@ CORE = "ai-dev-playbook"
 MANIFEST_SCHEMA = 1
 PLAN_SCHEMA = 1
 RELEASE_SCHEMA = 1
-UPDATES_SCHEMA = 1
+UPDATES_SCHEMA = 2
 MANIFEST_PATH = CORE + "/manifest.json"
 UPDATES_PATH = CORE + "/updates.json"
 RELEASE_FILE = "release.json"
@@ -122,8 +122,18 @@ def load_artifact(directory, safe_path, require):
     updates_from = {}
     if UPDATES_PATH in files:
         data = json.loads(files[UPDATES_PATH].decode("utf-8"))
-        require(isinstance(data, dict) and data.get("schema_version") == UPDATES_SCHEMA,
+        require(isinstance(data, dict) and data.get("schema_version") in {1, UPDATES_SCHEMA},
                 f"{UPDATES_PATH}: неподдерживаемая схема")
+        if data["schema_version"] == 2:
+            minimum = parse_version(data.get("minimum_cli_version"), require)
+            cli_version = parse_version((Path(__file__).resolve().parents[1] / "VERSION")
+                                        .read_text(encoding="utf-8").strip(), require)
+            require(cli_version >= minimum,
+                    f"Артефакт требует CLI >= {data['minimum_cli_version']}; используйте CLI целевого артефакта")
+            schemas = data.get("supported_project_schemas", [data_format.get("project_schema")])
+            require(isinstance(schemas, list) and schemas and all(type(v) is int and v > 0 for v in schemas),
+                    "updates.json: supported_project_schemas должен содержать номера схем")
+            data_format["project_schemas"] = schemas
         declared = data.get("updates_from") or {}
         require(isinstance(declared, dict), f"{UPDATES_PATH}: updates_from должен быть объектом")
         updates_from = declared
@@ -436,7 +446,9 @@ def plan_migrations(root, artifact, steps, safe_path, require):
         after = json.dumps(migrated, ensure_ascii=False, indent=2) + "\n"
         target_schema = _settings_target_schema(artifact, schema_keys[rel])
         if target_schema is not None:
-            require(migrated.get("schema_version") == target_schema,
+            supported = (artifact["data_format"].get("project_schemas", [target_schema])
+                         if rel == SETTINGS[0] else [target_schema])
+            require(migrated.get("schema_version") in supported,
                     f"{rel}: миграция не достигла схемы {target_schema} "
                     f"(получено {migrated.get('schema_version')})")
         if after != before:

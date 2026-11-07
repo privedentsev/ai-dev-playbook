@@ -1,0 +1,15 @@
+1: ('workflow', 'enable-v2'): 0
+2: ('workflow', 'enable-v2', '--apply'): 0
+3: ('workflow', 'migrate-card', 'PB-037', '--route', 'small', '--verification-plan', 'work/pilot-plan.json', '--actor', 'Codex', '--model', 'GPT-6', '--reason', 'Isolated PB-037 pilot', '--apply'): 0
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/docs/tasks/PB-037-evidence/self_pilot.py", line 99, in <module>
+    main()
+    ~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/docs/tasks/PB-037-evidence/self_pilot.py", line 73, in main
+    run('lifecycle', 'start', 'PB-037', '--actor', 'Codex', '--model', 'GPT-6', '--reason', 'Isolated pilot')
+    ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/docs/tasks/PB-037-evidence/self_pilot.py", line 48, in run
+    raise RuntimeError(f'{args}: {proc.returncode}\n{proc.stdout}\n{proc.stderr}')
+RuntimeError: ('lifecycle', 'start', 'PB-037', '--actor', 'Codex', '--model', 'GPT-6', '--reason', 'Isolated pilot'): -15
+
+

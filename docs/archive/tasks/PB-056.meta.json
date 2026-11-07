@@ -1,0 +1,132 @@
+{
+  "schema_version": 1,
+  "card_format_version": 2,
+  "relations": [],
+  "materials": [
+    {
+      "id": "history-and-checks",
+      "role": "report",
+      "source": "docs/archive/tasks/PB-056-evidence",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-056"
+      ]
+    },
+    {
+      "id": "verify-b6fed285d47f4f8d85a05bb46d88d79f",
+      "role": "report",
+      "source": "docs/archive/tasks/PB-056-evidence/work/verification/PB-056/b6fed285d47f4f8d85a05bb46d88d79f",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-056"
+      ]
+    },
+    {
+      "id": "audit-01",
+      "role": "report",
+      "source": "docs/archive/tasks/PB-056-evidence/work/verification/PB-056/audit-01",
+      "storage": "local",
+      "immutable": true,
+      "required": true,
+      "used_by": [
+        "PB-056"
+      ]
+    },
+    {
+      "id": "verify-1dbdbbe5dfa44d5dbb4a052b38eeaa99",
+      "role": "report",
+      "source": "docs/archive/tasks/PB-056-evidence/work/verification/PB-056/1dbdbbe5dfa44d5dbb4a052b38eeaa99",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-056"
+      ]
+    },
+    {
+      "id": "lifecycle-lc-043453de568a35ad",
+      "role": "report",
+      "source": "docs/archive/tasks/PB-056-evidence/close-lc-043453de568a35ad.json",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": []
+    }
+  ],
+  "criterion_evidence": {
+    "CHECK-01": {
+      "check_sha256": "sha256:e02ad1be8dc1481c11700d4ea8f97cc21255943e196ecd788b6a3c00c2618ab2",
+      "card_projection": "sha256:c2ac954ba21b9b8ae4e8ff8547fe451a71d73df613123cfbc09705e78081d0a0",
+      "report_id": "verify-b6fed285d47f4f8d85a05bb46d88d79f",
+      "report_sha256": "sha256:4f89e7976981bbdad5c45d1b74d42ef61e8cf75c2101f39db5e975642975de82"
+    },
+    "CHECK-02": {
+      "check_sha256": "sha256:72440f0f0a97c979834fc9f57ca1bfe084f21f7fb713bd4379f49c32a49f8c65",
+      "card_projection": "sha256:1c555a99ae62c638e53d60947562592c06f9500f2df8f073774e7488a22c307e",
+      "report_id": "verify-1dbdbbe5dfa44d5dbb4a052b38eeaa99",
+      "report_sha256": "sha256:b1ff85bd1ae84b53480a5593f1061e403284d89951048c9f897f71435553c9d2"
+    }
+  },
+  "handoff": {
+    "at": "2026-10-28T21:43:11+03:00",
+    "actor": {
+      "name": "Codex",
+      "model": "GPT-6"
+    },
+    "summary": "HANDOFF-02",
+    "reports": [
+      "verify-1dbdbbe5dfa44d5dbb4a052b38eeaa99"
+    ],
+    "card_projection": "sha256:1c555a99ae62c638e53d60947562592c06f9500f2df8f073774e7488a22c307e",
+    "entry_id": "HANDOFF-02",
+    "journal_sha256": "sha256:902983ed72596e2382e375b3b1e889d1c74b3ae1805cc19e70cbd9cd69559796"
+  },
+  "audit_packages": {
+    "audit-01": "sha256:0aed871aeeda4370b0d67899230beea496667436b92283547d84863954794eb3"
+  },
+  "acceptance": {
+    "at": "2026-10-28T21:44:39+03:00",
+    "actor": {
+      "name": "Codex",
+      "model": "GPT-6"
+    },
+    "role": "auditor",
+    "kind": "acceptance",
+    "result": "accepted",
+    "handoff_at": "2026-10-28T21:43:11+03:00",
+    "session": null,
+    "detail": null,
+    "audit_id": "AUDIT-01",
+    "audit_sha256": "sha256:b16cdef4f4edba99c04c4c1cba9bb2a0d852a6603a565e60fa40662effad6c4a"
+  },
+  "moves": [
+    {
+      "from": "docs/tasks/PB-056-evidence",
+      "to": "docs/archive/tasks/PB-056-evidence"
+    },
+    {
+      "from": "work/verification/PB-056/b6fed285d47f4f8d85a05bb46d88d79f",
+      "to": "docs/archive/tasks/PB-056-evidence/work/verification/PB-056/b6fed285d47f4f8d85a05bb46d88d79f"
+    },
+    {
+      "from": "work/verification/PB-056/audit-01",
+      "to": "docs/archive/tasks/PB-056-evidence/work/verification/PB-056/audit-01"
+    },
+    {
+      "from": "work/verification/PB-056/1dbdbbe5dfa44d5dbb4a052b38eeaa99",
+      "to": "docs/archive/tasks/PB-056-evidence/work/verification/PB-056/1dbdbbe5dfa44d5dbb4a052b38eeaa99"
+    },
+    {
+      "from": "docs/tasks/PB-056.md",
+      "to": "docs/archive/tasks/PB-056.md"
+    },
+    {
+      "from": "docs/tasks/PB-056.meta.json",
+      "to": "docs/archive/tasks/PB-056.meta.json"
+    }
+  ]
+}

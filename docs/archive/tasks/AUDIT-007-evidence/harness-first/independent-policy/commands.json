@@ -1,0 +1,141 @@
+[
+  {
+    "argv": [
+      "index"
+    ],
+    "returncode": 0,
+    "duration_seconds": 0.541
+  },
+  {
+    "argv": [
+      "lifecycle",
+      "start",
+      "DEV-1",
+      "--actor",
+      "Fixture executor",
+      "--model",
+      "Synthetic model",
+      "--reason",
+      "Synthetic engineer instruction"
+    ],
+    "returncode": 0,
+    "duration_seconds": 1.389
+  },
+  {
+    "argv": [
+      "verify",
+      "DEV-1"
+    ],
+    "returncode": 0,
+    "duration_seconds": 0.869
+  },
+  {
+    "argv": [
+      "verify",
+      "DEV-1"
+    ],
+    "returncode": 0,
+    "duration_seconds": 0.679
+  },
+  {
+    "argv": [
+      "verify",
+      "DEV-1"
+    ],
+    "returncode": 0,
+    "duration_seconds": 0.759
+  },
+  {
+    "argv": [
+      "verify",
+      "DEV-1"
+    ],
+    "returncode": 0,
+    "duration_seconds": 0.835
+  },
+  {
+    "argv": [
+      "lifecycle",
+      "handoff",
+      "DEV-1",
+      "--summary",
+      "Auditor synthetic fixture",
+      "--actor",
+      "Fixture executor",
+      "--model",
+      "Synthetic model"
+    ],
+    "returncode": 0,
+    "duration_seconds": 2.244
+  },
+  {
+    "argv": [
+      "lifecycle",
+      "handoff",
+      "DEV-1",
+      "--summary",
+      "Auditor synthetic fixture",
+      "--actor",
+      "Fixture executor",
+      "--model",
+      "Synthetic model"
+    ],
+    "returncode": 0,
+    "duration_seconds": 1.238
+  },
+  {
+    "argv": [
+      "close",
+      "DEV-1",
+      "--dry-run"
+    ],
+    "returncode": 1,
+    "duration_seconds": 0.84
+  },
+  {
+    "argv": [
+      "lifecycle",
+      "accept",
+      "DEV-1",
+      "--result",
+      "accepted",
+      "--role",
+      "auditor",
+      "--actor",
+      "Fixture engineer",
+      "--model",
+      "Synthetic model",
+      "--note",
+      "Synthetic explicit final version acceptance"
+    ],
+    "returncode": 1,
+    "duration_seconds": 0.689
+  },
+  {
+    "argv": [
+      "lifecycle",
+      "accept",
+      "DEV-1",
+      "--result",
+      "accepted",
+      "--role",
+      "engineer",
+      "--actor",
+      "Fixture engineer",
+      "--model",
+      "Synthetic model",
+      "--note",
+      "Synthetic explicit final version acceptance"
+    ],
+    "returncode": 0,
+    "duration_seconds": 1.707
+  },
+  {
+    "argv": [
+      "close",
+      "DEV-1"
+    ],
+    "returncode": 0,
+    "duration_seconds": 3.279
+  }
+]

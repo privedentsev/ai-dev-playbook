@@ -1,0 +1,8 @@
+Preflight v2 для задачи PB-037:
+Маршрут: small, ревизия плана: 1
+Проверки:
+- preflight-regressions (command): обязательна (always; task: always); актуальность: not_run (требуется запуск)
+- self-check (command): обязательна (always; task: always); актуальность: not_run (требуется запуск)
+- unit-tests (command): обязательна (always; task: always); актуальность: not_run (требуется запуск)
+
+preflight: структура, материалы, блокировки, команды и лимиты проверены; поведение CLI и приёмка не подтверждены.

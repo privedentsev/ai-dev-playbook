@@ -450,7 +450,7 @@ def _retarget(token, base_from, base_to, moves):
     if not _rel_changed(resolved, base_from, base_to, moves):
         return token
     mapped = map_path(resolved, moves)
-    relative = Path(os.path.relpath(mapped, base_to)).as_posix()
+    relative = Path(os.path.relpath(str(mapped), str(base_to))).as_posix()
     return format_dest(relative, query, fragment, angle)
 
 
@@ -483,9 +483,9 @@ def rewrite(text, source_old, source_new, moves):
 
 def _rel_changed(resolved, base_from, base_to, moves):
     """True, если относительный адрес resolved-цели изменится."""
-    old_rel = Path(os.path.relpath(resolved, base_from)).as_posix()
-    new_rel = Path(os.path.relpath(map_path(resolved, moves),
-                                   base_to)).as_posix()
+    old_rel = Path(os.path.relpath(str(resolved), str(base_from))).as_posix()
+    new_rel = Path(os.path.relpath(str(map_path(resolved, moves)),
+                                   str(base_to))).as_posix()
     return old_rel != new_rel
 
 
@@ -609,7 +609,12 @@ def check_text(text, label, base_dir, root, moves=None):
         parts = _split(link["target"])
         if parts is None:
             continue
-        destination = (base_dir / parts[1]).resolve()
+        try:
+            destination = (base_dir / parts[1]).resolve()
+        except ValueError:
+            errors.append(f"{label}: битая или внешняя локальная ссылка "
+                          f"{link['target']}")
+            continue
         seen = set()
         # Historical paths may be current again after reopen. Follow moves
         # only while the target is absent, never redirect an existing target.

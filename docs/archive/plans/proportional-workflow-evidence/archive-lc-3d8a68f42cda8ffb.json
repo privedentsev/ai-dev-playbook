@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "plan_id": "lc-3d8a68f42cda8ffb",
+  "at": "2026-11-06T18:29:44+03:00",
+  "actor": {
+    "model": "GPT-6.1",
+    "name": "Codex",
+    "role": "auditor"
+  },
+  "basis": "Инженер поручил аудит PB-033 и закрытие всех заблокированных из-за неё задач; подзадачи повторно приняты, итоговый аудит блока успешен.",
+  "action": "archive_document",
+  "files": [
+    {
+      "from": "docs/plans/proportional-workflow.md",
+      "to": "docs/archive/plans/proportional-workflow.md",
+      "sha256": "sha256:c0ad2001e06a8b256f90f0d3df402dbb9f68c927ae83f5641160cf05109a9051",
+      "bytes": 13785
+    }
+  ],
+  "moves": [
+    {
+      "from": "docs/plans/proportional-workflow.md",
+      "to": "docs/archive/plans/proportional-workflow.md"
+    }
+  ],
+  "materials": [],
+  "external": [],
+  "type": "lifecycle-archive",
+  "document": "plan:proportional-workflow",
+  "reason": "completed",
+  "successor": null
+}

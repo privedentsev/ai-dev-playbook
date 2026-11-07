@@ -1,0 +1,4 @@
+OK: структура, ссылки и 1 карточки; каталог документов: 0 документов, 0 legacy. Поведение продукта не проверялось.
+RUN: a (требуется новый запуск)
+RUN: b (требуется новый запуск)
+passed: /private/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/tmpk2p6_nv6/work/verification/DEV-1/cc29f45a26b24d319201c084c60aa0c9/report.json

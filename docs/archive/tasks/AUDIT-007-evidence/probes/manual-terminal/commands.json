@@ -1,0 +1,204 @@
+[
+  {
+    "argv": [
+      "index"
+    ],
+    "returncode": 0,
+    "duration_seconds": 0.528
+  },
+  {
+    "argv": [
+      "lifecycle",
+      "start",
+      "DEV-1",
+      "--actor",
+      "Fixture executor",
+      "--model",
+      "Synthetic model",
+      "--reason",
+      "Synthetic engineer instruction"
+    ],
+    "returncode": 0,
+    "duration_seconds": 1.349
+  },
+  {
+    "argv": [
+      "verify",
+      "DEV-1"
+    ],
+    "returncode": 1,
+    "duration_seconds": 0.68
+  },
+  {
+    "argv": [
+      "lifecycle",
+      "handoff",
+      "DEV-1",
+      "--summary",
+      "Auditor synthetic fixture",
+      "--actor",
+      "Fixture executor",
+      "--model",
+      "Synthetic model"
+    ],
+    "returncode": 1,
+    "duration_seconds": 0.603
+  },
+  {
+    "argv": [
+      "verify",
+      "DEV-1",
+      "--record-manual",
+      "work/manual.json"
+    ],
+    "returncode": 1,
+    "duration_seconds": 0.359
+  },
+  {
+    "argv": [
+      "verify",
+      "DEV-1",
+      "--record-manual",
+      "work/manual.json"
+    ],
+    "returncode": 0,
+    "duration_seconds": 0.345
+  },
+  {
+    "argv": [
+      "verify",
+      "DEV-1",
+      "--record-manual",
+      "work/manual.json"
+    ],
+    "returncode": 1,
+    "duration_seconds": 0.349
+  },
+  {
+    "argv": [
+      "verify",
+      "DEV-1"
+    ],
+    "returncode": 1,
+    "duration_seconds": 0.688
+  },
+  {
+    "argv": [
+      "verify",
+      "DEV-1",
+      "--record-manual",
+      "work/manual.json"
+    ],
+    "returncode": 0,
+    "duration_seconds": 0.369
+  },
+  {
+    "argv": [
+      "verify",
+      "DEV-1",
+      "--record-manual",
+      "work/manual.json"
+    ],
+    "returncode": 1,
+    "duration_seconds": 0.372
+  },
+  {
+    "argv": [
+      "verify",
+      "DEV-1"
+    ],
+    "returncode": 1,
+    "duration_seconds": 0.674
+  },
+  {
+    "argv": [
+      "verify",
+      "DEV-1",
+      "--record-manual",
+      "work/manual.json"
+    ],
+    "returncode": 0,
+    "duration_seconds": 0.371
+  },
+  {
+    "argv": [
+      "verify",
+      "DEV-1",
+      "--record-manual",
+      "work/manual.json"
+    ],
+    "returncode": 1,
+    "duration_seconds": 0.348
+  },
+  {
+    "argv": [
+      "verify",
+      "DEV-1"
+    ],
+    "returncode": 1,
+    "duration_seconds": 0.69
+  },
+  {
+    "argv": [
+      "verify",
+      "DEV-1",
+      "--record-manual",
+      "work/manual.json"
+    ],
+    "returncode": 1,
+    "duration_seconds": 0.365
+  },
+  {
+    "argv": [
+      "verify",
+      "DEV-1",
+      "--record-manual",
+      "work/manual.json"
+    ],
+    "returncode": 0,
+    "duration_seconds": 0.357
+  },
+  {
+    "argv": [
+      "lifecycle",
+      "handoff",
+      "DEV-1",
+      "--summary",
+      "Auditor synthetic fixture",
+      "--actor",
+      "Fixture executor",
+      "--model",
+      "Synthetic model"
+    ],
+    "returncode": 0,
+    "duration_seconds": 2.395
+  },
+  {
+    "argv": [
+      "lifecycle",
+      "accept",
+      "DEV-1",
+      "--result",
+      "accepted",
+      "--role",
+      "engineer",
+      "--actor",
+      "Fixture engineer",
+      "--model",
+      "Synthetic model",
+      "--note",
+      "Synthetic explicit final version acceptance"
+    ],
+    "returncode": 0,
+    "duration_seconds": 1.826
+  },
+  {
+    "argv": [
+      "close",
+      "DEV-1",
+      "--dry-run"
+    ],
+    "returncode": 0,
+    "duration_seconds": 2.81
+  }
+]

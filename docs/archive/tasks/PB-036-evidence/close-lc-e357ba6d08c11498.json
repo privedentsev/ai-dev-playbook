@@ -1,0 +1,241 @@
+{
+  "schema_version": 1,
+  "plan_id": "lc-e357ba6d08c11498",
+  "at": "2026-11-06T06:40:46+03:00",
+  "actor": {
+    "model": null,
+    "name": "cli:privedentsev1",
+    "role": "cli"
+  },
+  "basis": "playbook.py close PB-036",
+  "action": "close_task",
+  "files": [
+    {
+      "from": "docs/tasks/PB-036-evidence/implementation.md",
+      "to": "docs/archive/tasks/PB-036-evidence/implementation.md",
+      "sha256": "sha256:c87db1014897f0d7cc5bcb365644edea502a2e1b6b868950ef22fd0e1ce724a1",
+      "bytes": 8186
+    },
+    {
+      "from": "docs/tasks/PB-036-evidence/targeted-tests-02.log",
+      "to": "docs/archive/tasks/PB-036-evidence/targeted-tests-02.log",
+      "sha256": "sha256:4b6fe8d388a9316b84f0e886d83981cd70ac5e8f3d522c37a755c7956230d029",
+      "bytes": 6195
+    },
+    {
+      "from": "docs/tasks/PB-036-evidence/targeted-tests-final.log",
+      "to": "docs/archive/tasks/PB-036-evidence/targeted-tests-final.log",
+      "sha256": "sha256:db2af3ac330d972330b32902179c8a1c4a42bb4885acb522334f3db9486d2ef6",
+      "bytes": 6715
+    },
+    {
+      "from": "docs/tasks/PB-036-evidence/targeted-tests.log",
+      "to": "docs/archive/tasks/PB-036-evidence/targeted-tests.log",
+      "sha256": "sha256:46ce342beea1d3efc6d5a7c8d9fee84137fcaf9087874b308375740294ff1cac",
+      "bytes": 5901
+    },
+    {
+      "from": "docs/tasks/PB-036.md",
+      "to": "docs/archive/tasks/PB-036.md",
+      "sha256": "sha256:bd7a34154e2dfdd4609849e2703e263e5c2a09d517f9eebbc40f1c037e0e99b1",
+      "bytes": 18319
+    },
+    {
+      "from": "work/verification/PB-036/98f4b77b93124d0c874aa4b576f19752/preflight-regressions.stderr.log",
+      "to": "docs/archive/tasks/PB-036-evidence/work/verification/PB-036/98f4b77b93124d0c874aa4b576f19752/preflight-regressions.stderr.log",
+      "sha256": "sha256:423ca6d561a6e2eba78b83df3eb2fb35ca577197e93f123dc47ec21e90f39239",
+      "bytes": 1204
+    },
+    {
+      "from": "work/verification/PB-036/98f4b77b93124d0c874aa4b576f19752/preflight-regressions.stdout.log",
+      "to": "docs/archive/tasks/PB-036-evidence/work/verification/PB-036/98f4b77b93124d0c874aa4b576f19752/preflight-regressions.stdout.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "work/verification/PB-036/98f4b77b93124d0c874aa4b576f19752/report.json",
+      "to": "docs/archive/tasks/PB-036-evidence/work/verification/PB-036/98f4b77b93124d0c874aa4b576f19752/report.json",
+      "sha256": "sha256:4cffbaffca45899ffb50e23cb64bc1a5015b02fb36f1490ccea96f39283a72a1",
+      "bytes": 436717
+    },
+    {
+      "from": "work/verification/PB-036/98f4b77b93124d0c874aa4b576f19752/self-check.stderr.log",
+      "to": "docs/archive/tasks/PB-036-evidence/work/verification/PB-036/98f4b77b93124d0c874aa4b576f19752/self-check.stderr.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "work/verification/PB-036/98f4b77b93124d0c874aa4b576f19752/self-check.stdout.log",
+      "to": "docs/archive/tasks/PB-036-evidence/work/verification/PB-036/98f4b77b93124d0c874aa4b576f19752/self-check.stdout.log",
+      "sha256": "sha256:fa39452b5b278a3d56e8837a598c98e35015dee8a8655e5553f6972f055b053e",
+      "bytes": 198
+    },
+    {
+      "from": "work/verification/PB-036/98f4b77b93124d0c874aa4b576f19752/unit-tests.stderr.log",
+      "to": "docs/archive/tasks/PB-036-evidence/work/verification/PB-036/98f4b77b93124d0c874aa4b576f19752/unit-tests.stderr.log",
+      "sha256": "sha256:056aa48747487357148216d89687cf642979a2b0906cd4011be8a1d4d8399eb8",
+      "bytes": 96580
+    },
+    {
+      "from": "work/verification/PB-036/98f4b77b93124d0c874aa4b576f19752/unit-tests.stdout.log",
+      "to": "docs/archive/tasks/PB-036-evidence/work/verification/PB-036/98f4b77b93124d0c874aa4b576f19752/unit-tests.stdout.log",
+      "sha256": "sha256:33bb46bea56c7e171b8af20752e50348c1b4896e361e2fec684173512ecebb64",
+      "bytes": 418
+    },
+    {
+      "from": "work/verification/PB-036/audit-01/close-preview.log",
+      "to": "docs/archive/tasks/PB-036-evidence/work/verification/PB-036/audit-01/close-preview.log",
+      "sha256": "sha256:9a8e405db1797cf339e4e8500dc3521d4bfba80ea9d655f96d47fde1bcef6575",
+      "bytes": 33197
+    },
+    {
+      "from": "work/verification/PB-036/audit-01/preflight.log",
+      "to": "docs/archive/tasks/PB-036-evidence/work/verification/PB-036/audit-01/preflight.log",
+      "sha256": "sha256:b8d5552d35d3fd1d0fae25b6a34310372fe06e6cd39fb61464bad882d9690f5a",
+      "bytes": 1389
+    },
+    {
+      "from": "work/verification/PB-036/audit-01/probes.log",
+      "to": "docs/archive/tasks/PB-036-evidence/work/verification/PB-036/audit-01/probes.log",
+      "sha256": "sha256:6ee912d1e0eeba9f062c46990bdcb3a65d8716170596196caa147791ea09fa40",
+      "bytes": 2847
+    },
+    {
+      "from": "work/verification/PB-036/audit-01/probes.py",
+      "to": "docs/archive/tasks/PB-036-evidence/work/verification/PB-036/audit-01/probes.py",
+      "sha256": "sha256:51eaae5dd2f300de62f38b47c8884c58daaaccfa6a2ae7b59e680fbb2c2df7e5",
+      "bytes": 4869
+    },
+    {
+      "from": "work/verification/PB-036/audit-01/provenance.json",
+      "to": "docs/archive/tasks/PB-036-evidence/work/verification/PB-036/audit-01/provenance.json",
+      "sha256": "sha256:011ef246a780a74289a64d99ad0012a4bf57b4670a787d96910c7ba56ad36f33",
+      "bytes": 308
+    },
+    {
+      "from": "work/verification/PB-036/audit-01/provenance.sha256",
+      "to": "docs/archive/tasks/PB-036-evidence/work/verification/PB-036/audit-01/provenance.sha256",
+      "sha256": "sha256:863c918d20d402604ec1a8f6661285240ecbaa9244a5d6e99515b9ad35202af4",
+      "bytes": 72
+    },
+    {
+      "from": "work/verification/PB-036/audit-01/report.md",
+      "to": "docs/archive/tasks/PB-036-evidence/work/verification/PB-036/audit-01/report.md",
+      "sha256": "sha256:aa6cb8b8df917179107a1bf26028a781c4d471ffd9358d496ed634a6b3cf4a80",
+      "bytes": 3806
+    },
+    {
+      "from": "work/verification/PB-036/audit-01/schema-migrations.log",
+      "to": "docs/archive/tasks/PB-036-evidence/work/verification/PB-036/audit-01/schema-migrations.log",
+      "sha256": "sha256:daab2365434474c087c077aa77adbea283c21220cfc26dea17612775b08f9a86",
+      "bytes": 618
+    },
+    {
+      "from": "work/verification/PB-036/audit-01/snapshot.txt",
+      "to": "docs/archive/tasks/PB-036-evidence/work/verification/PB-036/audit-01/snapshot.txt",
+      "sha256": "sha256:e401625499cf0dee39ca731aef289d324fb23bcd6cb1853a7a2de9e503f2d2bc",
+      "bytes": 15977
+    },
+    {
+      "from": "work/verification/PB-036/audit-01/targeted-during-prepare.log",
+      "to": "docs/archive/tasks/PB-036-evidence/work/verification/PB-036/audit-01/targeted-during-prepare.log",
+      "sha256": "sha256:1441d2d608ef895288eba012dd0d777fd6ea72ee876ca516a21dda1cd06f5ffa",
+      "bytes": 33198
+    },
+    {
+      "from": "work/verification/PB-036/audit-01/targeted.log",
+      "to": "docs/archive/tasks/PB-036-evidence/work/verification/PB-036/audit-01/targeted.log",
+      "sha256": "sha256:c0334d8f54a0b8881b460a357fcd5b309ac93d22586c3d8708b8c52b32cf6ec0",
+      "bytes": 6195
+    }
+  ],
+  "moves": [
+    {
+      "from": "docs/tasks/PB-036-evidence",
+      "to": "docs/archive/tasks/PB-036-evidence"
+    },
+    {
+      "from": "work/verification/PB-036/98f4b77b93124d0c874aa4b576f19752",
+      "to": "docs/archive/tasks/PB-036-evidence/work/verification/PB-036/98f4b77b93124d0c874aa4b576f19752"
+    },
+    {
+      "from": "work/verification/PB-036/audit-01",
+      "to": "docs/archive/tasks/PB-036-evidence/work/verification/PB-036/audit-01"
+    },
+    {
+      "from": "docs/tasks/PB-036.md",
+      "to": "docs/archive/tasks/PB-036.md"
+    }
+  ],
+  "materials": [
+    {
+      "id": "implementation",
+      "role": "report",
+      "storage": "local",
+      "source_old": "docs/tasks/PB-036-evidence",
+      "source_new": "docs/archive/tasks/PB-036-evidence",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-036"
+      ]
+    },
+    {
+      "id": "verify-98f4b77b93124d0c874aa4b576f19752",
+      "role": "report",
+      "storage": "local",
+      "source_old": "work/verification/PB-036/98f4b77b93124d0c874aa4b576f19752",
+      "source_new": "docs/archive/tasks/PB-036-evidence/work/verification/PB-036/98f4b77b93124d0c874aa4b576f19752",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-036"
+      ]
+    },
+    {
+      "id": "audit-01",
+      "role": "report",
+      "storage": "local",
+      "source_old": "work/verification/PB-036/audit-01",
+      "source_new": "docs/archive/tasks/PB-036-evidence/work/verification/PB-036/audit-01",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-036"
+      ]
+    }
+  ],
+  "external": [],
+  "type": "lifecycle-close",
+  "task": "PB-036",
+  "outcome": "done",
+  "previous_status": "in_review",
+  "reason": null,
+  "acceptance_ref": null,
+  "policy": "managed",
+  "handoff": {
+    "at": "2026-11-06T06:31:48+03:00",
+    "actor": {
+      "name": "Codex",
+      "model": "GPT-6"
+    },
+    "summary": "0.2.0: явные init/enable-v2/migrate-card, legacy always, bootstrap и restore; 698 тестов passed",
+    "reports": [
+      "verify-98f4b77b93124d0c874aa4b576f19752"
+    ],
+    "card_projection": "sha256:46aa3e288e1de411e248150afe1087370e855a0d618deaa2bb76dd7a22571578"
+  },
+  "acceptance": {
+    "at": "2026-11-06T06:39:03+03:00",
+    "actor": {
+      "name": "Codex",
+      "model": "GPT-6"
+    },
+    "role": "auditor",
+    "kind": "acceptance",
+    "result": "accepted",
+    "handoff_at": "2026-11-06T06:31:48+03:00",
+    "session": null,
+    "detail": "Независимый аудит: замечаний нет; 27 целевых тестов, 2 теста схем и 2 дополнительных сценария passed; свежий полный verify на 698 тестов подтверждён. Протокол audit-01/report.md."
+  }
+}

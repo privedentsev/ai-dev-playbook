@@ -1,0 +1,1026 @@
+{
+  "at": "2026-10-28T11:56:23+03:00",
+  "scope": "Историческое обследование причин повторов, без повторной приёмки реализации",
+  "cards": [
+    {
+      "id": "AUDIT-004",
+      "status": "in_review",
+      "path": "docs/tasks/AUDIT-004.md",
+      "sha256": "2637d95c567dd685fab3000a2c6151bfbfac979f2fd9e50e04fa2977837b2e82",
+      "matches": [
+        {
+          "line": 20,
+          "text": "После переноса PB-005 выполнены `playbook.py index`, повторные 29/29 тестов и `playbook.py check --ready`: OK, структура и ссылки 12 карточек. Сохранённый протокол перечитан."
+        }
+      ]
+    },
+    {
+      "id": "PB-007",
+      "status": "in_review",
+      "path": "docs/tasks/PB-007.md",
+      "sha256": "c36e5f42345c7b3e667c11229bea940c9c14d4904231e0854004ccc2818c3fc3",
+      "matches": [
+        {
+          "line": 28,
+          "text": "  - `verify`: `--dry-run` печатает план без записи; отсутствие блока `verification`, неизвестная задача и `draft` отклоняются; успешный прогон пишет `report.json` и логи; падающая проверка помечает остальные `skipped`; изменение входов даёт статус `stale`; превышение `timeout_seconds` — `timeout`."
+        },
+        {
+          "line": 32,
+          "text": "Проверки: `python3 -m unittest discover -s tests -v` — 29/29 OK (включая таймаут-проверку ~0.5 c); `playbook.py index` — OK; `playbook.py check --ready` — OK. Прогон workflow на GitHub не проверялся — активируется при ближайшем push."
+        }
+      ]
+    },
+    {
+      "id": "PB-008",
+      "status": "in_review",
+      "path": "docs/tasks/PB-008.md",
+      "sha256": "f1b5c0867178ac4719fee998118e3ca67b1aeac723b056ce69cde154c937e470",
+      "matches": []
+    },
+    {
+      "id": "PB-031",
+      "status": "in_review",
+      "path": "docs/tasks/PB-031.md",
+      "sha256": "ae289f4232dbe3ed523ab0b2b77506986ac0929f713864947d18c83c3e0570ab",
+      "matches": [
+        {
+          "line": 175,
+          "text": "Команды основы: целевые `python3 -m unittest discover -s tests -p '<согласованный файл тестов>' -v`, затем настроенный `python3 ai-dev-playbook/scripts/playbook.py verify PB-031` по действующему на этапе контракту. Перед запуском проверить argv/inputs и готовность служебных данных. Проверить `index --all`, `check --ready`, `git diff --check`; после изменения файлов комплекта выполнить `adopt . --force --apply` до финального прогона. Существующий timeout не обходить скрытым изменением runner: заранее согласовать настройку при необходимости."
+        },
+        {
+          "line": 193,
+          "text": "     - Реализован валидатор `validate_task_workflow`: проверяет `schema_version == 2`, поля секции `task_workflow`, реестр проверок `checks` (`id`, `kind`, `command`/`argv`, `manual`/`scenario`, `timeout_seconds`, `default_inputs`, `rationale`), контрольные точки `checkpoints` (ссылки на существующие ID проверок)."
+        },
+        {
+          "line": 210,
+          "text": "   - В `ai-dev-playbook/project.json` таймаут для проверки `unit-tests` увеличен со 120с до 240с в связи с ростом общего набора тестов (470 тестов)."
+        },
+        {
+          "line": 225,
+          "text": "   - Выполнен повторный verify: `python3 ai-dev-playbook/scripts/playbook.py verify PB-031` (run_id: `997ef4c8f383423c88b67133319f5188`, статус: `passed`)."
+        },
+        {
+          "line": 236,
+          "text": "   - Выполнен повторный verify: `python3 ai-dev-playbook/scripts/playbook.py verify PB-031` (run_id: `667765ae60914590a9d90f0a66ed9452`, статус: `passed`)."
+        },
+        {
+          "line": 287,
+          "text": "Итог независимого полного прогона: **472/472 PASS**, 163.351s, `python3 -m unittest discover -s tests -v`; [лог](PB-031-evidence/reaudit-01/unit-tests.log). Итоговые `check --ready` и `git diff --check`: PASS. Эти результаты не снимают воспроизведённые A2/A3. Файлы комплекта не менялись, self-manifest не перезаписывался."
+        },
+        {
+          "line": 311,
+          "text": "Закрытие по поручению инженера: `lifecycle accept ... --result accepted --kind acceptance --role auditor` выполнено. `close PB-031 --dry-run` после регистрации каталога доказательств построил план. Реальный `close PB-031` остановлен staged-проверкой: `ERROR: docs/plans/index.md: битая или внешняя локальная ссылка ../tasks/PB-031.md` (close-attempt.log в audit-reaudit-02). Записи в архив не произошло, исходная карточка осталась in_review, pending отсутствует. Итоговая проверка активного дерева `check --ready` проходит."
+        }
+      ]
+    },
+    {
+      "id": "PB-041",
+      "status": "in_review",
+      "path": "docs/tasks/PB-041.md",
+      "sha256": "798f8c10163a119aeb19c1012dba476863feaa94ecaf033c01524017e7af7ae4",
+      "matches": [
+        {
+          "line": 251,
+          "text": "Результат: failed"
+        },
+        {
+          "line": 256,
+          "text": "- Финальный полный набор: 523 теста, 522 passed, один отказ test_self_project_copy_pilot из-за несоответствия отметок PB-040 журналу/свежести на копии репозитория. Отчёт runner failed; inputs_unchanged=true на момент завершения. Runner пропустил self-check после отказа unit-tests; отдельный check --ready воспроизвёл тот же блокер PB-040."
+        },
+        {
+          "line": 267,
+          "text": "- Следующий шаг: после устранения внешнего блокера состояния проекта повторить verify, добавить новую CHECK и HANDOFF, выполнить lifecycle handoff и передать независимому аудитору. Аудит должен проверить парные операции и прерывания, прежний inline/legacy путь и достаточность компактного контекста."
+        },
+        {
+          "line": 310,
+          "text": "Независимо проверено: чтение реализации адаптера и compact show; повтор 9 профильных тестов (включая два close/reopen, immutable evidence, stale plan, rollback и SIGKILL/restore); отдельная CLI-проба маркеров с inline-контролем. Исходная передача current; check --ready прошёл до записи аудита."
+        },
+        {
+          "line": 348,
+          "text": "Результат: failed"
+        }
+      ]
+    },
+    {
+      "id": "PB-046",
+      "status": "in_review",
+      "path": "docs/tasks/PB-046.md",
+      "sha256": "ee907347c94c2076d1a13c64f151ac62188ac00e5c4a6301b728329cb57ce5b2",
+      "matches": [
+        {
+          "line": 18,
+          "text": "Перевести документные операции на выборочный staged и поздний backup. Сохранить существующие гарантии gate/pending/restore и передавать payload путями/потоками. Лимит истории и удаление старых каталогов здесь не включать."
+        },
+        {
+          "line": 32,
+          "text": "- [x] AC-03: SIGKILL в каждой значимой фазе и повторный SIGKILL restore сохраняют восстановимость; missing/corrupt metadata не снимают pending. Проверены engine и автономный restore, lock ownership, права каталогов, временные имена и receipt boundary."
+        }
+      ]
+    },
+    {
+      "id": "AUDIT-001",
+      "status": "done",
+      "path": "docs/archive/tasks/AUDIT-001.md",
+      "sha256": "7fbc256cc0efe4628fac7816b4a038d662ef1a8ece96a0c76b8fd09bcb6be237",
+      "matches": []
+    },
+    {
+      "id": "AUDIT-002",
+      "status": "done",
+      "path": "docs/archive/tasks/AUDIT-002.md",
+      "sha256": "09a4a92a0718f83512c689fd0eb62113163bd41eb9baf6fa9be731d266fd375e",
+      "matches": []
+    },
+    {
+      "id": "AUDIT-003",
+      "status": "done",
+      "path": "docs/archive/tasks/AUDIT-003.md",
+      "sha256": "180e4a3979fde3e6ae73254a3ae161f6a5ab84671ae3cc49e8d2f7657493580e",
+      "matches": [
+        {
+          "line": 23,
+          "text": "- CLI ограничивает пути корнем проекта, проверяет конфигурацию и ссылки, не перезаписывает конфликтующие файлы при установке."
+        },
+        {
+          "line": 24,
+          "text": "- 29 локальных тестов включают сценарии установки, проверок, отчётов и таймаута; CI сконфигурирован."
+        }
+      ]
+    },
+    {
+      "id": "AUDIT-005",
+      "status": "done",
+      "path": "docs/archive/tasks/AUDIT-005.md",
+      "sha256": "c9bbb3ac96a3a80ed54b26c655f153c23f4dddf2a98b20fefd273db94e48522f",
+      "matches": [
+        {
+          "line": 71,
+          "text": "[Повторная проверка всех исправлений](AUDIT-005-evidence/recheck02-report.md): **A1/A2/A3/A4/A5/A8 закрыты. A6/A7 остаются открытыми (оба High).** A6: неполный backed в backup_index даёт ложный успех и смешанное состояние. A7: старый автономный restore.py восстанавливает чужую операцию и снимает её pending. Размещение — PB-018 и PB-019 соответственно; PB-019 возвращён в in_progress, AUDIT-005 остаётся blocked."
+        }
+      ]
+    },
+    {
+      "id": "AUDIT-006",
+      "status": "done",
+      "path": "docs/archive/tasks/AUDIT-006.md",
+      "sha256": "67bbe6a622b0959ae955458590975bfa751664cf9bfe7dcaa8c84b74bc74a86d",
+      "matches": [
+        {
+          "line": 205,
+          "text": "Итоговая самопроверка 2026-10-22T13:35:10+03:00; исполнитель: Codex; модель: GPT-6. Verify `8e7f3e5755e341b1be1474b88331bf1c` — passed, inputs_unchanged=true; 435/435 тестов PASS, 118.386 s; self-check PASS. Предыдущий финальный прогон `2685f3308352423c9c3a63c6598cad1a` остановлен по timeout 120 s на self-project copy; после удаления только собственных временных копий репетиций полный прогон прошёл в установленный лимит. Все неуспешные отчёты сохраняются и регистрируются как материалы, не выдаются за PASS."
+        }
+      ]
+    },
+    {
+      "id": "PB-001",
+      "status": "done",
+      "path": "docs/archive/tasks/PB-001.md",
+      "sha256": "60f737be6d93b8655e49030b47870238081acdd24f789ed039e01e601bfb7900",
+      "matches": []
+    },
+    {
+      "id": "PB-002",
+      "status": "done",
+      "path": "docs/archive/tasks/PB-002.md",
+      "sha256": "27122da3286dcb7e8069cfa0cb0d7808998ad67101e53dcb748241199fbe3510",
+      "matches": []
+    },
+    {
+      "id": "PB-003",
+      "status": "done",
+      "path": "docs/archive/tasks/PB-003.md",
+      "sha256": "e63d8601c9937c38aec6e0ba60e7f94c9138d2ba0e2b8502f71294125aed12f7",
+      "matches": []
+    },
+    {
+      "id": "PB-004",
+      "status": "done",
+      "path": "docs/archive/tasks/PB-004.md",
+      "sha256": "3266751de5601b10d500ad44392f9351128184136b9634a3316ab8622cdb07b7",
+      "matches": [
+        {
+          "line": 41,
+          "text": "- Не проверялось: поведение на других проектах с уже внедрённым комплектом — их индекс станет устаревшим до первого `index`; запасные варианты сортировки архива между префиксами ID не согласовывались (сейчас группировка по префиксу, внутри — номер по убыванию)."
+        }
+      ]
+    },
+    {
+      "id": "PB-005",
+      "status": "done",
+      "path": "docs/archive/tasks/PB-005.md",
+      "sha256": "e457b63c9167b79ef9a10b64b3ddd21d22b5c17ca236f437500705b11cc31265",
+      "matches": [
+        {
+          "line": 45,
+          "text": "- Исправление PB-005-A1: `render_index` показывает модель только вместе с исполнителем; карточка без `Executor:` даёт `—` в колонке даже при заполненной `Model:` (значение остаётся в карточке). Добавлен регрессионный тест `test_render_index_model_without_executor_dash`. Повторные прогоны: `unittest` — 10/10 OK, `index` и `check --ready` — OK."
+        },
+        {
+          "line": 54,
+          "text": "- Статус возвращён в `in_progress`. После исправления повторить тесты, `index` и `check --ready`, затем передать на повторный аудит. Остальные результаты и границы — в [AUDIT-001](AUDIT-001.md). Исправление внесено, статус — `in_review`, ожидает повторного аудита."
+        }
+      ]
+    },
+    {
+      "id": "PB-006",
+      "status": "done",
+      "path": "docs/archive/tasks/PB-006.md",
+      "sha256": "1622918fbf8d0246ea30eb690b47b130c36d411bd3771f93356c859a66197488",
+      "matches": [
+        {
+          "line": 46,
+          "text": "7. **Прерывание и восстановление.** Симулирован маркер `work/update/pending.json` + op-каталог с `backup_index.json`/`backup/` и смешанное состояние (VERSION повреждён, лишний файл записан): обычные команды заблокированы с подсказкой, `update status` показывает операцию и оба пути восстановления, `update restore` детерминированно вернул 2 файла, удалил добавленный, снял маркер; `check --ready` OK. Автономный `restore.py` в op-каталоге присутствует (путь показан status, отдельно не запускался)."
+        },
+        {
+          "line": 53,
+          "text": "- Прерывание записи воспроизведено симуляцией pending-маркера, не реальным SIGKILL — тот же уровень доказательства, что в тестах PB-018."
+        },
+        {
+          "line": 57,
+          "text": "- `check` валидирует ссылки всех `docs/**/*.md` проекта — внедрение в проект с битыми ссылками в документах потребует их исправления (в пилоте ссылки оказались корректны). Первичное подключение к непустому проекту сохраняет существующее правило: при конфликте развернуть комплект отдельно и объединить документы осознанно, не перезаписывать их."
+        }
+      ]
+    },
+    {
+      "id": "PB-009",
+      "status": "done",
+      "path": "docs/archive/tasks/PB-009.md",
+      "sha256": "59829b4dd1bd3202ff7093261c951753db822e5fc4124af1bc86e1879791b601",
+      "matches": [
+        {
+          "line": 32,
+          "text": "- Повторное исправление PB-009-A2: `relocate_links` пересчитывает локальные ссылки внутри переносимой карточки относительно `archive/` до записи; общая перезапись вынесена в `rewrite_links`/`LINK_INLINE`/`LINK_DEF`. Добавлен тест отката при сбое `write_index` (чужой индекс): карточка, содержимое и документы восстанавливаются."
+        }
+      ]
+    },
+    {
+      "id": "PB-010",
+      "status": "done",
+      "path": "docs/archive/tasks/PB-010.md",
+      "sha256": "419b8b508dbe1f9f6d4680a8d54367df6f090e81773751e1be37c378e0c7a898",
+      "matches": []
+    },
+    {
+      "id": "PB-011",
+      "status": "done",
+      "path": "docs/archive/tasks/PB-011.md",
+      "sha256": "01ec6a3e736fe1afc3637a496d36e0898825ac01eae22778063796c69c0aec83",
+      "matches": []
+    },
+    {
+      "id": "PB-012",
+      "status": "done",
+      "path": "docs/archive/tasks/PB-012.md",
+      "sha256": "7a424413858f49b4903330bb273e431a6cbd355422473524605ad7fb4a46d6ca",
+      "matches": [
+        {
+          "line": 45,
+          "text": "Исполнение 2026-09-29 (Devin / SWE-2 High): зависимость PB-011 закрыта (`done`, архив), карточка разблокирована и взята в работу. Подготовленные правки сверены с приёмкой: все перечисленные изменения на месте в `rules/tasks.md`, `rules/verification.md`, `templates/task.md`, `templates/AGENTS.md`, `playbook.py` (`MODEL_UNCONFIRMED`, `AUDIT_HEADING`, отказ `close` при маркере), `tests/test_cli.py` (3 теста), `docs/architecture.md`, `CHANGELOG.md`. Повторные проверки: `playbook.py index` — OK; `playbook.py check --ready` — OK (16 карточек); `python3 -m unittest discover -s tests -q` — 51/51 OK; `playbook.py verify PB-012` — passed (unit-tests + self-check, входы не изменены, отчёт `work/verification/PB-012/724c0304fc544124add08b8cdb245b9c/report.json`)."
+        }
+      ]
+    },
+    {
+      "id": "PB-013",
+      "status": "done",
+      "path": "docs/archive/tasks/PB-013.md",
+      "sha256": "a50d448d8a0243b621b7538ffa3affd3bb6288a5349146f1d07eebd9d558dad3",
+      "matches": []
+    },
+    {
+      "id": "PB-014",
+      "status": "done",
+      "path": "docs/archive/tasks/PB-014.md",
+      "sha256": "85abc679509ef0962356ad4dc6e084a397ec05519692125d4fae1eb38ba36b62",
+      "matches": []
+    },
+    {
+      "id": "PB-015",
+      "status": "done",
+      "path": "docs/archive/tasks/PB-015.md",
+      "sha256": "4b7c9b6e43db88fb42d708d69171cdda42064eba0d73bf1ad1b66f426e8b5e42",
+      "matches": []
+    },
+    {
+      "id": "PB-016",
+      "status": "done",
+      "path": "docs/archive/tasks/PB-016.md",
+      "sha256": "93e86fe27f5c0d309865ba60c2f487c77158732a10e270122e4faf18409124f3",
+      "matches": [
+        {
+          "line": 67,
+          "text": "A1 повторно подтверждён как закрытый. A7 в PB-019 остаётся открыт: автономный восстановитель не проверяет владельца pending. Изменения во время staged-проверок обнаруживаются, сохранность пользовательской правки подтверждена."
+        }
+      ]
+    },
+    {
+      "id": "PB-017",
+      "status": "done",
+      "path": "docs/archive/tasks/PB-017.md",
+      "sha256": "2383e0ae8d37d5647cad1516b5014545b2bc5de8c771246cc5787cc8f0989b4a",
+      "matches": [
+        {
+          "line": 43,
+          "text": "- Формат карточек версионируется отпечатком заголовка `templates/task.md`; расхождение с установленным — ручное замечание в плане, авто-перезаписи карточек нет: история аудитов, ID, статусы и даты не трогаются. Расхождение шаблона `templates/AGENTS.md` с корневым `AGENTS.md` — тоже ручное замечание; проектные инструкции сохраняются."
+        },
+        {
+          "line": 75,
+          "text": "Исправлено 2026-09-30T15:52:17+03:00; исполнитель: Devin; модель: SWE-2 High. AUDIT-005-A4 — неоднозначные миграции отклоняются до записи вместо скрытой потери значений: `json_rename` отказывает, если назначение занято другим значением (равное значение — схождение: источник удаляется, назначение сохраняется), а также при пересекающихся путях (один — префикс другого); `_path_set` отказывает, когда промежуточный путь занят не-объектом, включая явный `null` (ранее скаляр/другое значение молча заменялось `{}`). Отказы вычисляются в `plan_migrations` на этапе плана — до любой записи; повторное выполнение безопасно (идемпотентность сохранена). Контракт дополнен в [rules/update.md](../../../ai-dev-playbook/rules/update.md) (раздел «Миграции»). Проверено новыми тестами в `MigrationTest`: rename в занятое назначение отклонён на плане и при прямом вызове (повторный прогон не скрывает коллизию), пересекающиеся пути отклонены в обе стороны, set через скаляр и через `null` отклонены с сохранением значения, схождение rename допустимо и идемпотентно. `python3 -m unittest discover -s tests` — 121 тест OK; `check --ready` — OK."
+        }
+      ]
+    },
+    {
+      "id": "PB-018",
+      "status": "done",
+      "path": "docs/archive/tasks/PB-018.md",
+      "sha256": "af541c66f24e21f37b087e3f3db4cb2d32f0b0f25b290ef52c93a3f3650f1817",
+      "matches": [
+        {
+          "line": 45,
+          "text": "- Резервная копия всех затрагиваемых путей в `backup/` + `backup_index.json`; устойчивый `journal.jsonl` (fsync) фиксирует staged → backup_complete → write/remove → verified → done|failed → restored."
+        },
+        {
+          "line": 46,
+          "text": "- `work/update/pending.json` — маркер незавершённой операции: обычные команды (check/index/close/verify/init/adopt/update plan|apply) отклоняются до `update restore`; `update status` показывает операцию и хвост журнала."
+        },
+        {
+          "line": 50,
+          "text": "Проверки: `UpdateApplyTest` — end-to-end применение (файлы, VERSION, manifest, журнал, бэкап, restore.py), пустой план, повторный план после обновления пуст, keep/release-разрешения, неизвестные файлы сохранены, отказ при падающей staged-проверке без изменения проекта, прохождение staged-проверки, внедрение сбоя записи с автоматическим восстановлением, блокировка команд при pending + `update restore`, автономный restore.py через subprocess. `python3 -m unittest discover -s tests` — 98 тестов OK; `check --ready` — OK."
+        },
+        {
+          "line": 79,
+          "text": "- Доказательство: `updating.py:590–605, 781–796; playbook.py:78`; test_A5_schema_upgrade_succeeds_but_installed_CLI_breaks повторяет существующий test_schema_migration_with_steps: шаблон project schema=2 и явный json_set schema_version=2 при неизменном CLI. Apply=0, pending снят; следующий запуск установленного check завершается «Неподдерживаемая схема project.json»."
+        },
+        {
+          "line": 83,
+          "text": "### AUDIT-005-A6 — High: Неполное восстановление выдаётся за успешное и снимает pending"
+        },
+        {
+          "line": 85,
+          "text": "- Доказательство: `updating.py:607–628, 643–667, 799–809`; test_A6_missing_backup_is_reported_as_success: реальный SIGKILL после первой journaled-записи, затем удалить backup/VERSION; update restore=0, маркер снят, VERSION остаётся новой, project/manifest старые. test_A6_standalone_missing_index_is_success: удалить backup_index.json; автономный restore.py также возвращает 0 и снимает pending."
+        },
+        {
+          "line": 87,
+          "text": "- Критерий исправления: Предварительно валидировать индекс и весь набор backup; при недостающем/повреждённом пред-образе возвращать ненулевой код и сохранять pending. Снимать маркер только после подтверждённого возврата всех путей, одинаково для CLI и автономного скрипта."
+        },
+        {
+          "line": 93,
+          "text": "A2/A3/A5/A6 повторно воспроизводятся. A7 в PB-019 исправлен частично: restore снимает pending живого apply, допуская параллельную операцию. [Протокол](AUDIT-005-evidence/recheck01-report.md). Код в рамках аудита не менялся."
+        },
+        {
+          "line": 101,
+          "text": "- AUDIT-005-A5 — добавлен `_run_cli_compat`: после записи staged-копии в отдельном процессе исполняются `config()` и `resources()` playbook **из артефакта** на итоговом состоянии копии — до записи в проект и независимо от настроенного `verification`; argv фиксирован, произвольные команды артефакта не запускаются. Несовместимость — отказ, маркер снимается, проект не изменён. Тест `test_schema_migration_incompatible_cli_rejected` (бывший `test_schema_migration_with_steps`): apply=1, настройки и VERSION прежние, pending нет; `test_schema_migration_compatible_cli_applies`: артефакт с CLI, принимающим schema 2, применяется, и установленный CLI выдерживает `check`/`index`/`plan` отдельным процессом."
+        },
+        {
+          "line": 102,
+          "text": "- AUDIT-005-A6 — восстановление строгое: `backup_index.json` дополнен `hashes` (sha256 копий); `_read_backup_index` до записи проверяет наличие индекса, состав и целостность всех копий — неполнота/повреждение отклоняются с сохранением маркера; `_restore_from_backup` после копирования сверяет результат с копией побайтово. `update restore` требует каталог операции; в `apply` неполное восстановление фиксируется `restore_failed`, маркер сохраняется, ошибка сообщает честно. Автономный `restore.py` повторяет ту же валидацию и снимает маркер только после подтверждённого возврата всех путей. Тесты: отсутствующий файл копии, повреждённая копия и отсутствующий индекс — отказ и сохранение pending (CLI и автономный скрипт); индекс, найденный позже, даёт успешное восстановление."
+        },
+        {
+          "line": 112,
+          "text": "**A6, High, остаётся открыт.** В `test_remaining_A6_incomplete_index_false_success` после реального SIGKILL из backed удаляется VERSION, но backup/VERSION и hashes остаются. CLI restore=0, pending снят, VERSION=0.0.3 при project/manifest=0.0.2; check падает. Причина: updating.py:743–774 не сверяет полный состав backed/hashes/backup. Влияние: ложный успех восстановления и смешанное состояние при доступном пред-образе. Приёмка: до записи валидировать согласованность полного состава, дубли и пересечения; неполный/пустой backed должен отклоняться с сохранением pending, одинаково для CLI/standalone. После исправления индекса полный возврат должен проходить."
+        },
+        {
+          "line": 128,
+          "text": "Индивидуальная приёмка всей карточки пройдена. A2/A3/A5 подтверждены, A6 закрыт: шесть повреждений индекса проверены через CLI и standalone после реального SIGKILL — отказ без записи с сохранением pending; правильный индекс восстанавливает полный набор исходных SHA-256. Проверены staged/CLI-совместимость, journal/backup, сбои, повтор и сохранность; открытых замечаний в заявленных границах нет."
+        }
+      ]
+    },
+    {
+      "id": "PB-019",
+      "status": "done",
+      "path": "docs/archive/tasks/PB-019.md",
+      "sha256": "fbc2a50a2fd6d3e60e1d624ca9ab840ccdabda55b87b2a046be36a4e2796b97c",
+      "matches": [
+        {
+          "line": 14,
+          "text": "Закрыть общие находки AUDIT-005-A1/A7 на границе [PB-016](PB-016.md) и [PB-018](PB-018.md). P1: подтверждена перезапись пользовательских данных устаревшим планом. Карточка создана по [AUDIT-005](AUDIT-005.md); ремонт не разрешён запросом аудита. Зависимости не заданы, поскольку дефекты блокируют приёмку самих исходных карточек."
+        },
+        {
+          "line": 18,
+          "text": "### AUDIT-005-A1 — High: Новый файл после предпросмотра перезаписывается без разрешения"
+        },
+        {
+          "line": 26,
+          "text": "- Доказательство: `updating.py:686–689, 719–746`; test_A7_live_edit_during_staging_is_overwritten: доверенная проверка во временной копии моделирует редактор — меняет rules/git.md оригинала во время staged-фазы. Apply=0 и перезаписывает это изменение релизом."
+        },
+        {
+          "line": 34,
+          "text": "Исправлено 2026-09-30T15:15:23+03:00; исполнитель: Devin; модель: SWE-2 High. AUDIT-005-A7 — маркер `pending.json` создаётся эксклюзивно (`open \"x\"`) до staged-подготовки и удерживается всё применение: обычные команды и параллельный `update apply` отклоняются; проигравший гонку apply завершается abort до записи. После staged-проверок и резервной копии `_require_plan_inputs` повторно сверяет manifest, артефакт и отпечаток состояния перед первой записью; изменение входов отменяет применение, маркер снимается, журнал фиксирует `abort` без `done`. Проверено `test_edit_during_staged_checks_rejects_apply` (правка оригинала во время checks из доверенной проверки — отказ, пред-образ сохранён, повторный plan/apply работает) и `test_parallel_apply_rejected` (два apply отдельными процессами — второй отклонён, первый завершается успешно)."
+        },
+        {
+          "line": 36,
+          "text": "Исправлено 2026-09-30T15:32:46+03:00; исполнитель: Devin; модель: SWE-2 High. AUDIT-005-A7 (доработка после повторного аудита) — добавлена эксклюзивная файловая блокировка `work/update/lock` (`_update_lock`: `fcntl.flock`/`msvcrt.locking`, дескриптор удерживается всю операцию; ОС снимает её при любом завершении, включая SIGKILL — зависшей блокировки нет). `update apply` берёт блокировку до создания маркера — второй apply отклоняется. `update restore` и автономный `restore.py` отказываются, пока операция жива; восстановление доступно только после реального прерывания. Снятие маркера через `_release_pending` проверяет `op_id` владельца — чужой/повреждённый маркер не удаляется. `update status` показывает, выполняется ли операция. Контракт уточнён: backup создаётся до последней сверки и не содержит правку внешнего редактора после неё. Проверено `test_restore_refused_for_running_apply` (apply-процесс с барьером; restore и второй apply отклонены, check заблокирован, после снятия барьера apply завершается успешно) и `test_pending_release_checks_owner`. Проба аудитора `test_active_restore_unlocks_running_apply` больше не воспроизводит обход; контрольный SIGKILL/restore в probes.py работает."
+        },
+        {
+          "line": 38,
+          "text": "Исправлено 2026-09-30T16:34:17+03:00; исполнитель: Devin; модель: SWE-2 High. AUDIT-005-A7 (доработка после второго повторного аудита) — автономный `restore.py` сверяет владельца маркера до любой записи: `pending.json` обязан существовать, читаться и ссылаться на каталог этого восстановителя (`op_id` равен имени каталога, `op_dir` резолвится в него); отсутствующий, повреждённый или принадлежащий другой операции маркер — отказ без изменения файлов и маркера. Снятие маркера в конце повторно проверяет `op_id` — удаляется только собственный маркер. Автономный скрипт также повторяет строгую валидацию индекса резервной копии (см. A6 в [PB-018](PB-018.md)). `update restore` требует, чтобы `op_dir` маркера был прямым потомком `work/update/` и совпадал с `op_id`. Контракт уточнён в [rules/update.md](../../../ai-dev-playbook/rules/update.md). Проверено `UpdateRestoreGuardTest`: `test_stale_standalone_restore_refused_and_own_restores` (два последовательных обновления; старый restore.py отклоняется, текущий возвращает пред-образ), `test_standalone_restore_without_pending_refused`, `test_cli_restore_rejects_marker_outside_ops_dir`; сценарий аудитора воспроизведён вручную с реальным SIGKILL — старый восстановитель отклонён, текущий после прерывания возвращает пред-образ 0.0.3, `check --ready` проходит. Проба `test_remaining_A7_standalone_ignores_pending_owner` больше не воспроизводит дефект."
+        },
+        {
+          "line": 42,
+          "text": "- Изменения: `ai-dev-playbook/scripts/updating.py` (`state_fingerprint` + `extra`, `_require_plan_inputs`, ранний pending, повторная сверка; доработки — `_update_lock`, `_release_pending`, lock-гвард в `restore.py`, живость в `update status`; вторая доработка — строгая валидация `_read_backup_index`, сверка владельца маркера в `update_restore` и `RESTORE_SCRIPT`), контракт [rules/update.md](../../../ai-dev-playbook/rules/update.md) (состав отпечатка, порядок шагов apply, блокировка и владелец маркера, полнота backup-индекса, границы гарантий), [CHANGELOG.md](../../../CHANGELOG.md), [docs/update-plan.md](../../update-plan.md), [docs/architecture.md](../../architecture.md), `tests/test_cli.py` — классы `UpdatePlanProtectionTest` (7 сценариев) и `UpdateRestoreGuardTest` (5 сценариев)."
+        },
+        {
+          "line": 64,
+          "text": "- **A7, High, открыт:** базовая повторная сверка и запрет второго apply работают. Но `update restore` при живом первом apply снимает pending; второй apply входит в staged одновременно с первым. Воспроизведение: `python3 docs/tasks/AUDIT-005-evidence/recheck01.py`, `test_active_restore_unlocks_running_apply`; доказательство — оба процесса живы и оба журнала содержат staged до снятия барьера. Код: updating.py:732–739, 835–845. Влияние: обход взаимного исключения, удаление чужого маркера и доступ обычных команд во время обновления."
+        },
+        {
+          "line": 73,
+          "text": "**A7, High, остаётся открыт; возврат в in_progress.** `test_remaining_A7_standalone_ignores_pending_owner`: после восстановленной первой операции 0.0.2→0.0.3 и её успешного повтора прервать следующее обновление 0.0.3→0.0.4 реальным SIGKILL. Запуск restore.py первой операции (без правки pending) возвращает 0, откатывает до 0.0.2 вместо 0.0.3 и удаляет маркер новой операции. Код: RESTORE_SCRIPT в updating.py:804–886; проверка op_id/op_dir отсутствует, снятие pending безусловно. Влияние: откат чужой транзакции и потеря маркера актуальной операции."
+        },
+        {
+          "line": 75,
+          "text": "Приёмка: standalone до записи сверяет op_id/op_dir текущего pending со своей копией, отказывает для старого каталога без изменений, снимает только собственный маркер; правильный восстановитель после SIGKILL возвращает пред-образ текущей операции. Проверить два последовательных обновления и оба пути восстановления. Новая карточка не нужна: требование владения блокировкой уже входит в A7."
+        },
+        {
+          "line": 81,
+          "text": "Индивидуальная приёмка всей карточки пройдена. A1 подтверждён; A7 закрыт: старый standalone отклонён без изменений при pending новой операции, актуальный standalone после реального SIGKILL возвращает точный пред-образ 0.0.3 и снимает свой маркер. Повтор без pending отклонён. Живая блокировка, параллельный apply, внешний редактор и повторная сверка проходят; открытых замечаний нет."
+        }
+      ]
+    },
+    {
+      "id": "PB-020",
+      "status": "done",
+      "path": "docs/archive/tasks/PB-020.md",
+      "sha256": "e4f37ade25951c2cb78b96d2c14890498fd7fcb1edcb32b82d7784135cb2ff0b",
+      "matches": [
+        {
+          "line": 80,
+          "text": "- Хеши 31 файла комплекта совпадают со снимком начала этого этапа: `ai-dev-playbook/` не изменён, self-manifest обновлять не требуется. Проверки поведения CLI, пилоты и независимый аудит не выполнялись: проверены только план, карточки и навигация. Повторный запуск прежних тестов поведения не нужен для этой документной правки."
+        }
+      ]
+    },
+    {
+      "id": "PB-021",
+      "status": "done",
+      "path": "docs/archive/tasks/PB-021.md",
+      "sha256": "4519eca05c6eda6260f64a1f40b6b806c39bd5580d306d9843f60ff914595ebd",
+      "matches": [
+        {
+          "line": 87,
+          "text": "`verify PB-021`: PASS — `work/verification/PB-021/8e6e85d1f6b0488584b8295eebd4f65f/report.json` (unit-tests, self-check; повторный прогон после правок документации). Передача в in_review; независимая приёмка — отдельная сессия или инженер."
+        },
+        {
+          "line": 99,
+          "text": "Среда: macOS 27.0.1, Python 3.14.6, ветка `dev`, HEAD `0744f93`; проверено фактическое рабочее дерево с существующими незакоммиченными изменениями, не один HEAD. Точная модель уточнена инженером в этой сессии. Отпечатки до/после повторного прогона (с обнаруженным изменением входов) — [снимок](PB-021-evidence/audit-inputs.json)."
+        },
+        {
+          "line": 159,
+          "text": "Во время оформления протокола внешним исполнителем изменены `documents.py`, затем `playbook.py`, появился `document_links.py`. Аудитор эти файлы не редактировал. На повторном прогоне 12 subprocess-сценариев A1–A6 воспроизвелись снова; состав/байты фикстур не изменились. Повтор общего suite завершился **187 tests, 11 errors**, включая `NameError: rewrite_links` в `close`: [лог промежуточного состояния](PB-021-evidence/concurrent-run.log). До/после прогона хеш `playbook.py` изменился. Этот прогон относится к изменяющемуся дереву; первоначальные 187 OK не подтверждают итоговое состояние. Промежуточные ошибки соседней переработки не оформляются как установленные дефекты PB-021 без стабильного снимка. Перед повторной приёмкой необходим завершённый неизменный набор входов и новый полный прогон."
+        },
+        {
+          "line": 211,
+          "text": "Критерий исправления: не добавлять невалидные ID в множества и не передавать их дальше; преобразовывать ошибки разбора URI в сообщение с документом и полем. Добавить регрессии для этих трёх случаев, повторить исходные проверки A6, общий `verify` и независимую приёмку. Новая карточка для остатка A6 не создаётся."
+        }
+      ]
+    },
+    {
+      "id": "PB-022",
+      "status": "done",
+      "path": "docs/archive/tasks/PB-022.md",
+      "sha256": "29df94253f1a7521b57e9d89bda118d21d720a89eec77644579810e9f64993c4",
+      "matches": [
+        {
+          "line": 183,
+          "text": "- `python3 docs/tasks/PB-022-evidence/audit-probes.py` — **10/10 OK**; [новый лог прежних воспроизведений](PB-022-evidence/reaudit-original-probes.log). Исторический неуспешный лог не перезаписан."
+        },
+        {
+          "line": 197,
+          "text": "Регрессии: `tests/test_document_links.py::AuditRegressionTest` расширен до 21 теста (angle+query/fragment, escaped/unmatched backtick, вложенное изображение, совместный перенос wikilink). Проверки: `python3 -m unittest discover -s tests -v` — **277 тестов, OK** ([лог](PB-022-evidence/unit-tests-after-reaudit-fixes.log)); прежние probes — 10/10, новые probes — **8/8 OK** ([лог](PB-022-evidence/reaudit-probes-after-fixes.log)); `check --ready` — OK. `verify PB-022` — **passed**, отчёт `work/verification/PB-022/70e07d2aa9f14475b99f34e33adf168d/report.json` (первый прогон завершился `stale`: параллельная работа добавила `file_operations.py` во время измерения входов; повторный прогон на неизменных входах успешен). Self-manifest обновлён. Статус — `in_review` для повторной независимой приёмки."
+        }
+      ]
+    },
+    {
+      "id": "PB-023",
+      "status": "done",
+      "path": "docs/archive/tasks/PB-023.md",
+      "sha256": "4b5429eae29bca89014c4257f02b19c11455fcb468f4ef9b19d6826ff2ec69f0",
+      "matches": [
+        {
+          "line": 14,
+          "text": "Создать механизм staged-проверок, backup-index, журнала, pending и автономного restore для документных операций; подключить общий gate с фиксированным порядком блокировок. Формат backup существующего update сохранить. Бизнес-семантика архивирования остаётся в следующих задачах."
+        },
+        {
+          "line": 31,
+          "text": "Результат для следующего этапа: Проверяемый протокол write-set/staged/backup/pending/journal/restore для PB-024–PB-026, включая автономное восстановление. Формат старого backup update остаётся совместимым."
+        },
+        {
+          "line": 44,
+          "text": "2. Подключить gate и защиту обычных команд при pending без тупиков с verify/update."
+        },
+        {
+          "line": 51,
+          "text": "- [x] Повреждённый backup, чужой pending и живая операция отклоняют restore без снятия маркера; повторное восстановление безопасно."
+        },
+        {
+          "line": 80,
+          "text": "**Реализация.** Новый `ai-dev-playbook/scripts/file_operations.py`: спецификация операции (`operation`, `plan_id`, `actor`, `writes`/`removes`/`remove_dirs`, обязательный `inputs`-снимок затрагиваемых и читаемых путей, `staged_checks`/`final_checks`, метаданные квитанции) с отклонением неизвестных полей и небезопасных/служебных путей до записи; `snapshot_paths` (`sha256`|`dir`|`missing`). Протокол `run_operation`: общий gate → `work/lifecycle/lock` → маркер `work/lifecycle/pending.json` (создание `\"x\"`, fsync) → `restore.py` → staged-копия проекта (исключены `.git`, `work`, кеши) с применённым write-set и проверками → `backup/` копий с `backup_index.json` (атомарная запись, схема 1: backed/added/missing, hashes, modes, planned, created_dirs/removed_dirs) → повторная сверка входов → запись через temp+replace с сохранением режима → финальная сверка состава и final_checks → `receipt.json` → снятие маркера. Ошибка до записи — abort без изменений; ошибка после — полный откат по backup (байты, состав, права), при невозможности восстановления маркер сохраняется. Повторный `plan_id` → `already_completed` без второго применения."
+        },
+        {
+          "line": 84,
+          "text": "**Общий gate.** `work/gate.lock`, неблокирующий flock/msvcrt, держатель записывается в файл (`token`, `owner`, `pid`); порядок строго gate → специализированный lock. Подключён в `playbook.py` к `index`, `close`, `verify` (кроме `--dry-run`), `adopt --apply`, `update plan --save|apply|restore`; gate отклоняет команды при pending обеих подсистем (для `update restore` разрешён его маркер). `verification.py` пробрасывает `PLAYBOOK_GATE` в env проверок — вложенные playbook-команды проходят как nested при живом держателе и совпадающем токене; устаревший токен не обходит занятую или свободную блокировку. `updating.py` отклоняет свои операции при lifecycle-pending; `update status` дополнительно показывает его. `init` пишет в другой корень и gate не берёт. Read-only `check`/`document`/`update status` не блокируются gate; при pending обычные команды отклоняются сообщением с путём restore."
+        },
+        {
+          "line": 88,
+          "text": "**Проверки.** Новый `tests/test_file_operations.py` — 33 теста: движок (apply/abort/rollback/конфликты/отказы restore), subprocess с SIGKILL между фазами и в staged-проверке, автономный restore без комплекта, живой lock и чужой маркер, gate (разделяемый отказ, nested-токен, устаревший токен, pending обеих подсистем, вложенный `index` внутри `verify`, порядок gate→update-lock). `python3 -m unittest discover -s tests -v` — **310 тестов, OK** (2026-10-01, macOS, Python 3.14.6). `check --ready` — OK. `verify PB-023` — **passed**, отчёт `work/verification/PB-023/e09c4b9fb235474692fbe3f7cb3435d7/report.json`; unit-tests и self-check выполнены под удерживаемым gate, вложенность подтверждена тестом `test_verify_holds_gate_and_nests_children`. Self-manifest обновлён (`adopt --force --apply`, 29 управляемых файлов)."
+        },
+        {
+          "line": 102,
+          "text": "Место: `file_operations.py`, `_atomic_write` (строки 392–400), backup/restore. Для записи `docs/a.md` используется фиксированный `docs/a.md.fop-tmp`, отсутствующий в inputs и backup-index. Если такой пользовательский файл уже существует, `write_bytes` перезаписывает его, а `replace` удаляет его путь; операция сообщает `completed`. При SIGKILL после записи временного файла, до replace, оба восстановителя снимают pending, оставляя лишний `.fop-tmp` в проекте."
+        },
+        {
+          "line": 104,
+          "text": "Воспроизведение: `temp_collision`, `temp_kill` (engine и standalone) в evidence. **Влияние:** потеря файла вне write-set при штатной операции; состав проекта после restore не равен пред-образу. **Критерий исправления:** исключительное безопасное создание временного файла без перезаписи существующих файлов/ссылок; учёт и очистка только собственных временных файлов после сбоя. Проверить совпадение полного пред-образа и отсутствие изменений чужого файла при коллизии."
+        },
+        {
+          "line": 108,
+          "text": "Место: `file_operations.py`, `find_completed`, `_write_receipt`, оба restore. SIGKILL после записи receipt, до снятия pending; restore возвращает исходное содержимое, но receipt остаётся `result=completed`. Повторный запуск того же плана возвращает `already_completed`, хотя файл содержит `OLD`, а план требует `NEW`."
+        },
+        {
+          "line": 110,
+          "text": "Воспроизведение: `receipt_kill` (engine и standalone). **Влияние:** ложное подтверждение применения и невозможность корректно повторить отменённый план. **Критерий исправления:** согласовать receipt, pending и восстановление; после отката квитанция не должна считаться успешным применением. Проверить прерывания до/после receipt и повторный запуск для обоих восстановителей."
+        },
+        {
+          "line": 114,
+          "text": "Место: `file_operations.py`, `_require_no_write_events`, ветка отсутствующего индекса в `restore_operation` и `RESTORE_SCRIPT`. Событие `write` журналируется после replace. SIGKILL между replace и журналированием, затем утрата `backup_index.json`: оба восстановителя снимают pending с сообщением, что запись не начиналась, хотя файл уже содержит `NEW`."
+        },
+        {
+          "line": 116,
+          "text": "Воспроизведение: `lost_index` (engine и standalone); удаление индекса — явная инъекция повреждения backup. **Влияние:** смешанное состояние разблокируется без восстановления, вопреки требованию отказа при повреждённом backup. **Критерий исправления:** отсутствие события записи не считать доказательством отсутствия записи; при неоднозначности или утрате индекса после начала применения сохранять pending и возвращать отказ. Отдельно сохранить безопасное восстановление достоверно раннего прерывания."
+        },
+        {
+          "line": 120,
+          "text": "Место: `file_operations.py`, `_write_backup` и обработка `removed_dirs` в обоих restore. Индекс хранит только пути удалённых каталогов; восстановление вызывает `mkdir` без исходного режима. При удалении каталога `0700` и ошибке финальной проверки rollback создаёт его с `0755` в проверенной среде и снимает pending."
+        },
+        {
+          "line": 130,
+          "text": "**A1 — temp-файлы.** `_atomic_write` создаёт временный файл эксклюзивно (`O_WRONLY|O_CREAT|O_EXCL`) с уникальным именем `.<имя>.fop-<op_id>-<8hex>.tmp` — перезапись существующего файла/ссылки невозможна. При сбое записи temp удаляется; и engine-, и standalone-restore дополнительно удаляют остатки, доказуемо принадлежащие операции (op_id в имени, regex/fullmatch у engine, строгая проверка имени у standalone). Чужие файлы с похожими именами не затрагиваются. Регрессии: `test_foreign_temp_like_file_untouched`, `test_own_temp_leftover_cleaned_by_restore`, `test_sigkill_during_replace_cleans_own_temp`; сценарии `temp_collision`, `temp_kill`."
+        },
+        {
+          "line": 148,
+          "text": "`RESTORE_SCRIPT` в `file_operations.py:1095` распознаёт temp по начальной точке, вхождению `.fop-<op_id>-` и окончанию `.tmp`, без проверки восьми hex-символов. После прерывания записи создаём внешний файл `.notes.fop-<op_id>-manual.tmp`: engine restore сохраняет его, standalone restore удаляет и снимает pending. Такое имя движок не генерирует; принадлежность операции не доказана. Утверждение исправления о строгой проверке имени standalone не соответствует коду."
+        },
+        {
+          "line": 154,
+          "text": "`run_operation` (`file_operations.py:700`) вызывает `find_completed` до gate и проверки pending. `_neutralize_receipt` вызывается после возврата файлов. Воспроизведение: SIGKILL apply после receipt → engine restore → SIGKILL непосредственно перед `_neutralize_receipt` → повтор того же плана. Результат: `already_completed`, файл содержит `OLD` вместо `NEW`, pending ещё существует. Прерывание самого восстановления входит в приёмку PB-023; успешный полный restore не закрывает это окно."
+        },
+        {
+          "line": 156,
+          "text": "**Критерий закрытия:** pending и незавершённый/живой restore исключают успешный ответ о выполнении плана; проверка завершённости согласована с gate и состоянием операции. Добавить регрессии прерывания restore до нейтрализации receipt и повторного запуска, затем проверить безопасное завершение восстановления и реальное повторное применение. Исходный сценарий полного restore с повтором исправлен."
+        },
+        {
+          "line": 160,
+          "text": "- **PB-023-A3:** SIGKILL после replace до записи `write`, затем удаление backup-index — engine и standalone отказывают и сохраняют pending; исходный журнал `backup_complete` не допускает ложного раннего abort."
+        },
+        {
+          "line": 161,
+          "text": "- **PB-023-A4:** автоматический rollback сохраняет `0700`; дополнительно проверен standalone restore после SIGKILL за удалением каталога, с umask `0022` и `0077` — в обоих случаях восстановлен режим `0700`, pending снят. Сохранение и валидация `dir_modes` присутствуют в обоих восстановителях."
+        },
+        {
+          "line": 165,
+          "text": "**Итоговые проверки повторного аудита.** Первый `verify` получил `stale`: во время прогона сторонняя сессия изменила `document_links.py`; оба отдельных check прошли, но этот запуск не принят как стабильный. После обновления карточки повторён `verify PB-023`: **passed**, inputs неизменны; [краткий отчёт](PB-023-evidence/reaudit_verify.json), [лог тестов](PB-023-evidence/reaudit-unit-tests.log). Полный отчёт `work/verification/PB-023/454cfd0e851b48eb8e483edc979fb023/report.json` хранится в игнорируемом `work/` и может отсутствовать в другом checkout. SHA-256 четырёх проверенных модулей после прогона совпадают с evidence. Итоговая запись добавлена после verify; далее повторены `index`, `check --ready`, `git diff --check`. Код комплекта аудитором не менялся; self-manifest не переоформлялся."
+        },
+        {
+          "line": 171,
+          "text": "**A2 (остаток) — pending исключает «применено».** Ранний `find_completed` в `run_operation` возвращал `already_completed` до проверки маркера: kill внутри restore до `_neutralize_receipt` оставлял pending и квитанцию `completed`, и повтор плана ложно сообщал применение. Теперь ранний ответ допустим только при отсутствии pending; при живом маркере повтор проходит в `_apply_operation` и отклоняется («Незавершённая операция» → restore), а после завершения восстановления применяет план реально. Регрессия: `test_restore_kill_before_neutralize_blocks_retry`; probe `kill_restore_before_receipt_neutralization` фиксирует refused → restored → completed с `a.md=NEW`."
+        },
+        {
+          "line": 173,
+          "text": "**Проверки исправления.** Обновлённый [reaudit_probes.py](PB-023-evidence/reaudit_probes.py) утверждает исправленное поведение (повтор отклоняется по pending, а не already_completed; чужой temp сохраняется): 8 исходных сценариев + 5 граничных проверок проходят — [fix2_probes.json](PB-023-evidence/fix2_probes.json), отпечатки — [fix2_inputs.json](PB-023-evidence/fix2_inputs.json). `tests/test_file_operations.py` — 44 теста OK. `python3 -m unittest discover -s tests -v` — **325 тестов, OK** (2026-10-02, macOS, Python 3.14.6). `check --ready` — OK. `verify PB-023` — **passed**, отчёт `work/verification/PB-023/eaba844d6a49429abd91b77c301fbcce/report.json`. Self-manifest обновлён (`adopt . --force --apply`, 29 управляемых файлов). Карточка возвращена в `in_review`; независимая приёмка — отдельно."
+        },
+        {
+          "line": 179,
+          "text": "**Проверки и доказательства:** [сценарий третьей проверки](PB-023-evidence/review3_probes.py), [результат](PB-023-evidence/review3_probes.json), [среда и отпечатки всех модулей](PB-023-evidence/review3_inputs.json). Команда `python3 docs/tasks/PB-023-evidence/review3_probes.py`. Повторены восемь исходных и пять граничных сценариев с исправленными ожиданиями; все проходят. Чужой файл с суффиксом `manual.tmp` сохраняется обоими restore. Прерванный restore с существующим pending блокирует повтор, после завершения restore план реально применяется. Проверки выполняются во временных проектах."
+        },
+        {
+          "line": 181,
+          "text": "### PB-023-A2 — High: гонка между чтением квитанции и проверкой pending"
+        },
+        {
+          "line": 183,
+          "text": "Место: `file_operations.py`, `run_operation`: `prior = find_completed(...)` и последующий `pending_info(root) is None` выполняются до `acquire_gate`. Это две раздельные проверки, которые могут увидеть разные состояния операции."
+        },
+        {
+          "line": 185,
+          "text": "**Детерминированное воспроизведение:** SIGKILL apply после receipt → повтор плана читает completed receipt → приостановка перед проверкой pending → отдельный процесс исполняет настоящий автономный restore, возвращает `OLD`, нейтрализует receipt и снимает pending → повтор продолжает проверку и возвращает `already_completed`, используя устаревший `prior`. На диске `OLD`, план требует `NEW`, pending уже отсутствует. В probe перехвачен только возврат из `find_completed` для задания порядка; restore выполняется без изменений в отдельном процессе. Это допустимое расписание двух конкурирующих операций, а не подмена содержимого квитанции."
+        },
+        {
+          "line": 187,
+          "text": "**Критерий закрытия:** решение об `already_completed` принимается под общей блокировкой после проверки обоих pending и актуального состояния квитанции; восстановление не может вклиниться между чтением основания и ответом. Успешная идемпотентность после завершённого apply должна сохраниться. Регрессия обязана покрывать именно пересечение retry/restore, а не только последовательные вызовы при уже существующем pending."
+        },
+        {
+          "line": 195,
+          "text": "**A2 — уже не остаток, а гонка.** Ранний `find_completed`/`pending_info` в `run_operation` выполнялись до `acquire_gate`: конкурирующий restore мог вклиниться между чтением квитанции и проверкой маркера, и повтор отвечал `already_completed` по устаревшему `prior` после возврата пред-образа. Теперь пред-gate проверка квитанций убрана полностью: решение принимается в `_apply_operation` под удерживаемым gate и operation lock, после проверки обоих pending (`acquire_gate` + повторная проверка маркера) и с актуальной квитанцией. Restore за gate не проходит — вклиниться не может; при живом pending повтор отклоняется до чтения квитанций, после завершения restore применяет план реально."
+        },
+        {
+          "line": 197,
+          "text": "Регрессии: `test_completed_decision_under_gate_after_pending` доказывает порядок `gate → pending → find_completed` и отказ конкурирующей команды под удерживаемым gate; `test_restore_kill_before_neutralize_blocks_retry` покрывает пересечение retry/restore. Обновлённый [review3_probes.py](PB-023-evidence/review3_probes.py) воспроизводит исходное расписание (квитанция completed + живой pending + конкурирующий restore): повтор отклонён, restore завершается, повтор применяет план под gate — `defect_reproduced: false`. Результаты — [fix3_probes.json](PB-023-evidence/fix3_probes.json), отпечатки — [fix3_inputs.json](PB-023-evidence/fix3_inputs.json)."
+        },
+        {
+          "line": 203,
+          "text": "**Вывод: аудит пройден в проверенной области. PB-023-A1–A4 закрыты.** Последняя гонка A2 устранена: в `run_operation` больше нет чтения квитанции до gate; `_apply_operation` принимает решение под общим gate и operation lock после проверки pending. Новых блокирующих замечаний в этой проверке не выявлено. Карточка остаётся `in_review` до принятия результата инженером; закрытие/архивирование не выполнялись."
+        },
+        {
+          "line": 205,
+          "text": "**Независимая проверка A2:** в момент чтения completed receipt запущен реальный автономный restore в отдельном процессе; он отклонён именно по занятому gate, а не из-за отсутствия конфигурации/маркера. Идемпотентный повтор возвращает `already_completed` при фактическом `NEW`. Отдельно подтверждено, что даже завершённый план не обходит ни lifecycle pending, ни update pending. После прерывания restore до нейтрализации receipt повтор блокируется; завершение restore возвращает пред-образ, следующий apply реально выполняет план."
+        }
+      ]
+    },
+    {
+      "id": "PB-024",
+      "status": "done",
+      "path": "docs/archive/tasks/PB-024.md",
+      "sha256": "e6ebeb8a98bfc6da954408516e01e3db65b1c0d839232f68de77dff9c968c2bf",
+      "matches": [
+        {
+          "line": 51,
+          "text": "- [x] Коллизии имён/индексов, неверные пути и устаревшие входы дают отказ без перезаписи чужих данных."
+        }
+      ]
+    },
+    {
+      "id": "PB-025",
+      "status": "done",
+      "path": "docs/archive/tasks/PB-025.md",
+      "sha256": "b16120f53e70b248f9ab6d7153e61354608c15acf01271f3bf4c044db3357186",
+      "matches": [
+        {
+          "line": 33,
+          "text": "Граница с соседними задачами: Actions close_task/reopen/promote_change не включать частично — они относятся к PB-026. Сам запрос не удостоверяет смысл причины архивирования: инженер/агент фиксирует основание, CLI проверяет структуру и границы. Живые backup/pending не переносить как обычное evidence."
+        },
+        {
+          "line": 81,
+          "text": "**Реализация.** Новый `ai-dev-playbook/scripts/lifecycle.py` — request/plan/apply/status/restore для действия `archive_document` (design §6–7, ADR-0002). `lifecycle plan request.json` валидирует запрос (schema_version 1, actor, basis, scope ⇔ actions, отказ для `close_task`/`reopen`/`promote_change` — граница PB-026), строит детерминированный план: карта переносов документа и локальных материалов (файлы и каталоги) в архивный каталог коллекции, новые тексты с метаданными `archive`/`moves`/источниками материалов, переписанные ссылки затронутых файлов, индексы коллекций, сопровождающий JSON; снимок входов покрывает конфиг, весь scan-set ссылок, отсутствие будущих путей и состав каталогов. `--save` пишет план с хешами в `work/lifecycle/plans/<plan_id>.json`; preview без `--save` не пишет ничего. `apply` пересобирает план из сохранённого запроса и отклоняет несовпадение plan_id/входов/хешей до записи; применение через `file_operations.run_operation` со staged/final-проверками (каталог, индексы, ссылки дерева), повторный apply отвечает `already_completed` под gate+lock. `status`/`restore` показывают и восстанавливают незавершённые операции. `file_operations.py` расширен примитивом `create_dirs` (до writes) для опустевших каталогов материалов; `playbook.py` диспетчит lifecycle-команды через общий gate и whitelist pending. Отказы до записи: документ уже в архиве/без метаданных/не в финальном состоянии, открытые задачи плана, коллизии назначений, неучтённые файлы в каталогах материалов, неподтверждённый required external, материалы в `work/` вне `work/verification/` и `work/lifecycle/plans/`, successor внутри той же операции."
+        }
+      ]
+    },
+    {
+      "id": "PB-026",
+      "status": "done",
+      "path": "docs/archive/tasks/PB-026.md",
+      "sha256": "0704cdf911263dbad13d258b215dbcf0fd40f14c573405555d4ebc08cf3d7486",
+      "matches": [
+        {
+          "line": 135,
+          "text": "     - сбой посреди записи фиксирует `pending.json`, блокирует конкурирующие команды и полностью восстанавливается через `lifecycle restore`."
+        },
+        {
+          "line": 159,
+          "text": "Самопроверка: 33/33 целевых теста PASS; первый полный прогон 433 теста, 53 отказа в setup из-за временного pending lifecycle 20261022-130314-389ffd58 при init. Блокировка затем отсутствует, check --ready PASS. Исходный лог сохранён без исправлений в PB-026-evidence/fix-audit-006/initial-full.log. Итоговый повтор выполняется через штатный verify на стабильном дереве."
+        }
+      ]
+    },
+    {
+      "id": "PB-027",
+      "status": "done",
+      "path": "docs/archive/tasks/PB-027.md",
+      "sha256": "ef2c58ce9268288eb63bea05efc3ea108aba3e8192c00e3cc593cf66ddea1450",
+      "matches": []
+    },
+    {
+      "id": "PB-028",
+      "status": "done",
+      "path": "docs/archive/tasks/PB-028.md",
+      "sha256": "5282958675ff2be45851a085e07bec8698728f0c025d38416111c8cacc0a7b50",
+      "matches": [
+        {
+          "line": 90,
+          "text": "   - `work/update/pending.json` блокирует операции `lifecycle` (plan, apply, restore через CLI и автономный `restore.py`)."
+        },
+        {
+          "line": 91,
+          "text": "   - `work/lifecycle/pending.json` блокирует операции `update` (plan, apply, restore через CLI и автономный `restore.py`)."
+        },
+        {
+          "line": 113,
+          "text": "     - `test_real_sigkill_interrupted_update_locks_lifecycle_and_cli_restores`: прерывание во время записи файлов update оставляет `pending.json`, блокирует CLI и автономный lifecycle restore, а CLI `update restore` полностью восстанавливает исходное состояние 0.0.2."
+        },
+        {
+          "line": 115,
+          "text": "     - `test_real_sigkill_interrupted_lifecycle_locks_update_and_restores`: прерывание lifecycle по SIGKILL mid-write оставляет `work/lifecycle/pending.json`, блокирует CLI `update plan/restore` и автономный update restore, и восстанавливается автономным restore."
+        },
+        {
+          "line": 135,
+          "text": "     - Подтверждение блокировки операций lifecycle (`work/update/pending.json`)."
+        },
+        {
+          "line": 199,
+          "text": "- `tests/test_pb028.py:test_standalone_and_cli_update_restore` и пункт 6 зонда сначала успешно завершают apply, затем повреждают VERSION и вручную создают pending. Остальные проверки создают фиктивные pending. Реальное прерывание между записями и конкуренция живых операций этими сценариями не проверены."
+        },
+        {
+          "line": 279,
+          "text": "2. **CLI 0.0.2 запускается, но update не работает.** Независимый сценарий устанавливает фикстуру её CLI, задаёт custom paths, добавляет исторический архив/evidence/чужой файл, успешно выполняет установленным CLI index/check, затем вызывает тем же CLI `update plan <текущий-артефакт> --save`. Получен код 1: `updating.py:611 → _require_no_lifecycle_pending → import file_operations → ModuleNotFoundError`. В фикстуре отсутствует `file_operations.py`, но updating.py уже зависит от него. Это не работоспособный комплект старой версии для заявленного пути обновления."
+        },
+        {
+          "line": 307,
+          "text": "- Постоянные тесты SIGKILL запускают планирование исходным CLI, прерывают физическую запись текущим updater после первой записи, проверяют pending и блокировку lifecycle; CLI и автономное восстановление на отдельных полигонах сравнивают прежние файлы/каталоги вне work и запускают восстановленный CLI 0.0.2 (--help/check). Сценарий прерывания lifecycle проверяет обратную блокировку update и автономное восстановление."
+        }
+      ]
+    },
+    {
+      "id": "PB-029",
+      "status": "done",
+      "path": "docs/archive/tasks/PB-029.md",
+      "sha256": "23e16c97631d69da1c1d2fbade9b90f8437704973794f9f09cdde0badfc3a916",
+      "matches": [
+        {
+          "line": 1582,
+          "text": "Повторно используемые сквозные тесты — в `tests/`, разовые сценарии/протоколы/снимки — в собственном evidence; локальные временные копии новой/старой установки и self-project."
+        },
+        {
+          "line": 1632,
+          "text": "   - `test_large_block_route_e2e` (AC-05, AC-06, AC-08): большой блок (подзадачи `SUB-1`, `SUB-2`, аудит блока `AUDIT-1`, план `plan:search-engine`); закрытие подзадачи не архивирует общий план; замечание аудитора возвращает задачу в `in_progress`, попытка закрытия блокируется; изменение файла инвалидирует старый `verify`; повторные `verify` и `handoff` разрешают приёмку; отказ в архивировании плана при открытой задаче аудита; архивация плана после приёмки аудитором блока."
+        },
+        {
+          "line": 1633,
+          "text": "   - `test_link_and_archive_immutability_e2e` (AC-08, AC-09): перемещение карточки и evidence в архив; перезапись ссылок в документах проекта; сопровождающие материалы перемещаются вместе с владельцем; бинарный файл evidence побайтно совпадает (SHA256)."
+        },
+        {
+          "line": 1664,
+          "text": "   - В `docs/tasks/PB-029-evidence/process-log.md` подробно задокументированы реальные переходы всех задач полигона, включая диагностический возврат `SUB-2` по замечанию аудитора (`--kind diagnostic`), повторный verify/handoff после исправления кода, контроль обязательного evidence, отмену задачи, возобновление (`reopen`) и откладывание (`postpone`)."
+        },
+        {
+          "line": 1670,
+          "text": "   - В тесте `test_ac07` исключена перезапись ссылок в контексте карточки `DEV-702` при архивации дизайна, что предотвращает расхождение проекции карточки."
+        },
+        {
+          "line": 1713,
+          "text": "   - Доработка исполнителем: исправление функции в `src/validator.py` (очистка пробелов и возврат `None` для пустой строки), добавление выполняемого теста `test_empty_age_returns_none` в `tests/test_validator.py`, повторный `verify TASK-101` (4 теста unittest PASS, exit_code 0) и повторный `handoff TASK-101`, перевод в `in_review`;"
+        },
+        {
+          "line": 1746,
+          "text": "- **PB-029-A3 — P1, передача через CLI отсутствует.** Карточка PB-029 не содержит блока метаданных/handoff, текущий `project.json` не содержит `documents`. Независимый зонд `lifecycle accept PB-029 --result accepted --kind acceptance` на временной копии завершился rc=1: «карточка без метаданных — handoff/accept требуют раздел documents в project.json и блок метаданных карточки». Одного текста раздела «Передача» и копии `report.json` недостаточно по правилам verification/tasks. Исправление: совместимо включить схему для текущего проекта/карточки, повторить verify и зарегистрировать lifecycle handoff; проверить доступность обязательных отчётов следующей сессии. Старый отчёт сейчас отличается от дерева карточкой и индексом; пять файлов отдельного inputs.json совпадают, это не заменяет handoff."
+        },
+        {
+          "line": 1774,
+          "text": "Результат: **FAIL**, возврат в `in_progress`. **A1 (P1) остаётся блокирующим**. В итоговом архиве TASK-101 закрыта с acceptance от имени Engineer, но заявленное исправление пустой строки отсутствует: tests/test_validation.py содержит только комментарий, повторный verify исполняет `print('ok')`. Независимый unittest извлечённого файла: rc=5, `Ran 0 tests / NO TESTS RAN`. Технические переходы CLI сохранены; содержательный независимый пилот, описанный в process-log, ими не подтверждён."
+        },
+        {
+          "line": 1780,
+          "text": "Результат: **FAIL**, возврат в `in_progress`. **A1 (P1) остаётся блокирующим**. Настоящее исправление и тесты подтверждены: в исходном архиве 3 теста OK, parse_age(\"\") → ValueError; в итоговом 5 тестов OK, пустые/пробельные строки → None. Но e2e_pilot.py:217–310 в одном main() автоматически выполняет диагностическую приёмку от имени Engineer/human, возврат, исправление, повторный verify/handoff и приёмку/close от имени Engineer/human. Это воспроизводимый автоматический CLI-сценарий, а не доказательство фактического участия отдельного приёмщика."
+        },
+        {
+          "line": 1788,
+          "text": "Verify 5eebb0ee160d4bd3b30e77c6e8adab64 свежий до аудита; хэши совпали; check --ready — PASS. Код/tests прежние, фикстуры обоих архивов совпали с независимо проверенными в audit-06, повторные идентичные тесты не запускались. [Протокол и критерий завершения A1](PB-029-evidence/audit-07/report.md). Код, архивы и предыдущие evidence не изменялись; приёмка/закрытие PB-029 не выполнялись."
+        },
+        {
+          "line": 1800,
+          "text": "Итоговый аудит: A1/A2/A3 устранены, блокирующих замечаний не найдено. Происхождение реального пилота проверено по исходной сессии 01a162f1-a308-7c12-9380-08445b6a30d0: прямое разрешение инженера, отдельный /root/pilot_executor, возврат и повторная независимая приёмка. В текущем аудите на обоих снимках независимого пилота повторены 6 тестов и 9 случаев — PASS. [Итоговый протокол](PB-029-evidence/audit-final/report.md). По прямому разрешению инженера комплектуется свежая итоговая verify/handoff для приёмки и закрытия через CLI. Основной код не изменялся; исходный Executor/Model сохранён."
+        }
+      ]
+    },
+    {
+      "id": "PB-030",
+      "status": "done",
+      "path": "docs/archive/tasks/PB-030.md",
+      "sha256": "d777424e2c3ad53b02bb4b0224c395f63767fba6a1fcaa66d356afe751082a4a",
+      "matches": [
+        {
+          "line": 182,
+          "text": "`verify PB-030` не завершён: unit-tests остановлен по timeout 120 секунд в `test_self_project_copy_pilot`; self-check внутри runner пропущен. Входы прогона не менялись. [Отчёт](PB-030-evidence/verification/report.json), [лог тестов](PB-030-evidence/verification/unit-tests.stderr.log). Полный прогон не считается успешным; handoff не зарегистрирован, статус остаётся in_progress. Следующий шаг: завершить штатную проверку с достаточным согласованным лимитом, затем зарегистрировать передачу. Поведение CLI в рамках этой документационной задачи не изменялось."
+        },
+        {
+          "line": 186,
+          "text": "Инженер сообщил: «Модель GPT-6.1 Sol. Аудит провел, закрой задачу». Модель исполнителя уточнена по подтверждению инженера. Результат принят, разрешено закрытие. Для завершения технического протокола повторяются штатные проверки с лимитом unit-tests 600 секунд через тот же runner (только для этого прогона, без изменения project.json), затем регистрируются handoff и приёмка от имени инженера. Предыдущий timeout сохраняется как историческое доказательство."
+        },
+        {
+          "line": 190,
+          "text": "Повторный полный прогон прошёл: 435 тестов и self-check. После обновления статуса in_review и индекса выполняется окончательный прогон для свежести снимка закрытия. Исторические сообщения о незавершённых проверках выше относятся к предыдущим попыткам. Приёмка инженера подтверждена прямым сообщением в чате."
+        }
+      ]
+    },
+    {
+      "id": "PB-038",
+      "status": "done",
+      "path": "docs/archive/tasks/PB-038.md",
+      "sha256": "3cdfd4853be20c354f678e13a30172d206f64c87149bb2447a183dd23469d261",
+      "matches": [
+        {
+          "line": 240,
+          "text": "- Исправление: завершить изменения файлов и индексов, повторить verify и handoff; проверить `inputs_fresh` после передачи. Затем повторный независимый аудит. Не обходить gate и не переписывать старые отчёты."
+        },
+        {
+          "line": 253,
+          "text": "PB-038-A1 — завершена синхронизация всех файлов комплекта (`manifest.json`), протоколов выполнения (`docs/tasks/PB-038-evidence/execution.log`) и индекса задач перед запуском верификации. Выполнен повторный `playbook.py verify PB-038` и зарегистрирована повторная передача через `playbook.py lifecycle handoff PB-038`. Проверена свежесть входов через `verification.inputs_fresh` (возвращает `True`, `diff` пуст)."
+        },
+        {
+          "line": 261,
+          "text": "- Независимо повторены 38 тестов close lifecycle и 34 теста lifecycle — все прошли. Повторный CLI-сценарий подтвердил пять коллекций, якоря ручных ссылок, close/index/check/reopen/index/check, сохранность immutable-отчётов и отказ без частичных записей на некорректном индексе."
+        }
+      ]
+    },
+    {
+      "id": "PB-039",
+      "status": "done",
+      "path": "docs/archive/tasks/PB-039.md",
+      "sha256": "2c5e9b978dcfc8f609d26117e280f06156d1fc6f5b26519df98169d0ad8967b4",
+      "matches": [
+        {
+          "line": 147,
+          "text": "- Первый общий прогон (484 теста) выявил устаревший индекс в копии проекта: карточка была создана до синхронизации индекса. Индекс обновлён. При параллельной регистрации материалов несколько setup временных проектов увидели pending исходного репозитория; повтор 9 тестов без параллельной мутации прошёл. Эти прогоны не использованы как финальное доказательство."
+        }
+      ]
+    },
+    {
+      "id": "PB-040",
+      "status": "done",
+      "path": "docs/archive/tasks/PB-040.md",
+      "sha256": "1d0d009d816b3247e772c3dac5b0b6ef482304e1b4b317052d814f4c21850457",
+      "matches": [
+        {
+          "line": 302,
+          "text": "      \"id\": \"verify-timeout-09\","
+        },
+        {
+          "line": 853,
+          "text": "- [x] AC-09: пересчёт использует последнюю применимую проверку каждого критерия; passed даёт [x] только при актуальных доказательствах и отсутствии действующей находки. failed/not_run, отсутствие проверки или устаревание подтверждения не оставляют [x]. Открытая находка приоритетнее passed до подтверждения её устранения повторным аудитом."
+        },
+        {
+          "line": 857,
+          "text": "- [x] AC-13: обновлены парсер, шаблон, JSON-просмотр, правила и документация; состояния в Markdown и JSON вычисляются одинаково. Есть постоянные тесты частичного покрытия, passed → failed/not_run, находки по отдельному критерию, исправления без перепроверки, повторного аудита, устаревания, ручной подмены галочек, идемпотентности и отката CLI. Старые карточки/архив не мигрируются; уже созданные карточки v2 без чекбоксов остаются читаемыми."
+        },
+        {
+          "line": 981,
+          "text": "- 10 тестов вычисляемых чекбоксов проверяют частичное покрытие, latest failed/not_run, адресное снятие отметок по находке, исправление без перепроверки, повторный аудит, устаревание и запрет перепривязки старого CHECK, ручную подмену, нормализацию настоящих критериев, preview/read-only, идемпотентность, gate и rollback."
+        },
+        {
+          "line": 1000,
+          "text": "Факт: пилот пройден. Копия прошла проверку, изменение verification/индекса, пересчёт устаревших маркеров и полный цикл PILOT-001. Требования, история, метаданные и код исходных карточек сохранены; допустимое отличие — только вычисляемые галочки. Исходный репозиторий не изменялся пилотом."
+        },
+        {
+          "line": 1030,
+          "text": "- Собственная CLI-проба на временном проекте воспроизвела повторное использование старого verify после изменения требования, новый handoff/accept и успешный close --dry-run."
+        },
+        {
+          "line": 1038,
+          "text": "Ограничения: полный набор повторно не запускался; 20 профильных тестов и собственные пробы достаточны для отказа в приёмке. Синтетический accepted в пробе не является приёмкой PB-040. Код аудитором не исправлялся. Условие инженера для закрытия не выполнено; карточка возвращена в in_progress."
+        },
+        {
+          "line": 1043,
+          "text": "Проблема: новая CHECK получает подтверждение старого verify после изменения требований и новой EXEC без повторного verify."
+        },
+        {
+          "line": 1101,
+          "text": "- Проверить устранение замечания A-01: запуск `test_requirement_or_work_change_without_verify_rejects_check_and_close` и независимых проб (старый verify отклоняется при попытке привязать новую CHECK после EXEC-02 или изменения критериев без повторного verify)."
+        },
+        {
+          "line": 1144,
+          "text": "- В `handoff_command` отчёт verify отбирается только при строгом совпадении с текущим `execution_state(text, rel)` карточки: изменение EXEC без повторного verify блокирует запись передачи с ошибкой отсутствия свежего прогона."
+        },
+        {
+          "line": 1162,
+          "text": "Факт: устранено замечание независимого аудита AUDIT-02: A-03 (P1). 23 теста unittest выполнены успешно; verify PB-040 завершён с кодом 0 (отчёт cb72953d3b3d40889fa04f2d55f4fd87). Проверена инвалидация отметки при изменении проверенной EXEC без повторного verify, отказ handoff и close, а также успешный цикл с новым verify, добавлением новой CHECK-записи, сохранением прежних привязок и успешным закрытием."
+        },
+        {
+          "line": 1435,
+          "text": "- Проверить устранение замечания A-06: запуск `test_close_card_with_relative_links_in_journal_entries_preserves_historical_bindings_and_supports_second_close` и независимой пробы `work/verification/PB-040/independent-audit-07/probe.py` (при штатном переносе карточки в архив относительные ссылки внутри CHECK не сбрасывают исторические галочки [x] и валидный `check --ready`, возврат карточки через reopen сохраняет исторические доказательства, повторный цикл verify/sync/handoff/accept/close проходит штатно, immutable-доказательства побайтно неизменны)."
+        },
+        {
+          "line": 1450,
+          "text": "- Полный прогон unittest discover завершился успешно; лог сохранён в independent-audit-08/full-suite.log. Профильные тесты парсера/CLI: 11/11. Повторный прогон чекбоксов во время card sync получил 3 отказа gate при установке тестовых копий; чистый повтор без записи в исходный репозиторий: 15/15."
+        },
+        {
+          "line": 1452,
+          "text": "- Передача HANDOFF-07 несвежая: обнаружено 35 отличающихся входов отчёта, включая изменения PB-041 в lifecycle/task_cards/verification, правилах, шаблонах и тестах. Этот аудит подтверждает устранение A-06, но не заменяет актуальную передачу всего изменившегося дерева."
+        },
+        {
+          "line": 1464,
+          "text": "Изменения: По явному поручению инженера обновлены проверки и передача без изменения реализации продукта. Первый verify cb1f88db3ae44aa09614dfbc2b260f39 остановился по timeout=240 секунд; предыдущий успешный полный прогон занимал 246.495 секунд. В project.json лимит unit-tests увеличен до 600 секунд; команды и состав тестов сохранены. Self-manifest актуализирован через adopt . --force --apply."
+        },
+        {
+          "line": 1498,
+          "text": "Независимо проверено: Независимая проверка реализации выполнена ранее и сохранена в AUDIT-08: A-06 снята, профильные сценарии и полный набор тестов прошли. После AUDIT-08 код реализации не менялся. По прямому поручению инженера текущая сессия обновила verify/CHECK/HANDOFF; отчёт c9112c4f175e4292ba529f29ef91a026 успешен, inputs_unchanged=true. Техническая правка увеличивает только timeout unit-tests до 600 секунд, не меняет команды или состав проверок. Эта запись обновляет приёмку актуальной передачи на основании проведённого независимого аудита."
+        },
+        {
+          "line": 1509,
+          "text": "Состояние: Повтор регистрации передачи после учёта обязательных материалов verify-timeout-09 и independent-audit-08. HANDOFF-08 не был зарегистрирован CLI из-за неучтённых материалов; AUDIT-09 не получил CLI acceptance. Проверяемое дерево и CHECK-09 не изменялись; verify c9112c4f175e4292ba529f29ef91a026 успешен. Commit/push не выполнялись."
+        },
+        {
+          "line": 1520,
+          "text": "Независимо проверено: Выводы независимого аудита реализации AUDIT-08 сохранены: A-06 устранена, независимая проба и 523 теста прошли. После него код продукта не изменялся. По явному поручению инженера обновлены verify/CHECK/HANDOFF в этой сессии: verify c9112c4f175e4292ba529f29ef91a026 passed, inputs_unchanged=true; unit-tests 237.32 секунды, self-check passed. После регистрации материалов CLI успешно принял HANDOFF-09 с этим отчётом, подтвердив свежесть входов. Техническое изменение EXEC-08 затрагивает только timeout тестового набора и self-manifest."
+        }
+      ]
+    },
+    {
+      "id": "PB-042",
+      "status": "done",
+      "path": "docs/archive/tasks/PB-042.md",
+      "sha256": "327211a7fcb6aed57b4c7bc7dbcd024ca3de5ec397fcf5c669998df9c854fa4b",
+      "matches": [
+        {
+          "line": 143,
+          "text": "Ограничения: macOS / Python 3.14.6; полный свежий прогон 534 тестов выполнен исполнителем, аудитор независимо повторил целевые тесты и сценарии. No-op исключает служебный gate. Закрытие разрешено инженером после успешного аудита."
+        }
+      ]
+    },
+    {
+      "id": "PB-043",
+      "status": "done",
+      "path": "docs/archive/tasks/PB-043.md",
+      "sha256": "89ba4eb6de5a317f734daef21d447dfbded26ab1479aa0bc0564c7152e3bb168",
+      "matches": [
+        {
+          "line": 1,
+          "text": "# PB-043: Сократить чтение передачи и повторные действия перед verify"
+        },
+        {
+          "line": 93,
+          "text": "Фокус аудита: `PYTHONPATH=tests python3 -m unittest test_handoff_context -v`. Независимо проверить выбор всех явных EXEC/CHECK последней HANDOFF без нерелевантной истории, сохранность исходного raw и read-only, полные открытые находки и предупреждение о новой работе; inline/external, unsupported и архив. Воспроизвести сценарий одного verify с подготовленными статусом/индексом, отказы при failed/stale и отсутствие приёмки по одному in_review. Сверить правила и шаблоны: причины решений остаются в EXEC, результаты/ограничения в CHECK, последняя HANDOFF содержит собственный фокус и следующий шаг. Полная проверка и ограничения — CHECK-01; границы изменений — EXEC-01 и требования задачи. После подтверждения зарегистрировать отдельный AUDIT/accept; закрытие требует разрешения инженера."
+        }
+      ]
+    },
+    {
+      "id": "PB-044",
+      "status": "done",
+      "path": "docs/archive/tasks/PB-044.md",
+      "sha256": "d0aaeaa2178098af9f0a10ff12c90c14d01a4716752892cff0d0a93ab446f786",
+      "matches": []
+    },
+    {
+      "id": "PB-045",
+      "status": "done",
+      "path": "docs/archive/tasks/PB-045.md",
+      "sha256": "97486b4ce001dad41ae590854656ec2718bf22a6cac228519e0ea14572d2eded",
+      "matches": []
+    },
+    {
+      "id": "PB-051",
+      "status": "done",
+      "path": "docs/archive/tasks/PB-051.md",
+      "sha256": "8b71ba50def42820edbf0f189c6d8ed2bc3ccbfbafe29eb6afb59b84255a703c",
+      "matches": [
+        {
+          "line": 92,
+          "text": "Результат: failed"
+        },
+        {
+          "line": 126,
+          "text": "Результат: failed"
+        },
+        {
+          "line": 131,
+          "text": "Доказательства: [Полный журнал повторного прогона](PB-051-evidence/recheck-tests.log); tests/test_cli.py:724; tests/test_pb028.py:232; tests/test_pb029.py:775; tests/test_task_workflow_schema.py:563,677,739,750; ai-dev-playbook/project.json; CHANGELOG.md."
+        },
+        {
+          "line": 139,
+          "text": "5. После исправлений нужны подготовка in_review/индекса, свежий успешный verify с inputs_unchanged=true и новая CHECK, покрывающая оба критерия. CHECK-04 не заменяет failed полного прогона."
+        },
+        {
+          "line": 140,
+          "text": "6. Нет самостоятельной HANDOFF и её регистрации CLI: card show --handoff сообщает not_current. После passed нужны HANDOFF со связями EXEC/CHECK и фокусом аудита, lifecycle handoff и проверка current. Журнал повторного прогона зарегистрирован как обязательный неизменяемый материал."
+        },
+        {
+          "line": 157,
+          "text": "Результат: failed"
+        },
+        {
+          "line": 161,
+          "text": "Факт: 550 тестов за 332.510 s — FAILED (failures=1), 549 прошли; self-project pilot PB-029 упал на close PILOT-001 из-за ссылки в PB-052 на отсутствующий в staged-копии work/audits/PB-052-reaudit-02/report.md. Этот новый блокер A-03 вынесен в PB-053. Версии/38 хешей, init, update с 0.0.3 и сохранность файлов подтверждены. A-01/A-02: нет собственной актуальной передачи, изменение CHANGELOG после passed-runner не делает отчёт несвежим. Подробности и критерии исправления сохранены в протоколе."
+        },
+        {
+          "line": 194,
+          "text": "Фокус аудита: проверить current собственной передачи PB-051, охват CHANGELOG в снимках и отказ свежести после его изменения на временном проекте; версии/manifest/переходы 0.0.2 и 0.0.3; отсутствие даты выпуска в Unreleased; точность различий реализации и приёмки PB-041/PB-044. Исторические failed-прогоны и независимая диагностика сохранены без переписывания."
+        }
+      ]
+    },
+    {
+      "id": "PB-052",
+      "status": "done",
+      "path": "docs/archive/tasks/PB-052.md",
+      "sha256": "36f5f385bb4638fae2366e5d1909e225d0357ecb05223cd14189a691a9c197d2",
+      "matches": [
+        {
+          "line": 84,
+          "text": "Состояние: in_review; все исправления реализованы, полный verify passed, входы неизменны. Материалы зарегистрированы. Следующий шаг — независимый аудит PB-052; после её приёмки и завершения возобновить PB-051 с собственными verify и HANDOFF. Commit/push/release не выполнялись."
+        }
+      ]
+    },
+    {
+      "id": "PB-053",
+      "status": "done",
+      "path": "docs/archive/tasks/PB-053.md",
+      "sha256": "faa129ea14b5e03cc1d355aa85ee1bb09fef17e27e70a0fa190ac466bdf027ba",
+      "matches": []
+    },
+    {
+      "id": "PB-054",
+      "status": "done",
+      "path": "docs/archive/tasks/PB-054.md",
+      "sha256": "e5e3564aa432b8ceec6f084a299b820c917f900f44f8c4fd90908f0890042a47",
+      "matches": [
+        {
+          "line": 36,
+          "text": "- [x] AC-05: явный verify --reuse использует только собственный свежий полный passed-отчёт с совпадающими командами, входами, требованиями/EXEC, policy и средой; failed/timeout/старый формат без необходимых данных/изменённые входы вызывают объяснимый новый прогон. Не исключаются docs или evidence целиком; нет молчаливого сужения обязательных проверок."
+        },
+        {
+          "line": 72,
+          "text": "Изменения: основной разбор обнаружил malformed snapshot_after, приводящий к AttributeError; типы и равенство before/after теперь проверяются до повторного использования. Более поздний failed определяется по recorded started_at, а не касанию старого файла; run_id проверяется по папке. Замечание четвёртого независимого прохода о повреждённом run_id исправлено без ослабления AC-05: собственная UUID-история runner сохраняется побайтно, новый полный прогон не блокируется preflight, handoff не использует повреждённый отчёт как passed. Добавлены регрессии invalid JSON/run_id и отсутствия бесконечных повторов. Привязка критериев формата карточек v2 тоже исключает JSON из audit package; копия runner-отчёта с будущей датой не получает ложную привязку CHECK."
+        }
+      ]
+    },
+    {
+      "id": "PB-055",
+      "status": "done",
+      "path": "docs/archive/tasks/PB-055.md",
+      "sha256": "a56f34ae5400c01ab1fda02cb0a6ce6b8d68882f167f4d33117a7b99acc9e430",
+      "matches": []
+    }
+  ]
+}
