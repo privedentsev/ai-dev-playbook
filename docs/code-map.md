@@ -9,6 +9,7 @@ PB-036: `playbook.py` содержит workflow_settings, workflow_enable, workf
 | CLI | `ai-dev-playbook/scripts/playbook.py` | Установка, проверка, индексы задач и документов, verify, close, adopt, update, document create/register/impact/materials/list |
 | Политика проверок v2 | `ai-dev-playbook/scripts/verification_policy.py` | Чистые функции обязательности, semantic projections, явных snapshots, freshness/reuse и coverage; подключены к runner v2 (PB-032, PB-033) |
 | Контракт совместной приёмки | `ai-dev-playbook/scripts/block_workflow.py` | Версии схем политики/ссылок/review package/findings/block receipt, валидация графа блока, общий evaluator readiness и `block status`; `policy preview\|apply` в playbook.py (PB-065) |
+| Контракт выбора проверок | `ai-dev-playbook/scripts/checks_contract.py` | Версии схем policy/graph/result/receipt, контракт адаптера и классификация правок политики; `checks plan\|run\|status`, `setup preview\|apply` и ссылка `checks_policy` в playbook.py (PB-057) |
 | Исполнение проверок | `ai-dev-playbook/scripts/verification.py` | Legacy и v2 runner, read-only preflight, доверенные команды, ручные candidate и выборочное reuse (PB-033) |
 | Обновление | `ai-dev-playbook/scripts/updating.py` | Manifest, adopt, план/применение/восстановление обновления |
 | Представление проекта | `ai-dev-playbook/scripts/project_view.py` | Read-only ProjectView/FutureView, отслеживание прочитанных байтов/отсутствия/состава коллекций, streaming-подготовка отдельных payload; рабочие команды пока используют прежний staged |

@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "receipt_id": "rcpt-2026-11-07-001",
+  "project_id": "shop",
+  "candidate_digest": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+  "policy_digest": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+  "policy_revision": 3,
+  "engine": {"id": "playbook-verifier", "version": "1"},
+  "issuer": "ci-verifier@shop",
+  "issued_at": "2026-11-07T12:05:00+03:00",
+  "subject": {
+    "kind": "run",
+    "results": [
+      {"check_id": "payments-tests", "result_digest": "sha256:2222222222222222222222222222222222222222222222222222222222222222", "status": "passed"},
+      {"check_id": "lint", "result_digest": "sha256:3333333333333333333333333333333333333333333333333333333333333333", "status": "passed"}
+    ]
+  },
+  "signature": {
+    "algorithm": "ed25519",
+    "key_id": "verifier-key-1",
+    "value": "c2lnbmF0dXJlLWJ5dGVz"
+  }
+}

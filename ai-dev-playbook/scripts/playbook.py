@@ -25,6 +25,7 @@ import verification
 import task_cards
 import project_view
 import block_workflow
+import checks_contract
 
 
 CORE = "ai-dev-playbook"
@@ -136,6 +137,19 @@ def config(root):
             "Команда должна быть строкой или null")
     if "verification" in data:
         verification.validate(root, data["verification"], safe_path, require)
+    if checks_contract.PROJECT_LINK_FIELD in data:
+        link = data[checks_contract.PROJECT_LINK_FIELD]
+        require(isinstance(link, str),
+                f"{checks_contract.PROJECT_LINK_FIELD} должен быть "
+                f"относительным путём к документу политики")
+        policy_path = safe_path(root, link)
+        require(policy_path.is_file(),
+                f"{checks_contract.PROJECT_LINK_FIELD}: нет файла {link}")
+        require(not policy_path.is_symlink(),
+                f"{checks_contract.PROJECT_LINK_FIELD}: символическая ссылка")
+        policy_data = json.loads(policy_path.read_text(encoding="utf-8"),
+                                 object_pairs_hook=documents._unique_pairs)
+        checks_contract.validate_policy(policy_data, require)
     if "task_workflow" in data:
         verification.validate_task_workflow(root, data["task_workflow"], safe_path, require)
     if "documents" in data:
@@ -1445,6 +1459,12 @@ def _block_deferred(action, owner):
             "Синтаксис и форматы уже действуют.")
 
 
+def _checks_deferred(command, action, owner):
+    require(False, f"Команда '{command} {action}' зафиксирована контрактом "
+            f"PB-057; операция реализуется {owner}. "
+            "Синтаксис и форматы уже действуют.")
+
+
 def card_create(root, args, gate):
     """Create only new cards; never migrate an existing card implicitly."""
     data, paths = config(root)
@@ -1713,6 +1733,15 @@ def dispatch(root, args, gate):
             _block_deferred(args.action, "PB-068")
         else:
             _block_deferred(args.action, "PB-069")
+    elif args.command == "checks":
+        if args.action == "plan":
+            _checks_deferred("checks", "plan", "PB-059")
+        elif args.action == "run":
+            _checks_deferred("checks", "run", "PB-060")
+        else:
+            _checks_deferred("checks", "status", "PB-060")
+    elif args.command == "setup":
+        _checks_deferred("setup", args.action, "PB-063")
     elif args.command == "adopt":
         updating.adopt(root, args.release_dir,
                        updating.parse_resolves(args.resolve, require),
@@ -1982,6 +2011,43 @@ def main(argv=None):
         if deferred == "close":
             action.add_argument("--dry-run", action="store_true",
                                 help="Проверить конечный граф без записи")
+    command = sub.add_parser("checks",
+                             help="Выбор и запуск проверок по зависимостям; "
+                                  "контракт PB-057")
+    actions = command.add_subparsers(dest="action", required=True)
+    action = actions.add_parser(
+        "plan", help="Read-only объяснение required/reused/run/blocked "
+                     "и стоимости; операция реализуется PB-059")
+    action.add_argument("task_id")
+    action = actions.add_parser(
+        "run", help="Выполнить обязательства области; операция "
+                    "реализуется PB-060")
+    action.add_argument("task_id")
+    action.add_argument("--scope", choices=("task", "project"),
+                        default="task",
+                        help="область: фактические изменения задачи "
+                             "(task) либо весь проект (project)")
+    action.add_argument("--mode", choices=("stale", "force"),
+                        default="stale",
+                        help="stale — только обязательства без пригодного "
+                             "результата; force — весь набор области заново")
+    action.add_argument("--checkpoint",
+                        help="контрольная точка обязательности "
+                             "(например, release); потребление — PB-062")
+    action = actions.add_parser(
+        "status", help="Покрытие, фактические проверки и ограничения "
+                       "доверия; операция реализуется PB-060")
+    action.add_argument("task_id")
+    command = sub.add_parser("setup",
+                             help="Обследование проекта и одобрение "
+                                  "политики проверок; контракт PB-057")
+    actions = command.add_subparsers(dest="action", required=True)
+    actions.add_parser(
+        "preview", help="Обследование, неизвестные пути и diff политики "
+                        "без записи; операция реализуется PB-063")
+    actions.add_parser(
+        "apply", help="Запись одобренной политики; операция "
+                      "реализуется PB-063")
     command = sub.add_parser("index", help="Обновить индекс задач")
     command.add_argument("--documents", action="store_true",
                          help="Обновить только индексы коллекций документов")

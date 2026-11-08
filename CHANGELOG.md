@@ -1,10 +1,12 @@
 # Changelog
 
-Значимые изменения переносимого комплекта ai-dev-playbook. Подробности выполнения и проверок хранятся в [карточках задач](docs/tasks/index.md).
+Значимые изменения переносимого комплекта ai-dev-playbook. Подробности выполнения и проверок хранятся в [карточках задач](docs/tasks/index.md). Формат основан на [Keep a Changelog 1.1.0](https://keepachangelog.com/ru/1.1.0/).
 
 ## Unreleased
 
 ### Added
+
+- Форматы модулей, проверок и одобренной политики: версионированные схемы policy/graph/result/receipt, шаблон политики и каталог `python-unittest` со стабильными ID, описаниями и раздельными допусками skip/expected_failure. Валидаторы отклоняют неизвестные поля и версии, дубли ID, некорректные лимиты и конфликты исключений с объявленными входами. Изменения политики классифицируются как расширение или ослабление; новые команды и расширение допусков требуют отдельного одобрения инженера. Зафиксирован синтаксис `checks plan|run|status` и `setup preview|apply`; команды пока отвечают контролируемым отказом. Анализ зависимостей, runner и доверенный контур будут реализованы следующими задачами; новая настройка по умолчанию выключена ([PB-057](docs/archive/tasks/PB-057.md)).
 
 - Контракт совместной приёмки блока задач (`block_workflow.py`): версии схем политики `acceptance_policy` (plan metadata, явная `documents.capabilities: ["block_acceptance"]`), ссылок `block` карточек, review package, findings report и block receipt. Режимы `per_task|final|mixed`, `implementation_edges` с `verified_handoff`, checkpoints для mixed; валидация отклоняет неизвестные версии, циклы, повторное членство, противоречия рёбер и строгие связи, инцидентные final_audit/fix. Общий `evaluate()` покрывает readiness реализации, аудита, приёмки и закрытия для всех потребителей графа; CLI `policy preview|apply` атомарно записывает политику и ссылки карточек, `block status` — read-only диагностика. Операции `block prepare-review|revalidate|create-fix|accept|close` зафиксированы синтаксисом и назначены PB-067–069; формат не включён в self-project ([PB-065](docs/tasks/PB-065.md)).
 
