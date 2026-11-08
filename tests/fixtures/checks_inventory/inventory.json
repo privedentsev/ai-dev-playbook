@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "kind": "checks-inventory",
+  "project_id": "shop",
+  "policy_digest": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+  "created_at": "2026-11-08T12:00:00+03:00",
+  "entries": {
+    "src": {"type": "dir", "modules": []},
+    "src/payments": {"type": "dir", "modules": ["payments"]},
+    "src/payments/pay.py": {"type": "file", "modules": ["payments"]},
+    "docs": {"type": "dir", "modules": []},
+    "docs/readme.md": {"type": "file", "modules": []}
+  },
+  "excluded": [
+    {"path": "work", "reason": "Служебный runtime-каталог", "origin": "service"}
+  ],
+  "unknown_paths": ["docs/readme.md"]
+}

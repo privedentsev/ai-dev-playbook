@@ -1,0 +1,460 @@
+План lc-6e31f9a81e15b190 (lifecycle):
+Основание: playbook.py close PB-058
+Исполнитель: cli:privedentsev1 (cli)
+Действия:
+  close_task PB-058: docs/tasks/PB-058.md → docs/archive/tasks/PB-058.md (done)
+Переносы:
+  docs/tasks/PB-058-evidence/commands.md → docs/archive/tasks/PB-058-evidence/commands.md
+  docs/tasks/PB-058.md → docs/archive/tasks/PB-058.md
+  docs/tasks/PB-058.meta.json → docs/archive/tasks/PB-058.meta.json
+  work/verification/PB-058/399585ec3a234c47b9811cb725956982 → docs/archive/tasks/PB-058-evidence/work/verification/PB-058/399585ec3a234c47b9811cb725956982
+  work/verification/PB-058/399585ec3a234c47b9811cb725956982/preflight-regressions.stderr.log → docs/archive/tasks/PB-058-evidence/work/verification/PB-058/399585ec3a234c47b9811cb725956982/preflight-regressions.stderr.log
+  work/verification/PB-058/399585ec3a234c47b9811cb725956982/preflight-regressions.stdout.log → docs/archive/tasks/PB-058-evidence/work/verification/PB-058/399585ec3a234c47b9811cb725956982/preflight-regressions.stdout.log
+  work/verification/PB-058/399585ec3a234c47b9811cb725956982/report.json → docs/archive/tasks/PB-058-evidence/work/verification/PB-058/399585ec3a234c47b9811cb725956982/report.json
+  work/verification/PB-058/399585ec3a234c47b9811cb725956982/self-check.stderr.log → docs/archive/tasks/PB-058-evidence/work/verification/PB-058/399585ec3a234c47b9811cb725956982/self-check.stderr.log
+  work/verification/PB-058/399585ec3a234c47b9811cb725956982/self-check.stdout.log → docs/archive/tasks/PB-058-evidence/work/verification/PB-058/399585ec3a234c47b9811cb725956982/self-check.stdout.log
+  work/verification/PB-058/399585ec3a234c47b9811cb725956982/unit-tests.stderr.log → docs/archive/tasks/PB-058-evidence/work/verification/PB-058/399585ec3a234c47b9811cb725956982/unit-tests.stderr.log
+  work/verification/PB-058/399585ec3a234c47b9811cb725956982/unit-tests.stdout.log → docs/archive/tasks/PB-058-evidence/work/verification/PB-058/399585ec3a234c47b9811cb725956982/unit-tests.stdout.log
+  work/verification/PB-058/870b11ada4e54dd8836474a06b630e43 → docs/archive/tasks/PB-058-evidence/work/verification/PB-058/870b11ada4e54dd8836474a06b630e43
+  work/verification/PB-058/870b11ada4e54dd8836474a06b630e43/preflight-regressions.stderr.log → docs/archive/tasks/PB-058-evidence/work/verification/PB-058/870b11ada4e54dd8836474a06b630e43/preflight-regressions.stderr.log
+  work/verification/PB-058/870b11ada4e54dd8836474a06b630e43/preflight-regressions.stdout.log → docs/archive/tasks/PB-058-evidence/work/verification/PB-058/870b11ada4e54dd8836474a06b630e43/preflight-regressions.stdout.log
+  work/verification/PB-058/870b11ada4e54dd8836474a06b630e43/report.json → docs/archive/tasks/PB-058-evidence/work/verification/PB-058/870b11ada4e54dd8836474a06b630e43/report.json
+  work/verification/PB-058/870b11ada4e54dd8836474a06b630e43/self-check.stderr.log → docs/archive/tasks/PB-058-evidence/work/verification/PB-058/870b11ada4e54dd8836474a06b630e43/self-check.stderr.log
+  work/verification/PB-058/870b11ada4e54dd8836474a06b630e43/self-check.stdout.log → docs/archive/tasks/PB-058-evidence/work/verification/PB-058/870b11ada4e54dd8836474a06b630e43/self-check.stdout.log
+  work/verification/PB-058/870b11ada4e54dd8836474a06b630e43/unit-tests.stderr.log → docs/archive/tasks/PB-058-evidence/work/verification/PB-058/870b11ada4e54dd8836474a06b630e43/unit-tests.stderr.log
+  work/verification/PB-058/870b11ada4e54dd8836474a06b630e43/unit-tests.stdout.log → docs/archive/tasks/PB-058-evidence/work/verification/PB-058/870b11ada4e54dd8836474a06b630e43/unit-tests.stdout.log
+  work/verification/PB-058/audit-01 → docs/archive/tasks/PB-058-evidence/work/verification/PB-058/audit-01
+  work/verification/PB-058/audit-01/audit.md → docs/archive/tasks/PB-058-evidence/work/verification/PB-058/audit-01/audit.md
+  work/verification/PB-058/audit-01/contract-tests.log → docs/archive/tasks/PB-058-evidence/work/verification/PB-058/audit-01/contract-tests.log
+  work/verification/PB-058/audit-01/final-check.log → docs/archive/tasks/PB-058-evidence/work/verification/PB-058/audit-01/final-check.log
+  work/verification/PB-058/audit-01/inventory-tests.log → docs/archive/tasks/PB-058-evidence/work/verification/PB-058/audit-01/inventory-tests.log
+  work/verification/PB-058/audit-01/preflight.log → docs/archive/tasks/PB-058-evidence/work/verification/PB-058/audit-01/preflight.log
+  work/verification/PB-058/audit-01/probe.log → docs/archive/tasks/PB-058-evidence/work/verification/PB-058/audit-01/probe.log
+  work/verification/PB-058/audit-01/probe.py → docs/archive/tasks/PB-058-evidence/work/verification/PB-058/audit-01/probe.py
+  work/verification/PB-058/audit-01/provenance.json → docs/archive/tasks/PB-058-evidence/work/verification/PB-058/audit-01/provenance.json
+  work/verification/PB-058/audit-01/provenance.sha256 → docs/archive/tasks/PB-058-evidence/work/verification/PB-058/audit-01/provenance.sha256
+  work/verification/PB-058/audit-01/snapshot.meta.json → docs/archive/tasks/PB-058-evidence/work/verification/PB-058/audit-01/snapshot.meta.json
+  work/verification/PB-058/audit-01/snapshot.txt → docs/archive/tasks/PB-058-evidence/work/verification/PB-058/audit-01/snapshot.txt
+  work/verification/PB-058/audit-02 → docs/archive/tasks/PB-058-evidence/work/verification/PB-058/audit-02
+  work/verification/PB-058/audit-02/audit-ready.log → docs/archive/tasks/PB-058-evidence/work/verification/PB-058/audit-02/audit-ready.log
+  work/verification/PB-058/audit-02/audit.md → docs/archive/tasks/PB-058-evidence/work/verification/PB-058/audit-02/audit.md
+  work/verification/PB-058/audit-02/contract-tests.log → docs/archive/tasks/PB-058-evidence/work/verification/PB-058/audit-02/contract-tests.log
+  work/verification/PB-058/audit-02/final-check.log → docs/archive/tasks/PB-058-evidence/work/verification/PB-058/audit-02/final-check.log
+  work/verification/PB-058/audit-02/inventory-tests.log → docs/archive/tasks/PB-058-evidence/work/verification/PB-058/audit-02/inventory-tests.log
+  work/verification/PB-058/audit-02/overlap-probe.log → docs/archive/tasks/PB-058-evidence/work/verification/PB-058/audit-02/overlap-probe.log
+  work/verification/PB-058/audit-02/overlap-probe.py → docs/archive/tasks/PB-058-evidence/work/verification/PB-058/audit-02/overlap-probe.py
+  work/verification/PB-058/audit-02/preflight.log → docs/archive/tasks/PB-058-evidence/work/verification/PB-058/audit-02/preflight.log
+  work/verification/PB-058/audit-02/probe.log → docs/archive/tasks/PB-058-evidence/work/verification/PB-058/audit-02/probe.log
+  work/verification/PB-058/audit-02/probe.py → docs/archive/tasks/PB-058-evidence/work/verification/PB-058/audit-02/probe.py
+  work/verification/PB-058/audit-02/provenance.json → docs/archive/tasks/PB-058-evidence/work/verification/PB-058/audit-02/provenance.json
+  work/verification/PB-058/audit-02/provenance.sha256 → docs/archive/tasks/PB-058-evidence/work/verification/PB-058/audit-02/provenance.sha256
+  work/verification/PB-058/audit-02/snapshot.meta.json → docs/archive/tasks/PB-058-evidence/work/verification/PB-058/audit-02/snapshot.meta.json
+  work/verification/PB-058/audit-02/snapshot.txt → docs/archive/tasks/PB-058-evidence/work/verification/PB-058/audit-02/snapshot.txt
+  work/verification/PB-058/audit-03 → docs/archive/tasks/PB-058-evidence/work/verification/PB-058/audit-03
+  work/verification/PB-058/audit-03/accept.log → docs/archive/tasks/PB-058-evidence/work/verification/PB-058/audit-03/accept.log
+  work/verification/PB-058/audit-03/audit-ready-final.log → docs/archive/tasks/PB-058-evidence/work/verification/PB-058/audit-03/audit-ready-final.log
+  work/verification/PB-058/audit-03/audit-ready-initial.log → docs/archive/tasks/PB-058-evidence/work/verification/PB-058/audit-03/audit-ready-initial.log
+  work/verification/PB-058/audit-03/audit.md → docs/archive/tasks/PB-058-evidence/work/verification/PB-058/audit-03/audit.md
+  work/verification/PB-058/audit-03/close-dry-run.log → docs/archive/tasks/PB-058-evidence/work/verification/PB-058/audit-03/close-dry-run.log
+  work/verification/PB-058/audit-03/contract-tests.log → docs/archive/tasks/PB-058-evidence/work/verification/PB-058/audit-03/contract-tests.log
+  work/verification/PB-058/audit-03/final-check.log → docs/archive/tasks/PB-058-evidence/work/verification/PB-058/audit-03/final-check.log
+  work/verification/PB-058/audit-03/inventory-tests.log → docs/archive/tasks/PB-058-evidence/work/verification/PB-058/audit-03/inventory-tests.log
+  work/verification/PB-058/audit-03/overlap-probe.py → docs/archive/tasks/PB-058-evidence/work/verification/PB-058/audit-03/overlap-probe.py
+  work/verification/PB-058/audit-03/preflight.log → docs/archive/tasks/PB-058-evidence/work/verification/PB-058/audit-03/preflight.log
+  work/verification/PB-058/audit-03/probe.log → docs/archive/tasks/PB-058-evidence/work/verification/PB-058/audit-03/probe.log
+  work/verification/PB-058/audit-03/probe.py → docs/archive/tasks/PB-058-evidence/work/verification/PB-058/audit-03/probe.py
+  work/verification/PB-058/audit-03/provenance.json → docs/archive/tasks/PB-058-evidence/work/verification/PB-058/audit-03/provenance.json
+  work/verification/PB-058/audit-03/provenance.sha256 → docs/archive/tasks/PB-058-evidence/work/verification/PB-058/audit-03/provenance.sha256
+  work/verification/PB-058/audit-03/regression-probe.py → docs/archive/tasks/PB-058-evidence/work/verification/PB-058/audit-03/regression-probe.py
+  work/verification/PB-058/audit-03/snapshot.meta.json → docs/archive/tasks/PB-058-evidence/work/verification/PB-058/audit-03/snapshot.meta.json
+  work/verification/PB-058/audit-03/snapshot.txt → docs/archive/tasks/PB-058-evidence/work/verification/PB-058/audit-03/snapshot.txt
+  work/verification/PB-058/c236c2c0ff8f43198d29d126ab702688 → docs/archive/tasks/PB-058-evidence/work/verification/PB-058/c236c2c0ff8f43198d29d126ab702688
+  work/verification/PB-058/c236c2c0ff8f43198d29d126ab702688/preflight-regressions.stderr.log → docs/archive/tasks/PB-058-evidence/work/verification/PB-058/c236c2c0ff8f43198d29d126ab702688/preflight-regressions.stderr.log
+  work/verification/PB-058/c236c2c0ff8f43198d29d126ab702688/preflight-regressions.stdout.log → docs/archive/tasks/PB-058-evidence/work/verification/PB-058/c236c2c0ff8f43198d29d126ab702688/preflight-regressions.stdout.log
+  work/verification/PB-058/c236c2c0ff8f43198d29d126ab702688/report.json → docs/archive/tasks/PB-058-evidence/work/verification/PB-058/c236c2c0ff8f43198d29d126ab702688/report.json
+  work/verification/PB-058/c236c2c0ff8f43198d29d126ab702688/self-check.stderr.log → docs/archive/tasks/PB-058-evidence/work/verification/PB-058/c236c2c0ff8f43198d29d126ab702688/self-check.stderr.log
+  work/verification/PB-058/c236c2c0ff8f43198d29d126ab702688/self-check.stdout.log → docs/archive/tasks/PB-058-evidence/work/verification/PB-058/c236c2c0ff8f43198d29d126ab702688/self-check.stdout.log
+  work/verification/PB-058/c236c2c0ff8f43198d29d126ab702688/unit-tests.stderr.log → docs/archive/tasks/PB-058-evidence/work/verification/PB-058/c236c2c0ff8f43198d29d126ab702688/unit-tests.stderr.log
+  work/verification/PB-058/c236c2c0ff8f43198d29d126ab702688/unit-tests.stdout.log → docs/archive/tasks/PB-058-evidence/work/verification/PB-058/c236c2c0ff8f43198d29d126ab702688/unit-tests.stdout.log
+Удаляются каталоги:
+  docs/tasks/PB-058-evidence
+  work/verification/PB-058/399585ec3a234c47b9811cb725956982
+  work/verification/PB-058/870b11ada4e54dd8836474a06b630e43
+  work/verification/PB-058/audit-01
+  work/verification/PB-058/audit-02
+  work/verification/PB-058/audit-03
+  work/verification/PB-058/c236c2c0ff8f43198d29d126ab702688
+Записей: 70, удалений файлов: 66
+Diff записей (.md):
+  docs/archive/tasks/PB-058-evidence/commands.md: prepared stream sha256:6d1120593003ae0db81a4cf96fa8a2da13cd97a6c6b84c184115fe3206a161b4
+  docs/archive/tasks/PB-058-evidence/work/verification/PB-058/399585ec3a234c47b9811cb725956982/preflight-regressions.stderr.log: prepared stream sha256:98b6f881ec12835b5040874d16ad7c601fbb01cab5c09c415254cde337a25bd3
+  docs/archive/tasks/PB-058-evidence/work/verification/PB-058/399585ec3a234c47b9811cb725956982/preflight-regressions.stdout.log: prepared stream sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+  docs/archive/tasks/PB-058-evidence/work/verification/PB-058/399585ec3a234c47b9811cb725956982/report.json: prepared stream sha256:09db7728a5e539bb6afef79691999e742de8f8dadc036ff2718898f13b7607df
+  docs/archive/tasks/PB-058-evidence/work/verification/PB-058/399585ec3a234c47b9811cb725956982/self-check.stderr.log: prepared stream sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+  docs/archive/tasks/PB-058-evidence/work/verification/PB-058/399585ec3a234c47b9811cb725956982/self-check.stdout.log: prepared stream sha256:5db2bbbc9db2d9eadff8ab6757d5b2da72be545d681e106845f9490abc0780a9
+  docs/archive/tasks/PB-058-evidence/work/verification/PB-058/399585ec3a234c47b9811cb725956982/unit-tests.stderr.log: prepared stream sha256:7ae2f77669ec6763fce5649ab0579a8d8f77b27b46a60ce12702a1ec5de3c699
+  docs/archive/tasks/PB-058-evidence/work/verification/PB-058/399585ec3a234c47b9811cb725956982/unit-tests.stdout.log: prepared stream sha256:6b40e9291db6c26d8516474b22dbe7eb94949c448e5beca50e79d92b197c9dbc
+  docs/archive/tasks/PB-058-evidence/work/verification/PB-058/870b11ada4e54dd8836474a06b630e43/preflight-regressions.stderr.log: prepared stream sha256:00e13c0ca15d5e6af03e5513f6764b3ea8785e65da8491a80f062a878d99399d
+  docs/archive/tasks/PB-058-evidence/work/verification/PB-058/870b11ada4e54dd8836474a06b630e43/preflight-regressions.stdout.log: prepared stream sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+  docs/archive/tasks/PB-058-evidence/work/verification/PB-058/870b11ada4e54dd8836474a06b630e43/report.json: prepared stream sha256:cf43904d0f901ee9130927489e0e516a5b8dc5b4c4360cbd0d289e269b1e0753
+  docs/archive/tasks/PB-058-evidence/work/verification/PB-058/870b11ada4e54dd8836474a06b630e43/self-check.stderr.log: prepared stream sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+  docs/archive/tasks/PB-058-evidence/work/verification/PB-058/870b11ada4e54dd8836474a06b630e43/self-check.stdout.log: prepared stream sha256:5db2bbbc9db2d9eadff8ab6757d5b2da72be545d681e106845f9490abc0780a9
+  docs/archive/tasks/PB-058-evidence/work/verification/PB-058/870b11ada4e54dd8836474a06b630e43/unit-tests.stderr.log: prepared stream sha256:1c43f922433be9fe18ca10ba19cbfef46636f9fb859ba2467b2acc22a549cdaa
+  docs/archive/tasks/PB-058-evidence/work/verification/PB-058/870b11ada4e54dd8836474a06b630e43/unit-tests.stdout.log: prepared stream sha256:6b40e9291db6c26d8516474b22dbe7eb94949c448e5beca50e79d92b197c9dbc
+  docs/archive/tasks/PB-058-evidence/work/verification/PB-058/audit-01/audit.md: prepared stream sha256:97effe3fd91c457925cb5f9ecc5bc4ecb66489eceb23d45aefcc685ca40026b3
+  docs/archive/tasks/PB-058-evidence/work/verification/PB-058/audit-01/contract-tests.log: prepared stream sha256:7ebc6587ee0af1718141bce25d54a65db90447a9017ba5a15124b7f22a61d254
+  docs/archive/tasks/PB-058-evidence/work/verification/PB-058/audit-01/final-check.log: prepared stream sha256:5db2bbbc9db2d9eadff8ab6757d5b2da72be545d681e106845f9490abc0780a9
+  docs/archive/tasks/PB-058-evidence/work/verification/PB-058/audit-01/inventory-tests.log: prepared stream sha256:aac58f7359ad3ec2e1e16c1a41e6dc0b201d314d121c40099e4304d8cb47e03a
+  docs/archive/tasks/PB-058-evidence/work/verification/PB-058/audit-01/preflight.log: prepared stream sha256:e0e0878bc2e5f4e69708de875189089b11b2c1ae726ff73627fddc40c56cbb3b
+  docs/archive/tasks/PB-058-evidence/work/verification/PB-058/audit-01/probe.log: prepared stream sha256:d96eb889c6269aa6f109d593f0df5a737cac9531acd78e860dbc18a2392212cd
+  docs/archive/tasks/PB-058-evidence/work/verification/PB-058/audit-01/probe.py: prepared stream sha256:c96faeb598985ed5a8eec9210586fd4c77b7b41aebcbe2bd9c0fe1d7d913abb0
+  docs/archive/tasks/PB-058-evidence/work/verification/PB-058/audit-01/provenance.json: prepared stream sha256:1ea520d5da69ca795c63eabc53e34175419bab8606545f294011b887bb34f033
+  docs/archive/tasks/PB-058-evidence/work/verification/PB-058/audit-01/provenance.sha256: prepared stream sha256:52124edfd1a6bc4193e92c6a3b980964d31d10f2a9276d1647819611833f1b01
+  docs/archive/tasks/PB-058-evidence/work/verification/PB-058/audit-01/snapshot.meta.json: prepared stream sha256:cb5be380300dba48950809b1b1b90ce7e22bce96bbef931581ac5b4ac1f8466e
+  docs/archive/tasks/PB-058-evidence/work/verification/PB-058/audit-01/snapshot.txt: prepared stream sha256:c2b91a042909c84bda01be2213221a3bfd2bd360c50f0b497a6d25420442d456
+  docs/archive/tasks/PB-058-evidence/work/verification/PB-058/audit-02/audit-ready.log: prepared stream sha256:854d10d5f78eb19572ce236ac74e526942952dd7f39e18e3f4b594c91b86ccd6
+  docs/archive/tasks/PB-058-evidence/work/verification/PB-058/audit-02/audit.md: prepared stream sha256:c06f6590adf5d3253f45ff2f10e0f18556b120d9eb137bba5f85019d04e97b50
+  docs/archive/tasks/PB-058-evidence/work/verification/PB-058/audit-02/contract-tests.log: prepared stream sha256:a43151e05367eed609a84ec5723bf6c46b6d4c4b755a2ead91f875aab7fa5ba5
+  docs/archive/tasks/PB-058-evidence/work/verification/PB-058/audit-02/final-check.log: prepared stream sha256:5db2bbbc9db2d9eadff8ab6757d5b2da72be545d681e106845f9490abc0780a9
+  docs/archive/tasks/PB-058-evidence/work/verification/PB-058/audit-02/inventory-tests.log: prepared stream sha256:a877004ee8ad28b8330032085901e0dd8cd0c70babde24048d1e5fac32526c9e
+  docs/archive/tasks/PB-058-evidence/work/verification/PB-058/audit-02/overlap-probe.log: prepared stream sha256:e7fdec08c970e35b744b0c37d735a89601a8c5ed9544bb4850a5036c4164b758
+  docs/archive/tasks/PB-058-evidence/work/verification/PB-058/audit-02/overlap-probe.py: prepared stream sha256:712ffa6450c30bef903e14b27838b309731caa0b63214fa2c0d532cd84d7905b
+  docs/archive/tasks/PB-058-evidence/work/verification/PB-058/audit-02/preflight.log: prepared stream sha256:e0e0878bc2e5f4e69708de875189089b11b2c1ae726ff73627fddc40c56cbb3b
+  docs/archive/tasks/PB-058-evidence/work/verification/PB-058/audit-02/probe.log: prepared stream sha256:5d4bc2c4e8649e3de6f9527bb8aa2302ab5d50bf35eebb8e1367299f0af450e9
+  docs/archive/tasks/PB-058-evidence/work/verification/PB-058/audit-02/probe.py: prepared stream sha256:272f17b2ca30f910c8572c62a4ecd4664c48eeaf11ea108afbe9dac64a647f63
+  docs/archive/tasks/PB-058-evidence/work/verification/PB-058/audit-02/provenance.json: prepared stream sha256:972524954e57e9a6884853cec81fc752fafd90493858833ac55530add284231c
+  docs/archive/tasks/PB-058-evidence/work/verification/PB-058/audit-02/provenance.sha256: prepared stream sha256:8f06ae8289e45b258ad0045eb772faa41c3c23d750bbcc0d468b12f305e3cde4
+  docs/archive/tasks/PB-058-evidence/work/verification/PB-058/audit-02/snapshot.meta.json: prepared stream sha256:1b291a38f2ba7f1e2d9a76b32110065d1de84a4c2fd9b7125b90cb93f66d7a6d
+  docs/archive/tasks/PB-058-evidence/work/verification/PB-058/audit-02/snapshot.txt: prepared stream sha256:7403a6d00cbc285b25c36e743bb2681fba2e5c25d744c7bd6c74bc38e7f0b11f
+  docs/archive/tasks/PB-058-evidence/work/verification/PB-058/audit-03/accept.log: prepared stream sha256:cfa78390799dfe4534d81ec2504dca7f66a98b20ae4605c2a8834fc05dbaa417
+  docs/archive/tasks/PB-058-evidence/work/verification/PB-058/audit-03/audit-ready-final.log: prepared stream sha256:6c6cd71eeaf2186c3c8d2065af93a0de86d1c22be655e43d0aa691c29d52ec41
+  docs/archive/tasks/PB-058-evidence/work/verification/PB-058/audit-03/audit-ready-initial.log: prepared stream sha256:854d10d5f78eb19572ce236ac74e526942952dd7f39e18e3f4b594c91b86ccd6
+  docs/archive/tasks/PB-058-evidence/work/verification/PB-058/audit-03/audit.md: prepared stream sha256:f2eaaea87dc3d1cc2af54099984adde07dccda8270e2825a3267dc5c2f40fda6
+  docs/archive/tasks/PB-058-evidence/work/verification/PB-058/audit-03/close-dry-run.log: prepared stream sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+  docs/archive/tasks/PB-058-evidence/work/verification/PB-058/audit-03/contract-tests.log: prepared stream sha256:024670dea0cf285a7561d4f6fa6a66f6f9c5591230ab0b8d26ffa100a836b41d
+  docs/archive/tasks/PB-058-evidence/work/verification/PB-058/audit-03/final-check.log: prepared stream sha256:5db2bbbc9db2d9eadff8ab6757d5b2da72be545d681e106845f9490abc0780a9
+  docs/archive/tasks/PB-058-evidence/work/verification/PB-058/audit-03/inventory-tests.log: prepared stream sha256:ef8a0f01afc300015079f51539afe8c75c7acdb52a17364735e47ed42c7e233b
+  docs/archive/tasks/PB-058-evidence/work/verification/PB-058/audit-03/overlap-probe.py: prepared stream sha256:712ffa6450c30bef903e14b27838b309731caa0b63214fa2c0d532cd84d7905b
+  docs/archive/tasks/PB-058-evidence/work/verification/PB-058/audit-03/preflight.log: prepared stream sha256:e0e0878bc2e5f4e69708de875189089b11b2c1ae726ff73627fddc40c56cbb3b
+  docs/archive/tasks/PB-058-evidence/work/verification/PB-058/audit-03/probe.log: prepared stream sha256:920f3d06d3b97d2f19d087a04ea6f70a96e829314612c73b650fb0d3af4b1183
+  docs/archive/tasks/PB-058-evidence/work/verification/PB-058/audit-03/probe.py: prepared stream sha256:37ee4ac90881c36a4f13b88854b89e05d3656fa253d16bb364d53520303776c6
+  docs/archive/tasks/PB-058-evidence/work/verification/PB-058/audit-03/provenance.json: prepared stream sha256:c7cece9f4b2039f926f8d079009115b29e66d3cb73229238f62dc1524ff0bafb
+  docs/archive/tasks/PB-058-evidence/work/verification/PB-058/audit-03/provenance.sha256: prepared stream sha256:e556e14f520316152b728adaa57523b1ff849310091bf7a19a8624868666ecaf
+  docs/archive/tasks/PB-058-evidence/work/verification/PB-058/audit-03/regression-probe.py: prepared stream sha256:272f17b2ca30f910c8572c62a4ecd4664c48eeaf11ea108afbe9dac64a647f63
+  docs/archive/tasks/PB-058-evidence/work/verification/PB-058/audit-03/snapshot.meta.json: prepared stream sha256:7ef8713d4ee08b7dc0ea75292b020f01d4327d2d7374603872713e5e5560db3e
+  docs/archive/tasks/PB-058-evidence/work/verification/PB-058/audit-03/snapshot.txt: prepared stream sha256:3baee849d4f50da1ff7294121f6a71efb0204167e9f255b7c88ca6b2c08df0fb
+  docs/archive/tasks/PB-058-evidence/work/verification/PB-058/c236c2c0ff8f43198d29d126ab702688/preflight-regressions.stderr.log: prepared stream sha256:ee2ba4c1da4e8847f5d1f1b6d88f506253a3e96d721e88eab05dda004cf0f1f2
+  docs/archive/tasks/PB-058-evidence/work/verification/PB-058/c236c2c0ff8f43198d29d126ab702688/preflight-regressions.stdout.log: prepared stream sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+  docs/archive/tasks/PB-058-evidence/work/verification/PB-058/c236c2c0ff8f43198d29d126ab702688/report.json: prepared stream sha256:940c0a06eb5ea6a4e2d16f16b77cc7b80d1e1db0f30a1acac6247091be6d8706
+  docs/archive/tasks/PB-058-evidence/work/verification/PB-058/c236c2c0ff8f43198d29d126ab702688/self-check.stderr.log: prepared stream sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+  docs/archive/tasks/PB-058-evidence/work/verification/PB-058/c236c2c0ff8f43198d29d126ab702688/self-check.stdout.log: prepared stream sha256:5db2bbbc9db2d9eadff8ab6757d5b2da72be545d681e106845f9490abc0780a9
+  docs/archive/tasks/PB-058-evidence/work/verification/PB-058/c236c2c0ff8f43198d29d126ab702688/unit-tests.stderr.log: prepared stream sha256:0637d5033e3a93e88bef7e136e40b1c378f0f6020ed8904e1aebd3b23dc7a4ca
+  docs/archive/tasks/PB-058-evidence/work/verification/PB-058/c236c2c0ff8f43198d29d126ab702688/unit-tests.stdout.log: prepared stream sha256:6b40e9291db6c26d8516474b22dbe7eb94949c448e5beca50e79d92b197c9dbc
+--- /dev/null
++++ b/docs/archive/tasks/PB-058.md
+@@ -0,0 +1,265 @@
++# PB-058: Добавить независимые от Git снимки и классификацию файлов
++
++ID: PB-058
++Status: done
++Priority: P2
++Depends-On: PB-057
++Executor: Devin
++Model: SWE-2 High
++Created: 2026-11-07T01:06:37+03:00
++Closed: 2026-11-08T16:03:23+03:00
++
++<!-- playbook-meta:external -->
++
++## Задача
++
++### Цель и границы
++
++Снимки и исключения. Новый inventory/snapshot слой и интеграция с verification_policy/project_view; изолированные файловые fixtures. Не переписывать незавершённый engine PB-046.
++
++### Контекст
++
++[Спецификация](../../specs/dependency-aware-verification.md): R-05–07,15; сценарии AC-02–03,07. [Design](../../designs/dependency-aware-verification.md), [ADR-0006](../../adr/0006-dependency-aware-verification.md), [план](../../plans/dependency-aware-verification.md).
++
++Подготовлено по поручению инженера 2026-11-07. Выполнение пока не разрешено. Перед стартом: принятие технического проекта, завершённые зависимости, актуальный card show/handoff затрагиваемых работ и назначение исполнителя. Исходные чужие изменения сохранять.
++
++### Критерии приёмки
++
++- [x] AC-01: Inventory без .git обнаруживает add/delete/rename, одинаковые mtime/size с другими байтами, absent inputs, неизвестные пути и ошибки чтения; потоковое хеширование одного файла один раз на снимок.
++- [x] AC-02: Исключения имеют причину, конфликт с нужным входом отклоняется; служебные каталоги не читаются массово, используемые ресурсы не теряются. Symlink escape и циклы безопасно отклоняются.
++- [x] AC-03: Содержательные требования и служебные поля карточки разделены; snapshot входов не смешивается с lifecycle snapshot. Гонки и повреждённые/утраченные snapshots не дают reused.
++- [x] AC-04: Целевые поведенческие проверки и связанные регрессии пройдены; документация и self-manifest актуальны, EXEC/CHECK/HANDOFF содержат реальные доказательства и ограничения; передача зарегистрирована штатным CLI.
++
++### План
++
++1. Уточнить фактические интерфейсы зависимостей и связать изменения с критериями этой карточки.
++2. Реализовать ограниченный объём, добавить постоянные позитивные и негативные проверки критериев AC-01–03; не подменять их структурной проверкой.
++3. Обновить затронутые документы/шаблоны и self-manifest при изменениях комплекта; выполнить адресные проверки, index и check --ready.
++4. Подготовить материалы и пройти действующие preflight/verify/handoff. До явного opt-in использовать прежний контракт; не отключать полный legacy suite ради экономии.
++5. Записать EXEC/CHECK/HANDOFF и передать независимому аудитору; самостоятельно не закрывать.
++
++### Ресурсы
++
++Python и стандартная библиотека для основного CLI; локальные временные проекты и subprocess-счётчики. Новые зависимости защищённого executor обосновать в рамках принятого design. Фактические среда, policy_revision и бюджет фиксируются при старте; доступность отдельной OS/CI identity не предполагается.
++
++Материалы: `docs/tasks/PB-058-evidence/`; команды воспроизведения и отчёты принадлежат этой карточке. Общие материалы и сквозная матрица — AUDIT-009/PB-064.
++
++## Журнал
++
++### EXEC-01 — Выполнение
++Время: 2026-11-08T12:30:00+03:00
++Исполнитель: Devin
++Модель: SWE-2 High
++Изменения: новый модуль checks_inventory.py — файловый слой выбора проверок без Git по design §4 и spec R-05–07,15. `build_inventory` обходит проект без чтения байтов: классификация путей по glob модулей политики, unknown_paths, исключённые пути с причиной и origin; одобренные excludes применяются к дереву, служебные .git/work/__pycache__/.pytest_cache/.DS_Store не читаются массово. Symlink любого вида (escape, цикл, внутри входа), специальные файлы, циклические каталоги и ошибки чтения — отказ. Обнаруженная коллизия исключения с объявленным входом check.inputs — ошибка. `snapshot` хеширует только объявленные и вычисленные входы (`resolved_inputs`: check.inputs + области модулей с фильтром образца): потоковый SHA-256 через project_view.digest_file, один путь один раз на снимок, absent фиксируется, каталог хранит полный состав потомков. После снятия все наблюдавшиеся файлы и каталоги сверяются повторно — изменившееся дерево отклоняется. Снимок checks-input-snapshot schema_version 1 — отдельный формат от lifecycle snapshot; task/policy проекции берутся из verification_policy (служебные поля карточки не влияют на отпечаток). diff_snapshots/diff_inventories различают add/delete/rename и смену байтов при равных mtime/size; утраченный/повреждённый/чужой baseline — complete=false. Валидаторы форматов и snapshot_compatible для привязки к policy_digest. Engine PB-046 и verification_policy/project_view не переписаны; режим в self-project не включён.
++Файлы:
++- ai-dev-playbook/scripts/checks_inventory.py
++- tests/test_checks_inventory.py
++- tests/fixtures/checks_inventory/{inventory,snapshot}.json
++- docs/architecture.md
++- docs/code-map.md
++- CHANGELOG.md
++- ai-dev-playbook/manifest.json
++- docs/tasks/PB-058.md
++- docs/tasks/index.md
++
++### CHECK-01 — Проверка
++Время: 2026-11-08T12:40:05+03:00
++Исполнитель: Devin
++Модель: SWE-2 High
++Результат: passed
++Критерии: AC-01, AC-02, AC-03, AC-04
++Команда: `python3 ai-dev-playbook/scripts/playbook.py verify PB-058`; адресные `python3 -m unittest discover -s tests -p "test_checks_inventory.py" -v`
++Среда: macOS, Python 3.14, checkout feature/dependency-aware-verification; изолированные tempfile-деревья, счётчик хеширования через внедряемый hash_fn.
++Факт: финальный verify 399585ec3a234c47b9811cb725956982 passed, inputs_unchanged=true; 848 тестов (51 новый адресный), unit-tests 1198s. AC-01: inventory без .git ловит add/delete/rename, равные mtime/size при других байтах, absent, неизвестные пути и ошибки чтения; файл хешируется потоково один раз на снимок. AC-02: исключения с причиной, коллизия с обнаруженным входом отклонена, служебные каталоги не читаются, PNG/ZIP хешируются как входы, symlink/escape/cycle отклонены. AC-03: служебные поля карточки отделены проекцией, формат снимка отличен от lifecycle snapshot, гонки и повреждённые/утраченные/чужие snapshots не дают свежести.
++Доказательства:
++- [Отчёт verify](PB-058-evidence/work/verification/PB-058/399585ec3a234c47b9811cb725956982/report.json)
++- [Команды и ограничения](PB-058-evidence/commands.md)
++Ограничения: самопроверка исполнителя. Выбор обязательств/explain, runner и reuse — PB-059/060, доверенный контур — PB-061; режим в self-project не включён. Гонки проверены внедрением мутаций через hash_fn, не реальным параллельным writer.
++
++### HANDOFF-01 — Передача
++Время: 2026-11-08T12:40:05+03:00
++Исполнитель: Devin
++Модель: SWE-2 High
++Выполнение: EXEC-01
++Проверки: CHECK-01
++Состояние: in_review, ветка feature/dependency-aware-verification, изменения не закоммичены. Следующий шаг — независимый аудит; PB-059 стартует только после приёмки.
++Фокус аудита: корректность inventory/классификации по glob модулей и семантики исключений (обнаруженная коллизия с входом против допустимого селективного glob); полнота контроля гонок (size/mtime_ns и состав каталогов); разделение снимка входов и lifecycle snapshot; консервативность diff при утрате/порче/чужом baseline; реальное однократное хеширование и отсутствие mtime/size-ключа кеша.
++
++
++### AUDIT-01 — Аудит
++Время: 2026-11-08T13:14:02+03:00
++Исполнитель: Codex
++Модель: GPT-6.1 Sol (Medium)
++Передача: HANDOFF-01
++Результат: changes_requested
++Критерии: AC-01, AC-02, AC-03, AC-04
++Независимо проверено: audit-ready подтвердил исходную передачу; 51 тест inventory/snapshot и 53 теста checks_contract пройдены. Четыре независимые пробы с валидными политиками воспроизвели дефекты ниже. Статус возвращён в in_progress.
++Доказательства:
++- [Протокол и критерии исправления](PB-058-evidence/work/verification/PB-058/audit-01/audit.md)
++- [Воспроизводимые пробы](PB-058-evidence/work/verification/PB-058/audit-01/probe.py)
++- [Результаты проб](PB-058-evidence/work/verification/PB-058/audit-01/probe.log)
++- [51 адресный тест](PB-058-evidence/work/verification/PB-058/audit-01/inventory-tests.log)
++- [53 теста контракта](PB-058-evidence/work/verification/PB-058/audit-01/contract-tests.log)
++Ограничения: полный suite повторно не запускался; исходный passed проверен через audit-ready. Гонки проверены hash_fn. Первая попытка тестов контракта пересеклась с prepare-audit и получила 5 служебных отказов pending; после завершения операции все 53 прошли. Это ошибка порядка аудиторских команд, не дефект продукта. Исходники не исправлялись. Нужны исправления, свежие verify/HANDOFF и повторный аудит.
++
++#### A-01 — Замечание
++Серьёзность: P1
++Критерии: AC-01, AC-03
++Проблема: _group_inputs сужает явный строковый вход каталога модульным фильтром того же пути (checks_inventory.py:293–294).
++Воспроизведение: проба A; check.inputs=["src/payments"], module.paths=["src/payments/*.py"]; изменить notes.md.
++Факт: SHA-256 notes.md отсутствует; diff возвращает complete=true, fresh=true, changed=[].
++Влияние: изменение байтов явно объявленного входа теряется и допускает ложную свежесть.
++Критерий исправления: объединение входов сохраняет полный охват явного каталога; регрессия обнаруживает изменение notes.md.
++
++#### A-02 — Замечание
++Серьёзность: P2
++Критерии: AC-03
++Проблема: отсутствующие входы не включаются в финальную проверку гонок (checks_inventory.py:392–393,412–413).
++Воспроизведение: проба B; после наблюдения a-missing как absent создать его в hash_fn другого входа.
++Факт: snapshot успешно возвращает absent для уже существующего файла.
++Влияние: снимок не соответствует текущему дереву без предупреждения об изменении.
++Критерий исправления: финальная сверка отслеживает отсутствие файлов/каталогов и отсутствующих предков; появление входа вызывает отказ либо согласованное повторное построение.
++
++#### A-03 — Замечание
++Серьёзность: P2
++Критерии: AC-01
++Проблема: resolved_inputs безусловно превращает литеральный путь модуля в directory (checks_inventory.py:227–231).
++Воспроизведение: проба C; module.paths=["src/payments/pay.py"], файл существует; resolved_inputs → snapshot.
++Факт: отказ «вход 'src/payments/pay.py' не является каталогом» при валидной политике.
++Влияние: модуль из конкретного файла не поддерживается вопреки контракту paths.
++Критерий исправления: литеральные файлы корректно разрешаются и хешируются; добавить сквозную регрессию.
++
++#### A-04 — Замечание
++Серьёзность: P2
++Критерии: AC-02
++Проблема: snapshot отклоняет исключённый файл вне фильтра модульного входа (checks_inventory.py:355–358).
++Воспроизведение: проба D; module.paths=["src/payments/*.py"], excludes=src/**/fixtures.bin, check.inputs отсутствует; создать fixtures.bin.
++Факт: validate_policy и inventory успешны, snapshot падает с конфликтом исключения.
++Влияние: допустимое селективное исключение блокирует снимок, даже когда файл не входит в выбранный glob.
++Критерий исправления: исключения вне выбранных входов пропускаются; реальные коллизии с явными входами отклоняются; добавить совместную регрессию policy → inventory → resolved_inputs → snapshot.
++
++
++### EXEC-02 — Исправление
++Время: 2026-11-08T14:05:00+03:00
++Исполнитель: Devin
++Модель: SWE-2 High
++Замечания: A-01, A-02, A-03, A-04
++Изменения: A-01 — объявленный вход типа path теперь объединяется как полный охват области (dirs[rel]=None), фильтр связанного модуля больше не сужает явный каталог. A-02 — resolve() записывает состояние каждого префикса входа (file/dir/absent) в watch_states; финальная сверка ловит появление absent-входа и появление/исчезновение его предков. A-03 — литеральный путь модуля в resolved_inputs становится входом type=path и корректно разрешается и хешируется как файл либо каталог. A-04 — в фильтрованном входе-каталоге исключённый член пропускается, если ни сам файл, ни потомки исключённого поддерева не совпадают с образцом модуля (excluded_holds_input); совпадение остаётся ошибкой коллизии. Для входа без фильтра любое совпадение исключения — по-прежнему отказ. Регрессии всех находок добавлены в постоянные тесты; обновлены docstring и architecture.md.
++Файлы:
++- ai-dev-playbook/scripts/checks_inventory.py
++- tests/test_checks_inventory.py
++- docs/architecture.md
++
++### CHECK-02 — Проверка
++Время: 2026-11-08T14:20:44+03:00
++Исполнитель: Devin
++Модель: SWE-2 High
++Результат: passed
++Критерии: AC-01, AC-02, AC-03, AC-04
++Команда: `python3 ai-dev-playbook/scripts/playbook.py verify PB-058`; адресные `python3 -m unittest discover -s tests -p "test_checks_inventory.py" -v`
++Среда: macOS, Python 3.14, checkout feature/dependency-aware-verification; изолированные tempfile-деревья, счётчик хеширования через внедряемый hash_fn.
++Факт: повторный verify c236c2c0ff8f43198d29d126ab702688 passed, inputs_unchanged=true; 856 тестов (59 адресных, +8 регрессий находок), unit-tests 1196s. A-01: полный охват объявленного каталога при объединении с модульным фильтром — изменение notes.md обнаружено. A-02: появление absent-входа и его предка во время снимка отклоняется. A-03: литеральный путь модуля разрешается и хешируется. A-04: исключение вне фильтра пропускается, коллизия с фильтром и исключённое поддерево с совпадающими потомками отклоняются; сквозная регрессия policy → inventory → resolved_inputs → snapshot пройдена.
++Доказательства:
++- [Отчёт verify](PB-058-evidence/work/verification/PB-058/c236c2c0ff8f43198d29d126ab702688/report.json)
++- [Команды и ограничения](PB-058-evidence/commands.md)
++Ограничения: самопроверка исполнителя. Выбор обязательств/explain, runner и reuse — PB-059/060, доверенный контур — PB-061; режим в self-project не включён. Гонки проверены внедрением мутаций через hash_fn, не реальным параллельным writer.
++
++### HANDOFF-02 — Передача
++Время: 2026-11-08T14:20:44+03:00
++Исполнитель: Devin
++Модель: SWE-2 High
++Выполнение: EXEC-02
++Проверки: CHECK-02
++Состояние: in_review, ветка feature/dependency-aware-verification, изменения не закоммичены. Следующий шаг — повторный аудит находок A-01–A-04.
++Фокус аудита: закрытие A-01 (объединение входов сохраняет полный охват явного каталога), A-02 (watch_states ловит появление absent-входов и предков), A-03 (литеральный путь модуля), A-04 (селективное исключение вне фильтра допустимо, коллизия с фильтром/поддеревом — ошибка); регрессии воспроизводят сценарии находок.
++
++
++### AUDIT-02 — Аудит
++Время: 2026-11-08T14:33:01+03:00
++Исполнитель: Codex
++Модель: GPT-6.1 Sol (Medium)
++Передача: HANDOFF-02
++Результат: changes_requested
++Критерии: AC-01, AC-02, AC-03, AC-04
++Закрытые замечания: A-01, A-03, A-04
++Независимо проверено: исходные пробы A-01–A-04 подтверждают исправления; 59 тестов inventory/snapshot и 53 теста контракта passed. A-02 остаётся открытым: поздний resolve перезаписывает исходное absent-состояние общего предка, скрывая его появление. Добавлены A-05/A-06; статус возвращён в in_progress.
++Доказательства:
++- [Протокол, ограничения и критерии исправления](PB-058-evidence/work/verification/PB-058/audit-02/audit.md)
++- [Пробы исходных замечаний и гонок](PB-058-evidence/work/verification/PB-058/audit-02/probe.py)
++- [Результаты проб](PB-058-evidence/work/verification/PB-058/audit-02/probe.log)
++- [Проба перекрывающихся входов](PB-058-evidence/work/verification/PB-058/audit-02/overlap-probe.py)
++- [Результат перекрытия](PB-058-evidence/work/verification/PB-058/audit-02/overlap-probe.log)
++- [59 адресных тестов](PB-058-evidence/work/verification/PB-058/audit-02/inventory-tests.log)
++- [53 теста контракта](PB-058-evidence/work/verification/PB-058/audit-02/contract-tests.log)
++- [Отказ audit-ready](PB-058-evidence/work/verification/PB-058/audit-02/audit-ready.log)
++Ограничения: audit-ready отклоняет снятые открытыми находками AC-01–03; card show подтверждает current HANDOFF-02, отчёт c236c2c0ff8f43198d29d126ab702688 — passed/inputs_unchanged=true. Формальная готовность через audit-ready не подтверждена; проведён анализ исправлений и записаны блокирующие находки. Полный suite повторно не запускался. Гонки детерминированы hash_fn, не отдельным writer. Код продукта не исправлялся; нужны исправления A-02/A-05/A-06, свежие verify/HANDOFF и новый аудит.
++
++#### A-05 — Замечание
++Серьёзность: P2
++Критерии: AC-02, AC-03
++Проблема: excluded_holds_input проверяет исключённое поддерево однократно; финальная сверка пропускает его без повторного контроля (checks_inventory.py:361–381,408–418,523–525).
++Воспроизведение: probe.py, excluded-subtree-race; валидные paths=src/payments/**/*.py и excludes=src/**/gen. После проверки пустого gen создать gen/out.py в hash_fn последующего pay.py.
++Факт: snapshot успешно возвращается без нового входа; повторный обычный snapshot уже отвергает коллизию исключения.
++Влияние: изменение во время снимка скрывает новый вход и конфликт политики; нарушены R-07 и AC-03.
++Критерий исправления: контролировать устойчивость проверенных исключённых поддеревьев; создание совпадающего файла после обхода должно давать отказ; добавить регрессию.
++
++#### A-06 — Замечание
++Серьёзность: P1
++Критерии: AC-01, AC-03
++Проблема: строковый path-вход перезаписывает watch_files после первого хеширования того же файла через каталог (checks_inventory.py:455–459).
++Воспроизведение: overlap-probe.py; check.inputs=["src/payments", "src/payments/pay.py"]. В hash_fn прочитать old, затем записать mutated longer в pay.py.
++Факт: snapshot возвращает старый SHA-256 для обоих входов; фактический файл имеет другой хеш. Поздний path-вход сохраняет новые size/mtime, но использует кеш старого хеша, поэтому финальная сверка проходит.
++Влияние: снимок успешно возвращается после явного изменения байтов и не соответствует текущему кандидату; возможна ложная свежесть у потребителя.
++Критерий исправления: сохранять метаданные первого хеширования без перезаписи при перекрытии входов; регрессия directory+string-path должна отклонять мутацию при однократном хешировании файла.
++
++### EXEC-03 — Исправление
++Время: 2026-11-08T14:50:00+03:00
++Исполнитель: Devin
++Модель: SWE-2 High
++Замечания: A-02, A-05, A-06
++Изменения: A-02 (дополнение) — resolve() больше не перезаписывает состояние общего префикса: первое наблюдение сохраняется, расхождение состояния того же префикса между входами одного снимка — отказ немедленно. A-05 — watch_dirs хранит фильтр patterns вместе со списком членов; финальная сверка повторно оценивает каждый исключённый член через check_excluded_entry: появившийся совпадающий файл или совпадающий потомок в исключённом поддереве — отказ. A-06 — убрана ручная перезапись watch_files в ветке path-входа: метаданные первого хеширования сохраняются, перекрывающиеся входы не скрывают мутацию байтов. Добавлены постоянные регрессии всех трёх находок.
++Файлы:
++- ai-dev-playbook/scripts/checks_inventory.py
++- tests/test_checks_inventory.py
++
++### CHECK-03 — Проверка
++Время: 2026-11-08T15:34:04+03:00
++Исполнитель: Devin
++Модель: SWE-2 High
++Результат: passed
++Критерии: AC-01, AC-02, AC-03, AC-04
++Команда: `python3 ai-dev-playbook/scripts/playbook.py verify PB-058`; адресные `python3 -m unittest discover -s tests -p "test_checks_inventory.py" -v`
++Среда: macOS, Python 3.14, checkout feature/dependency-aware-verification; изолированные tempfile-деревья, счётчик хеширования через внедряемый hash_fn.
++Факт: третий verify 870b11ada4e54dd8836474a06b630e43 passed, inputs_unchanged=true; 859 тестов (62 адресных, +3 регрессии), unit-tests 1263s. A-02: поздний resolve общего префикса не стирает absent-запись, расхождение — отказ. A-05: совпадающий файл, созданный в проверенном исключённом поддереве во время снимка, отклоняется. A-06: метаданные первого хеширования сохраняются при перекрытии входов; мутация после кеша отклоняется.
++Доказательства:
++- [Отчёт verify](PB-058-evidence/work/verification/PB-058/870b11ada4e54dd8836474a06b630e43/report.json)
++- [Команды и ограничения](PB-058-evidence/commands.md)
++Ограничения: самопроверка исполнителя. Выбор обязательств/explain, runner и reuse — PB-059/060, доверенный контур — PB-061; режим в self-project не включён. Гонки проверены внедрением мутаций через hash_fn, не реальным параллельным writer.
++
++### HANDOFF-03 — Передача
++Время: 2026-11-08T15:34:04+03:00
++Исполнитель: Devin
++Модель: SWE-2 High
++Выполнение: EXEC-03
++Проверки: CHECK-03
++Состояние: in_review, ветка feature/dependency-aware-verification, изменения не закоммичены. Следующий шаг — повторный аудит находок A-02, A-05, A-06.
++Фокус аудита: закрытие A-02 (первая запись состояния префикса устойчива, расхождение — отказ), A-05 (перепроверка исключённых членов с учётом фильтра отклоняет появившееся совпадение), A-06 (метаданные первого хеширования не перезаписываются при перекрытии входов); регрессии воспроизводят сценарии находок.
++
++
++### AUDIT-03 — Аудит
++Время: 2026-11-08T15:59:26+03:00
++Исполнитель: Codex
++Модель: GPT-6.1 Sol (Medium)
++Передача: HANDOFF-03
++Результат: accepted
++Критерии: AC-01, AC-02, AC-03, AC-04
++Закрытые замечания: A-02, A-05, A-06
++Независимо проверено: 62 теста inventory/snapshot и 53 теста контракта passed; исходные независимые пробы A-02/A-05/A-06 теперь отклоняют гонки. Дополнительная валидная shared-политика с перекрывающимися вычисленными областями также отклоняет гонку в исключённом поддереве. A-01/A-03/A-04 остаются исправленными. HANDOFF-03 current, verify 870b11ada4e54dd8836474a06b630e43 passed/inputs_unchanged=true; байты исходника и тестов совпадают с его snapshot_after. Новых замечаний в проверенном объёме нет.
++Доказательства:
++- [Протокол приёмки и ограничения](PB-058-evidence/work/verification/PB-058/audit-03/audit.md)
++- [Независимые пробы](PB-058-evidence/work/verification/PB-058/audit-03/probe.py)
++- [Результаты проб](PB-058-evidence/work/verification/PB-058/audit-03/probe.log)
++- [62 адресных теста](PB-058-evidence/work/verification/PB-058/audit-03/inventory-tests.log)
++- [53 теста контракта](PB-058-evidence/work/verification/PB-058/audit-03/contract-tests.log)
++- [Исходный отказ audit-ready](PB-058-evidence/work/verification/PB-058/audit-03/audit-ready-initial.log)
++Ограничения: полный suite повторно не запускался. Гонки воспроизведены через hash_fn, не отдельным writer. Первый audit-ready заблокирован галочками открытых находок; после их закрытия требуется штатная синхронизация и повторный контроль. Runner/reuse/защищённый контур — следующие задачи; режим в self-project не включён. Продуктовый код не исправлялся; реальное закрытие требует отдельного поручения инженера.
+--- a/docs/plans/dependency-aware-verification.md
++++ b/docs/plans/dependency-aware-verification.md
+@@ -45,7 +45,7 @@
+ | Этап | Результат | Зависимость | Приёмка спецификации |
+ |---|---|---|---|
+ | [PB-057](../archive/tasks/PB-057.md) | Контракт и политика | — | AC-03–06,08,10 |
+-| [PB-058](../tasks/PB-058.md) | Снимки и исключения | PB-057 | AC-02–03,07 |
++| [PB-058](../archive/tasks/PB-058.md) | Снимки и исключения | PB-057 | AC-02–03,07 |
+ | [PB-059](../tasks/PB-059.md) | Граф и выбор | PB-058 | AC-01–04 |
+ | [PB-060](../tasks/PB-060.md) | Runner и результаты | PB-059 | AC-04–07 |
+ | [PB-061](../tasks/PB-061.md) | Граница доверия | PB-060 | AC-07–08,11 |
+--- a/docs/plans/index.md
++++ b/docs/plans/index.md
+@@ -6,7 +6,7 @@
+ | Документ | Состояние | Обновлён | Задачи |
+ |---|---|---|---|
+ | [План внедрения вариантов аудита и задач исправлений](block-acceptance.md) | draft | 2026-11-07 | [PB-065](../tasks/PB-065.md), [PB-066](../tasks/PB-066.md), [PB-067](../tasks/PB-067.md), [PB-068](../tasks/PB-068.md), [PB-069](../tasks/PB-069.md), [PB-070](../tasks/PB-070.md), [PB-071](../tasks/PB-071.md), [AUDIT-010](../tasks/AUDIT-010.md) |
+-| [План внедрения автоматического выбора проверок](dependency-aware-verification.md) | draft | 2026-11-07 | [PB-057](../archive/tasks/PB-057.md), [PB-058](../tasks/PB-058.md), [PB-059](../tasks/PB-059.md), [PB-060](../tasks/PB-060.md), [PB-061](../tasks/PB-061.md), [PB-062](../tasks/PB-062.md), [PB-063](../tasks/PB-063.md), [PB-064](../tasks/PB-064.md), [AUDIT-009](../tasks/AUDIT-009.md) |
++| [План внедрения автоматического выбора проверок](dependency-aware-verification.md) | draft | 2026-11-07 | [PB-057](../archive/tasks/PB-057.md), [PB-058](../archive/tasks/PB-058.md), [PB-059](../tasks/PB-059.md), [PB-060](../tasks/PB-060.md), [PB-061](../tasks/PB-061.md), [PB-062](../tasks/PB-062.md), [PB-063](../tasks/PB-063.md), [PB-064](../tasks/PB-064.md), [AUDIT-009](../tasks/AUDIT-009.md) |
+ | [Переход к выборочным файловым операциям и хранению 15 операций](scoped-file-operations.md) | draft | 2026-10-26 | [PB-045](../archive/tasks/PB-045.md), [PB-046](../tasks/PB-046.md), [PB-047](../tasks/PB-047.md), [PB-048](../tasks/PB-048.md), [PB-049](../tasks/PB-049.md), [PB-050](../tasks/PB-050.md), [AUDIT-008](../tasks/AUDIT-008.md) |
+ 
+ ## Архив
+--- a/docs/tasks/index.md
++++ b/docs/tasks/index.md
+@@ -18,7 +18,6 @@
+ | PB-048 | [PB-048: Перевести обновление комплекта на выборочную подготовку](PB-048.md) | draft | P2 | — | 2026-10-26 17:56 | — | PB-047 |
+ | PB-049 | [PB-049: Очищать завершённые операции и разрешать конфликты](PB-049.md) | draft | P2 | — | 2026-10-26 17:56 | — | PB-047, PB-048 |
+ | PB-050 | [PB-050: Проверить сквозной переход и описать новый контракт](PB-050.md) | draft | P2 | — | 2026-10-26 17:56 | — | PB-049 |
+-| PB-058 | [PB-058: Добавить независимые от Git снимки и классификацию файлов](PB-058.md) | in_review | P2 | Devin / SWE-2 High | 2026-11-07 01:06 | — | PB-057 |
+ | PB-059 | [PB-059: Построить карту зависимостей и объяснимый выбор проверок](PB-059.md) | draft | P2 | — | 2026-11-07 01:07 | — | PB-058 |
+ | PB-060 | [PB-060: Учитывать выполненные тесты и переиспользовать актуальные результаты](PB-060.md) | draft | P2 | — | 2026-11-07 01:07 | — | PB-059 |
+ | PB-061 | [PB-061: Подтверждать результаты и политику в защищённом контуре](PB-061.md) | draft | P2 | — | 2026-11-07 01:07 | — | PB-060 |
+@@ -37,6 +36,7 @@
+ 
+ | ID | Задача | Статус | Приоритет | Исполнитель | Создана | Закрыта | Зависимости |
+ |---|---|---|---|---|---|---|---|
++| PB-058 | [PB-058: Добавить независимые от Git снимки и классификацию файлов](../archive/tasks/PB-058.md) | done | P2 | Devin / SWE-2 High | 2026-11-07 01:06 | 2026-11-08 16:03 | PB-057 |
+ | PB-057 | [PB-057: Определить форматы модулей, проверок и одобренной политики](../archive/tasks/PB-057.md) | done | P2 | Devin / SWE-2 High | 2026-11-07 01:06 | 2026-11-08 11:58 | — |
+ | AUDIT-007 | [AUDIT-007: Независимо принять соразмерные маршруты и проверки](../archive/tasks/AUDIT-007.md) | done | P2 | Codex / GPT-6 | 2026-10-23 03:34 | 2026-11-06 18:29 | PB-031, PB-032, PB-033, PB-034, PB-035, PB-036, PB-037 |
+ | PB-037 | [PB-037: Проверить сквозные маршруты и выполнить пилот v2](../archive/tasks/PB-037.md) | done | P2 | Codex / GPT-6 | 2026-10-23 03:34 | 2026-11-06 17:18 | PB-036 |

@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
   "playbook_version": "0.2.0",
-  "release_id": "sha256:7b66e57e8a5d35251e13046f96fc06afad6c15eae86effa009bd3a0d95edda9a",
-  "installed_at": "2026-11-08T09:46:23+03:00",
+  "release_id": "sha256:0455a4d02c3c9ead43b47c45c12de8b306badd5cc13df39b3a90c5bafcba08cd",
+  "installed_at": "2026-11-08T15:10:34+03:00",
   "origin": "adopt:checkout",
   "files": {
     "ai-dev-playbook/README.md": "sha256:b32337257154d9744e2330468a0ca0e26e01d6f8b57a73483ddfe8851d344600",
@@ -18,6 +18,7 @@
     "ai-dev-playbook/rules/workflow.md": "sha256:dd3e58e4d71f8710f352b510eb3af65f20c2497237c425c5fc71b71253fc4e0a",
     "ai-dev-playbook/scripts/block_workflow.py": "sha256:40a1ae4b064d26b78ae8bc8b8aa02089ef995aa5af0a0c6c71e93b68758d1891",
     "ai-dev-playbook/scripts/checks_contract.py": "sha256:61f1d4aace9a54e0091ee134cf3da27d63679ba4d96b389afb29e0c3c1dba100",
+    "ai-dev-playbook/scripts/checks_inventory.py": "sha256:685c92063b3188551437d91060e4fbc7a1f00ca0d3190d3a8b6095dd6a73c580",
     "ai-dev-playbook/scripts/document_links.py": "sha256:892ab8dcbae56156c781e2c040a4a5c774abac9bedfdb955ca4fccb18b031a9d",
     "ai-dev-playbook/scripts/documents.py": "sha256:aee8fa98c0f3f5411acf74d172dc4dedcabf062a18d17a2824530584d0b82779",
     "ai-dev-playbook/scripts/file_operations.py": "sha256:cb8b0f0c6adb948962b828e37aedc137a0a7a96e02c97cfe260c033b6613b68c",

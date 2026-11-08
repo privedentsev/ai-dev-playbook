@@ -1,0 +1,10 @@
+A-01 {"complete": true, "reason": "", "fresh": false, "added": [], "removed": [], "changed": ["src/payments/notes.md"]}
+A-02 REJECTED checks-snapshot: вход a-missing изменился во время снимка
+A-03 {"path:src/payments/pay.py": {"type": "file", "sha256": "sha256:cba06b5736faf67e54b07b561eae94395e774c517a7d910a54369e1263ccfbd4"}}
+A-04 {"path:src/payments": {"type": "directory", "members": {"notes.md": {"type": "file"}, "pay.py": {"type": "file", "sha256": "sha256:cba06b5736faf67e54b07b561eae94395e774c517a7d910a54369e1263ccfbd4"}}}}
+excluded-subtree-race REJECTED checks-snapshot: вход src/payments/ изменился во время снимка
+excluded-subtree-after-race REJECTED checks-snapshot: исключение конфликтует с обнаруженным входом 'src/payments/gen'
+ancestor-overwrite-race REJECTED checks-snapshot: вход missing изменился во время снимка
+A-06 REJECTED checks-snapshot: вход 'src/payments/pay.py' изменился во время снимка
+A-05-overlapping-scopes REJECTED checks-snapshot: вход src/payments изменился во время снимка
+A-05-overlapping-scopes-next-snapshot REJECTED checks-snapshot: исключение конфликтует с обнаруженным входом 'src/payments/gen'
