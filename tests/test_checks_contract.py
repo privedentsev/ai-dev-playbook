@@ -755,7 +755,7 @@ class CliContractTest(LifecycleCase):
     def test_deferred_commands(self):
         code, _, err = self.cli("checks", "plan", "DEV-1")
         self.assertEqual(code, 1)
-        self.assertIn("PB-059", err)
+        self.assertIn("checks_policy", err)
         code, _, err = self.cli("checks", "run", "DEV-1")
         self.assertEqual(code, 1)
         self.assertIn("PB-060", err)

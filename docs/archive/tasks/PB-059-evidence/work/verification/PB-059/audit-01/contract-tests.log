@@ -1,0 +1,67 @@
+test_expected_failure_classification (test_checks_contract.ClassifyTest.test_expected_failure_classification)
+A-04: расширение допуска expected_failure — ослабление. ... ok
+test_extension (test_checks_contract.ClassifyTest.test_extension) ... ok
+test_extension_mixed_with_weakening (test_checks_contract.ClassifyTest.test_extension_mixed_with_weakening) ... ok
+test_identity_change_rejected (test_checks_contract.ClassifyTest.test_identity_change_rejected) ... ok
+test_new_catalog_entry_with_allowance (test_checks_contract.ClassifyTest.test_new_catalog_entry_with_allowance)
+A-06: новый ID сразу с допуском — ослабление. ... ok
+test_new_check_argv_allowlist (test_checks_contract.ClassifyTest.test_new_check_argv_allowlist)
+A-02: новая исполняемая команда требует решения инженера. ... ok
+test_tightening_limits_is_extension (test_checks_contract.ClassifyTest.test_tightening_limits_is_extension) ... ok
+test_unchanged (test_checks_contract.ClassifyTest.test_unchanged) ... ok
+test_weakening (test_checks_contract.ClassifyTest.test_weakening) ... ok
+test_backward_compat (test_checks_contract.CliContractTest.test_backward_compat)
+Проект без checks_policy и task_workflow работает как прежде. ... ok
+test_deferred_commands (test_checks_contract.CliContractTest.test_deferred_commands) ... ok
+test_policy_link_path_safety (test_checks_contract.CliContractTest.test_policy_link_path_safety) ... ok
+test_policy_link_validation (test_checks_contract.CliContractTest.test_policy_link_validation)
+project.json → checks_policy валидирует файл политики. ... ok
+test_scope_mode_axes (test_checks_contract.CliContractTest.test_scope_mode_axes)
+Область и режим — независимые оси; неизвестные значения отклонены. ... ok
+test_edges (test_checks_contract.GraphSchemaTest.test_edges) ... ok
+test_known_refs (test_checks_contract.GraphSchemaTest.test_known_refs) ... ok
+test_schema_version (test_checks_contract.GraphSchemaTest.test_schema_version) ... ok
+test_unknown_fields (test_checks_contract.GraphSchemaTest.test_unknown_fields) ... ok
+test_unknown_scope (test_checks_contract.GraphSchemaTest.test_unknown_scope) ... ok
+test_valid (test_checks_contract.GraphSchemaTest.test_valid) ... ok
+test_valid_policy (test_checks_contract.PolicyFixtureTest.test_valid_policy) ... ok
+test_version_constants (test_checks_contract.PolicyFixtureTest.test_version_constants) ... ok
+test_approved_basis (test_checks_contract.PolicySchemaTest.test_approved_basis) ... ok
+test_catalog_expected_failure (test_checks_contract.PolicySchemaTest.test_catalog_expected_failure)
+A-04: явная политика допуска expected_failure отдельно от skip. ... ok
+test_catalog_rules (test_checks_contract.PolicySchemaTest.test_catalog_rules) ... ok
+test_checks_rules (test_checks_contract.PolicySchemaTest.test_checks_rules) ... ok
+test_dependencies_rules (test_checks_contract.PolicySchemaTest.test_dependencies_rules) ... ok
+test_environment_rules (test_checks_contract.PolicySchemaTest.test_environment_rules) ... ok
+test_excludes_exact_input_match (test_checks_contract.PolicySchemaTest.test_excludes_exact_input_match)
+A-05: glob, совпадающий с явным входом, — коллизия. ... ok
+test_excludes_rules (test_checks_contract.PolicySchemaTest.test_excludes_rules) ... ok
+test_excludes_unanchored_glob (test_checks_contract.PolicySchemaTest.test_excludes_unanchored_glob)
+A-01: glob без литерального префикса наблюдает корень. ... ok
+test_fallback_rules (test_checks_contract.PolicySchemaTest.test_fallback_rules) ... ok
+test_ids_and_revision (test_checks_contract.PolicySchemaTest.test_ids_and_revision) ... ok
+test_inputs_and_applicability (test_checks_contract.PolicySchemaTest.test_inputs_and_applicability) ... ok
+test_limits_bool_nan (test_checks_contract.PolicySchemaTest.test_limits_bool_nan) ... ok
+test_module_path_overlap (test_checks_contract.PolicySchemaTest.test_module_path_overlap) ... ok
+test_modules_rules (test_checks_contract.PolicySchemaTest.test_modules_rules) ... ok
+test_required_fields (test_checks_contract.PolicySchemaTest.test_required_fields) ... ok
+test_trust_mode (test_checks_contract.PolicySchemaTest.test_trust_mode) ... ok
+test_unknown_fields_rejected (test_checks_contract.PolicySchemaTest.test_unknown_fields_rejected) ... ok
+test_unknown_version (test_checks_contract.PolicySchemaTest.test_unknown_version) ... ok
+test_aggregate (test_checks_contract.ReceiptSchemaTest.test_aggregate) ... ok
+test_signature (test_checks_contract.ReceiptSchemaTest.test_signature) ... ok
+test_subject (test_checks_contract.ReceiptSchemaTest.test_subject) ... ok
+test_valid (test_checks_contract.ReceiptSchemaTest.test_valid) ... ok
+test_version_and_digests (test_checks_contract.ReceiptSchemaTest.test_version_and_digests) ... ok
+test_binding_required (test_checks_contract.ResultSchemaTest.test_binding_required) ... ok
+test_kind_specific (test_checks_contract.ResultSchemaTest.test_kind_specific) ... ok
+test_reused (test_checks_contract.ResultSchemaTest.test_reused) ... ok
+test_status_reason (test_checks_contract.ResultSchemaTest.test_status_reason) ... ok
+test_tests_contract (test_checks_contract.ResultSchemaTest.test_tests_contract) ... ok
+test_valid (test_checks_contract.ResultSchemaTest.test_valid) ... ok
+test_version_and_status (test_checks_contract.ResultSchemaTest.test_version_and_status) ... ok
+
+----------------------------------------------------------------------
+Ran 53 tests in 1.179s
+
+OK

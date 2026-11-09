@@ -26,6 +26,9 @@ import task_cards
 import project_view
 import block_workflow
 import checks_contract
+import checks_graph
+import checks_inventory
+import checks_select
 
 
 CORE = "ai-dev-playbook"
@@ -1465,6 +1468,113 @@ def _checks_deferred(command, action, owner):
             "Синтаксис и форматы уже действуют.")
 
 
+def _load_policy(root, data):
+    """Загрузить одобренную checks-политику по ссылке project.json."""
+    require(checks_contract.PROJECT_LINK_FIELD in data,
+            "checks_policy не настроен в project.json — политика "
+            "подключается явной миграцией (PB-063)")
+    policy_path = safe_path(root, data[checks_contract.PROJECT_LINK_FIELD])
+    policy = json.loads(policy_path.read_text(encoding="utf-8"),
+                        object_pairs_hook=documents._unique_pairs)
+    return checks_contract.validate_policy(policy, require)
+
+
+def checks_plan(root, args):
+    """checks plan <TASK>: read-only объяснение набора и стоимости.
+
+    Не пишет файлы и не исполняет discovery/код проекта: inventory,
+    AST-анализ и снимки входов только читают дерево. Хранимое состояние
+    контура (work/checks/) производится позднейшими операциями; его
+    утрата расширяет выбор, а не сужает его.
+    """
+    data, paths = config(root)
+    policy = _load_policy(root, data)
+    records = read_tasks(root, paths)
+    task = records.get(args.task_id)
+    require(task is not None and not task["archived"],
+            f"{args.task_id}: активная карточка не найдена")
+    task_content = documents.read_text(task["path"])
+    meta_errors = []
+    task_meta = documents.parse_meta(
+        task_content, str(task["path"].relative_to(root)),
+        meta_errors) or {}
+    task_digest = verification.verification_policy.fingerprint(
+        verification.verification_policy.task_projection(
+            task_content, task_meta))
+
+    notes = []
+    state_dir = checks_select.STATE_DIR
+    baseline = None
+    snap_path = safe_path(
+        root, f"{state_dir}/{checks_select.SNAPSHOT_FILENAME}")
+    if snap_path.is_file():
+        try:
+            baseline = checks_inventory.load_snapshot(snap_path)
+        except (ValueError, OSError) as error:
+            notes.append(f"baseline-снимок непригоден: {error}")
+    previous = None
+    graph_path = safe_path(
+        root, f"{state_dir}/{checks_graph.GRAPH_FILENAME}")
+    if graph_path.is_file():
+        try:
+            previous = checks_graph.load_graph(graph_path)
+        except (ValueError, OSError) as error:
+            notes.append(f"прежний граф непригоден: {error}")
+    results, skipped = [], 0
+    results_dir = safe_path(
+        root, f"{state_dir}/{checks_select.RESULTS_DIR}")
+    if results_dir.is_dir():
+        for item in sorted(results_dir.rglob("*.json")):
+            try:
+                require(not item.is_symlink(), "символическая ссылка")
+                doc = json.loads(item.read_text(encoding="utf-8"),
+                                 object_pairs_hook=documents._unique_pairs)
+                checks_contract.validate_result(doc, require)
+                results.append(doc)
+            except (ValueError, OSError):
+                skipped += 1
+    if skipped:
+        notes.append(f"пропущено повреждённых результатов: {skipped}")
+    # Граф строится внутри плана: AST-чтение идёт под общим
+    # бюджетом max_bytes (аудит A-04).
+    plan = checks_select.plan(root, policy, baseline=baseline,
+                              previous=previous, results=results,
+                              task_digest=task_digest)
+
+    print(f"checks plan {args.task_id}: политика "
+          f"{policy['policy_id']} rev {policy['revision']}, "
+          f"trust={policy['trust_mode']}")
+    if plan["changed"] is None:
+        print(f"Изменения: не доказаны ({plan['change_reason']}) — "
+              f"консервативный набор")
+    else:
+        print(f"Изменения: {len(plan['changed'])} путей")
+        for path in plan["changed"]:
+            print(f"  ~ {path}")
+    if plan["unattributed"]:
+        print(f"Вне модулей: {', '.join(plan['unattributed'])}")
+    print(f"Граф: {plan['graph_edges']} рёбер, "
+          f"unknown-областей: {plan['graph_unknown']}")
+    max_bytes = plan["limits"].get("max_bytes")
+    byte_limit = f" (лимит {max_bytes} Б)" if max_bytes else ""
+    print(f"Оценка: {plan['estimate_seconds']}с лимит "
+          f"{plan['limits']['max_seconds']}с; прочитано "
+          f"{plan['hashed_bytes']} Б / {plan['hashed_files']} "
+          f"файлов{byte_limit}")
+    for check in policy["checks"]:
+        entry = plan["checks"][check["id"]]
+        print(f"  {check['id']}: {entry['status']}")
+        for line in entry["explain"]:
+            print(f"      {line}")
+    for reason in plan["budget_reasons"]:
+        print(f"BLOCKED: {reason}")
+    for note in notes:
+        print(f"Примечание: {note}")
+    print("Итог: " + ", ".join(f"{name}={count}" for name, count
+                               in plan["summary"].items()
+                               if count or name != "not_applicable"))
+
+
 def card_create(root, args, gate):
     """Create only new cards; never migrate an existing card implicitly."""
     data, paths = config(root)
@@ -1735,7 +1845,7 @@ def dispatch(root, args, gate):
             _block_deferred(args.action, "PB-069")
     elif args.command == "checks":
         if args.action == "plan":
-            _checks_deferred("checks", "plan", "PB-059")
+            checks_plan(root, args)
         elif args.action == "run":
             _checks_deferred("checks", "run", "PB-060")
         else:
@@ -2017,7 +2127,7 @@ def main(argv=None):
     actions = command.add_subparsers(dest="action", required=True)
     action = actions.add_parser(
         "plan", help="Read-only объяснение required/reused/run/blocked "
-                     "и стоимости; операция реализуется PB-059")
+                     "и стоимости (PB-059)")
     action.add_argument("task_id")
     action = actions.add_parser(
         "run", help="Выполнить обязательства области; операция "

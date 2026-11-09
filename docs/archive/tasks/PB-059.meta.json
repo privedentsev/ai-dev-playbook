@@ -1,0 +1,192 @@
+{
+  "schema_version": 1,
+  "card_format_version": 2,
+  "relations": [
+    {
+      "relation": "based_on",
+      "target": "spec:dependency-aware-verification"
+    },
+    {
+      "relation": "based_on",
+      "target": "design:dependency-aware-verification"
+    },
+    {
+      "relation": "based_on",
+      "target": "plan:dependency-aware-verification"
+    }
+  ],
+  "materials": [
+    {
+      "id": "commands",
+      "role": "report",
+      "source": "docs/archive/tasks/PB-059-evidence/commands.md",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-059"
+      ]
+    },
+    {
+      "id": "verify-c8868c8fda5f4dacaba02b5cf45c03ca",
+      "role": "report",
+      "source": "docs/archive/tasks/PB-059-evidence/work/verification/PB-059/c8868c8fda5f4dacaba02b5cf45c03ca",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-059"
+      ]
+    },
+    {
+      "id": "audit-01",
+      "role": "report",
+      "source": "docs/archive/tasks/PB-059-evidence/work/verification/PB-059/audit-01",
+      "storage": "local",
+      "immutable": true,
+      "required": true,
+      "used_by": [
+        "PB-059"
+      ]
+    },
+    {
+      "id": "verify-ca1cb5c4934e474b82e7316c671f809a",
+      "role": "report",
+      "source": "docs/archive/tasks/PB-059-evidence/work/verification/PB-059/ca1cb5c4934e474b82e7316c671f809a",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-059"
+      ]
+    },
+    {
+      "id": "audit-02",
+      "role": "report",
+      "source": "docs/archive/tasks/PB-059-evidence/work/verification/PB-059/audit-02",
+      "storage": "local",
+      "immutable": true,
+      "required": true,
+      "used_by": [
+        "PB-059"
+      ]
+    },
+    {
+      "id": "verify-2e2e700a88484661badf45733c5b78fd",
+      "role": "report",
+      "source": "docs/archive/tasks/PB-059-evidence/work/verification/PB-059/2e2e700a88484661badf45733c5b78fd",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-059"
+      ]
+    },
+    {
+      "id": "audit-03",
+      "role": "report",
+      "source": "docs/archive/tasks/PB-059-evidence/work/verification/PB-059/audit-03",
+      "storage": "local",
+      "immutable": true,
+      "required": true,
+      "used_by": [
+        "PB-059"
+      ]
+    },
+    {
+      "id": "lifecycle-lc-751e99009ecee606",
+      "role": "report",
+      "source": "docs/archive/tasks/PB-059-evidence/close-lc-751e99009ecee606.json",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": []
+    }
+  ],
+  "criterion_evidence": {
+    "CHECK-01": {
+      "check_sha256": "sha256:a9b00761c06f0eb5291a00c4ef0580201f562333f317fe634d1bb4e7167c26e9",
+      "card_projection": "sha256:aed53219081b5d6fdcf6544d25c74cae9692d72a950cef57c6fa8b5510064906",
+      "report_id": "verify-c8868c8fda5f4dacaba02b5cf45c03ca",
+      "report_sha256": "sha256:f0b8e004c04707ffa6fc1843792084f86d0468a6362c72caa8db7336fc7d8977"
+    },
+    "CHECK-03": {
+      "check_sha256": "sha256:3cd1a4b4f76342d767df659715b0da571667a0a3ef13a1f389c548993bcf2036",
+      "card_projection": "sha256:aed53219081b5d6fdcf6544d25c74cae9692d72a950cef57c6fa8b5510064906",
+      "report_id": "verify-2e2e700a88484661badf45733c5b78fd",
+      "report_sha256": "sha256:00cb1d3012c8d551e6aef3e9b7618b8d923e2283c536703c0db2a631602a5b12"
+    }
+  },
+  "handoff": {
+    "at": "2026-11-08T20:53:55+03:00",
+    "actor": {
+      "name": "Devin",
+      "model": "SWE-2 High"
+    },
+    "summary": "HANDOFF-03",
+    "reports": [
+      "verify-2e2e700a88484661badf45733c5b78fd"
+    ],
+    "card_projection": "sha256:aed53219081b5d6fdcf6544d25c74cae9692d72a950cef57c6fa8b5510064906",
+    "entry_id": "HANDOFF-03",
+    "journal_sha256": "sha256:b3027efba1af29f77dd1084dc15c4ba4a6e3ecd9068d1a9ce2e4af1546ac4e87"
+  },
+  "audit_packages": {
+    "audit-01": "sha256:4dd4d48e05a8423e7b09ee5863e7eca6a97ff0633bd5776fd6c1b5e2f824541e",
+    "audit-02": "sha256:377059e7883b2ff20401257b93be03198929c458f3bb2c57937c42aa266ac861",
+    "audit-03": "sha256:e19543f4089f9b0191c712ebb5aa720dbafcac511877e177f61f9fe128d0c900"
+  },
+  "acceptance": {
+    "at": "2026-11-09T08:44:46+03:00",
+    "actor": {
+      "name": "Codex",
+      "model": "GPT-6.1 Sol (Medium)"
+    },
+    "role": "auditor",
+    "kind": "acceptance",
+    "result": "accepted",
+    "handoff_at": "2026-11-08T20:53:55+03:00",
+    "session": null,
+    "detail": null,
+    "audit_id": "AUDIT-03",
+    "audit_sha256": "sha256:3259688c9dfb5d5ffc3d3e8b3652f8835e4b91df64358c968b1d770ad08bb6ac"
+  },
+  "moves": [
+    {
+      "from": "docs/tasks/PB-059-evidence/commands.md",
+      "to": "docs/archive/tasks/PB-059-evidence/commands.md"
+    },
+    {
+      "from": "work/verification/PB-059/c8868c8fda5f4dacaba02b5cf45c03ca",
+      "to": "docs/archive/tasks/PB-059-evidence/work/verification/PB-059/c8868c8fda5f4dacaba02b5cf45c03ca"
+    },
+    {
+      "from": "work/verification/PB-059/audit-01",
+      "to": "docs/archive/tasks/PB-059-evidence/work/verification/PB-059/audit-01"
+    },
+    {
+      "from": "work/verification/PB-059/ca1cb5c4934e474b82e7316c671f809a",
+      "to": "docs/archive/tasks/PB-059-evidence/work/verification/PB-059/ca1cb5c4934e474b82e7316c671f809a"
+    },
+    {
+      "from": "work/verification/PB-059/audit-02",
+      "to": "docs/archive/tasks/PB-059-evidence/work/verification/PB-059/audit-02"
+    },
+    {
+      "from": "work/verification/PB-059/2e2e700a88484661badf45733c5b78fd",
+      "to": "docs/archive/tasks/PB-059-evidence/work/verification/PB-059/2e2e700a88484661badf45733c5b78fd"
+    },
+    {
+      "from": "work/verification/PB-059/audit-03",
+      "to": "docs/archive/tasks/PB-059-evidence/work/verification/PB-059/audit-03"
+    },
+    {
+      "from": "docs/tasks/PB-059.md",
+      "to": "docs/archive/tasks/PB-059.md"
+    },
+    {
+      "from": "docs/tasks/PB-059.meta.json",
+      "to": "docs/archive/tasks/PB-059.meta.json"
+    }
+  ]
+}

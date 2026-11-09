@@ -1,0 +1,15 @@
+A-01: chain payments -> checkout -> cart
+{'payments-tests': 'run', 'checkout-tests': 'run', 'cart-tests': 'not_applicable'}
+Expected: all three run; actual cart-tests not_applicable
+
+A-02: closure digest with one reachable edge
+TypeError: cannot use 'list' as a set element (unhashable type: 'list')
+
+A-03: dynamic import aliases
+'from importlib import import_module as load\nload(chosen)\n' {'targets': {}, 'dynamic': []}
+'import importlib as il\nil.import_module(chosen)\n' {'targets': {}, 'dynamic': []}
+Expected: dynamic/unknown; actual no targets and no dynamic
+
+A-04: exceeded max_bytes
+{'bytes_exceeded': True, 'budget_blocked': False, 'budget_reasons': [], 'summary': {'run': 3, 'reused': 0, 'blocked': 0, 'not_applicable': 0}}
+Expected: budget blocked; actual run=3, blocked=0

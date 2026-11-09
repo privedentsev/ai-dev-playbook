@@ -1,0 +1,11 @@
+Independent re-audit PB-059: changes_requested (A-05 P1; A-06 P2).
+Technical probes for A-01..A-04: PASS; reproduce.py/log retained.
+24 graph + 34 select tests: PASS. Full suite not rerun.
+Initial audit-ready: FAIL (stale docs/tasks/index.md), before auditor changes.
+In-memory attempt to close A-01..A-04: parser rejected missing structured correction refs.
+card sync PB-059 --apply: exit 0, checkboxes already current.
+index: exit 0, status in_progress.
+check --ready: exit 0 (81 cards, 26 documents, 2 legacy).
+verify PB-059 --preflight: exit 0, materials/locks/commands/limits checked.
+git diff --check: exit 0.
+No implementation fixes, acceptance, close, commits or pushes performed.

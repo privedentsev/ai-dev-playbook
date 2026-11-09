@@ -1,0 +1,27 @@
+test_direct_from_relative_imports (test_checks_graph.AnalyzerTest.test_direct_from_relative_imports) ... ok
+test_dynamic_alias_flagged (test_checks_graph.AnalyzerTest.test_dynamic_alias_flagged) ... ok
+test_dynamic_import_flagged (test_checks_graph.AnalyzerTest.test_dynamic_import_flagged) ... ok
+test_literal_dynamic_resolved (test_checks_graph.AnalyzerTest.test_literal_dynamic_resolved) ... ok
+test_parent_relative_import (test_checks_graph.AnalyzerTest.test_parent_relative_import) ... ok
+test_src_layout_from_unrelated_dir (test_checks_graph.AnalyzerTest.test_src_layout_from_unrelated_dir) ... ok
+test_stdlib_and_external_ignored (test_checks_graph.AnalyzerTest.test_stdlib_and_external_ignored) ... ok
+test_syntax_error_raises (test_checks_graph.AnalyzerTest.test_syntax_error_raises) ... ok
+test_analyzer_edges_provenance (test_checks_graph.GraphBuildTest.test_analyzer_edges_provenance) ... ok
+test_cycle_no_hang (test_checks_graph.GraphBuildTest.test_cycle_no_hang) ... ok
+test_deleted_file_keeps_old_consumers_via_union (test_checks_graph.GraphBuildTest.test_deleted_file_keeps_old_consumers_via_union) ... ok
+test_dynamic_import_unknown (test_checks_graph.GraphBuildTest.test_dynamic_import_unknown) ... ok
+test_dynamic_outside_modules_project_scope (test_checks_graph.GraphBuildTest.test_dynamic_outside_modules_project_scope) ... ok
+test_foreign_graph_not_unionized (test_checks_graph.GraphBuildTest.test_foreign_graph_not_unionized) ... ok
+test_fresh_edge_wins_same_key (test_checks_graph.GraphBuildTest.test_fresh_edge_wins_same_key) ... ok
+test_graph_compatible (test_checks_graph.GraphBuildTest.test_graph_compatible) ... ok
+test_import_outside_modules_unknown (test_checks_graph.GraphBuildTest.test_import_outside_modules_unknown) ... ok
+test_load_graph_strict (test_checks_graph.GraphBuildTest.test_load_graph_strict) ... ok
+test_policy_edges_merged (test_checks_graph.GraphBuildTest.test_policy_edges_merged) ... ok
+test_same_module_import_no_edge (test_checks_graph.GraphBuildTest.test_same_module_import_no_edge) ... ok
+test_syntax_error_unknown (test_checks_graph.GraphBuildTest.test_syntax_error_unknown) ... ok
+test_union_merges_unknown (test_checks_graph.GraphBuildTest.test_union_merges_unknown) ... ok
+
+----------------------------------------------------------------------
+Ran 22 tests in 0.094s
+
+OK

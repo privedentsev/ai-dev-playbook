@@ -1,0 +1,7 @@
+Initial handoff_state=current; report 2e2e700a88484661badf45733c5b78fd passed, inputs_unchanged=true.
+Initial audit-ready rejected criterion checkboxes after verifying handoff freshness.
+All criterion reasons in initial-card.json are open_finding, not stale evidence.
+Cause: lifecycle.audit_preflight requires all criterion_states checked, but task_cards.criterion_states sets checked=false while findings await independent closure.
+Independent probes and 173 related tests passed. Current parser accepts an in-memory AUDIT-03 resolving A-01..A-06 with EXEC-02/03 links.
+Implementation sources checks_graph.py, checks_select.py and playbook.py match the report ca1cb5c4934e474b82e7316c671f809a from the prior technical audit.
+No gate code or evidence was changed to suppress this initial refusal; AUDIT-03 records the independent resolution, then readiness is rechecked.

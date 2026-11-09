@@ -1,0 +1,5 @@
+Initial verify PB-059 --audit-ready: exit 1.
+ERROR: PB-059: нет свежего успешного прогона verify — входы изменились после проверки; повторите verify и handoff
+verification.inputs_fresh(report ca1cb5c4934e474b82e7316c671f809a, own card excluded): (False, [docs/tasks/index.md]).
+In-memory task_cards.parse with appended accepted AUDIT and Закрытые замечания A-01..A-04: rejected with card format: AUDIT-02: закрытие без исправления/повторное закрытие.
+EXEC-02 has no Замечания field. No files modified by parser probe.
