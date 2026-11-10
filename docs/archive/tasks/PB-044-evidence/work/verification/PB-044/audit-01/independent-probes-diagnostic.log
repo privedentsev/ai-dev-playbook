@@ -1,0 +1,73 @@
+test_batch_real_cli_roundtrip_bytes_and_scoped_work (__main__.IndependentRepair.test_batch_real_cli_roundtrip_bytes_and_scoped_work) ... FAIL
+test_occupied_file_destination_is_refused (__main__.IndependentRepair.test_occupied_file_destination_is_refused) ... FAIL
+test_root_source_symlink_is_refused_without_mutation (__main__.IndependentRepair.test_root_source_symlink_is_refused_without_mutation) ... FAIL
+test_stale_source_content_keeps_entire_project (__main__.IndependentRepair.test_stale_source_content_keeps_entire_project) ... FAIL
+test_unselected_violation_is_not_exempted (__main__.IndependentRepair.test_unselected_violation_is_not_exempted) ... FAIL
+
+======================================================================
+FAIL: test_batch_real_cli_roundtrip_bytes_and_scoped_work (__main__.IndependentRepair.test_batch_real_cli_roundtrip_bytes_and_scoped_work)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/private/tmp/pb044-independent-audit-20261028/independent_probes.py", line 36, in test_batch_real_cli_roundtrip_bytes_and_scoped_work
+    sources = [self.fixture(), self.fixture('AUD-2', 'cancelled')]
+               ~~~~~~~~~~~~^^
+  File "/private/tmp/pb044-independent-audit-20261028/independent_probes.py", line 21, in fixture
+    self.assertEqual(code, 0, err + out)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+AssertionError: 1 != 0 : ERROR: AUD-1: Closed раньше Created
+
+
+======================================================================
+FAIL: test_occupied_file_destination_is_refused (__main__.IndependentRepair.test_occupied_file_destination_is_refused)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/private/tmp/pb044-independent-audit-20261028/independent_probes.py", line 122, in test_occupied_file_destination_is_refused
+    self.fixture()
+    ~~~~~~~~~~~~^^
+  File "/private/tmp/pb044-independent-audit-20261028/independent_probes.py", line 21, in fixture
+    self.assertEqual(code, 0, err + out)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+AssertionError: 1 != 0 : ERROR: AUD-1: Closed раньше Created
+
+
+======================================================================
+FAIL: test_root_source_symlink_is_refused_without_mutation (__main__.IndependentRepair.test_root_source_symlink_is_refused_without_mutation)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/private/tmp/pb044-independent-audit-20261028/independent_probes.py", line 108, in test_root_source_symlink_is_refused_without_mutation
+    src = self.fixture()
+  File "/private/tmp/pb044-independent-audit-20261028/independent_probes.py", line 21, in fixture
+    self.assertEqual(code, 0, err + out)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+AssertionError: 1 != 0 : ERROR: AUD-1: Closed раньше Created
+
+
+======================================================================
+FAIL: test_stale_source_content_keeps_entire_project (__main__.IndependentRepair.test_stale_source_content_keeps_entire_project)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/private/tmp/pb044-independent-audit-20261028/independent_probes.py", line 96, in test_stale_source_content_keeps_entire_project
+    src = self.fixture()
+  File "/private/tmp/pb044-independent-audit-20261028/independent_probes.py", line 21, in fixture
+    self.assertEqual(code, 0, err + out)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+AssertionError: 1 != 0 : ERROR: AUD-1: Closed раньше Created
+
+
+======================================================================
+FAIL: test_unselected_violation_is_not_exempted (__main__.IndependentRepair.test_unselected_violation_is_not_exempted)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/private/tmp/pb044-independent-audit-20261028/independent_probes.py", line 86, in test_unselected_violation_is_not_exempted
+    self.fixture(); self.fixture('AUD-2')
+    ~~~~~~~~~~~~^^
+  File "/private/tmp/pb044-independent-audit-20261028/independent_probes.py", line 21, in fixture
+    self.assertEqual(code, 0, err + out)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+AssertionError: 1 != 0 : ERROR: AUD-1: Closed раньше Created
+
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.446s
+
+FAILED (failures=5)

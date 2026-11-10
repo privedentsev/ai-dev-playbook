@@ -1,0 +1,12 @@
+PASS versions, 38 manifest hashes, release_id, declared transitions
+PASS changelog version, no release date, content and local links
+PASS fresh CLI init 0.1.0
+PASS 0.0.3 fixture preview writes nothing; apply preserves project files/custom config
+RUN: controlled-pass
+passed: /var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/tmpkvpkh7d_/work/verification/PROBE-51/2075b4de0e11439da3bb2d95c15cc45f/report.json
+PASS A-02: runner passed; unchanged fresh; edited CHANGELOG stale with sole diff; restored fresh
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/work/verification/PB-051/reaudit-03/probes.py", line 107, in <module>
+    line = next(line for line in changelog.splitlines() if line.startswith('- Исходные ошибки проверки PB-051'))
+           ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+StopIteration

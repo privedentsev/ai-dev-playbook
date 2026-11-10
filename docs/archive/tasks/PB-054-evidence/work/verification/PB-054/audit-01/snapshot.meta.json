@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "card_format_version": 2,
+  "relations": [
+    {
+      "relation": "based_on",
+      "target": "spec:audit-material-safety"
+    }
+  ],
+  "materials": []
+}

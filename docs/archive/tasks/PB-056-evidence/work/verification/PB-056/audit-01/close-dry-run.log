@@ -1,0 +1,220 @@
+План lc-91597c562769b82d (lifecycle):
+Основание: playbook.py close PB-056
+Исполнитель: cli:privedentsev1 (cli)
+Действия:
+  close_task PB-056: docs/tasks/PB-056.md → docs/archive/tasks/PB-056.md (done)
+Переносы:
+  docs/tasks/PB-056-evidence → docs/archive/tasks/PB-056-evidence
+  docs/tasks/PB-056-evidence/focused-first.log → docs/archive/tasks/PB-056-evidence/focused-first.log
+  docs/tasks/PB-056-evidence/history-review.md → docs/archive/tasks/PB-056-evidence/history-review.md
+  docs/tasks/PB-056-evidence/inventory.json → docs/archive/tasks/PB-056-evidence/inventory.json
+  docs/tasks/PB-056-evidence/preflight-blocked.log → docs/archive/tasks/PB-056-evidence/preflight-blocked.log
+  docs/tasks/PB-056-evidence/preflight-final.log → docs/archive/tasks/PB-056-evidence/preflight-final.log
+  docs/tasks/PB-056-evidence/tempdir-test.log → docs/archive/tasks/PB-056-evidence/tempdir-test.log
+  docs/tasks/PB-056.md → docs/archive/tasks/PB-056.md
+  docs/tasks/PB-056.meta.json → docs/archive/tasks/PB-056.meta.json
+  work/verification/PB-056/1dbdbbe5dfa44d5dbb4a052b38eeaa99 → docs/archive/tasks/PB-056-evidence/work/verification/PB-056/1dbdbbe5dfa44d5dbb4a052b38eeaa99
+  work/verification/PB-056/1dbdbbe5dfa44d5dbb4a052b38eeaa99/preflight-regressions.stderr.log → docs/archive/tasks/PB-056-evidence/work/verification/PB-056/1dbdbbe5dfa44d5dbb4a052b38eeaa99/preflight-regressions.stderr.log
+  work/verification/PB-056/1dbdbbe5dfa44d5dbb4a052b38eeaa99/preflight-regressions.stdout.log → docs/archive/tasks/PB-056-evidence/work/verification/PB-056/1dbdbbe5dfa44d5dbb4a052b38eeaa99/preflight-regressions.stdout.log
+  work/verification/PB-056/1dbdbbe5dfa44d5dbb4a052b38eeaa99/report.json → docs/archive/tasks/PB-056-evidence/work/verification/PB-056/1dbdbbe5dfa44d5dbb4a052b38eeaa99/report.json
+  work/verification/PB-056/1dbdbbe5dfa44d5dbb4a052b38eeaa99/self-check.stderr.log → docs/archive/tasks/PB-056-evidence/work/verification/PB-056/1dbdbbe5dfa44d5dbb4a052b38eeaa99/self-check.stderr.log
+  work/verification/PB-056/1dbdbbe5dfa44d5dbb4a052b38eeaa99/self-check.stdout.log → docs/archive/tasks/PB-056-evidence/work/verification/PB-056/1dbdbbe5dfa44d5dbb4a052b38eeaa99/self-check.stdout.log
+  work/verification/PB-056/1dbdbbe5dfa44d5dbb4a052b38eeaa99/unit-tests.stderr.log → docs/archive/tasks/PB-056-evidence/work/verification/PB-056/1dbdbbe5dfa44d5dbb4a052b38eeaa99/unit-tests.stderr.log
+  work/verification/PB-056/1dbdbbe5dfa44d5dbb4a052b38eeaa99/unit-tests.stdout.log → docs/archive/tasks/PB-056-evidence/work/verification/PB-056/1dbdbbe5dfa44d5dbb4a052b38eeaa99/unit-tests.stdout.log
+  work/verification/PB-056/audit-01 → docs/archive/tasks/PB-056-evidence/work/verification/PB-056/audit-01
+  work/verification/PB-056/audit-01/pb056-accept.log → docs/archive/tasks/PB-056-evidence/work/verification/PB-056/audit-01/pb056-accept.log
+  work/verification/PB-056/audit-01/pb056-audit-materials.log → docs/archive/tasks/PB-056-evidence/work/verification/PB-056/audit-01/pb056-audit-materials.log
+  work/verification/PB-056/audit-01/pb056-audit-readiness.log → docs/archive/tasks/PB-056-evidence/work/verification/PB-056/audit-01/pb056-audit-readiness.log
+  work/verification/PB-056/audit-01/pb056-audit-ready-final.log → docs/archive/tasks/PB-056-evidence/work/verification/PB-056/audit-01/pb056-audit-ready-final.log
+  work/verification/PB-056/audit-01/pb056-audit-smoke.log → docs/archive/tasks/PB-056-evidence/work/verification/PB-056/audit-01/pb056-audit-smoke.log
+  work/verification/PB-056/audit-01/pb056-handoff02.log → docs/archive/tasks/PB-056-evidence/work/verification/PB-056/audit-01/pb056-handoff02.log
+  work/verification/PB-056/audit-01/pb056-independent-probes.log → docs/archive/tasks/PB-056-evidence/work/verification/PB-056/audit-01/pb056-independent-probes.log
+  work/verification/PB-056/audit-01/pb056-independent-probes.py → docs/archive/tasks/PB-056-evidence/work/verification/PB-056/audit-01/pb056-independent-probes.py
+  work/verification/PB-056/audit-01/preflight-before-refresh.log → docs/archive/tasks/PB-056-evidence/work/verification/PB-056/audit-01/preflight-before-refresh.log
+  work/verification/PB-056/audit-01/provenance.json → docs/archive/tasks/PB-056-evidence/work/verification/PB-056/audit-01/provenance.json
+  work/verification/PB-056/audit-01/provenance.sha256 → docs/archive/tasks/PB-056-evidence/work/verification/PB-056/audit-01/provenance.sha256
+  work/verification/PB-056/audit-01/review.md → docs/archive/tasks/PB-056-evidence/work/verification/PB-056/audit-01/review.md
+  work/verification/PB-056/audit-01/snapshot.meta.json → docs/archive/tasks/PB-056-evidence/work/verification/PB-056/audit-01/snapshot.meta.json
+  work/verification/PB-056/audit-01/snapshot.txt → docs/archive/tasks/PB-056-evidence/work/verification/PB-056/audit-01/snapshot.txt
+  work/verification/PB-056/b6fed285d47f4f8d85a05bb46d88d79f → docs/archive/tasks/PB-056-evidence/work/verification/PB-056/b6fed285d47f4f8d85a05bb46d88d79f
+  work/verification/PB-056/b6fed285d47f4f8d85a05bb46d88d79f/completion.json → docs/archive/tasks/PB-056-evidence/work/verification/PB-056/b6fed285d47f4f8d85a05bb46d88d79f/completion.json
+  work/verification/PB-056/b6fed285d47f4f8d85a05bb46d88d79f/post-handoff-readiness.log → docs/archive/tasks/PB-056-evidence/work/verification/PB-056/b6fed285d47f4f8d85a05bb46d88d79f/post-handoff-readiness.log
+  work/verification/PB-056/b6fed285d47f4f8d85a05bb46d88d79f/preflight-regressions.stderr.log → docs/archive/tasks/PB-056-evidence/work/verification/PB-056/b6fed285d47f4f8d85a05bb46d88d79f/preflight-regressions.stderr.log
+  work/verification/PB-056/b6fed285d47f4f8d85a05bb46d88d79f/preflight-regressions.stdout.log → docs/archive/tasks/PB-056-evidence/work/verification/PB-056/b6fed285d47f4f8d85a05bb46d88d79f/preflight-regressions.stdout.log
+  work/verification/PB-056/b6fed285d47f4f8d85a05bb46d88d79f/report.json → docs/archive/tasks/PB-056-evidence/work/verification/PB-056/b6fed285d47f4f8d85a05bb46d88d79f/report.json
+  work/verification/PB-056/b6fed285d47f4f8d85a05bb46d88d79f/self-check.stderr.log → docs/archive/tasks/PB-056-evidence/work/verification/PB-056/b6fed285d47f4f8d85a05bb46d88d79f/self-check.stderr.log
+  work/verification/PB-056/b6fed285d47f4f8d85a05bb46d88d79f/self-check.stdout.log → docs/archive/tasks/PB-056-evidence/work/verification/PB-056/b6fed285d47f4f8d85a05bb46d88d79f/self-check.stdout.log
+  work/verification/PB-056/b6fed285d47f4f8d85a05bb46d88d79f/unit-tests.stderr.log → docs/archive/tasks/PB-056-evidence/work/verification/PB-056/b6fed285d47f4f8d85a05bb46d88d79f/unit-tests.stderr.log
+  work/verification/PB-056/b6fed285d47f4f8d85a05bb46d88d79f/unit-tests.stdout.log → docs/archive/tasks/PB-056-evidence/work/verification/PB-056/b6fed285d47f4f8d85a05bb46d88d79f/unit-tests.stdout.log
+Удаляются каталоги:
+  docs/tasks/PB-056-evidence
+  work/verification/PB-056/1dbdbbe5dfa44d5dbb4a052b38eeaa99
+  work/verification/PB-056/audit-01
+  work/verification/PB-056/b6fed285d47f4f8d85a05bb46d88d79f
+Записей: 40, удалений файлов: 38
+Diff записей (.md):
+  docs/archive/tasks/PB-056-evidence/focused-first.log: prepared stream sha256:79a8df0501def066d3ac12c2ed99539b4729f2212e1d7a0b651b59ac2f6dabcb
+  docs/archive/tasks/PB-056-evidence/history-review.md: prepared stream sha256:02562402a45a5a553b76893e98f18b25e8b6bd57930dc1b1ce092350daf6ef95
+  docs/archive/tasks/PB-056-evidence/inventory.json: prepared stream sha256:f0d20e778d3756bef1d66d8f189f6a834f8b640431027194a64ccd63790c502e
+  docs/archive/tasks/PB-056-evidence/preflight-blocked.log: prepared stream sha256:ce2cb0c5ea8a37357a0e2ca1b63453770f9c0cb3dc48144ea19e8a8f239cd16d
+  docs/archive/tasks/PB-056-evidence/preflight-final.log: prepared stream sha256:ff8bfadbb37bfa35c832b4fb0d92471024476246fc90f9f4d1d8c843337f9ff8
+  docs/archive/tasks/PB-056-evidence/tempdir-test.log: prepared stream sha256:e754769ec787a11bedb30adedbf5592b56e623984aec4a66d71f3458b2686d1b
+  docs/archive/tasks/PB-056-evidence/work/verification/PB-056/1dbdbbe5dfa44d5dbb4a052b38eeaa99/preflight-regressions.stderr.log: prepared stream sha256:0b504c20a3a108d6bdfe44fa57b22bc22bcd112ec0ba001147210244f7574048
+  docs/archive/tasks/PB-056-evidence/work/verification/PB-056/1dbdbbe5dfa44d5dbb4a052b38eeaa99/preflight-regressions.stdout.log: prepared stream sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+  docs/archive/tasks/PB-056-evidence/work/verification/PB-056/1dbdbbe5dfa44d5dbb4a052b38eeaa99/report.json: prepared stream sha256:b1ff85bd1ae84b53480a5593f1061e403284d89951048c9f897f71435553c9d2
+  docs/archive/tasks/PB-056-evidence/work/verification/PB-056/1dbdbbe5dfa44d5dbb4a052b38eeaa99/self-check.stderr.log: prepared stream sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+  docs/archive/tasks/PB-056-evidence/work/verification/PB-056/1dbdbbe5dfa44d5dbb4a052b38eeaa99/self-check.stdout.log: prepared stream sha256:fa39452b5b278a3d56e8837a598c98e35015dee8a8655e5553f6972f055b053e
+  docs/archive/tasks/PB-056-evidence/work/verification/PB-056/1dbdbbe5dfa44d5dbb4a052b38eeaa99/unit-tests.stderr.log: prepared stream sha256:8087a1b2254c750ff32a93a109938d65700731e618e6727ce4b988fe03377cb6
+  docs/archive/tasks/PB-056-evidence/work/verification/PB-056/1dbdbbe5dfa44d5dbb4a052b38eeaa99/unit-tests.stdout.log: prepared stream sha256:a67ac056d757bccbaf51c4009aebf9f98a6531c62779521b2fc8b0042f36876c
+  docs/archive/tasks/PB-056-evidence/work/verification/PB-056/audit-01/pb056-accept.log: prepared stream sha256:0eb24e17d41900db2f6acb62f631839337c4a74d679ec7777b46073e18e86252
+  docs/archive/tasks/PB-056-evidence/work/verification/PB-056/audit-01/pb056-audit-materials.log: prepared stream sha256:bf42866b693b881f0df49d353a60dec924d26882cd6f0033d65f2851a9f91256
+  docs/archive/tasks/PB-056-evidence/work/verification/PB-056/audit-01/pb056-audit-readiness.log: prepared stream sha256:c199929e5e11234c583ecf723364c984e61353fa5831a3e17adec98f43af64c0
+  docs/archive/tasks/PB-056-evidence/work/verification/PB-056/audit-01/pb056-audit-ready-final.log: prepared stream sha256:27de5043950dbb5f2658c90b5c70600c4e5bd66fb049e720dd4b48586b98cea9
+  docs/archive/tasks/PB-056-evidence/work/verification/PB-056/audit-01/pb056-audit-smoke.log: prepared stream sha256:2ae8a1ccc13e92c2511208d99305d14c24bd0588855f0f881a2a098bbc5e87af
+  docs/archive/tasks/PB-056-evidence/work/verification/PB-056/audit-01/pb056-handoff02.log: prepared stream sha256:42bdb871a002bad454fb6a97dcea69613cdf5da8a1c0b35a0377f93b9c19f300
+  docs/archive/tasks/PB-056-evidence/work/verification/PB-056/audit-01/pb056-independent-probes.log: prepared stream sha256:30c1d044d17dfafb79cdfdad2ba9dc2ce6fadc5132a0a752410570f562b731a9
+  docs/archive/tasks/PB-056-evidence/work/verification/PB-056/audit-01/pb056-independent-probes.py: prepared stream sha256:9d26e63a14ca7857cd6dd733469b9e015a1d12ffcb5d9cfeb312c7faaa9df8fb
+  docs/archive/tasks/PB-056-evidence/work/verification/PB-056/audit-01/preflight-before-refresh.log: prepared stream sha256:eacee66bdcefe741cf3d712cc037de3f8bcb926043c8da39ba4e6fa02a9d7af0
+  docs/archive/tasks/PB-056-evidence/work/verification/PB-056/audit-01/provenance.json: prepared stream sha256:0aed871aeeda4370b0d67899230beea496667436b92283547d84863954794eb3
+  docs/archive/tasks/PB-056-evidence/work/verification/PB-056/audit-01/provenance.sha256: prepared stream sha256:3bbb2e50593b34bd2870d9aa12083d9ea49c19db83bd7d7132958f4578d41c93
+  docs/archive/tasks/PB-056-evidence/work/verification/PB-056/audit-01/review.md: prepared stream sha256:35b7f801e79af8a9d8126a9aef2d50546c8435b8d9bd149773b5dc0491bf6695
+  docs/archive/tasks/PB-056-evidence/work/verification/PB-056/audit-01/snapshot.meta.json: prepared stream sha256:817e3ea1929f5e554536ab5bb6d301afa41020000fe530af36b3854b624d8b5a
+  docs/archive/tasks/PB-056-evidence/work/verification/PB-056/audit-01/snapshot.txt: prepared stream sha256:b3edde3a4056a0bd090b4e3dbf13db3d02770cd8c15853037df9c770f3656213
+  docs/archive/tasks/PB-056-evidence/work/verification/PB-056/b6fed285d47f4f8d85a05bb46d88d79f/completion.json: prepared stream sha256:c280e8171938d9c80f87a06a1ec559b85cf38ed95226b8da3d08f0c7929b0213
+  docs/archive/tasks/PB-056-evidence/work/verification/PB-056/b6fed285d47f4f8d85a05bb46d88d79f/post-handoff-readiness.log: prepared stream sha256:cb63d64521b31e1e0b39073f6e924dd4b94b9616cfe92d53b3033ceee7a8d0ef
+  docs/archive/tasks/PB-056-evidence/work/verification/PB-056/b6fed285d47f4f8d85a05bb46d88d79f/preflight-regressions.stderr.log: prepared stream sha256:0fd58b7ecce1aa919b05529eddb58d560cd304d73f0326aaa35e58c38552c49d
+  docs/archive/tasks/PB-056-evidence/work/verification/PB-056/b6fed285d47f4f8d85a05bb46d88d79f/preflight-regressions.stdout.log: prepared stream sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+  docs/archive/tasks/PB-056-evidence/work/verification/PB-056/b6fed285d47f4f8d85a05bb46d88d79f/report.json: prepared stream sha256:4f89e7976981bbdad5c45d1b74d42ef61e8cf75c2101f39db5e975642975de82
+  docs/archive/tasks/PB-056-evidence/work/verification/PB-056/b6fed285d47f4f8d85a05bb46d88d79f/self-check.stderr.log: prepared stream sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+  docs/archive/tasks/PB-056-evidence/work/verification/PB-056/b6fed285d47f4f8d85a05bb46d88d79f/self-check.stdout.log: prepared stream sha256:54b44fdc647b06f7740e29c1912a5ad8b9447a80dd6ef727777e8e4e2b611c7f
+  docs/archive/tasks/PB-056-evidence/work/verification/PB-056/b6fed285d47f4f8d85a05bb46d88d79f/unit-tests.stderr.log: prepared stream sha256:1e7cd43007fd31ad63d31e64c4e0400edd4978c6812461d8d366e955a91047a4
+  docs/archive/tasks/PB-056-evidence/work/verification/PB-056/b6fed285d47f4f8d85a05bb46d88d79f/unit-tests.stdout.log: prepared stream sha256:a67ac056d757bccbaf51c4009aebf9f98a6531c62779521b2fc8b0042f36876c
+--- /dev/null
++++ b/docs/archive/tasks/PB-056.md
+@@ -0,0 +1,108 @@
++# PB-056: Выявлять причины повторных дорогих проверок до запуска тестов и аудита
++
++ID: PB-056
++Status: done
++Priority: P1
++Depends-On: -
++Executor: Codex
++Model: GPT-6.1 Sol
++Created: 2026-10-28T11:50:05+03:00
++Closed: 2026-10-28T21:45:39+03:00
++
++<!-- playbook-meta:external -->
++
++## Задача
++
++### Цель и границы
++
++По поручению инженера обследовать историю выполненных задач и дополнить существующий ранний контроль PB-054 причинами повторных дорогих прогонов. Локальное расширение проверки готовности и порядка команд, без выборочного runner v2, изменения независимости аудита, автоматической приёмки и закрытия.
++
++### Контекст
++
++[История и границы обследования](PB-056-evidence/history-review.md), [перечень 51 результата](PB-056-evidence/inventory.json), [PB-054](PB-054.md), [правила проверок](../../../ai-dev-playbook/rules/verification.md).
++
++### Критерии приёмки
++
++- [x] AC-01: обследованы все закрытые и переданные результаты исходного индекса; причины повторов отделены от настоящих дефектов и сопоставлены с защитой.
++- [x] AC-02: preflight без записи/команд выявляет pending/gate, негодную структуру/версии/индексы/материалы, отсутствующие executables и таймаут не выше измеренного успешного прогона; обычный verify останавливается до команд.
++- [x] AC-03: verify --audit-ready без тестов/записи требует свежей передачи и подтверждённых критериев; не выдаёт независимую приёмку и не требует её для предварительной проверки.
++- [x] AC-04: структурная команда и шесть регрессий PB-051/052 выполняются до полного suite; отрицательные CLI-пробы со счётчиком и прежние сценарии проходят; правила/CHANGELOG/manifest актуальны, настроенный verify passed с неизменными входами.
++
++### План
++
++1. Обследовать журналы всех выполненных карточек, сохранить инвентаризацию и причины с границами доказательств.
++2. Расширить preflight и добавить audit-ready, сохраняя read-only и legacy; добавить постоянные негативные CLI-регрессии.
++3. Переставить self-check перед suite, добавить быстрые существующие регрессии версий и ссылок; актуализировать правила и self-manifest.
++4. Подготовить материалы, статус и индекс, один финальный verify; CHECK/HANDOFF и CLI-передача. Независимая приёмка — другая сессия или инженер.
++
++### Ресурсы
++
++Python 3/POSIX, macOS, локальные временные проекты; исходное дерево содержит незавершённые изменения PB-046 и других задач. policy_revision=2; бюджет не задан. Модель исполнителя GPT-6.1 Sol подтверждена инженером 2026-10-28; исходная атрибуция сохранена в audit-01/snapshot.txt. Commit/push/release не разрешены.
++
++## Журнал
++
++### EXEC-01 — Выполнение
++
++Время: 2026-10-28T11:56:23+03:00
++Исполнитель: Codex
++Модель: GPT-6.1 Sol
++Изменения: обследована история 51 результата; штатно сброшены устаревшие производные отметки PB-046 после изменения общих входов; ранний контроль дополнен проверкой готовности проекта, команд, gate/pending/TMPDIR и лимитов по успешной истории. Добавлен read-only audit-ready со штатными проверками handoff/journal/входов и критериев. Self-check и шесть существующих регрессий выполняются до полного suite, чтобы известные сбои обнаруживались раньше. Прежние ошибки и материалы не переписываются; аудитор не принимает собственную реализацию.
++Файлы: ai-dev-playbook/scripts/verification.py, file_operations.py, playbook.py, lifecycle.py; ai-dev-playbook/project.json; tests/test_verification_readiness.py, test_verification_smoke.py; правила проверок/режимов, docs/user-guide/modes.md, docs/code-map.md, CHANGELOG, docs/tasks/PB-056-evidence, производные отметки docs/tasks/PB-046.md/.meta.json и self-manifest.
++
++### CHECK-01 — Проверка
++
++Время: 2026-10-28T12:15:37+03:00
++Исполнитель: Codex
++Модель: GPT-6.1 Sol
++Результат: passed
++Критерии: AC-01, AC-02, AC-03, AC-04
++Команда: python3 ai-dev-playbook/scripts/playbook.py verify PB-056; предварительно адресные тесты, index --all, adopt . --force --apply, verify PB-056 --preflight и git diff --check.
++Среда: macOS, Python 3, текущий checkout с исходными незакоммиченными изменениями; негативные CLI-сценарии в изолированных временных проектах.
++Факт: единственный полный verify b6fed285d47f4f8d85a05bb46d88d79f passed, inputs_unchanged=true. Self-check прошёл за 7.698 s, шесть ранних регрессий за 2.626 s; полный suite — 619 тестов за 725.041 s. До общего прогона — 46 адресных проверок и отдельная регрессия TMPDIR. Счётчик подтвердил отсутствие subprocess при сбоях подготовки; audit-ready прошёл на свежей временной передаче и отказал после изменения входов. Ранний контроль реального checkout обнаружил устаревшие отметки PB-046 до suite; штатный card sync устранил этот блокер. Все 40 SHA-256 self-manifest совпали перед полным прогоном.
++Доказательства: [История](PB-056-evidence/history-review.md), [Инвентаризация](PB-056-evidence/inventory.json), [Адресные проверки](PB-056-evidence/focused-first.log), [TMPDIR](PB-056-evidence/tempdir-test.log), [Отказ до тестов](PB-056-evidence/preflight-blocked.log), [Успешный preflight](PB-056-evidence/preflight-final.log), [Отчёт verify](PB-056-evidence/work/verification/PB-056/b6fed285d47f4f8d85a05bb46d88d79f/report.json), [Полный журнал](PB-056-evidence/work/verification/PB-056/b6fed285d47f4f8d85a05bb46d88d79f/unit-tests.stderr.log), [Ранние регрессии](PB-056-evidence/work/verification/PB-056/b6fed285d47f4f8d85a05bb46d88d79f/preflight-regressions.stderr.log).
++Ограничения: самопроверка исполнителя, независимая приёмка этой реализации не выполнена. Историческое обследование не перепринимает старые задачи. Известные ошибки подготовки выявляются рано; новые дефекты поведения могут потребовать исправления и нового прогона. Название модели запрошено у инженера, пока не подтверждено.
++
++### HANDOFF-01 — Передача
++
++Время: 2026-10-28T12:15:37+03:00
++Исполнитель: Codex
++Модель: GPT-6.1 Sol
++Выполнение: EXEC-01
++Проверки: CHECK-01
++Состояние: in_review, текущий checkout, изменения не закоммичены; полный verify passed с неизменными входами. Следующий шаг — независимый аудит после read-only verify PB-056 --audit-ready; перед закрытием подтвердить точное название модели. Acceptance/close не выполнялись.
++Фокус аудита: сверить обследование 51 результата и источники причин повторов; независимо проверить нулевой счётчик команд при pending/gate/TMPDIR, stale index, недоступном executable и недостаточном лимите. Проверить совместимость dry-run, legacy без documents, учёт успешной архивной истории/использование настроенного archive-пути и игнорирование failed/corrupt/чужих отчётов. На Markdown v2 проверить audit-ready: журнал/EXEC/CHECK, свежие входы, критерии; отказ при изменениях без самоприёмки и без записи. Сверить, что self-check и шесть smoke-регрессий предшествуют полному suite. Не повторять полный suite без новых изменений или установленной необходимости; исходный отчёт и входы доступны по CHECK-01.
++
++### CHECK-02 — Проверка
++
++Время: 2026-10-28T21:42:42+03:00
++Исполнитель: Codex
++Модель: GPT-6
++Результат: passed
++Критерии: AC-01, AC-02, AC-03, AC-04
++Команда: python3 ai-dev-playbook/scripts/playbook.py verify PB-056
++Среда: macOS, Python 3; текущий checkout; без параллельной записи входов.
++Факт: свежий verify 1dbdbbe5dfa44d5dbb4a052b38eeaa99 passed, inputs_unchanged=true; self-check=passed (8.078 s), preflight-regressions=passed (2.703 s), unit-tests=passed (747.286 s). Полный набор: 619 тестов. Повтор выполнен после подтверждения инженером модели исполнителя GPT-6.1 Sol и обновления CHANGELOG; код реализации и постоянные тесты не менялись. Исходные атрибуция и sidecar сохранены в audit-01.
++Доказательства: [Свежий отчёт](PB-056-evidence/work/verification/PB-056/1dbdbbe5dfa44d5dbb4a052b38eeaa99/report.json), [Полный журнал](PB-056-evidence/work/verification/PB-056/1dbdbbe5dfa44d5dbb4a052b38eeaa99/unit-tests.stderr.log), [Независимые пробы](PB-056-evidence/work/verification/PB-056/audit-01/review.md).
++Ограничения: полный настроенный legacy-набор; другие платформы не проверены. Содержательный аудит реализации выполнен отдельно от первоначального исполнения в текущей сессии; CHECK не заменяет AUDIT и CLI acceptance.
++
++### HANDOFF-02 — Передача
++
++Время: 2026-10-28T21:42:42+03:00
++Исполнитель: Codex
++Модель: GPT-6
++Выполнение: EXEC-01
++Проверки: CHECK-02
++Состояние: in_review; уточнена атрибуция по ответу инженера, обновлён CHANGELOG Unreleased. Новый verify прошёл с неизменными входами. Реализация совпадает с независимо проверенной; следующий шаг — AUDIT и CLI acceptance/close по поручению инженера.
++Фокус аудита: сверить сохранённые независимые результаты 42 проверок, неизменность кода/тестов и свежесть CHECK-02. Проверить переносимость аудиторских материалов, audit-ready и полный close --dry-run после acceptance. Старую историю затрат и доказательства не переписывать.
++
++### AUDIT-01 — Аудит
++
++Время: 2026-10-28T21:43:56+03:00
++Исполнитель: Codex
++Модель: GPT-6
++Передача: HANDOFF-02
++Результат: accepted
++Критерии: AC-01, AC-02, AC-03, AC-04
++Независимо проверено: инвентаризация 51 результата и причины повторов; код раннего контроля, read-only gate/pending, доступность executable, история таймаутов и путь архива; свежесть передачи и журнала Markdown v2. Независимо прошли 11 readiness, 6 smoke, 22 material-safety/version и 3 дополнительные CLI-пробы. Проверены отсутствие записи/запуска при отказах, равенство лимита успешной длительности, повреждённая история, свежая передача без acceptance и отказ после изменения EXEC. Первоначальная реализация выполнена в другой сессии; в текущем аудите её код и тесты не исправлялись. После подтверждения модели и обновления changelog повторён полный verify: 619 тестов, passed, inputs_unchanged=true; HANDOFF-02 актуальна. Замечаний нет.
++Доказательства: [Протокол и границы](PB-056-evidence/work/verification/PB-056/audit-01/review.md), [Readiness](PB-056-evidence/work/verification/PB-056/audit-01/pb056-audit-readiness.log), [Smoke](PB-056-evidence/work/verification/PB-056/audit-01/pb056-audit-smoke.log), [Материалы](PB-056-evidence/work/verification/PB-056/audit-01/pb056-audit-materials.log), [Дополнительные пробы](PB-056-evidence/work/verification/PB-056/audit-01/pb056-independent-probes.log), [Свежий verify](PB-056-evidence/work/verification/PB-056/1dbdbbe5dfa44d5dbb4a052b38eeaa99/report.json).
++Ограничения: macOS/Python 3; новый выборочный runner не входит в задачу. Исторические задачи не перепринимались. Закрытие разрешено инженером при успешном аудите; CLI acceptance и close выполняются после этого протокола.
+--- a/docs/tasks/index.md
++++ b/docs/tasks/index.md
+@@ -8,7 +8,6 @@
+ |---|---|---|---|---|---|---|---|
+ | AUDIT-004 | [AUDIT-004: Повторная приёмка PB-005 и аудит PB-007](AUDIT-004.md) | in_review | P1 | Codex / GPT-6 Sol | unknown | — | — |
+ | PB-007 | [PB-007: Покрыть основной CLI сценарными проверками](PB-007.md) | in_review | P1 | Devin / SWE-2 High | unknown | — | — |
+-| PB-056 | [PB-056: Выявлять причины повторных дорогих проверок до запуска тестов и аудита](PB-056.md) | in_review | P1 | Codex / GPT-6.1 Sol | 2026-10-28 11:50 | — | — |
+ | AUDIT-007 | [AUDIT-007: Независимо принять соразмерные маршруты и проверки](AUDIT-007.md) | draft | P2 | — | 2026-10-23 03:34 | — | PB-031, PB-032, PB-033, PB-034, PB-035, PB-036, PB-037 |
+ | AUDIT-008 | [AUDIT-008: Независимо принять выборочные операции и ограниченную историю](AUDIT-008.md) | draft | P2 | — | 2026-10-26 17:56 | — | PB-045, PB-046, PB-047, PB-048, PB-049, PB-050 |
+ | PB-008 | [PB-008: Завершить самоприменение проверочного цикла](PB-008.md) | in_review | P2 | Devin / SWE-2 High | unknown | — | — |
+@@ -30,6 +29,7 @@
+ 
+ | ID | Задача | Статус | Приоритет | Исполнитель | Создана | Закрыта | Зависимости |
+ |---|---|---|---|---|---|---|---|
++| PB-056 | [PB-056: Выявлять причины повторных дорогих проверок до запуска тестов и аудита](../archive/tasks/PB-056.md) | done | P1 | Codex / GPT-6.1 Sol | 2026-10-28 11:50 | 2026-10-28 21:45 | — |
+ | PB-045 | [PB-045: Проверять будущее состояние через выборочный staged](../archive/tasks/PB-045.md) | done | P2 | Codex / GPT-6.1 Sol | 2026-10-26 17:56 | 2026-10-28 08:59 | — |
+ | PB-044 | [PB-044: Перенести исторические материалы закрытых задач и обнаруживать остатки](../archive/tasks/PB-044.md) | done | P2 | Codex / GPT-6.1 Sol | 2026-10-26 13:36 | 2026-10-28 06:11 | — |
+ | PB-055 | [PB-055: Зафиксировать выпуск 0.1.0 и отправить изменения в GitHub](../archive/tasks/PB-055.md) | done | P2 | Codex / GPT-6 | 2026-10-28 03:59 | 2026-10-28 05:50 | — |

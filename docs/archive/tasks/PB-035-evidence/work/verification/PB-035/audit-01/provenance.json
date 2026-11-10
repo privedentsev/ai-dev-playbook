@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "task_id": "PB-035",
+  "audit_id": "audit-01",
+  "at": "2026-11-06T05:44:57+03:00",
+  "actor": "cli:privedentsev1",
+  "files": {
+    "snapshot.txt": {
+      "source": "docs/tasks/PB-035.md",
+      "sha256": "sha256:6101f74d0b7c8d86fe3150a66c726bee272437e0ed6c64c30936befdae5a1496"
+    }
+  }
+}

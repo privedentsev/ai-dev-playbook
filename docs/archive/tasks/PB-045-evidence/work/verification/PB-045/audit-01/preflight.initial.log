@@ -1,0 +1,2 @@
+ERROR: docs/tasks/PB-045.md: битая или внешняя локальная ссылка target/child
+docs/tasks/PB-045.md: битая или внешняя локальная ссылка x/missing

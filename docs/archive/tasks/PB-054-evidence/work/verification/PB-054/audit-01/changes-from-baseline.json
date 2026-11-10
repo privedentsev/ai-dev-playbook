@@ -1,0 +1,70 @@
+{
+  "ai-dev-playbook/README.md": {
+    "before": "f21b861b1212383fba09c44f3a13a305fdc650eb68c0383180a22f4c530ba0bf",
+    "after": "0a8eeb478c7eda7fc9f95b8b59e63db6a982484dd61337be8e183e9e45166d70"
+  },
+  "ai-dev-playbook/manifest.json": {
+    "before": "01c26e71322347cfb28f47380c5f71ed1f27c817a49a6f2a1e477c12a917808f",
+    "after": "337559e0f48eca0267f61a495041a0ecf358f6c069e82a0a4f7be22758fd56d9"
+  },
+  "ai-dev-playbook/scripts/verification.py": {
+    "before": "d7ecd23223f426da6250cf18d7251e22c09888cd5ebab48c06eeb69bee899b6f",
+    "after": "114b9ca922fbcab7466cf8203e3c8b0247db92c3e6fac0dc727f9b8bf0e0caa3"
+  },
+  "ai-dev-playbook/scripts/playbook.py": {
+    "before": "aa32bc29f57fee5dd2434a07b7d971f9a391c8a6069f24f0537cb0d9d5b84cd6",
+    "after": "a86045b607a6aa004341537e03a53d71163cea97ac998758cd7cf1b362d41ce8"
+  },
+  "ai-dev-playbook/scripts/documents.py": {
+    "before": "adff43164cfb68ed4066afb1bbf7f45226bd0048075bb338c201622cdc353900",
+    "after": "fcced9a2f669a16014d392dfeeba4a076ed71f823007407907b8f37349cf92a5"
+  },
+  "ai-dev-playbook/scripts/lifecycle.py": {
+    "before": "8111ba2ebb8208a37402a483287e12325b8986940e9a1661871b86a6f8ffa29e",
+    "after": "1bef4ee2c58f59ab842561b1bf24807de0a9d4f7396d1a8291dedb9f08ee2f6e"
+  },
+  "ai-dev-playbook/scripts/file_operations.py": {
+    "before": "9faa9cde835821c7c71c4166d17acb738e6be239786ff4ddfe845c955c22f0d6",
+    "after": "14daed17aa1c8a97f46739ddcc76e0d8740931cf71f8b64848d97ade19574c5d"
+  },
+  "ai-dev-playbook/rules/workflow.md": {
+    "before": "858d40afbf96329fa64ce3bb77323ac24a4a548ee52779c6bd6fb8b2b9ed49cd",
+    "after": "57890084c90745ddea814fb9c1c3ab8625a7300a6278c534a10e89e73606babf"
+  },
+  "ai-dev-playbook/rules/tasks.md": {
+    "before": "e1d3ffe706753e17e477894f6064b32b958e2ac0f07f0a4f1da29ffa63c83d49",
+    "after": "2fc44c6e6e82c4e58d42c46843a0f4f5a2ebc87cb6e63e4cfd14e95ab3c8b838"
+  },
+  "ai-dev-playbook/rules/verification.md": {
+    "before": "c82c645e6036516dc182b598531005ab5b0589785575315a0dc8db7c49aa8e12",
+    "after": "26f6a9ff9154f4bd898fc864a54c6566b11593c1140ff3b231584fd6250a6cb3"
+  },
+  "tests/test_material_registration.py": {
+    "before": "abbcf67610e300f427fb0ea29e1ce1656ac3813181db9274e5e20da16711ff8c",
+    "after": "efface65e6486b6eaaa37a18e676e0961ac289e6816375af7e07324742d5f37c"
+  },
+  "tests/test_pb029.py": {
+    "before": "c65f36defe489ee5e6eb92ff9daebfd818f0a1439d170eed799f4babac045558",
+    "after": "7137d92694aa7f0213004e3018ff8d5fcb40bb9da05a3d1d3af2881018c42ae3"
+  },
+  "tests/test_close_lifecycle.py": {
+    "before": "0939b562b07e80980b04a8ed5378cd779dccec225a623634c2f1f27a27906c11",
+    "after": "35eb3f119a430abca4536a2a320e876100c50363e30d2a850ff9d4bad15bc390"
+  },
+  "CHANGELOG.md": {
+    "before": "acb73ee407d6a6f56b1f06a45d371ef34d4851fd48b4b8b7da6c32f9a2304c2a",
+    "after": "610c98847c945ed2b9f70445ca5147e33b91affe2d16cd44900f4dee47679787"
+  },
+  "docs/tasks/PB-033.md": {
+    "before": "a02accee5d06f40b655671614815fd5abbf99211c324c4fa266fafd3ce87af1f",
+    "after": "6635978cf962a6bedd93940d120e0aeff03cbd993f3604332cd6c43777cc1bf1"
+  },
+  "docs/tasks/PB-034.md": {
+    "before": "87d8e5f588766e348ddb2257624314c0498fe1d2f535660c97d60ba179ffcd43",
+    "after": "937cb2d2ba34f855aa30fbb552f1da0090520c501039109d383e468a4e36102f"
+  },
+  "docs/tasks/PB-037.md": {
+    "before": "fc14bd2b7cb38aa7c196a99c763482bcf3c625c8a86b7db01b71728c95eb7958",
+    "after": "57a7c318c3d7a67eabe1567724ab71e82f282e06f1a58ba945562add20b0efd4"
+  }
+}

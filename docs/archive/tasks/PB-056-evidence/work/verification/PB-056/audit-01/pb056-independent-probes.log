@@ -1,0 +1,8 @@
+test_custom_archive_timeout_equality (__main__.IndependentProbes.test_custom_archive_timeout_equality) ... ok
+test_malformed_history_shapes_are_ignored (__main__.IndependentProbes.test_malformed_history_shapes_are_ignored) ... ok
+test_markdown_v2_audit_ready_and_journal_integrity (__main__.IndependentProbes.test_markdown_v2_audit_ready_and_journal_integrity) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 5.941s
+
+OK

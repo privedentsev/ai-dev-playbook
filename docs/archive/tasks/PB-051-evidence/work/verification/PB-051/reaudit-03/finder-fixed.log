@@ -1,0 +1,6 @@
+PASS A-04: Finder registration absent; 50 genuine historical evidence hashes preserved
+PASS: 80 code/test/fixture files unchanged since preceding independent audit
+PASS: catalog on copied verification inputs and materials without Finder metadata
+PB-051: чекбоксы синхронизированы.
+PASS: forced criterion-sync write, staged/final checks; original text restored on copy
+All A-04 independent checks passed; original project unchanged

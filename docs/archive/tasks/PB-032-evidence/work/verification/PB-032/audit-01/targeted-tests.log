@@ -1,0 +1,21 @@
+test_absent_create_delete_directory_membership (test_verification_policy.PolicyTests.test_absent_create_delete_directory_membership) ... ok
+test_added_deleted_changed_and_zero_segment_glob (test_verification_policy.PolicyTests.test_added_deleted_changed_and_zero_segment_glob) ... ok
+test_always_and_explicit_checkpoint (test_verification_policy.PolicyTests.test_always_and_explicit_checkpoint) ... ok
+test_baseline_unknown_is_required (test_verification_policy.PolicyTests.test_baseline_unknown_is_required) ... ok
+test_broad_scope_and_wildcard_prefix (test_verification_policy.PolicyTests.test_broad_scope_and_wildcard_prefix) ... ok
+test_coverage_every_id_and_status (test_verification_policy.PolicyTests.test_coverage_every_id_and_status) ... ok
+test_environment_and_unknown_snapshots (test_verification_policy.PolicyTests.test_environment_and_unknown_snapshots) ... ok
+test_failed_exclusion_requires_engineer_history (test_verification_policy.PolicyTests.test_failed_exclusion_requires_engineer_history) ... ok
+test_independent_policy_definition (test_verification_policy.PolicyTests.test_independent_policy_definition) ... ok
+test_missing_scope_is_required (test_verification_policy.PolicyTests.test_missing_scope_is_required) ... ok
+test_narrow_unrelated_scope (test_verification_policy.PolicyTests.test_narrow_unrelated_scope) ... ok
+test_path_rejections (test_verification_policy.PolicyTests.test_path_rejections) ... ok
+test_project_obligation_cannot_be_omitted_or_weakened (test_verification_policy.PolicyTests.test_project_obligation_cannot_be_omitted_or_weakened) ... ok
+test_reuse_bindings_and_race (test_verification_policy.PolicyTests.test_reuse_bindings_and_race) ... ok
+test_star_does_not_cross_slash (test_verification_policy.PolicyTests.test_star_does_not_cross_slash) ... ok
+test_task_projection_preserves_requirements_and_metadata (test_verification_policy.PolicyTests.test_task_projection_preserves_requirements_and_metadata) ... ok
+
+----------------------------------------------------------------------
+Ran 16 tests in 0.010s
+
+OK

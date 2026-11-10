@@ -1,0 +1,29 @@
+test_absent_child_records_non_directory_ancestor_state (__main__.Probe.test_absent_child_records_non_directory_ancestor_state) ... ok
+test_explicit_file_to_directory_with_child_rejected_early (__main__.Probe.test_explicit_file_to_directory_with_child_rejected_early) ... ok
+test_explicit_file_to_empty_directory_rejected_early (__main__.Probe.test_explicit_file_to_empty_directory_rejected_early) ... ok
+test_external_local_link_reports_context (__main__.Probe.test_external_local_link_reports_context) ... ok
+test_live_bytes_cannot_hide_in_aliased_staging_read (__main__.Probe.test_live_bytes_cannot_hide_in_aliased_staging_read) ... ok
+test_live_parent_symlink_and_payload_hardlink_rejected (__main__.Probe.test_live_parent_symlink_and_payload_hardlink_rejected) ... ok
+test_live_root_substitution_detected_at_read_and_recheck (__main__.Probe.test_live_root_substitution_detected_at_read_and_recheck) ... ok
+test_non_directory_ancestor_is_an_absent_child (__main__.Probe.test_non_directory_ancestor_is_an_absent_child) ... ok
+test_nonempty_removed_directory_requires_explicit_child_removal (__main__.Probe.test_nonempty_removed_directory_requires_explicit_child_removal) ... ok
+test_obsolete_child_is_not_valid_link_below_future_file (__main__.Probe.test_obsolete_child_is_not_valid_link_below_future_file) ... ok
+test_overlay_matches_independent_physical_tree (__main__.Probe.test_overlay_matches_independent_physical_tree) ... ok
+test_payload_reads_are_bounded_and_no_live_links (__main__.Probe.test_payload_reads_are_bounded_and_no_live_links) ... ok
+test_read_set_binds_actual_stream_and_new_absence (__main__.Probe.test_read_set_binds_actual_stream_and_new_absence) ... ok
+test_read_set_observes_document_collection_changes (__main__.Probe.test_read_set_observes_document_collection_changes) ... ok
+test_removed_directory_rejects_new_descendants (__main__.Probe.test_removed_directory_rejects_new_descendants) ... ok
+test_root_actions_are_rejected (__main__.Probe.test_root_actions_are_rejected) ... ok
+test_source_alias_is_rejected_before_preparation (__main__.Probe.test_source_alias_is_rejected_before_preparation) ... ok
+test_staged_directory_substitution_detected_at_read (__main__.Probe.test_staged_directory_substitution_detected_at_read) ... ok
+test_staged_payload_substitution_by_hardlink_detected (__main__.Probe.test_staged_payload_substitution_by_hardlink_detected) ... ok
+test_staging_dotdot_alias_cannot_reuse_live_project (__main__.Probe.test_staging_dotdot_alias_cannot_reuse_live_project) ... ok
+test_symlink_staging_ancestor_rejected_before_write (__main__.Probe.test_symlink_staging_ancestor_rejected_before_write) ... ok
+test_symlink_staging_ancestor_rejected_by_view (__main__.Probe.test_symlink_staging_ancestor_rejected_by_view) ... ok
+test_symlink_staging_root_rejected_before_write (__main__.Probe.test_symlink_staging_root_rejected_before_write) ... ok
+test_unannounced_write_over_directory_rejected (__main__.Probe.test_unannounced_write_over_directory_rejected) ... ok
+
+----------------------------------------------------------------------
+Ran 24 tests in 0.063s
+
+OK

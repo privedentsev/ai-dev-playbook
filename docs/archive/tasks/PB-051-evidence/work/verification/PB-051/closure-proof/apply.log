@@ -1,0 +1,3 @@
+OK: структура, ссылки и 61 карточки; каталог документов: 17 документов, 2 legacy. Поведение продукта не проверялось.
+OK: структура, ссылки и 61 карточки; каталог документов: 17 документов, 2 legacy. Поведение продукта не проверялось.
+PACKAGING: {"old": "work/verification/PB-051/audit-20261027/card-original.md", "new": "work/verification/PB-051/audit-20261027/card-original.txt", "unchanged_sha256": "sha256:5e5131b8405a2ac2d457c7ed9707e09e2bdd816c644d9713d3f59f80dcfb9403", "result": "{'status': 'completed', 'op_id': '20261027-101626-52ce5403', 'plan_id': 'pb051-snapshot-txt-5e5131b8405a2ac2', 'op_dir': 'work/lifecycle/20261027-101626-52ce5403'}"}

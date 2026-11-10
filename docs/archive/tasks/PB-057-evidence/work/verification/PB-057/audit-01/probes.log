@@ -1,0 +1,6 @@
+A-01: exclude ** ACCEPTED despite intersection with declared inputs
+A-01: exclude **/* ACCEPTED despite intersection with declared inputs
+A-01: exclude **/payments/** ACCEPTED despite intersection with declared inputs
+A-02: new unapproved argv: {'verdict': 'extension', 'changes': [{'classification': 'extension', 'kind': 'checks', 'ref': 'new-command', 'detail': 'добавлена проверка'}]}
+A-03: duplicate expected test ID ACCEPTED
+A-04: expected_failure approval cannot be expressed: policy.test_catalog.entries[0]: неизвестные поля ['expected_failure']

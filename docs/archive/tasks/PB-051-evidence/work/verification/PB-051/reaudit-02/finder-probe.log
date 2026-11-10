@@ -1,0 +1,3 @@
+REPRODUCED: PROBE-51: материал отсутствует или не обычный файл/каталог: work/verification/PROBE-51/.DS_Store
+CONFIRMED: required=false does not bypass material-catalog existence validation
+Current PB-051 still references the same Finder material; original files/metadata unchanged

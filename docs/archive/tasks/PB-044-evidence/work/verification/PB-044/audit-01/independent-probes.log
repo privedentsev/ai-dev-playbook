@@ -1,0 +1,10 @@
+test_batch_real_cli_roundtrip_bytes_and_scoped_work (__main__.IndependentRepair.test_batch_real_cli_roundtrip_bytes_and_scoped_work) ... ok
+test_occupied_file_destination_is_refused (__main__.IndependentRepair.test_occupied_file_destination_is_refused) ... ok
+test_root_source_symlink_is_refused_without_mutation (__main__.IndependentRepair.test_root_source_symlink_is_refused_without_mutation) ... ok
+test_stale_source_content_keeps_entire_project (__main__.IndependentRepair.test_stale_source_content_keeps_entire_project) ... ok
+test_unselected_violation_is_not_exempted (__main__.IndependentRepair.test_unselected_violation_is_not_exempted) ... ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 4.163s
+
+OK

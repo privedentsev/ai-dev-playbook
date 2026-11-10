@@ -1,0 +1,374 @@
+test_actual_declared_transitions_preserve_custom_data_and_legacy (test_workflow_install.WorkflowInstallTest.test_actual_declared_transitions_preserve_custom_data_and_legacy) ... 
+  test_actual_declared_transitions_preserve_custom_data_and_legacy (test_workflow_install.WorkflowInstallTest.test_actual_declared_transitions_preserve_custom_data_and_legacy) (version='0.0.2') ... FAIL
+  test_actual_declared_transitions_preserve_custom_data_and_legacy (test_workflow_install.WorkflowInstallTest.test_actual_declared_transitions_preserve_custom_data_and_legacy) (version='0.0.3') ... FAIL
+  test_actual_declared_transitions_preserve_custom_data_and_legacy (test_workflow_install.WorkflowInstallTest.test_actual_declared_transitions_preserve_custom_data_and_legacy) (version='0.1.0') ... FAIL
+test_card_migration_preserves_history_and_requires_new_coverage (test_workflow_install.WorkflowInstallTest.test_card_migration_preserves_history_and_requires_new_coverage) ... FAIL
+test_custom_paths_and_update_conflict_are_preserved (test_workflow_install.WorkflowInstallTest.test_custom_paths_and_update_conflict_are_preserved) ... FAIL
+test_enable_interruption_blocks_work_and_standalone_restore_recovers (test_workflow_install.WorkflowInstallTest.test_enable_interruption_blocks_work_and_standalone_restore_recovers) ... FAIL
+test_enable_refuses_old_install_and_concurrent_gate (test_workflow_install.WorkflowInstallTest.test_enable_refuses_old_install_and_concurrent_gate) ... FAIL
+test_existing_opt_in_preserves_legacy_and_records_operation (test_workflow_install.WorkflowInstallTest.test_existing_opt_in_preserves_legacy_and_records_operation) ... FAIL
+test_external_card_migration_requires_complete_plan_and_keeps_journal (test_workflow_install.WorkflowInstallTest.test_external_card_migration_requires_complete_plan_and_keeps_journal) ... FAIL
+test_init_from_artifact_without_project_docs (test_workflow_install.WorkflowInstallTest.test_init_from_artifact_without_project_docs) ... FAIL
+test_minimum_cli_and_unknown_updates_schema_reject (test_workflow_install.WorkflowInstallTest.test_minimum_cli_and_unknown_updates_schema_reject) ... FAIL
+test_missing_legacy_checks_and_unknown_schema_reject_without_writes (test_workflow_install.WorkflowInstallTest.test_missing_legacy_checks_and_unknown_schema_reject_without_writes) ... FAIL
+test_new_init_opt_in_preview_and_validation (test_workflow_install.WorkflowInstallTest.test_new_init_opt_in_preview_and_validation) ... FAIL
+test_old_cli_rejects_enabled_project_before_verify (test_workflow_install.WorkflowInstallTest.test_old_cli_rejects_enabled_project_before_verify) ... FAIL
+test_old_cli_rejects_new_artifact_before_writes (test_workflow_install.WorkflowInstallTest.test_old_cli_rejects_new_artifact_before_writes) ... FAIL
+test_real_update_interruption_corrupt_backup_then_autonomous_restore (test_workflow_install.WorkflowInstallTest.test_real_update_interruption_corrupt_backup_then_autonomous_restore) ... FAIL
+test_update_preserves_enabled_project_schema (test_workflow_install.WorkflowInstallTest.test_update_preserves_enabled_project_schema) ... FAIL
+test_init_absent_destination_creates_target_directory (test_pb028.Pb028CompatibilityAndUpdateTest.test_init_absent_destination_creates_target_directory)
+PB-028-A3: init успешно устанавливает комплект в отсутствующий целевой каталог. ... ok
+test_init_absent_destination_rollback_on_failure_cleans_up_created_dirs (test_pb028.Pb028CompatibilityAndUpdateTest.test_init_absent_destination_rollback_on_failure_cleans_up_created_dirs)
+PB-028-A3: при ошибке записи в отсутствующий целевой каталог все созданные каталоги очищаются. ... FAIL
+test_init_archive_dir_conflict_leaves_clean_tree (test_pb028.Pb028CompatibilityAndUpdateTest.test_init_archive_dir_conflict_leaves_clean_tree)
+PB-028-A1: конфликт архивного пути (файл или symlink) отклоняется до записи без мусора на диске. ... FAIL
+test_init_foreign_file_conflict_stops_writes (test_pb028.Pb028CompatibilityAndUpdateTest.test_init_foreign_file_conflict_stops_writes)
+Конфликт чужого файла останавливает init до начала записи. ... FAIL
+test_init_fresh_creates_collections_and_indexes (test_pb028.Pb028CompatibilityAndUpdateTest.test_init_fresh_creates_collections_and_indexes)
+Init создаёт рабочие коллекции, 5 индексов и архивы коллекций. ... FAIL
+test_init_nested_absent_destination_creates_parents (test_pb028.Pb028CompatibilityAndUpdateTest.test_init_nested_absent_destination_creates_parents)
+PB-028-A3: init создаёт вложенные отсутствующие родительские каталоги целевого пути. ... ok
+test_real_002_artifact_update_with_custom_paths_and_evidence (test_pb028.Pb028CompatibilityAndUpdateTest.test_real_002_artifact_update_with_custom_paths_and_evidence)
+PB-028-A2: реальное обновление артефакта 0.0.2 до текущей версии с добавлением модулей и сохранением custom paths. ... ok
+test_real_sigkill_interrupted_lifecycle_locks_update_and_restores (test_pb028.Pb028CompatibilityAndUpdateTest.test_real_sigkill_interrupted_lifecycle_locks_update_and_restores)
+PB-028-A2: реальное SIGKILL-прерывание lifecycle блокирует update plan/apply/restore и восстанавливается автономно. ... FAIL
+test_real_sigkill_interrupted_update_locks_lifecycle_and_cli_restores (test_pb028.Pb028CompatibilityAndUpdateTest.test_real_sigkill_interrupted_update_locks_lifecycle_and_cli_restores)
+PB-028-A2: реальное прерывание update (SIGKILL mid-write) блокирует lifecycle и восстанавливается через CLI update restore. ... ok
+test_real_sigkill_interrupted_update_standalone_script_restores (test_pb028.Pb028CompatibilityAndUpdateTest.test_real_sigkill_interrupted_update_standalone_script_restores)
+PB-028-A2: автономный restore.py восстанавливает реальное SIGKILL-прерывание update. ... ok
+test_schema_backward_compatibility (test_pb028.Pb028CompatibilityAndUpdateTest.test_schema_backward_compatibility)
+0.0.2 без documents работает; documents опционален с собственной схемой. ... FAIL
+test_unannounced_update_transition_rejected (test_pb028.Pb028CompatibilityAndUpdateTest.test_unannounced_update_transition_rejected)
+Необъявленный переход отклоняется до записи. ... FAIL
+
+======================================================================
+FAIL: test_actual_declared_transitions_preserve_custom_data_and_legacy (test_workflow_install.WorkflowInstallTest.test_actual_declared_transitions_preserve_custom_data_and_legacy) (version='0.0.2')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_workflow_install.py", line 112, in test_actual_declared_transitions_preserve_custom_data_and_legacy
+    self.install(version=version, verification={'inputs': ['docs'], 'checks': [PASS_CHECK]})
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_cli.py", line 44, in install
+    self.assertEqual(code, 0, err)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+AssertionError: 1 != 0 : ERROR: Незавершённая операция документов (20261106-063543-98076aa5): обычные команды заблокированы. Восстановление: python3 work/lifecycle/20261106-063543-98076aa5/restore.py
+
+
+======================================================================
+FAIL: test_actual_declared_transitions_preserve_custom_data_and_legacy (test_workflow_install.WorkflowInstallTest.test_actual_declared_transitions_preserve_custom_data_and_legacy) (version='0.0.3')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_workflow_install.py", line 112, in test_actual_declared_transitions_preserve_custom_data_and_legacy
+    self.install(version=version, verification={'inputs': ['docs'], 'checks': [PASS_CHECK]})
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_cli.py", line 44, in install
+    self.assertEqual(code, 0, err)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+AssertionError: 1 != 0 : ERROR: Незавершённая операция документов (20261106-063543-98076aa5): обычные команды заблокированы. Восстановление: python3 work/lifecycle/20261106-063543-98076aa5/restore.py
+
+
+======================================================================
+FAIL: test_actual_declared_transitions_preserve_custom_data_and_legacy (test_workflow_install.WorkflowInstallTest.test_actual_declared_transitions_preserve_custom_data_and_legacy) (version='0.1.0')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_workflow_install.py", line 112, in test_actual_declared_transitions_preserve_custom_data_and_legacy
+    self.install(version=version, verification={'inputs': ['docs'], 'checks': [PASS_CHECK]})
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_cli.py", line 44, in install
+    self.assertEqual(code, 0, err)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+AssertionError: 1 != 0 : ERROR: Незавершённая операция документов (20261106-063543-98076aa5): обычные команды заблокированы. Восстановление: python3 work/lifecycle/20261106-063543-98076aa5/restore.py
+
+
+======================================================================
+FAIL: test_card_migration_preserves_history_and_requires_new_coverage (test_workflow_install.WorkflowInstallTest.test_card_migration_preserves_history_and_requires_new_coverage)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_workflow_install.py", line 182, in test_card_migration_preserves_history_and_requires_new_coverage
+    self.configure()
+    ~~~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_workflow_install.py", line 22, in configure
+    self.install(version=REPO_VERSION, verification={
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        'inputs': ['AGENTS.md', 'docs'], 'checks': [PASS_CHECK]})
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_cli.py", line 44, in install
+    self.assertEqual(code, 0, err)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+AssertionError: 1 != 0 : ERROR: Незавершённая операция документов (20261106-063543-98076aa5): обычные команды заблокированы. Восстановление: python3 work/lifecycle/20261106-063543-98076aa5/restore.py
+
+
+======================================================================
+FAIL: test_custom_paths_and_update_conflict_are_preserved (test_workflow_install.WorkflowInstallTest.test_custom_paths_and_update_conflict_are_preserved)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_workflow_install.py", line 297, in test_custom_paths_and_update_conflict_are_preserved
+    self.install(version='0.1.0', verification={'inputs': ['records'], 'checks': [PASS_CHECK]})
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_cli.py", line 44, in install
+    self.assertEqual(code, 0, err)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+AssertionError: 1 != 0 : ERROR: Незавершённая операция документов (20261106-063543-98076aa5): обычные команды заблокированы. Восстановление: python3 work/lifecycle/20261106-063543-98076aa5/restore.py
+
+
+======================================================================
+FAIL: test_enable_interruption_blocks_work_and_standalone_restore_recovers (test_workflow_install.WorkflowInstallTest.test_enable_interruption_blocks_work_and_standalone_restore_recovers)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_workflow_install.py", line 244, in test_enable_interruption_blocks_work_and_standalone_restore_recovers
+    self.configure()
+    ~~~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_workflow_install.py", line 22, in configure
+    self.install(version=REPO_VERSION, verification={
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        'inputs': ['AGENTS.md', 'docs'], 'checks': [PASS_CHECK]})
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_cli.py", line 44, in install
+    self.assertEqual(code, 0, err)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+AssertionError: 1 != 0 : ERROR: Незавершённая операция документов (20261106-063543-98076aa5): обычные команды заблокированы. Восстановление: python3 work/lifecycle/20261106-063543-98076aa5/restore.py
+
+
+======================================================================
+FAIL: test_enable_refuses_old_install_and_concurrent_gate (test_workflow_install.WorkflowInstallTest.test_enable_refuses_old_install_and_concurrent_gate)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_workflow_install.py", line 92, in test_enable_refuses_old_install_and_concurrent_gate
+    self.install(verification={'inputs': ['docs'], 'checks': [PASS_CHECK]})
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_cli.py", line 44, in install
+    self.assertEqual(code, 0, err)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+AssertionError: 1 != 0 : ERROR: Незавершённая операция документов (20261106-063543-98076aa5): обычные команды заблокированы. Восстановление: python3 work/lifecycle/20261106-063543-98076aa5/restore.py
+
+
+======================================================================
+FAIL: test_existing_opt_in_preserves_legacy_and_records_operation (test_workflow_install.WorkflowInstallTest.test_existing_opt_in_preserves_legacy_and_records_operation)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_workflow_install.py", line 55, in test_existing_opt_in_preserves_legacy_and_records_operation
+    self.configure()
+    ~~~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_workflow_install.py", line 22, in configure
+    self.install(version=REPO_VERSION, verification={
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        'inputs': ['AGENTS.md', 'docs'], 'checks': [PASS_CHECK]})
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_cli.py", line 44, in install
+    self.assertEqual(code, 0, err)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+AssertionError: 1 != 0 : ERROR: Незавершённая операция документов (20261106-063543-98076aa5): обычные команды заблокированы. Восстановление: python3 work/lifecycle/20261106-063543-98076aa5/restore.py
+
+
+======================================================================
+FAIL: test_external_card_migration_requires_complete_plan_and_keeps_journal (test_workflow_install.WorkflowInstallTest.test_external_card_migration_requires_complete_plan_and_keeps_journal)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_workflow_install.py", line 221, in test_external_card_migration_requires_complete_plan_and_keeps_journal
+    self.configure()
+    ~~~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_workflow_install.py", line 22, in configure
+    self.install(version=REPO_VERSION, verification={
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        'inputs': ['AGENTS.md', 'docs'], 'checks': [PASS_CHECK]})
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_cli.py", line 44, in install
+    self.assertEqual(code, 0, err)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+AssertionError: 1 != 0 : ERROR: Незавершённая операция документов (20261106-063543-98076aa5): обычные команды заблокированы. Восстановление: python3 work/lifecycle/20261106-063543-98076aa5/restore.py
+
+
+======================================================================
+FAIL: test_init_from_artifact_without_project_docs (test_workflow_install.WorkflowInstallTest.test_init_from_artifact_without_project_docs)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_workflow_install.py", line 51, in test_init_from_artifact_without_project_docs
+    self.assertEqual(proc.returncode, 0, proc.stdout + proc.stderr)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 1 != 0 : ERROR: Незавершённая операция документов (20261106-063543-98076aa5): обычные команды заблокированы. Восстановление: python3 work/lifecycle/20261106-063543-98076aa5/restore.py
+
+
+======================================================================
+FAIL: test_minimum_cli_and_unknown_updates_schema_reject (test_workflow_install.WorkflowInstallTest.test_minimum_cli_and_unknown_updates_schema_reject)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_workflow_install.py", line 173, in test_minimum_cli_and_unknown_updates_schema_reject
+    self.install()
+    ~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_cli.py", line 44, in install
+    self.assertEqual(code, 0, err)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+AssertionError: 1 != 0 : ERROR: Незавершённая операция документов (20261106-063543-98076aa5): обычные команды заблокированы. Восстановление: python3 work/lifecycle/20261106-063543-98076aa5/restore.py
+
+
+======================================================================
+FAIL: test_missing_legacy_checks_and_unknown_schema_reject_without_writes (test_workflow_install.WorkflowInstallTest.test_missing_legacy_checks_and_unknown_schema_reject_without_writes)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_workflow_install.py", line 80, in test_missing_legacy_checks_and_unknown_schema_reject_without_writes
+    self.install(version=REPO_VERSION)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_cli.py", line 44, in install
+    self.assertEqual(code, 0, err)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+AssertionError: 1 != 0 : ERROR: Незавершённая операция документов (20261106-063543-98076aa5): обычные команды заблокированы. Восстановление: python3 work/lifecycle/20261106-063543-98076aa5/restore.py
+
+
+======================================================================
+FAIL: test_new_init_opt_in_preview_and_validation (test_workflow_install.WorkflowInstallTest.test_new_init_opt_in_preview_and_validation)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_workflow_install.py", line 35, in test_new_init_opt_in_preview_and_validation
+    self.assertEqual(self.init('--workflow-v2')[0], 0)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 1 != 0
+
+======================================================================
+FAIL: test_old_cli_rejects_enabled_project_before_verify (test_workflow_install.WorkflowInstallTest.test_old_cli_rejects_enabled_project_before_verify)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_workflow_install.py", line 143, in test_old_cli_rejects_enabled_project_before_verify
+    self.configure()
+    ~~~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_workflow_install.py", line 22, in configure
+    self.install(version=REPO_VERSION, verification={
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        'inputs': ['AGENTS.md', 'docs'], 'checks': [PASS_CHECK]})
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_cli.py", line 44, in install
+    self.assertEqual(code, 0, err)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+AssertionError: 1 != 0 : ERROR: Незавершённая операция документов (20261106-063543-98076aa5): обычные команды заблокированы. Восстановление: python3 work/lifecycle/20261106-063543-98076aa5/restore.py
+
+
+======================================================================
+FAIL: test_old_cli_rejects_new_artifact_before_writes (test_workflow_install.WorkflowInstallTest.test_old_cli_rejects_new_artifact_before_writes)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_workflow_install.py", line 132, in test_old_cli_rejects_new_artifact_before_writes
+    self.install()
+    ~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_cli.py", line 44, in install
+    self.assertEqual(code, 0, err)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+AssertionError: 1 != 0 : ERROR: Незавершённая операция документов (20261106-063543-98076aa5): обычные команды заблокированы. Восстановление: python3 work/lifecycle/20261106-063543-98076aa5/restore.py
+
+
+======================================================================
+FAIL: test_real_update_interruption_corrupt_backup_then_autonomous_restore (test_workflow_install.WorkflowInstallTest.test_real_update_interruption_corrupt_backup_then_autonomous_restore)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_workflow_install.py", line 267, in test_real_update_interruption_corrupt_backup_then_autonomous_restore
+    self.install(version='0.1.0', verification={'inputs': ['docs'], 'checks': [PASS_CHECK]})
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_cli.py", line 44, in install
+    self.assertEqual(code, 0, err)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+AssertionError: 1 != 0 : ERROR: Незавершённая операция документов (20261106-063543-98076aa5): обычные команды заблокированы. Восстановление: python3 work/lifecycle/20261106-063543-98076aa5/restore.py
+
+
+======================================================================
+FAIL: test_update_preserves_enabled_project_schema (test_workflow_install.WorkflowInstallTest.test_update_preserves_enabled_project_schema)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_workflow_install.py", line 157, in test_update_preserves_enabled_project_schema
+    self.configure()
+    ~~~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_workflow_install.py", line 22, in configure
+    self.install(version=REPO_VERSION, verification={
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        'inputs': ['AGENTS.md', 'docs'], 'checks': [PASS_CHECK]})
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_cli.py", line 44, in install
+    self.assertEqual(code, 0, err)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+AssertionError: 1 != 0 : ERROR: Незавершённая операция документов (20261106-063543-98076aa5): обычные команды заблокированы. Восстановление: python3 work/lifecycle/20261106-063543-98076aa5/restore.py
+
+
+======================================================================
+FAIL: test_init_absent_destination_rollback_on_failure_cleans_up_created_dirs (test_pb028.Pb028CompatibilityAndUpdateTest.test_init_absent_destination_rollback_on_failure_cleans_up_created_dirs)
+PB-028-A3: при ошибке записи в отсутствующий целевой каталог все созданные каталоги очищаются.
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_pb028.py", line 518, in test_init_absent_destination_rollback_on_failure_cleans_up_created_dirs
+    self.assertIn("Simulated write failure", res.stderr)
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'Simulated write failure' not found in 'ERROR: Незавершённая операция документов (20261106-063543-98076aa5): обычные команды заблокированы. Восстановление: python3 work/lifecycle/20261106-063543-98076aa5/restore.py\n'
+
+======================================================================
+FAIL: test_init_archive_dir_conflict_leaves_clean_tree (test_pb028.Pb028CompatibilityAndUpdateTest.test_init_archive_dir_conflict_leaves_clean_tree)
+PB-028-A1: конфликт архивного пути (файл или symlink) отклоняется до записи без мусора на диске.
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_pb028.py", line 133, in test_init_archive_dir_conflict_leaves_clean_tree
+    self.assertIn("docs/archive/specs", err)
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'docs/archive/specs' not found in 'ERROR: Незавершённая операция документов (20261106-063543-98076aa5): обычные команды заблокированы. Восстановление: python3 work/lifecycle/20261106-063543-98076aa5/restore.py\n'
+
+======================================================================
+FAIL: test_init_foreign_file_conflict_stops_writes (test_pb028.Pb028CompatibilityAndUpdateTest.test_init_foreign_file_conflict_stops_writes)
+Конфликт чужого файла останавливает init до начала записи.
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_pb028.py", line 111, in test_init_foreign_file_conflict_stops_writes
+    self.assertIn("Конфликт: docs/specs/index.md", err)
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'Конфликт: docs/specs/index.md' not found in 'ERROR: Незавершённая операция документов (20261106-063543-98076aa5): обычные команды заблокированы. Восстановление: python3 work/lifecycle/20261106-063543-98076aa5/restore.py\n'
+
+======================================================================
+FAIL: test_init_fresh_creates_collections_and_indexes (test_pb028.Pb028CompatibilityAndUpdateTest.test_init_fresh_creates_collections_and_indexes)
+Init создаёт рабочие коллекции, 5 индексов и архивы коллекций.
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_pb028.py", line 67, in test_init_fresh_creates_collections_and_indexes
+    self.assertEqual(code, 0, err)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+AssertionError: 1 != 0 : ERROR: Незавершённая операция документов (20261106-063543-98076aa5): обычные команды заблокированы. Восстановление: python3 work/lifecycle/20261106-063543-98076aa5/restore.py
+
+
+======================================================================
+FAIL: test_real_sigkill_interrupted_lifecycle_locks_update_and_restores (test_pb028.Pb028CompatibilityAndUpdateTest.test_real_sigkill_interrupted_lifecycle_locks_update_and_restores)
+PB-028-A2: реальное SIGKILL-прерывание lifecycle блокирует update plan/apply/restore и восстанавливается автономно.
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_pb028.py", line 523, in test_real_sigkill_interrupted_lifecycle_locks_update_and_restores
+    self.install(version="0.0.2")
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_cli.py", line 44, in install
+    self.assertEqual(code, 0, err)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+AssertionError: 1 != 0 : ERROR: Незавершённая операция документов (20261106-063543-98076aa5): обычные команды заблокированы. Восстановление: python3 work/lifecycle/20261106-063543-98076aa5/restore.py
+
+
+======================================================================
+FAIL: test_schema_backward_compatibility (test_pb028.Pb028CompatibilityAndUpdateTest.test_schema_backward_compatibility)
+0.0.2 без documents работает; documents опционален с собственной схемой.
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_pb028.py", line 46, in test_schema_backward_compatibility
+    self.install(version="0.0.2")
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_cli.py", line 44, in install
+    self.assertEqual(code, 0, err)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+AssertionError: 1 != 0 : ERROR: Незавершённая операция документов (20261106-063543-98076aa5): обычные команды заблокированы. Восстановление: python3 work/lifecycle/20261106-063543-98076aa5/restore.py
+
+
+======================================================================
+FAIL: test_unannounced_update_transition_rejected (test_pb028.Pb028CompatibilityAndUpdateTest.test_unannounced_update_transition_rejected)
+Необъявленный переход отклоняется до записи.
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_pb028.py", line 290, in test_unannounced_update_transition_rejected
+    self.install(version="0.0.2")
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_cli.py", line 44, in install
+    self.assertEqual(code, 0, err)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+AssertionError: 1 != 0 : ERROR: Незавершённая операция документов (20261106-063543-98076aa5): обычные команды заблокированы. Восстановление: python3 work/lifecycle/20261106-063543-98076aa5/restore.py
+
+
+----------------------------------------------------------------------
+Ran 27 tests in 7.201s
+
+FAILED (failures=24)

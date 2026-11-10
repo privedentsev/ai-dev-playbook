@@ -1,0 +1,106 @@
+{
+  "schema_version": 1,
+  "card_format_version": 2,
+  "relations": [
+    {
+      "relation": "based_on",
+      "target": "spec:scoped-file-operations"
+    },
+    {
+      "relation": "based_on",
+      "target": "design:scoped-file-operations"
+    },
+    {
+      "relation": "based_on",
+      "target": "plan:scoped-file-operations"
+    }
+  ],
+  "materials": [
+    {
+      "id": "implementation-evidence",
+      "role": "report",
+      "source": "docs/tasks/PB-045-evidence",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-045"
+      ]
+    },
+    {
+      "id": "verify-9acd1892cd334f609ad983239aad0099",
+      "role": "report",
+      "source": "work/verification/PB-045/9acd1892cd334f609ad983239aad0099",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-045"
+      ]
+    },
+    {
+      "id": "audit-01",
+      "role": "report",
+      "source": "work/verification/PB-045/audit-01",
+      "storage": "local",
+      "immutable": true,
+      "required": true,
+      "used_by": [
+        "PB-045"
+      ]
+    },
+    {
+      "id": "verify-457d56ea036f47d1b1e01d80cb21433d",
+      "role": "report",
+      "source": "work/verification/PB-045/457d56ea036f47d1b1e01d80cb21433d",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-045"
+      ]
+    },
+    {
+      "id": "verify-8e64ba1464704e12ab889f75cd738964",
+      "role": "report",
+      "source": "work/verification/PB-045/8e64ba1464704e12ab889f75cd738964",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-045"
+      ]
+    }
+  ],
+  "criterion_evidence": {
+    "CHECK-01": {
+      "check_sha256": "sha256:e0aa38b004f30161371927c48a3e46d377af9b38b2fde4fcbf6428a2ebccb549",
+      "card_projection": "sha256:600ac71d4bc3cedf47da00c9117952a355583f8f0ab3a9b0ac7eb619453d214d",
+      "report_id": "verify-9acd1892cd334f609ad983239aad0099",
+      "report_sha256": "sha256:44d7bac3a34859fef8596cb6d16f58e4265a75759340c00d7e95e78ad0e0359f"
+    },
+    "CHECK-02": {
+      "check_sha256": "sha256:143f76b368fd84d79f1b55eb1903998617a0c50de81f3272c7a86870142805a2",
+      "card_projection": "sha256:600ac71d4bc3cedf47da00c9117952a355583f8f0ab3a9b0ac7eb619453d214d",
+      "report_id": "verify-457d56ea036f47d1b1e01d80cb21433d",
+      "report_sha256": "sha256:f831ff5be70268fc1c4ad2d7dceaeb63cda27a49c1fe1a2a34cf5e95bee5cda3"
+    }
+  },
+  "handoff": {
+    "at": "2026-10-28T08:56:11+03:00",
+    "actor": {
+      "name": "Codex",
+      "model": "GPT-6.1 Sol"
+    },
+    "summary": "HANDOFF-02",
+    "reports": [
+      "verify-457d56ea036f47d1b1e01d80cb21433d"
+    ],
+    "card_projection": "sha256:600ac71d4bc3cedf47da00c9117952a355583f8f0ab3a9b0ac7eb619453d214d",
+    "entry_id": "HANDOFF-02",
+    "journal_sha256": "sha256:9924583362aa74d99ddee5c5f8aa2534b7465a0c7ccd0702d58fe08c601d710d"
+  },
+  "audit_packages": {
+    "audit-01": "sha256:6f8859bcd6914f68fc8f1062a16f442224e1da62ff82cb0ecc3a2783d5a2ffd7"
+  }
+}

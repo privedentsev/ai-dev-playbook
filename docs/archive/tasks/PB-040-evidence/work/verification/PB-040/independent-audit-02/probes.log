@@ -1,0 +1,12 @@
+PASS A-01 stale report rejected: requirement
+PASS A-01 fresh report restores: requirement
+PASS A-01 stale report rejected: new execution
+PASS A-01 fresh report restores: new execution
+PASS A-02 rejected: unknown
+PASS A-02 rejected: duplicate
+PASS A-02 rejected: heading
+A-03 altered EXEC existing binding: {'checked': True, 'check_id': 'CHECK-01', 'reason': 'passed', 'open_findings': []}
+A-03 new handoff exit: 0
+A-03 accept exit: 0
+A-03 close dry-run exit: 0
+REPRODUCED: changed EXEC accepted with old verify; execution_sha256 not revalidated for existing bindings

@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/work/verification/PB-043/independent-audit/probe.py", line 36, in <module>
+    cli('lifecycle','accept','DEV-1','--result','accepted','--actor','Auditor','--model','SWE-2 High',ok=1)
+    ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/work/verification/PB-043/independent-audit/probe.py", line 9, in cli
+    assert p.returncode==ok,(args,p.stdout,p.stderr)
+           ^^^^^^^^^^^^^^^^
+AssertionError: (('lifecycle', 'accept', 'DEV-1', '--result', 'accepted', '--actor', 'Auditor', '--model', 'SWE-2 High'), 'DEV-1: записана приёмка result=accepted kind=acceptance.\n', '')

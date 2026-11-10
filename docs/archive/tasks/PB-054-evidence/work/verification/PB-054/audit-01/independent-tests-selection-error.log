@@ -1,0 +1,10 @@
+..............E.
+======================================================================
+ERROR: test_close_preview_and_apply_reject_same_future_link_without_touching_evidence (unittest.loader._FailedTest.test_close_preview_and_apply_reject_same_future_link_without_touching_evidence)
+----------------------------------------------------------------------
+AttributeError: type object 'CloseLifecycleCase' has no attribute 'test_close_preview_and_apply_reject_same_future_link_without_touching_evidence'
+
+----------------------------------------------------------------------
+Ran 16 tests in 17.173s
+
+FAILED (errors=1)

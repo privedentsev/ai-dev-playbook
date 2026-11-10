@@ -1,0 +1,3 @@
+Command: python3 ai-dev-playbook/scripts/playbook.py verify PB-041 --audit-ready
+Exit: 1
+ERROR: PB-041: неучтённые материалы до verify: work/verification/PB-041/.DS_Store; выполните lifecycle register-material

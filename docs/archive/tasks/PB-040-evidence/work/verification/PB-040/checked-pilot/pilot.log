@@ -1,0 +1,8 @@
+test_self_project_copy_pilot (test_pb029.Pb029EndToEndRoutesTest.test_self_project_copy_pilot)
+AC-12: Копия собственного проекта ai-dev-playbook со всеми незакоммиченными ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 76.174s
+
+OK
+PB-040: чекбоксы синхронизированы.

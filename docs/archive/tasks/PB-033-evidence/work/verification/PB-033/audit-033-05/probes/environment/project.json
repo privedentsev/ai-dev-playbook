@@ -1,0 +1,83 @@
+{
+  "schema_version": 1,
+  "playbook_version": "0.0.2",
+  "name": "test-project",
+  "setup_status": "configured",
+  "paths": {
+    "docs": "docs",
+    "tasks": "docs/tasks",
+    "archive": "docs/archive/tasks",
+    "task_index": "docs/tasks/index.md"
+  },
+  "components": [
+    {
+      "name": "playbook",
+      "code": "ai-dev-playbook",
+      "tests": [
+        "tests"
+      ],
+      "migrations": null
+    }
+  ],
+  "commands": {
+    "test": "python3 -m unittest discover -s tests -v",
+    "check": "python3 ai-dev-playbook/scripts/playbook.py check --ready"
+  },
+  "git": {
+    "commit": "explicit_request",
+    "push": "explicit_request",
+    "merge": "explicit_request",
+    "release": "explicit_request"
+  },
+  "documents": {
+    "schema_version": 1,
+    "collections": {
+      "spec": {
+        "active": "docs/specs",
+        "archive": "docs/archive/specs",
+        "index": "docs/specs/index.md"
+      },
+      "plan": {
+        "active": "docs/plans",
+        "archive": "docs/archive/plans",
+        "index": "docs/plans/index.md"
+      }
+    }
+  },
+  "verification": {
+    "inputs": [
+      "docs"
+    ],
+    "checks": [
+      {
+        "id": "unit",
+        "argv": [
+          "python3",
+          "-c",
+          "print('ok')"
+        ],
+        "timeout_seconds": 30
+      }
+    ]
+  },
+  "task_workflow": {
+    "schema_version": 2,
+    "registry": [
+      {
+        "id": "a",
+        "kind": "command",
+        "purpose": "Auditor probe a",
+        "default_inputs": [
+          "src/a.txt"
+        ],
+        "applicability": "always",
+        "argv": [
+          "/usr/local/opt/python@3.14/bin/python3.14",
+          "-c",
+          "from pathlib import Path; p=Path('work/count-a'); p.write_text(str(int(p.read_text())+1) if p.exists() else '1'); import os; raise SystemExit(0 if os.getenv(\"AUDIT007_MODE\")==\"pass\" else 9)"
+        ],
+        "timeout_seconds": 10
+      }
+    ]
+  }
+}

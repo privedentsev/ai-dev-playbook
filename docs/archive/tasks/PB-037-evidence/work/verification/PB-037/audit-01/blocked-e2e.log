@@ -1,0 +1,109 @@
+test_checkpoint_runs_regression_separately_from_local_check (test_workflow_e2e.WorkflowE2ETest.test_checkpoint_runs_regression_separately_from_local_check) ... FAIL
+test_independent_counters_add_remove_and_service_cycle (test_workflow_e2e.WorkflowE2ETest.test_independent_counters_add_remove_and_service_cycle) ... FAIL
+test_nonquick_routes_with_auditor_and_archive (test_workflow_e2e.WorkflowE2ETest.test_nonquick_routes_with_auditor_and_archive) ... FAIL
+test_three_manual_iterations_stale_candidate_then_archive (test_workflow_e2e.WorkflowE2ETest.test_three_manual_iterations_stale_candidate_then_archive) ... FAIL
+
+======================================================================
+FAIL: test_checkpoint_runs_regression_separately_from_local_check (test_workflow_e2e.WorkflowE2ETest.test_checkpoint_runs_regression_separately_from_local_check)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_workflow_e2e.py", line 19, in setUp
+    super().setUp()
+    ~~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_close_lifecycle.py", line 69, in setUp
+    super().setUp()
+    ~~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_lifecycle.py", line 48, in setUp
+    super().setUp()
+    ~~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_document_cli.py", line 16, in setUp
+    super().setUp()
+    ~~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_documents.py", line 120, in setUp
+    self.install()
+    ~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_cli.py", line 44, in install
+    self.assertEqual(code, 0, err)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+AssertionError: 1 != 0 : ERROR: Незавершённая операция документов (20261106-132254-6b63fb3f): обычные команды заблокированы. Восстановление: python3 work/lifecycle/20261106-132254-6b63fb3f/restore.py
+
+
+======================================================================
+FAIL: test_independent_counters_add_remove_and_service_cycle (test_workflow_e2e.WorkflowE2ETest.test_independent_counters_add_remove_and_service_cycle)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_workflow_e2e.py", line 19, in setUp
+    super().setUp()
+    ~~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_close_lifecycle.py", line 69, in setUp
+    super().setUp()
+    ~~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_lifecycle.py", line 48, in setUp
+    super().setUp()
+    ~~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_document_cli.py", line 16, in setUp
+    super().setUp()
+    ~~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_documents.py", line 120, in setUp
+    self.install()
+    ~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_cli.py", line 44, in install
+    self.assertEqual(code, 0, err)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+AssertionError: 1 != 0 : ERROR: Незавершённая операция документов (20261106-132254-6b63fb3f): обычные команды заблокированы. Восстановление: python3 work/lifecycle/20261106-132254-6b63fb3f/restore.py
+
+
+======================================================================
+FAIL: test_nonquick_routes_with_auditor_and_archive (test_workflow_e2e.WorkflowE2ETest.test_nonquick_routes_with_auditor_and_archive)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_workflow_e2e.py", line 19, in setUp
+    super().setUp()
+    ~~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_close_lifecycle.py", line 69, in setUp
+    super().setUp()
+    ~~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_lifecycle.py", line 48, in setUp
+    super().setUp()
+    ~~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_document_cli.py", line 16, in setUp
+    super().setUp()
+    ~~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_documents.py", line 120, in setUp
+    self.install()
+    ~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_cli.py", line 44, in install
+    self.assertEqual(code, 0, err)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+AssertionError: 1 != 0 : ERROR: Незавершённая операция документов (20261106-132254-6b63fb3f): обычные команды заблокированы. Восстановление: python3 work/lifecycle/20261106-132254-6b63fb3f/restore.py
+
+
+======================================================================
+FAIL: test_three_manual_iterations_stale_candidate_then_archive (test_workflow_e2e.WorkflowE2ETest.test_three_manual_iterations_stale_candidate_then_archive)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_workflow_e2e.py", line 19, in setUp
+    super().setUp()
+    ~~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_close_lifecycle.py", line 69, in setUp
+    super().setUp()
+    ~~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_lifecycle.py", line 48, in setUp
+    super().setUp()
+    ~~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_document_cli.py", line 16, in setUp
+    super().setUp()
+    ~~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_documents.py", line 120, in setUp
+    self.install()
+    ~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_cli.py", line 44, in install
+    self.assertEqual(code, 0, err)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+AssertionError: 1 != 0 : ERROR: Незавершённая операция документов (20261106-132254-6b63fb3f): обычные команды заблокированы. Восстановление: python3 work/lifecycle/20261106-132254-6b63fb3f/restore.py
+
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.033s
+
+FAILED (failures=4)

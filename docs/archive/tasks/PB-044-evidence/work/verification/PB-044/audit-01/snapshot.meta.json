@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "card_format_version": 2,
+  "relations": [],
+  "materials": [
+    {
+      "id": "pb044-evidence",
+      "role": "report",
+      "source": "docs/tasks/PB-044-evidence",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-044"
+      ]
+    },
+    {
+      "id": "verify-6b8f6a3512b8409499467a6a55cbcd83",
+      "role": "report",
+      "source": "work/verification/PB-044/6b8f6a3512b8409499467a6a55cbcd83",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-044"
+      ]
+    },
+    {
+      "id": "verify-e36bf53c778f4fb2abfdd7f5e5c1ab87",
+      "role": "report",
+      "source": "work/verification/PB-044/e36bf53c778f4fb2abfdd7f5e5c1ab87",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-044"
+      ]
+    }
+  ],
+  "criterion_evidence": {
+    "CHECK-01": {
+      "check_sha256": "sha256:c36324df67516c839c5554ce25bf0836fb6dccdf8a623efd9090adffcc440eab",
+      "card_projection": "sha256:266c366a280bb7e082be9a3a8a1f6e9fdc2536a5b4cd8e03c605285c08dbc8a9",
+      "report_id": "verify-6b8f6a3512b8409499467a6a55cbcd83",
+      "report_sha256": "sha256:e354c2aa2edc4eb57f6c13c79e1fda3558caea2ba7cd24d425f1b1a4861c46c7"
+    },
+    "CHECK-02": {
+      "check_sha256": "sha256:80c7047686a043470e0400a2266ca06e8442f8b1adb1c67f7243592df8ec0ba0",
+      "card_projection": "sha256:8a8792ab7bf7ea50a9775760b4b888341b35e2b1275a1796890bc06da627ae1e",
+      "report_id": "verify-e36bf53c778f4fb2abfdd7f5e5c1ab87",
+      "report_sha256": "sha256:350aca34da7d2e6605bf0785f8bb99b8ddcfe3a66ecd5f77c2df1fabef6958bd"
+    }
+  },
+  "handoff": {
+    "at": "2026-10-28T06:08:29+03:00",
+    "actor": {
+      "name": "Codex",
+      "model": "GPT-6.1 Sol"
+    },
+    "summary": "HANDOFF-02",
+    "reports": [
+      "verify-e36bf53c778f4fb2abfdd7f5e5c1ab87"
+    ],
+    "card_projection": "sha256:8a8792ab7bf7ea50a9775760b4b888341b35e2b1275a1796890bc06da627ae1e",
+    "entry_id": "HANDOFF-02",
+    "journal_sha256": "sha256:008b5220901a0f416f7f003d054584e8b80879b6c251c3d03cbe9427a52708fc"
+  }
+}

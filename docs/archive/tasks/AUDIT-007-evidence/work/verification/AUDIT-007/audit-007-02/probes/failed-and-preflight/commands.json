@@ -1,0 +1,95 @@
+[
+  {
+    "argv": [
+      "index"
+    ],
+    "returncode": 0,
+    "duration_seconds": 0.549
+  },
+  {
+    "argv": [
+      "lifecycle",
+      "start",
+      "DEV-1",
+      "--actor",
+      "Fixture executor",
+      "--model",
+      "Synthetic model",
+      "--reason",
+      "Synthetic engineer instruction"
+    ],
+    "returncode": 0,
+    "duration_seconds": 1.38
+  },
+  {
+    "argv": [
+      "verify",
+      "DEV-1",
+      "--preflight"
+    ],
+    "returncode": 1,
+    "duration_seconds": 0.376
+  },
+  {
+    "argv": [
+      "index"
+    ],
+    "returncode": 0,
+    "duration_seconds": 0.378
+  },
+  {
+    "argv": [
+      "verify",
+      "DEV-1"
+    ],
+    "returncode": 1,
+    "duration_seconds": 0.781
+  },
+  {
+    "argv": [
+      "lifecycle",
+      "handoff",
+      "DEV-1",
+      "--summary",
+      "Auditor synthetic fixture",
+      "--actor",
+      "Fixture executor",
+      "--model",
+      "Synthetic model"
+    ],
+    "returncode": 1,
+    "duration_seconds": 0.709
+  },
+  {
+    "argv": [
+      "close",
+      "DEV-1",
+      "--dry-run"
+    ],
+    "returncode": 1,
+    "duration_seconds": 0.517
+  },
+  {
+    "argv": [
+      "verify",
+      "DEV-1"
+    ],
+    "returncode": 1,
+    "duration_seconds": 0.811
+  },
+  {
+    "argv": [
+      "lifecycle",
+      "handoff",
+      "DEV-1",
+      "--summary",
+      "Auditor synthetic fixture",
+      "--actor",
+      "Fixture executor",
+      "--model",
+      "Synthetic model"
+    ],
+    "returncode": 1,
+    "duration_seconds": 0.603
+  }
+]

@@ -1,0 +1,36 @@
+{
+  "independent_policy": {
+    "before": {
+      "a": 2,
+      "b": 1
+    },
+    "after": {
+      "a": 3,
+      "b": 1
+    },
+    "expected": {
+      "a": 3,
+      "b": 1
+    }
+  },
+  "service_and_archive": {
+    "unchanged_counts": {
+      "a": 3,
+      "b": 1
+    },
+    "immutable_files_verified": 12
+  },
+  "manual_terminal": {
+    "actual_status": "passed",
+    "returncode": 0,
+    "expected": "passed: terminal review with engineer confirmation"
+  },
+  "manual_stale_and_iterations": "PASS; three versions, stale input/scenario rejected, zero commands",
+  "failed_timeout_preflight": "PASS; stale index zero executions, failed/timeout block handoff/close",
+  "environment_reuse": {
+    "environment_change": "rejected handoff/accept/close; fresh command failed exit9",
+    "counts": {
+      "a": 2
+    }
+  }
+}

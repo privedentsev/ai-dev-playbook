@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "card_format_version": 2,
+  "relations": [],
+  "materials": [
+    {
+      "id": "history-and-checks",
+      "role": "report",
+      "source": "docs/tasks/PB-056-evidence",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-056"
+      ]
+    },
+    {
+      "id": "verify-b6fed285d47f4f8d85a05bb46d88d79f",
+      "role": "report",
+      "source": "work/verification/PB-056/b6fed285d47f4f8d85a05bb46d88d79f",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-056"
+      ]
+    }
+  ],
+  "criterion_evidence": {
+    "CHECK-01": {
+      "check_sha256": "sha256:e992e6895456f0adf4da57ba533c2bd0884b5545c4b614f4d4a376ff448f6d42",
+      "card_projection": "sha256:c2ac954ba21b9b8ae4e8ff8547fe451a71d73df613123cfbc09705e78081d0a0",
+      "report_id": "verify-b6fed285d47f4f8d85a05bb46d88d79f",
+      "report_sha256": "sha256:4f89e7976981bbdad5c45d1b74d42ef61e8cf75c2101f39db5e975642975de82"
+    }
+  },
+  "handoff": {
+    "at": "2026-10-28T12:16:06+03:00",
+    "actor": {
+      "name": "Codex",
+      "model": "GPT-6 (не подтверждено)"
+    },
+    "summary": "HANDOFF-01",
+    "reports": [
+      "verify-b6fed285d47f4f8d85a05bb46d88d79f"
+    ],
+    "card_projection": "sha256:c2ac954ba21b9b8ae4e8ff8547fe451a71d73df613123cfbc09705e78081d0a0",
+    "entry_id": "HANDOFF-01",
+    "journal_sha256": "sha256:717f30dff5df5605648007d088c3f7d411b8b8c83c0139f680680fc667ec0382"
+  }
+}

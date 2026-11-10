@@ -1,0 +1,44 @@
+test_close_task_updates_active_plan_index_and_dry_run (test_close_lifecycle.CollectionIndexRetentionTest.test_close_task_updates_active_plan_index_and_dry_run) ... ok
+test_manual_links_across_collections_including_none_generator (test_close_lifecycle.CollectionIndexRetentionTest.test_manual_links_across_collections_including_none_generator) ... ok
+test_reopen_restores_plan_index_and_blocks_active_dependent (test_close_lifecycle.CollectionIndexRetentionTest.test_reopen_restores_plan_index_and_blocks_active_dependent) ... ok
+test_staged_check_failure_restores_preimage (test_close_lifecycle.CollectionIndexRetentionTest.test_staged_check_failure_restores_preimage) ... ok
+test_stale_plan_rejects_modified_collection_index (test_close_lifecycle.CollectionIndexRetentionTest.test_stale_plan_rejects_modified_collection_index) ... ok
+test_combined_close_and_plan_archive (test_close_lifecycle.CombinedClosureTest.test_combined_close_and_plan_archive) ... ok
+test_combined_close_refuses_unfinished_task_outside_scope (test_close_lifecycle.CombinedClosureTest.test_combined_close_refuses_unfinished_task_outside_scope) ... ok
+test_combined_close_refuses_without_acceptance (test_close_lifecycle.CombinedClosureTest.test_combined_close_refuses_without_acceptance) ... ok
+test_accept_records_result_and_link (test_close_lifecycle.HandoffAcceptTest.test_accept_records_result_and_link) ... ok
+test_accept_without_handoff_refused (test_close_lifecycle.HandoffAcceptTest.test_accept_without_handoff_refused) ... ok
+test_handoff_legacy_card_refused (test_close_lifecycle.HandoffAcceptTest.test_handoff_legacy_card_refused) ... ok
+test_handoff_registers_runs_and_projection (test_close_lifecycle.HandoffAcceptTest.test_handoff_registers_runs_and_projection) ... ok
+test_handoff_without_verify_refused (test_close_lifecycle.HandoffAcceptTest.test_handoff_without_verify_refused) ... ok
+test_close_cancelled_with_acceptance (test_close_lifecycle.ManagedCloseTest.test_close_cancelled_with_acceptance) ... ok
+test_close_cancelled_without_acceptance_refused (test_close_lifecycle.ManagedCloseTest.test_close_cancelled_without_acceptance_refused) ... ok
+test_close_cancelled_without_reason_refused (test_close_lifecycle.ManagedCloseTest.test_close_cancelled_without_reason_refused) ... ok
+test_close_done_card_changed_after_handoff_refused (test_close_lifecycle.ManagedCloseTest.test_close_done_card_changed_after_handoff_refused) ... ok
+test_close_done_in_progress_refused (test_close_lifecycle.ManagedCloseTest.test_close_done_in_progress_refused) ... ok
+test_close_done_managed_card (test_close_lifecycle.ManagedCloseTest.test_close_done_managed_card) ... ok
+test_close_done_stale_inputs_refused (test_close_lifecycle.ManagedCloseTest.test_close_done_stale_inputs_refused) ... ok
+test_close_done_without_acceptance_refused (test_close_lifecycle.ManagedCloseTest.test_close_done_without_acceptance_refused) ... ok
+test_close_done_without_handoff_refused (test_close_lifecycle.ManagedCloseTest.test_close_done_without_handoff_refused) ... ok
+test_close_dry_run_writes_nothing (test_close_lifecycle.ManagedCloseTest.test_close_dry_run_writes_nothing) ... ok
+test_close_legacy_card_in_managed_project (test_close_lifecycle.ManagedCloseTest.test_close_legacy_card_in_managed_project)
+Карточка без метаданных в проекте с documents — legacy-политика. ... ok
+test_diagnostic_acceptance_not_enough (test_close_lifecycle.ManagedCloseTest.test_diagnostic_acceptance_not_enough) ... ok
+test_promote_archived_refused (test_close_lifecycle.PromoteChangeTest.test_promote_archived_refused) ... ok
+test_promote_not_implemented_refused (test_close_lifecycle.PromoteChangeTest.test_promote_not_implemented_refused) ... ok
+test_promote_unknown_change_refused (test_close_lifecycle.PromoteChangeTest.test_promote_unknown_change_refused) ... ok
+test_promote_writes_revision_and_bumps (test_close_lifecycle.PromoteChangeTest.test_promote_writes_revision_and_bumps) ... ok
+test_promotion_rejects_missing_wrong_and_stale_acceptance (test_close_lifecycle.PromoteChangeTest.test_promotion_rejects_missing_wrong_and_stale_acceptance) ... ok
+test_receipt_changed_after_plan_refuses_apply (test_close_lifecycle.PromoteChangeTest.test_receipt_changed_after_plan_refuses_apply) ... ok
+test_reopen_active_card_refused (test_close_lifecycle.ReopenTest.test_reopen_active_card_refused) ... ok
+test_reopen_active_dependent_blocked (test_close_lifecycle.ReopenTest.test_reopen_active_dependent_blocked) ... ok
+test_reopen_blocks_dependents (test_close_lifecycle.ReopenTest.test_reopen_blocks_dependents) ... ok
+test_reopen_combined_with_dependent (test_close_lifecycle.ReopenTest.test_reopen_combined_with_dependent) ... ok
+test_reopen_legacy_card (test_close_lifecycle.ReopenTest.test_reopen_legacy_card) ... ok
+test_reopen_returns_card_and_clears_acceptance (test_close_lifecycle.ReopenTest.test_reopen_returns_card_and_clears_acceptance) ... ok
+test_reopen_with_done_dependent_refused (test_close_lifecycle.ReopenTest.test_reopen_with_done_dependent_refused) ... ok
+
+----------------------------------------------------------------------
+Ran 38 tests in 20.950s
+
+OK

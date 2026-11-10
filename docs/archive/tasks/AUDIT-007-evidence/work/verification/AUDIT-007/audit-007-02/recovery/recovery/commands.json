@@ -1,0 +1,168 @@
+[
+  {
+    "argv": [
+      "index"
+    ],
+    "returncode": 0,
+    "duration_seconds": 0.582
+  },
+  {
+    "argv": [
+      "lifecycle",
+      "start",
+      "DEV-1",
+      "--actor",
+      "Fixture executor",
+      "--model",
+      "Synthetic model",
+      "--reason",
+      "Synthetic engineer instruction"
+    ],
+    "returncode": 0,
+    "duration_seconds": 1.46
+  },
+  {
+    "argv": [
+      "verify",
+      "DEV-1"
+    ],
+    "returncode": 0,
+    "duration_seconds": 0.808
+  },
+  {
+    "argv": [
+      "lifecycle",
+      "handoff",
+      "DEV-1",
+      "--summary",
+      "Auditor synthetic fixture",
+      "--actor",
+      "Fixture executor",
+      "--model",
+      "Synthetic model"
+    ],
+    "returncode": 1,
+    "duration_seconds": 0.341
+  },
+  {
+    "argv": [
+      "lifecycle",
+      "accept",
+      "DEV-1",
+      "--result",
+      "accepted",
+      "--role",
+      "engineer",
+      "--actor",
+      "Fixture engineer",
+      "--model",
+      "Synthetic model",
+      "--note",
+      "Synthetic explicit final version acceptance"
+    ],
+    "returncode": 1,
+    "duration_seconds": 0.333
+  },
+  {
+    "argv": [
+      "lifecycle",
+      "restore"
+    ],
+    "returncode": 0,
+    "duration_seconds": 0.345
+  },
+  {
+    "argv": [
+      "lifecycle",
+      "restore"
+    ],
+    "returncode": 1,
+    "duration_seconds": 0.329
+  },
+  {
+    "argv": [
+      "lifecycle",
+      "handoff",
+      "DEV-1",
+      "--summary",
+      "Auditor synthetic fixture",
+      "--actor",
+      "Fixture executor",
+      "--model",
+      "Synthetic model"
+    ],
+    "returncode": 1,
+    "duration_seconds": 0.337
+  },
+  {
+    "argv": [
+      "verify",
+      "DEV-1",
+      "--preflight"
+    ],
+    "returncode": 1,
+    "duration_seconds": 0.345
+  },
+  {
+    "argv": [
+      "lifecycle",
+      "handoff",
+      "DEV-1",
+      "--summary",
+      "Auditor synthetic fixture",
+      "--actor",
+      "Fixture executor",
+      "--model",
+      "Synthetic model"
+    ],
+    "returncode": 0,
+    "duration_seconds": 2.097
+  },
+  {
+    "argv": [
+      "lifecycle",
+      "accept",
+      "DEV-1",
+      "--result",
+      "accepted",
+      "--role",
+      "engineer",
+      "--actor",
+      "Fixture engineer",
+      "--model",
+      "Synthetic model",
+      "--note",
+      "Synthetic explicit final version acceptance"
+    ],
+    "returncode": 0,
+    "duration_seconds": 1.639
+  },
+  {
+    "argv": [
+      "lifecycle",
+      "accept",
+      "DEV-1",
+      "--result",
+      "accepted",
+      "--role",
+      "engineer",
+      "--actor",
+      "Fixture engineer",
+      "--model",
+      "Synthetic model",
+      "--note",
+      "Synthetic explicit final version acceptance"
+    ],
+    "returncode": 1,
+    "duration_seconds": 0.443
+  },
+  {
+    "argv": [
+      "close",
+      "DEV-1",
+      "--dry-run"
+    ],
+    "returncode": 1,
+    "duration_seconds": 0.567
+  }
+]

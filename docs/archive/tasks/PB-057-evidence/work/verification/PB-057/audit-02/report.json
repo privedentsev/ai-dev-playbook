@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "task_id": "PB-057",
+  "audit_id": "AUDIT-02",
+  "handoff": "HANDOFF-02",
+  "actor": "Codex",
+  "model": "GPT-6",
+  "result": "changes_requested",
+  "readiness": "rejected: open findings A-01..04; diagnostic review only, no acceptance",
+  "targeted_tests": {
+    "count": 51,
+    "result": "passed"
+  },
+  "closed_findings": [
+    "A-01",
+    "A-02",
+    "A-03",
+    "A-04"
+  ],
+  "findings": [
+    {
+      "id": "A-05",
+      "priority": "P1",
+      "summary": "Selective exclusion matches an explicit file input but policy validation accepts it"
+    },
+    {
+      "id": "A-06",
+      "priority": "P2",
+      "summary": "New catalog entry with skip/expected_failure allowance classified as extension"
+    }
+  ],
+  "full_suite": "not independently repeated",
+  "final_validation": {
+    "preflight": "passed",
+    "check_ready": "passed",
+    "snapshot_portability": "prepare-audit repeat passed",
+    "diff_check": "passed",
+    "initial_preflight": "refused while card sync held write lock; retry after completion passed"
+  }
+}

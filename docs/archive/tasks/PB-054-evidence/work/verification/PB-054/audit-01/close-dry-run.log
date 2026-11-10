@@ -1,0 +1,214 @@
+План lc-aa6de9b457921fb3 (lifecycle):
+Основание: playbook.py close PB-054
+Исполнитель: cli:privedentsev1 (cli)
+Действия:
+  close_task PB-054: docs/tasks/PB-054.md → docs/archive/tasks/PB-054.md (done)
+Переносы:
+  docs/tasks/PB-054.md → docs/archive/tasks/PB-054.md
+  docs/tasks/PB-054.meta.json → docs/archive/tasks/PB-054.meta.json
+  work/verification/PB-054/210317c98cf140e483580d82c547a060 → docs/archive/tasks/PB-054-evidence/work/verification/PB-054/210317c98cf140e483580d82c547a060
+  work/verification/PB-054/210317c98cf140e483580d82c547a060/report.json → docs/archive/tasks/PB-054-evidence/work/verification/PB-054/210317c98cf140e483580d82c547a060/report.json
+  work/verification/PB-054/210317c98cf140e483580d82c547a060/unit-tests.stderr.log → docs/archive/tasks/PB-054-evidence/work/verification/PB-054/210317c98cf140e483580d82c547a060/unit-tests.stderr.log
+  work/verification/PB-054/210317c98cf140e483580d82c547a060/unit-tests.stdout.log → docs/archive/tasks/PB-054-evidence/work/verification/PB-054/210317c98cf140e483580d82c547a060/unit-tests.stdout.log
+  work/verification/PB-054/429aee56fc014c108dd1076fa9fe6401 → docs/archive/tasks/PB-054-evidence/work/verification/PB-054/429aee56fc014c108dd1076fa9fe6401
+  work/verification/PB-054/429aee56fc014c108dd1076fa9fe6401/report.json → docs/archive/tasks/PB-054-evidence/work/verification/PB-054/429aee56fc014c108dd1076fa9fe6401/report.json
+  work/verification/PB-054/429aee56fc014c108dd1076fa9fe6401/self-check.stderr.log → docs/archive/tasks/PB-054-evidence/work/verification/PB-054/429aee56fc014c108dd1076fa9fe6401/self-check.stderr.log
+  work/verification/PB-054/429aee56fc014c108dd1076fa9fe6401/self-check.stdout.log → docs/archive/tasks/PB-054-evidence/work/verification/PB-054/429aee56fc014c108dd1076fa9fe6401/self-check.stdout.log
+  work/verification/PB-054/429aee56fc014c108dd1076fa9fe6401/unit-tests.stderr.log → docs/archive/tasks/PB-054-evidence/work/verification/PB-054/429aee56fc014c108dd1076fa9fe6401/unit-tests.stderr.log
+  work/verification/PB-054/429aee56fc014c108dd1076fa9fe6401/unit-tests.stdout.log → docs/archive/tasks/PB-054-evidence/work/verification/PB-054/429aee56fc014c108dd1076fa9fe6401/unit-tests.stdout.log
+  work/verification/PB-054/audit-01 → docs/archive/tasks/PB-054-evidence/work/verification/PB-054/audit-01
+  work/verification/PB-054/audit-01/baseline-before.json → docs/archive/tasks/PB-054-evidence/work/verification/PB-054/audit-01/baseline-before.json
+  work/verification/PB-054/audit-01/changes-from-baseline.json → docs/archive/tasks/PB-054-evidence/work/verification/PB-054/audit-01/changes-from-baseline.json
+  work/verification/PB-054/audit-01/close-dry-run.log → docs/archive/tasks/PB-054-evidence/work/verification/PB-054/audit-01/close-dry-run.log
+  work/verification/PB-054/audit-01/final-audit.txt → docs/archive/tasks/PB-054-evidence/work/verification/PB-054/audit-01/final-audit.txt
+  work/verification/PB-054/audit-01/final-focused.log → docs/archive/tasks/PB-054-evidence/work/verification/PB-054/audit-01/final-focused.log
+  work/verification/PB-054/audit-01/final_probe.py → docs/archive/tasks/PB-054-evidence/work/verification/PB-054/audit-01/final_probe.py
+  work/verification/PB-054/audit-01/implementation-hashes.json → docs/archive/tasks/PB-054-evidence/work/verification/PB-054/audit-01/implementation-hashes.json
+  work/verification/PB-054/audit-01/independent-tests-selection-error.log → docs/archive/tasks/PB-054-evidence/work/verification/PB-054/audit-01/independent-tests-selection-error.log
+  work/verification/PB-054/audit-01/independent-tests.log → docs/archive/tasks/PB-054-evidence/work/verification/PB-054/audit-01/independent-tests.log
+  work/verification/PB-054/audit-01/pb054-economic-review-01.txt → docs/archive/tasks/PB-054-evidence/work/verification/PB-054/audit-01/pb054-economic-review-01.txt
+  work/verification/PB-054/audit-01/pb054-economic-review-02.txt → docs/archive/tasks/PB-054-evidence/work/verification/PB-054/audit-01/pb054-economic-review-02.txt
+  work/verification/PB-054/audit-01/pb054-economic-review-03.txt → docs/archive/tasks/PB-054-evidence/work/verification/PB-054/audit-01/pb054-economic-review-03.txt
+  work/verification/PB-054/audit-01/pb054-economic-review-04.txt → docs/archive/tasks/PB-054-evidence/work/verification/PB-054/audit-01/pb054-economic-review-04.txt
+  work/verification/PB-054/audit-01/pb054-economic-review-05.txt → docs/archive/tasks/PB-054-evidence/work/verification/PB-054/audit-01/pb054-economic-review-05.txt
+  work/verification/PB-054/audit-01/preflight.log → docs/archive/tasks/PB-054-evidence/work/verification/PB-054/audit-01/preflight.log
+  work/verification/PB-054/audit-01/provenance.json → docs/archive/tasks/PB-054-evidence/work/verification/PB-054/audit-01/provenance.json
+  work/verification/PB-054/audit-01/provenance.sha256 → docs/archive/tasks/PB-054-evidence/work/verification/PB-054/audit-01/provenance.sha256
+  work/verification/PB-054/audit-01/root-review.txt → docs/archive/tasks/PB-054-evidence/work/verification/PB-054/audit-01/root-review.txt
+  work/verification/PB-054/audit-01/snapshot.meta.json → docs/archive/tasks/PB-054-evidence/work/verification/PB-054/audit-01/snapshot.meta.json
+  work/verification/PB-054/audit-01/snapshot.txt → docs/archive/tasks/PB-054-evidence/work/verification/PB-054/audit-01/snapshot.txt
+Удаляются каталоги:
+  work/verification/PB-054/210317c98cf140e483580d82c547a060
+  work/verification/PB-054/429aee56fc014c108dd1076fa9fe6401
+  work/verification/PB-054/audit-01
+Записей: 36, удалений файлов: 30
+Diff записей (.md):
+--- /dev/null
++++ b/docs/archive/tasks/PB-054.md
+@@ -0,0 +1,110 @@
++# PB-054: Предотвращать ошибки материалов аудита и лишние повторные проверки
++
++ID: PB-054
++Status: done
++Priority: P1
++Depends-On: -
++Executor: Codex
++Model: GPT-6.1 Sol
++Created: 2026-10-27T10:38:07+03:00
++Closed: 2026-10-28T03:51:25+03:00
++
++<!-- playbook-meta:external -->
++
++## Задача
++
++### Цель и границы
++
++По поручению инженера реализовать полный цикл защиты от повторения ошибок PB-051–053: ранний контроль переносимости материалов, безопасная подготовка аудита, проверка конечного дерева при предпросмотре и консервативное повторное использование неизменённого полного verify. Проверка экономной моделью — GPT-6 Luna, затем итоговый разбор основным агентом и штатное закрытие после независимой приёмки.
++
++Не внедряет всю политику task_workflow v2 PB-032–037 и выборочный движок PB-045–050. Legacy-обязательные команды сохраняются; reuse разрешён явно и только для полного свежего набора. Изменённые или неизвестные входы не считаются проверенными. Commit/push/release не входят.
++
++### Контекст
++
++- [Требования](../../specs/audit-material-safety.md).
++- [PB-051](PB-051.md): исключённый из staged work/audits, Finder metadata, ошибочная база ссылок сырого снимка, позднее обнаружение при close.
++- [PB-052](PB-052.md): версии фикстур и сохранение незатронутых ссылок.
++- [PB-053](PB-053.md): исправление конкретного размещения доказательств.
++- [План соразмерных проверок](../../plans/proportional-workflow.md); интеграционные уточнения PB-033/PB-034/PB-037 сохраняются в draft.
++
++### Критерии приёмки
++
++- [x] AC-01: проверка материалов до subprocess выявляет существующую ссылку в исключённую из staged область, недоступный после переноса материал и служебные файлы. Предпросмотр регистрации и применение дают согласованный отказ; никакие пользовательские файлы не удаляются.
++- [x] AC-02: штатная подготовка аудита создаёт зарегистрированный контейнер в поддерживаемом месте, сырой snapshot в .txt и provenance с исходным путём/SHA-256; preview не меняет проект. Snapshot сохраняет байты, отказ/повтор/закрытая карточка не повреждают историю.
++- [x] AC-03: verify --preflight не пишет и не запускает команды; обычный verify выполняет тот же ранний контроль до дорогих проверок. Не требует ещё не созданных отчётов; legacy без documents сохраняет прежний маршрут.
++- [x] AC-04: close --dry-run проверяет подготовленное конечное дерево теми же staged-проверками, что применение; gate приёмки сохраняется. Битый сырой Markdown и конфликт будущих ссылок выявляются до записи. Применение заново сверяет входы и сохраняет restore/locks.
++- [x] AC-05: явный verify --reuse использует только собственный свежий полный passed-отчёт с совпадающими командами, входами, требованиями/EXEC, policy и средой; failed/timeout/старый формат без необходимых данных/изменённые входы вызывают объяснимый новый прогон. Не исключаются docs или evidence целиком; нет молчаливого сужения обязательных проверок.
++- [x] AC-06: постоянные CLI-регрессии воспроизводят ошибки материалов PB-051–053; счётчик подтверждает отсутствие второго запуска при неизменном reuse и новый запуск при содержательной правке. Проверены сохранность, восстановление/гонка, legacy и условная следующая версия без подмены исторических фикстур.
++- [x] AC-07: обновлены правила/руководство/CHANGELOG и уточнены PB-033/PB-034/PB-037 без заявления о реализации всего v2; manifest актуален; финальный настроенный verify passed и inputs_unchanged=true, CHECK/HANDOFF зарегистрированы.
++- [x] AC-08: независимая проверка GPT-6 Luna сохранена с точной атрибуцией, замечания устранены; приёмка зарегистрирована отдельно от самопроверки, dry-run/close и конечный check проходят, материалы сохраняют байты.
++
++### План
++
++1. Зафиксировать исходные хеши и требования; реализовать общую проверку переносимости и подготовку аудиторских материалов.
++2. Подключить read-only preflight и одинаковую проверку будущего дерева preview/apply; добавить консервативный явный reuse полного отчёта.
++3. Добавить негативные и сквозные CLI-регрессии, проверить счётчики и сохранность; обновить документы, CHANGELOG, self-manifest.
++4. Подготовить статус/индекс/материалы до одного финального verify; записать EXEC/CHECK/HANDOFF.
++5. Независимый субагент GPT-6 Luna проверяет результат без исправлений реализации; основной агент разбирает выводы, устраняет замечания при необходимости. После актуальной независимой приёмки выполнить dry-run/close и проверку архива.
++
++### Ресурсы
++
++Python 3/POSIX, локальные временные проекты; исходный checkout dev с существующими незакоммиченными изменениями. policy_revision=2. Инженер явно разрешил экономную модель и полный цикл 2026-10-27; бюджет не задан. Основная модель GPT-6.1 Sol подтверждена инженером; субагент GPT-6 Luna задаётся явно.
++
++## Журнал
++
++### EXEC-01 — Выполнение
++
++Время: 2026-10-28T03:25:43+03:00
++Исполнитель: Codex
++Модель: GPT-6.1 Sol
++Изменения: добавлены общий контроль переносимости материалов и audit package integrity, prepare-audit с raw .txt/sidecar/provenance и независимой SHA-256 привязкой audit_packages, read-only verify --preflight, одинаковая спецификация staged-checks close preview/apply, явный reuse полного свежего legacy-прогона с входами/командами/EXEC/policy/runtime. Audit report.json отделён от runner report.json по зарегистрированному пакету; TMPDIR внутри проекта отклоняется. Старые карточки не мигрируются, task_workflow v2 и выборочный staged не включены.
++
++Ошибки PB-051–053 должны обнаруживаться до subprocess; поздний протокол не должен ломать перенос доказательств. Предварительные проверки GPT-6 Luna выявили две P2: corrupt checks вызывал AttributeError, изменённый provenance принимался повтором; оба исправлены с постоянными негативными регрессиями. Исходные отчёты сохранены побайтно.
++Файлы: ai-dev-playbook/scripts/file_operations.py, lifecycle.py, documents.py, verification.py, playbook.py; tests/test_audit_material_safety.py, test_material_registration.py, test_close_lifecycle.py, test_pb029.py; правила проверок/задач/режимов, README, docs/specs/audit-material-safety.md, docs/architecture.md, docs/code-map.md, docs/user-guide/modes.md, PB-033/PB-034/PB-037 и план, CHANGELOG, manifest.
++
++В разработке 29 адресных тестов прошли; отдельная постоянная проба условной следующей версии выполняет шесть прежних проблемных сценариев на изолированной копии комплекта, историческая фикстура 0.0.2 сохраняется. После окончательной подготовки входов будут финальный verify, CHECK/HANDOFF и независимая приёмка.
++
++### EXEC-02 — Выполнение
++
++Время: 2026-10-28T03:33:17+03:00
++Исполнитель: Codex
++Модель: GPT-6.1 Sol
++Изменения: основной разбор обнаружил malformed snapshot_after, приводящий к AttributeError; типы и равенство before/after теперь проверяются до повторного использования. Более поздний failed определяется по recorded started_at, а не касанию старого файла; run_id проверяется по папке. Замечание четвёртого независимого прохода о повреждённом run_id исправлено без ослабления AC-05: собственная UUID-история runner сохраняется побайтно, новый полный прогон не блокируется preflight, handoff не использует повреждённый отчёт как passed. Добавлены регрессии invalid JSON/run_id и отсутствия бесконечных повторов. Привязка критериев формата карточек v2 тоже исключает JSON из audit package; копия runner-отчёта с будущей датой не получает ложную привязку CHECK.
++Файлы: ai-dev-playbook/scripts/verification.py, ai-dev-playbook/scripts/lifecycle.py, tests/test_audit_material_safety.py.
++
++Первый общий прогон 210317c98cf140e483580d82c547a060 штатно прерван SIGINT до правки исходников; report status=interrupted, историю не удаляли. Это не успешный verify и не основание для приёмки. После целевых проверок и нового независимого прохода будет отдельный финальный verify на окончательных входах.
++
++### CHECK-01 — Проверка
++
++Время: 2026-10-28T03:46:46+03:00
++Исполнитель: Codex
++Модель: GPT-6.1 Sol
++Результат: passed
++Критерии: AC-01, AC-02, AC-03, AC-04, AC-05, AC-06, AC-07, AC-08
++Команда: python3 ai-dev-playbook/scripts/playbook.py verify PB-054; предварительно index --all, adopt . --force --apply, verify PB-054 --preflight, git diff --check; адресные CLI-регрессии.
++Среда: macOS, Python 3, checkout dev; сценарии записи/ошибок/условной версии на локальных временных проектах.
++Факт: финальный полный verify 429aee56fc014c108dd1076fa9fe6401 passed, inputs_unchanged=true; 572 теста за 513.689 s, включая self-project pilot, подлинное обновление с 0.0.2, SIGKILL/restore и 22 новых регрессии PB-054. self-check passed. Сохранены 108 хешей исходников/правил/шаблонов/тестов без изменения во время финального прогона. В отдельном итоговом адресном наборе прошли 68 тестов; позднейшие исправления дополнительно проверены адресно и в полном наборе. Пять предварительных независимых проходов Luna сохранены, найденные P2 исправлены с регрессиями.
++Доказательства: [Отчёт verify](PB-054-evidence/work/verification/PB-054/429aee56fc014c108dd1076fa9fe6401/report.json), [Полный журнал](PB-054-evidence/work/verification/PB-054/429aee56fc014c108dd1076fa9fe6401/unit-tests.stderr.log), [Адресные проверки](PB-054-evidence/work/verification/PB-054/audit-01/final-focused.log), [Снимок исходников](PB-054-evidence/work/verification/PB-054/audit-01/implementation-hashes.json), [Проверка Luna](PB-054-evidence/work/verification/PB-054/audit-01/pb054-economic-review-05.txt).
++Ограничения: это самопроверка исполнителя. Финальная независимая приёмка и фактическое закрытие AC-08 выполняются следующими отдельными CLI-действиями после актуальной передачи; сквозной close/архив с сохранением байтов уже подтверждён temporary E2E. Первый interrupted-прогон не считается успешным. Выборочная политика v2 и уменьшение физического копирования остаются PB-032–037/PB-045–050.
++
++### HANDOFF-01 — Передача
++
++Время: 2026-10-28T03:46:46+03:00
++Исполнитель: Codex
++Модель: GPT-6.1 Sol
++Выполнение: EXEC-01, EXEC-02
++Проверки: CHECK-01
++Состояние: in_review, dev, изменения не закоммичены. Полный verify passed и inputs_unchanged=true, CHANGELOG/правила/руководство и manifest подготовлены. Следующий шаг — независимый финальный аудит GPT-6 Luna; при успехе CLI acceptance и разрешённые инженером dry-run/close с проверкой архива. История прерванной проверки и все исходные отчёты сохранены.
++Фокус аудита: проверить актуальность этой передачи и все AC, сверить 108 исходных хешей и свежесть полного verify. Независимо воспроизвести ранний отказ перед subprocess, read-only preview, целостность provenance+ledger и sidecar, reuse без повторного запуска, изменения значимых входов, corrupt run_id/JSON/snapshots и отсутствие бесконечных повторов. Особенно проверить отделение audit report.json в _prepare_criteria формат2 (новый E2E с будущей датой), handoff/accept/close/байты архива и сохранённые recovery/gate. Полный suite повторять только при новой обоснованной необходимости; нельзя исправлять реализацию в приёмочном аудите.
++
++
++### AUDIT-01 — Аудит
++Время: 2026-10-28T03:50:49+03:00
++Исполнитель: Codex
++Модель: GPT-6 Luna
++Передача: HANDOFF-01
++Результат: accepted
++Критерии: AC-01, AC-02, AC-03, AC-04, AC-05, AC-06, AC-07, AC-08
++Независимо проверено: свежесть полного verify, 108 хешей реализации, целостность provenance/ledger/snapshot, 16 адресных регрессий и изолированные сценарии format2, повреждённой истории, preflight и staged gate.
++Доказательства: work/verification/PB-054/audit-01/final-audit.txt, work/verification/PB-054/audit-01/independent-tests.log, work/verification/PB-054/audit-01/implementation-hashes.json, work/verification/PB-054/429aee56fc014c108dd1076fa9fe6401/report.json.
++Ограничения: полный suite не повторялся; фактический close не выполнялся.
+--- a/docs/plans/proportional-workflow.md
++++ b/docs/plans/proportional-workflow.md
+@@ -117,4 +117,4 @@
+ 
+ ## Интеграция защит PB-054
+ 
+-Текущий legacy-путь дополняется [PB-054](../tasks/PB-054.md): переносимость материалов до тестов, безопасный контейнер аудита, конечный staged-check close --dry-run и явный reuse неизменного полного отчёта. PB-033/034 используют эти общие механизмы для v2; PB-037 добавляет регрессии PB-051–053 и счётчики. Эти уточнения не объявляют оставшиеся draft-задачи выполненными и не меняют зависимости блока. Выборочная подготовка PB-045–050 остаётся самостоятельной оптимизацией.
++Текущий legacy-путь дополняется [PB-054](../archive/tasks/PB-054.md): переносимость материалов до тестов, безопасный контейнер аудита, конечный staged-check close --dry-run и явный reuse неизменного полного отчёта. PB-033/034 используют эти общие механизмы для v2; PB-037 добавляет регрессии PB-051–053 и счётчики. Эти уточнения не объявляют оставшиеся draft-задачи выполненными и не меняют зависимости блока. Выборочная подготовка PB-045–050 остаётся самостоятельной оптимизацией.
+--- a/docs/tasks/PB-033.md
++++ b/docs/tasks/PB-033.md
+@@ -88,6 +88,6 @@
+ 
+ ## Уточнение после PB-051–053
+ 
+-[PB-054](PB-054.md) добавляет базовый preflight переносимости материалов и явный reuse полного legacy-отчёта. Здесь остаются v2-применимость, coverage, ручные результаты и независимые наборы входов. Использовать общие проверки PB-054; не вводить второй несовместимый валидатор. До subprocess выявлять неучтённые материалы, не переносимые ссылки, ошибки статуса/индекса; не требовать будущие отчёты. Причина каждого повторного запуска должна показывать изменившиеся значимые входы/команду/политику/среду. CHANGELOG и другие результаты задачи не исключать из снимка ради экономии.
++[PB-054](../archive/tasks/PB-054.md) добавляет базовый preflight переносимости материалов и явный reuse полного legacy-отчёта. Здесь остаются v2-применимость, coverage, ручные результаты и независимые наборы входов. Использовать общие проверки PB-054; не вводить второй несовместимый валидатор. До subprocess выявлять неучтённые материалы, не переносимые ссылки, ошибки статуса/индекса; не требовать будущие отчёты. Причина каждого повторного запуска должна показывать изменившиеся значимые входы/команду/политику/среду. CHANGELOG и другие результаты задачи не исключать из снимка ради экономии.
+ 
+ Дополнительная приёмка: неизменный полный legacy-отчёт и выборочный v2-result различаются; новое обязательное правило, неизвестная зависимость и failed не обходятся reuse. Проверка, читающая документы/evidence, сохраняет эти зависимости.
+--- a/docs/tasks/PB-034.md
++++ b/docs/tasks/PB-034.md
+@@ -88,6 +88,6 @@
+ 
+ ## Уточнение после PB-051–053
+ 
+-[PB-054](PB-054.md) вводит безопасную подготовку аудита и проверку конечного staged-дерева в close --dry-run. Встроить эти общие механизмы в v2; не дублировать правила путей, снимков и материалов. После добавления протокола проверять переносимость/ссылки/байты до приёмки и заново перед close. Содержательная правка возвращает затронутые проверки; одна упаковка доказательства требует связанных проверок упаковки, если независимость реализации доказана. Статус/индекс/протокол не дают повода исключать docs целиком.
++[PB-054](../archive/tasks/PB-054.md) вводит безопасную подготовку аудита и проверку конечного staged-дерева в close --dry-run. Встроить эти общие механизмы в v2; не дублировать правила путей, снимков и материалов. После добавления протокола проверять переносимость/ссылки/байты до приёмки и заново перед close. Содержательная правка возвращает затронутые проверки; одна упаковка доказательства требует связанных проверок упаковки, если независимость реализации доказана. Статус/индекс/протокол не дают повода исключать docs целиком.
+ 
+ Дополнительная приёмка: служебный цикл с новым безопасно размещённым аудитом сохраняет счётчик дорогой проверки; изменение читаемого материала повторяет связанную проверку. Ранняя проверка не подменяет acceptance; внешний конфликт после preview отказывает до записи, recovery остаётся рабочим.
+--- a/docs/tasks/PB-037.md
++++ b/docs/tasks/PB-037.md
+@@ -88,6 +88,6 @@
+ 
+ ## Уточнение после PB-051–053
+ 
+-В сквозную матрицу включить регрессии [PB-054](PB-054.md): work/audits, служебный Finder-файл, сырой Markdown-снимок и безопасный .txt, добавление аудита после verify, будущий архив и побайтовая сохранность, условная следующая версия. Не повторять весь self-project pilot для каждого негативного случая: использовать маленькие синтетические temporary fixtures и отдельный финальный интеграционный пилот.
++В сквозную матрицу включить регрессии [PB-054](../archive/tasks/PB-054.md): work/audits, служебный Finder-файл, сырой Markdown-снимок и безопасный .txt, добавление аудита после verify, будущий архив и побайтовая сохранность, условная следующая версия. Не повторять весь self-project pilot для каждого негативного случая: использовать маленькие синтетические temporary fixtures и отдельный финальный интеграционный пилот.
+ 
+ Дополнительная приёмка: счётчик подтверждает один запуск при неизменном результате и служебных переходах, новый связанный запуск после содержательной правки, блокировку при повреждении доказательства. Failed/timeout, смена среды/команды/policy, добавление и удаление входа не переиспользуются. Показать команду, результат, причину повтора и границы независимости; секунды не являются единственным доказательством.
+--- a/docs/tasks/index.md
++++ b/docs/tasks/index.md
+@@ -8,7 +8,6 @@
+ |---|---|---|---|---|---|---|---|
+ | AUDIT-004 | [AUDIT-004: Повторная приёмка PB-005 и аудит PB-007](AUDIT-004.md) | in_review | P1 | Codex / GPT-6 Sol | unknown | — | — |
+ | PB-007 | [PB-007: Покрыть основной CLI сценарными проверками](PB-007.md) | in_review | P1 | Devin / SWE-2 High | unknown | — | — |
+-| PB-054 | [PB-054: Предотвращать ошибки материалов аудита и лишние повторные проверки](PB-054.md) | in_review | P1 | Codex / GPT-6.1 Sol | 2026-10-27 10:38 | — | — |
+ | AUDIT-007 | [AUDIT-007: Независимо принять соразмерные маршруты и проверки](AUDIT-007.md) | draft | P2 | — | 2026-10-23 03:34 | — | PB-031, PB-032, PB-033, PB-034, PB-035, PB-036, PB-037 |
+ | AUDIT-008 | [AUDIT-008: Независимо принять выборочные операции и ограниченную историю](AUDIT-008.md) | draft | P2 | — | 2026-10-26 17:56 | — | PB-045, PB-046, PB-047, PB-048, PB-049, PB-050 |
+ | PB-008 | [PB-008: Завершить самоприменение проверочного цикла](PB-008.md) | in_review | P2 | Devin / SWE-2 High | unknown | — | — |
+@@ -32,6 +31,7 @@
+ 
+ | ID | Задача | Статус | Приоритет | Исполнитель | Создана | Закрыта | Зависимости |
+ |---|---|---|---|---|---|---|---|
++| PB-054 | [PB-054: Предотвращать ошибки материалов аудита и лишние повторные проверки](../archive/tasks/PB-054.md) | done | P1 | Codex / GPT-6.1 Sol | 2026-10-27 10:38 | 2026-10-28 03:51 | — |
+ | PB-051 | [PB-051: Обновить версию комплекта и changelog до 0.1.0](../archive/tasks/PB-051.md) | done | P2 | Codex / GPT-6.1 Sol | 2026-10-26 18:50 | 2026-10-27 10:18 | PB-052, PB-053 |
+ | PB-053 | [PB-053: Сохранить доступность протокола повторного аудита PB-052 в staged-проверках](../archive/tasks/PB-053.md) | done | P2 | Codex / GPT-6 | 2026-10-27 08:58 | 2026-10-27 09:19 | — |
+ | PB-052 | [PB-052: Восстановить проверки после смены версии комплекта](../archive/tasks/PB-052.md) | done | P2 | Codex / GPT-6 | 2026-10-26 23:46 | 2026-10-27 08:33 | — |

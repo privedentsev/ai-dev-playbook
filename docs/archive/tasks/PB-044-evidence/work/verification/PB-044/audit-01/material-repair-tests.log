@@ -1,0 +1,18 @@
+test_apply_preserves_bytes_dates_links_and_repeat (test_material_repair.MaterialRepairTest.test_apply_preserves_bytes_dates_links_and_repeat) ... ok
+test_batch_repair_and_cancelled_status (test_material_repair.MaterialRepairTest.test_batch_repair_and_cancelled_status) ... ok
+test_check_rejects_active_card_with_archive_evidence (test_material_repair.MaterialRepairTest.test_check_rejects_active_card_with_archive_evidence) ... ok
+test_check_rejects_archived_leftovers_with_path (test_material_repair.MaterialRepairTest.test_check_rejects_archived_leftovers_with_path) ... ok
+test_check_rejects_both_locations_and_empty_leftover (test_material_repair.MaterialRepairTest.test_check_rejects_both_locations_and_empty_leftover) ... ok
+test_collision_refused_without_writes (test_material_repair.MaterialRepairTest.test_collision_refused_without_writes) ... ok
+test_existing_foreign_ownership_refused (test_material_repair.MaterialRepairTest.test_existing_foreign_ownership_refused) ... ok
+test_final_failure_rolls_back_complete_tree (test_material_repair.MaterialRepairTest.test_final_failure_rolls_back_complete_tree) ... ok
+test_managed_or_active_task_refused (test_material_repair.MaterialRepairTest.test_managed_or_active_task_refused) ... ok
+test_preview_is_read_only (test_material_repair.MaterialRepairTest.test_preview_is_read_only) ... ok
+test_stale_plan_after_new_material_refused (test_material_repair.MaterialRepairTest.test_stale_plan_after_new_material_refused) ... ok
+test_symlink_refused (test_material_repair.MaterialRepairTest.test_symlink_refused) ... ok
+test_unselected_leftover_and_missing_source_refused (test_material_repair.MaterialRepairTest.test_unselected_leftover_and_missing_source_refused) ... ok
+
+----------------------------------------------------------------------
+Ran 13 tests in 8.031s
+
+OK

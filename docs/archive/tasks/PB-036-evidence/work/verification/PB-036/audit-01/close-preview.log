@@ -1,0 +1,317 @@
+План lc-e856956763cf9b27 (lifecycle):
+Основание: playbook.py close PB-036
+Исполнитель: cli:privedentsev1 (cli)
+Действия:
+  close_task PB-036: docs/tasks/PB-036.md → docs/archive/tasks/PB-036.md (done)
+Переносы:
+  docs/tasks/PB-036-evidence → docs/archive/tasks/PB-036-evidence
+  docs/tasks/PB-036-evidence/implementation.md → docs/archive/tasks/PB-036-evidence/implementation.md
+  docs/tasks/PB-036-evidence/targeted-tests-02.log → docs/archive/tasks/PB-036-evidence/targeted-tests-02.log
+  docs/tasks/PB-036-evidence/targeted-tests-final.log → docs/archive/tasks/PB-036-evidence/targeted-tests-final.log
+  docs/tasks/PB-036-evidence/targeted-tests.log → docs/archive/tasks/PB-036-evidence/targeted-tests.log
+  docs/tasks/PB-036.md → docs/archive/tasks/PB-036.md
+  work/verification/PB-036/98f4b77b93124d0c874aa4b576f19752 → docs/archive/tasks/PB-036-evidence/work/verification/PB-036/98f4b77b93124d0c874aa4b576f19752
+  work/verification/PB-036/98f4b77b93124d0c874aa4b576f19752/preflight-regressions.stderr.log → docs/archive/tasks/PB-036-evidence/work/verification/PB-036/98f4b77b93124d0c874aa4b576f19752/preflight-regressions.stderr.log
+  work/verification/PB-036/98f4b77b93124d0c874aa4b576f19752/preflight-regressions.stdout.log → docs/archive/tasks/PB-036-evidence/work/verification/PB-036/98f4b77b93124d0c874aa4b576f19752/preflight-regressions.stdout.log
+  work/verification/PB-036/98f4b77b93124d0c874aa4b576f19752/report.json → docs/archive/tasks/PB-036-evidence/work/verification/PB-036/98f4b77b93124d0c874aa4b576f19752/report.json
+  work/verification/PB-036/98f4b77b93124d0c874aa4b576f19752/self-check.stderr.log → docs/archive/tasks/PB-036-evidence/work/verification/PB-036/98f4b77b93124d0c874aa4b576f19752/self-check.stderr.log
+  work/verification/PB-036/98f4b77b93124d0c874aa4b576f19752/self-check.stdout.log → docs/archive/tasks/PB-036-evidence/work/verification/PB-036/98f4b77b93124d0c874aa4b576f19752/self-check.stdout.log
+  work/verification/PB-036/98f4b77b93124d0c874aa4b576f19752/unit-tests.stderr.log → docs/archive/tasks/PB-036-evidence/work/verification/PB-036/98f4b77b93124d0c874aa4b576f19752/unit-tests.stderr.log
+  work/verification/PB-036/98f4b77b93124d0c874aa4b576f19752/unit-tests.stdout.log → docs/archive/tasks/PB-036-evidence/work/verification/PB-036/98f4b77b93124d0c874aa4b576f19752/unit-tests.stdout.log
+  work/verification/PB-036/audit-01 → docs/archive/tasks/PB-036-evidence/work/verification/PB-036/audit-01
+  work/verification/PB-036/audit-01/close-preview.log → docs/archive/tasks/PB-036-evidence/work/verification/PB-036/audit-01/close-preview.log
+  work/verification/PB-036/audit-01/preflight.log → docs/archive/tasks/PB-036-evidence/work/verification/PB-036/audit-01/preflight.log
+  work/verification/PB-036/audit-01/probes.log → docs/archive/tasks/PB-036-evidence/work/verification/PB-036/audit-01/probes.log
+  work/verification/PB-036/audit-01/probes.py → docs/archive/tasks/PB-036-evidence/work/verification/PB-036/audit-01/probes.py
+  work/verification/PB-036/audit-01/provenance.json → docs/archive/tasks/PB-036-evidence/work/verification/PB-036/audit-01/provenance.json
+  work/verification/PB-036/audit-01/provenance.sha256 → docs/archive/tasks/PB-036-evidence/work/verification/PB-036/audit-01/provenance.sha256
+  work/verification/PB-036/audit-01/report.md → docs/archive/tasks/PB-036-evidence/work/verification/PB-036/audit-01/report.md
+  work/verification/PB-036/audit-01/schema-migrations.log → docs/archive/tasks/PB-036-evidence/work/verification/PB-036/audit-01/schema-migrations.log
+  work/verification/PB-036/audit-01/snapshot.txt → docs/archive/tasks/PB-036-evidence/work/verification/PB-036/audit-01/snapshot.txt
+  work/verification/PB-036/audit-01/targeted-during-prepare.log → docs/archive/tasks/PB-036-evidence/work/verification/PB-036/audit-01/targeted-during-prepare.log
+  work/verification/PB-036/audit-01/targeted.log → docs/archive/tasks/PB-036-evidence/work/verification/PB-036/audit-01/targeted.log
+Удаляются каталоги:
+  docs/tasks/PB-036-evidence
+  work/verification/PB-036/98f4b77b93124d0c874aa4b576f19752
+  work/verification/PB-036/audit-01
+Записей: 27, удалений файлов: 23
+Diff записей (.md):
+  docs/archive/tasks/PB-036-evidence/implementation.md: prepared stream sha256:c87db1014897f0d7cc5bcb365644edea502a2e1b6b868950ef22fd0e1ce724a1
+  docs/archive/tasks/PB-036-evidence/targeted-tests-02.log: prepared stream sha256:4b6fe8d388a9316b84f0e886d83981cd70ac5e8f3d522c37a755c7956230d029
+  docs/archive/tasks/PB-036-evidence/targeted-tests-final.log: prepared stream sha256:db2af3ac330d972330b32902179c8a1c4a42bb4885acb522334f3db9486d2ef6
+  docs/archive/tasks/PB-036-evidence/targeted-tests.log: prepared stream sha256:46ce342beea1d3efc6d5a7c8d9fee84137fcaf9087874b308375740294ff1cac
+  docs/archive/tasks/PB-036-evidence/work/verification/PB-036/98f4b77b93124d0c874aa4b576f19752/preflight-regressions.stderr.log: prepared stream sha256:423ca6d561a6e2eba78b83df3eb2fb35ca577197e93f123dc47ec21e90f39239
+  docs/archive/tasks/PB-036-evidence/work/verification/PB-036/98f4b77b93124d0c874aa4b576f19752/preflight-regressions.stdout.log: prepared stream sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+  docs/archive/tasks/PB-036-evidence/work/verification/PB-036/98f4b77b93124d0c874aa4b576f19752/report.json: prepared stream sha256:4cffbaffca45899ffb50e23cb64bc1a5015b02fb36f1490ccea96f39283a72a1
+  docs/archive/tasks/PB-036-evidence/work/verification/PB-036/98f4b77b93124d0c874aa4b576f19752/self-check.stderr.log: prepared stream sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+  docs/archive/tasks/PB-036-evidence/work/verification/PB-036/98f4b77b93124d0c874aa4b576f19752/self-check.stdout.log: prepared stream sha256:fa39452b5b278a3d56e8837a598c98e35015dee8a8655e5553f6972f055b053e
+  docs/archive/tasks/PB-036-evidence/work/verification/PB-036/98f4b77b93124d0c874aa4b576f19752/unit-tests.stderr.log: prepared stream sha256:056aa48747487357148216d89687cf642979a2b0906cd4011be8a1d4d8399eb8
+  docs/archive/tasks/PB-036-evidence/work/verification/PB-036/98f4b77b93124d0c874aa4b576f19752/unit-tests.stdout.log: prepared stream sha256:33bb46bea56c7e171b8af20752e50348c1b4896e361e2fec684173512ecebb64
+  docs/archive/tasks/PB-036-evidence/work/verification/PB-036/audit-01/close-preview.log: prepared stream sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+  docs/archive/tasks/PB-036-evidence/work/verification/PB-036/audit-01/preflight.log: prepared stream sha256:b8d5552d35d3fd1d0fae25b6a34310372fe06e6cd39fb61464bad882d9690f5a
+  docs/archive/tasks/PB-036-evidence/work/verification/PB-036/audit-01/probes.log: prepared stream sha256:6ee912d1e0eeba9f062c46990bdcb3a65d8716170596196caa147791ea09fa40
+  docs/archive/tasks/PB-036-evidence/work/verification/PB-036/audit-01/probes.py: prepared stream sha256:51eaae5dd2f300de62f38b47c8884c58daaaccfa6a2ae7b59e680fbb2c2df7e5
+  docs/archive/tasks/PB-036-evidence/work/verification/PB-036/audit-01/provenance.json: prepared stream sha256:011ef246a780a74289a64d99ad0012a4bf57b4670a787d96910c7ba56ad36f33
+  docs/archive/tasks/PB-036-evidence/work/verification/PB-036/audit-01/provenance.sha256: prepared stream sha256:863c918d20d402604ec1a8f6661285240ecbaa9244a5d6e99515b9ad35202af4
+  docs/archive/tasks/PB-036-evidence/work/verification/PB-036/audit-01/report.md: prepared stream sha256:aa6cb8b8df917179107a1bf26028a781c4d471ffd9358d496ed634a6b3cf4a80
+  docs/archive/tasks/PB-036-evidence/work/verification/PB-036/audit-01/schema-migrations.log: prepared stream sha256:daab2365434474c087c077aa77adbea283c21220cfc26dea17612775b08f9a86
+  docs/archive/tasks/PB-036-evidence/work/verification/PB-036/audit-01/snapshot.txt: prepared stream sha256:e401625499cf0dee39ca731aef289d324fb23bcd6cb1853a7a2de9e503f2d2bc
+  docs/archive/tasks/PB-036-evidence/work/verification/PB-036/audit-01/targeted-during-prepare.log: prepared stream sha256:1441d2d608ef895288eba012dd0d777fd6ea72ee876ca516a21dda1cd06f5ffa
+  docs/archive/tasks/PB-036-evidence/work/verification/PB-036/audit-01/targeted.log: prepared stream sha256:c0334d8f54a0b8881b460a357fcd5b309ac93d22586c3d8708b8c52b32cf6ec0
+--- /dev/null
++++ b/docs/archive/tasks/PB-036.md
+@@ -0,0 +1,214 @@
++# PB-036: Подключить v2 к установке и безопасному обновлению
++
++ID: PB-036
++Status: done
++Priority: P2
++Depends-On: PB-035
++Executor: Codex
++Model: GPT-6
++Created: 2026-10-23T03:34:58+03:00
++Closed: 2026-11-06T06:39:16+03:00
++
++<!-- playbook-meta:start -->
++```json
++{
++  "schema_version": 1,
++  "relations": [
++    {
++      "relation": "based_on",
++      "target": "spec:proportional-workflow"
++    },
++    {
++      "relation": "based_on",
++      "target": "design:proportional-workflow"
++    }
++  ],
++  "materials": [
++    {
++      "id": "implementation",
++      "role": "report",
++      "source": "docs/archive/tasks/PB-036-evidence",
++      "storage": "local",
++      "required": true,
++      "immutable": true,
++      "used_by": [
++        "PB-036"
++      ]
++    },
++    {
++      "id": "verify-98f4b77b93124d0c874aa4b576f19752",
++      "role": "report",
++      "source": "docs/archive/tasks/PB-036-evidence/work/verification/PB-036/98f4b77b93124d0c874aa4b576f19752",
++      "storage": "local",
++      "required": true,
++      "immutable": true,
++      "used_by": [
++        "PB-036"
++      ]
++    },
++    {
++      "id": "audit-01",
++      "role": "report",
++      "source": "docs/archive/tasks/PB-036-evidence/work/verification/PB-036/audit-01",
++      "storage": "local",
++      "immutable": true,
++      "required": true,
++      "used_by": [
++        "PB-036"
++      ]
++    },
++    {
++      "id": "lifecycle-lc-e856956763cf9b27",
++      "role": "report",
++      "source": "docs/archive/tasks/PB-036-evidence/close-lc-e856956763cf9b27.json",
++      "storage": "local",
++      "required": true,
++      "immutable": true,
++      "used_by": []
++    }
++  ],
++  "handoff": {
++    "at": "2026-11-06T06:31:48+03:00",
++    "actor": {
++      "name": "Codex",
++      "model": "GPT-6"
++    },
++    "summary": "0.2.0: явные init/enable-v2/migrate-card, legacy always, bootstrap и restore; 698 тестов passed",
++    "reports": [
++      "verify-98f4b77b93124d0c874aa4b576f19752"
++    ],
++    "card_projection": "sha256:46aa3e288e1de411e248150afe1087370e855a0d618deaa2bb76dd7a22571578"
++  },
++  "audit_packages": {
++    "audit-01": "sha256:011ef246a780a74289a64d99ad0012a4bf57b4670a787d96910c7ba56ad36f33"
++  },
++  "acceptance": {
++    "at": "2026-11-06T06:39:03+03:00",
++    "actor": {
++      "name": "Codex",
++      "model": "GPT-6"
++    },
++    "role": "auditor",
++    "kind": "acceptance",
++    "result": "accepted",
++    "handoff_at": "2026-11-06T06:31:48+03:00",
++    "session": null,
++    "detail": "Независимый аудит: замечаний нет; 27 целевых тестов, 2 теста схем и 2 дополнительных сценария passed; свежий полный verify на 698 тестов подтверждён. Протокол audit-01/report.md."
++  },
++  "moves": [
++    {
++      "from": "docs/tasks/PB-036-evidence",
++      "to": "docs/archive/tasks/PB-036-evidence"
++    },
++    {
++      "from": "work/verification/PB-036/98f4b77b93124d0c874aa4b576f19752",
++      "to": "docs/archive/tasks/PB-036-evidence/work/verification/PB-036/98f4b77b93124d0c874aa4b576f19752"
++    },
++    {
++      "from": "work/verification/PB-036/audit-01",
++      "to": "docs/archive/tasks/PB-036-evidence/work/verification/PB-036/audit-01"
++    },
++    {
++      "from": "docs/tasks/PB-036.md",
++      "to": "docs/archive/tasks/PB-036.md"
++    }
++  ]
++}
++```
++<!-- playbook-meta:end -->
++
++## Цель и границы
++
++Обеспечить явное включение v2, init и update существующих установок с сохранением обязательных legacy-команд, пользовательских документов и восстановления.
++
++## Приоритет и зависимости
++
++P2, часть согласованного направления развития. Порядок существующих работ не меняется. Зависимости: PB-035. Выполнение разрешено инженером 2026-11-06; согласованы 0.2.0 и переходы из 0.0.2, 0.0.3, 0.1.0.
++
++## Контекст
++
++- [План](../../plans/proportional-workflow.md).
++- [Спецификация](../../specs/proportional-workflow.md): R-13,23,25–26; AC-11–13.
++- [Design](../../designs/proportional-workflow.md).
++- [ADR-0003](../../adr/0003-task-scoped-verification.md).
++
++## Область изменений
++
++init/config, templates/project.json, updates.json, VERSION и self-manifest, updating.py при необходимости, документация совместимости и fixtures локальных артефактов. Публикация/теги не входят.
++
++## Условия готовности
++
++План/границы согласованы инженером; зависимости завершены; поля/интерфейсы соответствующего этапа однозначны. Исполнитель назначается только при старте. Изменение требований/архитектуры возвращается к соответствующему этапу, не решается скрытым расширением задачи.
++
++## План
++
++1. Согласовать версии/переходы и migration diff.
++2. Реализовать explicit opt-in, init/update adapters и отказ старых форматов.
++3. Проверить custom paths, conflicts, прерывание и restore на копиях.
++
++## Приёмка
++
++- [x] До ready инженер согласовал целевую версию локального артефакта и поддерживаемые переходы; они объявлены и проверены.
++- [x] Новая установка валидна; старый проект без подключения v2 работает прежним путём. Переход отдельной карточки/плана явный с историей.
++- [x] Миграция первоначально сохраняет старые обязательные команды как always; сокращение их применимости не выполняется автоматически.
++- [x] Старый CLI/неподдерживаемый формат отказывают, v1-отчёт не считается автоматически v2 coverage. Необъявленный переход отклоняется.
++- [x] Update/restore после прерывания сохраняют пользовательские данные, блокировки, manifest и независимый автономный restore; контрольные точки регрессии не выдают внешнюю интеграцию за реализованную.
++- [ ] Самопроверка и handoff зарегистрированы, независимая приёмка выполнена в отдельной сессии либо инженером перед закрытием.
++
++## Проверки и доказательства
++
++Матрица old/new CLI × configs/cards/reports v1/v2, init, dry-run migration, update apply/restore, custom paths, corrupt backup и concurrent lifecycle. Только локальные артефакты/временные проекты.
++
++Команды основы: целевые `python3 -m unittest discover -s tests -p '<согласованный файл тестов>' -v`, затем настроенный `python3 ai-dev-playbook/scripts/playbook.py verify PB-036` по действующему на этапе контракту. Перед запуском проверить argv/inputs и готовность служебных данных. Проверить `index --all`, `check --ready`, `git diff --check`; после изменения файлов комплекта выполнить `adopt . --force --apply` до финального прогона. Существующий timeout не обходить скрытым изменением runner: заранее согласовать настройку при необходимости.
++
++Материалы: `docs/tasks/PB-036-evidence/` и зарегистрированные verify-прогоны. Неизменяемые отчёты не переписывать. Структурные проверки не являются доказательством поведения CLI.
++
++## Ресурсы
++
++Python 3.10+ и стандартная библиотека, локальные временные проекты без секретов; независимый аудитор отдельной сессией либо инженер. policy_revision — действующая конфигурация на момент старта; бюджет отдельно не согласован. Общие материалы принадлежат AUDIT-007, не архивируются с подзадачей.
++
++## Выполнение и проверки
++
++Реализация не начата. Карточка подготовлена Codex / GPT-6.1 Sol на этапе планирования.
++
++### Подготовка — 2026-11-06T05:55:18+03:00; исполнитель: Codex; модель: GPT-6.
++
++Инженер поручил начать PB-036. Зависимость PB-035 завершена и независимо принята. Исходный проект использует legacy-конфигурацию без task_workflow; текущая версия комплекта 0.1.0. В рабочем дереве уже есть незакоммиченные изменения предыдущих задач; они сохраняются. `check --ready` прошёл: 64 карточки, 18 документов, 2 legacy; это проверка структуры, не поведения CLI.
++
++До ready требуется отдельное согласование по плану блока. На согласование предложен локальный артефакт **0.2.0** с прямыми переходами **0.0.2 → 0.2.0**, **0.0.3 → 0.2.0**, **0.1.0 → 0.2.0**. Публикация не входит. Update сохраняет legacy; подключение task_workflow v2 выполняется явно и первоначально переносит все обязательные legacy-команды как always, сохраняя argv, inputs и timeout. Карточки, планы проверок и отчёты автоматически не мигрируются. Downgrade и необъявленные переходы отклоняются до записи. Предложение пока не согласовано; VERSION, конфигурация и код не изменены.
++
++После согласования: проверить init legacy/v2 и preview без записи; каждый объявленный переход из manifest-установки; отдельное подключение v2 с diff и сохранением пользовательских полей/путей; отсутствие автоматического v2 coverage из v1-отчёта; отказ неизвестных форматов/переходов; конфликт файлов, прерывание apply, автономный restore, повреждённую резервную копию и конкурирующую lifecycle-операцию. Fixtures — только локальные временные проекты. Точки реализации: init в playbook.py, миграции и update/restore в updating.py; существующие регрессии — tests/test_cli.py и tests/test_file_operations.py.
++
++На момент подготовки ожидалось решение инженера; до решения статус draft сохранялся согласно условиям готовности.
++
++### EXEC-01 — 2026-11-06; исполнитель: Codex; модель: GPT-6.
++
++Инженер явно согласовал локальный артефакт 0.2.0 и прямые переходы из 0.0.2, 0.0.3, 0.1.0 с сохранением legacy и отдельным включением v2. Публикация не разрешалась. Реализация начата: init --workflow-v2 для новых проектов; workflow enable-v2 с preview/apply для существующих. Отсутствующий legacy verification требует его настройки до подключения, shell-строки commands автоматически в argv не преобразуются. Обновление не переводит карточки и отчёты в v2. Новая схема updates.json отклоняется прежним CLI; для перехода используется CLI целевого локального артефакта.
++
++### EXEC-02 — 2026-11-06T06:06:40+03:00; исполнитель: Codex; модель: GPT-6.
++
++Реализованы init/enable-v2 и явный migrate-card с сохранением истории; opt-in устанавливает project schema 2 для отказа старого CLI, updates schema 2 задаёт minimum CLI и поддерживаемые схемы проекта. Legacy-команды сохранены как always, self-project остаётся legacy до PB-037. Подробности, матрица fixtures и границы доказательств: [материалы](PB-036-evidence/implementation.md). Целевые 27 сценариев прошли; завершаются адресные проверки generic schema migration, затем настроенный полный verify. Независимая приёмка не проводилась.
++
++### EXEC-03 — 2026-11-06T06:10:35+03:00; исполнитель: Codex; модель: GPT-6.
++
++Итоговые 29 целевых сценариев прошли: [лог](PB-036-evidence/targeted-tests-final.log). Материалы зарегистрированы immutable/required; manifest актуализирован через adopt. Статус in_review подготовлен до полного legacy verify вместе с индексом; это ещё не актуальная CLI-передача и не независимая приёмка. Проверки/лимиты runner не сокращались.
++
++## Передача
++
++После реализации сохранить команды воспроизведения, отчёты, ограничения и фактическую ветку/состояние входов; зарегистрировать `lifecycle handoff PB-036` и in_review по действующему контракту. Исполнитель не закрывает задачу сам без инженерского поручения. Закрытие — только после независимой приёмки через штатный CLI.
++
++### CHECK-01 — 2026-11-06T06:30:39+03:00; исполнитель: Codex; модель: GPT-6.
++
++Настроенный полный `verify PB-036` passed, inputs_unchanged=true: [отчёт](PB-036-evidence/work/verification/PB-036/98f4b77b93124d0c874aa4b576f19752/report.json). Self-check и preflight-regressions passed; unit-tests — 698 тестов OK за 1032 с при неизменном лимите 1200 с. Итоговые целевые 29 сценариев — [лог](PB-036-evidence/targeted-tests-final.log). До прогона выполнены `index --all`, `verify PB-036 --preflight`, `adopt . --force --apply`; `check --ready` входит в runner, `git diff --check` прошёл отдельно. Проверка структуры не подменяет поведение CLI; внешняя блокировка merge/release не заявляется.
++
++## Передача
++
++HANDOFF-01 — 2026-11-06T06:30:39+03:00; исполнитель: Codex; модель: GPT-6.
++
++Передаётся PB-036: локальный артефакт 0.2.0 и согласованные переходы из 0.0.2/0.0.3/0.1.0, init/enable-v2 и явный перевод карточки/плана с историей. Исходные записи: EXEC-01–03, CHECK-01. [Изменения, матрица и ограничения fixtures](PB-036-evidence/implementation.md), [целевой лог](PB-036-evidence/targeted-tests-final.log), полный свежий отчёт — CHECK-01. Ветка dev; исходные незакоммиченные изменения сохранены. Legacy verification и обязательные команды не ослаблены; self-project остаётся legacy до PB-037, публикация не выполнялась.
++
++Следующий шаг — независимая приёмка отдельной сессией либо инженером. Перед аудитом выполнить `verify PB-036 --audit-ready`; проверить bootstrap целевым CLI, отказ старого CLI на новом артефакте/project schema 2, сохранение схемы при update, history/ready/baseline при migrate-card, отсутствие coverage v2 из v1, прерывания/restore и сохранность данных. Самопроверка исполнителя не является независимым аудитом; последний критерий с независимой приёмкой остаётся открытым. Закрытие и переход к зависимой PB-037 — после штатной приёмки PB-036.
++
++## Аудит 2026-11-06T06:38:23+03:00; исполнитель: Codex; модель: GPT-6.
++
++Результат: accepted. Независимая сессия; замечаний к PB-036 нет. Все критерии карточки проверены, независимая приёмка выполнена. Свежесть передачи подтверждена `verify PB-036 --audit-ready`; независимо пройдены 27 сценариев установки/совместимости/restore и два дополнительных сценария нескольких обязательных legacy-команд и прерванной миграции карточки. Полный свежий отчёт исполнителя: 698 тестов OK; повтор полного suite не требовался. [Протокол, доказательства и ограничения](PB-036-evidence/work/verification/PB-036/audit-01/report.md). Служебный отказ из-за пересечения первого запуска с prepare-audit сохранён; повтор после завершения операции успешен. Пилот PB-037 и итоговый аудит блока не входят. Закрытие разрешено текущим поручением инженера, через штатный CLI после acceptance и dry-run.
+--- a/docs/plans/index.md
++++ b/docs/plans/index.md
+@@ -5,7 +5,7 @@
+ 
+ | Документ | Состояние | Обновлён | Задачи |
+ |---|---|---|---|
+-| [Внедрение соразмерных маршрутов, проверок и приёмки](proportional-workflow.md) | draft | 2026-10-23 | [PB-031](../archive/tasks/PB-031.md), [PB-032](../archive/tasks/PB-032.md), [PB-033](../archive/tasks/PB-033.md), [PB-034](../archive/tasks/PB-034.md), [PB-035](../archive/tasks/PB-035.md), [PB-036](../tasks/PB-036.md), [PB-037](../tasks/PB-037.md), [AUDIT-007](../tasks/AUDIT-007.md) |
++| [Внедрение соразмерных маршрутов, проверок и приёмки](proportional-workflow.md) | draft | 2026-10-23 | [PB-031](../archive/tasks/PB-031.md), [PB-032](../archive/tasks/PB-032.md), [PB-033](../archive/tasks/PB-033.md), [PB-034](../archive/tasks/PB-034.md), [PB-035](../archive/tasks/PB-035.md), [PB-036](../archive/tasks/PB-036.md), [PB-037](../tasks/PB-037.md), [AUDIT-007](../tasks/AUDIT-007.md) |
+ | [Переход к выборочным файловым операциям и хранению 15 операций](scoped-file-operations.md) | draft | 2026-10-26 | [PB-045](../archive/tasks/PB-045.md), [PB-046](../tasks/PB-046.md), [PB-047](../tasks/PB-047.md), [PB-048](../tasks/PB-048.md), [PB-049](../tasks/PB-049.md), [PB-050](../tasks/PB-050.md), [AUDIT-008](../tasks/AUDIT-008.md) |
+ 
+ ## Архив
+--- a/docs/plans/proportional-workflow.md
++++ b/docs/plans/proportional-workflow.md
+@@ -60,7 +60,7 @@
+ | 3 | [PB-033](../archive/tasks/PB-033.md) | PB-032 | Runner v2, ручные результаты, preflight и reuse |
+ | 4 | [PB-034](../archive/tasks/PB-034.md) | PB-033 | Согласованные переходы, передача, приёмка и закрытие |
+ | 5 | [PB-035](../archive/tasks/PB-035.md) | PB-034 | Быстрый маршрут, итерации и пользовательские правила/шаблоны |
+-| 6 | [PB-036](../tasks/PB-036.md) | PB-035 | Init/update, явное включение v2 и совместимость установок |
++| 6 | [PB-036](../archive/tasks/PB-036.md) | PB-035 | Init/update, явное включение v2 и совместимость установок |
+ | 7 | [PB-037](../tasks/PB-037.md) | PB-036 | Сквозной пилот, self-application и доказательства эффекта |
+ | Приёмка блока | [AUDIT-007](../tasks/AUDIT-007.md) | PB-031–PB-037 | Независимая приёмка всех требований и совместной работы |
+ 
+--- a/docs/tasks/index.md
++++ b/docs/tasks/index.md
+@@ -11,7 +11,6 @@
+ | AUDIT-007 | [AUDIT-007: Независимо принять соразмерные маршруты и проверки](AUDIT-007.md) | draft | P2 | — | 2026-10-23 03:34 | — | PB-031, PB-032, PB-033, PB-034, PB-035, PB-036, PB-037 |
+ | AUDIT-008 | [AUDIT-008: Независимо принять выборочные операции и ограниченную историю](AUDIT-008.md) | draft | P2 | — | 2026-10-26 17:56 | — | PB-045, PB-046, PB-047, PB-048, PB-049, PB-050 |
+ | PB-008 | [PB-008: Завершить самоприменение проверочного цикла](PB-008.md) | in_review | P2 | Devin / SWE-2 High | unknown | — | — |
+-| PB-036 | [PB-036: Подключить v2 к установке и безопасному обновлению](PB-036.md) | in_review | P2 | Codex / GPT-6 | 2026-10-23 03:34 | — | PB-035 |
+ | PB-037 | [PB-037: Проверить сквозные маршруты и выполнить пилот v2](PB-037.md) | draft | P2 | — | 2026-10-23 03:34 | — | PB-036 |
+ | PB-041 | [PB-041: Компактное чтение задач и внешние метаданные](PB-041.md) | in_review | P2 | Antigravity / Gemini 3.8 Flash (High) | 2026-10-25 00:23 | — | — |
+ | PB-046 | [PB-046: Применять документные операции с поздним backup без полной копии](PB-046.md) | in_review | P2 | Antigravity / Gemini 3.8 Flash (High) | 2026-10-26 17:56 | — | PB-045 |
+@@ -24,6 +23,7 @@
+ 
+ | ID | Задача | Статус | Приоритет | Исполнитель | Создана | Закрыта | Зависимости |
+ |---|---|---|---|---|---|---|---|
++| PB-036 | [PB-036: Подключить v2 к установке и безопасному обновлению](../archive/tasks/PB-036.md) | done | P2 | Codex / GPT-6 | 2026-10-23 03:34 | 2026-11-06 06:39 | PB-035 |
+ | PB-035 | [PB-035: Внедрить быстрый маршрут, итерации и пользовательские правила](../archive/tasks/PB-035.md) | done | P2 | Codex / GPT-6 | 2026-10-23 03:34 | 2026-11-06 05:49 | PB-034 |
+ | PB-034 | [PB-034: Согласовать передачу, приёмку и закрытие без лишних прогонов](../archive/tasks/PB-034.md) | done | P2 | Codex / GPT-6 | 2026-10-23 03:34 | 2026-11-05 19:01 | PB-033 |
+ | PB-033 | [PB-033: Добавить runner v2, ручные проверки и предварительную проверку](../archive/tasks/PB-033.md) | done | P2 | Antigravity / Gemini 3.8 Flash (High) | 2026-10-23 03:34 | 2026-10-29 19:30 | PB-032 |

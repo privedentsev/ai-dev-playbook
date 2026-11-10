@@ -1,0 +1,540 @@
+PB-051: материал 'closure-proof' зарегистрирован.
+OK: структура, ссылки и 61 карточки; каталог документов: 17 документов, 2 legacy. Поведение продукта не проверялось.
+OK: структура, ссылки и 61 карточки; каталог документов: 17 документов, 2 legacy. Поведение продукта не проверялось.
+PACKAGING: {"old": "work/verification/PB-051/audit-20261027/card-original.md", "new": "work/verification/PB-051/audit-20261027/card-original.txt", "unchanged_sha256": "sha256:5e5131b8405a2ac2d457c7ed9707e09e2bdd816c644d9713d3f59f80dcfb9403", "result": "{'status': 'completed', 'op_id': '20261027-101433-1708d49d', 'plan_id': 'pb051-snapshot-txt-5e5131b8405a2ac2', 'op_dir': 'work/lifecycle/20261027-101433-1708d49d'}"}
+План lc-a985b85578ad5a50 (lifecycle):
+Основание: playbook.py close PB-051
+Исполнитель: cli:privedentsev1 (cli)
+Действия:
+  close_task PB-051: docs/tasks/PB-051.md → docs/archive/tasks/PB-051.md (done)
+Переносы:
+  docs/tasks/PB-051-evidence/finder-fix → docs/archive/tasks/PB-051-evidence/finder-fix
+  docs/tasks/PB-051-evidence/finder-fix/preserved.json → docs/archive/tasks/PB-051-evidence/finder-fix/preserved.json
+  docs/tasks/PB-051-evidence/finder-fix/probe.log → docs/archive/tasks/PB-051-evidence/finder-fix/probe.log
+  docs/tasks/PB-051-evidence/finder-fix/probe.py → docs/archive/tasks/PB-051-evidence/finder-fix/probe.py
+  docs/tasks/PB-051-evidence/freshness-fixed-report.json → docs/archive/tasks/PB-051-evidence/freshness-fixed-report.json
+  docs/tasks/PB-051-evidence/freshness-fixed.log → docs/archive/tasks/PB-051-evidence/freshness-fixed.log
+  docs/tasks/PB-051-evidence/freshness-fixed.py → docs/archive/tasks/PB-051-evidence/freshness-fixed.py
+  docs/tasks/PB-051-evidence/recheck-tests.log → docs/archive/tasks/PB-051-evidence/recheck-tests.log
+  docs/tasks/PB-051.md → docs/archive/tasks/PB-051.md
+  docs/tasks/PB-051.meta.json → docs/archive/tasks/PB-051.meta.json
+  work/verification/PB-051/5c8c667b64754818a21f6e2a2c34e433 → docs/archive/tasks/PB-051-evidence/work/verification/PB-051/5c8c667b64754818a21f6e2a2c34e433
+  work/verification/PB-051/5c8c667b64754818a21f6e2a2c34e433/report.json → docs/archive/tasks/PB-051-evidence/work/verification/PB-051/5c8c667b64754818a21f6e2a2c34e433/report.json
+  work/verification/PB-051/5c8c667b64754818a21f6e2a2c34e433/self-check.stderr.log → docs/archive/tasks/PB-051-evidence/work/verification/PB-051/5c8c667b64754818a21f6e2a2c34e433/self-check.stderr.log
+  work/verification/PB-051/5c8c667b64754818a21f6e2a2c34e433/self-check.stdout.log → docs/archive/tasks/PB-051-evidence/work/verification/PB-051/5c8c667b64754818a21f6e2a2c34e433/self-check.stdout.log
+  work/verification/PB-051/5c8c667b64754818a21f6e2a2c34e433/unit-tests.stderr.log → docs/archive/tasks/PB-051-evidence/work/verification/PB-051/5c8c667b64754818a21f6e2a2c34e433/unit-tests.stderr.log
+  work/verification/PB-051/5c8c667b64754818a21f6e2a2c34e433/unit-tests.stdout.log → docs/archive/tasks/PB-051-evidence/work/verification/PB-051/5c8c667b64754818a21f6e2a2c34e433/unit-tests.stdout.log
+  work/verification/PB-051/audit-20261027 → docs/archive/tasks/PB-051-evidence/work/verification/PB-051/audit-20261027
+  work/verification/PB-051/audit-20261027/card-before.log → docs/archive/tasks/PB-051-evidence/work/verification/PB-051/audit-20261027/card-before.log
+  work/verification/PB-051/audit-20261027/card-change.diff → docs/archive/tasks/PB-051-evidence/work/verification/PB-051/audit-20261027/card-change.diff
+  work/verification/PB-051/audit-20261027/card-original.txt → docs/archive/tasks/PB-051-evidence/work/verification/PB-051/audit-20261027/card-original.txt
+  work/verification/PB-051/audit-20261027/check-before.log → docs/archive/tasks/PB-051-evidence/work/verification/PB-051/audit-20261027/check-before.log
+  work/verification/PB-051/audit-20261027/check-final.log → docs/archive/tasks/PB-051-evidence/work/verification/PB-051/audit-20261027/check-final.log
+  work/verification/PB-051/audit-20261027/content-check.json → docs/archive/tasks/PB-051-evidence/work/verification/PB-051/audit-20261027/content-check.json
+  work/verification/PB-051/audit-20261027/create-followup.log → docs/archive/tasks/PB-051-evidence/work/verification/PB-051/audit-20261027/create-followup.log
+  work/verification/PB-051/audit-20261027/diff-check-before.log → docs/archive/tasks/PB-051-evidence/work/verification/PB-051/audit-20261027/diff-check-before.log
+  work/verification/PB-051/audit-20261027/diff-check-final.log → docs/archive/tasks/PB-051-evidence/work/verification/PB-051/audit-20261027/diff-check-final.log
+  work/verification/PB-051/audit-20261027/finalize.py → docs/archive/tasks/PB-051-evidence/work/verification/PB-051/audit-20261027/finalize.py
+  work/verification/PB-051/audit-20261027/freshness-fixture-report.json → docs/archive/tasks/PB-051-evidence/work/verification/PB-051/audit-20261027/freshness-fixture-report.json
+  work/verification/PB-051/audit-20261027/freshness.log → docs/archive/tasks/PB-051-evidence/work/verification/PB-051/audit-20261027/freshness.log
+  work/verification/PB-051/audit-20261027/freshness_probe.py → docs/archive/tasks/PB-051-evidence/work/verification/PB-051/audit-20261027/freshness_probe.py
+  work/verification/PB-051/audit-20261027/input-diff.json → docs/archive/tasks/PB-051-evidence/work/verification/PB-051/audit-20261027/input-diff.json
+  work/verification/PB-051/audit-20261027/probes.log → docs/archive/tasks/PB-051-evidence/work/verification/PB-051/audit-20261027/probes.log
+  work/verification/PB-051/audit-20261027/probes.py → docs/archive/tasks/PB-051-evidence/work/verification/PB-051/audit-20261027/probes.py
+  work/verification/PB-051/audit-20261027/report.md → docs/archive/tasks/PB-051-evidence/work/verification/PB-051/audit-20261027/report.md
+  work/verification/PB-051/audit-20261027/snapshot-after.json → docs/archive/tasks/PB-051-evidence/work/verification/PB-051/audit-20261027/snapshot-after.json
+  work/verification/PB-051/audit-20261027/snapshot-before.json → docs/archive/tasks/PB-051-evidence/work/verification/PB-051/audit-20261027/snapshot-before.json
+  work/verification/PB-051/audit-20261027/tests.log → docs/archive/tasks/PB-051-evidence/work/verification/PB-051/audit-20261027/tests.log
+  work/verification/PB-051/audit-20261027/verify-dry-run.log → docs/archive/tasks/PB-051-evidence/work/verification/PB-051/audit-20261027/verify-dry-run.log
+  work/verification/PB-051/c34964a993774221bf3e6c4bbf225348 → docs/archive/tasks/PB-051-evidence/work/verification/PB-051/c34964a993774221bf3e6c4bbf225348
+  work/verification/PB-051/c34964a993774221bf3e6c4bbf225348/report.json → docs/archive/tasks/PB-051-evidence/work/verification/PB-051/c34964a993774221bf3e6c4bbf225348/report.json
+  work/verification/PB-051/c34964a993774221bf3e6c4bbf225348/self-check.stderr.log → docs/archive/tasks/PB-051-evidence/work/verification/PB-051/c34964a993774221bf3e6c4bbf225348/self-check.stderr.log
+  work/verification/PB-051/c34964a993774221bf3e6c4bbf225348/self-check.stdout.log → docs/archive/tasks/PB-051-evidence/work/verification/PB-051/c34964a993774221bf3e6c4bbf225348/self-check.stdout.log
+  work/verification/PB-051/c34964a993774221bf3e6c4bbf225348/unit-tests.stderr.log → docs/archive/tasks/PB-051-evidence/work/verification/PB-051/c34964a993774221bf3e6c4bbf225348/unit-tests.stderr.log
+  work/verification/PB-051/c34964a993774221bf3e6c4bbf225348/unit-tests.stdout.log → docs/archive/tasks/PB-051-evidence/work/verification/PB-051/c34964a993774221bf3e6c4bbf225348/unit-tests.stdout.log
+  work/verification/PB-051/caa4fbbcf01d4f9090dfe3dd4364c9ea → docs/archive/tasks/PB-051-evidence/work/verification/PB-051/caa4fbbcf01d4f9090dfe3dd4364c9ea
+  work/verification/PB-051/caa4fbbcf01d4f9090dfe3dd4364c9ea/report.json → docs/archive/tasks/PB-051-evidence/work/verification/PB-051/caa4fbbcf01d4f9090dfe3dd4364c9ea/report.json
+  work/verification/PB-051/caa4fbbcf01d4f9090dfe3dd4364c9ea/unit-tests.stderr.log → docs/archive/tasks/PB-051-evidence/work/verification/PB-051/caa4fbbcf01d4f9090dfe3dd4364c9ea/unit-tests.stderr.log
+  work/verification/PB-051/caa4fbbcf01d4f9090dfe3dd4364c9ea/unit-tests.stdout.log → docs/archive/tasks/PB-051-evidence/work/verification/PB-051/caa4fbbcf01d4f9090dfe3dd4364c9ea/unit-tests.stdout.log
+  work/verification/PB-051/closure-proof → docs/archive/tasks/PB-051-evidence/work/verification/PB-051/closure-proof
+  work/verification/PB-051/closure-proof/packaging.py → docs/archive/tasks/PB-051-evidence/work/verification/PB-051/closure-proof/packaging.py
+  work/verification/PB-051/closure-proof/probe-initial.log → docs/archive/tasks/PB-051-evidence/work/verification/PB-051/closure-proof/probe-initial.log
+  work/verification/PB-051/closure-proof/probe.log → docs/archive/tasks/PB-051-evidence/work/verification/PB-051/closure-proof/probe.log
+  work/verification/PB-051/reaudit-02 → docs/archive/tasks/PB-051-evidence/work/verification/PB-051/reaudit-02
+  work/verification/PB-051/reaudit-02/cli-results.json → docs/archive/tasks/PB-051-evidence/work/verification/PB-051/reaudit-02/cli-results.json
+  work/verification/PB-051/reaudit-02/diff-check-before.log → docs/archive/tasks/PB-051-evidence/work/verification/PB-051/reaudit-02/diff-check-before.log
+  work/verification/PB-051/reaudit-02/diff-check-final.log → docs/archive/tasks/PB-051-evidence/work/verification/PB-051/reaudit-02/diff-check-final.log
+  work/verification/PB-051/reaudit-02/finder-probe.log → docs/archive/tasks/PB-051-evidence/work/verification/PB-051/reaudit-02/finder-probe.log
+  work/verification/PB-051/reaudit-02/finder_probe.py → docs/archive/tasks/PB-051-evidence/work/verification/PB-051/reaudit-02/finder_probe.py
+  work/verification/PB-051/reaudit-02/freshness-fixture-report.json → docs/archive/tasks/PB-051-evidence/work/verification/PB-051/reaudit-02/freshness-fixture-report.json
+  work/verification/PB-051/reaudit-02/material-hashes-before.json → docs/archive/tasks/PB-051-evidence/work/verification/PB-051/reaudit-02/material-hashes-before.json
+  work/verification/PB-051/reaudit-02/pb041-state.json → docs/archive/tasks/PB-051-evidence/work/verification/PB-051/reaudit-02/pb041-state.json
+  work/verification/PB-051/reaudit-02/pb044-state.json → docs/archive/tasks/PB-051-evidence/work/verification/PB-051/reaudit-02/pb044-state.json
+  work/verification/PB-051/reaudit-02/probes.log → docs/archive/tasks/PB-051-evidence/work/verification/PB-051/reaudit-02/probes.log
+  work/verification/PB-051/reaudit-02/probes.py → docs/archive/tasks/PB-051-evidence/work/verification/PB-051/reaudit-02/probes.py
+  work/verification/PB-051/reaudit-02/report.md → docs/archive/tasks/PB-051-evidence/work/verification/PB-051/reaudit-02/report.md
+  work/verification/PB-051/reaudit-02/snapshot-after.json → docs/archive/tasks/PB-051-evidence/work/verification/PB-051/reaudit-02/snapshot-after.json
+  work/verification/PB-051/reaudit-02/snapshot-before.json → docs/archive/tasks/PB-051-evidence/work/verification/PB-051/reaudit-02/snapshot-before.json
+  work/verification/PB-051/reaudit-02/structure-before.log → docs/archive/tasks/PB-051-evidence/work/verification/PB-051/reaudit-02/structure-before.log
+  work/verification/PB-051/reaudit-02/structure-final.log → docs/archive/tasks/PB-051-evidence/work/verification/PB-051/reaudit-02/structure-final.log
+  work/verification/PB-051/reaudit-02/tests.log → docs/archive/tasks/PB-051-evidence/work/verification/PB-051/reaudit-02/tests.log
+  work/verification/PB-051/reaudit-03 → docs/archive/tasks/PB-051-evidence/work/verification/PB-051/reaudit-03
+  work/verification/PB-051/reaudit-03/changelog-after-close.txt → docs/archive/tasks/PB-051-evidence/work/verification/PB-051/reaudit-03/changelog-after-close.txt
+  work/verification/PB-051/reaudit-03/cli-results.json → docs/archive/tasks/PB-051-evidence/work/verification/PB-051/reaudit-03/cli-results.json
+  work/verification/PB-051/reaudit-03/diff-check-before.log → docs/archive/tasks/PB-051-evidence/work/verification/PB-051/reaudit-03/diff-check-before.log
+  work/verification/PB-051/reaudit-03/finder-fixed.log → docs/archive/tasks/PB-051-evidence/work/verification/PB-051/reaudit-03/finder-fixed.log
+  work/verification/PB-051/reaudit-03/finder_fixed_probe.py → docs/archive/tasks/PB-051-evidence/work/verification/PB-051/reaudit-03/finder_fixed_probe.py
+  work/verification/PB-051/reaudit-03/freshness-fixture-report.json → docs/archive/tasks/PB-051-evidence/work/verification/PB-051/reaudit-03/freshness-fixture-report.json
+  work/verification/PB-051/reaudit-03/material-hashes-before.json → docs/archive/tasks/PB-051-evidence/work/verification/PB-051/reaudit-03/material-hashes-before.json
+  work/verification/PB-051/reaudit-03/post_close_probe.py → docs/archive/tasks/PB-051-evidence/work/verification/PB-051/reaudit-03/post_close_probe.py
+  work/verification/PB-051/reaudit-03/probes-initial.log → docs/archive/tasks/PB-051-evidence/work/verification/PB-051/reaudit-03/probes-initial.log
+  work/verification/PB-051/reaudit-03/probes.log → docs/archive/tasks/PB-051-evidence/work/verification/PB-051/reaudit-03/probes.log
+  work/verification/PB-051/reaudit-03/probes.py → docs/archive/tasks/PB-051-evidence/work/verification/PB-051/reaudit-03/probes.py
+  work/verification/PB-051/reaudit-03/record_audit.py → docs/archive/tasks/PB-051-evidence/work/verification/PB-051/reaudit-03/record_audit.py
+  work/verification/PB-051/reaudit-03/report.md → docs/archive/tasks/PB-051-evidence/work/verification/PB-051/reaudit-03/report.md
+  work/verification/PB-051/reaudit-03/snapshot-after.json → docs/archive/tasks/PB-051-evidence/work/verification/PB-051/reaudit-03/snapshot-after.json
+  work/verification/PB-051/reaudit-03/snapshot-before.json → docs/archive/tasks/PB-051-evidence/work/verification/PB-051/reaudit-03/snapshot-before.json
+  work/verification/PB-051/reaudit-03/structure-before.log → docs/archive/tasks/PB-051-evidence/work/verification/PB-051/reaudit-03/structure-before.log
+  work/verification/PB-051/reaudit-03/tests.log → docs/archive/tasks/PB-051-evidence/work/verification/PB-051/reaudit-03/tests.log
+Удаляются каталоги:
+  docs/tasks/PB-051-evidence
+  docs/tasks/PB-051-evidence/finder-fix
+  work/verification/PB-051/5c8c667b64754818a21f6e2a2c34e433
+  work/verification/PB-051/audit-20261027
+  work/verification/PB-051/c34964a993774221bf3e6c4bbf225348
+  work/verification/PB-051/caa4fbbcf01d4f9090dfe3dd4364c9ea
+  work/verification/PB-051/closure-proof
+  work/verification/PB-051/reaudit-02
+  work/verification/PB-051/reaudit-03
+Записей: 84, удалений файлов: 80
+Diff записей (.md):
+--- /dev/null
++++ b/docs/archive/tasks/PB-051-evidence/work/verification/PB-051/audit-20261027/report.md
+@@ -0,0 +1,52 @@
++# PB-051 — независимый диагностический аудит
++
++## Аудит 2026-10-27T09:00:00+03:00; исполнитель: Codex; модель: GPT-6.
++
++Вердикт: **changes_requested**, задача не принята и не закрыта.
++Проверены требования AC-01/AC-02, результат выполнения, история самопроверок, предшествующая приёмка зависимости и возможность завершения жизненного цикла. Инженер сообщил модель исполнителя PB-051: GPT-6.1 Sol. Исторические записи сохранены с исходной атрибуцией.
++
++## Подтверждённый результат
++
++- VERSION, project.json и manifest согласованы на 0.1.0; совпали 38 хешей управляемых файлов, release_id и состав артефакта. Объявлены переходы с 0.0.2 и 0.0.3.
++- CHANGELOG содержит один Unreleased с целевой 0.1.0 без даты публикации. Отражены PB-020–PB-030, PB-038/PB-042, legacy/v2, совместимость и ручные действия. PB-041/PB-044 по текущим карточкам всё ещё без независимой приёмки, ограничение описано верно. Все три локальные ссылки существуют.
++- Отдельные subprocess-пробы: свежий init устанавливает 0.1.0; preview перехода 0.0.3 → 0.1.0 не пишет; plan --save/apply сохраняет пользовательскую настройку и все проектные файлы. 0.0.3 здесь — согласованная фикстура на текущем коде, не исторический CLI.
++- Независимый полный `python3 -m unittest discover -s tests -v`: **550 тестов, 332.510 s, FAILED (failures=1)**, exit_code=1. Прошли 549 тестов, включая подлинный артефакт/CLI 0.0.2 и сценарии PB-031; self-project pilot PB-029 упал на close PILOT-001 из-за ссылки на протокол повторного аудита PB-052 (A-03). Это аудиторский прогон, не финальная самопроверка/передача исполнителя PB-051.
++- `check --ready` до записи протокола: OK, 60 карточек. `git diff --check`: OK. Снимки объявленных входов плюс CHANGELOG совпали от начала отдельных проб до завершения полного прогона. Среда: macOS, Python 3.14.6.
++
++## Проверка предыдущих этапов
++
++PB-052 завершена и архивирована. Её AUDIT-01 выполнен GPT-6.1 Sol в отдельной сессии, содержит 550 тестов и отдельные пробы; явно оставляет собственные verify/HANDOFF PB-051 следующему этапу. Это приёмка исправлений PB-052, не PB-051. В контекст архивной PB-052 позже добавлена ссылка на повторный аудит GPT-6 от 08:43:55; этот аудит заявил 550/550, но его итоговая запись теперь ломает staged-проверку (A-03). Историческая приёмка реализации PB-052 не отменяется этим протоколом, однако зелёный результат нельзя переносить на нынешнее дерево. В PB-051 нет AUDIT/HANDOFF; CHECK-03 сообщает о положительной оценке в чате, но не содержит воспроизводимой самостоятельной независимой приёмки PB-051. Последний полный verify PB-051 failed; CHECK-05 также failed. Исходные шесть падений устранены, но полный прогон снова красный по другой причине.
++
++## A-01 — P2: PB-051 не прошла финальную самопроверку и передачу
++
++Критерии: AC-01, AC-02.
++Воспроизведение: `python3 ai-dev-playbook/scripts/playbook.py card show PB-051 --handoff`; `python3 ai-dev-playbook/scripts/playbook.py verify PB-051 --dry-run`.
++Факт: Status blocked, handoff_state/acceptance_state not_current, HANDOFF отсутствует; dry-run отказывает: «verify требует активную задачу ready/in_progress/in_review». Завершение PB-052 не завершило собственный цикл PB-051.
++Влияние: нет проверенного состояния и журнала, к которым можно привязать независимую приёмку и close.
++Критерий исправления: исполнитель завершает финальную подготовку, регистрирует материалы, готовит in_review/индекс, выполняет собственный passed verify с inputs_unchanged=true, добавляет новые CHECK/HANDOFF и регистрирует current-передачу. После этого — независимый повторный аудит, accept и close по уже данному поручению инженера.
++
++## A-02 — P2: проверка свежести не охватывает основной результат CHANGELOG
++
++Критерии: AC-01, AC-02.
++Источник: `ai-dev-playbook/project.json → verification.inputs` содержит AGENTS.md, README.md, ai-dev-playbook, docs, tests; корневой CHANGELOG.md отсутствует. Runner автоматически добавляет настройки и карточку, но не changelog.
++Воспроизведение: `python3 work/verification/PB-051/audit-20261027/freshness_probe.py`.
++Факт: на временном проекте с точным списком входов репозитория настоящий runner создал passed/inputs_unchanged=true; после изменения CHANGELOG `verification.inputs_fresh` вернул true и пустой diff. Дополнительная snapshot-проба дала тот же результат. Использован контролируемый passing-check, не полный verify PB-051.
++Влияние: файл, определяющий оба критерия PB-051, можно изменить после проверки без потери свежести отчёта. Тесты и наличие статуса passed не доказывают актуальность changelog.
++Критерий исправления: включить корневой CHANGELOG.md во входы проверки PB-051 (например, в существующий verification.inputs); отдельной пробой подтвердить, что изменение этого файла после успешного runner делает отчёт несвежим. Затем выполнить цикл A-01.
++
++## A-03 — P2: итог повторного аудита PB-052 нарушил staged-проверку
++
++Источник: docs/archive/tasks/PB-052.md:28, ссылка `../../../work/audits/PB-052-reaudit-02/report.md`.
++Воспроизведение: полный unittest discover, tests/test_pb029.py:757, close PILOT-001 на точной временной копии репозитория.
++Факт: закрытие отказывает с «битая или внешняя локальная ссылка» именно на этот файл. В исходном дереве файл существует и check --ready проходит. `_prepare_staged` в file_operations.py исключает корневой work и отдельно копирует только work/verification; work/audits в подготовленной копии отсутствует. Правила lifecycle также не разрешают work/audits как переносимый материал. Это не исходная ошибка переписывания ссылок PB-052, а последствия размещения нового аудиторского протокола после закрытия.
++Влияние: регрессия общего набора блокирует успешный verify PB-051; предыдущий PASS повторного аудита не подтверждает конечное состояние после записи его ссылки.
++Исправление вынесено в отдельную draft-карточку [PB-053](../../../../docs/tasks/PB-053.md). Критерий: сохранить протокол и доказательства в поддерживаемом месте без потери байтов/истории, исправить ссылку, подтвердить полный self-project pilot и общий набор именно после окончательной записи материалов. PB-051 получает зависимость PB-053. В ходе аудита проблема не исправлялась.
++
++## Материалы и границы
++
++- [Полный прогон](tests.log), [CLI-пробы](probes.log), [код проб](probes.py).
++- [Проба свежести](freshness.log), [код](freshness_probe.py), [отчёт временного runner](freshness-fixture-report.json).
++- [Содержательные проверки](content-check.json), [начальное состояние](card-before.log), [структура](check-before.log), [отказ verify](verify-dry-run.log).
++- [Снимок до](snapshot-before.json), [снимок после](snapshot-after.json).
++
++Формат v2 требует предшествующую HANDOFF для AUDIT-записи. Создавать фиктивную передачу аудитору нельзя; диагностический протокол хранится этим материалом и связан из CHECK-06/контекста карточки. Accepted-приёмка не регистрировалась. Реализация и конфигурация не исправлялись. Уточнена шапка модели по сообщению инженера; задача остаётся blocked из-за новой зависимости PB-053, добавлена диагностическая запись, история сохранена. В CHANGELOG актуализировано ограничение перед выпуском: новый полный прогон failed, повторная проверка нужна после PB-053 и закрытия A-01/A-02. Публикация/commit/push не выполнялись.
+--- /dev/null
++++ b/docs/archive/tasks/PB-051-evidence/work/verification/PB-051/reaudit-02/report.md
+@@ -0,0 +1,43 @@
++# PB-051 — повторный независимый аудит
++
++## Повторный аудит 2026-10-27T09:43:05+03:00; исполнитель: Codex; модель: GPT-6.
++
++Результат: **changes_requested**. Задача не принята и не закрыта. Проверена HANDOFF-01 в отдельной от исполнителя сессии; до начала аудита CLI показывал current.
++
++## Что подтверждено
++
++- AC-01/AC-02 по содержанию: VERSION/project.json/manifest согласованы на 0.1.0; 38 хешей и release_id совпали. Объявлены переходы с 0.0.2/0.0.3. Один Unreleased без даты выпуска; содержание, legacy/v2 и ограничения приёмки PB-041/PB-044 соответствуют текущим карточкам; локальные ссылки существуют.
++- A-01: собственный verify PB-051 5c8c667b64754818a21f6e2a2c34e433 passed, inputs_unchanged=true; новые CHECK-07/HANDOFF-01 зарегистрированы, исходный отчёт свежий. Это не отменяет новой ошибки независимого прогона на переданном состоянии.
++- A-02: настоящий runner с точным списком входов проекта включает CHANGELOG в snapshot. Без изменений inputs_fresh=true; после изменения только CHANGELOG — false с единственным отличием CHANGELOG.md; после восстановления — true.
++- A-03 устранён отдельно в закрытой PB-053; прежняя ошибка отсутствующего протокола work/audits в текущем прогоне не возникла.
++- CLI init устанавливает согласованную 0.1.0. Отдельный preview перехода 0.0.3 → 0.1.0 не пишет; apply сохраняет проектные файлы и пользовательскую настройку. 0.0.3 — согласованная фикстура на текущем коде; подлинный 0.0.2 проходит в общем наборе.
++- Объявленные входы и SHA-256 всех 34 файлов ранее зарегистрированных материалов не изменились во время аудиторских прогонов. Код и конфигурация не исправлялись.
++
++Независимый `python3 -m unittest discover -s tests -v`: **550 тестов за 291.295 s, FAILED (errors=1), exit_code=1**. Прошли 549 тестов. Падает test_self_project_copy_pilot до завершения полного цикла. `check --ready` до аудита прошёл для 61 карточки; `git diff --check` прошёл. Структурные проверки не подтверждают прохождение пилота.
++
++## A-04 — P2: служебный .DS_Store зарегистрирован как материал задачи
++
++Критерии: AC-01, AC-02.
++
++Источник: docs/tasks/PB-051.meta.json, материал finder-metadata, source work/verification/PB-051/.DS_Store, required=false, immutable=true. Файл существует в исходном дереве, но тест копии намеренно исключает .DS_Store (tests/test_pb029.py:635–643). Это штатное исключение служебного файла Finder.
++
++Воспроизведение:
++
++1. Полный unittest discover: tests/test_pb029.py:735 вызывает lifecycle.sync_criteria_command при сбросе вычисляемых галочек PB-051 на копии.
++2. lifecycle._task_material_catalog требует существование всех локальных материалов независимо от required; строка lifecycle.py:1949 отказывает на work/verification/PB-051/.DS_Store.
++3. Отдельная минимальная проба finder_probe.py на свежем временном проекте: материал с теми же флагами проходит при наличии файла, после его отсутствия получает тот же ValueError. Оригинальные файлы/метаданные не менялись.
++
++Факт ошибки: `ValueError: PB-051: материал отсутствует или не обычный файл/каталог: work/verification/PB-051/.DS_Store`.
++
++Влияние: переданное состояние не воспроизводит успешный полный набор, несмотря на свежесть отчёта исполнителя. После handoff критерии PB-051 отмечены [x], поэтому пилот входит в синхронизацию этой карточки и обнаруживает отсутствующий служебный материал. Самопроверка исполнителя до формирования итоговой передачи эту ветку не подтвердила.
++
++Критерий исправления: служебный файл Finder не должен быть зарегистрированным доказательством PB-051; исправить регистрацию без утраты настоящих исторических материалов. Подтвердить каталог/синхронизацию на копии с обычным исключением .DS_Store, полный прогон и пилот на итоговом состоянии с CHECK/HANDOFF. Не ослаблять исключение служебных файлов или проверку сохранности доказательств ради прохождения теста. Затем новая передача и отдельный повторный аудит.
++
++## Доказательства и границы
++
++- [Полный прогон](tests.log).
++- [Минимальное воспроизведение](finder-probe.log), [код](finder_probe.py).
++- [Независимые пробы версий/CLI/свежести](probes.log), [код](probes.py), [вывод CLI](cli-results.json), [временный runner](freshness-fixture-report.json).
++- [Снимок до](snapshot-before.json), [снимок после](snapshot-after.json), [хеши материалов](material-hashes-before.json), [структура](structure-before.log).
++
++Среда: macOS, Python 3.14.6. Ранее устранённые A-01/A-02 описаны во внешнем диагностическом протоколе до первой HANDOFF; их ID не подмешиваются в локальный список закрытых находок v2. Новая A-04 фиксируется в AUDIT-01 текущей передачи. Карточка возвращается в in_progress; changelog отражает обнаруженный блокер. Accepted-приёмка и close не выполняются, выпуск/commit/push не выполняются.
+--- /dev/null
++++ b/docs/archive/tasks/PB-051-evidence/work/verification/PB-051/reaudit-03/report.md
+@@ -0,0 +1,22 @@
++# PB-051 — повторный независимый аудит HANDOFF-02
++
++## Повторный аудит 2026-10-27T10:07:14+03:00; исполнитель: Codex; модель: GPT-6.
++
++Результат: **accepted**. Замечаний нет. A-04 закрыт после отдельного исправления EXEC-06, проверки CHECK-08 и актуальной HANDOFF-02. Исполнитель и независимый аудитор работали в разных сессиях; код и тесты в этом аудите не исправлялись.
++
++| Приёмка | Независимое подтверждение |
++|---|---|
++| AC-01 | VERSION/project.json/manifest равны 0.1.0; совпали 38 хешей и release_id. Переходы с 0.0.2/0.0.3 объявлены. Один Unreleased без даты публикации. CLI init устанавливает 0.1.0; preview/apply с 0.0.3 сохраняют проектные файлы и пользовательскую настройку. |
++| AC-02 | Содержание CHANGELOG сверено с принятыми карточками: блок документов/режимов PB-020–PB-029, руководство PB-030, PB-038, legacy/v2. Ограничения PB-041/PB-044 сохраняют различие реализации и независимой приёмки. Локальные ссылки существуют. |
++| A-04 | finder-metadata отсутствует, Finder-файлы не зарегистрированы. Все 50 исторических файлов из preserved.json сохранили SHA-256. Каталог на копии без .DS_Store проходит. Принудительно изменённые только в копии галочки действительно сброшены через sync с записью и staged/final checks; исходный текст копии восстановлен. |
++| Предыдущие A-01/A-02/A-03 | Собственный verify PB-051 c34964a993774221bf3e6c4bbf225348 passed и inputs_unchanged=true; HANDOFF-02 current. CHANGELOG входит в snapshot; реальный независимый runner теряет свежесть только по CHANGELOG после его изменения и восстанавливает её после возврата байтов. PB-053 done; прежняя staged-ссылка не ломает полный пилот. |
++
++Независимый полный `python3 -m unittest discover -s tests -v`: **550 тестов за 398.801 s, OK**. Включены подлинный CLI/артефакт 0.0.2, негативные пробы PB-031 и self-project pilot PB-029. Проверены 80 файлов кода/тестов/фикстур: байты совпадают с предыдущим независимым аудитом, защита доказательств и исключение служебных файлов не ослаблены.
++
++`check --ready` прошёл для 61 карточки, `git diff --check` прошёл. Все объявленные входы совпали до/после прогона; 58 файлов зарегистрированных материалов сохранили SHA-256. История failed-проверок и первого AUDIT-01 не переписывается. Галочки критериев до приёмки оставались сброшенными из-за открытой A-04; lifecycle accept закроет находку и синхронизирует их штатно.
++
++Доказательства: [полный прогон](tests.log), [проверка A-04](finder-fixed.log), [код A-04](finder_fixed_probe.py), [пробы версий/CLI/свежести](probes.log), [код](probes.py), [вывод CLI](cli-results.json), [контрольный runner](freshness-fixture-report.json), [снимок до](snapshot-before.json), [снимок после](snapshot-after.json), [хеши материалов](material-hashes-before.json), [структура](structure-before.log).
++
++По прямому поручению инженера после AUDIT-02/acceptance выполняются close --dry-run и реальный close. Затем из CHANGELOG удаляется только устаревший пункт ограничения PB-051: [итоговый текст](changelog-after-close.txt). После архивации передача/приёмка штатно historical; такая запись о завершении не меняет входы до приёмки. Последующая [проба](post_close_probe.py) проверяет сохранённые хеши, архивную пару и настоящий _prepare_staged с полным check --ready на конечном дереве.
++
++Границы: macOS, Python 3.14.6; 0.0.3 проверена согласованной фикстурой на текущем коде, 0.0.2 — подлинным историческим CLI. Первый запуск вспомогательного скрипта остановился на старой формулировке строки changelog ([журнал](probes-initial.log)); исправлен только поисковый префикс скрипта аудитора, итоговые пробы прошли. Исторические доказательства сохраняются побайтно, переносы фиксирует CLI companion. Unreleased без даты, приёмка PB-041/PB-044 и публикация выпуска остаются отдельными этапами. Commit/push/release не выполняются.
+--- /dev/null
++++ b/docs/archive/tasks/PB-051.md
+@@ -0,0 +1,261 @@
++# PB-051: Обновить версию комплекта и changelog до 0.1.0
++
++ID: PB-051
++Status: done
++Priority: P2
++Depends-On: PB-052, PB-053
++Executor: Codex
++Model: GPT-6.1 Sol
++Created: 2026-10-26T18:50:41+03:00
++Closed: 2026-10-27T10:14:54+03:00
++
++<!-- playbook-meta:external -->
++
++## Задача
++
++### Цель и границы
++
++Подготовить версию комплекта 0.1.0 и понятный пользователю CHANGELOG: значимые изменения, совместимость, действия при обновлении и ограничения перед выпуском. По уточнению инженера от 2026-10-26 записи остаются в Unreleased до будущего выпуска 0.1.0; внутренние детали и история перенумерации остаются в карточках. Без публикации релиза и Git-операций.
++
++### Контекст
++
++Зависимости [PB-052](PB-052.md) и [PB-053](PB-053.md) завершены и независимо приняты. Повторный аудит HANDOFF-01 подтвердил устранение прежних A-01/A-02, но выявил A-04: зарегистрированный служебный .DS_Store отсутствует в обычной копии проекта и ломает полный прогон. Регистрация finder-metadata исправлена по A-04; готовится новая проверка и передача, затем отдельный повторный аудит. История и зарегистрированные доказательства сохранены.
++
++Прямое поручение инженера от 2026-10-26; контракт ai-dev-playbook/rules/update.md.
++
++### Критерии приёмки
++
++- [x] AC-01: VERSION, project.json и manifest согласованы на 0.1.0; CHANGELOG содержит Unreleased с целевой версией 0.1.0 без даты будущего выпуска; переход с 0.0.3 объявлен.
++
++- [x] AC-02: CHANGELOG отражает реализованный блок документов и режимов PB-020–PB-029, руководство PB-030 и исправление PB-038; различает legacy/v2 и реализацию/приёмку PB-041/PB-044.
++
++### План
++
++1. Сохранить согласованную версию и декларацию переходов. Сократить changelog до пользовательских изменений, добавить совместимость, ручные действия и ограничения; сверить с текущими правилами и индексом. Self-manifest обновлять при изменении файлов комплекта.
++2. Зарегистрировать материалы, подготовить статус in_review и индекс до финального verify.
++3. После passed добавить CHECK с результатами и HANDOFF со ссылками на EXEC/CHECK, состоянием, следующим шагом и конкретным фокусом аудита; зарегистрировать передачу.
++
++### Ресурсы
++
++Python 3, локальные файлы; проверки по риску: версия, manifest, init и структура. Модель исполнителя GPT-6.1 Sol уточнена инженером 2026-10-27; историческая атрибуция записей сохранена.
++
++## Журнал
++
++### EXEC-01 — Выполнение
++
++Время: 2026-10-26T18:51:37+03:00
++Исполнитель: Codex
++Модель: неизвестна
++Изменения: VERSION/project.json/manifest согласованы на 0.1.0; manifest обновлён через adopt. Объявлен переход с 0.0.3, актуализирован переход с 0.0.2. Все записи CHANGELOG сохранены под 0.1.0 от 2026-10-26; разделы Changed объединены, статус PB-043 уточнён по архиву.
++
++Файлы: ai-dev-playbook/VERSION, ai-dev-playbook/project.json, ai-dev-playbook/manifest.json, ai-dev-playbook/updates.json, CHANGELOG.md, docs/tasks/PB-051.md, docs/tasks/PB-051.meta.json, docs/tasks/index.md.
++
++### CHECK-01 — Проверка
++
++Время: 2026-10-26T18:51:37+03:00
++Исполнитель: Codex
++Модель: неизвестна
++Результат: passed
++Среда: macOS, Python 3, локальный checkout.
++Доказательства: вывод команд текущей сессии; постоянные тесты tests/test_cli.py, ManifestTest.
++Критерии: AC-01
++Команда: PYTHONPATH=tests python3 -m unittest test_cli.ManifestTest.test_init_writes_manifest test_cli.ManifestTest.test_init_substitutes_version_from_VERSION -v
++Факт: 2 теста прошли; отдельные assertions подтвердили три версии, все SHA-256 manifest и единую дату CHANGELOG. index и check --ready прошли (59 карточек). git diff --check прошёл.
++Ограничения: полный verify и независимая приёмка не выполнялись; карточка остаётся in_progress. Commit/push/release не выполнялись.
++
++### EXEC-02 — Выполнение
++
++Время: 2026-10-26T19:01:04+03:00
++Исполнитель: Codex
++Модель: неизвестна
++Изменения: по поручению инженера расширены цель, план и AC-02 текущей карточки. В changelog добавлены PB-020–PB-030 и PB-038, обозначены незавершённая приёмка PB-041/PB-044 и отсутствие публикации; legacy-форматы аудита/исправлений отделены от v2. Историческая ошибочная метка 0.1.0 отделена от текущего согласованного номера. История EXEC-01/CHECK-01 сохранена.
++Файлы: CHANGELOG.md, docs/tasks/PB-051.md.
++
++### CHECK-02 — Проверка
++
++Время: 2026-10-26T19:01:04+03:00
++Исполнитель: Codex
++Модель: неизвестна
++Результат: passed
++Критерии: AC-01, AC-02
++Команда: python3 ai-dev-playbook/scripts/playbook.py check --ready; git diff --check; локальная проверка разделов и ссылок CHANGELOG средствами Python.
++Среда: macOS, Python 3, текущий checkout.
++Факт: check --ready прошёл для 59 карточек; версия/дата раздела 0.1.0 сохранены; Added/Changed/Fixed без повторов, локальные ссылки существуют. Полнота добавлений сверена с индексом задач, README и архивными карточками; статусы PB-041/PB-044 сверены с активным индексом. git diff --check прошёл.
++Доказательства: CHANGELOG.md; docs/tasks/index.md; ai-dev-playbook/README.md; docs/archive/tasks/PB-028.md, docs/archive/tasks/PB-030.md, docs/archive/tasks/PB-038.md; вывод команд текущей сессии.
++Ограничения: проверка документации; поведение CLI заново не тестировалось, полный verify и независимая приёмка PB-051 не выполнялись. Статус in_progress сохранён.
++
++### CHECK-03 — Проверка
++
++Время: 2026-10-26T19:09:11+03:00
++Исполнитель: Codex
++Модель: неизвестна
++Результат: failed
++Критерии: AC-01, AC-02
++Команда: python3 ai-dev-playbook/scripts/playbook.py verify PB-051
++Среда: macOS, Python 3, текущий checkout.
++Факт: по поручению инженера закрыть задачу подготовлены in_review и индекс, выполнен полный verify. 549 тестов за 349.251 s: failures=3, errors=3. Тест adopt ошибочной метки 0.1.0 конфликтует с новой действующей версией; PB-028 ожидает переход к 0.0.3; три пробы PB-031 получают рассогласование manifest/project.json. Отдельно пилот PB-029 обнаружил изменение docs/specs/workflow-and-document-lifecycle.md на своей копии (несовпадение SHA-256); причина требует диагностики. inputs_unchanged=true. Закрытие не выполнено; статус возвращён в in_progress.
++Доказательства: [Отчёт verify](PB-051-evidence/work/verification/PB-051/caa4fbbcf01d4f9090dfe3dd4364c9ea/report.json), [Полный журнал](PB-051-evidence/work/verification/PB-051/caa4fbbcf01d4f9090dfe3dd4364c9ea/unit-tests.stderr.log).
++Ограничения: инженер сообщил о выполненном аудите и положительной приёмке результата в чате; успешный технический gate закрытия отсутствует. Приёмка CLI не зарегистрирована. Необходимы актуализация тестовых ожиданий новой версии, свежий verify и закрытие по разрешению инженера. В этом этапе тесты не исправлялись.
++
++### EXEC-03 — Выполнение
++
++Время: 2026-10-26T19:14:57+03:00
++Исполнитель: Codex
++Модель: неизвестна
++Изменения: по новому поручению инженера переработан CHANGELOG для будущего выпуска 0.1.0: записи перенесены в Unreleased без даты публикации; внутренние детали и история перенумерации заменены пользовательскими изменениями. Добавлены совместимость, ручные действия при обновлении и ограничения выпуска. Цель, AC-01 и план уточнены; история сохранена.
++Файлы: CHANGELOG.md, docs/tasks/PB-051.md.
++
++### CHECK-04 — Проверка
++
++Время: 2026-10-26T19:14:57+03:00
++Исполнитель: Codex
++Модель: неизвестна
++Результат: passed
++Критерии: AC-02
++Команда: python3 ai-dev-playbook/scripts/playbook.py index; python3 ai-dev-playbook/scripts/playbook.py check --ready; git diff --check; локальная проверка Python разделов, ссылок и версий.
++Среда: macOS, Python 3, текущий checkout.
++Факт: index актуален; check --ready прошёл для 59 карточек; git diff --check прошёл. Проверены единственный раздел Unreleased, уникальность разделов, локальные ссылки и согласованность номера 0.1.0 в VERSION/project.json/manifest. Содержание сверено с rules/git.md, rules/update.md, updates.json и индексом задач.
++Доказательства: CHANGELOG.md; вывод команд текущей сессии.
++Ограничения: поведение CLI заново не проверялось. Уточнение по повторной проверке: сообщение о расхождении README было ошибкой вспомогательной проверки — digest сравнивался без обязательного префикса sha256:. При корректном сравнении все файлы manifest совпали. Первая попытка также имела ошибку повторного префикса пути. Файлы комплекта и manifest в этом этапе не менялись. Неуспешный полный verify CHECK-03 остаётся блокером завершения PB-051 и выпуска. Карточка остаётся in_progress, передача не зарегистрирована. Релиз и Git-операции не выполнялись.
++
++### CHECK-05 — Проверка
++
++Время: 2026-10-26T20:13:47+03:00
++Исполнитель: Codex
++Модель: GPT-6
++Результат: failed
++Критерии: AC-01, AC-02
++Команда: PYTHONPATH=tests python3 -m unittest test_cli.AdoptTest.test_adopt_erroneous_label_010 test_pb028.Pb028CompatibilityAndUpdateTest.test_real_002_artifact_update_with_custom_paths_and_evidence test_pb029.Pb029EndToEndRoutesTest.test_self_project_copy_pilot test_task_workflow_schema.AuditFindingsCoverageTest.test_PB_031_A1_symlink_in_scope_and_inputs_rejected test_task_workflow_schema.AuditFindingsCoverageTest.test_PB_031_A2_null_plan_and_null_inputs_rejected test_task_workflow_schema.AuditFindingsCoverageTest.test_PB_031_A4_v2_card_rejected_without_task_workflow_opt_in -v
++Среда: macOS, Python 3, текущий checkout; изменяющие сценарии выполнялись на временных проектах.
++Факт: все 6 проблем CHECK-03 воспроизведены: 3 failures, 3 errors, 181.297 s. Версии VERSION/project.json/manifest равны 0.1.0; все 38 SHA-256 manifest совпадают. Unreleased без даты выпуска, переход с 0.0.3, legacy/v2 и ограничения PB-041/PB-044 отражены в CHANGELOG. index актуален; check --ready проходит для 59 карточек; git diff --check проходит.
++Доказательства: [Полный журнал повторного прогона](PB-051-evidence/recheck-tests.log); tests/test_cli.py:724; tests/test_pb028.py:232; tests/test_pb029.py:775; tests/test_task_workflow_schema.py:563,677,739,750; ai-dev-playbook/project.json; CHANGELOG.md.
++Ограничения: полный набор 549 тестов повторно не запускался; успешного свежего verify нет. Реализация и тесты не исправлялись; это проверка перед аудитом, не независимая приёмка.
++
++Препятствия для передачи на аудит.
++1. Тест adopt использует 0.1.0 как ошибочную метку и требует разрешения конфликта VERSION, которого больше нет. Нужна актуализация сценария с сохранением проверки реального конфликта.
++2. PB-028 ожидает переход 0.0.2 → 0.0.3 вместо действующего 0.0.2 → 0.1.0; тест останавливается до проверки apply. Нужны актуальные ожидания и прохождение всего сценария обновления.
++3. Три негативные пробы PB-031 используют project.json с 0.0.3 при manifest установленного комплекта 0.1.0. Они падают на config до целевых проверок symlink, null и opt-in; нужно согласовать тестовую конфигурацию и подтвердить целевые отказы.
++4. Пилот PB-029 повторно нарушает побайтовую сохранность docs/specs/workflow-and-document-lifecycle.md на копии проекта. Причина в этой проверке не установлена; требуется диагностика и устранение причины, а не отключение проверки сохранности.
++5. После исправлений нужны подготовка in_review/индекса, свежий успешный verify с inputs_unchanged=true и новая CHECK, покрывающая оба критерия. CHECK-04 не заменяет failed полного прогона.
++6. Нет самостоятельной HANDOFF и её регистрации CLI: card show --handoff сообщает not_current. После passed нужны HANDOFF со связями EXEC/CHECK и фокусом аудита, lifecycle handoff и проверка current. Журнал повторного прогона зарегистрирован как обязательный неизменяемый материал.
++
++Незавершённая приёмка PB-041/PB-044 — объявленное ограничение выпуска, не зависимость PB-051 и не самостоятельный запрет её аудита. Отсутствие acceptance ожидаемо до аудита; закрытие сейчас не выполняется.
++
++### EXEC-04 — Выполнение
++
++Время: 2026-10-26T23:47:22+03:00
++Исполнитель: Codex
++Модель: GPT-6
++Изменения: по поручению инженера вся корректирующая работа выделена в PB-052: устойчивость тестов adopt/PB-028/PB-031, диагностика и устранение изменения документа PB-029, успешный полный verify и передача PB-052. PB-051 заблокирована зависимостью PB-052; исходная цель версии/CHANGELOG, история и доказательства сохранены. Собственные финальные verify и HANDOFF PB-051 выполняются после завершения зависимости. Реализация исправлений не начиналась.
++Файлы: docs/tasks/PB-052.md, docs/tasks/PB-052.meta.json, docs/tasks/PB-051.md, docs/tasks/index.md.
++
++### CHECK-06 — Проверка
++
++Время: 2026-10-27T09:00:00+03:00
++Исполнитель: Codex
++Модель: GPT-6
++Результат: failed
++Критерии: AC-01, AC-02
++Команда: python3 -m unittest discover -s tests -v; python3 work/verification/PB-051/audit-20261027/probes.py; python3 work/verification/PB-051/audit-20261027/freshness_probe.py
++Среда: macOS, Python 3.14.6; независимая сессия, изменяющие пробы только во временных проектах.
++Факт: 550 тестов за 332.510 s — FAILED (failures=1), 549 прошли; self-project pilot PB-029 упал на close PILOT-001 из-за ссылки в PB-052 на отсутствующий в staged-копии work/audits/PB-052-reaudit-02/report.md. Этот новый блокер A-03 вынесен в PB-053. Версии/38 хешей, init, update с 0.0.3 и сохранность файлов подтверждены. A-01/A-02: нет собственной актуальной передачи, изменение CHANGELOG после passed-runner не делает отчёт несвежим. Подробности и критерии исправления сохранены в протоколе.
++Доказательства: [Диагностический аудит](PB-051-evidence/work/verification/PB-051/audit-20261027/report.md), [полный прогон](PB-051-evidence/work/verification/PB-051/audit-20261027/tests.log), [проба свежести](PB-051-evidence/work/verification/PB-051/audit-20261027/freshness.log).
++Ограничения: это независимая диагностика до HANDOFF; AUDIT v2/accepted без предшествующей передачи не создавались. PB-052 принята отдельно. Текущие тесты не заменяют финальные verify/CHECK/HANDOFF исполнителя и повторный аудит PB-051. Код и настройки не исправлялись; ограничение CHANGELOG актуализировано по результату аудита.
++
++### EXEC-05 — Выполнение
++
++Время: 2026-10-27T09:24:48+03:00
++Исполнитель: Codex
++Модель: GPT-6
++Изменения: по поручению инженера устранён A-02 диагностического аудита: CHANGELOG.md добавлен в verification.inputs текущего проекта. Проба с точным списком входов подтверждает passed временного runner, наличие CHANGELOG в snapshot и потерю свежести после его изменения. Зависимости PB-052/PB-053 завершены, PB-051 возобновлена; контекст и ограничение CHANGELOG актуализированы без заявления о приёмке. История CHECK-03/CHECK-06 и исходные immutable-материалы сохранены. Финальные входы подготовлены к собственному verify PB-051 по A-01. Self-manifest актуализирован через adopt; управляемый состав и release_id не изменились.
++Файлы: ai-dev-playbook/project.json, ai-dev-playbook/manifest.json, CHANGELOG.md, docs/tasks/PB-051.md, docs/tasks/PB-051.meta.json, docs/tasks/PB-051-evidence/freshness-fixed.py, docs/tasks/PB-051-evidence/freshness-fixed.log, docs/tasks/PB-051-evidence/freshness-fixed-report.json, docs/tasks/index.md.
++
++### CHECK-07 — Проверка
++
++Время: 2026-10-27T09:31:43+03:00
++Исполнитель: Codex
++Модель: GPT-6
++Результат: passed
++Критерии: AC-01, AC-02
++Команда: python3 ai-dev-playbook/scripts/playbook.py verify PB-051; python3 docs/tasks/PB-051-evidence/freshness-fixed.py; локальные assertions Python версий и SHA-256 manifest.
++Среда: macOS, Python 3, текущий checkout; проба свежести на временном проекте.
++Факт: собственный verify PB-051 passed, 550 тестов за 369.693 s; self-check passed, inputs_unchanged=true. CHANGELOG.md включён в snapshot_after. Контрольная проба подтверждает inputs_fresh=false с единственной разницей CHANGELOG.md после его изменения. VERSION/project.json/manifest согласованы на 0.1.0, все 38 хешей совпадают; Unreleased один, переход с 0.0.3 объявлен. Содержание CHANGELOG сохраняет режимы/документы, руководство, исправления, legacy/v2 и ограничения приёмки PB-041/PB-044; A-03 устранён завершённой PB-053. index/check --ready и git diff --check прошли до финального verify.
++Доказательства: [Отчёт финального verify](PB-051-evidence/work/verification/PB-051/5c8c667b64754818a21f6e2a2c34e433/report.json), [Полный журнал](PB-051-evidence/work/verification/PB-051/5c8c667b64754818a21f6e2a2c34e433/unit-tests.stderr.log), [Проба свежести](PB-051-evidence/freshness-fixed.py), [Результат пробы](PB-051-evidence/freshness-fixed.log), [Контрольный отчёт](PB-051-evidence/freshness-fixed-report.json).
++Ограничения: это самопроверка исполнителя; независимый повторный аудит A-01/A-02 и приёмка PB-051 не выполнялись. Релиз не опубликован; commit/push/close не выполнялись.
++
++### HANDOFF-01 — Передача
++
++Время: 2026-10-27T09:31:43+03:00
++Исполнитель: Codex
++Модель: GPT-6
++Выполнение: EXEC-01, EXEC-02, EXEC-03, EXEC-04, EXEC-05
++Проверки: CHECK-07
++Состояние: in_review; зависимости PB-052/PB-053 done; собственный полный verify passed, inputs_unchanged=true. Материалы зарегистрированы; CHANGELOG входит в контроль свежести. Следующий шаг — отдельный независимый повторный аудит PB-051 по диагностическим A-01/A-02, затем приёмка/закрытие по полномочиям инженера.
++Фокус аудита: проверить current собственной передачи PB-051, охват CHANGELOG в снимках и отказ свежести после его изменения на временном проекте; версии/manifest/переходы 0.0.2 и 0.0.3; отсутствие даты выпуска в Unreleased; точность различий реализации и приёмки PB-041/PB-044. Исторические failed-прогоны и независимая диагностика сохранены без переписывания.
++
++### AUDIT-01 — Аудит
++
++Время: 2026-10-27T09:43:05+03:00
++Исполнитель: Codex
++Модель: GPT-6
++Передача: HANDOFF-01
++Результат: changes_requested
++Критерии: AC-01, AC-02
++Независимо проверено: исходная передача current и собственный verify свежий; A-01/A-02 диагностического протокола устранены, A-03 исправлен в PB-053. Отдельные пробы подтвердили CHANGELOG в snapshot, потерю свежести при его изменении, версии/38 хешей, init и update с 0.0.3. Полный независимый прогон: 550 тестов за 291.295 s, errors=1; self-project pilot падает на отсутствующем .DS_Store в материалах PB-051. Причина воспроизведена минимальной пробой; входы и 34 исторических файла доказательств во время прогонов не менялись.
++Доказательства: [Повторный аудит](PB-051-evidence/work/verification/PB-051/reaudit-02/report.md), [полный прогон](PB-051-evidence/work/verification/PB-051/reaudit-02/tests.log), [минимальная проба](PB-051-evidence/work/verification/PB-051/reaudit-02/finder-probe.log), [остальные пробы](PB-051-evidence/work/verification/PB-051/reaudit-02/probes.log).
++Ограничения: отдельная сессия, macOS/Python 3; реализация не исправлялась. После новой находки задача возвращена в in_progress; accepted-приёмка и закрытие не выполнялись. Прежние A-01/A-02 находятся во внешнем протоколе, поэтому не перечислены как локальные ID закрытых находок.
++
++#### A-04 — Замечание
++
++Серьёзность: P2
++Критерии: AC-01, AC-02
++Проблема: служебный файл Finder зарегистрирован как локальный материал finder-metadata; обычная копия проекта его исключает, но синхронизация критериев требует его наличия.
++Воспроизведение: python3 -m unittest discover -s tests -v; отдельная проба python3 work/verification/PB-051/reaudit-02/finder_probe.py. См. tests/test_pb029.py:735 и lifecycle._task_material_catalog.
++Факт: ValueError при синхронизации PB-051 на копии — материал work/verification/PB-051/.DS_Store отсутствует; required=false не отменяет проверку существования. Прошли 549 из 550 тестов.
++Влияние: полный набор не проходит на итоговом переданном состоянии; свежий verify исполнителя не подтверждает эту ветку после выставления галочек HANDOFF.
++Критерий исправления: исключить служебный Finder-файл из зарегистрированных доказательств без потери настоящих исторических материалов; подтвердить каталог/синхронизацию и пилот на обычной копии, полный прогон и новую передачу с итоговыми CHECK/HANDOFF. Не ослаблять проверку сохранности или исключение .DS_Store ради зелёного теста; затем отдельный повторный аудит.
++
++### EXEC-06 — Исправление
++
++Время: 2026-10-27T09:47:15+03:00
++Исполнитель: Codex
++Модель: GPT-6
++Замечания: A-04
++Изменения: по A-04 удалена только ошибочная регистрация finder-metadata из materials; служебный .DS_Store вынесен во временный каталог за пределами материалов задачи. Это метаданные Finder, а не доказательство. required=false не отменяет проверку существования зарегистрированного локального материала; контроль сохранности и исключение .DS_Store при копировании не менялись. Сохранены побайтно все настоящие зарегистрированные материалы; их исходные SHA-256 записаны для контрольной пробы.
++Файлы: docs/tasks/PB-051.meta.json, docs/tasks/PB-051.md, docs/tasks/PB-051-evidence/finder-fix/.
++
++### CHECK-08 — Проверка
++
++Время: 2026-10-27T09:57:37+03:00
++Исполнитель: Codex
++Модель: GPT-6
++Результат: passed
++Критерии: AC-01, AC-02
++Команда: python3 docs/tasks/PB-051-evidence/finder-fix/probe.py; python3 ai-dev-playbook/scripts/playbook.py index; python3 ai-dev-playbook/scripts/playbook.py check --ready; python3 ai-dev-playbook/scripts/playbook.py verify PB-051; git diff --check.
++Среда: macOS, Python 3; каталог/синхронизация на временной обычной копии проекта без .DS_Store.
++Факт: A-04 исправлен: finder-metadata отсутствует в materials; каталог и явная синхронизация PB-051 на копии проходят. Все 50 настоящих исторических файлов доказательств сохранили SHA-256. Финальный verify passed: 550 тестов за 393.927 s, включая self-project copy pilot PB-029; self-check passed; inputs_unchanged=true. index/check --ready и git diff --check прошли. Код CLI, проверки сохранности и исключение служебных файлов не менялись.
++Доказательства: [Проба](PB-051-evidence/finder-fix/probe.py), [Результат пробы](PB-051-evidence/finder-fix/probe.log), [Исходные хеши](PB-051-evidence/finder-fix/preserved.json), [Отчёт verify](PB-051-evidence/work/verification/PB-051/c34964a993774221bf3e6c4bbf225348/report.json), [Полный журнал](PB-051-evidence/work/verification/PB-051/c34964a993774221bf3e6c4bbf225348/unit-tests.stderr.log).
++Ограничения: самопроверка исполнителя; A-04 должен закрыть независимый повторный аудит. Приёмка, закрытие, публикация и Git-операции не выполнялись.
++
++### HANDOFF-02 — Передача
++
++Время: 2026-10-27T09:57:37+03:00
++Исполнитель: Codex
++Модель: GPT-6
++Выполнение: EXEC-01, EXEC-02, EXEC-03, EXEC-04, EXEC-05, EXEC-06
++Проверки: CHECK-08
++Состояние: in_review; PB-052/PB-053 done; версия/CHANGELOG подготовлены, A-04 исправлен, полный verify passed и inputs_unchanged=true. Исторические доказательства сохранены. Следующий шаг — отдельный независимый повторный аудит A-04 и AC-01/AC-02, затем приёмка и закрытие при успехе.
++Фокус аудита: актуальность HANDOFF-02; отсутствие finder-metadata в регистрации; сохранность 50 исторических файлов по preserved.json; каталог и явная синхронизация на обычной копии без .DS_Store, полный пилот PB-029. Проверить версию 0.1.0 и manifest, CHANGELOG в snapshot и Unreleased без даты публикации, переход с 0.0.3 и ограничения приёмки PB-041/PB-044. Закрытие A-04 и принятие результата выполняет независимый аудитор; контроль существования материалов и исключение .DS_Store не ослаблялись.
++
++### AUDIT-02 — Аудит
++
++Время: 2026-10-27T10:07:14+03:00
++Исполнитель: Codex
++Модель: GPT-6
++Передача: HANDOFF-02
++Результат: accepted
++Критерии: AC-01, AC-02
++Закрытые замечания: A-04
++Независимо проверено: отдельная сессия; 550 тестов за 398.801 s — OK, включая self-project pilot PB-029 и подлинное обновление с 0.0.2. finder-metadata отсутствует; сохранены 50 исходных доказательств; каталог и принудительная синхронизация с записью на копии без .DS_Store проходят staged/final checks. 80 файлов кода/тестов/фикстур не менялись. Пробы подтвердили версии/38 хешей, init/update с 0.0.3, CHANGELOG в snapshot и потерю свежести при его изменении. HANDOFF-02 current, исходный verify свежий; входы и 58 зарегистрированных файлов материалов не менялись. check --ready/git diff --check успешны. Замечаний нет.
++Доказательства: [Повторный аудит](PB-051-evidence/work/verification/PB-051/reaudit-03/report.md), [полный прогон](PB-051-evidence/work/verification/PB-051/reaudit-03/tests.log), [A-04](PB-051-evidence/work/verification/PB-051/reaudit-03/finder-fixed.log), [остальные пробы](PB-051-evidence/work/verification/PB-051/reaudit-03/probes.log).
++Ограничения: macOS/Python 3; 0.0.3 — согласованная фикстура, 0.0.2 — подлинный исторический CLI. После приёмки — close --dry-run/close по поручению инженера; затем удаление только устаревшего ограничения PB-051 из CHANGELOG и проверка конечного staged-дерева. Приёмка PB-041/PB-044 и публикация выпуска остаются отдельными этапами.
+--- a/docs/archive/tasks/PB-052.md
++++ b/docs/archive/tasks/PB-052.md
+@@ -21,7 +21,7 @@
+ 
+ ### Контекст
+ 
+-Инженер поручил выделить всю корректирующую работу в PB-052. Исходные факты и история остаются в [PB-051, CHECK-03/CHECK-05](../../tasks/PB-051.md); [лог шести воспроизведений](../../tasks/PB-051-evidence/recheck-tests.log) принадлежит PB-051 и здесь используется как ссылка, без переноса или дублирования.
++Инженер поручил выделить всю корректирующую работу в PB-052. Исходные факты и история остаются в [PB-051, CHECK-03/CHECK-05](PB-051.md); [лог шести воспроизведений](PB-051-evidence/recheck-tests.log) принадлежит PB-051 и здесь используется как ссылка, без переноса или дублирования.
+ 
+ Три failures и три errors воспроизведены за 181.297 s. Версии текущего комплекта и все 38 хешей manifest согласованы; структурная проверка проходит. Закрытые задачи не стали открытыми: падают оставшиеся регрессионные тесты общего набора.
+ 
+--- a/docs/archive/tasks/PB-053.md
++++ b/docs/archive/tasks/PB-053.md
+@@ -19,7 +19,7 @@
+ 
+ ### Контекст
+ 
+-Выявлено при независимом [аудите PB-051, A-03](../../../work/verification/PB-051/audit-20261027/report.md). В [архивную PB-052](PB-052.md) после закрытия добавлена ссылка на work/audits/PB-052-reaudit-02/report.md. В исходном дереве check --ready проходит, но work/audits не переносится в staged: file_operations._prepare_staged отдельно копирует только work/verification. Полный прогон 2026-10-27: 550 тестов, 332.510 s, failures=1; test_self_project_copy_pilot падает на close PILOT-001. Это новый блокер PB-051, исходные исправления PB-052 остаются принятыми.
++Выявлено при независимом [аудите PB-051, A-03](PB-051-evidence/work/verification/PB-051/audit-20261027/report.md). В [архивную PB-052](PB-052.md) после закрытия добавлена ссылка на work/audits/PB-052-reaudit-02/report.md. В исходном дереве check --ready проходит, но work/audits не переносится в staged: file_operations._prepare_staged отдельно копирует только work/verification. Полный прогон 2026-10-27: 550 тестов, 332.510 s, failures=1; test_self_project_copy_pilot падает на close PILOT-001. Это новый блокер PB-051, исходные исправления PB-052 остаются принятыми.
+ 
+ ### Критерии приёмки
+ 
+--- a/docs/tasks/index.md
++++ b/docs/tasks/index.md
+@@ -26,12 +26,12 @@
+ | PB-048 | [PB-048: Перевести обновление комплекта на выборочную подготовку](PB-048.md) | draft | P2 | — | 2026-10-26 17:56 | — | PB-047 |
+ | PB-049 | [PB-049: Очищать завершённые операции и разрешать конфликты](PB-049.md) | draft | P2 | — | 2026-10-26 17:56 | — | PB-047, PB-048 |
+ | PB-050 | [PB-050: Проверить сквозной переход и описать новый контракт](PB-050.md) | draft | P2 | — | 2026-10-26 17:56 | — | PB-049 |
+-| PB-051 | [PB-051: Обновить версию комплекта и changelog до 0.1.0](PB-051.md) | in_review | P2 | Codex / GPT-6.1 Sol | 2026-10-26 18:50 | — | PB-052, PB-053 |
+ 
+ ## Архив
+ 
+ | ID | Задача | Статус | Приоритет | Исполнитель | Создана | Закрыта | Зависимости |
+ |---|---|---|---|---|---|---|---|
++| PB-051 | [PB-051: Обновить версию комплекта и changelog до 0.1.0](../archive/tasks/PB-051.md) | done | P2 | Codex / GPT-6.1 Sol | 2026-10-26 18:50 | 2026-10-27 10:14 | PB-052, PB-053 |
+ | PB-053 | [PB-053: Сохранить доступность протокола повторного аудита PB-052 в staged-проверках](../archive/tasks/PB-053.md) | done | P2 | Codex / GPT-6 | 2026-10-27 08:58 | 2026-10-27 09:19 | — |
+ | PB-052 | [PB-052: Восстановить проверки после смены версии комплекта](../archive/tasks/PB-052.md) | done | P2 | Codex / GPT-6 | 2026-10-26 23:46 | 2026-10-27 08:33 | — |
+ | PB-042 | [PB-042: Повторно обновлять индекс после возврата к прежнему состоянию](../archive/tasks/PB-042.md) | done | P2 | Codex / GPT-6.1 Sol | 2026-10-25 07:57 | 2026-10-26 08:30 | — |
+PB-051: done. Карточка в архиве, индексы и ссылки обновлены. План: work/lifecycle/plans/lc-3b47b7d20e29e3e6.json. Операция: work/lifecycle/20261027-101528-25b0f197
+OK: структура, ссылки и 61 карточки; каталог документов: 17 документов, 2 legacy. Поведение продукта не проверялось.

@@ -1,0 +1,25 @@
+A-05 PASS rejection: **/test_payments.py typed_input= False
+A-05 PASS rejection: tests/test_payments.p? typed_input= False
+A-05 PASS rejection: tests/test_payments.py typed_input= False
+A-05 PASS rejection: */test_payments.py typed_input= False
+A-05 PASS rejection: **/test_payments.[p]y typed_input= False
+A-05 PASS rejection: **/test_payments.py typed_input= True
+A-05 PASS rejection: tests/test_payments.p? typed_input= True
+A-05 PASS rejection: tests/test_payments.py typed_input= True
+A-05 PASS rejection: */test_payments.py typed_input= True
+A-05 PASS rejection: **/test_payments.[p]y typed_input= True
+A-05 PASS permitted selective exclusion: tests/*.log
+A-05 PASS permitted selective exclusion: src/payments/*.py
+A-05 PASS permitted selective exclusion: **/fixtures.bin
+A-06 PASS new entry: skip True weakening
+A-06 PASS new entry: skip False extension
+A-06 PASS new entry: skip None extension
+A-06 PASS new entry: expected_failure True weakening
+A-06 PASS new entry: expected_failure False extension
+A-06 PASS new entry: expected_failure None extension
+A-06 PASS mixed extension and two allowances => weakening
+Regression A-01 PASS
+Regression A-02 PASS
+Regression A-03 PASS
+Regression A-04 PASS
+Independent probes: ALL PASSED

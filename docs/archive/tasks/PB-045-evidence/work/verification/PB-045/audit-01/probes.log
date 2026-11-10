@@ -1,0 +1,123 @@
+test_explicit_file_to_directory_with_child_matches_oracle (__main__.Probe.test_explicit_file_to_directory_with_child_matches_oracle) ... ERROR
+test_explicit_file_to_empty_directory_matches_oracle (__main__.Probe.test_explicit_file_to_empty_directory_matches_oracle) ... ERROR
+test_live_parent_symlink_and_payload_hardlink_rejected (__main__.Probe.test_live_parent_symlink_and_payload_hardlink_rejected) ... ok
+test_non_directory_ancestor_is_an_absent_child (__main__.Probe.test_non_directory_ancestor_is_an_absent_child) ... ERROR
+test_obsolete_child_is_not_valid_link_below_future_file (__main__.Probe.test_obsolete_child_is_not_valid_link_below_future_file) ... FAIL
+test_overlay_matches_independent_physical_tree (__main__.Probe.test_overlay_matches_independent_physical_tree) ... ok
+test_payload_reads_are_bounded_and_no_live_links (__main__.Probe.test_payload_reads_are_bounded_and_no_live_links) ... ok
+test_read_set_binds_actual_stream_and_new_absence (__main__.Probe.test_read_set_binds_actual_stream_and_new_absence) ... ok
+test_read_set_observes_document_collection_changes (__main__.Probe.test_read_set_observes_document_collection_changes) ... ok
+test_symlink_staging_ancestor_rejected_before_write (__main__.Probe.test_symlink_staging_ancestor_rejected_before_write) ... FAIL
+test_symlink_staging_ancestor_rejected_by_view (__main__.Probe.test_symlink_staging_ancestor_rejected_by_view) ... FAIL
+test_symlink_staging_root_rejected_before_write (__main__.Probe.test_symlink_staging_root_rejected_before_write) ... FAIL
+test_unannounced_write_over_directory_rejected (__main__.Probe.test_unannounced_write_over_directory_rejected) ... FAIL
+
+======================================================================
+ERROR: test_explicit_file_to_directory_with_child_matches_oracle (__main__.Probe.test_explicit_file_to_directory_with_child_matches_oracle)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/private/tmp/pb045_independent_probe.py", line 45, in test_explicit_file_to_directory_with_child_matches_oracle
+    self.assertEqual({str(p.relative_to(v.path)):p.read_bytes() if p.is_file() else None for p in v.path.rglob('*')},{'x':None,'x/new':b'new'})
+                                                                                                  ~~~~~~~~~~~~^^^^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/ai-dev-playbook/scripts/project_view.py", line 336, in rglob
+    yield from child.rglob(pattern)
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/ai-dev-playbook/scripts/project_view.py", line 332, in rglob
+    for child in self.iterdir():
+                 ~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/ai-dev-playbook/scripts/project_view.py", line 314, in iterdir
+    members = self.view.members(self.rel)
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/ai-dev-playbook/scripts/project_view.py", line 198, in members
+    original = _members(live)
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/ai-dev-playbook/scripts/project_view.py", line 77, in _members
+    raise ValueError(f'not an ordinary collection: {path}')
+ValueError: not an ordinary collection: /private/tmp/tmpd5_5rnc2/root/x
+
+======================================================================
+ERROR: test_explicit_file_to_empty_directory_matches_oracle (__main__.Probe.test_explicit_file_to_empty_directory_matches_oracle)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/private/tmp/pb045_independent_probe.py", line 41, in test_explicit_file_to_empty_directory_matches_oracle
+    self.assertTrue((v.path/'x').is_dir());self.assertEqual(list((v.path/'x').iterdir()),[])
+                                                            ~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/ai-dev-playbook/scripts/project_view.py", line 314, in iterdir
+    members = self.view.members(self.rel)
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/ai-dev-playbook/scripts/project_view.py", line 198, in members
+    original = _members(live)
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/ai-dev-playbook/scripts/project_view.py", line 77, in _members
+    raise ValueError(f'not an ordinary collection: {path}')
+ValueError: not an ordinary collection: /private/tmp/tmpt2jsj7q8/root/x
+
+======================================================================
+ERROR: test_non_directory_ancestor_is_an_absent_child (__main__.Probe.test_non_directory_ancestor_is_an_absent_child)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/private/tmp/pb045_independent_probe.py", line 65, in test_non_directory_ancestor_is_an_absent_child
+    self.assertFalse((v.path/'file/child').exists())
+                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/ai-dev-playbook/scripts/project_view.py", line 291, in exists
+    return self.view.state(self.rel)[0] != 'absent'
+           ~~~~~~~~~~~~~~~^^^^^^^^^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/ai-dev-playbook/scripts/project_view.py", line 104, in state
+    path, live = self.source(rel)
+                 ~~~~~~~~~~~^^^^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/ai-dev-playbook/scripts/project_view.py", line 101, in source
+    return self._live(rel), True
+           ~~~~~~~~~~^^^^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/ai-dev-playbook/scripts/project_view.py", line 94, in _live
+    state = _state(path)
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/ai-dev-playbook/scripts/project_view.py", line 64, in _state
+    s = path.lstat()
+  File "/usr/local/Cellar/python@3.14/3.14.6/Frameworks/Python.framework/Versions/3.14/lib/python3.14/pathlib/__init__.py", line 661, in lstat
+    return os.lstat(self)
+           ~~~~~~~~^^^^^^
+NotADirectoryError: [Errno 20] Not a directory: '/private/tmp/tmpw3oc5sv7/root/file/child'
+
+======================================================================
+FAIL: test_obsolete_child_is_not_valid_link_below_future_file (__main__.Probe.test_obsolete_child_is_not_valid_link_below_future_file)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/private/tmp/pb045_independent_probe.py", line 37, in test_obsolete_child_is_not_valid_link_below_future_file
+    self.assertTrue(document_links.check_text('[obsolete](target/child)','probe',v.path,v.path))
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: [] is not true
+
+======================================================================
+FAIL: test_symlink_staging_ancestor_rejected_before_write (__main__.Probe.test_symlink_staging_ancestor_rejected_before_write)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/private/tmp/pb045_independent_probe.py", line 55, in test_symlink_staging_ancestor_rejected_before_write
+    with self.assertRaisesRegex(ValueError,'symlink|symbolic|link'):
+         ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_symlink_staging_ancestor_rejected_by_view (__main__.Probe.test_symlink_staging_ancestor_rejected_by_view)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/private/tmp/pb045_independent_probe.py", line 60, in test_symlink_staging_ancestor_rejected_by_view
+    with self.assertRaisesRegex(ValueError,'symlink|symbolic|link'):
+         ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_symlink_staging_root_rejected_before_write (__main__.Probe.test_symlink_staging_root_rejected_before_write)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/private/tmp/pb045_independent_probe.py", line 49, in test_symlink_staging_root_rejected_before_write
+    with self.assertRaisesRegex(ValueError,'symlink|symbolic|link'):
+         ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_unannounced_write_over_directory_rejected (__main__.Probe.test_unannounced_write_over_directory_rejected)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/private/tmp/pb045_independent_probe.py", line 31, in test_unannounced_write_over_directory_rejected
+    with self.assertRaisesRegex(ValueError,'collision|directory|каталог'):
+         ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+----------------------------------------------------------------------
+Ran 13 tests in 0.181s
+
+FAILED (failures=5, errors=3)

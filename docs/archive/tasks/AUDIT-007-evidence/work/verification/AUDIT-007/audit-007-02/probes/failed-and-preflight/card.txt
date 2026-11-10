@@ -1,0 +1,77 @@
+# DEV-1: test
+
+ID: DEV-1
+Status: in_progress
+Priority: P2
+Depends-On: -
+Executor: Fixture executor
+Model: Synthetic model
+Created: 2026-01-01T00:00:00Z
+Closed: -
+
+<!-- playbook-meta:start -->
+```json
+{
+  "schema_version": 2,
+  "workflow": {
+    "route": "quick",
+    "reason": "Local low risk fixture",
+    "history": [],
+    "baseline": {
+      "source": "docs/tasks/DEV-1-evidence/baseline.json",
+      "sha256": "sha256:b872801e90ae734bfe60a51356790813ccf8536f4c5b1b3b547151fd09128c8c"
+    },
+    "transitions": [
+      {
+        "at": "2026-11-06T18:02:40+03:00",
+        "action": "start",
+        "reason": "Synthetic engineer instruction",
+        "actor": "Fixture executor"
+      }
+    ]
+  },
+  "verification_plan": {
+    "revision": 1,
+    "rationale": "Independent explicit files",
+    "scope": [
+      "src"
+    ],
+    "checks": [
+      {
+        "id": "a",
+        "kind": "command",
+        "purpose": "Auditor probe a",
+        "registry_id": "a",
+        "inputs": [
+          "src/a.txt"
+        ]
+      }
+    ],
+    "decisions": []
+  },
+  "relations": [],
+  "materials": [
+    {
+      "id": "workflow-baseline",
+      "role": "report",
+      "source": "docs/tasks/DEV-1-evidence/baseline.json",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "DEV-1"
+      ]
+    }
+  ],
+  "moves": [],
+  "handoff": null,
+  "acceptance": null
+}
+```
+<!-- playbook-meta:end -->
+
+## Цель и границы
+Проверить изолированный пример.
+
+## Приёмка
+- [ ] Актуальный результат принят.

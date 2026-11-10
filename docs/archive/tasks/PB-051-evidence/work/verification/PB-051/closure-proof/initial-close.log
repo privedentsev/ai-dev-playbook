@@ -1,0 +1,4 @@
+ERROR: docs/archive/tasks/PB-051-evidence/work/verification/PB-051/audit-20261027/card-original.md: битая или внешняя локальная ссылка ../archive/tasks/PB-052.md
+docs/archive/tasks/PB-051-evidence/work/verification/PB-051/audit-20261027/card-original.md: битая или внешняя локальная ссылка ../../work/verification/PB-051/caa4fbbcf01d4f9090dfe3dd4364c9ea/report.json
+docs/archive/tasks/PB-051-evidence/work/verification/PB-051/audit-20261027/card-original.md: битая или внешняя локальная ссылка ../../work/verification/PB-051/caa4fbbcf01d4f9090dfe3dd4364c9ea/unit-tests.stderr.log
+docs/archive/tasks/PB-051-evidence/work/verification/PB-051/audit-20261027/card-original.md: битая или внешняя локальная ссылка PB-051-evidence/recheck-tests.log

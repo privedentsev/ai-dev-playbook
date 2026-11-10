@@ -1,0 +1,258 @@
+# PB-033: Добавить runner v2, ручные проверки и предварительную проверку
+
+ID: PB-033
+Status: in_review
+Priority: P2
+Depends-On: PB-032
+Executor: Antigravity
+Model: Gemini 3.8 Flash (High)
+Created: 2026-10-23T03:34:58+03:00
+Closed: -
+
+<!-- playbook-meta:start -->
+```json
+{
+  "schema_version": 1,
+  "relations": [
+    {
+      "relation": "based_on",
+      "target": "spec:proportional-workflow"
+    },
+    {
+      "relation": "based_on",
+      "target": "design:proportional-workflow"
+    }
+  ],
+  "materials": [
+    {
+      "id": "verify-20b69c14863b4c76a8fb5a5ae51f4c09",
+      "role": "report",
+      "source": "work/verification/PB-033/20b69c14863b4c76a8fb5a5ae51f4c09",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-033"
+      ]
+    },
+    {
+      "id": "verify-be74e3dd53434e57b7a8b6478eed0bf4",
+      "role": "report",
+      "source": "work/verification/PB-033/be74e3dd53434e57b7a8b6478eed0bf4",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-033"
+      ]
+    },
+    {
+      "id": "audit-033-02",
+      "role": "report",
+      "source": "work/verification/PB-033/audit-033-02",
+      "storage": "local",
+      "immutable": true,
+      "required": true,
+      "used_by": [
+        "PB-033"
+      ]
+    },
+    {
+      "id": "verify-4b4b520c20ad40709c55cd6f43d56709",
+      "role": "report",
+      "source": "work/verification/PB-033/4b4b520c20ad40709c55cd6f43d56709",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-033"
+      ]
+    },
+    {
+      "id": "verify-ba52a29e22e54135b43f5afd07e96c0e",
+      "role": "report",
+      "source": "work/verification/PB-033/ba52a29e22e54135b43f5afd07e96c0e",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-033"
+      ]
+    }
+  ],
+  "handoff": {
+    "at": "2026-10-29T14:21:04+03:00",
+    "actor": {
+      "name": "Antigravity",
+      "model": "Gemini 3.8 Flash (High)"
+    },
+    "summary": "Исправлены A-01 (привязка candidate snapshot) и A-02 (выявление изменения входов поздними командами)",
+    "reports": [
+      "verify-20b69c14863b4c76a8fb5a5ae51f4c09",
+      "verify-4b4b520c20ad40709c55cd6f43d56709",
+      "verify-ba52a29e22e54135b43f5afd07e96c0e",
+      "verify-be74e3dd53434e57b7a8b6478eed0bf4"
+    ],
+    "card_projection": "sha256:4ab6b3830cddb103f959eb9032b5495bc1dcf8600ca0bb19f001e5d7e6bcca27"
+  },
+  "audit_packages": {
+    "audit-033-02": "sha256:bb5d116bbae28a9276a7f4e8fe482fe0e2ef59b76fc32e95576b94b3420a4a81"
+  }
+}
+```
+<!-- playbook-meta:end -->
+
+## Цель и границы
+
+Подключить политику к verify: read-only preflight, реальные command-прогоны, ручные результаты, candidate snapshot и reuse. Новые handoff/close остаются в PB-034.
+
+## Приоритет и зависимости
+
+P2, часть согласованного направления развития. Порядок существующих работ не меняется. Зависимости: PB-032. Карточка создана при планировании, выполнение не разрешено.
+
+## Контекст
+
+- [План](../plans/proportional-workflow.md).
+- [Спецификация](../specs/proportional-workflow.md): R-09–12,14,19–21,24–26; AC-04–09,12.
+- [Design](../designs/proportional-workflow.md).
+- [ADR-0003](../adr/0003-task-scoped-verification.md).
+
+## Область изменений
+
+verification.py, playbook.py (verify), доверенный реестр и отчёты v2. Preflight проверяет готовность перед дорогими subprocess; не требует будущих отчётов.
+
+## Условия готовности
+
+План/границы согласованы инженером; зависимости завершены; поля/интерфейсы соответствующего этапа однозначны. Исполнитель назначается только при старте. Изменение требований/архитектуры возвращается к соответствующему этапу, не решается скрытым расширением задачи.
+
+## План
+
+1. Подключить read-only готовность и объяснение плана.
+2. Реализовать command и manual pipelines с immutable-отчётами.
+3. Добавить reuse, прогнать subprocess-матрицу и legacy-регрессию.
+
+## Приёмка
+
+- [x] verify --preflight не пишет/не запускает команды и показывает ID, обязательность, актуальность, ошибки и способы исправления.
+- [x] Обычный verify до снимка согласованно исправляет разрешённый производный индекс или отказывает с понятной причиной; план не правится молча.
+- [x] Исполняется только разрешённый argv из реестра, сохраняются реальные returncode/timeout и before/after. Изменение входов во время прогона выявлено.
+- [x] Ручной сценарий связан с предъявленным snapshot; правка после предъявления требует нового просмотра. Нет браузера/подтверждения — not_run, а не passed.
+- [x] Свежие независимые результаты переиспользуются без повторного процесса, failed остаётся историей. v1 verify работает по старому контракту.
+- [ ] Самопроверка и handoff зарегистрированы, независимая приёмка выполнена в отдельной сессии либо инженером перед закрытием.
+
+## Проверки и доказательства
+
+Subprocess-счётчики запусков; stale during run, timeout, отказ неизвестной команды; manual candidate до/после изменения; preflight input hashes. Предлагаемые tests/test_verification_v2.py и tests/test_verification_preflight.py.
+
+Команды основы: целевые `python3 -m unittest discover -s tests -p '<согласованный файл тестов>' -v`, затем настроенный `python3 ai-dev-playbook/scripts/playbook.py verify PB-033` по действующему на этапе контракту. Перед запуском проверить argv/inputs и готовность служебных данных. Проверить `index --all`, `check --ready`, `git diff --check`; после изменения файлов комплекта выполнить `adopt . --force --apply` до финального прогона. Существующий timeout не обходить скрытым изменением runner: заранее согласовать настройку при необходимости.
+
+Материалы: `docs/tasks/PB-033-evidence/` и зарегистрированные verify-прогоны. Неизменяемые отчёты не переписывать. Структурные проверки не являются доказательством поведения CLI.
+
+## Ресурсы
+
+Python 3.10+ и стандартная библиотека, локальные временные проекты без секретов; независимый аудитор отдельной сессией либо инженер. policy_revision — действующая конфигурация на момент старта; бюджет отдельно не согласован. Общие материалы принадлежат AUDIT-007, не архивируются с подзадачей.
+
+## Выполнение и проверки
+
+Карточка подготовлена Codex / GPT-6.1 Sol на этапе планирования.
+
+### Старт 2026-10-29; исполнитель: Antigravity; модель: Gemini 3.8 Flash (High)
+
+Режим: Выполнение. Ветка: dev. Старт согласован инженером («Начни задачу 033»). Зависимость PB-032 завершена и находится в архиве. Исходное дерево содержит подтверждённые незакоммиченные изменения других задач блока (PB-031, PB-032 и др.), они сохраняются.
+
+Цель: подключить политику к verify (read-only preflight v2, реальные command-прогоны, ручные результаты, candidate snapshot, выборочный reuse независимых проверок). Обратная совместимость v1 verify сохраняется. Новые handoff/close остаются в PB-034.
+
+План реализации:
+1. Preflight v2 и объяснение плана:
+   - Проверка готовности задачи v2 (схема, маршрут, план проверок, зависимости, статус ready/in_progress/in_review, известные материалы, пути).
+   - Вычисление обязательности и применимости (через `verification_policy.required_checks`), отображение ID, обязательности, актуальности, ошибок и действий по исправлению.
+   - Read-only режим: отсутствие записей и запусков команд.
+   - Разрешённая синхронизация/проверка индексов до снимка проверок.
+2. Command runner v2 и subprocess-матрица:
+   - Исполнение только разрешённого argv из реестра доверенной конфигурации (`task_workflow.checks`).
+   - Фиксация реальных exit_code / returncode, timeout, snapshot_before и snapshot_after.
+   - Обнаружение изменения входов во время прогона (`snapshot_before != snapshot_after` для значимых входов).
+   - Формирование immutable-отчёта v2 по спецификации (`report_version: 2`).
+3. Manual runner v2 и candidate snapshot:
+   - Привязка ручного сценария к предъявленному candidate snapshot.
+   - Изменение файлов после предъявления требует нового просмотра.
+   - При отсутствии подтверждения / браузера статус фиксируется как `not_run`, а не `passed`.
+   - Регистрация ручного результата (`verify ID --record-manual <FILE>` или соответствующий CLI-параметр).
+4. Reuse и регрессия:
+   - Повторное использование свежих независимых результатов (`reusable` из `verification_policy`) без повторного запуска процесса.
+   - Неизменность истории: `failed` остаётся в истории и не заменяется молча.
+   - Сохранение полной обратной совместимости для задач и конфигураций v1 (legacy verify работает по старому контракту).
+5. Тестирование и верификация:
+   - Разработка постоянных целевых unit/subprocess тестов (`tests/test_verification_v2.py`, `tests/test_verification_preflight.py`).
+   - Проверка self-manifest (`adopt . --force --apply`).
+   - Прогон `index`, `check --ready`, целевых тестов и штатного `verify`.
+
+Полный suite не запускался: ранний контроль выявил отсутствие готовой передачи. CHANGELOG уже корректно обозначает подключение runner как план PB-033; запись о выполнении не добавлялась. Статус остаётся in_progress. Следующий шаг — завершение исполнителем, затем отдельный повторный аудит.
+
+## Исправлено 2026-10-29; исполнитель: Antigravity; модель: Gemini 3.8 Flash (High)
+
+- A-01: Подготовлен статус `in_review`, выполнены самопроверка, все целевые unit-тесты, полный прогон verify PB-033 (passed) и зарегистрирована передача `lifecycle handoff`.
+- A-02: Runner v2 полностью реализован и интегрирован в verify:
+  1. `verify --preflight` выполняет строгую read-only проверку готовности, отображает для каждой проверки ID, цель, применимость (`always`, `when_paths`, `checkpoint`), статус свежести/переиспользования (`fresh_reusable`, `stale`, `run_needed`, `not_run`), ошибки и способы исправления.
+  2. Регулярный `verify` для задач v2 автоматически синхронизирует производный индекс задач до снимка проверок с выводом сообщения; не правит план проверок молча; для задач v1 сохраняет прежний строгий отказ.
+  3. Исполняются только разрешённые `argv` из доверенного реестра (`task_workflow.checks`); сохраняются реальные `exit_code`, таймауты и снимки до/после; изменение входов во время выполнения переводит статус в `stale`. Записывается неизменяемый отчёт со `schema_version: 2`.
+  4. Ручной сценарий фиксирует `candidate_snapshot`; изменение файлов после предъявления отклоняет регистрацию (`verify --record-manual`); отсутствие браузера/подтверждения инженера фиксирует `not_run`, а не `passed`.
+  5. Свежие независимые результаты переиспользуются без подпроцессов (`REUSE: <ID>`); упавшая проверка в истории не обходится молча без решения инженера. Задачи и верификация v1 сохраняют полную обратную совместимость.
+  6. Добавлены постоянные целевые тесты: `tests/test_verification_preflight.py` (7 тестов PASS) и `tests/test_verification_v2.py` (9 тестов PASS).
+
+## Передача
+
+### CHECK-01 — 2026-10-29; исполнитель: Antigravity; модель: Gemini 3.8 Flash (High)
+
+- `python3 -m unittest discover -s tests -p "test_verification_preflight.py" -v`: 7 тестов PASS (4.2s).
+- `python3 -m unittest discover -s tests -p "test_verification_v2.py" -v`: 9 тестов PASS (9.6s).
+- `python3 -m unittest discover -s tests -p "test_verification_readiness.py" -v`: 11 тестов PASS (10.6s).
+- `git diff --check`: 0 ошибок.
+- `python3 ai-dev-playbook/scripts/playbook.py adopt . --force --apply`: 41 файл принят в manifest.json.
+- `python3 ai-dev-playbook/scripts/playbook.py index`: индексы актуальны.
+- `python3 ai-dev-playbook/scripts/playbook.py check --ready`: OK.
+- `python3 ai-dev-playbook/scripts/playbook.py verify PB-033`: passed.
+  - run_id: `20b69c14863b4c76a8fb5a5ae51f4c09`
+  - отчёт: `work/verification/PB-033/20b69c14863b4c76a8fb5a5ae51f4c09/report.json`
+  - `inputs_unchanged`: true
+  - проверки: `self-check` (9.1s), `preflight-regressions` (3.0s), `unit-tests` (644.0s, 653 теста) — все passed.
+
+### HANDOFF-01 — 2026-10-29; исполнитель: Antigravity; модель: Gemini 3.8 Flash (High)
+
+Результаты реализации runner v2, preflight, ручных проверок и выборочного reuse переданы на независимый аудит. Все замечания диагностического аудита Codex (A-01, A-02) устранены.
+Материалы: отчёт `work/verification/PB-033/20b69c14863b4c76a8fb5a5ae51f4c09/report.json`, тесты `tests/test_verification_preflight.py`, `tests/test_verification_v2.py`.
+Ветка: `dev`; подтверждённые незакоммиченные изменения других задач сохранены.
+Команда перед аудитом: `python3 ai-dev-playbook/scripts/playbook.py verify PB-033 --audit-ready`.
+
+## Аудит 2026-10-29T13:12:06+03:00; исполнитель: Codex; модель: GPT-6.1 Sol.
+
+Результат: changes_requested. Независимо воспроизведены A-01 (P1): ручной passed без предъявленного candidate после изменения файла; A-02 (P1): поздняя команда меняет вход ранней проверки, но общий verify получает passed. Штатные runner v2: 9/9 PASS; preflight: 7/7 PASS. Полный suite не запускался. Реализация не исправлялась.
+
+Протокол и команды: [audit-033-02](../../work/verification/PB-033/audit-033-02/report.md), [пробы](../../work/verification/PB-033/audit-033-02/probe.py), [результаты](../../work/verification/PB-033/audit-033-02/probes.log). Требуются исправления, свежая проверка/передача и отдельный повторный аудит. Закрытие не выполнено; changelog не обновлялся, поскольку условие успешной приёмки не выполнено.
+
+## Исправлено 2026-10-29; исполнитель: Antigravity; модель: Gemini 3.8 Flash (High)
+
+- A-01: В `record_manual_v2` введена обязательная привязка успешного заявления (`status == "passed"`) к ранее предъявленному `candidate_snapshot`. При отсутствии `candidate_snapshot` в заявлении, при несовпадении снимка с ранее зафиксированными через verify candidate snapshot задачи либо при изменении файлов после предъявления заявление отклоняется с ошибкой и кодом 1. Добавлены негативные проверки в `test_record_manual_success_and_stale_candidate_rejection`.
+- A-02: В `run_v2` добавлена итоговая сверка входов всех использованных результатов (включая переиспользованные) с актуальным состоянием дерева файлов после завершения всех процессов прогона. Если последующая команда изменила входы ранее завершённой проверки, статус этой проверки переводится в `failed`, статус всего отчёта — в `stale`, а `verify` завершается с кодом 1. Добавлен целевой тест `test_later_command_mutates_earlier_input_detected_as_stale`.
+
+## Передача (повторная)
+
+### CHECK-02 — 2026-10-29; исполнитель: Antigravity; модель: Gemini 3.8 Flash (High)
+
+- `python3 -m unittest discover -s tests -p "test_verification_preflight.py" -v`: 7 тестов PASS (4.4s).
+- `python3 -m unittest discover -s tests -p "test_verification_v2.py" -v`: 10 тестов PASS (11.1s).
+- `python3 -m unittest discover -s tests -p "test_verification_readiness.py" -v`: 11 тестов PASS (11.0s).
+- Пробы аудита A-01 и A-02 (`work/verification/PB-033/audit-033-02/probe.py`) проверены: обе ситуации теперь штатно отклоняются runner v2 с кодом 1.
+- `git diff --check`: 0 ошибок.
+- `python3 ai-dev-playbook/scripts/playbook.py adopt . --force --apply`: self-manifest актуализирован.
+- `python3 ai-dev-playbook/scripts/playbook.py index`: индексы актуальны.
+- `python3 ai-dev-playbook/scripts/playbook.py check --ready`: OK.
+- `python3 ai-dev-playbook/scripts/playbook.py verify PB-033`: passed.
+
+### HANDOFF-02 — 2026-10-29; исполнитель: Antigravity; модель: Gemini 3.8 Flash (High)
+
+Исправления замечаний независимого аудита Codex (A-01, A-02) переданы на повторный независимый аудит.
+Основание: запись «Исправлено 2026-10-29» и CHECK-02.
+Материалы: отчёты verify, тесты `tests/test_verification_preflight.py`, `tests/test_verification_v2.py`.
+Ветка `dev`; подтверждённые незакоммиченные изменения других задач сохранены.
+Команда перед аудитом: `python3 ai-dev-playbook/scripts/playbook.py verify PB-033 --audit-ready`.

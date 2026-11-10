@@ -1,0 +1,46 @@
+[
+  [
+    "internal",
+    "REJECT"
+  ],
+  [
+    {
+      "type": "file",
+      "path": "internal"
+    },
+    "REJECT"
+  ],
+  [
+    "external",
+    "REJECT"
+  ],
+  [
+    {
+      "type": "file",
+      "path": "external"
+    },
+    "REJECT"
+  ],
+  [
+    "parent/link/new",
+    "REJECT"
+  ],
+  [
+    {
+      "type": "file",
+      "path": "parent/link/new"
+    },
+    "REJECT"
+  ],
+  [
+    "absent/new",
+    "ACCEPT"
+  ],
+  [
+    {
+      "type": "file",
+      "path": "absent/new"
+    },
+    "ACCEPT"
+  ]
+]

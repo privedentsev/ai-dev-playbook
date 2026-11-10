@@ -1,0 +1,13 @@
+A-01 original: ** REJECTED: policy.excludes: исключение '**' конфликтует с объявленным путём 'src/payments/**' модуля 'payments'
+A-01 original: **/* REJECTED: policy.excludes: исключение '**/*' конфликтует с объявленным путём 'src/payments/**' модуля 'payments'
+A-01 original: **/payments/** REJECTED: policy.excludes: исключение '**/payments/**' конфликтует с объявленным путём 'src/payments/**' модуля 'payments'
+A-01 original: * REJECTED: policy.excludes: исключение '*' конфликтует с объявленным путём 'src/payments/**' модуля 'payments'
+A-02: test novel argv => weakening
+A-02: command novel argv => weakening
+A-02: previously approved argv => extension
+A-03: duplicate expected ID REJECTED: result.tests.expected: повторный test_id
+A-04: explicit expected_failure accepted; existing test new allowance => weakening
+A-05: ACCEPTED exclusion **/test_payments.py matches explicit input tests/test_payments.py
+A-05: ACCEPTED exclusion tests/test_payments.p? matches explicit input tests/test_payments.py
+A-06: new test with skip allowed=True => extension
+A-06: new test with expected_failure allowed=True => extension

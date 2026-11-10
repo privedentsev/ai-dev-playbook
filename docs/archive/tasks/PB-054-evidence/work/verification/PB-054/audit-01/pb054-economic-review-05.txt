@@ -1,0 +1,19 @@
+PB-054 — пятый предварительный независимый проход
+Дата: 2026-10-28
+Проверяющий: GPT-6 Luna
+Область: восстановление после damaged runner report с несовпадающим run_id и невалидным JSON.
+Код не менял; acceptance не регистрировал.
+
+Результат
+
+Исправление подтверждено. Обе новые адресные регрессии прошли.
+
+- Неверный run_id в собственной UUID-папке: verify --reuse выполняет новый полный прогон, исходные байты старого report.json остаются неизменными; handoff записывает свежий результат, а следующий reuse использует его без третьего запуска.
+- Невалидный JSON в историческом report.json: новый полный прогон проходит; повреждённый файл сохраняется, handoff не считает его успешным свидетельством, последующий reuse не запускает команды повторно.
+- Предварительный просмотр кода подтверждает, что preflight относит UUID-папку к внутреннему runner namespace; reusable_run валидирует run_id против каталога и не возвращает повреждённый отчет как кандидат.
+
+Проверки
+
+`PYTHONPATH=tests python3 -m unittest test_audit_material_safety.AuditMaterialSafetyTest.test_corrupt_runner_identity_is_preserved_and_replaced_not_blocked_by_preflight test_audit_material_safety.AuditMaterialSafetyTest.test_invalid_json_history_is_diagnostic_material_and_does_not_force_endless_reruns` — 2/2 passed.
+
+Полный suite, финальный verify/HANDOFF и acceptance не выполнялись.

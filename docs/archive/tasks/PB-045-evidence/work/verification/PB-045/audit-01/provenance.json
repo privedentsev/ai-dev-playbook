@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "task_id": "PB-045",
+  "audit_id": "audit-01",
+  "at": "2026-10-28T08:36:46+03:00",
+  "actor": "Codex (независимый аудитор)",
+  "files": {
+    "snapshot.txt": {
+      "source": "docs/tasks/PB-045.md",
+      "sha256": "sha256:fd3c86ee528db0914ff2b15b56d5457546030c56cf430b5e94b83286677455ac"
+    },
+    "snapshot.meta.json": {
+      "source": "docs/tasks/PB-045.meta.json",
+      "sha256": "sha256:649c57b40b8cac183b430a674aee736f8904252bf3b0e72a50c9340ec9d8728f"
+    }
+  }
+}

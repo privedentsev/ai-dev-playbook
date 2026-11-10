@@ -1,0 +1,44 @@
+test_actual_declared_transitions_preserve_custom_data_and_legacy (test_workflow_install.WorkflowInstallTest.test_actual_declared_transitions_preserve_custom_data_and_legacy) ... ok
+test_card_migration_preserves_history_and_requires_new_coverage (test_workflow_install.WorkflowInstallTest.test_card_migration_preserves_history_and_requires_new_coverage) ... ok
+test_custom_paths_and_update_conflict_are_preserved (test_workflow_install.WorkflowInstallTest.test_custom_paths_and_update_conflict_are_preserved) ... ok
+test_enable_interruption_blocks_work_and_standalone_restore_recovers (test_workflow_install.WorkflowInstallTest.test_enable_interruption_blocks_work_and_standalone_restore_recovers) ... ok
+test_enable_refuses_old_install_and_concurrent_gate (test_workflow_install.WorkflowInstallTest.test_enable_refuses_old_install_and_concurrent_gate) ... ok
+test_existing_opt_in_preserves_legacy_and_records_operation (test_workflow_install.WorkflowInstallTest.test_existing_opt_in_preserves_legacy_and_records_operation) ... ok
+test_external_card_migration_requires_complete_plan_and_keeps_journal (test_workflow_install.WorkflowInstallTest.test_external_card_migration_requires_complete_plan_and_keeps_journal) ... ok
+test_init_from_artifact_without_project_docs (test_workflow_install.WorkflowInstallTest.test_init_from_artifact_without_project_docs) ... ok
+test_minimum_cli_and_unknown_updates_schema_reject (test_workflow_install.WorkflowInstallTest.test_minimum_cli_and_unknown_updates_schema_reject) ... ok
+test_missing_legacy_checks_and_unknown_schema_reject_without_writes (test_workflow_install.WorkflowInstallTest.test_missing_legacy_checks_and_unknown_schema_reject_without_writes) ... ok
+test_new_init_opt_in_preview_and_validation (test_workflow_install.WorkflowInstallTest.test_new_init_opt_in_preview_and_validation) ... ok
+test_old_cli_rejects_enabled_project_before_verify (test_workflow_install.WorkflowInstallTest.test_old_cli_rejects_enabled_project_before_verify) ... ok
+test_old_cli_rejects_new_artifact_before_writes (test_workflow_install.WorkflowInstallTest.test_old_cli_rejects_new_artifact_before_writes) ... ok
+test_real_update_interruption_corrupt_backup_then_autonomous_restore (test_workflow_install.WorkflowInstallTest.test_real_update_interruption_corrupt_backup_then_autonomous_restore) ... ok
+test_update_preserves_enabled_project_schema (test_workflow_install.WorkflowInstallTest.test_update_preserves_enabled_project_schema) ... ok
+test_init_absent_destination_creates_target_directory (test_pb028.Pb028CompatibilityAndUpdateTest.test_init_absent_destination_creates_target_directory)
+PB-028-A3: init успешно устанавливает комплект в отсутствующий целевой каталог. ... ok
+test_init_absent_destination_rollback_on_failure_cleans_up_created_dirs (test_pb028.Pb028CompatibilityAndUpdateTest.test_init_absent_destination_rollback_on_failure_cleans_up_created_dirs)
+PB-028-A3: при ошибке записи в отсутствующий целевой каталог все созданные каталоги очищаются. ... ok
+test_init_archive_dir_conflict_leaves_clean_tree (test_pb028.Pb028CompatibilityAndUpdateTest.test_init_archive_dir_conflict_leaves_clean_tree)
+PB-028-A1: конфликт архивного пути (файл или symlink) отклоняется до записи без мусора на диске. ... ok
+test_init_foreign_file_conflict_stops_writes (test_pb028.Pb028CompatibilityAndUpdateTest.test_init_foreign_file_conflict_stops_writes)
+Конфликт чужого файла останавливает init до начала записи. ... ok
+test_init_fresh_creates_collections_and_indexes (test_pb028.Pb028CompatibilityAndUpdateTest.test_init_fresh_creates_collections_and_indexes)
+Init создаёт рабочие коллекции, 5 индексов и архивы коллекций. ... ok
+test_init_nested_absent_destination_creates_parents (test_pb028.Pb028CompatibilityAndUpdateTest.test_init_nested_absent_destination_creates_parents)
+PB-028-A3: init создаёт вложенные отсутствующие родительские каталоги целевого пути. ... ok
+test_real_002_artifact_update_with_custom_paths_and_evidence (test_pb028.Pb028CompatibilityAndUpdateTest.test_real_002_artifact_update_with_custom_paths_and_evidence)
+PB-028-A2: реальное обновление артефакта 0.0.2 до текущей версии с добавлением модулей и сохранением custom paths. ... ok
+test_real_sigkill_interrupted_lifecycle_locks_update_and_restores (test_pb028.Pb028CompatibilityAndUpdateTest.test_real_sigkill_interrupted_lifecycle_locks_update_and_restores)
+PB-028-A2: реальное SIGKILL-прерывание lifecycle блокирует update plan/apply/restore и восстанавливается автономно. ... ok
+test_real_sigkill_interrupted_update_locks_lifecycle_and_cli_restores (test_pb028.Pb028CompatibilityAndUpdateTest.test_real_sigkill_interrupted_update_locks_lifecycle_and_cli_restores)
+PB-028-A2: реальное прерывание update (SIGKILL mid-write) блокирует lifecycle и восстанавливается через CLI update restore. ... ok
+test_real_sigkill_interrupted_update_standalone_script_restores (test_pb028.Pb028CompatibilityAndUpdateTest.test_real_sigkill_interrupted_update_standalone_script_restores)
+PB-028-A2: автономный restore.py восстанавливает реальное SIGKILL-прерывание update. ... ok
+test_schema_backward_compatibility (test_pb028.Pb028CompatibilityAndUpdateTest.test_schema_backward_compatibility)
+0.0.2 без documents работает; documents опционален с собственной схемой. ... ok
+test_unannounced_update_transition_rejected (test_pb028.Pb028CompatibilityAndUpdateTest.test_unannounced_update_transition_rejected)
+Необъявленный переход отклоняется до записи. ... ok
+
+----------------------------------------------------------------------
+Ran 27 tests in 23.297s
+
+OK

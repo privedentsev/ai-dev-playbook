@@ -1,0 +1,34 @@
+PB-054 — независимый приёмочный аудит AUDIT-01
+
+Время: 2026-10-28T03:50:49+03:00
+Исполнитель: Codex
+Модель: GPT-6 Luna
+Передача: HANDOFF-01
+Результат: accepted
+
+Объём и результат
+Проверены актуальная карточка и HANDOFF-01, требования docs/specs/audit-material-safety.md, финальный verify, implementation-hashes.json и пять сохранённых предварительных отчётов economic-review-01..05. Изменений реализации, тестов, требований или индексов не вносилось.
+
+Свежесть и целостность
+- Полный verify work/verification/PB-054/429aee56fc014c108dd1076fa9fe6401/report.json: status=passed, inputs_unchanged=true; run_id совпадает с именем каталога; before/after snapshots равны; inputs_fresh пересчитан как true, изменённых входов нет.
+- Все 108 записей implementation-hashes.json независимо пересчитаны: отсутствующих файлов и несовпадений нет.
+- SHA-256 provenance.json совпадает со служебным audit_packages ledger карточки и provenance.sha256. Хеши snapshot.txt и snapshot.meta.json совпадают с provenance.
+- История операций документов сообщает, что незавершённых операций нет.
+
+Независимые адресные проверки
+В изолированных временных проектах повторно выполнены 16 целевых unittest-сценариев; результат 16/16 passed (подробный вывод: independent-tests.log). В частности проверены ранний отказ до subprocess, read-only preflight, preview/apply gate, повторная подготовка и отказ при изменённом provenance, rollback, reuse и запуск при изменённых входах, более поздний failed, повреждённые run_id/JSON/snapshots и сохранность повреждённых исходных байтов.
+
+Отдельный E2E format2 подтвердил, что копия runner report.json, помещённая в audit package и снабжённая started_at=2099, не получает CHECK binding. Также проверен временный сценарий handoff/accept/dry-run/close и отсутствие ложной привязки критерия к материалу аудита. Preview с TMPDIR внутри проекта и staged-конфликт проверены отдельными регрессиями.
+
+Предварительные замечания P2 из отчётов 01–05 имеют добавленные постоянные регрессии и исправлены в переданной реализации: неверная форма checks, изменение provenance, malformed snapshots и испорченные идентификаторы/JSON истории. Корректный свежий полный verify после этих изменений проходит. Новых блокирующих или неблокирующих находок не выявлено.
+
+Решение
+AC-01..AC-08 приняты. После записи AUDIT-01 accepted выполнен lifecycle accept с ролью auditor и атрибуцией Codex / GPT-6 Luna. Затем выполнены read-only verify --preflight и close --dry-run; результаты сохранены отдельными логами в этом каталоге. Фактический close не запускался.
+
+Ограничения
+Полный suite повторно не запускался: его свежий настроенный прогон уже подтверждён финальным verify; независимая проверка ограничена адресными сценариями, описанными выше. Аудит не удостоверяет личность исполнителя за пределами записанной атрибуции и не архивирует задачу.
+
+Post-registration CLI evidence
+- lifecycle accept PB-054 --result accepted --kind acceptance --role auditor --actor Codex --model 'GPT-6 Luna': exit 0; acceptance recorded.
+- verify PB-054 --preflight: exit 0; materials readiness confirmed, report states behavior and acceptance are not confirmed by preflight. Full output: preflight.log.
+- close PB-054 --dry-run: exit 0; staged close plan generated, including archive moves and checks; no apply/close occurred. Full output: close-dry-run.log.

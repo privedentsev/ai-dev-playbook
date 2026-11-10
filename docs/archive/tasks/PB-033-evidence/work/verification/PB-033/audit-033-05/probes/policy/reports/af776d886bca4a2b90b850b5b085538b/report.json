@@ -1,0 +1,107 @@
+{
+  "schema_version": 2,
+  "run_id": "af776d886bca4a2b90b850b5b085538b",
+  "task_id": "DEV-1",
+  "route": "quick",
+  "plan_revision": 1,
+  "plan_hash": "sha256:2727862be585db9a46dd4e26a091aea993ba36df4cf926df500cd05f20f82dd3",
+  "policy_hash": "sha256:29cb4fe77986c3d5f541163b7f351bd4226f9285afc4b3bb1128629a97e84730",
+  "at": "2026-11-06T12:30:59.016386+00:00",
+  "started_at": "2026-11-06T12:30:59.016391+00:00",
+  "finished_at": "2026-11-06T12:30:59.016394+00:00",
+  "cwd": "/private/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/tmpis9jexni",
+  "status": "passed",
+  "results": [
+    {
+      "check_id": "a",
+      "definition_hash": "sha256:507d12389ba92caf7f51ce0a9081929154be5b210640cdd59680de1e9b3d7eb6",
+      "kind": "command",
+      "status": "passed",
+      "actor": {
+        "name": "Fixture executor",
+        "model": "Synthetic model"
+      },
+      "environment": {
+        "os": "posix",
+        "platform": "macOS-27.0.1-x86_64-i386-64bit-Mach-O",
+        "python": "3.14.6",
+        "architecture": "x86_64",
+        "executable": "/usr/local/opt/python@3.14/bin/python3.14",
+        "environment_sha256": "sha256:8127aeeced134a64d6eb5a23068b8fb59f87905be70dc35f3cec5229f5598237"
+      },
+      "policy_binding": "sha256:ec81663d59612e7709c39fd5f0dbc1a88340de67cb9311747803f66b5b6654b2",
+      "input_snapshot": {
+        "files": {
+          "path:src/a.txt": "sha256:cbe3e66524cb62b29edb3e6dda742af5a20de7ceff3c0ba1818cf57c454b542c"
+        }
+      },
+      "started_at": "2026-11-06T12:30:58.923220+00:00",
+      "finished_at": "2026-11-06T12:30:59.014286+00:00",
+      "duration_seconds": 0.091,
+      "exit_code": 0,
+      "stdout_log": "work/verification/DEV-1/af776d886bca4a2b90b850b5b085538b/a.stdout.log",
+      "stderr_log": "work/verification/DEV-1/af776d886bca4a2b90b850b5b085538b/a.stderr.log",
+      "snapshot_before": {
+        "files": {
+          "path:src/a.txt": "sha256:cbe3e66524cb62b29edb3e6dda742af5a20de7ceff3c0ba1818cf57c454b542c"
+        }
+      },
+      "snapshot_after": {
+        "files": {
+          "path:src/a.txt": "sha256:cbe3e66524cb62b29edb3e6dda742af5a20de7ceff3c0ba1818cf57c454b542c"
+        }
+      }
+    },
+    {
+      "check_id": "b",
+      "definition_hash": "sha256:2bfbedf0a46a8dc252b2d129b2e9f6352ec5ce23ef3df93bc09f85eba4466194",
+      "kind": "command",
+      "status": "passed",
+      "actor": {
+        "name": "Fixture executor",
+        "model": "Synthetic model"
+      },
+      "environment": {
+        "os": "posix",
+        "platform": "macOS-27.0.1-x86_64-i386-64bit-Mach-O",
+        "python": "3.14.6",
+        "architecture": "x86_64",
+        "executable": "/usr/local/opt/python@3.14/bin/python3.14",
+        "environment_sha256": "sha256:8127aeeced134a64d6eb5a23068b8fb59f87905be70dc35f3cec5229f5598237"
+      },
+      "policy_binding": "sha256:b27b04bc601063cb8119aeb11a8d09de678770681d6cb69c889af4f033b0ac5d",
+      "input_snapshot": {
+        "files": {
+          "path:src/b.txt": "sha256:b41f503a1d2669f32437ed3620ce50746e7cc1bc14fc3c9539296152241be5f0"
+        }
+      },
+      "started_at": "2026-11-06T12:30:57.477842+00:00",
+      "finished_at": "2026-11-06T12:30:57.574596+00:00",
+      "duration_seconds": 0.097,
+      "exit_code": 0,
+      "stdout_log": "work/verification/DEV-1/7b142048860b494f8faa283015f7d7bc/b.stdout.log",
+      "stderr_log": "work/verification/DEV-1/7b142048860b494f8faa283015f7d7bc/b.stderr.log",
+      "snapshot_before": {
+        "files": {
+          "path:src/b.txt": "sha256:b41f503a1d2669f32437ed3620ce50746e7cc1bc14fc3c9539296152241be5f0"
+        }
+      },
+      "snapshot_after": {
+        "files": {
+          "path:src/b.txt": "sha256:b41f503a1d2669f32437ed3620ce50746e7cc1bc14fc3c9539296152241be5f0"
+        }
+      }
+    }
+  ],
+  "coverage": {
+    "total_checks": 2,
+    "passed": [
+      "a",
+      "b"
+    ],
+    "failed": [],
+    "not_applicable": [],
+    "not_run": [],
+    "satisfied": true
+  }
+}

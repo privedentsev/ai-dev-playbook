@@ -1,0 +1,28 @@
+test_cli_show_legacy_and_future (test_task_cards.CardLifecycleTest.test_cli_show_legacy_and_future) ... ok
+test_handoff_accept_close_and_tamper (test_task_cards.CardLifecycleTest.test_handoff_accept_close_and_tamper) ... ok
+test_return_fix_new_handoff_requires_new_audit (test_task_cards.CardLifecycleTest.test_return_fix_new_handoff_requires_new_audit) ... ok
+test_default_template_is_supported (test_task_cards.ParserTest.test_default_template_is_supported) ... ok
+test_fenced_examples_and_duplicate_fields (test_task_cards.ParserTest.test_fenced_examples_and_duplicate_fields) ... ok
+test_markdown_colons_urls_and_paragraphs_are_not_fields (test_task_cards.ParserTest.test_markdown_colons_urls_and_paragraphs_are_not_fields) ... ok
+test_negative_grammar_and_links (test_task_cards.ParserTest.test_negative_grammar_and_links) ... ok
+test_projection_and_journal_binding (test_task_cards.ParserTest.test_projection_and_journal_binding) ... ok
+test_two_fixes_three_audits (test_task_cards.ParserTest.test_two_fixes_three_audits) ... ok
+test_unknown_header_field_and_extra_task_heading_rejected (test_task_cards.ParserTest.test_unknown_header_field_and_extra_task_heading_rejected) ... ok
+test_unsupported_versions_and_bad_markers (test_task_cards.ParserTest.test_unsupported_versions_and_bad_markers) ... ok
+test_altered_exec_invalidates_existing_binding_and_blocks_close_until_new_verify (test_criterion_checkboxes.CriterionCliTest.test_altered_exec_invalidates_existing_binding_and_blocks_close_until_new_verify) ... ok
+test_finding_affects_only_linked_criteria_and_fix_needs_check_and_audit (test_criterion_checkboxes.CriterionCliTest.test_finding_affects_only_linked_criteria_and_fix_needs_check_and_audit) ... ok
+test_latest_failed_or_not_run_overrides_passed (test_criterion_checkboxes.CriterionCliTest.test_latest_failed_or_not_run_overrides_passed) ... ok
+test_legacy_v2_findings_preserved_on_explicit_sync (test_criterion_checkboxes.CriterionCliTest.test_legacy_v2_findings_preserved_on_explicit_sync) ... ok
+test_manual_marker_tamper_does_not_open_acceptance (test_criterion_checkboxes.CriterionCliTest.test_manual_marker_tamper_does_not_open_acceptance) ... ok
+test_preview_read_only_partial_coverage_and_repeat (test_criterion_checkboxes.CriterionCliTest.test_preview_read_only_partial_coverage_and_repeat) ... ok
+test_requirement_or_work_change_without_verify_rejects_check_and_close (test_criterion_checkboxes.CriterionCliTest.test_requirement_or_work_change_without_verify_rejects_check_and_close) ... ok
+test_snapshot_and_handoff_ignore_only_checkbox_rendering (test_criterion_checkboxes.CriterionCliTest.test_snapshot_and_handoff_ignore_only_checkbox_rendering) ... ok
+test_stale_inputs_do_not_rebind_existing_check (test_criterion_checkboxes.CriterionCliTest.test_stale_inputs_do_not_rebind_existing_check) ... ok
+test_sync_gate_and_final_failure_rollback (test_criterion_checkboxes.CriterionCliTest.test_sync_gate_and_final_failure_rollback) ... ok
+test_new_finding_requires_valid_criterion_links (test_criterion_checkboxes.CriterionParserTest.test_new_finding_requires_valid_criterion_links) ... ok
+test_only_real_markers_are_normalized (test_criterion_checkboxes.CriterionParserTest.test_only_real_markers_are_normalized) ... ok
+
+----------------------------------------------------------------------
+Ran 23 tests in 13.042s
+
+OK

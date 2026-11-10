@@ -1,0 +1,4 @@
+{'changed': 'latest EXEC-01', 'checked': False, 'handoff': 1, 'accept': 1, 'close_dry_run': 1}
+PASS: new verify/CHECK restores and real close succeeds
+{'changed': 'earlier EXEC-01 with EXEC-02 present', 'checked': False, 'handoff': 1, 'accept': 1, 'close_dry_run': 1}
+PASS: new verify/CHECK restores and real close succeeds

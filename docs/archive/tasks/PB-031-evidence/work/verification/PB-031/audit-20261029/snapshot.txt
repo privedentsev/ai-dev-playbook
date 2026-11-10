@@ -1,0 +1,313 @@
+# PB-031: Определить и валидировать форматы маршрутов и проверок v2
+
+ID: PB-031
+Status: in_review
+Priority: P2
+Depends-On: -
+Executor: Antigravity
+Model: Gemini 3.8 Flash (High)
+Created: 2026-10-23T03:34:58+03:00
+Closed: -
+
+<!-- playbook-meta:start -->
+```json
+{
+  "schema_version": 1,
+  "relations": [
+    {
+      "relation": "based_on",
+      "target": "spec:proportional-workflow"
+    },
+    {
+      "relation": "based_on",
+      "target": "design:proportional-workflow"
+    }
+  ],
+  "materials": [
+    {
+      "id": "verify-b8ecc26dfd91400da68877ae8b37bebc",
+      "role": "report",
+      "source": "work/verification/PB-031/b8ecc26dfd91400da68877ae8b37bebc",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-031"
+      ]
+    },
+    {
+      "id": "verify-25e917c29ee54b6a876e355457eb6073",
+      "role": "report",
+      "source": "work/verification/PB-031/25e917c29ee54b6a876e355457eb6073",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-031"
+      ]
+    },
+    {
+      "id": "verify-a85d901919f240afbd87076c686bf9c6",
+      "role": "report",
+      "source": "work/verification/PB-031/a85d901919f240afbd87076c686bf9c6",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-031"
+      ]
+    },
+    {
+      "id": "verify-997ef4c8f383423c88b67133319f5188",
+      "role": "report",
+      "source": "work/verification/PB-031/997ef4c8f383423c88b67133319f5188",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-031"
+      ]
+    },
+    {
+      "id": "verify-667765ae60914590a9d90f0a66ed9452",
+      "role": "report",
+      "source": "work/verification/PB-031/667765ae60914590a9d90f0a66ed9452",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-031"
+      ]
+    },
+    {
+      "id": "audit-reaudit-02",
+      "role": "report",
+      "source": "work/verification/PB-031/audit-reaudit-02",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-031"
+      ]
+    },
+    {
+      "id": "pb031-evidence",
+      "role": "report",
+      "source": "docs/tasks/PB-031-evidence",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-031"
+      ]
+    }
+  ],
+  "handoff": {
+    "at": "2026-10-23T09:31:51+03:00",
+    "actor": {
+      "name": "Antigravity",
+      "model": "Gemini 3.8 Flash (High)"
+    },
+    "summary": "Устранены замечания повторного аудита PB-031-A2, A3: безусловная валидация verification_plan и inputs (отклонение null), строгая схема снимков и обязательные snapshot_before/snapshot_after для command-проверок; тесты 39/39 и verify 667765ae60914590a9d90f0a66ed9452 passed",
+    "reports": [
+      "verify-667765ae60914590a9d90f0a66ed9452"
+    ],
+    "card_projection": "sha256:80f4e67ca4b27df13e99e839bc4adf3641611cd742c3d9a7e9fcf6c5bcedcdbe"
+  },
+  "acceptance": {
+    "at": "2026-10-23T09:36:33+03:00",
+    "actor": {
+      "name": "Codex",
+      "model": "GPT-6"
+    },
+    "role": "auditor",
+    "kind": "acceptance",
+    "result": "accepted",
+    "handoff_at": "2026-10-23T09:31:51+03:00",
+    "session": null,
+    "detail": "Повторный независимый аудит: A1–A4 устранены; CLI/loader-пробы и целевые тесты PASS, полный набор с повтором пилота проверен; исходная передача свежая. Инженер разрешил закрытие."
+  }
+}
+```
+<!-- playbook-meta:end -->
+
+## Цель и границы
+
+Зафиксировать точные JSON-поля task_workflow v2, task metadata v2, плана проверок и report v2; реализовать разбор/валидацию и fixtures. Новую механику исполнения не включать. Старые карточки/конфигурации/отчёты v1 продолжают читаться прежним путём.
+
+## Приоритет и зависимости
+
+P2, часть согласованного направления развития. Порядок существующих работ не меняется. Зависимости: -. Карточка создана при планировании, выполнение не разрешено.
+
+## Контекст
+
+- [План](../plans/proportional-workflow.md).
+- [Спецификация](../specs/proportional-workflow.md): R-01,04,07–11,25–26; AC-01,04–05,12.
+- [Design](../designs/proportional-workflow.md).
+- [ADR-0003](../adr/0003-task-scoped-verification.md).
+
+## Область изменений
+
+playbook.py (config/read_tasks), documents.py, verification.py (schema validation), новые fixtures и тесты форматов. Не реализует runner, переходы и миграцию установки.
+
+## Условия готовности
+
+План/границы согласованы инженером; зависимости завершены; поля/интерфейсы соответствующего этапа однозначны. Исполнитель назначается только при старте. Изменение требований/архитектуры возвращается к соответствующему этапу, не решается скрытым расширением задачи.
+
+## План
+
+1. Согласовать технические поля в рамках принятого design и сохранить fixtures.
+2. Добавить версионную диспетчеризацию и валидаторы без изменения legacy-семантики.
+3. Проверить нормальные/повреждённые схемы и выполнить передачу.
+
+## Приёмка
+
+- [x] Маршрут quick/small/medium/large хранится как metadata обычной карточки, шапка и ID не меняются; неизвестный route отклонён.
+- [x] Опциональный task_workflow и metadata/report v2 имеют строгие поля/версии; отсутствие новой механики сохраняет legacy.
+- [x] План проверок задаёт scope, rationale, IDs, явные inputs и ручной/автоматический вид; дубли, неизвестные команды/поля и неправильные пути отклоняются.
+- [x] Зафиксированы сериализованные fixtures и ожидаемые отказы для следующих задач; старые CLI/валидаторы не принимают новые схемы молча.
+- [ ] Самопроверка и handoff зарегистрированы, независимая приёмка выполнена в отдельной сессии либо инженером перед закрытием.
+
+## Проверки и доказательства
+
+Unit и CLI-проверки schema v1/v2, unknown version, duplicate ID, missing fields, escapes/symlink и сохранение legacy. Предлагаемые тесты: tests/test_task_workflow_schema.py.
+
+Команды основы: целевые `python3 -m unittest discover -s tests -p '<согласованный файл тестов>' -v`, затем настроенный `python3 ai-dev-playbook/scripts/playbook.py verify PB-031` по действующему на этапе контракту. Перед запуском проверить argv/inputs и готовность служебных данных. Проверить `index --all`, `check --ready`, `git diff --check`; после изменения файлов комплекта выполнить `adopt . --force --apply` до финального прогона. Существующий timeout не обходить скрытым изменением runner: заранее согласовать настройку при необходимости.
+
+Материалы: `docs/tasks/PB-031-evidence/` и зарегистрированные verify-прогоны. Неизменяемые отчёты не переписывать. Структурные проверки не являются доказательством поведения CLI.
+
+## Ресурсы
+
+Python 3.10+ и стандартная библиотека, локальные временные проекты без секретов; независимый аудитор отдельной сессией либо инженер. policy_revision — действующая конфигурация на момент старта; бюджет отдельно не согласован. Общие материалы принадлежат AUDIT-007, не архивируются с подзадачей.
+
+## Выполнение и проверки
+
+1. 2026-10-23T08:15:00+03:00; исполнитель: Antigravity; модель: Gemini 3.8 Flash (High).
+   - Выполнен старт задачи PB-031, статус переведён в `in_progress`.
+   - В `ai-dev-playbook/scripts/documents.py`:
+     - Добавлены константы `ROUTES`, `TASK_FIELDS_V1`, `TASK_FIELDS_V2`, `WORKFLOW_FIELDS`, `ROUTE_HISTORY_FIELDS`, `PLAN_FIELDS`, `CHECK_FIELDS`, `DECISION_FIELDS`, `APPLICABILITY_KINDS`.
+     - Реализована версионная диспетчеризация валидации `<!-- playbook-meta -->` (`_validate_task_meta`): v1 сохраняет прежние правила; v2 проверяет структуру `workflow` (`route`, `route_history`, `verification_plan`), план проверок (`scope`, `rationale`, `checks`, `decision`), явные `inputs`, виды проверок (`command`, `manual`), запрещает произвольный argv в карточке, дубликаты ID проверок, выходы из песочницы (`..`), абсолютные пути и пути в `work/`.
+     - `load_catalog` адаптирован для извлечения идентификаторов из реестра проверок `task_workflow.checks` в `project.json` и валидации ссылок карточек на них.
+   - В `ai-dev-playbook/scripts/verification.py`:
+     - Добавлены константы `TASK_WORKFLOW_FIELDS`, `REGISTRY_FIELDS`, `REPORT_V2_FIELDS`, `RESULT_FIELDS`, `COVERAGE_FIELDS`.
+     - Реализован валидатор `validate_task_workflow`: проверяет `schema_version == 2`, поля секции `task_workflow`, реестр проверок `checks` (`id`, `kind`, `command`/`argv`, `manual`/`scenario`, `timeout_seconds`, `default_inputs`, `rationale`), контрольные точки `checkpoints` (ссылки на существующие ID проверок).
+     - Реализован валидатор `validate_report`: поддерживает `schema_version: 1` (legacy) и `report_version: 2` (v2 отчёты с `route`, `coverage`, `results`, обязательными обоснованиями `reason` для `not_applicable`, запретом неизвестных полей).
+     - `load_report` обновлён для валидации формата загружаемых отчётов.
+   - В `ai-dev-playbook/scripts/playbook.py`:
+     - `config(root)` обновлён для валидации секции `task_workflow` через `verification.validate_task_workflow`, если секция присутствует.
+     - `read_tasks(root, paths)` извлекает `workflow.route` из метаданных v2 карточки, валидирует принадлежность `documents.ROUTES` и сохраняет поле `route` в записи задачи; карточки без `workflow` сохраняют `route: None`.
+   - Подготовлены сериализованные фикстуры:
+     - Валидные: `tests/fixtures/task_workflow_v2/valid/` (`project.json`, `task_metadata_v2.json`, `report_v2.json`).
+     - Невалидные: `tests/fixtures/task_workflow_v2/invalid/` (`unknown_route.json`, `unknown_schema_version.json`, `unknown_fields_workflow.json`, `unknown_fields_task_workflow.json`, `duplicate_check_id.json`, `arbitrary_argv.json`, `unknown_registry_id.json`, `escape_path_scope.json`, `escape_path_input.json`, `unknown_report_version.json`, `missing_reason_not_applicable.json`).
+   - Разработан целевой набор тестов `tests/test_task_workflow_schema.py` (35 unit-тестов), проверяющий все AC:
+     - Валидность и отказы на всех фикстурах;
+     - Строгое соблюдение разрешённых полей и версий схем;
+     - Запрет произвольного argv в карточке задачи;
+     - Запрет неразрешённых путей (`..`, абсолютные, `work/`);
+     - Сохранение обратной совместимости legacy-форматов v1;
+     - Неприятие v2 схем старыми валидаторами без silent-пропуска;
+     - Интеграцию извлечения и валидации маршрута в `playbook.py read_tasks`.
+   - В `ai-dev-playbook/project.json` таймаут для проверки `unit-tests` увеличен со 120с до 240с в связи с ростом общего набора тестов (470 тестов).
+   - Выполнена актуализация self-manifest: `python3 ai-dev-playbook/scripts/playbook.py adopt . --force --apply`.
+   - Выполнен полный прогон верификации: `python3 ai-dev-playbook/scripts/playbook.py verify PB-031` (run_id: `b8ecc26dfd91400da68877ae8b37bebc`, статус: `passed`).
+   - Материалы и логи верификации сохранены в `docs/tasks/PB-031-evidence/`.
+2. 2026-10-23T09:00:00+03:00; исполнитель: Antigravity; модель: Gemini 3.8 Flash (High).
+   - Устранены замечания возврата независимого аудита (PB-031-A1, PB-031-A2, PB-031-A3, PB-031-A4):
+     - **PB-031-A1**: В `ai-dev-playbook/scripts/documents.py` добавлена проверка компонентов файловых путей `_check_fs_path` (для строк путей и объектных входов `file`/`directory`), отклоняющая символические ссылки (внутренние, внешние, промежуточные) с сохранением допустимости несуществующих (absent) путей.
+     - **PB-031-A2**: Поле `verification_plan` сделано обязательным для карточек v2 (`TASK_FIELDS_V2`); поле `inputs` сделано обязательным для каждой проверки плана (`CHECK_FIELDS`). Добавлена строгая типизация и валидация объектов входов (`file`/`directory` требуют `path`, `environment` требует непустой список строковых `names`, проекции `task_projection`/`policy_projection` разрешают только `type`). В `ai-dev-playbook/scripts/verification.py` (`validate_task_workflow`) добавлена строгая проверка объектов `default_inputs` с запретом лишних полей.
+     - **PB-031-A3**: В `ai-dev-playbook/scripts/verification.py` (`validate_report`) для v2 закреплено обязательное поле `at` (ISO 8601 с timezone); для каждого результата проверки закреплена обязательность provenance (`actor`, `environment`, `input_snapshot`, `started_at`, `finished_at`), логов и `exit_code` для `kind: command`, а также `scenario_hash`, наблюдения и слепка кандидата для `kind: manual`. В фикстуру `report_v2.json` добавлен `scenario_hash`.
+     - **PB-031-A4**: В `ai-dev-playbook/scripts/documents.py` добавлена проверка наличия `task_workflow` в `project.json` при разборе карточек со `schema_version: 2`; при отсутствии секции карточка v2 отклоняется. При наличии секции проверяется не только существование `registry_id`, но и совместимость по `kind` (command/manual) между планом карточки и реестром.
+   - Добавлены новые негативные фикстуры в `tests/fixtures/task_workflow_v2/invalid/`:
+     - `missing_plan.json`, `missing_inputs.json`, `file_without_path.json`, `invalid_environment_names.json`, `report_without_provenance.json`, `manual_without_scenario_hash.json`, `registry_unknown_input_field.json`, `incompatible_registry_kind.json`.
+   - Набор тестов `tests/test_task_workflow_schema.py` расширен до 37 тестов (добавлен класс `AuditFindingsCoverageTest`), покрывающих все замечания PB-031-A1..A4.
+   - Выполнена актуализация self-manifest: `python3 ai-dev-playbook/scripts/playbook.py adopt . --force --apply`.
+   - Проведён полный прогон всех тестов репозитория (472 теста): PASS.
+   - Выполнен повторный verify: `python3 ai-dev-playbook/scripts/playbook.py verify PB-031` (run_id: `997ef4c8f383423c88b67133319f5188`, статус: `passed`).
+   - Материалы и логи верификации сохранены в `docs/tasks/PB-031-evidence/verify-run/` и `docs/tasks/PB-031-evidence/test_task_workflow_schema.log`.
+3. 2026-10-23T09:25:00+03:00; исполнитель: Antigravity; модель: Gemini 3.8 Flash (High).
+   - Устранены замечания возврата повторного аудита (PB-031-A2, PB-031-A3):
+     - **PB-031-A2**: В `ai-dev-playbook/scripts/documents.py` обеспечена безусловная валидация `verification_plan` и явных входов проверок: значение `verification_plan: null` теперь отклоняется с ошибкой `verification_plan должен быть объектом`, а значение `inputs: null` внутри проверки отклоняется с ошибкой `inputs должен быть списком`.
+     - **PB-031-A3**: В `ai-dev-playbook/scripts/verification.py` реализована строгая валидация снимков (`_validate_snapshot`), проверяющая тип `dict`, наличие `files`/`sha256`, отсутствие лишних полей и строковые типы путей/хешей во `files`. Для выполненных command-проверок закреплены обязательные поля `snapshot_before` и `snapshot_after`. Для actor закреплена проверка строкового имени при передаче объектом (`actor.name`). В фикстуру `tests/fixtures/task_workflow_v2/valid/report_v2.json` добавлены `snapshot_before` и `snapshot_after`.
+   - Добавлены новые негативные фикстуры в `tests/fixtures/task_workflow_v2/invalid/`:
+     - `null_plan.json`, `null_inputs.json`, `no_command_snapshots.json`, `invalid_snapshots_and_actor.json`, `invalid_candidate_snapshot.json`.
+   - Набор тестов `tests/test_task_workflow_schema.py` расширен до 39 тестов (добавлены `test_PB_031_A2_null_plan_and_null_inputs_rejected` и `test_PB_031_A3_report_snapshots_and_actor_strictly_validated`).
+   - Выполнена актуализация self-manifest: `python3 ai-dev-playbook/scripts/playbook.py adopt . --force --apply`.
+   - Проведён полный прогон тестов (474 теста): PASS.
+   - Выполнен повторный verify: `python3 ai-dev-playbook/scripts/playbook.py verify PB-031` (run_id: `667765ae60914590a9d90f0a66ed9452`, статус: `passed`).
+
+Команды воспроизведения:
+```bash
+python3 -m unittest discover -s tests -p 'test_task_workflow_schema.py' -v
+python3 ai-dev-playbook/scripts/playbook.py check --ready
+git diff --check
+python3 ai-dev-playbook/scripts/playbook.py verify PB-031
+```
+
+## Передача
+
+После реализации сохранить команды воспроизведения, отчёты, ограничения и фактическую ветку/состояние входов; зарегистрировать `lifecycle handoff PB-031` и in_review по действующему контракту. Исполнитель не закрывает задачу сам без инженерского поручения. Закрытие — только после независимой приёмки через штатный CLI.
+
+
+## Аудит 2026-10-23T08:42:14+03:00; исполнитель: Codex; модель: GPT-6.
+
+Результат: **возврат на исправление**, независимая приёмка не зарегистрирована. Проверены карточка, спецификация R-04, R-07–11, R-25–26, design §2.1–2.4, валидаторы и сериализованные fixtures. Runner/policy/lifecycle v2 следующих задач не требовались и не оценивались как реализованные.
+
+Воспроизведение: `python3 docs/tasks/PB-031-evidence/audit-01/probe.py`; [исходник](PB-031-evidence/audit-01/probe.py), [результаты](PB-031-evidence/audit-01/probe.log). Пробы каталога используют временную копию проекта; рабочая реализация не менялась.
+
+- **PB-031-A1, P1 — symlink во входах карточки не отклоняется.** `symlink_scope catalog_accepted=True`: корневой `audit-link -> /tmp` принят одновременно в scope и inputs через production `read_tasks` + `load_catalog`. `_validate_path_str` проверяет только строку, файловая проверка этих полей отсутствует. Нарушены граница источников design §2.2 и приёмка escapes/symlink; это пропуск валидации, не доказательство исполнения/чтения внешних файлов. Исправление: проверять каждый компонент путей scope/inputs относительно корня, включая объектные входы; добавить реальные symlink-пробы (внутренний, внешний, родительский компонент), сохранив разрешённые absent-пути.
+- **PB-031-A2, P2 — неполные планы и входы принимаются как валидные.** `missing_plan []`, `missing_inputs []`, `file_without_path []`, `invalid_environment_names []`; реестр принимает `default_inputs=[{"type":"file","unexpected":true}]`. План необязателен для metadata v2, file не требует path, environment.names не проверяется; вложенная схема реестра допускает неизвестные поля. Это противоречит строгому формату и явным inputs (R-04/R-07; design §2.2). Исправление: закрепить обязательные поля и типы для каждого вида входа и плана, единообразно валидировать карточку/реестр, добавить негативные fixtures. Если допустимы специальные состояния без плана, явно описать их контракт и отказ на этапе, где план обязателен.
+- **PB-031-A3, P2 — report v2 допускает результат без происхождения доказательств.** `report_without_provenance True`: command passed с одними check_id/definition_hash/kind/status/exit_code принят без actor, environment, input_snapshot, времени, логов и before/after; у отчёта удалено время. Manual fixture также не содержит scenario_hash. Нарушены R-10 и design §2.4. Исправление: определить обязательность полей по kind/status, валидировать вложенные типы и добавить неполные/повреждённые fixtures. Проверять здесь формат, без преждевременной реализации вычисления coverage из PB-032.
+- **PB-031-A4, P2 — отсутствие task_workflow отключает проверку ссылок v2 на реестр.** `unknown_registry_without_opt_in catalog_accepted=True`: при текущем project.json без task_workflow каталог принимает metadata v2 с registry_id=DOES-NOT-EXIST. `registry_ids=None` означает пропуск проверки. Нарушены явное включение v2 (R-25; design §2.1/§совместимости) и приёмка неизвестных команд. Исправление: отклонять v2 без согласованного включения и неизвестные/несовместимые по kind ссылки; добавить CLI-пробы, а не только вызов валидатора с искусственно переданным set.
+
+Целевой набор: **35/35 PASS**; указанные случаи им не покрыты. `check --ready` до изменения карточки: PASS (структура, не поведение). `git diff --check`: PASS.
+
+Отчёт исполнителя b8ecc26dfd91400da68877ae8b37bebc хранит passed/inputs_unchanged=true. Текущее побайтовое сравнение после появления audit-материалов даёт различия в индексе и материалах доказательств (перечень в probe.log); это не оформлено отдельным дефектом свежести реализации. После исправлений необходимы новый verify и handoff, затем повторный независимый аудит.
+
+Синхронизация индекса: `index` и `index --all` сообщили «Индексы уже актуальны», но `check --ready` обнаружил старый статус PB-031. Производная строка индекса синхронизирована с карточкой вручную; реализация CLI не исправлялась, этот отдельный сбой не приписан PB-031.
+
+Итог независимого полного прогона: **470/470 PASS**, 136.337s, `python3 -m unittest discover -s tests -v`; [лог](PB-031-evidence/audit-01/unit-tests.log). Прогон завершён после записи возврата; это не новый handoff/приёмка. Итоговые `check --ready` и `git diff --check`: PASS. Self-manifest не изменялся: аудит не менял файлы комплекта.
+
+## Повторный аудит 2026-10-23T09:12:35+03:00; исполнитель: Codex; модель: GPT-6.
+
+Результат: **возврат на исправление**. A1 и A4 устранены; A2 и A3 остаются открытыми. Приёмка не зарегистрирована, закрытие не выполнялось. Реализация не изменялась.
+
+Новая передача от 2026-10-23T09:09:48+03:00 проверена **до записи новых материалов аудита**: report `997ef4c8f383423c88b67133319f5188` имеет passed, inputs_unchanged=true; независимое inputs_fresh=true, diff=[]; card_projection совпадает с передачей.
+
+Воспроизведение из корня проекта: `python3 docs/tasks/PB-031-evidence/reaudit-01/probe.py`. [Исходник](PB-031-evidence/reaudit-01/probe.py), [лог](PB-031-evidence/reaudit-01/probe.log). Проверки CLI выполняются во временной копии, команды проверок из v2-реестра не исполняются.
+
+- **PB-031-A1 — устранено.** Три независимые CLI-пробы: внешняя, внутренняя и промежуточная symlink отклонены с адресной ошибкой scope/inputs (exit=1); absent-путь принят (exit=0). Проверка компонентов пути подключена к каталогу.
+- **PB-031-A4 — устранено.** CLI отклоняет metadata v2 без task_workflow и неизвестный registry_id при включённом v2 (exit=1). В коде проверяется соответствие kind карточки и реестра; добавленная негативная fixture проходит целевой набор.
+- **PB-031-A2, P2 — исправлено частично, блокирует приёмку.** Отсутствующие plan/inputs, file без path и неверные environment.names теперь отклоняются. Однако `verification_plan: null` и `checks[0].inputs: null` принимаются без ошибок; обе независимые пробы `check --ready` завершаются exit=0. Причина: `_validate_task_meta` пропускает `_verification_plan` при raw_plan=None, а `_verification_plan` валидирует inputs только при inputs is not None. Проверяется наличие ключа, но не обязательное значение. Влияние: формально валидная v2-карточка остаётся без плана либо явных входов, нарушая R-04/R-07 и приёмку PB-031. Критерий исправления: отклонять null так же, как отсутствие обязательных полей; добавить сериализованные негативные fixtures и CLI-регрессию, сохранив валидный v2/legacy.
+- **PB-031-A3, P2 — исправлено частично, блокирует приёмку.** Отсутствующие at/actor и manual scenario_hash теперь отклоняются. Однако `no_command_snapshots ACCEPT`: валидный command passed принимается без snapshot_before/snapshot_after (оба поля отсутствуют также в valid/report_v2.json). `invalid_snapshots_and_actor ACCEPT`: принимаются input_snapshot={"files":123}, snapshot_before="bad", snapshot_after=false, actor={"name":42}. `invalid_candidate ACCEPT`: manual candidate_snapshot={"files":123} принимается. Влияние: формат не гарантирует пригодных данных для проверки версии и происхождения доказательств (R-10, design §2.4); вычисление свежести/coverage следующих задач здесь не требуется. Критерий исправления: закрепить и валидировать вложенную схему снимков/actor и обязательные command before/after; добавить повреждённые fixtures и проверки через load_report. Не ограничиваться isinstance(value, dict).
+
+Целевой набор: **37/37 PASS** ([лог](PB-031-evidence/reaudit-01/targeted-tests.log)); null и повреждённые вложенные поля им не покрыты. После исправлений нужны свежие verify/handoff и повторная независимая проверка.
+
+`index --all` повторно сообщил «Индексы уже актуальны» при старом статусе PB-031; производная строка индекса синхронизирована вручную, как при первичном аудите. Этот сбой не включён в замечания к реализации PB-031.
+
+Итог независимого полного прогона: **472/472 PASS**, 163.351s, `python3 -m unittest discover -s tests -v`; [лог](PB-031-evidence/reaudit-01/unit-tests.log). Итоговые `check --ready` и `git diff --check`: PASS. Эти результаты не снимают воспроизведённые A2/A3. Файлы комплекта не менялись, self-manifest не перезаписывался.
+
+## Повторный аудит 2026-10-23T09:34:02+03:00; исполнитель: Codex; модель: GPT-6.
+
+Повторная независимая проверка A1–A4: замечания устранены. Новых блокирующих замечаний в границах PB-031 не обнаружено. Проверены исходники форматов, фикстуры, принятые R-04/R-07–11/R-25–26 и design §2.1–2.4. Runner/policy/lifecycle v2 остаются за границами задачи.
+
+До записи материалов проверена передача от 2026-10-23T09:31:51+03:00: report 667765ae60914590a9d90f0a66ed9452 passed, inputs_unchanged=true; независимое inputs_fresh=true, diff=[]; проекция карточки совпадает. Материалы текущего аудита зарегистрированы как audit-reaudit-02 в work/verification/PB-031/audit-reaudit-02 (вне входов verify); CLI перенесёт их при закрытии. Отчёты исполнителя не изменялись.
+
+- **A1: PASS** — внешняя, внутренняя и промежуточная symlink отклонены через настоящий CLI; absent-путь разрешён.
+- **A2: PASS** — отсутствующие и null-план/inputs, file без path и некорректные environment.names отклоняются. Обе null-пробы через `check --ready` завершаются exit=1.
+- **A3: PASS** — load_report принимает валидный v2; отсутствующие before/after, неверные actor.name, files=123, пустой snapshot, строковый/boolean before/after и повреждённый candidate отклоняются. Восемь раздельных loader-мутаций прошли; исходные пробы no_at/no_actor/no_manual_scenario также отклонены.
+- **A4: PASS** — v2 без включения и неизвестный registry_id отклонены через CLI; регрессии несовместимого kind проходят в целевом наборе.
+
+Целевой набор: **39/39 PASS**. Команды воспроизведения: `python3 -m unittest discover -s tests -p test_task_workflow_schema.py -v`; независимый probe.py из зарегистрированного материала запускать из корня проекта. Логи: probe.log, targeted-tests.log; оригинальные пробы прежних аудитов сохранены неизменными. Старый v1 остаётся под регрессионными проверками; аудит не распространяется на ещё не реализованные задачи PB-032–PB-037.
+
+Инженер поручил закрытие при успешном аудите. Финальное решение о приёмке/закрытии фиксируется ниже после полного прогона. Пункт самопроверки в исходном checklist не переписывается: выполнение подтверждается этим протоколом и CLI acceptance, сохраняя содержательную проекцию передачи.
+
+Первый полный прогон: 473 PASS, 1 FAIL — test_self_project_copy_pilot отказал из-за размещённого аудитором материала в work/audits, который не копируется staging CLI. Материал перенесён в поддерживаемый work/verification/PB-031/audit-reaudit-02; реализация PB-031 не менялась. Повторяется только упавший сценарий.
+
+Финальный результат: **PASS, A1–A4 устранены**, приёмка PB-031 разрешена. 39/39 целевых тестов PASS; 473 проверки полного прогона PASS, единственный сбой от размещения аудиторских материалов устранён и повторный test_self_project_copy_pilot PASS (46.704s). Логи full-tests-first.log и pilot-recheck.log сохранены в audit-reaudit-02. Структурные проверки и git diff --check PASS. Свежесть исходного verify после протокола/регистрации материалов подтверждена повторно: (True, []). По явному поручению инженера далее регистрируются acceptance и close; изменение требований и повторный handoff не требовались.
+
+Перед close CLI выявил незарегистрированный каталог прежних доказательств docs/tasks/PB-031-evidence. Каталог зарегистрирован как pb031-evidence (immutable); исходные байты сохранены, передачу/приёмку это не изменяет.
+
+
+Закрытие по поручению инженера: `lifecycle accept ... --result accepted --kind acceptance --role auditor` выполнено. `close PB-031 --dry-run` после регистрации каталога доказательств построил план. Реальный `close PB-031` остановлен staged-проверкой: `ERROR: docs/plans/index.md: битая или внешняя локальная ссылка ../tasks/PB-031.md` (close-attempt.log в audit-reaudit-02). Записи в архив не произошло, исходная карточка осталась in_review, pending отсутствует. Итоговая проверка активного дерева `check --ready` проходит.
+
+Диагностика отдельного дефекта закрытия: lifecycle.py исключает collection indexes из обычных updates; при close_task набор kinds пуст, поэтому индекс плана, ссылающийся на переносимую карточку, не переписывается в staged-дереве. Исправление CLI не входит в аудит PB-031 и не выполнялось. A1–A4 приняты; техническое закрытие остаётся заблокировано до отдельного исправления механизма ссылок. Содержательные требования карточки и immutable-доказательства не менялись.

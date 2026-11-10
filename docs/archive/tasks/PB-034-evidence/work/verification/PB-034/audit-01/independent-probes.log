@@ -1,0 +1,9 @@
+test_audit_changed_source_blocks_close_after_accept (__main__.AuditProbe.test_audit_changed_source_blocks_close_after_accept) ... ok
+test_audit_plan_drift_blocks_accept (__main__.AuditProbe.test_audit_plan_drift_blocks_accept) ... ok
+test_audit_policy_drift_blocks_accept (__main__.AuditProbe.test_audit_policy_drift_blocks_accept) ... ok
+test_audit_small_route_accepts_independent_auditor (__main__.AuditProbe.test_audit_small_route_accepts_independent_auditor) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 19.429s
+
+OK

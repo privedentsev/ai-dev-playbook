@@ -1,0 +1,224 @@
+План lc-6c4152e1269fee8e (lifecycle):
+Основание: playbook.py close DEV-1
+Исполнитель: cli:privedentsev1 (cli)
+Действия:
+  close_task DEV-1: docs/tasks/DEV-1.md → docs/archive/tasks/DEV-1.md (done)
+Переносы:
+  docs/tasks/DEV-1-evidence/baseline.json → docs/archive/tasks/DEV-1-evidence/baseline.json
+  docs/tasks/DEV-1.md → docs/archive/tasks/DEV-1.md
+  work/verification/DEV-1/2f84be85d56a431ea7f1d1e19b9012a2 → docs/archive/tasks/DEV-1-evidence/work/verification/DEV-1/2f84be85d56a431ea7f1d1e19b9012a2
+  work/verification/DEV-1/2f84be85d56a431ea7f1d1e19b9012a2/report.json → docs/archive/tasks/DEV-1-evidence/work/verification/DEV-1/2f84be85d56a431ea7f1d1e19b9012a2/report.json
+  work/verification/DEV-1/795db0a81e374b1693d5b47ce43f9906 → docs/archive/tasks/DEV-1-evidence/work/verification/DEV-1/795db0a81e374b1693d5b47ce43f9906
+  work/verification/DEV-1/795db0a81e374b1693d5b47ce43f9906/report.json → docs/archive/tasks/DEV-1-evidence/work/verification/DEV-1/795db0a81e374b1693d5b47ce43f9906/report.json
+  work/verification/DEV-1/d28ce90d4ee4471391189df2f6be9883 → docs/archive/tasks/DEV-1-evidence/work/verification/DEV-1/d28ce90d4ee4471391189df2f6be9883
+  work/verification/DEV-1/d28ce90d4ee4471391189df2f6be9883/report.json → docs/archive/tasks/DEV-1-evidence/work/verification/DEV-1/d28ce90d4ee4471391189df2f6be9883/report.json
+Удаляются каталоги:
+  docs/tasks/DEV-1-evidence
+  work/verification/DEV-1/2f84be85d56a431ea7f1d1e19b9012a2
+  work/verification/DEV-1/795db0a81e374b1693d5b47ce43f9906
+  work/verification/DEV-1/d28ce90d4ee4471391189df2f6be9883
+Записей: 7, удалений файлов: 5
+Diff записей (.md):
+  docs/archive/tasks/DEV-1-evidence/baseline.json: prepared stream sha256:313cf0382b92bf7c1823d99b3ef08480b8d3d4b33cf0cbe04913fdb81e7ad760
+  docs/archive/tasks/DEV-1-evidence/work/verification/DEV-1/2f84be85d56a431ea7f1d1e19b9012a2/report.json: prepared stream sha256:aaca2962d75b362031e4889fa31d1799b17d0c020c479961862dfc08cec27be0
+  docs/archive/tasks/DEV-1-evidence/work/verification/DEV-1/795db0a81e374b1693d5b47ce43f9906/report.json: prepared stream sha256:6df98d51e5c42fbd7e4b0831f495e56fabfabb43ba2bc47eb7f00f821487cf3b
+  docs/archive/tasks/DEV-1-evidence/work/verification/DEV-1/d28ce90d4ee4471391189df2f6be9883/report.json: prepared stream sha256:b0d7b4929de4e5d2be21408767fb8ecf771d9836dd8f71591fa3a24a3f51ff52
+--- /dev/null
++++ b/docs/archive/tasks/DEV-1.md
+@@ -0,0 +1,179 @@
++# DEV-1: test
++
++ID: DEV-1
++Status: done
++Priority: P2
++Depends-On: -
++Executor: Fixture executor
++Model: Synthetic model
++Created: 2026-01-01T00:00:00Z
++Closed: 2026-11-06T15:31:22+03:00
++
++<!-- playbook-meta:start -->
++```json
++{
++  "schema_version": 2,
++  "workflow": {
++    "route": "quick",
++    "reason": "Local low risk fixture",
++    "history": [],
++    "baseline": {
++      "source": "docs/archive/tasks/DEV-1-evidence/baseline.json",
++      "sha256": "sha256:313cf0382b92bf7c1823d99b3ef08480b8d3d4b33cf0cbe04913fdb81e7ad760"
++    },
++    "transitions": [
++      {
++        "at": "2026-11-06T15:31:15+03:00",
++        "action": "start",
++        "reason": "Synthetic engineer instruction",
++        "actor": "Fixture executor"
++      }
++    ]
++  },
++  "verification_plan": {
++    "revision": 1,
++    "rationale": "Independent explicit files",
++    "scope": [
++      "src"
++    ],
++    "checks": [
++      {
++        "id": "a",
++        "kind": "manual",
++        "purpose": "Auditor probe a",
++        "registry_id": "a",
++        "inputs": [
++          "src/a.txt"
++        ]
++      }
++    ],
++    "decisions": []
++  },
++  "relations": [],
++  "materials": [
++    {
++      "id": "workflow-baseline",
++      "role": "report",
++      "source": "docs/archive/tasks/DEV-1-evidence/baseline.json",
++      "storage": "local",
++      "required": true,
++      "immutable": true,
++      "used_by": [
++        "DEV-1"
++      ]
++    },
++    {
++      "id": "verify-2f84be85d56a431ea7f1d1e19b9012a2",
++      "role": "report",
++      "source": "docs/archive/tasks/DEV-1-evidence/work/verification/DEV-1/2f84be85d56a431ea7f1d1e19b9012a2",
++      "storage": "local",
++      "required": true,
++      "immutable": true,
++      "used_by": [
++        "DEV-1"
++      ]
++    },
++    {
++      "id": "verify-795db0a81e374b1693d5b47ce43f9906",
++      "role": "report",
++      "source": "docs/archive/tasks/DEV-1-evidence/work/verification/DEV-1/795db0a81e374b1693d5b47ce43f9906",
++      "storage": "local",
++      "required": true,
++      "immutable": true,
++      "used_by": [
++        "DEV-1"
++      ]
++    },
++    {
++      "id": "verify-d28ce90d4ee4471391189df2f6be9883",
++      "role": "report",
++      "source": "docs/archive/tasks/DEV-1-evidence/work/verification/DEV-1/d28ce90d4ee4471391189df2f6be9883",
++      "storage": "local",
++      "required": true,
++      "immutable": true,
++      "used_by": [
++        "DEV-1"
++      ]
++    },
++    {
++      "id": "lifecycle-lc-6c4152e1269fee8e",
++      "role": "report",
++      "source": "docs/archive/tasks/DEV-1-evidence/close-lc-6c4152e1269fee8e.json",
++      "storage": "local",
++      "required": true,
++      "immutable": true,
++      "used_by": []
++    }
++  ],
++  "moves": [
++    {
++      "from": "docs/tasks/DEV-1-evidence/baseline.json",
++      "to": "docs/archive/tasks/DEV-1-evidence/baseline.json"
++    },
++    {
++      "from": "work/verification/DEV-1/2f84be85d56a431ea7f1d1e19b9012a2",
++      "to": "docs/archive/tasks/DEV-1-evidence/work/verification/DEV-1/2f84be85d56a431ea7f1d1e19b9012a2"
++    },
++    {
++      "from": "work/verification/DEV-1/795db0a81e374b1693d5b47ce43f9906",
++      "to": "docs/archive/tasks/DEV-1-evidence/work/verification/DEV-1/795db0a81e374b1693d5b47ce43f9906"
++    },
++    {
++      "from": "work/verification/DEV-1/d28ce90d4ee4471391189df2f6be9883",
++      "to": "docs/archive/tasks/DEV-1-evidence/work/verification/DEV-1/d28ce90d4ee4471391189df2f6be9883"
++    },
++    {
++      "from": "docs/tasks/DEV-1.md",
++      "to": "docs/archive/tasks/DEV-1.md"
++    }
++  ],
++  "handoff": {
++    "at": "2026-11-06T15:31:19+03:00",
++    "actor": {
++      "name": "Fixture executor",
++      "model": "Synthetic model"
++    },
++    "summary": "Auditor synthetic fixture",
++    "reports": [
++      "verify-2f84be85d56a431ea7f1d1e19b9012a2",
++      "verify-795db0a81e374b1693d5b47ce43f9906",
++      "verify-d28ce90d4ee4471391189df2f6be9883"
++    ],
++    "card_projection": "sha256:c2428775294751c0f9f5d09ee7bddb9111caec1a3cac6c333caaf90daa566a25",
++    "result_hash": "sha256:b50820ea097c0a19820606b9ef1a8a62d8f55ea2fbde25973d2ee4c771c57a5e",
++    "coverage": {
++      "checks": {
++        "a": "passed"
++      },
++      "satisfied": true
++    },
++    "evidence_hashes": {
++      "verify-2f84be85d56a431ea7f1d1e19b9012a2": "sha256:e17d3afc7530cc41bf79fce8afc4affb3ad2c27e24257cd7296274c24e118354",
++      "verify-795db0a81e374b1693d5b47ce43f9906": "sha256:4ee65a6465a4ed2daed1240d925eca19cbdd8af0d9dbaa85268d62d81d66ffd8",
++      "verify-d28ce90d4ee4471391189df2f6be9883": "sha256:e81fee072ef7d5f7b64d8afecd8c58df2bf34d2519c37f8b91f48fcdc9ffda32",
++      "workflow-baseline": "sha256:af1146d9568ac11ef4cedd59653f79fb3c5aa89ce5419c853fd1ee29592e7ff8"
++    }
++  },
++  "acceptance": {
++    "at": "2026-11-06T15:31:20+03:00",
++    "actor": {
++      "name": "Fixture engineer",
++      "model": "Synthetic model"
++    },
++    "role": "engineer",
++    "kind": "acceptance",
++    "result": "accepted",
++    "handoff_at": "2026-11-06T15:31:19+03:00",
++    "session": null,
++    "detail": "Synthetic explicit final version acceptance",
++    "result_hash": "sha256:b50820ea097c0a19820606b9ef1a8a62d8f55ea2fbde25973d2ee4c771c57a5e"
++  }
++}
++```
++<!-- playbook-meta:end -->
++
++## Цель и границы
++Проверить изолированный пример.
++
++## Приёмка
++- [ ] Актуальный результат принят.
+--- a/docs/tasks/index.md
++++ b/docs/tasks/index.md
+@@ -6,11 +6,11 @@
+ 
+ | ID | Задача | Статус | Приоритет | Исполнитель | Создана | Закрыта | Зависимости |
+ |---|---|---|---|---|---|---|---|
+-| DEV-1 | [DEV-1: test](DEV-1.md) | in_review | P2 | Fixture executor / Synthetic model | 2026-01-01 00:00 | — | — |
++
++Активных карточек пока нет.
+ 
+ ## Архив
+ 
+ | ID | Задача | Статус | Приоритет | Исполнитель | Создана | Закрыта | Зависимости |
+ |---|---|---|---|---|---|---|---|
+-
+-Архивных карточек пока нет.
++| DEV-1 | [DEV-1: test](../archive/tasks/DEV-1.md) | done | P2 | Fixture executor / Synthetic model | 2026-01-01 00:00 | 2026-11-06 15:31 | — |

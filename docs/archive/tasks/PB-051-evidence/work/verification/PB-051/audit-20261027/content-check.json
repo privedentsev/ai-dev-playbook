@@ -1,0 +1,13 @@
+{
+  "environment": "macOS-27.0.1-x86_64-i386-64bit-Mach-O",
+  "python": "3.14.6",
+  "manifest_files": 38,
+  "changelog_sha256": "55e8bbc5d314ab4b8371a3f16fddbfc0d7fcd8db71182115cfdcbe03f73b6bb3",
+  "changelog_local_links": [
+    "docs/tasks/index.md",
+    "docs/user-guide/index.md",
+    "ai-dev-playbook/rules/update.md"
+  ],
+  "unreleased_without_release_date": true,
+  "git_operations": false
+}
