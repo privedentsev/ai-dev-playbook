@@ -1,0 +1,26 @@
+test_directory_parent_destination_allowed (test_material_relocation.AncestorDestinationTest.test_directory_parent_destination_allowed) ... ok
+test_file_parent_destination_rejected_both_orders (test_material_relocation.AncestorDestinationTest.test_file_parent_destination_rejected_both_orders) ... ok
+test_handoff_rejects_when_auto_registration_collides (test_material_relocation.EarlyDestinationCheckTest.test_handoff_rejects_when_auto_registration_collides) ... ok
+test_nested_directory_collision_and_legit_overlap (test_material_relocation.EarlyDestinationCheckTest.test_nested_directory_collision_and_legit_overlap) ... ok
+test_preflight_and_verify_stop_before_subprocess (test_material_relocation.EarlyDestinationCheckTest.test_preflight_and_verify_stop_before_subprocess) ... ok
+test_prepare_audit_and_foreign_owner (test_material_relocation.EarlyDestinationCheckTest.test_prepare_audit_and_foreign_owner) ... ok
+test_register_rejects_same_archive_destination_equal_bytes (test_material_relocation.EarlyDestinationCheckTest.test_register_rejects_same_archive_destination_equal_bytes) ... ok
+test_register_rejects_same_destination_different_bytes (test_material_relocation.EarlyDestinationCheckTest.test_register_rejects_same_destination_different_bytes) ... ok
+test_same_bytes_different_destinations_pass (test_material_relocation.EarlyDestinationCheckTest.test_same_bytes_different_destinations_pass) ... ok
+test_apply_moves_bytes_updates_links_and_companion (test_material_relocation.RelocateMaterialTest.test_apply_moves_bytes_updates_links_and_companion) ... ok
+test_foreign_immutable_link_rejected_own_preserved (test_material_relocation.RelocateMaterialTest.test_foreign_immutable_link_rejected_own_preserved) ... ok
+test_full_pb060_equivalent_close_dry_run_and_close (test_material_relocation.RelocateMaterialTest.test_full_pb060_equivalent_close_dry_run_and_close) ... ok
+test_gate_and_final_failure_restore (test_material_relocation.RelocateMaterialTest.test_gate_and_final_failure_restore) ... ok
+test_installed_cli_subprocess (test_material_relocation.RelocateMaterialTest.test_installed_cli_subprocess) ... ok
+test_interruption_and_separate_restore (test_material_relocation.RelocateMaterialTest.test_interruption_and_separate_restore) ... ok
+test_preview_shows_plan_without_writes (test_material_relocation.RelocateMaterialTest.test_preview_shows_plan_without_writes) ... ok
+test_relocate_on_external_metadata_card (test_material_relocation.RelocateMaterialTest.test_relocate_on_external_metadata_card) ... ok
+test_relocate_rejects_invalid_materials_and_targets (test_material_relocation.RelocateMaterialTest.test_relocate_rejects_invalid_materials_and_targets) ... ok
+test_repeat_is_safe_message_without_new_copy (test_material_relocation.RelocateMaterialTest.test_repeat_is_safe_message_without_new_copy) ... ok
+test_stale_source_or_target_rejected_without_writes (test_material_relocation.RelocateMaterialTest.test_stale_source_or_target_rejected_without_writes) ... ok
+test_target_inside_own_evidence_root_material (test_material_relocation.RelocateMaterialTest.test_target_inside_own_evidence_root_material) ... ok
+
+----------------------------------------------------------------------
+Ran 21 tests in 71.573s
+
+OK

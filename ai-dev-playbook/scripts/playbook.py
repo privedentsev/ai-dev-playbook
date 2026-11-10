@@ -1186,7 +1186,8 @@ def command_gate(root, args):
                  or (action == "plan" and getattr(args, "save", False))))
         or (args.command == "lifecycle"
             and (action in {"apply", "restore", "handoff", "accept", "start", "route", "revise"}
-                 or (action in {"register-material", "prepare-audit"} and args.apply)
+                 or (action in {"register-material", "prepare-audit",
+                                "relocate-material"} and args.apply)
                  or (action == "plan" and getattr(args, "save", False))))
         or (args.command == "policy" and action == "apply")
         or (args.command == "block"
@@ -1929,6 +1930,11 @@ def dispatch(root, args, gate):
                 root, args.task_id, args.source, args.material_id, args.role,
                 args.immutable, args.required, args.apply,
                 args.actor or _actor(), _lifecycle_ctx(gate), safe_path, require)
+        elif args.action == "relocate-material":
+            lifecycle.relocate_material_command(
+                root, args.task_id, args.material_id, args.to, args.reason,
+                args.apply, args.actor, args.model,
+                _lifecycle_ctx(gate), safe_path, require)
         elif args.action in {"start", "route", "revise"}:
             lifecycle.transition_command(root, args.task_id, args.action,
                 args.actor or _actor(), args.model, args.reason,
@@ -2073,6 +2079,18 @@ def main(argv=None):
     flags.add_argument("--optional", dest="required", action="store_false")
     action.add_argument("--apply", action="store_true")
     action.add_argument("--actor")
+    action = actions.add_parser("relocate-material",
+                                help="Перенести один локальный файл-материал "
+                                     "в свободный путь внутри owner-evidence; "
+                                     "preview по умолчанию")
+    action.add_argument("task_id")
+    action.add_argument("--id", dest="material_id", required=True)
+    action.add_argument("--to", required=True,
+                        help="Новый путь файла внутри docs/tasks/<ID>-evidence/")
+    action.add_argument("--reason", required=True)
+    action.add_argument("--actor", required=True)
+    action.add_argument("--model", required=True)
+    action.add_argument("--apply", action="store_true")
     action = actions.add_parser("handoff",
                                 help="Записать передачу карточки на приёмку "
                                      "(отчёты verify → materials)")

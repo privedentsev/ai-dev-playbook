@@ -30,7 +30,7 @@
     {
       "id": "verify-070dadde",
       "role": "report",
-      "source": "docs/tasks/PB-060-evidence/work/verification/PB-060/070daddef15143dcbfa2d1c5415df265/report.json",
+      "source": "docs/tasks/PB-060-evidence/manual-reports/070dadde-report.json",
       "storage": "local",
       "required": true,
       "immutable": true,
@@ -169,6 +169,15 @@
       "used_by": [
         "PB-060"
       ]
+    },
+    {
+      "id": "relocate-lc-e7298caefc6fd7fa",
+      "role": "report",
+      "source": "docs/tasks/PB-060-evidence/relocate-lc-e7298caefc6fd7fa.json",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": []
     }
   ],
   "handoff": {
@@ -238,5 +247,11 @@
     "detail": null,
     "audit_id": "AUDIT-05",
     "audit_sha256": "sha256:03a6a420b97480a2d807d5c5c24377313224c7e990ef530be7ae43620a03c251"
-  }
+  },
+  "moves": [
+    {
+      "from": "docs/tasks/PB-060-evidence/work/verification/PB-060/070daddef15143dcbfa2d1c5415df265/report.json",
+      "to": "docs/tasks/PB-060-evidence/manual-reports/070dadde-report.json"
+    }
+  ]
 }

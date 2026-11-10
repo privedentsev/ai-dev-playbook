@@ -1,0 +1,4 @@
+Before prepare-audit: python3 ai-dev-playbook/scripts/playbook.py verify PB-072 --audit-ready
+Exit 1
+ERROR: PB-072: критерии не подтверждены свежими проверками; обновите CHECK/handoff
+Reason inspected in criterion_states: previous findings remain open until auditor closure. CHECK-02 now covers AC-01–AC-07; HANDOFF-02 is current.

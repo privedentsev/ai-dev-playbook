@@ -1,0 +1,31 @@
+{
+  "task": "PB-072",
+  "audit": "AUDIT-01",
+  "result": "changes_requested",
+  "at": "2026-11-10T12:23:31+03:00",
+  "actor": "Codex",
+  "model": "GPT-6",
+  "tests": {
+    "command": "python3 -m unittest discover -s tests -p test_material_relocation.py -v",
+    "passed": 15
+  },
+  "audit_ready": "failed: AC-07 is not covered by CHECK-01",
+  "findings": [
+    "A-01: missing ancestor-file destination collision",
+    "A-02: relocation rejects own evidence-directory material",
+    "A-03: incomplete permanent regression coverage",
+    "A-04: missing AC-07 CHECK evidence"
+  ],
+  "limits": [
+    "Full suite not repeated after audit-ready rejection.",
+    "An initial overlapping prepare-audit caused one fixture initialization failure; sequential rerun passed all 15 tests.",
+    "PB-060 was not changed during audit."
+  ],
+  "final_checks": {
+    "index": "passed",
+    "card_sync": "passed",
+    "check_ready": "passed",
+    "verify_preflight": "passed (portability/structure; no test runner)",
+    "git_diff_check": "passed"
+  }
+}

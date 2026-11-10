@@ -1,0 +1,28 @@
+{
+  "task": "PB-072",
+  "at": "2026-11-10T14:08:23+03:00",
+  "actor": "Codex",
+  "model": "GPT-6",
+  "result": "not_ready",
+  "card_status": "in_progress",
+  "latest_handoff": "HANDOFF-02",
+  "latest_audit": "AUDIT-02",
+  "open_findings": [
+    "A-03",
+    "A-05"
+  ],
+  "observations": [
+    "No new EXEC/CHECK/HANDOFF after AUDIT-02.",
+    "test_installed_cli_subprocess still selects repository playbook.__file__.",
+    "material_destinations still checks only projected ancestor destinations, not existing ancestor files."
+  ],
+  "audit_ready": {
+    "command": "python3 ai-dev-playbook/scripts/playbook.py verify PB-072 --audit-ready",
+    "exit_code": 1,
+    "error": "PB-072: аудит требует in_review",
+    "structural_check": "passed: 82 cards, 28 documents, 2 legacy"
+  },
+  "index": "already current",
+  "tests": "not repeated: no new handoff/fixes",
+  "changelog": "unchanged: acceptance condition not satisfied"
+}

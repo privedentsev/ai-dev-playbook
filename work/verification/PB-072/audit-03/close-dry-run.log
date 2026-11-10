@@ -1,0 +1,511 @@
+План lc-c29588eecbadc435 (lifecycle):
+Основание: playbook.py close PB-072
+Исполнитель: cli:privedentsev1 (cli)
+Действия:
+  close_task PB-072: docs/tasks/PB-072.md → docs/archive/tasks/PB-072.md (done)
+Переносы:
+  docs/tasks/PB-072-evidence/implementation-brief.md → docs/archive/tasks/PB-072-evidence/implementation-brief.md
+  docs/tasks/PB-072-evidence/pb060-close-dry-run.log → docs/archive/tasks/PB-072-evidence/pb060-close-dry-run.log
+  docs/tasks/PB-072-evidence/pb060-relocate-apply.log → docs/archive/tasks/PB-072-evidence/pb060-relocate-apply.log
+  docs/tasks/PB-072-evidence/pb060-relocate-preview.log → docs/archive/tasks/PB-072-evidence/pb060-relocate-preview.log
+  docs/tasks/PB-072-evidence/source-case.json → docs/archive/tasks/PB-072-evidence/source-case.json
+  docs/tasks/PB-072-evidence/test-matrix.md → docs/archive/tasks/PB-072-evidence/test-matrix.md
+  docs/tasks/PB-072.md → docs/archive/tasks/PB-072.md
+  docs/tasks/PB-072.meta.json → docs/archive/tasks/PB-072.meta.json
+  work/verification/PB-072/audit-01 → docs/archive/tasks/PB-072-evidence/work/verification/PB-072/audit-01
+  work/verification/PB-072/audit-01/audit-ready.log → docs/archive/tasks/PB-072-evidence/work/verification/PB-072/audit-01/audit-ready.log
+  work/verification/PB-072/audit-01/check-ready-final.log → docs/archive/tasks/PB-072-evidence/work/verification/PB-072/audit-01/check-ready-final.log
+  work/verification/PB-072/audit-01/check-ready.log → docs/archive/tasks/PB-072-evidence/work/verification/PB-072/audit-01/check-ready.log
+  work/verification/PB-072/audit-01/preflight.log → docs/archive/tasks/PB-072-evidence/work/verification/PB-072/audit-01/preflight.log
+  work/verification/PB-072/audit-01/probe.py → docs/archive/tasks/PB-072-evidence/work/verification/PB-072/audit-01/probe.py
+  work/verification/PB-072/audit-01/probes.log → docs/archive/tasks/PB-072-evidence/work/verification/PB-072/audit-01/probes.log
+  work/verification/PB-072/audit-01/provenance.json → docs/archive/tasks/PB-072-evidence/work/verification/PB-072/audit-01/provenance.json
+  work/verification/PB-072/audit-01/provenance.sha256 → docs/archive/tasks/PB-072-evidence/work/verification/PB-072/audit-01/provenance.sha256
+  work/verification/PB-072/audit-01/report.json → docs/archive/tasks/PB-072-evidence/work/verification/PB-072/audit-01/report.json
+  work/verification/PB-072/audit-01/snapshot.meta.json → docs/archive/tasks/PB-072-evidence/work/verification/PB-072/audit-01/snapshot.meta.json
+  work/verification/PB-072/audit-01/snapshot.txt → docs/archive/tasks/PB-072-evidence/work/verification/PB-072/audit-01/snapshot.txt
+  work/verification/PB-072/audit-01/tests.log → docs/archive/tasks/PB-072-evidence/work/verification/PB-072/audit-01/tests.log
+  work/verification/PB-072/audit-02 → docs/archive/tasks/PB-072-evidence/work/verification/PB-072/audit-02
+  work/verification/PB-072/audit-02/audit-ready.log → docs/archive/tasks/PB-072-evidence/work/verification/PB-072/audit-02/audit-ready.log
+  work/verification/PB-072/audit-02/check-ready.log → docs/archive/tasks/PB-072-evidence/work/verification/PB-072/audit-02/check-ready.log
+  work/verification/PB-072/audit-02/occupied-parent-probe.py → docs/archive/tasks/PB-072-evidence/work/verification/PB-072/audit-02/occupied-parent-probe.py
+  work/verification/PB-072/audit-02/occupied-parent.log → docs/archive/tasks/PB-072-evidence/work/verification/PB-072/audit-02/occupied-parent.log
+  work/verification/PB-072/audit-02/original-probes.log → docs/archive/tasks/PB-072-evidence/work/verification/PB-072/audit-02/original-probes.log
+  work/verification/PB-072/audit-02/preflight.log → docs/archive/tasks/PB-072-evidence/work/verification/PB-072/audit-02/preflight.log
+  work/verification/PB-072/audit-02/provenance.json → docs/archive/tasks/PB-072-evidence/work/verification/PB-072/audit-02/provenance.json
+  work/verification/PB-072/audit-02/provenance.sha256 → docs/archive/tasks/PB-072-evidence/work/verification/PB-072/audit-02/provenance.sha256
+  work/verification/PB-072/audit-02/repeat-readiness-20261110-140823.json → docs/archive/tasks/PB-072-evidence/work/verification/PB-072/audit-02/repeat-readiness-20261110-140823.json
+  work/verification/PB-072/audit-02/report.json → docs/archive/tasks/PB-072-evidence/work/verification/PB-072/audit-02/report.json
+  work/verification/PB-072/audit-02/snapshot.meta.json → docs/archive/tasks/PB-072-evidence/work/verification/PB-072/audit-02/snapshot.meta.json
+  work/verification/PB-072/audit-02/snapshot.txt → docs/archive/tasks/PB-072-evidence/work/verification/PB-072/audit-02/snapshot.txt
+  work/verification/PB-072/audit-02/tests.log → docs/archive/tasks/PB-072-evidence/work/verification/PB-072/audit-02/tests.log
+  work/verification/PB-072/audit-03 → docs/archive/tasks/PB-072-evidence/work/verification/PB-072/audit-03
+  work/verification/PB-072/audit-03/audit-ready-after.log → docs/archive/tasks/PB-072-evidence/work/verification/PB-072/audit-03/audit-ready-after.log
+  work/verification/PB-072/audit-03/audit-ready-before.log → docs/archive/tasks/PB-072-evidence/work/verification/PB-072/audit-03/audit-ready-before.log
+  work/verification/PB-072/audit-03/check-ready.log → docs/archive/tasks/PB-072-evidence/work/verification/PB-072/audit-03/check-ready.log
+  work/verification/PB-072/audit-03/close-dry-run.log → docs/archive/tasks/PB-072-evidence/work/verification/PB-072/audit-03/close-dry-run.log
+  work/verification/PB-072/audit-03/occupied-parent.log → docs/archive/tasks/PB-072-evidence/work/verification/PB-072/audit-03/occupied-parent.log
+  work/verification/PB-072/audit-03/provenance.json → docs/archive/tasks/PB-072-evidence/work/verification/PB-072/audit-03/provenance.json
+  work/verification/PB-072/audit-03/provenance.sha256 → docs/archive/tasks/PB-072-evidence/work/verification/PB-072/audit-03/provenance.sha256
+  work/verification/PB-072/audit-03/report.json → docs/archive/tasks/PB-072-evidence/work/verification/PB-072/audit-03/report.json
+  work/verification/PB-072/audit-03/snapshot.meta.json → docs/archive/tasks/PB-072-evidence/work/verification/PB-072/audit-03/snapshot.meta.json
+  work/verification/PB-072/audit-03/snapshot.txt → docs/archive/tasks/PB-072-evidence/work/verification/PB-072/audit-03/snapshot.txt
+  work/verification/PB-072/audit-03/symlink-probe.py → docs/archive/tasks/PB-072-evidence/work/verification/PB-072/audit-03/symlink-probe.py
+  work/verification/PB-072/audit-03/symlink.log → docs/archive/tasks/PB-072-evidence/work/verification/PB-072/audit-03/symlink.log
+  work/verification/PB-072/audit-03/tests.log → docs/archive/tasks/PB-072-evidence/work/verification/PB-072/audit-03/tests.log
+  work/verification/PB-072/b7a24c15255b49a3a8c9163864df6fcb → docs/archive/tasks/PB-072-evidence/work/verification/PB-072/b7a24c15255b49a3a8c9163864df6fcb
+  work/verification/PB-072/b7a24c15255b49a3a8c9163864df6fcb/preflight-regressions.stderr.log → docs/archive/tasks/PB-072-evidence/work/verification/PB-072/b7a24c15255b49a3a8c9163864df6fcb/preflight-regressions.stderr.log
+  work/verification/PB-072/b7a24c15255b49a3a8c9163864df6fcb/preflight-regressions.stdout.log → docs/archive/tasks/PB-072-evidence/work/verification/PB-072/b7a24c15255b49a3a8c9163864df6fcb/preflight-regressions.stdout.log
+  work/verification/PB-072/b7a24c15255b49a3a8c9163864df6fcb/report.json → docs/archive/tasks/PB-072-evidence/work/verification/PB-072/b7a24c15255b49a3a8c9163864df6fcb/report.json
+  work/verification/PB-072/b7a24c15255b49a3a8c9163864df6fcb/self-check.stderr.log → docs/archive/tasks/PB-072-evidence/work/verification/PB-072/b7a24c15255b49a3a8c9163864df6fcb/self-check.stderr.log
+  work/verification/PB-072/b7a24c15255b49a3a8c9163864df6fcb/self-check.stdout.log → docs/archive/tasks/PB-072-evidence/work/verification/PB-072/b7a24c15255b49a3a8c9163864df6fcb/self-check.stdout.log
+  work/verification/PB-072/b7a24c15255b49a3a8c9163864df6fcb/unit-tests.stderr.log → docs/archive/tasks/PB-072-evidence/work/verification/PB-072/b7a24c15255b49a3a8c9163864df6fcb/unit-tests.stderr.log
+  work/verification/PB-072/b7a24c15255b49a3a8c9163864df6fcb/unit-tests.stdout.log → docs/archive/tasks/PB-072-evidence/work/verification/PB-072/b7a24c15255b49a3a8c9163864df6fcb/unit-tests.stdout.log
+  work/verification/PB-072/b7d1767eff91482884e1c8a9fe3dc512 → docs/archive/tasks/PB-072-evidence/work/verification/PB-072/b7d1767eff91482884e1c8a9fe3dc512
+  work/verification/PB-072/b7d1767eff91482884e1c8a9fe3dc512/preflight-regressions.stderr.log → docs/archive/tasks/PB-072-evidence/work/verification/PB-072/b7d1767eff91482884e1c8a9fe3dc512/preflight-regressions.stderr.log
+  work/verification/PB-072/b7d1767eff91482884e1c8a9fe3dc512/preflight-regressions.stdout.log → docs/archive/tasks/PB-072-evidence/work/verification/PB-072/b7d1767eff91482884e1c8a9fe3dc512/preflight-regressions.stdout.log
+  work/verification/PB-072/b7d1767eff91482884e1c8a9fe3dc512/report.json → docs/archive/tasks/PB-072-evidence/work/verification/PB-072/b7d1767eff91482884e1c8a9fe3dc512/report.json
+  work/verification/PB-072/b7d1767eff91482884e1c8a9fe3dc512/self-check.stderr.log → docs/archive/tasks/PB-072-evidence/work/verification/PB-072/b7d1767eff91482884e1c8a9fe3dc512/self-check.stderr.log
+  work/verification/PB-072/b7d1767eff91482884e1c8a9fe3dc512/self-check.stdout.log → docs/archive/tasks/PB-072-evidence/work/verification/PB-072/b7d1767eff91482884e1c8a9fe3dc512/self-check.stdout.log
+  work/verification/PB-072/b7d1767eff91482884e1c8a9fe3dc512/unit-tests.stderr.log → docs/archive/tasks/PB-072-evidence/work/verification/PB-072/b7d1767eff91482884e1c8a9fe3dc512/unit-tests.stderr.log
+  work/verification/PB-072/b7d1767eff91482884e1c8a9fe3dc512/unit-tests.stdout.log → docs/archive/tasks/PB-072-evidence/work/verification/PB-072/b7d1767eff91482884e1c8a9fe3dc512/unit-tests.stdout.log
+  work/verification/PB-072/d6b31ecc140b433d9d4d00efd6507081 → docs/archive/tasks/PB-072-evidence/work/verification/PB-072/d6b31ecc140b433d9d4d00efd6507081
+  work/verification/PB-072/d6b31ecc140b433d9d4d00efd6507081/preflight-regressions.stderr.log → docs/archive/tasks/PB-072-evidence/work/verification/PB-072/d6b31ecc140b433d9d4d00efd6507081/preflight-regressions.stderr.log
+  work/verification/PB-072/d6b31ecc140b433d9d4d00efd6507081/preflight-regressions.stdout.log → docs/archive/tasks/PB-072-evidence/work/verification/PB-072/d6b31ecc140b433d9d4d00efd6507081/preflight-regressions.stdout.log
+  work/verification/PB-072/d6b31ecc140b433d9d4d00efd6507081/report.json → docs/archive/tasks/PB-072-evidence/work/verification/PB-072/d6b31ecc140b433d9d4d00efd6507081/report.json
+  work/verification/PB-072/d6b31ecc140b433d9d4d00efd6507081/self-check.stderr.log → docs/archive/tasks/PB-072-evidence/work/verification/PB-072/d6b31ecc140b433d9d4d00efd6507081/self-check.stderr.log
+  work/verification/PB-072/d6b31ecc140b433d9d4d00efd6507081/self-check.stdout.log → docs/archive/tasks/PB-072-evidence/work/verification/PB-072/d6b31ecc140b433d9d4d00efd6507081/self-check.stdout.log
+  work/verification/PB-072/d6b31ecc140b433d9d4d00efd6507081/unit-tests.stderr.log → docs/archive/tasks/PB-072-evidence/work/verification/PB-072/d6b31ecc140b433d9d4d00efd6507081/unit-tests.stderr.log
+  work/verification/PB-072/d6b31ecc140b433d9d4d00efd6507081/unit-tests.stdout.log → docs/archive/tasks/PB-072-evidence/work/verification/PB-072/d6b31ecc140b433d9d4d00efd6507081/unit-tests.stdout.log
+Удаляются каталоги:
+  docs/tasks/PB-072-evidence
+  work/verification/PB-072/audit-01
+  work/verification/PB-072/audit-02
+  work/verification/PB-072/audit-03
+  work/verification/PB-072/b7a24c15255b49a3a8c9163864df6fcb
+  work/verification/PB-072/b7d1767eff91482884e1c8a9fe3dc512
+  work/verification/PB-072/d6b31ecc140b433d9d4d00efd6507081
+Записей: 72, удалений файлов: 67
+Diff записей (.md):
+  docs/archive/tasks/PB-072-evidence/implementation-brief.md: prepared stream sha256:78f15d200aa41662833ae8e9e0850987c3c2809c8df0ec99614e40b6af319e95
+  docs/archive/tasks/PB-072-evidence/pb060-close-dry-run.log: prepared stream sha256:ced88eb3f7bc5262ddec3cf54c498df60584f31caf1772d38fafe7722890377c
+  docs/archive/tasks/PB-072-evidence/pb060-relocate-apply.log: prepared stream sha256:0146d3e3946f48bf80ec4b3d4a6544bd4bd6910d4c9c3cf2077aa7fc3ed85bde
+  docs/archive/tasks/PB-072-evidence/pb060-relocate-preview.log: prepared stream sha256:655cad0fd774cf27c0f943890939d8df577acd26aad505b2f58a6f313e3b0b90
+  docs/archive/tasks/PB-072-evidence/source-case.json: prepared stream sha256:befd0936924b6512a93e8f1c79c97ea0ebcca1369704e87482d82f7e4b9066f8
+  docs/archive/tasks/PB-072-evidence/test-matrix.md: prepared stream sha256:ec726c6165a3fe46d2a68f86ee1c0bd7d73b69ba3297cc4a8e4867f5c64cdbe4
+  docs/archive/tasks/PB-072-evidence/work/verification/PB-072/audit-01/audit-ready.log: prepared stream sha256:58a36c1ee122cc9d47ca32f26f117adcb78ed6e8f1d013c58f9aab3a6f32d382
+  docs/archive/tasks/PB-072-evidence/work/verification/PB-072/audit-01/check-ready-final.log: prepared stream sha256:7058809b6c6df68abacaec509829b17400a075a183e6d9f116c6a352340dc3a6
+  docs/archive/tasks/PB-072-evidence/work/verification/PB-072/audit-01/check-ready.log: prepared stream sha256:331cc381f3afce74d06604cb8ef8999da6dcdf3e39dd6930c86a3927b082dee4
+  docs/archive/tasks/PB-072-evidence/work/verification/PB-072/audit-01/preflight.log: prepared stream sha256:9aee5351f698ae5f08ed332030f7d2c566883aadd9908a94ae7c08be4ea4db9b
+  docs/archive/tasks/PB-072-evidence/work/verification/PB-072/audit-01/probe.py: prepared stream sha256:5c63be037cd090ca561c745227e4cd4cc8e89ec6c555f6226ab4896eb1b0c4b0
+  docs/archive/tasks/PB-072-evidence/work/verification/PB-072/audit-01/probes.log: prepared stream sha256:e367d7c84a1e140202bb97ff9bed13b57bed276f84199b4f565972547fa50c85
+  docs/archive/tasks/PB-072-evidence/work/verification/PB-072/audit-01/provenance.json: prepared stream sha256:32dbd1b35faa14e1a5eb20a5b9e68ecd89a9008430d65036a45f6b01ab769122
+  docs/archive/tasks/PB-072-evidence/work/verification/PB-072/audit-01/provenance.sha256: prepared stream sha256:62b57d07febaf748fb009ecbc080b9d09aa6b3e1b041e0a3fda75312a209331e
+  docs/archive/tasks/PB-072-evidence/work/verification/PB-072/audit-01/report.json: prepared stream sha256:c74ef56d70b9588bee719f9365852e7a5ece98fa4e224ab99ce541e5f137e410
+  docs/archive/tasks/PB-072-evidence/work/verification/PB-072/audit-01/snapshot.meta.json: prepared stream sha256:b33a09e9d8ac9dc28b10d2f75a97b9200a15c287ae721afa2c17ab9d26c052fe
+  docs/archive/tasks/PB-072-evidence/work/verification/PB-072/audit-01/snapshot.txt: prepared stream sha256:54b39cb7d742492bc177598067cd01e490b7ebe2a19815bc8dfc8209d591d1b7
+  docs/archive/tasks/PB-072-evidence/work/verification/PB-072/audit-01/tests.log: prepared stream sha256:38482a8400e560a2009d6224274f49fd9cfb852edb15be09e3411075189628cc
+  docs/archive/tasks/PB-072-evidence/work/verification/PB-072/audit-02/audit-ready.log: prepared stream sha256:c6fff0cfdcc0d0ed9987dded1b9dbe478e717002669704c39409535c560e15d7
+  docs/archive/tasks/PB-072-evidence/work/verification/PB-072/audit-02/check-ready.log: prepared stream sha256:7058809b6c6df68abacaec509829b17400a075a183e6d9f116c6a352340dc3a6
+  docs/archive/tasks/PB-072-evidence/work/verification/PB-072/audit-02/occupied-parent-probe.py: prepared stream sha256:0ae7c2f4c876dbeee4ec1c01269240904f867f9a6114d0b1fa19e2a0a5e201af
+  docs/archive/tasks/PB-072-evidence/work/verification/PB-072/audit-02/occupied-parent.log: prepared stream sha256:7fd0338db9898326c2d81b57c79a15500e821ff1136330dd4c9caa0c68aeac64
+  docs/archive/tasks/PB-072-evidence/work/verification/PB-072/audit-02/original-probes.log: prepared stream sha256:2a935f053809742cdfff7c06accb226647712a4b5e10dab507461f4a6798246a
+  docs/archive/tasks/PB-072-evidence/work/verification/PB-072/audit-02/preflight.log: prepared stream sha256:9aee5351f698ae5f08ed332030f7d2c566883aadd9908a94ae7c08be4ea4db9b
+  docs/archive/tasks/PB-072-evidence/work/verification/PB-072/audit-02/provenance.json: prepared stream sha256:a4c90fc17a8423ac0c3e7fb9359ae09178c506913dd7788a1520b9aaf32e97b7
+  docs/archive/tasks/PB-072-evidence/work/verification/PB-072/audit-02/provenance.sha256: prepared stream sha256:0ef0b489be0cb43b0ca7d76e70fe8661ee2b23906100f785ac270da4f9b79fe9
+  docs/archive/tasks/PB-072-evidence/work/verification/PB-072/audit-02/repeat-readiness-20261110-140823.json: prepared stream sha256:c96db920bf023ab0f32a289b8a820868eb7075c615f3fb6916ef6f8936d7108b
+  docs/archive/tasks/PB-072-evidence/work/verification/PB-072/audit-02/report.json: prepared stream sha256:45d219837c912c09f99461ddc24336c6224a61cf78b1656912db3629595a445e
+  docs/archive/tasks/PB-072-evidence/work/verification/PB-072/audit-02/snapshot.meta.json: prepared stream sha256:3ad4bfc5d4e1b1810a77deb1f05eb19725565c109920359ad35154f7fff0b81e
+  docs/archive/tasks/PB-072-evidence/work/verification/PB-072/audit-02/snapshot.txt: prepared stream sha256:1f78dfdcc17e0cc350596f2e3ca9df687150d17174e3396c82a13636a8df45f9
+  docs/archive/tasks/PB-072-evidence/work/verification/PB-072/audit-02/tests.log: prepared stream sha256:fdf19c7f68e48b8ea04a63888a960f65d738d4237ef8094d14490fcd16249c85
+  docs/archive/tasks/PB-072-evidence/work/verification/PB-072/audit-03/audit-ready-after.log: prepared stream sha256:ce47ed3ba6dfe4c50b9b92a926c93454753274cdb19e0f75ccaae5e2c07ae993
+  docs/archive/tasks/PB-072-evidence/work/verification/PB-072/audit-03/audit-ready-before.log: prepared stream sha256:0119f25ec5ebd8a749e9d11c0c73e6278e15515bc70432ca269579e9f13d0558
+  docs/archive/tasks/PB-072-evidence/work/verification/PB-072/audit-03/check-ready.log: prepared stream sha256:7058809b6c6df68abacaec509829b17400a075a183e6d9f116c6a352340dc3a6
+  docs/archive/tasks/PB-072-evidence/work/verification/PB-072/audit-03/close-dry-run.log: prepared stream sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+  docs/archive/tasks/PB-072-evidence/work/verification/PB-072/audit-03/occupied-parent.log: prepared stream sha256:b6b8efeb2fb0e337ec875976b8d213cf18a38c63cc89edfaaad916df99616754
+  docs/archive/tasks/PB-072-evidence/work/verification/PB-072/audit-03/provenance.json: prepared stream sha256:425af7eb6277d0a2dd013378b9eedf7ba58bd8bbe58a93226b1a5e0a28a000f4
+  docs/archive/tasks/PB-072-evidence/work/verification/PB-072/audit-03/provenance.sha256: prepared stream sha256:0e4edc4ed72baf1728d410b15a075fe0a4fea4a5b3178459e6df45aea07df3bd
+  docs/archive/tasks/PB-072-evidence/work/verification/PB-072/audit-03/report.json: prepared stream sha256:bcd9a009998507674f3820239bbcea8003fd5455ba30780a886f9809f36735eb
+  docs/archive/tasks/PB-072-evidence/work/verification/PB-072/audit-03/snapshot.meta.json: prepared stream sha256:5303debe4e5727bd87e03cb1e3cae730d8552b65c8a403ac0837772ea03b7a75
+  docs/archive/tasks/PB-072-evidence/work/verification/PB-072/audit-03/snapshot.txt: prepared stream sha256:13a6307cb8254692d618c679d7720049c1564271b36407dfbac8ad4d2ecbbdfe
+  docs/archive/tasks/PB-072-evidence/work/verification/PB-072/audit-03/symlink-probe.py: prepared stream sha256:3fe3b7a2b05d8082cd155207b7d37aca1d66212760c9444d18088e93d9f78b57
+  docs/archive/tasks/PB-072-evidence/work/verification/PB-072/audit-03/symlink.log: prepared stream sha256:5c500ec9d21e3115a70f9ef6b8ad997188d041a9edf1956a38be0c7ca7d96614
+  docs/archive/tasks/PB-072-evidence/work/verification/PB-072/audit-03/tests.log: prepared stream sha256:5a15f9c9ecbe5688905357e2a98f3702845fba75e8fed1ce2f2d3410ca0e24e8
+  docs/archive/tasks/PB-072-evidence/work/verification/PB-072/b7a24c15255b49a3a8c9163864df6fcb/preflight-regressions.stderr.log: prepared stream sha256:119697cbb86bb0d202ab36bd77e2b8a5ca2033d0bddb072b2f99201dfd0cff02
+  docs/archive/tasks/PB-072-evidence/work/verification/PB-072/b7a24c15255b49a3a8c9163864df6fcb/preflight-regressions.stdout.log: prepared stream sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+  docs/archive/tasks/PB-072-evidence/work/verification/PB-072/b7a24c15255b49a3a8c9163864df6fcb/report.json: prepared stream sha256:c204a39a1ccb85b7ce72945cc622e750b4d2f092a1544c6eefe4ba44dbb10865
+  docs/archive/tasks/PB-072-evidence/work/verification/PB-072/b7a24c15255b49a3a8c9163864df6fcb/self-check.stderr.log: prepared stream sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+  docs/archive/tasks/PB-072-evidence/work/verification/PB-072/b7a24c15255b49a3a8c9163864df6fcb/self-check.stdout.log: prepared stream sha256:7058809b6c6df68abacaec509829b17400a075a183e6d9f116c6a352340dc3a6
+  docs/archive/tasks/PB-072-evidence/work/verification/PB-072/b7a24c15255b49a3a8c9163864df6fcb/unit-tests.stderr.log: prepared stream sha256:116e5e7fefca1f4434ec73bd413df9aee2406c0888abad582a2be95eeb57e5dd
+  docs/archive/tasks/PB-072-evidence/work/verification/PB-072/b7a24c15255b49a3a8c9163864df6fcb/unit-tests.stdout.log: prepared stream sha256:7c58070f213bf3c3ab0b69de52364b6a8aa2cdb85d27ccb3d4f0b30da1d8cd37
+  docs/archive/tasks/PB-072-evidence/work/verification/PB-072/b7d1767eff91482884e1c8a9fe3dc512/preflight-regressions.stderr.log: prepared stream sha256:6e8fd0e91126dadab3b6a4492145aa6183684cff501f60e1e992bd5097a42137
+  docs/archive/tasks/PB-072-evidence/work/verification/PB-072/b7d1767eff91482884e1c8a9fe3dc512/preflight-regressions.stdout.log: prepared stream sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+  docs/archive/tasks/PB-072-evidence/work/verification/PB-072/b7d1767eff91482884e1c8a9fe3dc512/report.json: prepared stream sha256:f68907e0537ec92742a5bad35439ac7ed0edf52bbc6f01e5e862cf53dd9cb6f7
+  docs/archive/tasks/PB-072-evidence/work/verification/PB-072/b7d1767eff91482884e1c8a9fe3dc512/self-check.stderr.log: prepared stream sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+  docs/archive/tasks/PB-072-evidence/work/verification/PB-072/b7d1767eff91482884e1c8a9fe3dc512/self-check.stdout.log: prepared stream sha256:7058809b6c6df68abacaec509829b17400a075a183e6d9f116c6a352340dc3a6
+  docs/archive/tasks/PB-072-evidence/work/verification/PB-072/b7d1767eff91482884e1c8a9fe3dc512/unit-tests.stderr.log: prepared stream sha256:d881e64d6ff2b6dbe524c63770121b4d17f7747551380da8939b9f99979afa65
+  docs/archive/tasks/PB-072-evidence/work/verification/PB-072/b7d1767eff91482884e1c8a9fe3dc512/unit-tests.stdout.log: prepared stream sha256:27629cbcb2aec383b2fcae2226807eb927869d529aaf62ef9cb503e25e237a9f
+  docs/archive/tasks/PB-072-evidence/work/verification/PB-072/d6b31ecc140b433d9d4d00efd6507081/preflight-regressions.stderr.log: prepared stream sha256:f0c7fcf8124bc3a981136a7f6f3297950e8867d53b13d8afaceabcaf7f87dad2
+  docs/archive/tasks/PB-072-evidence/work/verification/PB-072/d6b31ecc140b433d9d4d00efd6507081/preflight-regressions.stdout.log: prepared stream sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+  docs/archive/tasks/PB-072-evidence/work/verification/PB-072/d6b31ecc140b433d9d4d00efd6507081/report.json: prepared stream sha256:8bbc3916078b1f4ac4a78926a8163af2b9e730b73608279fe2c75c57b8477f7e
+  docs/archive/tasks/PB-072-evidence/work/verification/PB-072/d6b31ecc140b433d9d4d00efd6507081/self-check.stderr.log: prepared stream sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+  docs/archive/tasks/PB-072-evidence/work/verification/PB-072/d6b31ecc140b433d9d4d00efd6507081/self-check.stdout.log: prepared stream sha256:7058809b6c6df68abacaec509829b17400a075a183e6d9f116c6a352340dc3a6
+  docs/archive/tasks/PB-072-evidence/work/verification/PB-072/d6b31ecc140b433d9d4d00efd6507081/unit-tests.stderr.log: prepared stream sha256:e22a87389557d6ff8bdea7b7d981e2e31cdbe6c0c153f33109b5388f36673b13
+  docs/archive/tasks/PB-072-evidence/work/verification/PB-072/d6b31ecc140b433d9d4d00efd6507081/unit-tests.stdout.log: prepared stream sha256:b1e1431b49f1186a17fae93ba4adbd664b4d2d8b8ba5397d66177edd5be78fd9
+--- /dev/null
++++ b/docs/archive/tasks/PB-072.md
+@@ -0,0 +1,290 @@
++# PB-072: Предотвращать коллизии архивирования отчётов и безопасно исправлять размещение материалов
++
++ID: PB-072
++Status: done
++Priority: P2
++Depends-On: -
++Executor: Devin
++Model: SWE-2 High
++Created: 2026-11-10T08:19:18+03:00
++Closed: 2026-11-10T15:18:43+03:00
++
++<!-- playbook-meta:external -->
++
++## Задача
++
++### Цель и границы
++
++Устранить причину поздней коллизии материалов PB-060: правило использования оригиналов verify, общий ранний контроль будущих архивных назначений и явный перенос одного зарегистрированного файла с сохранением байтов и истории. Средняя задача, один результат; не quick. Не выполнять её в рамках подготовки документов.
++
++### Контекст
++
++[Спецификация](../../specs/material-archive-safety.md), [design](../../designs/material-archive-safety.md), [памятка и план восстановления](PB-072-evidence/implementation-brief.md), [матрица тестов](PB-072-evidence/test-matrix.md), [исходный случай](PB-072-evidence/source-case.json). Основание — обсуждение инженера и просьба «Создай задачу и все материалы для ее реализации» от 2026-11-10.
++
++PB-060 — источник случая, не блокирующая зависимость: ожидание её закрытия создало бы цикл. Существующая приёмка сохранена как исторический факт; актуальность после новых изменений проверяется штатно. Перед стартом согласовать draft spec/design и разрешить выполнение; прочитать актуальные передачи пересекающихся работ. Чужие незакоммиченные изменения сохранять.
++
++### Критерии приёмки
++
++- [x] AC-01: Правила verification/context и руководство предписывают использовать оригиналы штатных отчётов через handoff; допустимые внешние доказательства и заметки не запрещены (R-01).
++- [x] AC-02: Один расчёт выявляет совпадающее архивное назначение разных источников при register-material, handoff, prepare-audit и verify/preflight до записи/subprocess; сообщение содержит owner, material IDs, источники, назначение и следующий шаг (R-02–05).
++- [x] AC-03: Реальные CLI-регрессии подтверждают ранний отказ без изменения дерева для оригинала/копии, совпадающих и различных байтов, вложенного файла каталога, автоматической регистрации handoff и занятого назначения; нормальные материалы проходят (R-02–06).
++- [x] AC-04: Явный relocate-material имеет preview/apply; переносит только локальный файл в свободный owner-evidence, сохраняет bytes/ID/флаги/исторические факты, обновляет source/живые ссылки и сохраняет companion. Не подделывает freshness; symlink, чужое/общее владение, каталог и конфликт отвергаются (R-07–10).
++- [x] AC-05: Проверены gate, stale source/target, rollback/final failure, restore после прерывания и повтор операции. Коллизия исходного состояния не блокирует корректный план исправления; чужие задачи не блокируются её проверкой (R-04, R-10).
++- [x] AC-06: Случай PB-060 воспроизведён и нормализован с двумя сохранёнными копиями и разными назначениями; preview/hashes/diff/close dry-run на fixture сохранены. Рабочая нормализация и дальнейшие шаги verify/handoff/приёмки PB-060 оформлены без ручной правки старых hashes; коллизия отделена от иных gate (R-08–12).
++- [x] AC-07: Постоянные тесты, документированный интерфейс, self-manifest и материалы актуальны; адресные проверки и требуемый runner пройдены, EXEC/CHECK/HANDOFF содержат реальные доказательства; передача PB-072 зарегистрирована штатным CLI (R-13).
++
++### План
++
++1. Прочитать spec/design и card show PB-060 --handoff; зафиксировать baseline чужих изменений, среду/ресурсы и атрибуцию исполнителя. Согласовать техническую границу до реализации.
++2. Добавить реальные негативные/позитивные фикстуры; выделить общий расчёт назначений и подключить ранний контроль, сохранив финальный gate close.
++3. Реализовать явный файловый перенос через существующий engine; проверить ссылки, historical receipts, companion, отказ без записи, read-set и restore. Не вводить автоматическую дедупликацию.
++4. Репетировать PB-060 на временном проекте; затем выполнить рабочую нормализацию до финального verify PB-072. Зафиксировать историческую приёмку и отдельные требования восстановления текущей готовности PB-060.
++5. Обновить правила/руководство/контракт CLI, architecture/code-map, CHANGELOG и self-manifest. Зарегистрировать доказательства; подготовить EXEC, in_review и индекс до полного verify. Выполнить адресные проверки, index/check --ready и preflight; действующий legacy runner не отключать.
++6. После passed записать CHECK и HANDOFF, зарегистрировать передачу; передать независимому аудитору. Самостоятельно не принимать реализацию и не закрывать PB-060 попутно.
++
++### Ресурсы
++
++Python и стандартная библиотека, существующие lifecycle/file_operations/document_links, временные проекты вне checkout и реальный установленный CLI. Базовая policy_revision ресурсов — 2; доступность моделей, время и квоты проверяются при старте, новый внешний сервис не нужен. Не включать workflow v2 или другие draft-возможности ради этой задачи.
++
++Подготовленные материалы зарегистрированы в PB-072-evidence; собственные логи реализации/проверок добавлять туда либо в штатный work/verification/PB-072 с регистрацией до финального verify. Для подготовки выполнены только документные/структурные проверки; поведение будущего CLI ещё не проверено.
++
++## Журнал
++
++### EXEC-01 — Выполнение
++
++Время: 2026-11-10T11:47:31+03:00
++Исполнитель: Devin
++Модель: SWE-2 High
++Изменения: реализация по design §4–8 и spec R-01–R-09. Общий чистый расчёт архивных назначений `_archive_destination` выделен из `_move_materials` (переиспользуется там же); `material_destinations` разворачивает каталоги до вложенных записей, отклоняет коллизию разных источников независимо от байтов, занятое назначение и выход из области, допускает повторное представление одного источника; `_check_destinations` подключён в `_task_material_catalog` (register-material, оба handoff, staged-проверки prepare-audit/sync), в `verification_preflight` до subprocess и в явный eager-контроль `prepare_audit_command` проектируемого контейнера. Команда `lifecycle relocate-material` (argparse + dispatch + mutating gate): preview/apply одного локального файла-материала внутрь owner-evidence через `preview_operation`/`run_operation` с gate, snapshot входов, staged/final проверками и restore; сохраняются байты/ID/флаги/used_by, обновляются source, живая цель ссылок через `plan_rewrites` и служебная `moves`; пишется immutable companion `relocate-<plan_id>.json` с причиной, автором, картой путей, SHA-256 и снимком receipts. Отказ без записи: symlink/каталог/external/чужое владение/занятое назначение/выход из owner-evidence/ссылка внутри чужого immutable. Повтор безопасен. Тесты: tests/test_material_relocation.py — 15 сценариев T-01–T-15 (ранний контроль, preview/apply, ссылки, чужой immutable, gate/final-отказ+restore, повтор, внешние метаданные, полный эквивалент PB-060 до close). Нормализация PB-060: `verify-070dadde` перенесён в `docs/tasks/PB-060-evidence/manual-reports/070dadde-report.json` (байты 7b761cc2… сохранены, 5 ссылок карточки обновлены, companion relocate-lc-e7298caefc6fd7fa.json); `close PB-060 --dry-run` больше не видит коллизию — остался честный отказ «переданная история изменилась» (свежесть восстанавливается штатными gates PB-060 отдельно). Правила/руководство/tasks/architecture/code-map/CHANGELOG и spec→implemented обновлены, self-manifest пересобран.
++Файлы:
++- ai-dev-playbook/scripts/lifecycle.py
++- ai-dev-playbook/scripts/playbook.py
++- ai-dev-playbook/rules/verification.md
++- ai-dev-playbook/rules/context.md
++- ai-dev-playbook/rules/tasks.md
++- ai-dev-playbook/manifest.json
++- docs/user-guide/modes.md
++- docs/architecture.md
++- docs/code-map.md
++- CHANGELOG.md
++- docs/specs/material-archive-safety.md
++- docs/designs/material-archive-safety.md
++- docs/tasks/PB-060.md
++- docs/tasks/PB-060.meta.json
++- docs/tasks/PB-060-evidence/manual-reports/070dadde-report.json
++- docs/tasks/PB-060-evidence/relocate-lc-e7298caefc6fd7fa.json
++- docs/tasks/PB-072-evidence/pb060-relocate-preview.log
++- docs/tasks/PB-072-evidence/pb060-relocate-apply.log
++- docs/tasks/PB-072-evidence/pb060-close-dry-run.log
++- tests/test_material_relocation.py
++
++### CHECK-01 — Проверка
++
++Время: 2026-11-10T12:13:48+03:00
++Исполнитель: Devin
++Модель: SWE-2 High
++Результат: passed
++Критерии: AC-01, AC-02, AC-03, AC-04, AC-05, AC-06
++Команда: `python3 ai-dev-playbook/scripts/playbook.py verify PB-072`; адресные `python3 -m unittest discover -s tests -p "test_material_relocation.py" -v` (15 сценариев) и регрессионные наборы material_registration/audit_material_safety/verification_preflight/close_lifecycle/lifecycle (110 тестов)
++Среда: macOS, Python 3.14, checkout; изолированные tempfile-проекты, реальный CLI.
++Факт: verify b7d1767eff91482884e1c8a9fe3dc512 passed, inputs_unchanged=true; полный suite зелёный. AC-01: оригинал verify-отчёта используется через handoff; коллизия разных источников отклоняется рано в register-material (preview/apply), handoff, prepare-audit и verify/preflight — до записи и до subprocess (счётчик команд = 0), дерево неизменно. AC-02: один общий расчёт `_archive_destination`/`material_destinations` — та же формула, что _move_materials; каталоги разворачиваются до вложенных записей. AC-03: байты, material ID, флаги, used_by и история сохраняются; companion relocate-<plan_id>.json immutable; ссылки на чужие immutable отклоняют перенос. AC-04: relocate-material — preview без записи, apply через gate/backup/journal/restore, итоговая раскладка валидна; занятое/чужое/вне-области назначение отклонено. AC-05: законные состояния проходят — разные назначения при равных байтах, повторное представление одного источника, чужие задачи не блокируют владельца; повторная команда идемпотентна. AC-06: случай PB-060 репетирован на fixture (полный цикл до close) и нормализован в проекте — копия в manual-reports/, оригинал на месте, коллизии в close --dry-run больше нет; остался штатный отказ freshness, восстановление по отдельной процедуре PB-060.
++Доказательства:
++- [Отчёт verify](PB-072-evidence/work/verification/PB-072/b7d1767eff91482884e1c8a9fe3dc512/report.json)
++- [Preview переноса PB-060](PB-072-evidence/pb060-relocate-preview.log)
++- [Apply переноса PB-060](PB-072-evidence/pb060-relocate-apply.log)
++- [close --dry-run PB-060 после переноса](PB-072-evidence/pb060-close-dry-run.log)
++Ограничения: самопроверка исполнителя; чужие immutable-материалы и общее владение требуют ручного разбора (осознанный отказ, не обход).
++
++### HANDOFF-01 — Передача
++
++Время: 2026-11-10T12:13:48+03:00
++Исполнитель: Devin
++Модель: SWE-2 High
++Выполнение: EXEC-01
++Проверки: CHECK-01
++Состояние: in_review, изменения не закоммичены. Записи, материалы и индекс завершены до verify. Следующий шаг — независимый аудит.
++Фокус аудита: одинаковость формулы назначений в material_destinations и _move_materials; полнота ранних точек (register-material/handoff/prepare-audit/preflight); relocate-material — границы отказов, companion, moves и повтор; нормализация PB-060 без правки исторических hashes; оставшийся freshness-отказ PB-060 — ожидаемый, не обход.
++
++
++### AUDIT-01 — Аудит
++
++Время: 2026-11-10T12:23:31+03:00
++Исполнитель: Codex
++Модель: GPT-6
++Передача: HANDOFF-01
++Результат: changes_requested
++Критерии: AC-01, AC-02, AC-03, AC-04, AC-05, AC-06, AC-07
++Независимо проверено: diff реализации и документов, spec/design, ранний audit-ready; 15 постоянных тестов переноса пройдены; две дополнительные subprocess-пробы установленного CLI на временных проектах подтвердили A-01/A-02. Сохранение двух копий PB-060 и штатный отказ freshness отражены в переданных материалах; рабочая PB-060 не изменялась.
++Доказательства:
++- [Протокол](PB-072-evidence/work/verification/PB-072/audit-01/report.json)
++- [Постоянные тесты](PB-072-evidence/work/verification/PB-072/audit-01/tests.log)
++- [Subprocess-пробы](PB-072-evidence/work/verification/PB-072/audit-01/probes.log)
++- [Скрипт воспроизведения](PB-072-evidence/work/verification/PB-072/audit-01/probe.py)
++- [Исходный audit-ready](PB-072-evidence/work/verification/PB-072/audit-01/audit-ready.log)
++Ограничения: полный runner повторно не запускался после отказа audit-ready; независимая приёмка не зарегистрирована. Первый запуск адресных тестов пересёкся с prepare-audit и получил отказ init по pending; после завершения операции повторный запуск прошёл 15/15. Исправления реализации и закрытие не выполнялись.
++
++#### A-01 — Замечание
++Серьёзность: P2
++Критерии: AC-02, AC-03
++Проблема: material_destinations сравнивает только одинаковые назначения и пропускает файл, становящийся родителем другого назначения (lifecycle.py:384–400).
++Воспроизведение: зарегистрировать обычный файл docs/tasks/DEV-1-evidence/docs и внешний файл docs/misc/note.txt. Их архивные назначения — DEV-1-evidence/docs и DEV-1-evidence/docs/misc/note.txt; выполнить preflight, verify, handoff, accept и close --dry-run на fixture.
++Факт: регистрации, preflight, verify и handoff возвращают 0; только close --dry-run падает с FileExistsError на staged/…/DEV-1-evidence/docs. Точный subprocess-вывод сохранён в probes.log.
++Влияние: дорогой runner и передача допускают заведомо неархивируемую раскладку; ранняя защита не соответствует конечному дереву.
++Критерий исправления: общий расчёт отвергает конфликт file/ancestor до записи и subprocess, с owner/material IDs/source/destination и следующим шагом; добавить обе очередности регистрации и положительные случаи каталогов.
++
++#### A-02 — Замечание
++Серьёзность: P2
++Критерии: AC-04, AC-05
++Проблема: relocate-material безусловно запрещает target внутри другого материала, включая собственный зарегистрированный корень owner-evidence (lifecycle.py:2445–2457). Такой корень и вложенный файл — поддерживаемое повторное представление одного источника.
++Воспроизведение: в унаследованной коллизии зарегистрировать whole-evidence с source docs/tasks/DEV-1-evidence у того же владельца и отдельно manual-copy; запросить перенос manual-copy в DEV-1-evidence/manual/copy.json.
++Факт: preview возвращает 1 «назначение пересекается с материалом 'whole-evidence' владельца DEV-1». Любой разрешённый --to внутри owner-evidence попадает под этот запрет; до проверки исправленной раскладки команда не доходит.
++Влияние: корректное разнесение коллизии невозможно для поддерживаемого собственного evidence-каталога без ручного вмешательства в регистрацию.
++Критерий исправления: разрешить законное собственное перекрытие и проверять итоговое дерево с учётом удаления source/добавления target; чужое и общее владение по-прежнему отклонять. Добавить subprocess-регрессию preview/apply и проверку неизменности байтов.
++
++#### A-03 — Замечание
++Серьёзность: P2
++Критерии: AC-03, AC-05, AC-07
++Проблема: постоянный набор не покрывает заявленные stale source/target и прерывание с отдельным restore. Все 15 тестов используют self.cli → run_cli → playbook.main внутри процесса; обязательного subprocess CLI из спецификации нет.
++Воспроизведение: сопоставить test_material_relocation.py с T-11/T-12/T-15 матрицы и spec «Приёмка и проверки»; реализация self.cli находится в tests/test_cli.py:37–38 и run_cli в строках 23–28.
++Факт: test_gate_and_final_failure_restore проверяет занятый gate и автоматический rollback при исключении final-check; это не fault injection stale inputs и не восстановление после прерывания отдельным restore.py. Заявление EXEC/CHECK о полном покрытии T-01–T-15 шире фактического набора.
++Влияние: существенные гарантии сохранности материалов и установленного CLI не подтверждены постоянными проверками.
++Критерий исправления: добавить отдельные проверки изменения source/target между подготовкой и записью, прерывания и штатного restore, а также реальный subprocess установленного CLI; уточнить EXEC/CHECK по фактическим результатам.
++
++#### A-04 — Замечание
++Серьёзность: P2
++Критерии: AC-07
++Проблема: HANDOFF-01 зарегистрирован без CHECK, подтверждающей AC-07; CHECK-01 перечисляет только AC-01–AC-06.
++Воспроизведение: verify PB-072 --audit-ready до подготовки контейнера аудитора.
++Факт: код 1, «критерии не подтверждены свежими проверками»; AC-07 показан [ ]. Это исходное состояние передачи, не следствие аудиторских записей.
++Влияние: задача передана аудитору при неполной готовности; независимая приёмка заблокирована.
++Критерий исправления: после исправлений завершить относящиеся проверки и материалы, записать новую CHECK с фактическим покрытием AC-01–AC-07 и новую HANDOFF; штатный audit-ready должен завершиться успешно. Историю CHECK-01/HANDOFF-01 не переписывать.
++
++### EXEC-02 — Исправление
++
++Время: 2026-11-10T12:38:58+03:00
++Исполнитель: Devin
++Модель: SWE-2 High
++Замечания: A-01, A-02, A-03, A-04
++Изменения: закрытие AUDIT-01 (A-01–A-04). A-01: `material_destinations` после exact-проверки выполняет предковый проход — файл, чьё назначение является родителем другого назначения, отклоняется с owner/IDs/источниками/назначением и шагом; каталог-предок остаётся законным (обе очередности регистрации и позитивные случаи покрыты). A-02: `relocate-material` разрешает назначение внутри собственного материала-корня owner-evidence (повторное представление по правилам каталога); чужое и общее владение отклоняется. Проектируемая раскладка строится по итоговому дереву: источник и опустевшие каталоги исключаются параметром `exclude`. A-03: добавлены проверки stale source/target (мутация входов между подготовкой и записью → отказ без записи), прерывания с отдельным `restore_operation` и реальный subprocess установленного playbook.py; набор теперь 21 сценарий. A-04: новая CHECK фиксирует фактическое покрытие всех критериев; AC-07 отмечен по факту. Правила verification.md дополнены предковым отказом и разрешённым собственным перекрытием.
++Файлы:
++- ai-dev-playbook/scripts/lifecycle.py
++- ai-dev-playbook/rules/verification.md
++- ai-dev-playbook/manifest.json
++- tests/test_material_relocation.py
++
++### CHECK-02 — Проверка
++
++Время: 2026-11-10T13:08:18+03:00
++Исполнитель: Devin
++Модель: SWE-2 High
++Результат: passed
++Критерии: AC-01, AC-02, AC-03, AC-04, AC-05, AC-06, AC-07
++Команда: `python3 ai-dev-playbook/scripts/playbook.py verify PB-072`; адресные `python3 -m unittest discover -s tests -p "test_material_relocation.py" -v` (21 сценарий) и регрессионные наборы material_registration/audit_material_safety/verification_preflight/close_lifecycle/lifecycle (110 тестов)
++Среда: macOS, Python 3.14, checkout; изолированные tempfile-проекты, реальный CLI и subprocess установленного playbook.py.
++Факт: verify b7a24c15255b49a3a8c9163864df6fcb passed, inputs_unchanged=true; полный suite зелёный. AC-01: правила verification/context и руководство предписывают оригиналы через handoff; внешние доказательства не запрещены. AC-02: общий расчёт отклоняет рано совпадение назначений и файл-предка чужого назначения (закрытие A-01) в register-material (обе очередности), handoff, prepare-audit и verify/preflight до записи и subprocess; сообщение с owner/IDs/источниками/назначением/шагом. AC-03: ранние отказы без изменения дерева подтверждены для оригинал/копия, равных/разных байтов, вложенного файла каталога, авторегистрации handoff, занятого и предкового назначения; счётчик команд = 0. AC-04: relocate-material preview/apply — байты/ID/флаги/история сохранены, source/ссылки/companion обновлены; назначение внутри собственного материала-корня owner-evidence разрешено (A-02), чужое/общее владение и занятое отклоняются. AC-05: gate, stale source/target (мутация входов между подготовкой и записью), rollback/final failure, прерывание с отдельным restore_operation и безопасный повтор проверены; чужие задачи не блокируются. AC-06: PB-060 нормализован, две копии сохранены, коллизии нет; остался штатный freshness-отказ. AC-07: 21 постоянный тест включая subprocess CLI, документированный интерфейс, self-manifest актуален, материалы зарегистрированы, EXEC-01/EXEC-02/CHECK-02/HANDOFF-02 содержат реальные доказательства, передача регистрируется штатным CLI.
++Доказательства:
++- [Отчёт verify](PB-072-evidence/work/verification/PB-072/b7a24c15255b49a3a8c9163864df6fcb/report.json)
++- [Preview переноса PB-060](PB-072-evidence/pb060-relocate-preview.log)
++- [Apply переноса PB-060](PB-072-evidence/pb060-relocate-apply.log)
++- [close --dry-run PB-060 после переноса](PB-072-evidence/pb060-close-dry-run.log)
++Ограничения: самопроверка исполнителя; чужие immutable-материалы и общее владение требуют ручного разбора (осознанный отказ, не обход).
++
++### HANDOFF-02 — Передача
++
++Время: 2026-11-10T13:08:18+03:00
++Исполнитель: Devin
++Модель: SWE-2 High
++Выполнение: EXEC-01, EXEC-02
++Проверки: CHECK-01, CHECK-02
++Состояние: in_review, изменения не закоммичены. Замечания AUDIT-01 (A-01–A-04) закрыты исправлением EXEC-02; записи, материалы и индекс завершены до verify. Следующий шаг — повторный независимый аудит.
++Фокус аудита: предковый отказ материалов (file-vs-dir ancestor, обе очередности), проекция итогового дерева при переносе (exclude источника и опустевших каталогов), собственный корень owner-evidence против чужого/общего владения, stale-входы и прерывание+restore, subprocess CLI; оставшийся freshness-отказ PB-060 — ожидаемый, не обход.
++
++
++### AUDIT-02 — Аудит
++
++Время: 2026-11-10T13:23:55+03:00
++Исполнитель: Codex
++Модель: GPT-6
++Передача: HANDOFF-02
++Результат: changes_requested
++Критерии: AC-01, AC-02, AC-03, AC-04, AC-05, AC-06, AC-07
++Закрытые замечания: A-01, A-02, A-04
++Независимо проверено: исправления EXEC-02, актуальная HANDOFF-02 и полный passed-отчёт b7a24c15255b49a3a8c9163864df6fcb (inputs_unchanged=true, EXEC-02); 21 адресный тест пройден. Исходная subprocess-проба A-01 теперь отклоняет вторую регистрацию до записи, A-02 допускает preview внутри собственного корня evidence; новые тесты проверяют apply, stale source/target и отдельный restore после прерывания. A-04: CHECK-02 покрывает AC-01–AC-07; исходный audit-ready пока отклонён из-за открытых замечаний, а не отсутствия CHECK по AC-07. Дополнительная проба установленного CLI выявила A-05.
++Доказательства:
++- [Протокол](PB-072-evidence/work/verification/PB-072/audit-02/report.json)
++- [21 адресный тест](PB-072-evidence/work/verification/PB-072/audit-02/tests.log)
++- [Повтор исходных проб](PB-072-evidence/work/verification/PB-072/audit-02/original-probes.log)
++- [Занятый родитель назначения](PB-072-evidence/work/verification/PB-072/audit-02/occupied-parent.log)
++- [Скрипт установленного CLI](PB-072-evidence/work/verification/PB-072/audit-02/occupied-parent-probe.py)
++- [Исходный audit-ready](PB-072-evidence/work/verification/PB-072/audit-02/audit-ready.log)
++Ограничения: полный 25-минутный runner исполнителя изучен, независимо повторены адресные тесты и subprocess-пробы; рабочая PB-060 не изменялась. Условие обновления CHANGELOG и подготовки окончательного названия коммита не наступило: задача не принята, commit/push не выполнялись.
++Замечания: A-03 остаётся открытым в части постоянной проверки установленного CLI. В test_material_relocation.py:568 script=Path(playbook.__file__).resolve() указывает на исходный репозиторий (импорт из test_playbook.py), cwd=self.root меняет только рабочий каталог; установленный self.root/ai-dev-playbook/scripts/playbook.py не запускается. Единственный subprocess-тест проверяет только relocate preview/apply, обязательный сценарий original/copy/runner с ранним отказом остаётся внутри playbook.main. Stale inputs и отдельный restore из A-03 теперь проверены. Для закрытия нужны постоянные subprocess-проверки именно установленного скрипта, включая ранний отказ коллизии и отсутствие subprocess runner/записи при отказе; затем новая CHECK/HANDOFF.
++
++#### A-05 — Замечание
++Серьёзность: P2
++Критерии: AC-02, AC-03, AC-07
++Проблема: ранний расчёт проверяет занятость только самого конечного пути и предков среди проектируемых назначений; уже существующий обычный файл на месте родительского каталога назначения не выявляется (lifecycle.py:396–397, 409–415).
++Воспроизведение: на временном проекте создать материал docs/tasks/loose/note.txt и существующий обычный файл docs/archive/tasks/loose; через установленный CLI выполнить register-material DEV-1 docs/tasks/loose/note.txt --id note --role report --immutable --required --apply, verify --preflight, verify, handoff, accept и close --dry-run. Полный скрипт и stdout/stderr сохранены.
++Факт: register-material, preflight, verify, handoff и приёмка fixture возвращают 0; close --dry-run возвращает 1 «file/directory collision: docs/archive/tasks/loose». Исходный архивный файл сохраняется, но runner уже выполнен и передача зарегистрирована.
++Влияние: заведомо занятая раскладка обнаруживается только при закрытии, вопреки R-03/R-06; исправление A-01 покрывает конфликт двух будущих назначений, но не существующего файлового предка.
++Критерий исправления: общий ранний контроль проверяет реальные родительские пути назначения до dest_root, отклоняет файл/недопустимую ссылку вместо каталога с понятной диагностикой до записи и subprocess; обычные существующие каталоги остаются допустимыми. Добавить постоянные subprocess-регрессии preview/apply/register/preflight и контроль неизменности дерева/нулевого запуска runner.
++
++### EXEC-03 — Исправление
++
++Время: 2026-11-10T14:39:38+03:00
++Исполнитель: Devin
++Модель: SWE-2 High
++Замечания: A-03, A-05
++Изменения: продолжение закрытия AUDIT-02. A-03 (часть): постоянные subprocess-проверки запускают именно установленный `ai-dev-playbook/scripts/playbook.py` временного проекта (не скрипт репозитория): relocate preview/apply, ранний отказ verify/preflight и verify на коллизии original/copy/runner без запуска runner (счётчик команд = 0), ранняя регистрация пары файл-предок/файл-потомок. A-05: `material_destinations` проверяет реальные родительские пути каждого назначения до dest_root — существующий файл или недопустимая ссылка на месте родительского каталога отклоняется до записи и subprocess с owner/material ID/источником/путём; существующий обычный каталог законен. Тестовый набор — 25 сценариев.
++Файлы:
++- ai-dev-playbook/scripts/lifecycle.py
++- ai-dev-playbook/rules/verification.md
++- ai-dev-playbook/manifest.json
++- tests/test_material_relocation.py
++
++### CHECK-03 — Проверка
++
++Время: 2026-11-10T15:07:11+03:00
++Исполнитель: Devin
++Модель: SWE-2 High
++Результат: passed
++Критерии: AC-01, AC-02, AC-03, AC-04, AC-05, AC-06, AC-07
++Команда: `python3 ai-dev-playbook/scripts/playbook.py verify PB-072`; адресные `python3 -m unittest discover -s tests -p "test_material_relocation.py" -v` (25 сценариев) и регрессионные наборы material_registration/audit_material_safety/verification_preflight/close_lifecycle/lifecycle (110 тестов)
++Среда: macOS, Python 3.14, checkout; изолированные tempfile-проекты, реальный CLI и subprocess установленного ai-dev-playbook/scripts/playbook.py проекта.
++Факт: verify d6b31ecc140b433d9d4d00efd6507081 passed, inputs_unchanged=true; полный suite зелёный. AC-01: правила предписывают оригиналы через handoff; внешние доказательства не запрещены. AC-02: общий расчёт отклоняет рано совпадение назначений, файл-предка проектируемого назначения и существующий файл/недопустимую ссылку на месте родительского каталога назначения (A-05) — до записи и subprocess; сообщения с owner/IDs/источниками/назначением/шагом. AC-03: ранние отказы без изменения дерева и без запуска runner (счётчик = 0) подтверждены для оригинал/копия, равных/разных байтов, вложенного файла каталога, авторегистрации handoff, занятого, предкового и занятого родительского назначения — включая установленный CLI в subprocess. AC-04: relocate-material preview/apply — байты/ID/флаги/история сохранены; собственный корень owner-evidence разрешён (A-02), чужое/общее владение отклоняется. AC-05: gate, stale source/target, rollback/final failure, прерывание с отдельным restore и повтор проверены. AC-06: PB-060 нормализован, коллизии нет, остаётся штатный freshness-отказ. AC-07: 25 постоянных тестов включая subprocess установленного скрипта, документированный интерфейс, актуальный manifest и материалы, EXEC-01–03/CHECK-03/HANDOFF-03 с реальными доказательствами, передача регистрируется штатным CLI.
++Доказательства:
++- [Отчёт verify](PB-072-evidence/work/verification/PB-072/d6b31ecc140b433d9d4d00efd6507081/report.json)
++- [Preview переноса PB-060](PB-072-evidence/pb060-relocate-preview.log)
++- [Apply переноса PB-060](PB-072-evidence/pb060-relocate-apply.log)
++- [close --dry-run PB-060 после переноса](PB-072-evidence/pb060-close-dry-run.log)
++Ограничения: самопроверка исполнителя; чужие immutable-материалы и общее владение требуют ручного разбора.
++
++### HANDOFF-03 — Передача
++
++Время: 2026-11-10T15:07:11+03:00
++Исполнитель: Devin
++Модель: SWE-2 High
++Выполнение: EXEC-01, EXEC-02, EXEC-03
++Проверки: CHECK-01, CHECK-02, CHECK-03
++Состояние: in_review, изменения не закоммичены. Замечания AUDIT-01/AUDIT-02 закрыты EXEC-02/EXEC-03; записи, материалы и индекс завершены до verify. Следующий шаг — повторный независимый аудит.
++Фокус аудита: реальные родительские пути назначений (файл/ссылка вместо каталога — A-05), subprocess установленного CLI (A-03), предковый и exact контроль, проекция итогового дерева при переносе; оставшийся freshness-отказ PB-060 — ожидаемый, не обход.
++
++
++### AUDIT-03 — Аудит
++
++Время: 2026-11-10T15:17:32+03:00
++Исполнитель: Codex
++Модель: GPT-6
++Передача: HANDOFF-03
++Результат: accepted
++Критерии: AC-01, AC-02, AC-03, AC-04, AC-05, AC-06, AC-07
++Закрытые замечания: A-03, A-05
++Независимо проверено: исправления EXEC-03 и актуальная HANDOFF-03; 25 постоянных тестов test_material_relocation.py пройдены. A-03: subprocess запускает установленный self.root/ai-dev-playbook/scripts/playbook.py; проверены relocate preview/apply, отказ original/copy/runner при verify/preflight с нулевым счётчиком runner, предковые назначения; stale source/target и отдельный restore после прерывания также проходят. A-05: существующий файловый предок назначения отклоняется общим ранним расчётом; постоянные тесты проверяют preview/apply, унаследованную регистрацию, preflight/verify без записи и запуска runner, обычный существующий каталог разрешён. Исходная subprocess-проба A-05 теперь получает отказ при регистрации. Дополнительная subprocess-проба symlink родителя отклоняется при register-material и preflight. Проверены общий расчёт с формулой close, self-manifest (хеши совпадают), полный passed-отчёт d6b31ecc140b433d9d4d00efd6507081 (inputs_unchanged=true, EXEC-03), документация и существующая актуальная запись PB-072 в CHANGELOG. Открытых и новых замечаний нет.
++Доказательства:
++- [Протокол](PB-072-evidence/work/verification/PB-072/audit-03/report.json)
++- [25 независимых адресных тестов](PB-072-evidence/work/verification/PB-072/audit-03/tests.log)
++- [Повтор пробы A-05](PB-072-evidence/work/verification/PB-072/audit-03/occupied-parent.log)
++- [Проба symlink](PB-072-evidence/work/verification/PB-072/audit-03/symlink.log)
++- [Скрипт symlink-пробы](PB-072-evidence/work/verification/PB-072/audit-03/symlink-probe.py)
++- [Исходная проверка готовности](PB-072-evidence/work/verification/PB-072/audit-03/audit-ready-before.log)
++Ограничения: полный 25-минутный runner исполнителя независимо не повторялся; независимо запущены 25 адресных тестов и subprocess-пробы. Исходный audit-ready отклонял открытые A-03/A-05, которые закрыты этим протоколом; итоговые штатные acceptance/audit-ready/close dry-run фиксируются в report.json. Рабочая PB-060 не изменялась и требует отдельного восстановления свежести. Запись CHANGELOG уже соответствует реализации; содержательные входы после verify не редактировались. Реальное закрытие и Git-операции не выполнялись.
+--- a/docs/designs/material-archive-safety.md
++++ b/docs/designs/material-archive-safety.md
+@@ -28,7 +28,7 @@
+ 
+ ## Исходное состояние
+ 
+-Контракт — [спецификация](../specs/material-archive-safety.md), исходный случай — [материалы PB-072](../tasks/PB-072-evidence/implementation-brief.md). `_move_materials` в lifecycle.py вычисляет отображение source → archive; `_task_material_catalog` проверяет исходные пути; register-material/handoff/prepare-audit и verification_preflight вызывают общие проверки. Финальная сборка плана проверяет уникальность назначений. File operations обеспечивает общую запись, блокировку и восстановление.
++Контракт — [спецификация](../specs/material-archive-safety.md), исходный случай — [материалы PB-072](../archive/tasks/PB-072-evidence/implementation-brief.md). `_move_materials` в lifecycle.py вычисляет отображение source → archive; `_task_material_catalog` проверяет исходные пути; register-material/handoff/prepare-audit и verification_preflight вызывают общие проверки. Финальная сборка плана проверяет уникальность назначений. File operations обеспечивает общую запись, блокировку и восстановление.
+ 
+ ## Общий расчёт назначений
+ 
+@@ -76,7 +76,7 @@
+ 
+ Точки: lifecycle.py (раскладка, ранние вызовы, новая операция), playbook.py (парсер/dispatch), document_links.py и file_operations.py — использовать существующие API, без попутного рефакторинга. Профильные тесты: test_material_registration.py, test_audit_material_safety.py, test_verification_preflight.py, test_close_lifecycle.py, test_lifecycle.py; новую группу переносов можно выделить в test_material_relocation.py.
+ 
+-Подробная матрица — [test-matrix.md](../tasks/PB-072-evidence/test-matrix.md). Не считать структурный check доказательством поведения. После правки комплекта self-manifest, затем адресные проверки, установленный CLI, index/check --ready, preflight и действующий полный verify PB-072. Новые регистрации и содержательные документы завершить до финального verify. При передаче перечислить реальные команды, результаты, ограничения и вопрос готовности PB-060.
++Подробная матрица — [test-matrix.md](../archive/tasks/PB-072-evidence/test-matrix.md). Не считать структурный check доказательством поведения. После правки комплекта self-manifest, затем адресные проверки, установленный CLI, index/check --ready, preflight и действующий полный verify PB-072. Новые регистрации и содержательные документы завершить до финального verify. При передаче перечислить реальные команды, результаты, ограничения и вопрос готовности PB-060.
+ 
+ ## Статус
+ 
+--- a/docs/index.md
++++ b/docs/index.md
+@@ -20,4 +20,4 @@
+ 
+ - Варианты аудита плана и исправления без возврата архива: [требования](specs/block-acceptance.md), [design](designs/block-acceptance.md), [ADR-0007](adr/0007-block-acceptance.md), [план PB-065–071 и AUDIT-010](plans/block-acceptance.md). Документы и карточки draft; реализация не начата.
+ 
+-- Защита от коллизий архивирования материалов: [требования](specs/material-archive-safety.md), [design](designs/material-archive-safety.md), [PB-072](tasks/PB-072.md) и материалы реализации. Draft; подготовка разрешена, кодирование не начато.
++- Защита от коллизий архивирования материалов: [требования](specs/material-archive-safety.md), [design](designs/material-archive-safety.md), [PB-072](archive/tasks/PB-072.md) и материалы реализации. Draft; подготовка разрешена, кодирование не начато.
+--- a/docs/specs/material-archive-safety.md
++++ b/docs/specs/material-archive-safety.md
+@@ -45,7 +45,7 @@
+ 
+ ## Контекст и действующее поведение
+ 
+-Исходный случай — [PB-060](../tasks/PB-060.md), AUDIT-05: реализация принята, но close --dry-run остановлен коллизией архивных назначений. Ручная копия report.json в owner-evidence и исходный каталог runner зарегистрированы под разными material ID; SHA-256 файлов совпадает. Факты и пути — [source-case.json](../tasks/PB-072-evidence/source-case.json).
++Исходный случай — [PB-060](../tasks/PB-060.md), AUDIT-05: реализация принята, но close --dry-run остановлен коллизией архивных назначений. Ручная копия report.json в owner-evidence и исходный каталог runner зарегистрированы под разными material ID; SHA-256 файлов совпадает. Факты и пути — [source-case.json](../archive/tasks/PB-072-evidence/source-case.json).
+ 
+ Сейчас `_task_material_catalog` отвергает совпадающие/пересекающиеся исходные пути, но не разные источники с одним будущим назначением. `_move_materials` рассчитывает назначение, сборка lifecycle-плана отвергает коллизию только при закрытии. Handoff автоматически регистрирует отчёты runner, но ручная копия с другим ID остаётся отдельным материалом. Эти правила действуют до приёмки изменения. Запрет перезаписи при закрытии сохраняется.
+ 
+@@ -75,7 +75,7 @@
+ 
+ ## Приёмка и проверки
+ 
+-Приёмка задачи — AC-01–AC-07 [PB-072](../tasks/PB-072.md). Матрица R → сценарии/доказательства — [test-matrix.md](../tasks/PB-072-evidence/test-matrix.md). Обязателен реальный subprocess CLI на временном проекте с оригиналом, копией и каталогом runner; подмена только внутреннего helper не доказывает ранний отказ.
++Приёмка задачи — AC-01–AC-07 [PB-072](../archive/tasks/PB-072.md). Матрица R → сценарии/доказательства — [test-matrix.md](../archive/tasks/PB-072-evidence/test-matrix.md). Обязателен реальный subprocess CLI на временном проекте с оригиналом, копией и каталогом runner; подмена только внутреннего helper не доказывает ранний отказ.
+ 
+ ## Влияние на документы
+ 
+--- a/docs/tasks/index.md
++++ b/docs/tasks/index.md
+@@ -30,12 +30,12 @@
+ | PB-069 | [PB-069: Регистрировать общую приёмку и закрывать блок](PB-069.md) | draft | P2 | — | 2026-11-07 01:36 | — | PB-068 |
+ | PB-070 | [PB-070: Подключить новые маршруты к правилам и совместимому обновлению](PB-070.md) | draft | P2 | — | 2026-11-07 01:37 | — | PB-069 |
+ | PB-071 | [PB-071: Проверить сквозные циклы аудита и исправлений](PB-071.md) | draft | P2 | — | 2026-11-07 01:37 | — | PB-070 |
+-| PB-072 | [PB-072: Предотвращать коллизии архивирования отчётов и безопасно исправлять размещение материалов](PB-072.md) | in_review | P2 | Devin / SWE-2 High | 2026-11-10 08:19 | — | — |
+ 
+ ## Архив
+ 
+ | ID | Задача | Статус | Приоритет | Исполнитель | Создана | Закрыта | Зависимости |
+ |---|---|---|---|---|---|---|---|
++| PB-072 | [PB-072: Предотвращать коллизии архивирования отчётов и безопасно исправлять размещение материалов](../archive/tasks/PB-072.md) | done | P2 | Devin / SWE-2 High | 2026-11-10 08:19 | 2026-11-10 15:18 | — |
+ | PB-059 | [PB-059: Построить карту зависимостей и объяснимый выбор проверок](../archive/tasks/PB-059.md) | done | P2 | Devin / SWE-2 High | 2026-11-07 01:07 | 2026-11-09 09:10 | PB-058 |
+ | PB-058 | [PB-058: Добавить независимые от Git снимки и классификацию файлов](../archive/tasks/PB-058.md) | done | P2 | Devin / SWE-2 High | 2026-11-07 01:06 | 2026-11-08 17:09 | PB-057 |
+ | PB-057 | [PB-057: Определить форматы модулей, проверок и одобренной политики](../archive/tasks/PB-057.md) | done | P2 | Devin / SWE-2 High | 2026-11-07 01:06 | 2026-11-08 11:58 | — |

@@ -1,0 +1,63 @@
+{
+  "task": "PB-072",
+  "audit": "AUDIT-03",
+  "handoff": "HANDOFF-03",
+  "at": "2026-11-10T15:17:32+03:00",
+  "actor": "Codex",
+  "model": "GPT-6",
+  "result": "accepted",
+  "closed_findings": [
+    "A-03",
+    "A-05"
+  ],
+  "new_findings": [],
+  "independent_tests": {
+    "command": "python3 -m unittest discover -s tests -p test_material_relocation.py -v",
+    "passed": 25
+  },
+  "probes": {
+    "occupied_archive_parent": "registration rejects before write",
+    "symlink_archive_parent": "register-material and preflight reject before write"
+  },
+  "full_verify": {
+    "id": "d6b31ecc140b433d9d4d00efd6507081",
+    "status": "passed",
+    "inputs_unchanged": true,
+    "execution_id": "EXEC-03",
+    "checks": [
+      "self-check",
+      "preflight-regressions",
+      "unit-tests"
+    ],
+    "independently_repeated": false
+  },
+  "self_manifest": "all file hashes match",
+  "changelog": "existing PB-072 entry reviewed and current; no content change needed",
+  "limitations": [
+    "Full configured suite was not independently repeated; report freshness is checked by lifecycle gates.",
+    "PB-060 unchanged by auditor; its stale handoff remains a separate workflow."
+  ],
+  "final_checks": {
+    "lifecycle_accept": "accepted, AUDIT-03",
+    "audit_ready": "passed",
+    "check_ready": "passed",
+    "index": "already current",
+    "git_diff_check": "passed",
+    "close_dry_run": "passed (no actual close)"
+  },
+  "acceptance": {
+    "at": "2026-11-10T15:17:32+03:00",
+    "actor": {
+      "name": "Codex",
+      "model": "GPT-6"
+    },
+    "role": "auditor",
+    "kind": "acceptance",
+    "result": "accepted",
+    "handoff_at": "2026-11-10T15:10:48+03:00",
+    "session": null,
+    "detail": null,
+    "audit_id": "AUDIT-03",
+    "audit_sha256": "sha256:2a3d36afe6a7894a02f87b98e118de68d627af28c0201c14cba8735b0458c060"
+  }
+}
