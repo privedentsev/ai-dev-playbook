@@ -6,7 +6,7 @@
 | Документ | Состояние | Обновлён | Задачи |
 |---|---|---|---|
 | [План внедрения вариантов аудита и задач исправлений](block-acceptance.md) | draft | 2026-11-07 | [PB-065](../tasks/PB-065.md), [PB-066](../tasks/PB-066.md), [PB-067](../tasks/PB-067.md), [PB-068](../tasks/PB-068.md), [PB-069](../tasks/PB-069.md), [PB-070](../tasks/PB-070.md), [PB-071](../tasks/PB-071.md), [AUDIT-010](../tasks/AUDIT-010.md) |
-| [План внедрения автоматического выбора проверок](dependency-aware-verification.md) | draft | 2026-11-07 | [PB-057](../archive/tasks/PB-057.md), [PB-058](../archive/tasks/PB-058.md), [PB-059](../archive/tasks/PB-059.md), [PB-060](../tasks/PB-060.md), [PB-061](../tasks/PB-061.md), [PB-062](../tasks/PB-062.md), [PB-063](../tasks/PB-063.md), [PB-064](../tasks/PB-064.md), [AUDIT-009](../tasks/AUDIT-009.md) |
+| [План внедрения автоматического выбора проверок](dependency-aware-verification.md) | draft | 2026-11-07 | [PB-057](../archive/tasks/PB-057.md), [PB-058](../archive/tasks/PB-058.md), [PB-059](../archive/tasks/PB-059.md), [PB-060](../archive/tasks/PB-060.md), [PB-061](../tasks/PB-061.md), [PB-062](../tasks/PB-062.md), [PB-063](../tasks/PB-063.md), [PB-064](../tasks/PB-064.md), [AUDIT-009](../tasks/AUDIT-009.md) |
 | [Переход к выборочным файловым операциям и хранению 15 операций](scoped-file-operations.md) | draft | 2026-10-26 | [PB-045](../archive/tasks/PB-045.md), [PB-046](../tasks/PB-046.md), [PB-047](../tasks/PB-047.md), [PB-048](../tasks/PB-048.md), [PB-049](../tasks/PB-049.md), [PB-050](../tasks/PB-050.md), [AUDIT-008](../tasks/AUDIT-008.md) |
 
 ## Архив
