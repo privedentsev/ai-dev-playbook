@@ -44,6 +44,159 @@
       "used_by": [
         "PB-072"
       ]
+    },
+    {
+      "id": "pb060-preview-log",
+      "role": "log",
+      "source": "docs/tasks/PB-072-evidence/pb060-relocate-preview.log",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-072"
+      ]
+    },
+    {
+      "id": "pb060-apply-log",
+      "role": "log",
+      "source": "docs/tasks/PB-072-evidence/pb060-relocate-apply.log",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-072"
+      ]
+    },
+    {
+      "id": "pb060-close-dry-run-log",
+      "role": "log",
+      "source": "docs/tasks/PB-072-evidence/pb060-close-dry-run.log",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-072"
+      ]
+    },
+    {
+      "id": "verify-b7d1767eff91482884e1c8a9fe3dc512",
+      "role": "report",
+      "source": "work/verification/PB-072/b7d1767eff91482884e1c8a9fe3dc512",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-072"
+      ]
+    },
+    {
+      "id": "audit-01",
+      "role": "report",
+      "source": "work/verification/PB-072/audit-01",
+      "storage": "local",
+      "immutable": true,
+      "required": true,
+      "used_by": [
+        "PB-072"
+      ]
+    },
+    {
+      "id": "verify-b7a24c15255b49a3a8c9163864df6fcb",
+      "role": "report",
+      "source": "work/verification/PB-072/b7a24c15255b49a3a8c9163864df6fcb",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-072"
+      ]
+    },
+    {
+      "id": "audit-02",
+      "role": "report",
+      "source": "work/verification/PB-072/audit-02",
+      "storage": "local",
+      "immutable": true,
+      "required": true,
+      "used_by": [
+        "PB-072"
+      ]
+    },
+    {
+      "id": "verify-d6b31ecc140b433d9d4d00efd6507081",
+      "role": "report",
+      "source": "work/verification/PB-072/d6b31ecc140b433d9d4d00efd6507081",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-072"
+      ]
+    },
+    {
+      "id": "audit-03",
+      "role": "report",
+      "source": "work/verification/PB-072/audit-03",
+      "storage": "local",
+      "immutable": true,
+      "required": true,
+      "used_by": [
+        "PB-072"
+      ]
     }
-  ]
+  ],
+  "criterion_evidence": {
+    "CHECK-01": {
+      "check_sha256": "sha256:07ce03fd468f9452c84dc1c1fcf6ff3728000969a783420f5d1d692f67323778",
+      "card_projection": "sha256:b9d2f9a02aa1f4456c299a05f6e946f07f73fa9425779f8fa2d0491ea7f249b1",
+      "report_id": "verify-b7d1767eff91482884e1c8a9fe3dc512",
+      "report_sha256": "sha256:f68907e0537ec92742a5bad35439ac7ed0edf52bbc6f01e5e862cf53dd9cb6f7"
+    },
+    "CHECK-02": {
+      "check_sha256": "sha256:dc38c2fc6f6f669b78a8f84b5ea59dd9fdc722f80fc03ceeadb55faf54683bf2",
+      "card_projection": "sha256:b9d2f9a02aa1f4456c299a05f6e946f07f73fa9425779f8fa2d0491ea7f249b1",
+      "report_id": "verify-b7a24c15255b49a3a8c9163864df6fcb",
+      "report_sha256": "sha256:c204a39a1ccb85b7ce72945cc622e750b4d2f092a1544c6eefe4ba44dbb10865"
+    },
+    "CHECK-03": {
+      "check_sha256": "sha256:a5b0b20ff712d24a87ff151a90f5aba6987337e4eed33f05afae92d4f7584ff5",
+      "card_projection": "sha256:b9d2f9a02aa1f4456c299a05f6e946f07f73fa9425779f8fa2d0491ea7f249b1",
+      "report_id": "verify-d6b31ecc140b433d9d4d00efd6507081",
+      "report_sha256": "sha256:8bbc3916078b1f4ac4a78926a8163af2b9e730b73608279fe2c75c57b8477f7e"
+    }
+  },
+  "handoff": {
+    "at": "2026-11-10T15:10:48+03:00",
+    "actor": {
+      "name": "Devin",
+      "model": "SWE-2 High"
+    },
+    "summary": "HANDOFF-03",
+    "reports": [
+      "verify-d6b31ecc140b433d9d4d00efd6507081"
+    ],
+    "card_projection": "sha256:b9d2f9a02aa1f4456c299a05f6e946f07f73fa9425779f8fa2d0491ea7f249b1",
+    "entry_id": "HANDOFF-03",
+    "journal_sha256": "sha256:14e46ed59cfbc4b3a744bd8b56b625ac3916c4fe4ce270a6fe9c936557f8cbfe"
+  },
+  "audit_packages": {
+    "audit-01": "sha256:32dbd1b35faa14e1a5eb20a5b9e68ecd89a9008430d65036a45f6b01ab769122",
+    "audit-02": "sha256:a4c90fc17a8423ac0c3e7fb9359ae09178c506913dd7788a1520b9aaf32e97b7",
+    "audit-03": "sha256:425af7eb6277d0a2dd013378b9eedf7ba58bd8bbe58a93226b1a5e0a28a000f4"
+  },
+  "acceptance": {
+    "at": "2026-11-10T15:17:32+03:00",
+    "actor": {
+      "name": "Codex",
+      "model": "GPT-6"
+    },
+    "role": "auditor",
+    "kind": "acceptance",
+    "result": "accepted",
+    "handoff_at": "2026-11-10T15:10:48+03:00",
+    "session": null,
+    "detail": null,
+    "audit_id": "AUDIT-03",
+    "audit_sha256": "sha256:2a3d36afe6a7894a02f87b98e118de68d627af28c0201c14cba8735b0458c060"
+  }
 }

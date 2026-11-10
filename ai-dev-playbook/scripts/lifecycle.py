@@ -340,6 +340,114 @@ def _free_name(directory, target, root, require):
                     != folded, f"Коллизия имени: {_rel(root, child)}")
 
 
+def _archive_destination(root, resolved_src, home_dir, dest_dir,
+                         evidence_dir):
+    """Архивное назначение одного источника — единая формула раскладки.
+
+    Материал внутри home_dir сохраняет путь относительно dest_dir;
+    материал вне home_dir уходит в evidence_dir с полным относительным
+    путём от корня.
+    """
+    if resolved_src.is_relative_to(home_dir.resolve()):
+        return dest_dir / resolved_src.relative_to(home_dir.resolve())
+    return evidence_dir / resolved_src.relative_to(root.resolve())
+
+
+def material_destinations(root, owner, materials, home_dir, dest_dir,
+                          evidence_dir, safe_path, require, exclude=None):
+    """Будущая архивная раскладка локальных материалов владельца (PB-072).
+
+    Чистый расчёт по той же формуле, что _move_materials: каталоги
+    разворачиваются до вложенных файлов/каталогов, поэтому коллизию
+    вложенного report.json видно до записи. Разные источники с одним
+    назначением — конфликт независимо от равенства байтов; повторное
+    представление одного источника (материал-каталог и файл внутри него)
+    законно. Занятое архивное назначение, выход из области назначения и
+    файл, ставший родителем другого назначения, отклоняются здесь же;
+    каталог-предок допустим. Возвращает
+    {destination: (material_id, source, source_is_dir)}.
+
+    ``exclude`` — resolved-пути источников, исключаемые из раскладки
+    (проекция дерева после удаления, например переносимый файл).
+    """
+    exclude = {path.resolve() for path in exclude} if exclude else set()
+    destinations = {}
+    for material in materials:
+        if material.get("storage") != "local":
+            continue
+        src = material.get("resolved")
+        if src is None and material.get("source"):
+            src = safe_path(root, material["source"])
+        if src is None:
+            continue
+        resolved_src = src.resolve()
+        dst = _archive_destination(root, resolved_src, home_dir,
+                                   dest_dir, evidence_dir).resolve()
+        items = [] if resolved_src in exclude else [(resolved_src, dst)]
+        if resolved_src.is_dir():
+            items += [(sub, dst / sub.relative_to(resolved_src))
+                      for sub in sorted(resolved_src.rglob("*"))
+                      if sub.resolve() not in exclude]
+        for old, new in items:
+            require(new.is_relative_to(dest_dir.resolve()),
+                    f"{owner}: назначение материала "
+                    f"'{material.get('id')}' вне области назначения: "
+                    f"{_rel(root, new)}")
+            require(not new.exists() and not new.is_symlink(),
+                    f"Назначение занято: {_rel(root, new)}")
+            previous = destinations.setdefault(
+                new, (material.get("id"), old, old.is_dir()))
+            if previous[1] != old:
+                require(False,
+                        f"{owner}: материалы '{previous[0]}' "
+                        f"({_rel(root, previous[1])}) и "
+                        f"'{material.get('id')}' ({_rel(root, old)}) "
+                        f"назначены в {_rel(root, new)}. Штатный отчёт "
+                        "verify используйте на исходном пути через handoff; "
+                        "для уже размещённой копии подготовьте явный "
+                        "lifecycle relocate-material.")
+    dest_root = dest_dir.resolve()
+    for new in sorted(destinations, key=lambda path: len(path.parts)):
+        for parent in new.parents:
+            if parent == dest_root or not parent.is_relative_to(dest_root):
+                break
+            ancestor = destinations.get(parent)
+            if ancestor is not None and not ancestor[2]:
+                require(False,
+                        f"{owner}: назначение файла материала "
+                        f"'{ancestor[0]}' ({_rel(root, ancestor[1])}) "
+                        f"является родителем назначения "
+                        f"'{destinations[new][0]}' "
+                        f"({_rel(root, destinations[new][1])}): "
+                        f"{_rel(root, parent)}. Переместите один из "
+                        "источников штатным lifecycle relocate-material "
+                        "или исправьте регистрацию.")
+            # Реальный файл на месте родительского каталога делает
+            # раскладку незаписываемой; существующий каталог законен.
+            if ancestor is None and (parent.exists()
+                                     or parent.is_symlink()):
+                require(parent.is_dir() and not parent.is_symlink(),
+                        f"{owner}: родительский путь назначения "
+                        f"'{destinations[new][0]}' "
+                        f"({_rel(root, destinations[new][1])}) занят "
+                        f"файлом: {_rel(root, parent)}. Освободите "
+                        "архивный путь или выберите другой источник.")
+    return destinations
+
+
+def _check_destinations(root, task_id, materials, paths, safe_path,
+                        require, exclude=None):
+    """Ранний контроль коллизий архивных назначений материалов задачи.
+
+    Проверяет только владельца команды — чужие незавершённые задачи не
+    блокируются. Финальная сверка объединённого плана остаётся при close.
+    """
+    evidence_dir = paths["archive"] / f"{task_id}-evidence"
+    material_destinations(root, task_id, materials, paths["tasks"],
+                          paths["archive"], evidence_dir, safe_path, require,
+                          exclude=exclude)
+
+
 def _move_materials(root, owner, materials, self_path, home_dir, dest_dir,
                     evidence_dir, protected, confirmed, safe_path, require):
     """Карта переносов локальных материалов владельца.
@@ -373,10 +481,8 @@ def _move_materials(root, owner, materials, self_path, home_dir, dest_dir,
                 require(not path.is_relative_to(resolved_src),
                         f"{owner}: материал '{material.get('id')}' "
                         f"({rel_src}) накрывает служебный файл {path}")
-        if resolved_src.is_relative_to(home_dir.resolve()):
-            dst = dest_dir / resolved_src.relative_to(home_dir.resolve())
-        else:
-            dst = evidence_dir / resolved_src.relative_to(root.resolve())
+        dst = _archive_destination(root, resolved_src, home_dir, dest_dir,
+                                   evidence_dir)
         resolved_dst = dst.resolve()
         require(resolved_dst.is_relative_to(dest_dir.resolve()),
                 f"{owner}: назначение материала '{material.get('id')}' "
@@ -2061,6 +2167,8 @@ def prepare_audit_command(root, task_id, audit_id, snapshot_rel, apply, actor,
             require(not (destination == other or destination.is_relative_to(other)
                          or other.is_relative_to(destination)), 'Пересечение материалов аудита')
     updated = {**meta, 'materials': meta['materials'] + [material]}
+    projected = meta['materials'] + [dict(material, resolved=destination)]
+    _check_destinations(root, task_id, projected, paths, safe_path, require)
     writes = {f'{folder}/{name}': content for name, content in contents.items()}
     writes[f'{folder}/provenance.json'] = (json.dumps(provenance, ensure_ascii=False, indent=2) + '\n').encode()
     writes[f'{folder}/provenance.sha256'] = (file_operations.sha256(writes[f'{folder}/provenance.json']) + '\n').encode('ascii')
@@ -2201,6 +2309,8 @@ def verification_preflight(root, task_id, ctx, safe_path, require):
     require(not candidates, f"{task_id}: неучтённые материалы до verify: "
             + ', '.join(item['path'] for item in candidates)
             + '; выполните lifecycle register-material')
+    _check_destinations(root, task_id, catalog['owners'].get(task_id, []),
+                        paths, safe_path, require)
 
 
 def _task_material_catalog(root, task_id, meta, ctx, safe_path, require):
@@ -2234,6 +2344,8 @@ def _task_material_catalog(root, task_id, meta, ctx, safe_path, require):
                 require(other in evidence_dirs or src in evidence_dirs,
                         f"{task_id}: пересечение материалов: {material['source']}")
         local.append(src)
+    _check_destinations(root, task_id, catalog["owners"].get(task_id, []),
+                        paths, safe_path, require)
     portable_materials(root, catalog, paths, ctx, safe_path, require)
     return catalog
 
@@ -2296,6 +2408,287 @@ def register_material_command(root, task_id, source, material_id, role,
     require(saved == meta,
             f"{task_id}: операция не записала регистрацию; проверьте lifecycle status")
     print(f"{task_id}: материал '{material_id}' зарегистрирован.")
+
+
+def relocate_material_command(root, task_id, material_id, target, reason,
+                              apply, actor_name, actor_model, ctx,
+                              safe_path, require):
+    """Явный перенос одного зарегистрированного локального файла (PB-072).
+
+    Preview по умолчанию; --apply переносит файл в свободный путь внутри
+    owner-evidence той же восстанавливаемой операцией, что прочие записи
+    карточки. Байты, material ID, флаги и исторические факты сохраняются;
+    обновляются source, живая цель ссылок и служебная карта moves.
+    Старые journal/check/audit отпечатки не пересчитываются.
+    """
+    data, paths = ctx['config'](root)
+    records = ctx['read_tasks'](root, paths)
+    rec, rel, text, meta = _managed_card(root, records, task_id, safe_path,
+                                         require)
+    require(rec['status'] not in FINAL_TASK_STATES,
+            f"{task_id}: карточка в статусе {rec['status']}")
+    require(actor_name and actor_name != 'cli' and actor_model
+            and ctx['model_unconfirmed'] not in actor_model,
+            'relocate-material требует точные --actor и --model')
+    require(reason and reason.strip(), 'Требуется непустая причина (--reason)')
+    catalog = documents.load_catalog(root, data, paths, records, safe_path,
+                                     require)
+    require(catalog is not None, 'Раздел documents не настроен')
+    material = next((item for item in meta.get('materials') or []
+                     if item.get('id') == material_id), None)
+    require(material is not None,
+            f"{task_id}: нет материала '{material_id}'")
+    require(material.get('storage') == 'local',
+            f"{task_id}: материал '{material_id}' — {material.get('storage')}; "
+            "переносится только локальный файл")
+    require(set(material.get('used_by') or []) <= {task_id},
+            f"{task_id}: материал '{material_id}' используется "
+            f"{sorted(set(material.get('used_by') or []) - {task_id})}; "
+            "общее и чужое владение не переносится")
+    dst = safe_path(root, target)
+    dst_rel = _rel(root, dst)
+    evidence = paths['tasks'] / f'{task_id}-evidence'
+    require(dst.resolve() != evidence.resolve()
+            and dst.resolve().is_relative_to(evidence.resolve()),
+            f'Назначение обязано быть файлом внутри '
+            f'{_rel(root, evidence)}/: {dst_rel}')
+    src_rel = material['source']
+    if src_rel == dst_rel:
+        require(dst.is_file() and not dst.is_symlink(),
+                f"{task_id}: материал '{material_id}' уже указывает на "
+                f"{dst_rel}, но файл отсутствует")
+        print(f"{task_id}: материал '{material_id}' уже размещён в "
+              f"{dst_rel}; повторный перенос не создаёт копию.")
+        return
+    src = safe_path(root, src_rel)
+    require(src.is_file() and not src.is_symlink(),
+            f"{task_id}: материал '{material_id}' ({src_rel}) — переносится "
+            "один существующий обычный файл, не каталог и не symlink")
+    require(not dst.exists() and not dst.is_symlink(),
+            f"Назначение занято: {dst_rel}")
+    if dst.parent.is_dir():
+        folded = unicodedata.normalize('NFC', dst.name).casefold()
+        for child in dst.parent.iterdir():
+            require(unicodedata.normalize('NFC', child.name).casefold()
+                    != folded, f"Коллизия имени: {_rel(root, child)}")
+    require(file_operations.staged_path_available(dst_rel),
+            f'{dst_rel}: путь исключён из staged; выберите другое '
+            'назначение внутри owner-evidence')
+    protected = _protected_files(paths, records, catalog)
+    require(not any(dst.resolve() == path or dst.resolve().is_relative_to(path)
+                    for path in protected),
+            f'{task_id}: назначение накрывает служебный файл: {dst_rel}')
+    for owner, mats in catalog['owners'].items():
+        for other in mats:
+            if other.get('storage') != 'local' \
+                    or other.get('id') == material_id:
+                continue
+            other_src = other.get('resolved')
+            if other_src is None:
+                continue
+            if not (dst.resolve() == other_src.resolve()
+                    or dst.resolve().is_relative_to(other_src.resolve())):
+                continue
+            # Законное повторное представление каталога: назначение
+            # внутри собственного материала-корня owner-evidence. Чужое
+            # и общее владение по-прежнему отклоняется.
+            require(owner == task_id
+                    and set(other.get('used_by') or []) <= {task_id}
+                    and other_src.resolve() == evidence.resolve(),
+                    f'{task_id}: назначение пересекается с материалом '
+                    f"'{other.get('id')}' владельца {owner}: "
+                    f"{other.get('source')}")
+    src_resolved = src.resolve()
+    moves = {src_resolved: dst.resolve()}
+    # Ссылки на переносимое внутри чужих immutable-материалов — отказ:
+    # их исторические адреса остаются чужими фактами. Собственные frozen
+    # байты сохраняются и разрешаются через meta.moves.
+    foreign_hits = []
+    for owner, mats in catalog['owners'].items():
+        if owner == task_id:
+            continue
+        for item in mats:
+            if item.get('storage') != 'local' or not item.get('immutable') \
+                    or item.get('resolved') is None:
+                continue
+            base = item['resolved'].resolve()
+            files = (documents._walk_files(base)[0] if base.is_dir()
+                     else [base])
+            for path in files:
+                if path.suffix != '.md' or not path.is_file():
+                    continue
+                for link in document_links.scan(
+                        path.read_text(encoding='utf-8')):
+                    parts = document_links._split(link['target'])
+                    if parts is None:
+                        continue
+                    if (path.parent / parts[1]).resolve() == src_resolved:
+                        foreign_hits.append(
+                            f'{_rel(root, path)}:{link["line"]}')
+    require(not foreign_hits,
+            f"{task_id}: ссылки на '{material_id}' внутри чужих "
+            f"immutable-материалов ({', '.join(sorted(foreign_hits))}) — "
+            "требуется ручной разбор, перенос отклонён")
+    if src.suffix == '.md' and not material.get('immutable'):
+        own = document_links.rewrite(src.read_text(encoding='utf-8'),
+                                     src_resolved, dst.resolve(), moves)
+        require(not own['changes'],
+                f"{task_id}: материал '{material_id}' содержит относительные "
+                "ссылки; перенос изменил бы его байты — выберите файл без "
+                "ссылок либо разберите их вручную")
+    frozen = [item for item in catalog['immutable']]
+    scan = [item for item in ctx['scan_files'](root, paths)
+            if item.is_file()
+            and item.resolve() != paths['task_index'].resolve()]
+    managed = [safe_path(root, ctx['core_prefix']).resolve()]
+    result = document_links.plan_rewrites(scan, moves, root.resolve(),
+                                          managed=managed, frozen=frozen)
+    require(not result['conflicts'],
+            'Ссылки требуют ручного разбора:\n' + '\n'.join(
+                f"  {item['path']}:{item['line']} {item['kind']} "
+                f"{item['detail']}" for item in result['conflicts']))
+    updates = dict(result['updates'])
+    card_path = safe_path(root, rel).resolve()
+    card_update = next((info for path, info in updates.items()
+                        if path.resolve() == card_path), None)
+    updates = {path: info for path, info in updates.items()
+               if path.resolve() != card_path}
+    at = file_operations.now_iso()
+    digest = file_operations.scoped_operations.file_digest(src)
+    # Первый проход входов определяет plan_id; companion получает его имя.
+    removes = [src_rel]
+    remove_dirs = _emptied_dirs(root, _rel(root, evidence),
+                                set(removes), require)
+    probe = sorted({rel, src_rel, dst_rel}
+                   | {_rel(root, documents.meta_path(safe_path(root, rel)))}
+                   | set(removes) | set(remove_dirs)
+                   | {_rel(root, path) for path in scan})
+    inputs = file_operations.snapshot_paths(root, probe, safe_path, require)
+    plan_id = 'lc-' + file_operations.sha256(_canonical(
+        {'op': 'relocate-material', 'path': rel, 'material': material_id,
+         'from': src_rel, 'to': dst_rel,
+         'inputs': inputs}).encode('utf-8'))[7:23]
+    companion_rel = f'{_rel(root, evidence)}/relocate-{plan_id}.json'
+    require(not safe_path(root, companion_rel).exists()
+            and not safe_path(root, companion_rel).is_symlink(),
+            f'Назначение занято: {companion_rel}')
+    inputs[companion_rel] = 'missing'
+    companion = {'id': f'relocate-{plan_id}', 'role': 'report',
+                 'source': companion_rel, 'storage': 'local',
+                 'required': True, 'immutable': True, 'used_by': []}
+    new_materials = [dict(item, source=dst_rel)
+                     if item.get('id') == material_id else item
+                     for item in meta.get('materials') or []]
+    new_materials.append(companion)
+    new_meta = copy.deepcopy(meta)
+    new_meta['materials'] = new_materials
+    new_meta['moves'] = list(meta.get('moves') or []) + [
+        {'from': src_rel, 'to': dst_rel}]
+    if new_meta.get('workflow', {}).get('baseline', {}).get('source') == src_rel:
+        new_meta['workflow']['baseline']['source'] = dst_rel
+    errors = []
+    _validate_moved_task_meta(root, new_meta, rel, errors, safe_path)
+    require(not errors, '\n'.join(errors))
+    merged = _splice_meta(text, new_meta)
+    require(merged is not None, f'{rel}: блок метаданных не найден')
+    merged = document_links.rewrite(merged, card_path, card_path,
+                                    moves)['text']
+    link_changes = []
+    if card_update is not None:
+        link_changes.append({'path': rel,
+                             'changes': card_update['changes']})
+    link_changes += [{'path': _rel(root, path), 'changes': info['changes']}
+                     for path, info in sorted(updates.items(),
+                                              key=lambda kv: str(kv[0]))]
+    body = {'schema_version': 1, 'type': 'lifecycle-relocate-material',
+            'plan_id': plan_id, 'task': task_id, 'material': material_id,
+            'at': at,
+            'actor': {'name': actor_name, 'model': actor_model},
+            'reason': reason,
+            'files': [{'from': src_rel, 'to': dst_rel, 'sha256': digest,
+                       'bytes': src.stat().st_size}],
+            'links': link_changes,
+            'receipts': {
+                'handoff': ({'at': meta['handoff'].get('at'),
+                             'summary': meta['handoff'].get('summary')}
+                            if isinstance(meta.get('handoff'), dict) else None),
+                'acceptance': ({'at': meta['acceptance'].get('at'),
+                                'result': meta['acceptance'].get('result'),
+                                'handoff_at': meta['acceptance'].get('handoff_at')}
+                               if isinstance(meta.get('acceptance'), dict)
+                               else None)}}
+    writes = documents.split_card_writes({rel: merged.encode('utf-8')})
+    for path, info in updates.items():
+        writes[_rel(root, path.resolve())] = info['updated'].encode('utf-8')
+    writes[companion_rel] = (json.dumps(body, ensure_ascii=False, indent=2)
+                             + '\n').encode('utf-8')
+    writes[dst_rel] = file_operations.scoped_operations.Payload(src)
+    for rel_path in writes:
+        inputs.setdefault(rel_path, 'missing')
+    # Проектируемая раскладка после переноса — унаследованная коллизия
+    # исходного состояния не блокирует корректное исправление. Исходный
+    # путь исключён вместе с опустевшими от переноса каталогами:
+    # материалы-каталоги разворачиваются по итоговому дереву.
+    projected = []
+    for item in new_materials:
+        projected_item = dict(item)
+        if item.get('storage') == 'local':
+            projected_item['resolved'] = dst.resolve() \
+                if item.get('id') == material_id else safe_path(
+                    root, item['source'])
+        projected.append(projected_item)
+    exclude = {src_resolved} | {safe_path(root, empty).resolve()
+                                for empty in remove_dirs}
+    _check_destinations(root, task_id, projected, paths, safe_path, require,
+                        exclude=exclude)
+
+    def check(staged_root):
+        staged_card = documents.read_text(staged_root / rel)
+        staged_errors = []
+        parsed = documents.parse_meta(staged_card, rel, staged_errors)
+        require(staged_card == merged,
+                'relocate-material: записанный текст не совпадает '
+                'с подготовленным')
+        require(not staged_errors and parsed == new_meta,
+                'relocate-material: карточка изменилась после подготовки '
+                'записи')
+        staged_dst = staged_root / dst_rel
+        require(staged_dst.is_file()
+                and file_operations.scoped_operations.file_digest(staged_dst)
+                == digest,
+                f'relocate-material: байты {dst_rel} не совпадают с исходными')
+        require(not (staged_root / src_rel).exists(),
+                f'relocate-material: источник {src_rel} остался на месте')
+        require((staged_root / companion_rel).is_file(),
+                'relocate-material: companion не записан')
+        _task_material_catalog(staged_root, task_id, new_meta, ctx,
+                               safe_path, require)
+        _consistency(ctx, set(), True, 'relocate-material', safe_path,
+                     require)(staged_root)
+
+    spec = {'operation': 'lifecycle relocate-material', 'plan_id': plan_id,
+            'actor': _actor_label({'name': actor_name, 'role': 'executor',
+                                   'model': actor_model}),
+            'basis': reason, 'writes': writes, 'removes': removes,
+            'remove_dirs': remove_dirs, 'inputs': inputs,
+            'read_set': root.view.read_set.snapshot()
+            if hasattr(root, 'view') else None,
+            'staged_checks': [check], 'final_checks': [check],
+            'receipt': {'type': 'relocate-material', 'task': task_id,
+                        'material': material_id,
+                        'from': src_rel, 'to': dst_rel}}
+    if not apply:
+        file_operations.preview_operation(root, spec, safe_path, require)
+        print(f'Предпросмотр {task_id}: материал '
+              f"'{material_id}' {src_rel} → {dst_rel} (sha256 {digest}); "
+              f'companion {companion_rel}; ссылок переписано: '
+              f'{sum(len(item["changes"]) for item in link_changes)}; '
+              'запись только с --apply')
+        return
+    ctx['run_operation'](root, spec)
+    print(f"{task_id}: материал '{material_id}' перенесён "
+          f"{src_rel} → {dst_rel}; доказательство {companion_rel}. "
+          'Исторические hashes и приёмка не пересчитывались.')
 
 
 def handoff_command(root, task_id, summary, actor_name, actor_model,
