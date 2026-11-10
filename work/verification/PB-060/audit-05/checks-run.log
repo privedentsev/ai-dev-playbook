@@ -1,0 +1,47 @@
+test_allowed_skip_accepted (test_checks_run.AdapterTest.test_allowed_skip_accepted) ... ok
+test_error_outcome_and_description (test_checks_run.AdapterTest.test_error_outcome_and_description) ... ok
+test_expected_failure_and_unexpected_success (test_checks_run.AdapterTest.test_expected_failure_and_unexpected_success) ... ok
+test_green_suite_passed (test_checks_run.AdapterTest.test_green_suite_passed) ... ok
+test_missing_catalog_id_rejected (test_checks_run.AdapterTest.test_missing_catalog_id_rejected) ... ok
+test_parse_argv_forms (test_checks_run.AdapterTest.test_parse_argv_forms) ... ok
+test_subtest_failure_rejected (test_checks_run.AdapterTest.test_subtest_failure_rejected) ... ok
+test_timeout_status (test_checks_run.AdapterTest.test_timeout_status) ... ok
+test_unexpected_skip_rejected (test_checks_run.AdapterTest.test_unexpected_skip_rejected) ... ok
+test_unfinished_and_crash_rejected (test_checks_run.AdapterTest.test_unfinished_and_crash_rejected) ... ok
+test_zero_tests_rejected (test_checks_run.AdapterTest.test_zero_tests_rejected) ... ok
+test_a01_ttl_from_original_run (test_checks_run.AuditRegressionTest.test_a01_ttl_from_original_run) ... ok
+test_a02_reuse_rebinding_race_reruns (test_checks_run.AuditRegressionTest.test_a02_reuse_rebinding_race_reruns) ... ok
+test_a03_corrupt_latest_failed_blocks_reuse (test_checks_run.AuditRegressionTest.test_a03_corrupt_latest_failed_blocks_reuse) ... ok
+test_a04_status_counts_only_fresh_coverage (test_checks_run.AuditRegressionTest.test_a04_status_counts_only_fresh_coverage) ... ok
+test_a05_project_import_in_adapter (test_checks_run.AuditRegressionTest.test_a05_project_import_in_adapter) ... ok
+test_a06_deleted_latest_failed_blocks_reuse (test_checks_run.AuditRegressionTest.test_a06_deleted_latest_failed_blocks_reuse) ... ok
+test_a07_rebuild_preserves_loss_evidence (test_checks_run.AuditRegressionTest.test_a07_rebuild_preserves_loss_evidence) ... ok
+test_a07_unrelated_run_keeps_evidence (test_checks_run.AuditRegressionTest.test_a07_unrelated_run_keeps_evidence) ... ok
+test_run_and_status_end_to_end (test_checks_run.CliRunTest.test_run_and_status_end_to_end) ... ok
+test_run_requires_policy (test_checks_run.CliRunTest.test_run_requires_policy) ... ok
+test_run_requires_task (test_checks_run.CliRunTest.test_run_requires_task) ... ok
+test_run_second_time_reuses (test_checks_run.CliRunTest.test_run_second_time_reuses) ... ok
+test_changed_input_forces_rerun (test_checks_run.RunnerTest.test_changed_input_forces_rerun) ... ok
+test_corrupt_index_rebuilt (test_checks_run.RunnerTest.test_corrupt_index_rebuilt) ... ok
+test_corrupt_result_no_false_reuse (test_checks_run.RunnerTest.test_corrupt_result_no_false_reuse) ... ok
+test_cross_task_reuse_same_project (test_checks_run.RunnerTest.test_cross_task_reuse_same_project) ... ok
+test_external_ttl_and_always_run (test_checks_run.RunnerTest.test_external_ttl_and_always_run) ... ok
+test_external_version_change_breaks_binding (test_checks_run.RunnerTest.test_external_version_change_breaks_binding) ... ok
+test_first_run_stores_results_and_state (test_checks_run.RunnerTest.test_first_run_stores_results_and_state) ... ok
+test_force_reruns_all (test_checks_run.RunnerTest.test_force_reruns_all) ... ok
+test_late_failed_not_hidden (test_checks_run.RunnerTest.test_late_failed_not_hidden) ... ok
+test_mutation_during_command_blocked (test_checks_run.RunnerTest.test_mutation_during_command_blocked) ... ok
+test_other_project_result_not_reused (test_checks_run.RunnerTest.test_other_project_result_not_reused) ... ok
+test_project_scope_covers_all (test_checks_run.RunnerTest.test_project_scope_covers_all) ... ok
+test_stale_reuses_independent_results (test_checks_run.RunnerTest.test_stale_reuses_independent_results) ... ok
+test_status_reports_coverage_and_trust (test_checks_run.RunnerTest.test_status_reports_coverage_and_trust) ... ok
+test_task_requirements_change_breaks_reuse (test_checks_run.RunnerTest.test_task_requirements_change_breaks_reuse) ... ok
+
+----------------------------------------------------------------------
+Ran 38 tests in 11.351s
+
+OK
+Создано 69 файлов в /private/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/tmpnkkq3cjq; manifest записан. Заполните документы и project.json; setup_status=needs_review.
+Создано 69 файлов в /private/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/tmpxchocvo4; manifest записан. Заполните документы и project.json; setup_status=needs_review.
+Создано 69 файлов в /private/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/tmpqveyv310; manifest записан. Заполните документы и project.json; setup_status=needs_review.
+Создано 69 файлов в /private/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/tmp8qsx0yvu; manifest записан. Заполните документы и project.json; setup_status=needs_review.

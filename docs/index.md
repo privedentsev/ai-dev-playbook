@@ -19,3 +19,5 @@
 - Автоматический выбор проверок по зависимостям: [требования](specs/dependency-aware-verification.md), [design](designs/dependency-aware-verification.md), [ADR-0006](adr/0006-dependency-aware-verification.md), [план PB-057–064 и AUDIT-009](plans/dependency-aware-verification.md). Подготовлено к согласованию; реализация не начата.
 
 - Варианты аудита плана и исправления без возврата архива: [требования](specs/block-acceptance.md), [design](designs/block-acceptance.md), [ADR-0007](adr/0007-block-acceptance.md), [план PB-065–071 и AUDIT-010](plans/block-acceptance.md). Документы и карточки draft; реализация не начата.
+
+- Защита от коллизий архивирования материалов: [требования](specs/material-archive-safety.md), [design](designs/material-archive-safety.md), [PB-072](tasks/PB-072.md) и материалы реализации. Draft; подготовка разрешена, кодирование не начато.

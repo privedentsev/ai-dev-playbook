@@ -758,15 +758,15 @@ class CliContractTest(LifecycleCase):
         self.assertIn("checks_policy", err)
         code, _, err = self.cli("checks", "run", "DEV-1")
         self.assertEqual(code, 1)
-        self.assertIn("PB-060", err)
+        self.assertIn("checks_policy", err)
         code, _, err = self.cli("checks", "run", "DEV-1",
                                 "--scope", "project", "--mode", "force",
                                 "--checkpoint", "release")
         self.assertEqual(code, 1)
-        self.assertIn("PB-060", err)
+        self.assertIn("checks_policy", err)
         code, _, err = self.cli("checks", "status", "DEV-1")
         self.assertEqual(code, 1)
-        self.assertIn("PB-060", err)
+        self.assertIn("checks_policy", err)
         code, _, err = self.cli("setup", "preview")
         self.assertEqual(code, 1)
         self.assertIn("PB-063", err)

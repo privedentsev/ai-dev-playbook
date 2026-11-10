@@ -380,6 +380,32 @@ def environment_identity(policy):
     return env
 
 
+def binding_environment(policy, check):
+    """Среда привязки результата конкретной проверки (R-11).
+
+    К наблюдаемой ``environment_identity`` добавляются внешние факты,
+    объявленные проверкой в ``required_environment``: политика
+    фиксирует ожидаемую ``version`` либо маркер ``ttl``/``always_run``
+    для каждого внешнего ``environment.external``. Смена объявленной
+    версии или вида свежести меняет привязку и обесценивает результат;
+    сам TTL/always_run оценивает runner отдельно от identity.
+    """
+    env = environment_identity(policy)
+    externals = {item["id"]: item for item in
+                 policy["environment"].get("external") or []}
+    for name in check.get("required_environment") or []:
+        external = externals.get(name)
+        if external is None:
+            env[f"required:{name}"] = "unknown"
+            continue
+        freshness = external["freshness"]
+        if freshness["kind"] == "version":
+            env[f"external:{name}"] = freshness["version"]
+        else:
+            env[f"external:{name}"] = {"freshness": freshness["kind"]}
+    return env
+
+
 def _latest_results(results):
     """Последний результат на check_id; более поздний failed важнее."""
     latest = {}
@@ -392,12 +418,16 @@ def _latest_results(results):
 
 
 def evaluate_reuse(check, result, *, root, policy, edges, state,
-                   hash_fn=None, task_digest=None, now=None):
+                   hash_fn=None, task_digest=None, now=None,
+                   projections=None, environment=None):
     """Решение reuse для одной обязательной проверки (R-11).
 
     ``reused`` требует успешного валидного результата с совпадающими
     значимыми входами, определением, замыканием графа, политикой,
     адаптером/runner и средой. Неизвестная среда reuse исключает.
+    ``projections`` и ``environment`` — те же значения, что runner
+    передавал снимку при записи результата (иначе входы
+    projection/environment не снимаются и свежесть недоказуема).
     """
     if result is None:
         return {"status": "run", "reason": "результатов нет"}
@@ -424,7 +454,9 @@ def evaluate_reuse(check, result, *, root, policy, edges, state,
         return {"status": "run", "reason": "другой адаптер"}
     if binding["runner"] != RUNNER:
         return {"status": "run", "reason": "другой runner"}
-    if binding["environment"] != environment_identity(policy):
+    environment = (environment if environment is not None
+                   else binding_environment(policy, check))
+    if binding["environment"] != environment:
         return {"status": "run",
                 "reason": "среда отличается или неизвестна"}
     has_task_input = any(isinstance(e, dict) and
@@ -437,9 +469,11 @@ def evaluate_reuse(check, result, *, root, policy, edges, state,
     try:
         snap = checks_inventory.snapshot(
             root, policy, checks_inventory.resolved_inputs(
-                policy, check), hash_fn=_counting_hasher(
-                    state, policy["fallback"]["limits"]
-                    .get("max_bytes"), hash_fn), now=now)
+                policy, check), environment=environment,
+            projections=projections,
+            hash_fn=_counting_hasher(
+                state, policy["fallback"]["limits"]
+                .get("max_bytes"), hash_fn), now=now)
     except BudgetExceeded as error:
         return {"status": "run", "reason": str(error)}
     if binding["input_digest"] != \
@@ -468,7 +502,7 @@ def _counting_reader(root, state, limit, read_file):
 
 def plan(root, policy, *, baseline=None, graph=None, previous=None,
          results=(), task_digest=None, checkpoint=None, hash_fn=None,
-         read_file=None, now=None):
+         read_file=None, now=None, projections=None, environment=None):
     """Построить объяснимый план: required/reused/run/blocked + цена.
 
     Ничего не исполняет и не пишет. ``baseline`` — прошлый снимок
@@ -512,7 +546,8 @@ def plan(root, policy, *, baseline=None, graph=None, previous=None,
         verdict = evaluate_reuse(
             check, latest.get(check["id"]), root=root, policy=policy,
             edges=graph["edges"], state=state, hash_fn=hash_fn,
-            task_digest=task_digest, now=now)
+            task_digest=task_digest, now=now, projections=projections,
+            environment=environment)
         if verdict["status"] == "reused":
             entry["status"] = "reused"
             entry["explain"] = entry["explain"] + [verdict["reason"]]
@@ -574,4 +609,5 @@ def plan(root, policy, *, baseline=None, graph=None, previous=None,
         "summary": summary,
         "graph_edges": len(graph["edges"]),
         "graph_unknown": len(graph["unknown"]),
+        "graph": graph,
     }

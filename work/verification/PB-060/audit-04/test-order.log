@@ -1,0 +1,25 @@
+UUID ORDER: ascending
+test_a07_rebuild_preserves_loss_evidence (test_checks_run.AuditRegressionTest.test_a07_rebuild_preserves_loss_evidence) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 0.185s
+
+OK
+RESULT ascending success= True
+UUID ORDER: descending
+test_a07_rebuild_preserves_loss_evidence (test_checks_run.AuditRegressionTest.test_a07_rebuild_preserves_loss_evidence) ... FAIL
+
+======================================================================
+FAIL: test_a07_rebuild_preserves_loss_evidence (test_checks_run.AuditRegressionTest.test_a07_rebuild_preserves_loss_evidence)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_checks_run.py", line 819, in test_a07_rebuild_preserves_loss_evidence
+    self.assertIn("payments-tests", corrupt)
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'payments-tests' not found in set()
+
+----------------------------------------------------------------------
+Ran 1 test in 0.152s
+
+FAILED (failures=1)
+RESULT descending success= False

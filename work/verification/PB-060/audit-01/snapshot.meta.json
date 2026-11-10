@@ -1,0 +1,98 @@
+{
+  "schema_version": 1,
+  "card_format_version": 2,
+  "relations": [
+    {
+      "relation": "based_on",
+      "target": "spec:dependency-aware-verification"
+    },
+    {
+      "relation": "based_on",
+      "target": "design:dependency-aware-verification"
+    },
+    {
+      "relation": "based_on",
+      "target": "plan:dependency-aware-verification"
+    }
+  ],
+  "materials": [
+    {
+      "id": "commands",
+      "role": "other",
+      "source": "docs/tasks/PB-060-evidence/commands.md",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-060"
+      ]
+    },
+    {
+      "id": "verify-070dadde",
+      "role": "report",
+      "source": "docs/tasks/PB-060-evidence/work/verification/PB-060/070daddef15143dcbfa2d1c5415df265/report.json",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-060"
+      ]
+    },
+    {
+      "id": "verify-070daddef15143dcbfa2d1c5415df265",
+      "role": "report",
+      "source": "work/verification/PB-060/070daddef15143dcbfa2d1c5415df265",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-060"
+      ]
+    },
+    {
+      "id": "verify-de89c6750de24714b6ba404412fe1e5a",
+      "role": "report",
+      "source": "work/verification/PB-060/de89c6750de24714b6ba404412fe1e5a",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-060"
+      ]
+    },
+    {
+      "id": "verify-ef39a246c3a9422eb40ef86264b62162",
+      "role": "report",
+      "source": "work/verification/PB-060/ef39a246c3a9422eb40ef86264b62162",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-060"
+      ]
+    }
+  ],
+  "handoff": {
+    "at": "2026-11-09T11:10:05+03:00",
+    "actor": {
+      "name": "Devin",
+      "model": "SWE-2 High"
+    },
+    "summary": "HANDOFF-01",
+    "reports": [
+      "verify-070daddef15143dcbfa2d1c5415df265",
+      "verify-ef39a246c3a9422eb40ef86264b62162"
+    ],
+    "card_projection": "sha256:324414234948a63e7305ecccf15b91c11be78b0d33e9bbc5e2a76c9967006e26",
+    "entry_id": "HANDOFF-01",
+    "journal_sha256": "sha256:8be208e2fe964ad9d03f727cb415ba1ca63edbed09b933f31ad78dbc93ad0f52"
+  },
+  "criterion_evidence": {
+    "CHECK-01": {
+      "check_sha256": "sha256:73604e3027170a4e9b152a0182964552105460ac30faee0502f7719f3e0a6d1d",
+      "card_projection": "sha256:324414234948a63e7305ecccf15b91c11be78b0d33e9bbc5e2a76c9967006e26",
+      "report_id": "verify-ef39a246c3a9422eb40ef86264b62162",
+      "report_sha256": "sha256:23978aaf40f6a6d50ee6678e6131d54149aaa8dd08040bcba8e8fc448af6445b"
+    }
+  }
+}

@@ -28,6 +28,7 @@ import block_workflow
 import checks_contract
 import checks_graph
 import checks_inventory
+import checks_runner
 import checks_select
 
 
@@ -1575,6 +1576,47 @@ def checks_plan(root, args):
                                if count or name != "not_applicable"))
 
 
+def _checks_task(root, args):
+    """Политика и активная карточка задачи для checks run/status."""
+    data, paths = config(root)
+    policy = _load_policy(root, data)
+    records = read_tasks(root, paths)
+    task = records.get(args.task_id)
+    require(task is not None and not task["archived"],
+            f"{args.task_id}: активная карточка не найдена")
+    task_content = documents.read_text(task["path"])
+    meta_errors = []
+    task_meta = documents.parse_meta(
+        task_content, str(task["path"].relative_to(root)),
+        meta_errors) or {}
+    return policy, task_content, task_meta
+
+
+def checks_run(root, args):
+    """checks run <TASK>: исполнить обязательства области (PB-060).
+
+    Runner пишет append-only результаты в work/checks/ и обновляет
+    baseline/граф контура; локальный режим честно помечает вывод как
+    диагностический. Код выхода 0 — только когда все обязательства
+    области покрыты passed либо переиспользованным успехом.
+    """
+    policy, task_content, task_meta = _checks_task(root, args)
+    outcome = checks_runner.execute(
+        root, policy, task_id=args.task_id, scope=args.scope,
+        mode=args.mode, checkpoint=args.checkpoint,
+        task_content=task_content, task_meta=task_meta)
+    return 0 if outcome["ok"] else 1
+
+
+def checks_status(root, args):
+    """checks status <TASK>: покрытие и ограничения доверия (PB-060)."""
+    policy, task_content, task_meta = _checks_task(root, args)
+    checks_runner.status(
+        root, policy, task_id=args.task_id, task_content=task_content,
+        task_meta=task_meta)
+    return 0
+
+
 def card_create(root, args, gate):
     """Create only new cards; never migrate an existing card implicitly."""
     data, paths = config(root)
@@ -1847,9 +1889,9 @@ def dispatch(root, args, gate):
         if args.action == "plan":
             checks_plan(root, args)
         elif args.action == "run":
-            _checks_deferred("checks", "run", "PB-060")
+            return checks_run(root, args)
         else:
-            _checks_deferred("checks", "status", "PB-060")
+            return checks_status(root, args)
     elif args.command == "setup":
         _checks_deferred("setup", args.action, "PB-063")
     elif args.command == "adopt":

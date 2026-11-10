@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "card_format_version": 2,
+  "relations": [
+    {
+      "relation": "based_on",
+      "target": "spec:material-archive-safety"
+    },
+    {
+      "relation": "based_on",
+      "target": "design:material-archive-safety"
+    }
+  ],
+  "materials": [
+    {
+      "id": "implementation-brief",
+      "role": "other",
+      "source": "docs/tasks/PB-072-evidence/implementation-brief.md",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-072"
+      ]
+    },
+    {
+      "id": "test-matrix",
+      "role": "other",
+      "source": "docs/tasks/PB-072-evidence/test-matrix.md",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-072"
+      ]
+    },
+    {
+      "id": "source-case",
+      "role": "report",
+      "source": "docs/tasks/PB-072-evidence/source-case.json",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-072"
+      ]
+    }
+  ]
+}

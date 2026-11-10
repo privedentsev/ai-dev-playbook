@@ -1,0 +1,12 @@
+test_direct_loss (__main__.Probes.test_direct_loss) ... ok
+test_inapplicable_run_rebuild (__main__.Probes.test_inapplicable_run_rebuild) ... ok
+test_index_recovery (__main__.Probes.test_index_recovery) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 1.071s
+
+OK
+DIRECT: {'payments-tests': 'passed'} NEXT: {'payments-tests': 'reused'}
+CHECKPOINT: {'probe': 'passed'} {'probe': 'failed'} loss: ['probe'] no checkpoint: {'probe': 'not_applicable'} after: [] next release: {'probe': 'reused'}
+STATUS AFTER REBUILD: {'covered': 1, 'obligated': 1}
+REBUILD: corrupt_ids before= ['payments-tests'] after= [] outcomes= {'payments-tests': 'reused'}
