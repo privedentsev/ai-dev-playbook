@@ -7,18 +7,35 @@ test ID (discovery по тому же argv) и фактические исход
 unexpected_success, включая subtests. Текстовый разбор ``-v`` не
 используется: события результата — единственный источник факта.
 
-Подпроцесс запускается ``sys.executable checks_unittest.py --argv JSON
---out PATH`` в корне проекта: загружает suite без исполнения discovery
-вне одобренной команды, исполняет и атомарно пишет отчёт. Завершение
-без отчёта, усечённый JSON и нулевой набор — не ``passed`` (R-13).
-Родитель сверяет набор с одобренным ``test_catalog``: тест вне
-каталога, пропавший ID группы проверки, дубликат, незавершённый ID и
-skip/expected_failure вне допусков отклоняются.
+Подпроцесс запускается ``sys.executable checks_unittest.py --suite
+--argv JSON`` в корне проекта: загружает suite без исполнения
+discovery вне одобренной команды, исполняет и выдаёт отчёт одной
+строкой с маркером ``REPORT_SENTINEL`` в stdout. Путь файла отчёта
+тестовому процессу не передаётся: отчёт, записанный тестовым кодом
+в run_dir, доверием не является — родитель разбирает канал stdout
+после завершения и сам сохраняет ``*.adapter.json`` (A-01, PB-061).
+Завершение без строки отчёта, усечённый JSON и нулевой набор — не
+``passed`` (R-13). Дочерний процесс завершается ``os._exit``, чтобы
+обработчики ``atexit`` тестового кода не печатали строки после
+отчёта. Родитель сверяет набор с одобренным ``test_catalog``: тест
+вне каталога, пропавший ID группы проверки, дубликат, незавершённый
+ID и skip/expected_failure вне допусков отклоняются.
+
+Остаточное ограничение, заявленное честно: события результата
+вычисляются в том же процессе, что и тестовый код, — вредоносный
+тест может подменить состояние адаптера изнутри процесса либо
+оставить отделённый процесс, пишущий в stdout после отчёта. Такой
+канал принципиально не доказывает происхождение self-reported
+исходов; защищённое подтверждение опирается на границу verifier,
+а не на неподделываемость заявлений тестов.
 """
 import argparse
 import json
+import os
 import subprocess
 import sys
+import threading
+import time
 import unittest
 from pathlib import Path
 
@@ -27,6 +44,7 @@ import checks_contract
 ADAPTER = {"id": checks_contract.BUILTIN_ADAPTER,
            "version": str(checks_contract.ADAPTER_PROTOCOL_VERSION)}
 REPORT_PROTOCOL = 1
+REPORT_SENTINEL = "CHECKS-REPORT-V1 "
 
 _PASSED = "passed"
 _FAIL_OUTCOMES = {"failed", "error"}
@@ -184,9 +202,16 @@ def _load_suite(selection):
 
 
 def _subprocess_main(argv=None):
+    """Режим suite: исполнить набор, выдать отчёт в stdout.
+
+    Отчёт — последняя строка с ``REPORT_SENTINEL``; процесс
+    завершается ``os._exit``, чтобы ``atexit``-код тестов не мог
+    добавить строки после отчёта. Файл отчёта не создаётся: путь
+    недоступен тестовому процессу, подделка файла не принимается.
+    """
     parser = argparse.ArgumentParser(prog="checks_unittest")
+    parser.add_argument("--suite", action="store_true", required=True)
     parser.add_argument("--argv", required=True)
-    parser.add_argument("--out", required=True)
     args = parser.parse_args(argv)
     report = {"protocol": REPORT_PROTOCOL, "expected": [],
               "actual": [], "exit_code": 2}
@@ -201,27 +226,51 @@ def _subprocess_main(argv=None):
         report["exit_code"] = 0 if result.wasSuccessful() else 1
     except Exception as error:  # отказ до/во время загрузки — crash
         report["error"] = f"{type(error).__name__}: {error}"
-    temporary = Path(args.out + ".tmp")
+    sys.stdout.write(REPORT_SENTINEL
+                     + json.dumps(report, ensure_ascii=False) + "\n")
+    sys.stdout.flush()
+    # Ack-протокол A-01: доверенный хвост ждёт подтверждения родителя.
+    # Строка отчёта, напечатанная тестовым кодом до выхода процесса,
+    # не может быть подтверждена живым процессом и отклоняется.
+    try:
+        sys.stdin.buffer.read(1)
+    except (OSError, ValueError, AttributeError):
+        pass
+    os._exit(report["exit_code"])
+
+
+def _write_report(out_path, report):
+    """Атомарно сохранить проверенный отчёт; пишет только родитель."""
+    temporary = Path(str(out_path) + ".tmp")
     temporary.write_text(json.dumps(report, ensure_ascii=False) + "\n",
                          encoding="utf-8")
-    temporary.replace(args.out)
-    return report["exit_code"]
+    temporary.replace(out_path)
 
 
-def collect(root, check, run_dir, *, timeout, env=None):
+def collect(root, check, run_dir, *, timeout, env=None, wrap=None):
     """Исполнить проверку в подпроцессе; вернуть сырой сбор адаптера.
 
     ``run_dir`` — каталог прогона внутри work/checks; stdout/stderr
     уходят в файлы рядом с отчётом. Timeout останавливает группу
     процессов; отсутствующий/повреждённый отчёт — crash, не passed.
+    ``wrap`` — необязательный префикс argv механизма изоляции
+    (например, sandbox-exec доверенного контура PB-061).
+
+    Канал отчёта (A-01): строка ``REPORT_SENTINEL`` в stdout
+    подтверждается ack-байтом по stdin только если процесс ещё жив —
+    отчёт, напечатанный тестовым кодом и за которым процесс завершился
+    (``os._exit``, crash), отклоняется как posthumous; вторая строка
+    отчёта (подделка поверх настоящей) — crash. ``adapter.json``
+    перезаписывается родителем только проверенным содержимым.
     """
     import verification
     root = Path(root)
     script = Path(__file__).resolve()
     out_path = run_dir / (check["id"] + ".adapter.json")
-    argv = [sys.executable, str(script), "--argv",
-            json.dumps(check["argv"], ensure_ascii=False),
-            "--out", str(out_path)]
+    argv = [sys.executable, str(script), "--suite", "--argv",
+            json.dumps(check["argv"], ensure_ascii=False)]
+    if wrap:
+        argv = list(wrap) + argv
     stdout = run_dir / (check["id"] + ".stdout.log")
     stderr = run_dir / (check["id"] + ".stderr.log")
     collected = {"status": None, "exit_code": None, "report": None,
@@ -231,22 +280,65 @@ def collect(root, check, run_dir, *, timeout, env=None):
     # A-05: `python -m unittest` из корня видит корень в sys.path;
     # файл-скрипт ставит scripts/ — корень добавляем через PYTHONPATH,
     # иначе импорты модулей проекта не воспроизводят одобренную команду.
-    if env is None:
-        import os
-        env = dict(os.environ)
+    env = dict(os.environ if env is None else env)
     root_abs = str(root.resolve())
     if env.get("PYTHONPATH"):
         env["PYTHONPATH"] = root_abs + os.pathsep + env["PYTHONPATH"]
     else:
         env["PYTHONPATH"] = root_abs
     process = None
+    reports = []
+    reports_lock = threading.Lock()
+    acked = False
+    posthumous = False
     try:
-        with stdout.open("xb") as out, stderr.open("xb") as err:
+        with stdout.open("xb") as out_file, \
+                stderr.open("xb") as err:
             process = subprocess.Popen(
-                argv, cwd=root, stdin=subprocess.DEVNULL,
-                stdout=out, stderr=err, env=env,
+                argv, cwd=root, stdin=subprocess.PIPE,
+                stdout=subprocess.PIPE, stderr=err, env=env,
                 start_new_session=True)
-            collected["exit_code"] = process.wait(timeout=timeout)
+
+            def _pump():
+                sentinel = REPORT_SENTINEL.encode("utf-8")
+                try:
+                    for line in process.stdout:
+                        out_file.write(line)
+                        out_file.flush()
+                        if line.startswith(sentinel):
+                            with reports_lock:
+                                reports.append(line)
+                except (OSError, ValueError):
+                    pass
+                finally:
+                    try:
+                        out_file.close()
+                    except OSError:
+                        pass
+
+            pump = threading.Thread(target=_pump, daemon=True)
+            pump.start()
+            deadline = time.monotonic() + timeout
+            while True:
+                with reports_lock:
+                    pending = bool(reports)
+                if pending and not acked:
+                    if process.poll() is None:
+                        try:
+                            process.stdin.write(b"\x00")
+                            process.stdin.flush()
+                            acked = True
+                        except (OSError, ValueError):
+                            posthumous = True
+                    else:
+                        posthumous = True
+                if process.poll() is not None:
+                    collected["exit_code"] = process.returncode
+                    break
+                if time.monotonic() >= deadline:
+                    raise subprocess.TimeoutExpired(argv, timeout)
+                time.sleep(0.005)
+            pump.join(timeout=5)
     except subprocess.TimeoutExpired:
         collected["status"] = "timeout"
     except OSError as error:
@@ -255,19 +347,30 @@ def collect(root, check, run_dir, *, timeout, env=None):
         if process is not None:
             verification.stop_group(process)
             collected.setdefault("exit_code", process.returncode)
+            for stream in (process.stdin, process.stdout):
+                try:
+                    stream.close()
+                except (OSError, ValueError, AttributeError):
+                    pass
     if collected["status"] is not None:
         return collected
-    if not out_path.is_file():
+    with reports_lock:
+        lines = list(reports)
+    if len(lines) != 1 or not acked or posthumous:
         collected["status"] = "crash"
-        collected["error"] = ("отчёт адаптера не создан "
-                              f"(exit {collected['exit_code']})")
+        collected["error"] = ("канал отчёта адаптера не подтверждён: "
+                              f"строк={len(lines)}, ack={acked}, "
+                              f"posthumous={posthumous}, "
+                              f"exit {collected['exit_code']}")
         return collected
+    payload = lines[0][len(REPORT_SENTINEL):]
     try:
-        report = json.loads(out_path.read_text(encoding="utf-8"),
+        report = json.loads(payload.decode("utf-8").strip(),
                             object_pairs_hook=_unique_pairs)
         _validate_report(report)
+        _write_report(out_path, report)
         collected["report"] = report
-    except (ValueError, OSError) as error:
+    except (ValueError, OSError, UnicodeDecodeError) as error:
         collected["status"] = "crash"
         collected["error"] = f"отчёт адаптера повреждён: {error}"
     return collected

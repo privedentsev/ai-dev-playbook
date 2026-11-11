@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "card_format_version": 2,
+  "relations": [
+    {
+      "relation": "based_on",
+      "target": "spec:dependency-aware-verification"
+    },
+    {
+      "relation": "based_on",
+      "target": "design:dependency-aware-verification"
+    },
+    {
+      "relation": "based_on",
+      "target": "plan:dependency-aware-verification"
+    }
+  ],
+  "materials": [
+    {
+      "id": "evidence",
+      "role": "report",
+      "source": "docs/tasks/PB-061-evidence",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-061"
+      ]
+    },
+    {
+      "id": "verify-41b4049b522e4b0e9a18f8b794cecb07",
+      "role": "report",
+      "source": "work/verification/PB-061/41b4049b522e4b0e9a18f8b794cecb07",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-061"
+      ]
+    }
+  ],
+  "criterion_evidence": {
+    "CHECK-01": {
+      "check_sha256": "sha256:3d104bf9cb48802126281626189e4a480c7b6a5387ebeb58eab1d23495a78248",
+      "card_projection": "sha256:db1ff2a0097d434c57e2406c227b7adb1bb8a09ee4016b5ac10c9dbe25a7a5a2",
+      "report_id": "verify-41b4049b522e4b0e9a18f8b794cecb07",
+      "report_sha256": "sha256:957827f9b14a3995f5a63f9a2856bcf2f5c2b4503404fc59518543c32c3fcd9c"
+    }
+  },
+  "handoff": {
+    "at": "2026-11-10T18:08:15+03:00",
+    "actor": {
+      "name": "Devin",
+      "model": "SWE-2 High"
+    },
+    "summary": "HANDOFF-01",
+    "reports": [
+      "verify-41b4049b522e4b0e9a18f8b794cecb07"
+    ],
+    "card_projection": "sha256:db1ff2a0097d434c57e2406c227b7adb1bb8a09ee4016b5ac10c9dbe25a7a5a2",
+    "entry_id": "HANDOFF-01",
+    "journal_sha256": "sha256:8b829348d1fea3630800d1dbaa9006ec898631d79e7e528ab545e102b41f69a3"
+  }
+}

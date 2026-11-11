@@ -1,0 +1,45 @@
+test_extension_without_argv_is_routine (test_checks_trust.ApproveTest.test_extension_without_argv_is_routine) ... ok
+test_initial_and_require (test_checks_trust.ApproveTest.test_initial_and_require) ... ok
+test_new_argv_is_weakening (test_checks_trust.ApproveTest.test_new_argv_is_weakening)
+Обычное расширение не разрешает новые недоверенные команды. ... ok
+test_removed_check_is_weakening (test_checks_trust.ApproveTest.test_removed_check_is_weakening) ... ok
+test_revoked_policy_digest_refused (test_checks_trust.ApproveTest.test_revoked_policy_digest_refused) ... ok
+test_covered_by_run_receipt (test_checks_trust.GateTest.test_covered_by_run_receipt) ... ok
+test_forged_file_in_project_rejected (test_checks_trust.GateTest.test_forged_file_in_project_rejected) ... ok
+test_no_receipts_uncovered (test_checks_trust.GateTest.test_no_receipts_uncovered) ... ok
+test_init_and_binding (test_checks_trust.HomeTest.test_init_and_binding) ... ok
+test_probe_inside_project_is_local (test_checks_trust.HomeTest.test_probe_inside_project_is_local) ... ok
+test_probe_same_uid_is_honest_local (test_checks_trust.HomeTest.test_probe_same_uid_is_honest_local) ... ok
+test_probe_without_home_is_local (test_checks_trust.HomeTest.test_probe_without_home_is_local) ... ok
+test_env_scrubbed_for_test_process (test_checks_trust.IsolationTest.test_env_scrubbed_for_test_process)
+Переменные доверенной стороны не доходят до подпроцесса. ... ok
+test_sandbox_denies_home_access (test_checks_trust.IsolationTest.test_sandbox_denies_home_access)
+Реальная граница на стенде: запись/чтение дома запрещены. ... ok
+test_aggregate_confirms_unchanged (test_checks_trust.ReceiptVerifyTest.test_aggregate_confirms_unchanged) ... ok
+test_aggregate_refuses_when_nothing_confirms (test_checks_trust.ReceiptVerifyTest.test_aggregate_refuses_when_nothing_confirms) ... ok
+test_aggregate_skips_changed_inputs (test_checks_trust.ReceiptVerifyTest.test_aggregate_skips_changed_inputs) ... ok
+test_attacker_signature_rejected (test_checks_trust.ReceiptVerifyTest.test_attacker_signature_rejected) ... ok
+test_cross_project_rejected (test_checks_trust.ReceiptVerifyTest.test_cross_project_rejected)
+Квитанция чужого проекта не принимается этим домом. ... ok
+test_foreign_home_receipt_rejected (test_checks_trust.ReceiptVerifyTest.test_foreign_home_receipt_rejected)
+Квитанция другого дома того же проекта — журнал/ключ иные. ... ok
+test_forged_field_rejected (test_checks_trust.ReceiptVerifyTest.test_forged_field_rejected) ... ok
+test_replay_for_other_candidate_rejected (test_checks_trust.ReceiptVerifyTest.test_replay_for_other_candidate_rejected) ... ok
+test_revoked_key_rejected (test_checks_trust.ReceiptVerifyTest.test_revoked_key_rejected) ... ok
+test_revoked_policy_rejected (test_checks_trust.ReceiptVerifyTest.test_revoked_policy_rejected) ... ok
+test_revoked_receipt_rejected (test_checks_trust.ReceiptVerifyTest.test_revoked_receipt_rejected) ... ok
+test_unknown_key_replacement_rejected (test_checks_trust.ReceiptVerifyTest.test_unknown_key_replacement_rejected) ... ok
+test_client_results_never_signed (test_checks_trust.VerifierRunTest.test_client_results_never_signed)
+Файл, подброшенный агентом, не становится квитанцией. ... ok
+test_editable_approved_is_not_authorization (test_checks_trust.VerifierRunTest.test_editable_approved_is_not_authorization)
+approved_basis в файле проекта не заменяет одобрение дома. ... ok
+test_policy_edit_after_approval_refused (test_checks_trust.VerifierRunTest.test_policy_edit_after_approval_refused) ... ok
+test_run_issues_valid_receipt (test_checks_trust.VerifierRunTest.test_run_issues_valid_receipt) ... ok
+test_snapshot_substitution_detected (test_checks_trust.VerifierRunTest.test_snapshot_substitution_detected)
+AC-07: изменение после прогона — replay отклонён. ... ok
+test_unapproved_policy_refused (test_checks_trust.VerifierRunTest.test_unapproved_policy_refused) ... ok
+
+----------------------------------------------------------------------
+Ran 32 tests in 11.933s
+
+OK

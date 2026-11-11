@@ -193,11 +193,13 @@ def _snapshot_inputs(root, policy, check, projections, env, now):
         projections=projections, now=now)
 
 
-def _execute_test(root, check, policy, run_dir, now):
+def _execute_test(root, check, policy, run_dir, now, *, env=None,
+                  wrap=None):
     """Запуск через адаптер и сверка с каталогом."""
+    isolation = {"wrap": wrap} if wrap else {}
     collected = checks_unittest.collect(
         root, check, run_dir,
-        timeout=check["timeout_seconds"])
+        timeout=check["timeout_seconds"], env=env, **isolation)
     outcome = checks_unittest.verdict(check, policy, collected)
     evidence = {"stdout_log": collected["stdout_log"],
                 "stderr_log": collected["stderr_log"],
@@ -206,19 +208,22 @@ def _execute_test(root, check, policy, run_dir, now):
         {"tests": outcome["tests"]}
 
 
-def _execute_command(root, check, run_dir, now):
+def _execute_command(root, check, run_dir, now, *, env=None, wrap=None):
     """Команда с постусловием по exit-коду; выдуманного числа тестов нет."""
     stdout = run_dir / (check["id"] + ".stdout.log")
     stderr = run_dir / (check["id"] + ".stderr.log")
     command = {"exit_code": None, "stdout_log": str(
         stdout.relative_to(root)), "stderr_log": str(
         stderr.relative_to(root))}
+    argv = (list(wrap) + list(check["argv"])) if wrap \
+        else check["argv"]
     process = None
     try:
         with stdout.open("xb") as out, stderr.open("xb") as err:
             process = subprocess.Popen(
-                check["argv"], cwd=root, stdin=subprocess.DEVNULL,
-                stdout=out, stderr=err, start_new_session=True)
+                argv, cwd=root, stdin=subprocess.DEVNULL,
+                stdout=out, stderr=err, env=env,
+                start_new_session=True)
             command["exit_code"] = process.wait(
                 timeout=check["timeout_seconds"])
     except subprocess.TimeoutExpired:
@@ -270,13 +275,16 @@ def _reused_result(policy, check, source, edges, task_digest, env,
 
 
 def execute(root, policy, *, task_id, scope, mode, checkpoint,
-            task_content, task_meta, now=None, emit=print):
+            task_content, task_meta, now=None, emit=print, env=None,
+            argv_prefix=None):
     """Выполнить обязательства области и вернуть итог прогона.
 
     Пишет результаты и обновляет baseline/граф контура. Возвращает
-    ``{"ok": bool, "plan": plan, "stored": [result...]}``; ``ok``
+    ``{"ok": bool, ..., "results": [result...]}``; ``ok``
     истинно только когда все обязательства области покрыты passed или
-    reused — ручные и блокированные остаются непокрытыми.
+    reused — ручные и блокированные остаются непокрытыми. ``env`` и
+    ``argv_prefix`` задают окружение и механизм изоляции подпроцессов
+    (доверенный контур PB-061); по умолчанию — наследование среды.
     """
     root = Path(root)
     task_digest = verification_policy.fingerprint(
@@ -335,12 +343,15 @@ def execute(root, policy, *, task_id, scope, mode, checkpoint,
     for check in policy["checks"]:
         entry = checks[check["id"]]
         status = entry["status"]
-        env = checks_select.binding_environment(policy, check)
+        # A-03/A-05 аудита PB-061: окружение процесса (env) и идентичность
+        # среды привязки (bind_env) — разные величины; binding_environment
+        # не является окружением подпроцесса.
+        bind_env = checks_select.binding_environment(policy, check)
         if status == "reused":
             source = latest.get(check["id"])
             try:
                 snap = _snapshot_inputs(root, policy, check,
-                                        projections, env, now)
+                                        projections, bind_env, now)
                 input_digest = \
                     checks_inventory.snapshot_digest(snap)
                 # A-02: запись reuse только на байтах исходного успеха;
@@ -352,8 +363,8 @@ def execute(root, policy, *, task_id, scope, mode, checkpoint,
                          f"оценки reuse — запуск")
                 else:
                     result = _reused_result(
-                        policy, check, source, edges, task_digest, env,
-                        input_digest, run_id, now)
+                        policy, check, source, edges, task_digest,
+                        bind_env, input_digest, run_id, now)
             except (ValueError, OSError) as error:
                 result = {"schema_version": 1,
                           "result_id": f"{run_id}-{check['id']}",
@@ -362,7 +373,8 @@ def execute(root, policy, *, task_id, scope, mode, checkpoint,
                           "kind": check["kind"],
                           "binding": _binding(
                               policy, check, edges,
-                              "sha256:" + "0" * 64, task_digest, env),
+                              "sha256:" + "0" * 64, task_digest,
+                              bind_env),
                           "status": "blocked",
                           "reason": f"входы результата не доказаны "
                                     f"при записи reuse: {error}",
@@ -396,7 +408,7 @@ def execute(root, policy, *, task_id, scope, mode, checkpoint,
                       "check_id": check["id"], "kind": check["kind"],
                       "binding": _binding(
                           policy, check, edges,
-                          "sha256:" + "0" * 64, task_digest, env),
+                          "sha256:" + "0" * 64, task_digest, bind_env),
                       "status": "blocked", "reason": reason,
                       "started_at": _clock(now),
                       "finished_at": _clock(now),
@@ -419,7 +431,7 @@ def execute(root, policy, *, task_id, scope, mode, checkpoint,
                       "check_id": check["id"], "kind": "manual",
                       "binding": _binding(
                           policy, check, edges,
-                          "sha256:" + "0" * 64, task_digest, env),
+                          "sha256:" + "0" * 64, task_digest, bind_env),
                       "status": "not_run",
                       "reason": "ручная проверка: runner не исполняет, "
                                 "подтверждение — инженер",
@@ -439,7 +451,7 @@ def execute(root, policy, *, task_id, scope, mode, checkpoint,
         started = time.monotonic()
         try:
             pre = _snapshot_inputs(root, policy, check, projections,
-                                   env, now)
+                                   bind_env, now)
         except (ValueError, OSError) as error:
             result = {"schema_version": 1,
                       "result_id": f"{run_id}-{check['id']}",
@@ -447,7 +459,7 @@ def execute(root, policy, *, task_id, scope, mode, checkpoint,
                       "check_id": check["id"], "kind": check["kind"],
                       "binding": _binding(
                           policy, check, edges,
-                          "sha256:" + "0" * 64, task_digest, env),
+                          "sha256:" + "0" * 64, task_digest, bind_env),
                       "status": "blocked",
                       "reason": f"снимок входов не построен: {error}",
                       "started_at": started_at,
@@ -469,16 +481,17 @@ def execute(root, policy, *, task_id, scope, mode, checkpoint,
                     {"tests": {"expected": [], "actual": []}}
             else:
                 status_r, reasons, evidence, body = _execute_test(
-                    root, check, policy, run_dir, now)
+                    root, check, policy, run_dir, now, env=env,
+                    wrap=argv_prefix)
         else:
             status_r, reasons, evidence, body = _execute_command(
-                root, check, run_dir, now)
+                root, check, run_dir, now, env=env, wrap=argv_prefix)
         evidence["run_id"] = run_id
         mutation = None
         if status_r in {"passed", "failed"}:
             try:
                 post = _snapshot_inputs(root, policy, check,
-                                        projections, env, now)
+                                        projections, bind_env, now)
                 if checks_inventory.snapshot_digest(post) != \
                         checks_inventory.snapshot_digest(pre):
                     mutation = ("входы изменились во время запуска — "
@@ -495,7 +508,8 @@ def execute(root, policy, *, task_id, scope, mode, checkpoint,
             "kind": check["kind"],
             "binding": _binding(
                 policy, check, edges,
-                checks_inventory.snapshot_digest(pre), task_digest, env),
+                checks_inventory.snapshot_digest(pre), task_digest,
+                bind_env),
             "status": status_r,
             "started_at": started_at,
             "finished_at": _clock(now),
@@ -532,7 +546,7 @@ def execute(root, policy, *, task_id, scope, mode, checkpoint,
     for note in notes:
         emit(f"Примечание: {note}")
     return {"ok": ok, "summary": summary, "uncovered": uncovered,
-            "outcomes": outcomes, "run_id": run_id}
+            "outcomes": outcomes, "run_id": run_id, "results": stored}
 
 
 def status(root, policy, *, task_id, task_content, task_meta, now=None,

@@ -1,0 +1,6 @@
+ACK_FORGERY {"run_ok": true, "verify_ok": true, "gate_ok": true, "defined_tests": 0, "executed_tests": 0}
+CHMOD_PROBE {"capability": "local", "separate_identity": false, "key_writable": true}
+DIRECTORY_WRITABILITY {"\u0434\u043e\u043c": null, "\u0440\u043e\u0434\u0438\u0442\u0435\u043b\u044c\u0441\u043a\u0438\u0439 \u043a\u0430\u0442\u0430\u043b\u043e\u0433": null, "\u043a\u043b\u044e\u0447\u0438": null, "approved.json": true, "revocations.json": true, "journal.jsonl": true, "\u043a\u043b\u044e\u0447 k-fc1d0cddf8f949d7": true}
+PROTECTED_ENV {"ok": true, "HOME_in_arena": true, "TMPDIR_in_arena": true, "PATH_present": true}
+ORDINARY_ENV {"ok": true, "inherited": "inherited"}
+TRANSITIVE_REVOCATION {"source_ok": false, "aggregate1_ok": false, "aggregate2_ok": false, "gate_ok": false}

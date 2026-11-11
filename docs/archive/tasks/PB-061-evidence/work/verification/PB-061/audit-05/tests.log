@@ -1,0 +1,294 @@
+test_expected_failure_classification (test_checks_contract.ClassifyTest.test_expected_failure_classification)
+A-04: расширение допуска expected_failure — ослабление. ... ok
+test_extension (test_checks_contract.ClassifyTest.test_extension) ... ok
+test_extension_mixed_with_weakening (test_checks_contract.ClassifyTest.test_extension_mixed_with_weakening) ... ok
+test_identity_change_rejected (test_checks_contract.ClassifyTest.test_identity_change_rejected) ... ok
+test_new_catalog_entry_with_allowance (test_checks_contract.ClassifyTest.test_new_catalog_entry_with_allowance)
+A-06: новый ID сразу с допуском — ослабление. ... ok
+test_new_check_argv_allowlist (test_checks_contract.ClassifyTest.test_new_check_argv_allowlist)
+A-02: новая исполняемая команда требует решения инженера. ... ok
+test_tightening_limits_is_extension (test_checks_contract.ClassifyTest.test_tightening_limits_is_extension) ... ok
+test_unchanged (test_checks_contract.ClassifyTest.test_unchanged) ... ok
+test_weakening (test_checks_contract.ClassifyTest.test_weakening) ... ok
+test_backward_compat (test_checks_contract.CliContractTest.test_backward_compat)
+Проект без checks_policy и task_workflow работает как прежде. ... ok
+test_deferred_commands (test_checks_contract.CliContractTest.test_deferred_commands) ... ok
+test_policy_link_path_safety (test_checks_contract.CliContractTest.test_policy_link_path_safety) ... ok
+test_policy_link_validation (test_checks_contract.CliContractTest.test_policy_link_validation)
+project.json → checks_policy валидирует файл политики. ... ok
+test_scope_mode_axes (test_checks_contract.CliContractTest.test_scope_mode_axes)
+Область и режим — независимые оси; неизвестные значения отклонены. ... ok
+test_edges (test_checks_contract.GraphSchemaTest.test_edges) ... ok
+test_known_refs (test_checks_contract.GraphSchemaTest.test_known_refs) ... ok
+test_schema_version (test_checks_contract.GraphSchemaTest.test_schema_version) ... ok
+test_unknown_fields (test_checks_contract.GraphSchemaTest.test_unknown_fields) ... ok
+test_unknown_scope (test_checks_contract.GraphSchemaTest.test_unknown_scope) ... ok
+test_valid (test_checks_contract.GraphSchemaTest.test_valid) ... ok
+test_valid_policy (test_checks_contract.PolicyFixtureTest.test_valid_policy) ... ok
+test_version_constants (test_checks_contract.PolicyFixtureTest.test_version_constants) ... ok
+test_approved_basis (test_checks_contract.PolicySchemaTest.test_approved_basis) ... ok
+test_catalog_expected_failure (test_checks_contract.PolicySchemaTest.test_catalog_expected_failure)
+A-04: явная политика допуска expected_failure отдельно от skip. ... ok
+test_catalog_rules (test_checks_contract.PolicySchemaTest.test_catalog_rules) ... ok
+test_checks_rules (test_checks_contract.PolicySchemaTest.test_checks_rules) ... ok
+test_dependencies_rules (test_checks_contract.PolicySchemaTest.test_dependencies_rules) ... ok
+test_environment_rules (test_checks_contract.PolicySchemaTest.test_environment_rules) ... ok
+test_excludes_exact_input_match (test_checks_contract.PolicySchemaTest.test_excludes_exact_input_match)
+A-05: glob, совпадающий с явным входом, — коллизия. ... ok
+test_excludes_rules (test_checks_contract.PolicySchemaTest.test_excludes_rules) ... ok
+test_excludes_unanchored_glob (test_checks_contract.PolicySchemaTest.test_excludes_unanchored_glob)
+A-01: glob без литерального префикса наблюдает корень. ... ok
+test_fallback_rules (test_checks_contract.PolicySchemaTest.test_fallback_rules) ... ok
+test_ids_and_revision (test_checks_contract.PolicySchemaTest.test_ids_and_revision) ... ok
+test_inputs_and_applicability (test_checks_contract.PolicySchemaTest.test_inputs_and_applicability) ... ok
+test_limits_bool_nan (test_checks_contract.PolicySchemaTest.test_limits_bool_nan) ... ok
+test_module_path_overlap (test_checks_contract.PolicySchemaTest.test_module_path_overlap) ... ok
+test_modules_rules (test_checks_contract.PolicySchemaTest.test_modules_rules) ... ok
+test_required_fields (test_checks_contract.PolicySchemaTest.test_required_fields) ... ok
+test_trust_mode (test_checks_contract.PolicySchemaTest.test_trust_mode) ... ok
+test_unknown_fields_rejected (test_checks_contract.PolicySchemaTest.test_unknown_fields_rejected) ... ok
+test_unknown_version (test_checks_contract.PolicySchemaTest.test_unknown_version) ... ok
+test_aggregate (test_checks_contract.ReceiptSchemaTest.test_aggregate) ... ok
+test_signature (test_checks_contract.ReceiptSchemaTest.test_signature) ... ok
+test_subject (test_checks_contract.ReceiptSchemaTest.test_subject) ... ok
+test_valid (test_checks_contract.ReceiptSchemaTest.test_valid) ... ok
+test_version_and_digests (test_checks_contract.ReceiptSchemaTest.test_version_and_digests) ... ok
+test_binding_required (test_checks_contract.ResultSchemaTest.test_binding_required) ... ok
+test_kind_specific (test_checks_contract.ResultSchemaTest.test_kind_specific) ... ok
+test_reused (test_checks_contract.ResultSchemaTest.test_reused) ... ok
+test_status_reason (test_checks_contract.ResultSchemaTest.test_status_reason) ... ok
+test_tests_contract (test_checks_contract.ResultSchemaTest.test_tests_contract) ... ok
+test_valid (test_checks_contract.ResultSchemaTest.test_valid) ... ok
+test_version_and_status (test_checks_contract.ResultSchemaTest.test_version_and_status) ... ok
+test_direct_from_relative_imports (test_checks_graph.AnalyzerTest.test_direct_from_relative_imports) ... ok
+test_dynamic_alias_flagged (test_checks_graph.AnalyzerTest.test_dynamic_alias_flagged) ... ok
+test_dynamic_import_alias (test_checks_graph.AnalyzerTest.test_dynamic_import_alias) ... ok
+test_dynamic_import_flagged (test_checks_graph.AnalyzerTest.test_dynamic_import_flagged) ... ok
+test_dynamic_module_alias (test_checks_graph.AnalyzerTest.test_dynamic_module_alias) ... ok
+test_literal_dynamic_resolved (test_checks_graph.AnalyzerTest.test_literal_dynamic_resolved) ... ok
+test_parent_relative_import (test_checks_graph.AnalyzerTest.test_parent_relative_import) ... ok
+test_src_layout_from_unrelated_dir (test_checks_graph.AnalyzerTest.test_src_layout_from_unrelated_dir) ... ok
+test_stdlib_and_external_ignored (test_checks_graph.AnalyzerTest.test_stdlib_and_external_ignored) ... ok
+test_syntax_error_raises (test_checks_graph.AnalyzerTest.test_syntax_error_raises) ... ok
+test_analyzer_edges_provenance (test_checks_graph.GraphBuildTest.test_analyzer_edges_provenance) ... ok
+test_cycle_no_hang (test_checks_graph.GraphBuildTest.test_cycle_no_hang) ... ok
+test_deleted_file_keeps_old_consumers_via_union (test_checks_graph.GraphBuildTest.test_deleted_file_keeps_old_consumers_via_union) ... ok
+test_dynamic_import_unknown (test_checks_graph.GraphBuildTest.test_dynamic_import_unknown) ... ok
+test_dynamic_outside_modules_project_scope (test_checks_graph.GraphBuildTest.test_dynamic_outside_modules_project_scope) ... ok
+test_foreign_graph_not_unionized (test_checks_graph.GraphBuildTest.test_foreign_graph_not_unionized) ... ok
+test_fresh_edge_wins_same_key (test_checks_graph.GraphBuildTest.test_fresh_edge_wins_same_key) ... ok
+test_graph_compatible (test_checks_graph.GraphBuildTest.test_graph_compatible) ... ok
+test_import_outside_modules_unknown (test_checks_graph.GraphBuildTest.test_import_outside_modules_unknown) ... ok
+test_load_graph_strict (test_checks_graph.GraphBuildTest.test_load_graph_strict) ... ok
+test_policy_edges_merged (test_checks_graph.GraphBuildTest.test_policy_edges_merged) ... ok
+test_same_module_import_no_edge (test_checks_graph.GraphBuildTest.test_same_module_import_no_edge) ... ok
+test_syntax_error_unknown (test_checks_graph.GraphBuildTest.test_syntax_error_unknown) ... ok
+test_union_merges_unknown (test_checks_graph.GraphBuildTest.test_union_merges_unknown) ... ok
+test_diff_add_delete_rename (test_checks_inventory.InventoryTest.test_diff_add_delete_rename) ... ok
+test_diff_corrupt_baseline_conservative (test_checks_inventory.InventoryTest.test_diff_corrupt_baseline_conservative) ... ok
+test_diff_missing_baseline_conservative (test_checks_inventory.InventoryTest.test_diff_missing_baseline_conservative) ... ok
+test_diff_policy_change_blocks (test_checks_inventory.InventoryTest.test_diff_policy_change_blocks) ... ok
+test_exclude_conflict_with_discovered_input (test_checks_inventory.InventoryTest.test_exclude_conflict_with_discovered_input) ... ok
+test_exclude_outside_inputs_ok (test_checks_inventory.InventoryTest.test_exclude_outside_inputs_ok) ... ok
+test_module_classification (test_checks_inventory.InventoryTest.test_module_classification) ... ok
+test_no_git_needed (test_checks_inventory.InventoryTest.test_no_git_needed) ... ok
+test_policy_excludes_have_reason (test_checks_inventory.InventoryTest.test_policy_excludes_have_reason) ... ok
+test_read_error_propagates (test_checks_inventory.InventoryTest.test_read_error_propagates) ... ok
+test_root_symlink_rejected (test_checks_inventory.InventoryTest.test_root_symlink_rejected) ... ok
+test_service_dirs_skipped (test_checks_inventory.InventoryTest.test_service_dirs_skipped) ... ok
+test_special_file_rejected (test_checks_inventory.InventoryTest.test_special_file_rejected) ... ok
+test_symlink_cycle_rejected (test_checks_inventory.InventoryTest.test_symlink_cycle_rejected) ... ok
+test_symlink_escape_rejected (test_checks_inventory.InventoryTest.test_symlink_escape_rejected) ... ok
+test_symlink_rejected (test_checks_inventory.InventoryTest.test_symlink_rejected) ... ok
+test_unknown_paths (test_checks_inventory.InventoryTest.test_unknown_paths) ... ok
+test_validate_fixture (test_checks_inventory.InventoryTest.test_validate_fixture) ... ok
+test_declared_dir_input_not_narrowed_by_module (test_checks_inventory.ResolvedInputsTest.test_declared_dir_input_not_narrowed_by_module) ... ok
+test_end_to_end_policy_inventory_snapshot (test_checks_inventory.ResolvedInputsTest.test_end_to_end_policy_inventory_snapshot) ... ok
+test_exclude_inside_module_filter_conflicts (test_checks_inventory.ResolvedInputsTest.test_exclude_inside_module_filter_conflicts) ... ok
+test_exclude_outside_module_filter_allowed (test_checks_inventory.ResolvedInputsTest.test_exclude_outside_module_filter_allowed) ... ok
+test_excluded_subtree_holding_input_conflicts (test_checks_inventory.ResolvedInputsTest.test_excluded_subtree_holding_input_conflicts) ... ok
+test_literal_module_path_is_input (test_checks_inventory.ResolvedInputsTest.test_literal_module_path_is_input) ... ok
+test_module_filter_hashes_only_matching (test_checks_inventory.ResolvedInputsTest.test_module_filter_hashes_only_matching) ... ok
+test_module_paths_become_inputs (test_checks_inventory.ResolvedInputsTest.test_module_paths_become_inputs) ... ok
+test_resolved_validation (test_checks_inventory.ResolvedInputsTest.test_resolved_validation) ... ok
+test_unanchored_module_glob_scans_root (test_checks_inventory.ResolvedInputsTest.test_unanchored_module_glob_scans_root) ... ok
+test_absent_ancestor_appearing_is_race (test_checks_inventory.SnapshotTest.test_absent_ancestor_appearing_is_race) ... ok
+test_absent_input_appearing_is_race (test_checks_inventory.SnapshotTest.test_absent_input_appearing_is_race) ... ok
+test_absent_input_recorded (test_checks_inventory.SnapshotTest.test_absent_input_recorded) ... ok
+test_absent_then_present_is_change (test_checks_inventory.SnapshotTest.test_absent_then_present_is_change) ... ok
+test_add_delete_rename_detected (test_checks_inventory.SnapshotTest.test_add_delete_rename_detected) ... ok
+test_contradictory_inputs_rejected (test_checks_inventory.SnapshotTest.test_contradictory_inputs_rejected) ... ok
+test_corrupt_snapshot_not_reusable (test_checks_inventory.SnapshotTest.test_corrupt_snapshot_not_reusable) ... ok
+test_directory_and_file_inputs (test_checks_inventory.SnapshotTest.test_directory_and_file_inputs) ... ok
+test_environment_input (test_checks_inventory.SnapshotTest.test_environment_input) ... ok
+test_exclude_conflict_inside_input (test_checks_inventory.SnapshotTest.test_exclude_conflict_inside_input) ... ok
+test_excluded_input_rejected (test_checks_inventory.SnapshotTest.test_excluded_input_rejected) ... ok
+test_excluded_subtree_race_detected (test_checks_inventory.SnapshotTest.test_excluded_subtree_race_detected) ... ok
+test_hash_once_per_file (test_checks_inventory.SnapshotTest.test_hash_once_per_file) ... ok
+test_load_snapshot_strict (test_checks_inventory.SnapshotTest.test_load_snapshot_strict) ... ok
+test_overlapping_inputs_keep_first_hash_state (test_checks_inventory.SnapshotTest.test_overlapping_inputs_keep_first_hash_state) ... ok
+test_policy_change_invalidates (test_checks_inventory.SnapshotTest.test_policy_change_invalidates) ... ok
+test_projection_inputs (test_checks_inventory.SnapshotTest.test_projection_inputs) ... ok
+test_race_during_hash_detected (test_checks_inventory.SnapshotTest.test_race_during_hash_detected) ... ok
+test_race_new_member_detected (test_checks_inventory.SnapshotTest.test_race_new_member_detected) ... ok
+test_read_error_is_failure (test_checks_inventory.SnapshotTest.test_read_error_is_failure) ... ok
+test_same_mtime_size_different_bytes (test_checks_inventory.SnapshotTest.test_same_mtime_size_different_bytes) ... ok
+test_service_area_input_rejected (test_checks_inventory.SnapshotTest.test_service_area_input_rejected) ... ok
+test_service_paths_not_read (test_checks_inventory.SnapshotTest.test_service_paths_not_read) ... ok
+test_shared_prefix_state_not_overwritten (test_checks_inventory.SnapshotTest.test_shared_prefix_state_not_overwritten) ... ok
+test_snapshot_compatible_ok (test_checks_inventory.SnapshotTest.test_snapshot_compatible_ok) ... ok
+test_snapshot_digest_stable (test_checks_inventory.SnapshotTest.test_snapshot_digest_stable) ... ok
+test_snapshot_is_not_lifecycle_snapshot (test_checks_inventory.SnapshotTest.test_snapshot_is_not_lifecycle_snapshot) ... ok
+test_streaming_default_hasher (test_checks_inventory.SnapshotTest.test_streaming_default_hasher) ... ok
+test_symlink_input_rejected (test_checks_inventory.SnapshotTest.test_symlink_input_rejected) ... ok
+test_symlink_inside_dir_input_rejected (test_checks_inventory.SnapshotTest.test_symlink_inside_dir_input_rejected) ... ok
+test_task_projection_ignores_service_fields (test_checks_inventory.SnapshotTest.test_task_projection_ignores_service_fields) ... ok
+test_type_mismatch_rejected (test_checks_inventory.SnapshotTest.test_type_mismatch_rejected) ... ok
+test_used_resources_not_lost (test_checks_inventory.SnapshotTest.test_used_resources_not_lost) ... ok
+test_validate_fixture (test_checks_inventory.SnapshotTest.test_validate_fixture) ... ok
+test_allowed_skip_accepted (test_checks_run.AdapterTest.test_allowed_skip_accepted) ... ok
+test_error_outcome_and_description (test_checks_run.AdapterTest.test_error_outcome_and_description) ... ok
+test_expected_failure_and_unexpected_success (test_checks_run.AdapterTest.test_expected_failure_and_unexpected_success) ... ok
+test_green_suite_passed (test_checks_run.AdapterTest.test_green_suite_passed) ... ok
+test_missing_catalog_id_rejected (test_checks_run.AdapterTest.test_missing_catalog_id_rejected) ... ok
+test_parse_argv_forms (test_checks_run.AdapterTest.test_parse_argv_forms) ... ok
+test_subtest_failure_rejected (test_checks_run.AdapterTest.test_subtest_failure_rejected) ... ok
+test_timeout_status (test_checks_run.AdapterTest.test_timeout_status) ... ok
+test_unexpected_skip_rejected (test_checks_run.AdapterTest.test_unexpected_skip_rejected) ... ok
+test_unfinished_and_crash_rejected (test_checks_run.AdapterTest.test_unfinished_and_crash_rejected) ... ok
+test_zero_tests_rejected (test_checks_run.AdapterTest.test_zero_tests_rejected) ... ok
+test_a01_ttl_from_original_run (test_checks_run.AuditRegressionTest.test_a01_ttl_from_original_run) ... ok
+test_a02_reuse_rebinding_race_reruns (test_checks_run.AuditRegressionTest.test_a02_reuse_rebinding_race_reruns) ... ok
+test_a03_corrupt_latest_failed_blocks_reuse (test_checks_run.AuditRegressionTest.test_a03_corrupt_latest_failed_blocks_reuse) ... ok
+test_a04_status_counts_only_fresh_coverage (test_checks_run.AuditRegressionTest.test_a04_status_counts_only_fresh_coverage) ... ok
+test_a05_project_import_in_adapter (test_checks_run.AuditRegressionTest.test_a05_project_import_in_adapter) ... ok
+test_a06_deleted_latest_failed_blocks_reuse (test_checks_run.AuditRegressionTest.test_a06_deleted_latest_failed_blocks_reuse) ... ok
+test_a07_rebuild_preserves_loss_evidence (test_checks_run.AuditRegressionTest.test_a07_rebuild_preserves_loss_evidence) ... ok
+test_a07_unrelated_run_keeps_evidence (test_checks_run.AuditRegressionTest.test_a07_unrelated_run_keeps_evidence) ... ok
+test_run_and_status_end_to_end (test_checks_run.CliRunTest.test_run_and_status_end_to_end) ... ok
+test_run_requires_policy (test_checks_run.CliRunTest.test_run_requires_policy) ... ok
+test_run_requires_task (test_checks_run.CliRunTest.test_run_requires_task) ... ok
+test_run_second_time_reuses (test_checks_run.CliRunTest.test_run_second_time_reuses) ... ok
+test_changed_input_forces_rerun (test_checks_run.RunnerTest.test_changed_input_forces_rerun) ... ok
+test_corrupt_index_rebuilt (test_checks_run.RunnerTest.test_corrupt_index_rebuilt) ... ok
+test_corrupt_result_no_false_reuse (test_checks_run.RunnerTest.test_corrupt_result_no_false_reuse) ... ok
+test_cross_task_reuse_same_project (test_checks_run.RunnerTest.test_cross_task_reuse_same_project) ... ok
+test_external_ttl_and_always_run (test_checks_run.RunnerTest.test_external_ttl_and_always_run) ... ok
+test_external_version_change_breaks_binding (test_checks_run.RunnerTest.test_external_version_change_breaks_binding) ... ok
+test_first_run_stores_results_and_state (test_checks_run.RunnerTest.test_first_run_stores_results_and_state) ... ok
+test_force_reruns_all (test_checks_run.RunnerTest.test_force_reruns_all) ... ok
+test_late_failed_not_hidden (test_checks_run.RunnerTest.test_late_failed_not_hidden) ... ok
+test_mutation_during_command_blocked (test_checks_run.RunnerTest.test_mutation_during_command_blocked) ... ok
+test_other_project_result_not_reused (test_checks_run.RunnerTest.test_other_project_result_not_reused) ... ok
+test_project_scope_covers_all (test_checks_run.RunnerTest.test_project_scope_covers_all) ... ok
+test_stale_reuses_independent_results (test_checks_run.RunnerTest.test_stale_reuses_independent_results) ... ok
+test_status_reports_coverage_and_trust (test_checks_run.RunnerTest.test_status_reports_coverage_and_trust) ... ok
+test_task_requirements_change_breaks_reuse (test_checks_run.RunnerTest.test_task_requirements_change_breaks_reuse) ... ok
+test_plan_prints_selection (test_checks_select.CliPlanTest.test_plan_prints_selection) ... ok
+test_plan_read_only (test_checks_select.CliPlanTest.test_plan_read_only) ... ok
+test_plan_requires_policy_link (test_checks_select.CliPlanTest.test_plan_requires_policy_link) ... ok
+test_plan_requires_task (test_checks_select.CliPlanTest.test_plan_requires_task) ... ok
+test_ast_reads_within_same_budget (test_checks_select.PlanTest.test_ast_reads_within_same_budget) ... ok
+test_bytes_budget_conservative (test_checks_select.PlanTest.test_bytes_budget_conservative) ... ok
+test_content_edit_detected (test_checks_select.PlanTest.test_content_edit_detected) ... ok
+test_corrupt_baseline_conservative (test_checks_select.PlanTest.test_corrupt_baseline_conservative) ... ok
+test_deleted_input_required (test_checks_select.PlanTest.test_deleted_input_required) ... ok
+test_edit_selects_consumer_chain (test_checks_select.PlanTest.test_edit_selects_consumer_chain) ... ok
+test_environment_mismatch_not_reused (test_checks_select.PlanTest.test_environment_mismatch_not_reused) ... ok
+test_first_plan_no_baseline_requires_all (test_checks_select.PlanTest.test_first_plan_no_baseline_requires_all) ... ok
+test_hash_counter_expected_set (test_checks_select.PlanTest.test_hash_counter_expected_set) ... ok
+test_irrelevant_edit_outside_modules (test_checks_select.PlanTest.test_irrelevant_edit_outside_modules) ... ok
+test_newer_failed_hides_older_passed (test_checks_select.PlanTest.test_newer_failed_hides_older_passed) ... ok
+test_read_only_no_writes (test_checks_select.PlanTest.test_read_only_no_writes) ... ok
+test_reuse_valid_result (test_checks_select.PlanTest.test_reuse_valid_result) ... ok
+test_seconds_budget_blocks_before_run (test_checks_select.PlanTest.test_seconds_budget_blocks_before_run) ... ok
+test_stale_input_not_reused (test_checks_select.PlanTest.test_stale_input_not_reused) ... ok
+test_always_and_task_obligations_add (test_checks_select.SelectTest.test_always_and_task_obligations_add) ... ok
+test_change_only_inside_module_no_spill (test_checks_select.SelectTest.test_change_only_inside_module_no_spill) ... ok
+test_checkpoint_not_required_without_flag (test_checks_select.SelectTest.test_checkpoint_not_required_without_flag) ... ok
+test_closure_digest_chain_cycle_change (test_checks_select.SelectTest.test_closure_digest_chain_cycle_change) ... ok
+test_module_change_selects_own_and_consumers (test_checks_select.SelectTest.test_module_change_selects_own_and_consumers) ... ok
+test_obligations_never_narrow (test_checks_select.SelectTest.test_obligations_never_narrow) ... ok
+test_subsystem_consumer_expands (test_checks_select.SelectTest.test_subsystem_consumer_expands) ... ok
+test_transitive_two_edge_chain (test_checks_select.SelectTest.test_transitive_two_edge_chain) ... ok
+test_unattributed_module_scope_blocked (test_checks_select.SelectTest.test_unattributed_module_scope_blocked) ... ok
+test_unattributed_path_blocked_by_scope (test_checks_select.SelectTest.test_unattributed_path_blocked_by_scope) ... ok
+test_unattributed_path_project_scope (test_checks_select.SelectTest.test_unattributed_path_project_scope) ... ok
+test_unknown_module_always_affected (test_checks_select.SelectTest.test_unknown_module_always_affected) ... ok
+test_unknown_project_scope_widens (test_checks_select.SelectTest.test_unknown_project_scope_widens) ... ok
+test_unproven_change_widens (test_checks_select.SelectTest.test_unproven_change_widens) ... ok
+test_when_paths_unmatched_not_required (test_checks_select.SelectTest.test_when_paths_unmatched_not_required) ... ok
+test_extension_without_argv_is_routine (test_checks_trust.ApproveTest.test_extension_without_argv_is_routine) ... ok
+test_initial_and_require (test_checks_trust.ApproveTest.test_initial_and_require) ... ok
+test_new_argv_is_weakening (test_checks_trust.ApproveTest.test_new_argv_is_weakening)
+Обычное расширение не разрешает новые недоверенные команды. ... ok
+test_removed_check_is_weakening (test_checks_trust.ApproveTest.test_removed_check_is_weakening) ... ok
+test_revoked_policy_digest_refused (test_checks_trust.ApproveTest.test_revoked_policy_digest_refused) ... ok
+test_aggregate_source_revocation_transitive (test_checks_trust.AuditFixesTest.test_aggregate_source_revocation_transitive) ... ok
+test_duplicate_report_lines_rejected (test_checks_trust.AuditFixesTest.test_duplicate_report_lines_rejected)
+Подделка поверх настоящего отчёта — квитанция не выдаётся. ... ok
+test_external_always_run_does_not_break_env (test_checks_trust.AuditFixesTest.test_external_always_run_does_not_break_env)
+required_environment с dict-значением не ломает subprocess (A-03). ... ok
+test_forged_report_file_rejected (test_checks_trust.AuditFixesTest.test_forged_report_file_rejected)
+Поддельный adapter.json + os._exit — квитанция не выдаётся. ... ok
+test_forged_stdout_sentinel_posthumous (test_checks_trust.AuditFixesTest.test_forged_stdout_sentinel_posthumous)
+Строка отчёта, за которой процесс умер — квитанция не выдаётся. ... ok
+test_legacy_self_reported_receipt_rejected (test_checks_trust.AuditFixesTest.test_legacy_self_reported_receipt_rejected)
+Квитанция на kind=test результат отклоняется verify (A-01). ... ok
+test_probe_readonly_root_stays_local (test_checks_trust.AuditFixesTest.test_probe_readonly_root_stays_local)
+chmod 0555 на доме того же uid не даёт protected (A-02). ... ok
+test_scrubbed_env_reaches_subprocess (test_checks_trust.AuditFixesTest.test_scrubbed_env_reaches_subprocess)
+HOME/TMPDIR внутри arena, PATH есть; binding env не подменяет. ... ok
+test_self_reported_policy_refused (test_checks_trust.AuditFixesTest.test_self_reported_policy_refused)
+Политика с test-проверками не получает квитанцию (A-01/AUDIT-02). ... ok
+test_covered_by_run_receipt (test_checks_trust.GateTest.test_covered_by_run_receipt) ... ok
+test_forged_file_in_project_rejected (test_checks_trust.GateTest.test_forged_file_in_project_rejected) ... ok
+test_no_receipts_uncovered (test_checks_trust.GateTest.test_no_receipts_uncovered) ... ok
+test_init_and_binding (test_checks_trust.HomeTest.test_init_and_binding) ... ok
+test_probe_inside_project_is_local (test_checks_trust.HomeTest.test_probe_inside_project_is_local) ... ok
+test_probe_same_uid_is_honest_local (test_checks_trust.HomeTest.test_probe_same_uid_is_honest_local) ... ok
+test_probe_without_home_is_local (test_checks_trust.HomeTest.test_probe_without_home_is_local) ... ok
+test_env_scrubbed_for_test_process (test_checks_trust.IsolationTest.test_env_scrubbed_for_test_process)
+Переменные доверенной стороны не доходят до подпроцесса. ... ok
+test_sandbox_denies_home_access (test_checks_trust.IsolationTest.test_sandbox_denies_home_access)
+Реальная граница на стенде: запись/чтение дома запрещены. ... ok
+test_denied_dir_returns_false (test_checks_trust.ProbeWritabilityTest.test_denied_dir_returns_false) ... ok
+test_probe_reports_writable_home_points (test_checks_trust.ProbeWritabilityTest.test_probe_reports_writable_home_points)
+Доступный для записи дом: writable_points заполнены, ... ok
+test_unknown_error_returns_none (test_checks_trust.ProbeWritabilityTest.test_unknown_error_returns_none) ... ok
+test_writable_dir_marker_created_and_removed (test_checks_trust.ProbeWritabilityTest.test_writable_dir_marker_created_and_removed) ... ok
+test_aggregate_confirms_unchanged (test_checks_trust.ReceiptVerifyTest.test_aggregate_confirms_unchanged) ... ok
+test_aggregate_skips_changed_inputs (test_checks_trust.ReceiptVerifyTest.test_aggregate_skips_changed_inputs) ... ok
+test_attacker_signature_rejected (test_checks_trust.ReceiptVerifyTest.test_attacker_signature_rejected) ... ok
+test_cross_project_rejected (test_checks_trust.ReceiptVerifyTest.test_cross_project_rejected)
+Квитанция чужого проекта не принимается этим домом. ... ok
+test_foreign_home_receipt_rejected (test_checks_trust.ReceiptVerifyTest.test_foreign_home_receipt_rejected)
+Квитанция другого дома того же проекта — журнал/ключ иные. ... ok
+test_forged_field_rejected (test_checks_trust.ReceiptVerifyTest.test_forged_field_rejected) ... ok
+test_replay_for_other_candidate_rejected (test_checks_trust.ReceiptVerifyTest.test_replay_for_other_candidate_rejected) ... ok
+test_revoked_key_rejected (test_checks_trust.ReceiptVerifyTest.test_revoked_key_rejected) ... ok
+test_revoked_policy_rejected (test_checks_trust.ReceiptVerifyTest.test_revoked_policy_rejected) ... ok
+test_revoked_receipt_rejected (test_checks_trust.ReceiptVerifyTest.test_revoked_receipt_rejected) ... ok
+test_unknown_key_replacement_rejected (test_checks_trust.ReceiptVerifyTest.test_unknown_key_replacement_rejected) ... ok
+test_client_results_never_signed (test_checks_trust.VerifierRunTest.test_client_results_never_signed)
+Файл, подброшенный агентом, не становится квитанцией. ... ok
+test_editable_approved_is_not_authorization (test_checks_trust.VerifierRunTest.test_editable_approved_is_not_authorization)
+approved_basis в файле проекта не заменяет одобрение дома. ... ok
+test_policy_edit_after_approval_refused (test_checks_trust.VerifierRunTest.test_policy_edit_after_approval_refused) ... ok
+test_run_issues_valid_receipt (test_checks_trust.VerifierRunTest.test_run_issues_valid_receipt) ... ok
+test_snapshot_substitution_detected (test_checks_trust.VerifierRunTest.test_snapshot_substitution_detected)
+AC-07: изменение после прогона — replay отклонён. ... ok
+test_unapproved_policy_refused (test_checks_trust.VerifierRunTest.test_unapproved_policy_refused) ... ok
+
+----------------------------------------------------------------------
+Ran 255 tests in 17.705s
+
+OK
+Создано 71 файлов в /private/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/tmpz20upeo5; manifest записан. Заполните документы и project.json; setup_status=needs_review.
+Создано 71 файлов в /private/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/tmp84ih95eu; manifest записан. Заполните документы и project.json; setup_status=needs_review.
+Создано 71 файлов в /private/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/tmp27cka1kt; manifest записан. Заполните документы и project.json; setup_status=needs_review.
+Создано 71 файлов в /private/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/tmp8e7du4mp; manifest записан. Заполните документы и project.json; setup_status=needs_review.
+Создано 71 файлов в /private/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/tmpclqhtwfo; manifest записан. Заполните документы и project.json; setup_status=needs_review.
+Создано 71 файлов в /private/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/tmptda04j9k; manifest записан. Заполните документы и project.json; setup_status=needs_review.
+Создано 71 файлов в /private/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/tmphlpy9_4p; manifest записан. Заполните документы и project.json; setup_status=needs_review.
+Создано 71 файлов в /private/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/tmptibxo7xp; manifest записан. Заполните документы и project.json; setup_status=needs_review.

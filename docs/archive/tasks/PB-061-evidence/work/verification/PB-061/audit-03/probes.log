@@ -1,0 +1,5 @@
+ACK_BLOCK {"refused": true, "receipts": 0, "gate_ok": false, "arenas": 0}
+COMMAND_SMOKE {"verify_ok": true, "aggregate_ok": true, "gate_ok": true}
+LEGACY_TEST_RECEIPT {"verify_ok": false, "self_reported_reason": true, "aggregate_refused": true}
+MARKER {"writable": true, "denied": false, "unknown": null, "preserved_neighbor": true, "no_own_residue": true}
+PROBE {"capability": "local", "writable_points": ["approved.json", "journal.jsonl", "revocations.json", "\u0434\u043e\u043c", "\u043a\u043b\u044e\u0447 k-b3780202126345f8", "\u043a\u043b\u044e\u0447\u0438", "\u0440\u043e\u0434\u0438\u0442\u0435\u043b\u044c\u0441\u043a\u0438\u0439 \u043a\u0430\u0442\u0430\u043b\u043e\u0433"], "agent_can_write": true}
