@@ -26,6 +26,7 @@ import task_cards
 import project_view
 import block_workflow
 import checks_contract
+import checks_gate
 import checks_graph
 import checks_inventory
 import checks_runner
@@ -1620,6 +1621,56 @@ def checks_status(root, args):
     return 0
 
 
+def checks_confirm(root, args):
+    """checks confirm <TASK>: подтверждение ручной проверки (PB-062)."""
+    policy, task_content, task_meta = _checks_task(root, args)
+    checks_runner.confirm(
+        root, policy, task_id=args.task_id,
+        task_content=task_content, task_meta=task_meta,
+        check_id=args.check, who=args.who, statement=args.statement,
+        observation=args.observation)
+    return 0
+
+
+def checks_release_ready(root, args):
+    """checks release-ready <TASK>: готовность релиза (PB-062).
+
+    Единый расчёт покрытия области project на контрольной точке
+    release: весь актуальный обязательный набор с cross-task reuse.
+    Код выхода 0 — только при подтверждённом покрытии; при
+    ``trust_mode=protected`` требуется доказанная граница verifier.
+    Коммит и название ветки авторизацией не являются.
+    """
+    policy, task_content, task_meta = _checks_task(root, args)
+    verdict = checks_gate.evaluate(
+        root, policy, task_id=args.task_id, scope="project",
+        checkpoint=args.checkpoint or "release",
+        task_content=task_content, task_meta=task_meta)
+    print(f"checks release-ready {args.task_id}: "
+          f"политика {policy['policy_id']} rev {policy['revision']}, "
+          f"trust={policy['trust_mode']}, "
+          f"checkpoint={args.checkpoint or 'release'}")
+    print("Ограничение: " + (checks_runner.TRUST_NOTE_LOCAL
+                            if policy["trust_mode"] == "local"
+                            else checks_runner.TRUST_NOTE_PROTECTED))
+    for check in policy["checks"]:
+        record = verdict["checks"][check["id"]]
+        if record["status"] == "not_applicable":
+            continue
+        print(f"  {check['id']}: {record['status']}")
+    print(f"Покрытие: {len(verdict['covered'])} покрыто, "
+          f"{len(verdict['uncovered'])} не покрыто, "
+          f"{len(verdict['manual'])} ручных, "
+          f"{len(verdict['blocked'])} заблокировано")
+    for reason in verdict["rejections"]:
+        print(f"  отказ: {reason}")
+    for note in verdict["notes"]:
+        print(f"  примечание: {note}")
+    print("release-ready: " + ("готово" if verdict["ok"]
+                              else "не готово"))
+    return 0 if verdict["ok"] else 1
+
+
 def _verifier_home(args):
     """Дом verifier от оператора: --home либо PLAYBOOK_VERIFIER_HOME.
 
@@ -2056,6 +2107,10 @@ def dispatch(root, args, gate):
             checks_plan(root, args)
         elif args.action == "run":
             return checks_run(root, args)
+        elif args.action == "confirm":
+            return checks_confirm(root, args)
+        elif args.action == "release-ready":
+            return checks_release_ready(root, args)
         else:
             return checks_status(root, args)
     elif args.command == "verifier":
@@ -2390,6 +2445,28 @@ def main(argv=None):
         "status", help="Покрытие, фактические проверки и ограничения "
                        "доверия; операция реализуется PB-060")
     action.add_argument("task_id")
+    action = actions.add_parser(
+        "confirm", help="Подтвердить ручную проверку (kind=manual) "
+                        "записью в истории результатов (PB-062)")
+    action.add_argument("task_id")
+    action.add_argument("--check", required=True,
+                        help="id ручной проверки из политики")
+    action.add_argument("--who", required=True,
+                        help="кто подтверждает (инженер)")
+    action.add_argument("--statement", required=True,
+                        help="что именно подтверждено")
+    action.add_argument("--observation", required=True,
+                        help="фактическое наблюдение")
+    action = actions.add_parser(
+        "release-ready", help="Готовность релиза: весь актуальный "
+                              "обязательный набор с cross-task reuse "
+                              "(PB-062)")
+    action.add_argument("task_id",
+                        help="карточка релиза/проверки — обычная "
+                             "карточка проекта")
+    action.add_argument("--checkpoint", default="release",
+                        help="контрольная точка обязательности "
+                             "(по умолчанию release)")
     command = sub.add_parser("verifier",
                              help="Доверенный контур: verifier, квитанции "
                                   "и граница прав; контракт PB-061")

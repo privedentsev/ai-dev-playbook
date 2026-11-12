@@ -1,0 +1,13 @@
+PB-062 / AUDIT-03, Codex / GPT-6.
+272 checks tests PASS. Original audit-02 probe now passes expected behavior.
+New collision probe: two real runs with identical now, passed then failed;
+before aggregation ok=false, after aggregate of old passed ok=true.
+Only OS-boundary probe mocked, signed results authentic.
+Audit-ready before writes: exit 1 (open_finding for earlier findings).
+CHECK-03/report/projection/EXEC-03 hashes all match registered evidence;
+report f47c0b6e passed, inputs_unchanged=true.
+A-04 closed; A-03 retained, A-05 records timestamp-collision detail.
+
+Final: index updated; verify --preflight PASS; card sync --apply completed;
+check --ready PASS after synchronization; git diff --check PASS.
+Task in_progress; open A-03/A-05. No acceptance, close, commit or push.

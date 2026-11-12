@@ -6,9 +6,9 @@
   "schema_version": 1,
   "document_id": "plan:dependency-aware-verification",
   "kind": "plan",
-  "state": "draft",
+  "state": "accepted",
   "created_at": "2026-11-07T01:05:41+03:00",
-  "updated_at": "2026-11-07T01:10:30+03:00",
+  "updated_at": "2026-11-11T06:35:54+03:00",
   "current_revision": 1,
   "relations": [
     {
@@ -49,7 +49,7 @@
 | [PB-059](../archive/tasks/PB-059.md) | Граф и выбор | PB-058 | AC-01–04 |
 | [PB-060](../archive/tasks/PB-060.md) | Runner и результаты | PB-059 | AC-04–07 |
 | [PB-061](../archive/tasks/PB-061.md) | Граница доверия | PB-060 | AC-07–08,11 |
-| [PB-062](../tasks/PB-062.md) | Жизненный цикл и релиз | PB-061 | AC-05,08–09 |
+| [PB-062](../archive/tasks/PB-062.md) | Жизненный цикл и релиз | PB-061 | AC-05,08–09 |
 | [PB-063](../tasks/PB-063.md) | Настройка и миграция | PB-062 | AC-03,06,10 |
 | [PB-064](../tasks/PB-064.md) | Сквозной пилот | PB-063 | AC-01–11 |
 | [AUDIT-009](../tasks/AUDIT-009.md) | Независимая приёмка всего блока | PB-057–064 | AC-01–11 |

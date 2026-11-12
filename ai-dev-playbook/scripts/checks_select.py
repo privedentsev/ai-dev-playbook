@@ -417,6 +417,20 @@ def _latest_results(results):
     return latest
 
 
+def evidence_latest(results):
+    """Последний значимый результат на check_id для решения покрытия.
+
+    ``not_run`` ручной проверки — не свидетельство: runner её не
+    исполняет, и такая запись не должна маскировать подтверждение
+    инженера (PB-062). Для остальных видов и статусов выбор совпадает
+    с ``_latest_results``.
+    """
+    meaningful = [result for result in results
+                  if not (result.get("kind") == "manual"
+                          and result.get("status") == "not_run")]
+    return _latest_results(meaningful)
+
+
 def evaluate_reuse(check, result, *, root, policy, edges, state,
                    hash_fn=None, task_digest=None, now=None,
                    projections=None, environment=None):
@@ -538,7 +552,7 @@ def plan(root, policy, *, baseline=None, graph=None, previous=None,
     selection = select_checks(
         policy, changed=changed, edges=graph["edges"],
         unknown=graph["unknown"], checkpoint=checkpoint)
-    latest = _latest_results(results)
+    latest = evidence_latest(results)
     for check in policy["checks"]:
         entry = selection["checks"][check["id"]]
         if entry["status"] != "run":

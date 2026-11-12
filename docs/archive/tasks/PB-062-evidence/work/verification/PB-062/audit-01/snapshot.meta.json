@@ -1,0 +1,76 @@
+{
+  "schema_version": 1,
+  "card_format_version": 2,
+  "relations": [
+    {
+      "relation": "based_on",
+      "target": "spec:dependency-aware-verification"
+    },
+    {
+      "relation": "based_on",
+      "target": "design:dependency-aware-verification"
+    },
+    {
+      "relation": "based_on",
+      "target": "plan:dependency-aware-verification"
+    }
+  ],
+  "materials": [
+    {
+      "id": "evidence",
+      "role": "report",
+      "source": "docs/tasks/PB-062-evidence",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-062"
+      ]
+    },
+    {
+      "id": "verify-69f1c89b20a24c79be547ca1cf7b41e1",
+      "role": "report",
+      "source": "work/verification/PB-062/69f1c89b20a24c79be547ca1cf7b41e1",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-062"
+      ]
+    },
+    {
+      "id": "verify-84150d61e6ef44efaf39d7446a34f4a3",
+      "role": "report",
+      "source": "work/verification/PB-062/84150d61e6ef44efaf39d7446a34f4a3",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-062"
+      ]
+    }
+  ],
+  "criterion_evidence": {
+    "CHECK-01": {
+      "check_sha256": "sha256:62b744558677f992455a504024b35c550d77bed86088be1277102f9f9aea16ba",
+      "card_projection": "sha256:336436b5a3379ab4444f7c4445dbdfc5708ae20e5f9f0ae8faca05fe31104695",
+      "report_id": "verify-69f1c89b20a24c79be547ca1cf7b41e1",
+      "report_sha256": "sha256:df1d8f7c1290ea5e36e761ecdc2ae36b5a6d00ef6cad7f1836cc0705f622d090"
+    }
+  },
+  "handoff": {
+    "at": "2026-11-11T08:41:54+03:00",
+    "actor": {
+      "name": "Devin",
+      "model": "SWE-2 Flash High"
+    },
+    "summary": "HANDOFF-01",
+    "reports": [
+      "verify-69f1c89b20a24c79be547ca1cf7b41e1",
+      "verify-84150d61e6ef44efaf39d7446a34f4a3"
+    ],
+    "card_projection": "sha256:336436b5a3379ab4444f7c4445dbdfc5708ae20e5f9f0ae8faca05fe31104695",
+    "entry_id": "HANDOFF-01",
+    "journal_sha256": "sha256:39a6a771a6c061297cff70bbf60666d45cb1c61f8484d53b72976ae4f88ba65b"
+  }
+}

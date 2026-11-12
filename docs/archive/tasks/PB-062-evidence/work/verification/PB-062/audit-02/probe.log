@@ -1,0 +1,7 @@
+expired_only {'ok': False, 'covered': [], 'uncovered': ['probe'], 'rejections': ['000-old.json: probe — внешний api: ttl 60с истёк']}
+runs {'probe': 'passed'} {'probe': 'passed'}
+old_then_fresh {'ok': False, 'covered': ['probe'], 'uncovered': [], 'rejections': ['000-old.json: probe — внешний api: ttl 60с истёк']}
+fresh_then_old {'ok': True, 'covered': ['probe'], 'uncovered': [], 'rejections': []}
+passed_then_failed_runs {'probe': 'passed'} {'probe': 'failed'}
+same_candidate True
+passed_then_failed_gate {'ok': True, 'covered': ['probe'], 'uncovered': [], 'rejections': []}

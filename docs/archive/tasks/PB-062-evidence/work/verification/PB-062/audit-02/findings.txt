@@ -1,0 +1,30 @@
+PB-062 re-audit, Codex / GPT-6, 2026-11-11.
+Handoff: HANDOFF-02, EXEC-02, CHECK-02.
+Before audit writes: verify PB-062 --audit-ready exit 1:
+ERROR: PB-062: критерии не подтверждены свежими проверками; обновите CHECK/handoff
+The CHECK-02 journal hash, report hash, card projection and execution hash
+all match the registered verify-02d82d1a1c7549dc813934603ab26a29.
+Its report is passed, inputs_unchanged=true, execution_id=EXEC-02.
+Previous findings A-01/A-02 remain open until auditor closure; criterion_states
+prioritizes open_finding. This is no longer CHECK-01 binding mismatch.
+No historical journal entries were rewritten by this audit.
+
+Independent probe: python3 work/verification/PB-062/audit-02/probe.py
+Run from repository root outside nested sandbox. Actual verifier command
+execution and actual signed receipts; only OS-boundary probe is mocked.
+A-01: expired-only TTL evidence is now rejected.
+New defects:
+1. Passed then failed on same candidate gives ok=true; failed is ignored.
+   The test command reads a temporary external flag changing from 0 to 1.
+   Both runs have identical candidate_digest, policy and check definition.
+   Actual outcomes are passed then failed. No receipts/results forged.
+2. Expired run then fresh run on same candidate: both passed, but gate
+   with files 000-old.json / 999-new.json has covered=[probe], ok=false
+   because expired evidence contributes a rejection. Renaming only the old
+   copy to zzz-old.json produces ok=true without changing signed contents.
+See probe.log. Freshness selection must not depend on random receipt names.
+
+Final checks: 268 checks tests PASS (18.349s); index updated;
+check --ready PASS; verify PB-062 --preflight PASS; git diff --check PASS.
+Journal parser: latest AUDIT-02, open findings A-03 and A-04.
+Task returned to in_progress. No acceptance/close/commit/push performed.

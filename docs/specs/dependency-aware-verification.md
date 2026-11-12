@@ -6,9 +6,9 @@
   "schema_version": 1,
   "document_id": "spec:dependency-aware-verification",
   "kind": "spec",
-  "state": "draft",
+  "state": "accepted",
   "created_at": "2026-11-07T01:03:30+03:00",
-  "updated_at": "2026-11-07T01:10:30+03:00",
+  "updated_at": "2026-11-11T06:35:54+03:00",
   "current_revision": 1,
   "relations": [
     {
@@ -30,7 +30,7 @@
   "changes": [
     {
       "id": "dependency-aware-verification",
-      "state": "draft",
+      "state": "approved",
       "section": "Планируемые требования",
       "basis": {
         "type": "authorized_scope",

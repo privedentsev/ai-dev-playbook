@@ -96,6 +96,7 @@ import re
 import unicodedata
 from pathlib import Path, PurePosixPath
 
+import checks_gate
 import document_links
 import documents
 import task_cards
@@ -654,6 +655,53 @@ def _blocked_text(text, dep_id, source_id, stamp, actor, require):
     return new_text
 
 
+def _checks_gate(root, task_id, rel, text, task_meta, safe_path, require):
+    """Покрытие checks-контракта для handoff/accept/close (PB-062).
+
+    ``None`` — проект не подключил ``checks_policy``: прежний контракт
+    verify-отчётов действует без изменений. Иначе обязателен единый
+    расчёт ``checks_gate.evaluate`` области задачи: свежие результаты
+    при ``trust_mode=local``, квитанции verifier'а при ``protected``.
+    """
+    view = getattr(root, "view", None)
+    physical = getattr(view, "root", None)
+    if physical is not None:
+        # v2-контекст оперирует ProjectView-обёрткой; checks-контракт
+        # читает живую файловую систему — нужен физический корень.
+        root = physical
+    policy = checks_gate.load_policy(root)
+    if policy is None:
+        return None
+    verdict = checks_gate.evaluate(
+        root, policy, task_id=task_id, task_content=text,
+        task_meta=task_meta, scope="task")
+    require(verdict["ok"], _checks_gate_message(task_id, verdict))
+    return verdict
+
+
+def _checks_gate_message(task_id, verdict):
+    parts = [f"{task_id}: покрытие проверок не подтверждено "
+             f"(scope={verdict['scope']}"
+             + (f", checkpoint={verdict['checkpoint']}"
+                if verdict["checkpoint"] else "") + ")"]
+    if verdict["uncovered"]:
+        parts.append("не покрыто: " + ", ".join(verdict["uncovered"]))
+    if verdict["manual"]:
+        parts.append("ручные обязательства без подтверждения: "
+                     + ", ".join(verdict["manual"]))
+    if verdict["blocked"]:
+        parts.append("заблокировано: " + ", ".join(verdict["blocked"]))
+    for reason in verdict["rejections"][:5]:
+        parts.append(f"отказ: {reason}")
+    if verdict["trust_mode"] == "protected" \
+            and not verdict["protected_confirmed"]:
+        parts.append("граница verifier не доказана — защищённое "
+                     "утверждение заблокировано (R-20)")
+    parts.append("выполните checks run checks status и повторите "
+                 "операцию")
+    return "; ".join(parts)
+
+
 def _handoff_evidence(root, task_id, rel, text, task_meta, safe_path, require):
     """The same freshness gate for closing and read-only context display."""
     if task_meta.get('schema_version') == 2:
@@ -702,6 +750,7 @@ def _handoff_evidence(root, task_id, rel, text, task_meta, safe_path, require):
     require(not handoff.get("reports") or fresh,
             f"{task_id}: нет свежего успешного прогона verify — входы "
             "изменились после проверки; повторите verify и handoff")
+    _checks_gate(root, task_id, rel, text, task_meta, safe_path, require)
     return handoff
 
 
@@ -2784,7 +2833,9 @@ def handoff_command(root, task_id, summary, actor_name, actor_model,
             "Зарегистрируйте каждый материал: lifecycle register-material "
             f"{task_id} <source> --id <id> --role report "
             "--immutable --required --apply; затем повторите verify и handoff")
-    require(report_refs,
+    checks_verdict = _checks_gate(root, task_id, rel, text, meta,
+                                  safe_path, require)
+    require(report_refs or checks_verdict is not None,
             f"{task_id}: нет успешного прогона verify с неизменными "
             "входами — выполните playbook.py verify до передачи")
     binding = {}
@@ -2855,6 +2906,9 @@ def accept_command(root, task_id, result, kind, role, actor_name,
                 f"{task_id}: карточка изменилась после передачи — "
                 "приёмка относилась бы к другому состоянию требований; "
                 "повторите handoff и аудит")
+        if meta.get('schema_version') != 2:
+            _checks_gate(root, task_id, rel, text, meta, safe_path,
+                         require)
     binding = {}
     if result == "accepted" and task_cards.version(text) == 2:
         task_cards.receipt(text, meta)
@@ -3192,6 +3246,7 @@ def _handoff_v2_evidence(root, task_id, rel, text, meta, safe_path, require):
     require(cov == handoff.get('coverage'), 'Покрытие изменилось после передачи')
     require(_result_hash(root, rel, text, meta) == handoff['result_hash'],
             'Результат изменился после передачи; повторите затронутые проверки и handoff')
+    _checks_gate(root, task_id, rel, text, meta, safe_path, require)
     return handoff
 
 
@@ -3202,6 +3257,7 @@ def handoff_v2_command(root, task_id, summary, actor_name, actor_model,
     require(rec['status'] in {'in_progress', 'in_review'}, 'handoff требует in_progress/in_review')
     require(actor_name and actor_model and ctx['model_unconfirmed'] not in actor_model, 'Требуется точная атрибуция')
     _dependencies_done(task_id, records, require)
+    _checks_gate(root, task_id, rel, text, meta, safe_path, require)
     cov, _ = _v2_coverage(root, task_id, rel, text, meta, safe_path, require)
     meta = copy.deepcopy(meta)
     audit_sources = {m['source'] for m in meta.get('materials', []) if m['id'] in meta.get('audit_packages', {})}

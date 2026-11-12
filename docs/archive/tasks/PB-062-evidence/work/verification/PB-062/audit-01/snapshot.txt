@@ -1,0 +1,88 @@
+# PB-062: Подключить выбор проверок к задачам и готовности релиза
+
+ID: PB-062
+Status: in_review
+Priority: P2
+Depends-On: PB-061
+Executor: Devin
+Model: SWE-2 Flash High
+Created: 2026-11-07T01:08:27+03:00
+Closed: -
+
+<!-- playbook-meta:external -->
+
+## Задача
+
+### Цель и границы
+
+Жизненный цикл и релиз. playbook.py/lifecycle.py, CLI modes/checkpoint и consumer gate, правила жизненного цикла. Не публиковать релиз и не создавать автоматические коммиты.
+
+### Контекст
+
+[Спецификация](../specs/dependency-aware-verification.md): R-08,12,16–18,20; сценарии AC-05,08–09. [Design](../designs/dependency-aware-verification.md), [ADR-0006](../adr/0006-dependency-aware-verification.md), [план](../plans/dependency-aware-verification.md).
+
+Подготовлено по поручению инженера 2026-11-07. Выполнение пока не разрешено. Перед стартом: принятие технического проекта, завершённые зависимости, актуальный card show/handoff затрагиваемых работ и назначение исполнителя. Исходные чужие изменения сохранять.
+
+### Критерии приёмки
+
+- [ ] AC-01: Handoff/accept/release-ready используют один selector+coverage; текущие байты сверяются с проверенным candidate. В protected режиме local/поддельные отчёты не закрывают обязательства.
+- [ ] AC-02: Release требует весь актуальный набор с cross-task reuse, force запускает всё; commit не триггер авторизации. Самостоятельная проверка/релиз владеют обычной карточкой, запуск в текущей задаче не создаёт новую.
+- [ ] AC-03: Manual и новые сценарии приёмки не заменяются старым suite; stale передачи, перенос evidence, concurrent edits, restore и запреты внешнего release проверены.
+- [ ] AC-04: Целевые поведенческие проверки и связанные регрессии пройдены; документация и self-manifest актуальны, EXEC/CHECK/HANDOFF содержат реальные доказательства и ограничения; передача зарегистрирована штатным CLI.
+
+### План
+
+1. Уточнить фактические интерфейсы зависимостей и связать изменения с критериями этой карточки.
+2. Реализовать ограниченный объём, добавить постоянные позитивные и негативные проверки критериев AC-01–03; не подменять их структурной проверкой.
+3. Обновить затронутые документы/шаблоны и self-manifest при изменениях комплекта; выполнить адресные проверки, index и check --ready.
+4. Подготовить материалы и пройти действующие preflight/verify/handoff. До явного opt-in использовать прежний контракт; не отключать полный legacy suite ради экономии.
+5. Записать EXEC/CHECK/HANDOFF и передать независимому аудитору; самостоятельно не закрывать.
+
+### Ресурсы
+
+Python и стандартная библиотека для основного CLI; локальные временные проекты и subprocess-счётчики. Новые зависимости защищённого executor обосновать в рамках принятого design. Фактические среда, policy_revision и бюджет фиксируются при старте; доступность отдельной OS/CI identity не предполагается.
+
+Материалы: `docs/tasks/PB-062-evidence/`; команды воспроизведения и отчёты принадлежат этой карточке. Общие материалы и сквозная матрица — AUDIT-009/PB-064.
+
+## Журнал
+
+### EXEC-01 — Выполнение
+Время: 2026-11-11T07:35:00+03:00
+Исполнитель: Devin
+Модель: SWE-2 Flash High
+Изменения: единый selector+coverage для lifecycle по design и spec R-08,12,16–18,20. `checks_gate.py` — read-only `evaluate` областей task/project: тот же `checks_select.plan` и свежесть, что `checks run --mode stale`/`checks status`; protected-вердикт только по квитанциям verifier'а текущего кандидата (candidate/policy digest, отзывы, task_requirements_digest для task_projection-входов), `ok` требует `capability=protected`. `checks_runner.confirm` — append-only подтверждение kind=manual с полной привязкой; `checks_select.evidence_latest` — `not_run` runner'а не маскирует подтверждение. `lifecycle.py` — `_checks_gate` в handoff/accept/close-evidence обеих схем карточек при объявленной `checks_policy`; без политики прежний контракт verify-отчётов; v2-контекст разворачивается до физического корня (ProjectView). CLI `checks confirm` и `checks release-ready` (read-only, exit 0 только при ok). Постоянные тесты tests/test_checks_gate.py — 11 сценариев AC-01–03 (local/protected покрытие, forgery, stale candidate, cross-task reuse, manual confirm, legacy без policy). Документация: rules/verification.md (раздел PB-062), architecture.md, code-map.md, CHANGELOG.md; self-manifest пересобран; evidence — docs/tasks/PB-062-evidence/commands.md.
+Файлы:
+- ai-dev-playbook/scripts/checks_gate.py
+- ai-dev-playbook/scripts/checks_runner.py
+- ai-dev-playbook/scripts/checks_select.py
+- ai-dev-playbook/scripts/lifecycle.py
+- ai-dev-playbook/scripts/playbook.py
+- ai-dev-playbook/rules/verification.md
+- ai-dev-playbook/manifest.json
+- tests/test_checks_gate.py
+- docs/architecture.md
+- docs/code-map.md
+- docs/tasks/PB-062-evidence/commands.md
+- CHANGELOG.md
+
+### CHECK-01 — Проверка
+Время: 2026-11-11T08:05:00+03:00
+Исполнитель: Devin
+Модель: SWE-2 Flash High
+Результат: passed
+Критерии: AC-01, AC-02, AC-03, AC-04
+Команда: `python3 -m unittest discover -s tests -p "test_checks_gate.py" -v` (11 сценариев PB-062), `python3 -m unittest discover -s tests -p "test_checks_*.py"` (266 тестов), `python3 -m unittest test_lifecycle test_workflow_e2e` (38 тестов), полный `python3 -m unittest discover -s tests -p "test_*.py"` (1035 тестов), `playbook.py index`, `playbook.py check --ready`, `playbook.py adopt . --force --apply`, полный `playbook.py verify PB-062` (self-check, preflight-regressions, unit-tests — отчёт 84150d61e6ef44efaf39d7446a34f4a3, inputs_unchanged)
+Среда: macOS Darwin 27, Python 3.14.6; временные проекты-фикстуры в /tmp; checkout dev.
+Факт: единый `checks_gate.evaluate` подключён к handoff/accept/close-evidence обеих схем карточек и `checks release-ready`; local-режим покрывается свежими результатами, protected — только квитанциями текущего кандидата при доказанной границе; manual подтверждается `checks confirm`, `not_run` не маскирует; release-ready требует весь набор project-области с cross-task reuse; без `checks_policy` поведение legacy сохранено (11 новых + 1035 регрессионных тестов зелёные).
+Доказательства: [команды и ограничения](PB-062-evidence/commands.md), [отчёт verify](../../work/verification/PB-062/84150d61e6ef44efaf39d7446a34f4a3/report.json)
+Ограничения: самопроверка исполнителя. Стенд без отдельной OS identity — `verifier probe` capability=local; protected-вердикт покрыт тестом с подменой probe, защищённая эксплуатация не заявлена (ограничение PB-061 сохраняется). `checks_policy` в self-project не подключена (PB-063) — поведение проверено на временных фикстурах. Изменения не закоммичены.
+
+### HANDOFF-01 — Передача
+Время: 2026-11-11T08:05:00+03:00
+Исполнитель: Devin
+Модель: SWE-2 Flash High
+Выполнение: EXEC-01
+Проверки: CHECK-01
+Состояние: in_review; dev; изменения не закоммичены. Реализован lifecycle-gate PB-062 (checks_gate.evaluate, checks confirm, checks release-ready, подключение к handoff/accept/close legacy+v2); полный verify passed. Следующий шаг — независимый аудит в отдельной сессии.
+Фокус аудита: единый selector+coverage на handoff/accept/release-ready; сверка текущих байтов с кандидатом доказательств; отказ local/поддельных/stale/replay-квитанций в protected; обязательность всего набора при release и cross-task reuse по привязкам; force-полный перезапуск; отсутствие авторизации по commit/имени ветки и автосоздания карточек; сохранение legacy-контракта без checks_policy; маскировка manual-подтверждения not_run; ViewPath→физический корень в v2.
+

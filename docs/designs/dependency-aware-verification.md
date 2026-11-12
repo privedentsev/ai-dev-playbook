@@ -6,9 +6,9 @@
   "schema_version": 1,
   "document_id": "design:dependency-aware-verification",
   "kind": "design",
-  "state": "draft",
+  "state": "accepted",
   "created_at": "2026-11-07T01:04:14+03:00",
-  "updated_at": "2026-11-07T01:10:30+03:00",
+  "updated_at": "2026-11-11T06:35:54+03:00",
   "current_revision": 1,
   "relations": [
     {

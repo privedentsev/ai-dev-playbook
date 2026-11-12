@@ -134,7 +134,7 @@ def _external_freshness(check, policy, entry, result, now):
 
 def _apply_external_freshness(checks, results, policy, now):
     """stale-режим: внешняя свежесть ttl/always_run режет reuse."""
-    latest = checks_results.latest(results)
+    latest = checks_select.evidence_latest(results)
     for check in policy["checks"]:
         entry = checks[check["id"]]
         if entry["status"] != "reused":
@@ -339,7 +339,7 @@ def execute(root, policy, *, task_id, scope, mode, checkpoint,
                             else TRUST_NOTE_PROTECTED))
 
     stored, outcomes = [], {}
-    latest = checks_results.latest(results)
+    latest = checks_select.evidence_latest(results)
     for check in policy["checks"]:
         entry = checks[check["id"]]
         status = entry["status"]
@@ -574,7 +574,7 @@ def status(root, policy, *, task_id, task_content, task_meta, now=None,
     checks = {cid: dict(entry)
               for cid, entry in planned["checks"].items()}
     _apply_external_freshness(checks, results, policy, now)
-    latest = checks_results.latest(results)
+    latest = checks_select.evidence_latest(results)
     emit(f"checks status {task_id}: политика {policy['policy_id']} "
          f"rev {policy['revision']}")
     emit("Ограничение: " + (TRUST_NOTE_LOCAL
@@ -616,3 +616,63 @@ def status(root, policy, *, task_id, task_content, task_meta, now=None,
     for note in notes:
         emit(f"Примечание: {note}")
     return {"covered": covered, "obligated": obligated}
+
+
+def confirm(root, policy, *, task_id, task_content, task_meta, check_id,
+            who, statement, observation, now=None, emit=print):
+    """Записать подтверждение ручной проверки инженером (kind=manual).
+
+    Подтверждение — приложение к append-only истории с полной привязкой
+    результата: входы снимаются по текущим байтам, определение/замыкание/
+    политика/среда — как у runner. Свежесть далее решает тот же расчёт
+    reuse, что и для исполненных проверок (PB-062); сценарий, входы или
+    требования задачи меняются — подтверждение становится недействительным.
+    """
+    root = Path(root)
+    check = next((item for item in policy["checks"]
+                  if item["id"] == check_id), None)
+    _raise(check is not None,
+           f"проверка {check_id!r} не найдена в политике")
+    _raise(check["kind"] == "manual",
+           f"проверка {check_id!r} не ручная (kind={check['kind']}) — "
+           "подтверждение применяется только к kind=manual")
+    _raise(who and who.strip() and statement and statement.strip()
+           and observation and observation.strip(),
+           "confirm требует --who, --statement и --observation")
+    task_meta = task_meta or {}
+    task_digest = verification_policy.fingerprint(
+        verification_policy.task_projection(task_content, task_meta))
+    projections = _projections(policy, task_content, task_meta)
+    _baseline, previous, _notes = _load_state(root)
+    planned = checks_select.plan(
+        root, policy, baseline=None, previous=previous, results=[],
+        task_digest=task_digest, now=now, projections=projections)
+    bind_env = checks_select.binding_environment(policy, check)
+    snap = _snapshot_inputs(root, policy, check, projections, bind_env,
+                            now)
+    input_digest = checks_inventory.snapshot_digest(snap)
+    run_id = f"confirm-{uuid.uuid4().hex[:12]}"
+    stamp = _clock(now)
+    result = {
+        "schema_version": 1,
+        "result_id": f"{run_id}-{check['id']}",
+        "project_id": policy["project_id"], "check_id": check["id"],
+        "kind": "manual",
+        "binding": _binding(policy, check, planned["graph"]["edges"],
+                            input_digest, task_digest, bind_env),
+        "status": "passed",
+        "started_at": stamp, "finished_at": stamp,
+        "manual": {
+            "observation": observation,
+            "scenario_digest": verification_policy.fingerprint(
+                check.get("scenario")),
+            "confirmation": {"who": who, "at": stamp,
+                             "statement": statement}},
+        "evidence": {"run_id": run_id, "source": "engineer"},
+    }
+    checks_contract.validate_result(result, _raise)
+    checks_results.store_result(root, run_id, result)
+    checks_results.update_index(root, run_id, result)
+    emit(f"checks confirm {task_id}: {check['id']} — подтверждено "
+         f"{who} в {stamp}; покрытие решает общий расчёт свежести")
+    return {"ok": True, "result": result, "run_id": run_id}
