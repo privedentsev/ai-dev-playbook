@@ -1,0 +1,152 @@
+{
+  "schema_version": 1,
+  "card_format_version": 2,
+  "relations": [
+    {
+      "relation": "based_on",
+      "target": "spec:dependency-aware-verification"
+    },
+    {
+      "relation": "based_on",
+      "target": "design:dependency-aware-verification"
+    },
+    {
+      "relation": "based_on",
+      "target": "plan:dependency-aware-verification"
+    }
+  ],
+  "materials": [
+    {
+      "id": "evidence-commands",
+      "role": "report",
+      "source": "docs/tasks/PB-063-evidence/commands.md",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-063"
+      ]
+    },
+    {
+      "id": "evidence-preview-self",
+      "role": "log",
+      "source": "docs/tasks/PB-063-evidence/setup-preview-self.txt",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-063"
+      ]
+    },
+    {
+      "id": "verify-afdf4881515f4fca9ddb11c60d8e04a0",
+      "role": "report",
+      "source": "work/verification/PB-063/afdf4881515f4fca9ddb11c60d8e04a0",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-063"
+      ]
+    },
+    {
+      "id": "audit-01",
+      "role": "report",
+      "source": "work/verification/PB-063/audit-01",
+      "storage": "local",
+      "immutable": true,
+      "required": true,
+      "used_by": [
+        "PB-063"
+      ]
+    },
+    {
+      "id": "verify-cf81b336b006438db607e89da25740ae",
+      "role": "report",
+      "source": "work/verification/PB-063/cf81b336b006438db607e89da25740ae",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-063"
+      ]
+    },
+    {
+      "id": "audit-02",
+      "role": "report",
+      "source": "work/verification/PB-063/audit-02",
+      "storage": "local",
+      "immutable": true,
+      "required": true,
+      "used_by": [
+        "PB-063"
+      ]
+    },
+    {
+      "id": "verify-e6a3ffc267eb4f9f9201c48f21ca8dc6",
+      "role": "report",
+      "source": "work/verification/PB-063/e6a3ffc267eb4f9f9201c48f21ca8dc6",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-063"
+      ]
+    },
+    {
+      "id": "verify-077464face0b458f8dccb4c792841fab",
+      "role": "report",
+      "source": "work/verification/PB-063/077464face0b458f8dccb4c792841fab",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-063"
+      ]
+    }
+  ],
+  "criterion_evidence": {
+    "CHECK-01": {
+      "check_sha256": "sha256:62ea81ad6356a54f5c1791960f836296f3ee8f126bac4f7a13105c68e060d0db",
+      "card_projection": "sha256:1a85c893f156fb66e4c3c2f512107fad220dc24f38759443fd73d094e795acc1",
+      "report_id": "verify-afdf4881515f4fca9ddb11c60d8e04a0",
+      "report_sha256": "sha256:de0347651cea8ac8f56d2c2c39bab2bc38d0088b8086ac1bdb8b5d8cff231ad9"
+    },
+    "CHECK-02": {
+      "check_sha256": "sha256:973b9ac7f2a77d6f2a56ddf71633b7a11b35ef2a365f711f91a391c40012107d",
+      "card_projection": "sha256:1a85c893f156fb66e4c3c2f512107fad220dc24f38759443fd73d094e795acc1",
+      "report_id": "verify-cf81b336b006438db607e89da25740ae",
+      "report_sha256": "sha256:870ea2a4375090771503a50ca9a607cc9bff7e376612265c098572240716382c"
+    },
+    "CHECK-03": {
+      "check_sha256": "sha256:4a8a8be5bdc12fabbbf526d908ec7f55157c6c4f23d90b1c8386278587e5e896",
+      "card_projection": "sha256:1a85c893f156fb66e4c3c2f512107fad220dc24f38759443fd73d094e795acc1",
+      "report_id": "verify-e6a3ffc267eb4f9f9201c48f21ca8dc6",
+      "report_sha256": "sha256:f7acd15cefaca6bf3e1b1b5062c706b55f75b61e6b48a2d471cf55a63f1dae17"
+    },
+    "CHECK-04": {
+      "check_sha256": "sha256:0c95c4ffed0b396b870459c5e2a1d8b5a7a2a5a39a05af223917aa05ea8e7126",
+      "card_projection": "sha256:1a85c893f156fb66e4c3c2f512107fad220dc24f38759443fd73d094e795acc1",
+      "report_id": "verify-077464face0b458f8dccb4c792841fab",
+      "report_sha256": "sha256:93e3b69fc921fcb2d9881f39c2a5f9c483167bd992f6c5260caeda96ba401c14"
+    }
+  },
+  "handoff": {
+    "at": "2026-11-12T09:46:14+03:00",
+    "actor": {
+      "name": "Devin",
+      "model": "SWE-2 Flash High"
+    },
+    "summary": "HANDOFF-03",
+    "reports": [
+      "verify-077464face0b458f8dccb4c792841fab"
+    ],
+    "card_projection": "sha256:1a85c893f156fb66e4c3c2f512107fad220dc24f38759443fd73d094e795acc1",
+    "entry_id": "HANDOFF-03",
+    "journal_sha256": "sha256:3728c0353117c63e1d81eeb5f3dc0870fa96a9f9cb2fd6622fbeea3767529bbe"
+  },
+  "audit_packages": {
+    "audit-01": "sha256:59467d72cafe5fb64587ad135859e73f905429f062da09bf0472e1c85fc9da22",
+    "audit-02": "sha256:27729057b974bc3fa5d5197ac1251689718bece348bac03883c0386bee9a7a77"
+  }
+}

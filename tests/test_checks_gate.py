@@ -70,12 +70,14 @@ class LocalGateTest(unittest.TestCase):
         self.policy = run_policy()
 
     def test_uncovered_before_run(self):
+        """До прогона область не покрыта — evaluate возвращает ok=false"""
         verdict = evaluate(self.proj, self.policy)
         self.assertFalse(verdict["ok"])
         self.assertIn("payments-tests", verdict["uncovered"])
         self.assertIn("ui-review", verdict["manual"])
 
     def test_manual_without_confirm_blocks_ok(self):
+        """Ручная проверка без confirm блокирует ok даже при зелёном прогоне"""
         with collect_green(self.policy, self.proj):
             execute(self.proj, self.policy)
         verdict = evaluate(self.proj, self.policy)
@@ -84,6 +86,7 @@ class LocalGateTest(unittest.TestCase):
         self.assertNotIn("payments-tests", verdict["uncovered"])
 
     def test_confirm_covers_and_survives_rerun(self):
+        """Confirm ручной проверки покрывает её и переживает повторный прогон"""
         with collect_green(self.policy, self.proj):
             execute(self.proj, self.policy)
             confirm_manual(self.proj, self.policy)
@@ -97,6 +100,7 @@ class LocalGateTest(unittest.TestCase):
                          "covered")
 
     def test_input_change_uncovers(self):
+        """Изменение входа после прогона снимает покрытие проверки"""
         with collect_green(self.policy, self.proj):
             execute(self.proj, self.policy)
         self.proj.write("src/payments/pay.py", "x = 2\n")
@@ -139,6 +143,7 @@ class ProtectedGateTest(unittest.TestCase):
             **kw)
 
     def test_local_results_do_not_cover_protected(self):
+        """Локальные результаты не покрывают protected-политику"""
         checks_runner.execute(
             self.proj.root, self.policy, task_id="verifier-x",
             scope="project", mode="stale", checkpoint=None,
@@ -148,6 +153,7 @@ class ProtectedGateTest(unittest.TestCase):
         self.assertIn("probe", verdict["uncovered"])
 
     def test_receipt_covers_but_boundary_required(self):
+        """Квитанция verifier покрывает проверку, но граница обязательна"""
         verifier_run(self.proj, self.home)
         # capability=local на этом стенде — покрытие есть, ok=False.
         verdict = self.evaluate()
@@ -165,6 +171,7 @@ class ProtectedGateTest(unittest.TestCase):
         self.assertTrue(verdict["protected_confirmed"])
 
     def test_forged_receipt_rejected(self):
+        """Поддельная квитанция verifier отклоняется evaluate"""
         outcome = verifier_run(self.proj, self.home)
         doc = json.loads(json.dumps(outcome["receipt"]))
         fake = forge(doc)
@@ -208,6 +215,7 @@ class ProtectedTtlTest(unittest.TestCase):
             **kw)
 
     def test_run_receipt_ttl_expiry_rejected(self):
+        """Просроченная по TTL run-квитанция не закрывает обязательство"""
         verifier_run(self.proj, self.home)
         fresh = self.evaluate()
         self.assertIn("probe", fresh["covered"])
@@ -218,6 +226,7 @@ class ProtectedTtlTest(unittest.TestCase):
         self.assertTrue(any("ttl" in r for r in stale["rejections"]))
 
     def test_aggregate_receipt_ttl_expiry_rejected(self):
+        """Просроченная aggregate-квитанция не закрывает обязательство"""
         outcome = verifier_run(self.proj, self.home)
         checks_verifier.aggregate(
             self.home, self.proj.root,
@@ -292,6 +301,7 @@ class ProtectedLatestOutcomeTest(unittest.TestCase):
             **kw)
 
     def test_later_failed_blocks_earlier_passed(self):
+        """Поздний failed блокирует ранний passed в защищённой истории"""
         verifier_run(self.proj, self.home,
                      now="2026-01-01T00:00:00+00:00")
         self.assertIn("probe", self.evaluate()["covered"])
@@ -374,6 +384,7 @@ class LifecycleGateTest(unittest.TestCase):
             json.dumps(link))
 
     def test_no_policy_returns_none(self):
+        """Без checks_policy lifecycle возвращает None — legacy-контракт"""
         self.write_link()
         verdict = lifecycle._checks_gate(
             self.proj.root, "DEV-1", "docs/tasks/DEV-1.md",
@@ -383,6 +394,7 @@ class LifecycleGateTest(unittest.TestCase):
         self.assertIsNone(verdict)
 
     def test_policy_requires_coverage(self):
+        """С checks_policy lifecycle требует покрытия области задачи"""
         self.write_link(run_policy())
         text = (self.proj.root / "docs/tasks/DEV-1.md").read_text()
         with self.assertRaises(ValueError):

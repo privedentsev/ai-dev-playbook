@@ -9,7 +9,10 @@ from test_documents import tree_fingerprint
 
 
 class CriterionParserTest(unittest.TestCase):
+    """Парсер маркеров критериев: нормализация только реальных
+    маркеров, связи находок."""
     def test_only_real_markers_are_normalized(self):
+        """Только реальные маркеры критериев нормализуются, примеры в code-fence нет"""
         original = text(BODY.replace('Локальный проект.', 'Локальный проект.\n```markdown\n- [x] AC-99: пример.\n```'))
         checked = original.replace('- AC-01:', '- [x] AC-01:')
         unchecked = checked.replace('- [x] AC-01:', '- [ ] AC-01:')
@@ -20,6 +23,7 @@ class CriterionParserTest(unittest.TestCase):
         self.assertIn('- [x] AC-99: пример.', cards.normalize_checkboxes(checked))
 
     def test_new_finding_requires_valid_criterion_links(self):
+        """Новая находка требует валидных связей с критериями"""
         body = BODY.replace('- AC-01:', '- [ ] AC-01:') + record('EXEC') + record('CHECK') + record('HANDOFF')
         body += record('AUDIT', **{'Результат': 'changes_requested'}) + finding(1)
         self.assertEqual(cards.parse(text(body))['entries'][-1]['findings'][0]['criteria'], ['AC-01'])
@@ -29,6 +33,8 @@ class CriterionParserTest(unittest.TestCase):
 
 
 class CriterionCliTest(CloseLifecycleCase):
+    """CLI критериев: preview, покрытие, привязки находок и fix,
+    tamper-защита маркеров."""
     def setup_card(self, two=False, linked=True):
         body = BODY.replace('- AC-01:', '- [ ] AC-01:')
         if two:
@@ -55,6 +61,7 @@ class CriterionCliTest(CloseLifecycleCase):
         return {k: v for k,v in tree_fingerprint(self.root).items() if not k.startswith('work/')}
 
     def test_preview_read_only_partial_coverage_and_repeat(self):
+        """Preview read-only, частичное покрытие и повторный запуск"""
         self.setup_card(two=True, linked=False); self.verify()
         before = tree_fingerprint(self.root)
         self.assertEqual(self.sync(False)[0], 0)
@@ -71,6 +78,7 @@ class CriterionCliTest(CloseLifecycleCase):
         self.assertEqual(self.cli('check', '--ready')[0], 0)
 
     def test_latest_failed_or_not_run_overrides_passed(self):
+        """Поздний failed/not_run перекрывает старый passed критериев"""
         self.setup_card(); self.verify(); self.assertEqual(self.sync()[0], 0)
         for number, result in enumerate(('failed', 'not_run'), 2):
             self.append(record('CHECK', number, **{'Результат': result}))
@@ -83,6 +91,7 @@ class CriterionCliTest(CloseLifecycleCase):
             self.assertFalse(self.mark('AC-01'))
 
     def test_finding_affects_only_linked_criteria_and_fix_needs_check_and_audit(self):
+        """Находка затрагивает только связанные критерии; fix требует check и audit"""
         self.setup_card(two=True); self.verify()
         self.append(record('HANDOFF'))
         self.assertEqual(self.handoff()[0], 0)
@@ -104,6 +113,7 @@ class CriterionCliTest(CloseLifecycleCase):
         self.assertEqual(self.cli('close', 'DEV-1', '--dry-run')[0], 0)
 
     def test_manual_marker_tamper_does_not_open_acceptance(self):
+        """Ручная подмена маркера не открывает приёмку"""
         self.setup_card()
         self.path.write_text(self.path.read_text().replace('- [ ] AC-01:', '- [x] AC-01:'))
         before = tree_fingerprint(self.root)
@@ -115,6 +125,7 @@ class CriterionCliTest(CloseLifecycleCase):
         self.assertFalse(self.mark('AC-01'))
 
     def test_stale_inputs_do_not_rebind_existing_check(self):
+        """Устаревшие входы не перепривязывают существующий check"""
         self.setup_card(); self.verify(); self.assertEqual(self.sync()[0], 0)
         confirmed_text = self.path.read_text()
         (self.root / 'docs/new-input.txt').write_text('changed')
@@ -128,6 +139,7 @@ class CriterionCliTest(CloseLifecycleCase):
         self.assertTrue(self.mark('AC-01'))
 
     def test_snapshot_and_handoff_ignore_only_checkbox_rendering(self):
+        """Snapshot и handoff игнорируют только рендер чекбоксов"""
         self.setup_card(); self.verify(); self.append(record('HANDOFF'))
         self.assertEqual(self.handoff()[0], 0)
         meta = cards.metadata(self.path.read_text())
@@ -145,6 +157,7 @@ class CriterionCliTest(CloseLifecycleCase):
         self.assertEqual(self.cli('close', 'DEV-1', '--dry-run')[0], 0)
 
     def test_sync_gate_and_final_failure_rollback(self):
+        """Sync-gate и откат при финальном сбое"""
         self.setup_card(); self.verify()
         before = self.project()
         gate = fops.acquire_gate(self.root, playbook.safe_path, playbook.require, owner='test')
@@ -166,6 +179,7 @@ class CriterionCliTest(CloseLifecycleCase):
         self.assertIsNone(fops.pending_info(self.root))
 
     def test_legacy_v2_findings_preserved_on_explicit_sync(self):
+        """Legacy v2-находки сохраняются при явном sync"""
         body = BODY + record('EXEC') + record('CHECK') + record('HANDOFF')
         body += record('AUDIT', **{'Результат': 'changes_requested'}) + finding(1).replace('Критерии: AC-01\n', '')
         self.managed_task(meta={**copy.deepcopy(TASK_META), 'card_format_version': 2}, body=body)
@@ -177,6 +191,7 @@ class CriterionCliTest(CloseLifecycleCase):
         self.assertTrue(self.view()['entries'][-1]['findings'][0]['criteria_inferred'])
 
     def test_requirement_or_work_change_without_verify_rejects_check_and_close(self):
+        """Изменение требований/работы без verify отклоняет check и close"""
         self.setup_card()
         self.verify()
         self.assertEqual(self.sync()[0], 0)
@@ -215,6 +230,7 @@ class CriterionCliTest(CloseLifecycleCase):
 
     def test_altered_exec_invalidates_existing_binding_and_blocks_close_until_new_verify(self):
         # A-03: изменение проверенной EXEC делает существующую привязку CHECK неактуальной
+        """Изменённый EXEC инвалидирует привязку и блокирует close до verify"""
         self.setup_card()
         self.verify()
         self.assertEqual(self.sync()[0], 0)
@@ -257,6 +273,7 @@ class CriterionCliTest(CloseLifecycleCase):
     def test_altered_earlier_exec_with_subsequent_exec_invalidates_binding_and_blocks_close(self):
         # A-04: изменение ранней EXEC-01 при наличии последующей EXEC-02 делает
         # совокупный execution_state недействительным и блокирует handoff/close до нового verify
+        """Изменённый ранний EXEC при наличии позднего инвалидирует привязку"""
         self.setup_card()
         self.append(record('EXEC', 2, **{'Изменения': 'Вторая часть реализации.'}))
         self.append(record('CHECK', 2))
@@ -295,6 +312,7 @@ class CriterionCliTest(CloseLifecycleCase):
     def test_close_card_with_relative_link_preserves_historical_checkboxes_and_supports_reopen(self):
         # A-05: закрытие карточки с относительными ссылками сохраняет вычисляемые галочки в архиве,
         # а возврат (reopen) сохраняет исторические доказательства без коллизий в каталоге материалов
+        """Относительная ссылка при close сохраняет исторические чекбоксы и reopen"""
         self.setup_card()
         self.path.write_text(self.path.read_text().replace(
             'Локальный проект.',
@@ -362,6 +380,7 @@ class CriterionCliTest(CloseLifecycleCase):
         # переписываются при close, но исторические привязки и вычисляемые галочки
         # остаются валидными в архиве; повторный цикл reopen -> verify -> handoff -> accept -> close
         # выполняется штатно, а immutable-доказательства сохраняются побайтно неизменными
+        """Относительные ссылки в записях журнала сохраняют привязки и второй close"""
         import hashlib
         self.setup_card()
         evidence_dir = self.tasks_dir() / 'DEV-1-evidence'

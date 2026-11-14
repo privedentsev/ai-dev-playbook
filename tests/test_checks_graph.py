@@ -63,6 +63,7 @@ def make_policy(**overrides):
 
 
 class Project:
+    """Фикстурный проект для графа: файлы и policy на диске."""
     def __init__(self, case):
         self.tmp = tempfile.TemporaryDirectory()
         case.addCleanup(self.tmp.cleanup)
@@ -85,6 +86,7 @@ class AnalyzerTest(unittest.TestCase):
     """Разбор одного файла: разрешение импортов и динамика."""
 
     def test_direct_from_relative_imports(self):
+        """Прямые, from- и относительные импорты разрешаются в файлы проекта"""
         files = {"src/payments/pay.py", "src/shared/util.py",
                  "src/shared/__init__.py", "src/payments/__init__.py",
                  "src/payments/helper.py"}
@@ -100,6 +102,7 @@ class AnalyzerTest(unittest.TestCase):
         self.assertEqual(found["dynamic"], [])
 
     def test_src_layout_from_unrelated_dir(self):
+        """src-layout разрешается из несвязанного каталога тестов"""
         files = {"tests/test_x.py", "src/payments/pay.py"}
         found = cg.analyze_python("tests/test_x.py",
                                   "import payments.pay\n", files)
@@ -107,6 +110,7 @@ class AnalyzerTest(unittest.TestCase):
                          {"src/payments/pay.py"})
 
     def test_parent_relative_import(self):
+        """Родительский относительный импорт from ..payments разрешается"""
         files = {"src/checkout/order.py", "src/payments/pay.py"}
         found = cg.analyze_python(
             "src/checkout/order.py",
@@ -114,6 +118,7 @@ class AnalyzerTest(unittest.TestCase):
         self.assertIn("src/payments/pay.py", found["targets"])
 
     def test_stdlib_and_external_ignored(self):
+        """Stdlib и внешние пакеты не создают рёбер графа"""
         files = {"a/x.py"}
         found = cg.analyze_python(
             "a/x.py",
@@ -122,6 +127,7 @@ class AnalyzerTest(unittest.TestCase):
         self.assertEqual(found["dynamic"], [])
 
     def test_dynamic_import_flagged(self):
+        """importlib.import_module и __import__ с переменной помечаются dynamic"""
         files = {"a/x.py"}
         source = ("import importlib\n"
                   "importlib.import_module(name)\n"
@@ -130,6 +136,7 @@ class AnalyzerTest(unittest.TestCase):
         self.assertEqual(len(found["dynamic"]), 2)
 
     def test_dynamic_alias_flagged(self):
+        """from importlib import import_module с переменной помечается dynamic"""
         files = {"a/x.py"}
         found = cg.analyze_python(
             "a/x.py",
@@ -139,6 +146,7 @@ class AnalyzerTest(unittest.TestCase):
 
     def test_dynamic_import_alias(self):
         # A-03: локальный alias исходной функции — динамика, не край.
+        """import_module as load с переменной помечается dynamic"""
         files = {"a/x.py"}
         found = cg.analyze_python(
             "a/x.py",
@@ -149,6 +157,7 @@ class AnalyzerTest(unittest.TestCase):
 
     def test_dynamic_module_alias(self):
         # A-03: import importlib as il; il.import_module — динамика.
+        """importlib as il + il.import_module(переменная) помечается dynamic"""
         files = {"a/x.py"}
         found = cg.analyze_python(
             "a/x.py",
@@ -157,6 +166,7 @@ class AnalyzerTest(unittest.TestCase):
         self.assertEqual(len(found["dynamic"]), 1)
 
     def test_literal_dynamic_resolved(self):
+        """import_module с литералом разрешается в обычное ребро"""
         files = {"a/x.py", "b/mod.py"}
         found = cg.analyze_python(
             "a/x.py",
@@ -166,11 +176,14 @@ class AnalyzerTest(unittest.TestCase):
         self.assertEqual(found["dynamic"], [])
 
     def test_syntax_error_raises(self):
+        """Синтаксическая ошибка в анализируемом файле поднимает SyntaxError"""
         with self.assertRaises(SyntaxError):
             cg.analyze_python("a/x.py", "def broken(:\n", {"a/x.py"})
 
 
 class GraphBuildTest(unittest.TestCase):
+    """Построение графа: analyzer-рёбра provenance, объединение
+    policy-рёбер, отсутствие самоссылок, циклы и свежесть рёбер."""
     def setUp(self):
         self.proj = Project(self)
         self.policy = make_policy()
@@ -189,6 +202,7 @@ class GraphBuildTest(unittest.TestCase):
         return cg.build_graph(self.proj.root, self.policy, **kw)
 
     def test_analyzer_edges_provenance(self):
+        """Рёбра анализатора получают provenance и проходят схему графа"""
         graph = self.build()
         checks_contract.validate_graph(graph, req)
         self.assertEqual(graph["analyzer_version"], cg.ANALYZER_VERSION)
@@ -204,6 +218,7 @@ class GraphBuildTest(unittest.TestCase):
                          "module:shared-util")
 
     def test_policy_edges_merged(self):
+        """Policy-рёбра объединяются с analyzer-рёбрами в графе"""
         self.policy["dependencies"] = [
             {"consumer": "module:checkout",
              "dependency": "module:cart", "kind": "api",
@@ -220,6 +235,7 @@ class GraphBuildTest(unittest.TestCase):
                        "resource", "observed"), keys)
 
     def test_same_module_import_no_edge(self):
+        """Импорт внутри того же модуля не создаёт ребра"""
         self.proj.write("src/payments/more.py",
                         "from . import pay\n")
         graph = self.build()
@@ -227,6 +243,7 @@ class GraphBuildTest(unittest.TestCase):
                           "import", "analyzer"), edge_set(graph))
 
     def test_cycle_no_hang(self):
+        """Циклические импорты между модулями не вешают построение графа"""
         self.proj.write("src/payments/peer.py",
                         "import checkout.order\n")
         self.proj.write("src/checkout/order.py",
@@ -244,6 +261,7 @@ class GraphBuildTest(unittest.TestCase):
         self.assertIn("module:payments", reached)  # цикл замкнут
 
     def test_deleted_file_keeps_old_consumers_via_union(self):
+        """Удалённый файл сохраняет старых потребителей через union"""
         first = self.build()
         self.assertIn(("module:checkout", "module:payments",
                        "import", "analyzer"), edge_set(first))
@@ -257,6 +275,7 @@ class GraphBuildTest(unittest.TestCase):
         self.assertIn("module:checkout", reached)
 
     def test_fresh_edge_wins_same_key(self):
+        """Свежая analyzer-edge побеждает устаревшую policy-edge с тем же ключом"""
         first = self.build()
         stale = dict(first)
         stale["edges"] = [dict(e, evidence="old:1")
@@ -269,6 +288,7 @@ class GraphBuildTest(unittest.TestCase):
         self.assertNotEqual(edge["evidence"], "old:1")
 
     def test_union_merges_unknown(self):
+        """Union объединяет unknown-записи двух версий графа"""
         first = self.build()
         stale_unknown = dict(first)
         stale_unknown["unknown"] = [
@@ -280,6 +300,7 @@ class GraphBuildTest(unittest.TestCase):
                       second["unknown"])
 
     def test_dynamic_import_unknown(self):
+        """Динамический импорт попадает в unknown графа"""
         self.proj.write("src/checkout/plugins.py",
                         "import importlib\n"
                         "importlib.import_module(name)\n")
@@ -290,6 +311,7 @@ class GraphBuildTest(unittest.TestCase):
                       graph["unknown"])
 
     def test_syntax_error_unknown(self):
+        """Синтаксическая ошибка файла попадает в unknown графа"""
         self.proj.write("src/cart/broken.py", "def broken(:\n")
         graph = self.build()
         unknown = [u for u in graph["unknown"]
@@ -298,6 +320,7 @@ class GraphBuildTest(unittest.TestCase):
         self.assertIn("неразбираемый Python", unknown[0]["reason"])
 
     def test_import_outside_modules_unknown(self):
+        """Импорт вне путей модулей попадает в unknown"""
         self.proj.write("misc/tool.py", "Y = 2\n")
         self.proj.write("src/payments/use_tool.py",
                         "import misc.tool\n")
@@ -311,6 +334,7 @@ class GraphBuildTest(unittest.TestCase):
             graph["unknown"])
 
     def test_dynamic_outside_modules_project_scope(self):
+        """Динамический импорт вне модулей при scope=project помечается"""
         self.proj.write("tools/loader.py",
                         "__import__(choice)\n")
         graph = self.build()
@@ -318,6 +342,7 @@ class GraphBuildTest(unittest.TestCase):
                          [{"kind": "project"}])
 
     def test_graph_compatible(self):
+        """Построенный граф совместим с policy"""
         graph = self.build()
         self.assertTrue(cg.graph_compatible(graph, self.policy)
                         ["compatible"])
@@ -329,12 +354,14 @@ class GraphBuildTest(unittest.TestCase):
                          ["compatible"])
 
     def test_foreign_graph_not_unionized(self):
+        """Граф другого project_id не объединяется union'ом"""
         first = self.build()
         foreign = dict(first, project_id="elsewhere")
         second = self.build(previous=foreign)
         self.assertEqual(second["edges"], first["edges"])
 
     def test_load_graph_strict(self):
+        """load_graph строго валидирует и отклоняет повреждённый граф"""
         graph = self.build()
         target = self.proj.root / "graph.json"
         target.write_text(json.dumps(graph), encoding="utf-8")

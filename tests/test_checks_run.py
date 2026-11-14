@@ -152,6 +152,7 @@ class AdapterTest(unittest.TestCase):
             timeout=timeout)
 
     def test_parse_argv_forms(self):
+        """parse_argv разбирает формы unittest discover/модулей в selection"""
         sel = checks_unittest.parse_argv(
             ["python3", "-m", "unittest", "discover", "-s", "tests",
              "-p", "test_*.py", "-v"])
@@ -167,6 +168,7 @@ class AdapterTest(unittest.TestCase):
             checks_unittest.parse_argv(["ruff", "-m", "unittest", "x"])
 
     def test_green_suite_passed(self):
+        """Зелёный набор тестов даёт verdict passed"""
         collected = self.collect()
         out = checks_unittest.verdict(self.check(), self.policy,
                                       collected)
@@ -176,6 +178,7 @@ class AdapterTest(unittest.TestCase):
         self.assertEqual(out["tests"]["actual"][0]["outcome"], "passed")
 
     def test_zero_tests_rejected(self):
+        """Пустой набор без тестов отклоняется verdict'ом"""
         self.proj.write("tests/test_payments.py",
                         "import unittest\n")
         out = checks_unittest.verdict(self.check(), self.policy,
@@ -185,6 +188,7 @@ class AdapterTest(unittest.TestCase):
                             for r in out["reasons"]), out["reasons"])
 
     def test_unexpected_skip_rejected(self):
+        """Неожиданный skip вне allowlist отклоняется"""
         self.proj.write(
             "tests/test_payments.py",
             "import unittest\n\n"
@@ -198,6 +202,7 @@ class AdapterTest(unittest.TestCase):
                             for r in out["reasons"]), out["reasons"])
 
     def test_allowed_skip_accepted(self):
+        """Skip из allowlist каталога принимается verdict'ом"""
         self.proj.write(
             "tests/test_payments.py",
             "import unittest\n\n"
@@ -215,6 +220,7 @@ class AdapterTest(unittest.TestCase):
 
     def test_missing_catalog_id_rejected(self):
         # Переименованный тест: запись каталога не покрыта discovery.
+        """Тест вне каталога политики отклоняется"""
         self.proj.write(
             "tests/test_payments.py",
             "import unittest\n\n"
@@ -231,6 +237,7 @@ class AdapterTest(unittest.TestCase):
 
     def test_unfinished_and_crash_rejected(self):
         # Падение процесса во время suite: отчёт адаптера не создан.
+        """unfinished/crash исходы тестов отклоняются"""
         self.proj.write(
             "tests/test_payments.py",
             "import os, unittest\n\n"
@@ -244,6 +251,7 @@ class AdapterTest(unittest.TestCase):
                             for r in out["reasons"]), out["reasons"])
 
     def test_error_outcome_and_description(self):
+        """error-исход попадает в описание результата проверки"""
         self.proj.write(
             "tests/test_payments.py",
             "import unittest\n\n"
@@ -257,6 +265,7 @@ class AdapterTest(unittest.TestCase):
                             for r in out["reasons"]), out["reasons"])
 
     def test_subtest_failure_rejected(self):
+        """Падение subTest отклоняется verdict'ом"""
         self.proj.write(
             "tests/test_payments.py",
             "import unittest\n\n"
@@ -271,6 +280,7 @@ class AdapterTest(unittest.TestCase):
         self.assertTrue(any("failed" in r for r in out["reasons"]))
 
     def test_expected_failure_and_unexpected_success(self):
+        """expectedFailure и unexpected success учитываются verdict'ом"""
         self.proj.write(
             "tests/test_payments.py",
             "import unittest\n\n"
@@ -298,6 +308,7 @@ class AdapterTest(unittest.TestCase):
         self.assertEqual(out["status"], "passed", out["reasons"])
 
     def test_timeout_status(self):
+        """Превышение timeout проверки даёт статус timeout"""
         self.proj.write(
             "tests/test_payments.py",
             "import time, unittest\n\n"
@@ -335,6 +346,7 @@ class RunnerTest(unittest.TestCase):
                 for cid, tid in zip(check_ids, ids)}
 
     def test_first_run_stores_results_and_state(self):
+        """Первый прогон сохраняет результаты и состояние runner'а"""
         calls, fake = self.collect_counter(self.reports())
         with mock.patch.object(checks_unittest, "collect", fake):
             out, text = execute(self.proj, self.policy)
@@ -358,6 +370,7 @@ class RunnerTest(unittest.TestCase):
         self.assertIn("trust_mode=local", text)
 
     def test_stale_reuses_independent_results(self):
+        """stale-режим переиспользует независимые свежие результаты"""
         calls, fake = self.collect_counter(self.reports())
         with mock.patch.object(checks_unittest, "collect", fake):
             execute(self.proj, self.policy)
@@ -378,6 +391,7 @@ class RunnerTest(unittest.TestCase):
         self.assertIn("reused", text)
 
     def test_changed_input_forces_rerun(self):
+        """Изменённый вход проверки заставляет её повторить"""
         calls, fake = self.collect_counter(self.reports())
         with mock.patch.object(checks_unittest, "collect", fake):
             execute(self.proj, self.policy)
@@ -394,6 +408,7 @@ class RunnerTest(unittest.TestCase):
         self.assertIn("cart-tests", calls)
 
     def test_late_failed_not_hidden(self):
+        """Поздний failed не скрывается старым passed при переиспользовании"""
         calls, fake = self.collect_counter(self.reports())
         with mock.patch.object(checks_unittest, "collect", fake):
             execute(self.proj, self.policy)
@@ -417,6 +432,7 @@ class RunnerTest(unittest.TestCase):
         self.assertEqual(out["outcomes"]["payments-tests"], "failed")
 
     def test_corrupt_result_no_false_reuse(self):
+        """Повреждённый результат не даёт ложного переиспользования"""
         calls, fake = self.collect_counter(self.reports())
         with mock.patch.object(checks_unittest, "collect", fake):
             execute(self.proj, self.policy)
@@ -431,6 +447,7 @@ class RunnerTest(unittest.TestCase):
         self.assertTrue(any("поврежд" in n for n in notes))
 
     def test_corrupt_index_rebuilt(self):
+        """Повреждённый индекс результатов перестраивается"""
         calls, fake = self.collect_counter(self.reports())
         with mock.patch.object(checks_unittest, "collect", fake):
             execute(self.proj, self.policy)
@@ -444,6 +461,7 @@ class RunnerTest(unittest.TestCase):
         self.assertIn("cart-tests", rebuilt["entries"])
 
     def test_force_reruns_all(self):
+        """force-режим перезапускает все проверки области"""
         calls, fake = self.collect_counter(self.reports())
         with mock.patch.object(checks_unittest, "collect", fake):
             execute(self.proj, self.policy)
@@ -455,6 +473,7 @@ class RunnerTest(unittest.TestCase):
         self.assertEqual(out["outcomes"]["lint"], "passed")
 
     def test_project_scope_covers_all(self):
+        """scope=project покрывает все проверки проекта"""
         calls, fake = self.collect_counter(self.reports())
         with mock.patch.object(checks_unittest, "collect", fake):
             out, _ = execute(self.proj, self.policy, scope="project")
@@ -463,6 +482,7 @@ class RunnerTest(unittest.TestCase):
         self.assertEqual(out["outcomes"]["lint"], "passed")
 
     def test_task_requirements_change_breaks_reuse(self):
+        """Изменение task_projection-входа ломает переиспользование"""
         self.policy["checks"][0]["inputs"] = [
             "tests", {"type": "task_projection"}]
         calls, fake = self.collect_counter(self.reports())
@@ -480,6 +500,7 @@ class RunnerTest(unittest.TestCase):
         self.assertNotIn("cart-tests", calls)
 
     def test_external_ttl_and_always_run(self):
+        """TTL и always_run внешних зависимостей соблюдаются runner'ом"""
         self.policy["environment"]["external"] = [
             {"id": "payment-api",
              "freshness": {"kind": "ttl", "ttl_seconds": 60}},
@@ -513,6 +534,7 @@ class RunnerTest(unittest.TestCase):
         self.assertIn("payments-tests", calls)
 
     def test_external_version_change_breaks_binding(self):
+        """Смена версии внешней зависимости ломает binding результата"""
         self.policy["environment"]["external"] = [
             {"id": "api",
              "freshness": {"kind": "version", "version": "v1"}}]
@@ -529,6 +551,7 @@ class RunnerTest(unittest.TestCase):
 
     def test_mutation_during_command_blocked(self):
         # Команда правит собственный вход: post-снимок ≠ pre → blocked.
+        """Мутация входов во время команды проверки блокируется"""
         script = ("import pathlib;"
                   "pathlib.Path('src/cart/basket.py')"
                   ".write_text('x = 9\\n')")
@@ -547,6 +570,7 @@ class RunnerTest(unittest.TestCase):
 
     def test_cross_task_reuse_same_project(self):
         # Результат задачи DEV-1 пригоден для DEV-2 того же проекта.
+        """Результат одной задачи переиспользуется другой в том же проекте"""
         calls, fake = self.collect_counter(self.reports())
         with mock.patch.object(checks_unittest, "collect", fake):
             execute(self.proj, self.policy)
@@ -559,6 +583,7 @@ class RunnerTest(unittest.TestCase):
         self.assertNotIn("cart-tests", calls)
 
     def test_other_project_result_not_reused(self):
+        """Результат другого проекта не переиспользуется"""
         calls, fake = self.collect_counter(self.reports())
         with mock.patch.object(checks_unittest, "collect", fake):
             execute(self.proj, self.policy)
@@ -577,6 +602,7 @@ class RunnerTest(unittest.TestCase):
         self.assertEqual(out["outcomes"]["lint"], "passed")
 
     def test_status_reports_coverage_and_trust(self):
+        """checks status сообщает покрытие и trust_mode"""
         calls, fake = self.collect_counter(self.reports())
         with mock.patch.object(checks_unittest, "collect", fake):
             execute(self.proj, self.policy)
@@ -646,6 +672,7 @@ class CliRunTest(unittest.TestCase):
         return code, out.getvalue() + err.getvalue()
 
     def test_run_and_status_end_to_end(self):
+        """checks run и status работают end-to-end через CLI"""
         code, text = self.run_cli("checks", "run", "DEV-1")
         self.assertEqual(code, 1, text)  # manual остаётся непокрытым
         self.assertIn("payments-tests", text)
@@ -658,16 +685,19 @@ class CliRunTest(unittest.TestCase):
         self.assertIn("passed", text)
 
     def test_run_second_time_reuses(self):
+        """Повторный checks run переиспользует результаты"""
         code, _ = self.run_cli("checks", "run", "DEV-1")
         code, text = self.run_cli("checks", "run", "DEV-1")
         self.assertIn("reused", text)
 
     def test_run_requires_task(self):
+        """checks run для несуществующей задачи отклоняется"""
         code, text = self.run_cli("checks", "run", "DEV-99")
         self.assertEqual(code, 1)
         self.assertIn("DEV-99", text)
 
     def test_run_requires_policy(self):
+        """checks run без checks_policy в project.json отклоняется"""
         proj_file = self.root / "ai-dev-playbook" / "project.json"
         project = json.loads(proj_file.read_text())
         project.pop("checks_policy")
@@ -701,6 +731,7 @@ class AuditRegressionTest(unittest.TestCase):
     def test_a01_ttl_from_original_run(self):
         # Цепочка reuse: TTL считается от исходного запуска, не от
         # finished_at последней строки reuse.
+        """A-01: TTL внешней зависимости считается от исходного прогона"""
         result = {"status": "passed",
                   "finished_at": "2030-01-01T00:00:00+00:00",
                   "reused": {"issued_at": "2020-01-01T00:00:00+00:00"}}
@@ -730,6 +761,7 @@ class AuditRegressionTest(unittest.TestCase):
 
     def test_a02_reuse_rebinding_race_reruns(self):
         # Входы изменились между оценкой и записью reuse — не reused.
+        """A-02: гонка перепривязки при переиспользовании вызывает прогон"""
         calls, fake = self.collect_counter(self.reports())
         with mock.patch.object(checks_unittest, "collect", fake):
             execute(self.proj, self.policy)
@@ -753,6 +785,7 @@ class AuditRegressionTest(unittest.TestCase):
         self.assertNotEqual(out["outcomes"]["cart-tests"], "reused")
 
     def test_a03_corrupt_latest_failed_blocks_reuse(self):
+        """A-03: повреждённый поздний failed блокирует переиспользование"""
         calls, fake = self.collect_counter(self.reports())
         with mock.patch.object(checks_unittest, "collect", fake):
             execute(self.proj, self.policy)
@@ -808,6 +841,7 @@ class AuditRegressionTest(unittest.TestCase):
         self.fail(f"результат {check_id} со status={status} не найден")
 
     def test_a06_deleted_latest_failed_blocks_reuse(self):
+        """A-06: удалённый поздний failed блокирует переиспользование"""
         calls2, fake2 = self._seed_lost_failed()
         calls2.clear()
         with mock.patch.object(checks_unittest, "collect", fake2):
@@ -817,6 +851,7 @@ class AuditRegressionTest(unittest.TestCase):
                             "reused")
 
     def test_a07_rebuild_preserves_loss_evidence(self):
+        """A-07: rebuild индекса сохраняет свидетельства потерь"""
         self._seed_lost_failed()
         checks_results.rebuild_index(self.proj.root, self.policy)
         # Свидетельство пережило пересборку: load_results снова
@@ -834,6 +869,7 @@ class AuditRegressionTest(unittest.TestCase):
     def test_a07_unrelated_run_keeps_evidence(self):
         # Прогон, где затронутая проверка не исполнялась (scope другой
         # задачи с её собственным набором), не стирает свидетельство.
+        """A-07: несвязанный прогон сохраняет свидетельства потерь"""
         self._seed_lost_failed()
         # Перезапускаем только cart: изменяем только cart-вход.
         calls2, fake2 = self.collect_counter(self.reports())
@@ -849,6 +885,7 @@ class AuditRegressionTest(unittest.TestCase):
                             "reused")
 
     def test_a04_status_counts_only_fresh_coverage(self):
+        """A-04: status учитывает только свежее покрытие"""
         calls, fake = self.collect_counter(self.reports())
         with mock.patch.object(checks_unittest, "collect", fake):
             execute(self.proj, self.policy)
@@ -867,6 +904,7 @@ class AuditRegressionTest(unittest.TestCase):
 
     def test_a05_project_import_in_adapter(self):
         # Тест импортирует код проекта — корень в sys.path адаптера.
+        """A-05: project-импорт в адаптере unittest обрабатывается"""
         self.proj.write(
             "tests/test_payments.py",
             "import unittest\n"

@@ -11,6 +11,8 @@ fops = playbook.file_operations
 
 
 class MaterialRepairTest(CloseLifecycleCase):
+    """Ремонт материалов: check-отказы, preview/apply, batch-операции
+    и cancelled-статусы."""
     def fixture(self, ident="DEV-1", status="done"):
         write_card(self.archive_dir(), ident, status, executor="Devin",
                    model="SWE-2 High", closed="2026-10-02T07:15:25+03:00")
@@ -31,6 +33,7 @@ class MaterialRepairTest(CloseLifecycleCase):
         return req
 
     def test_check_rejects_archived_leftovers_with_path(self):
+        """check отклоняет архивные остатки с путём"""
         self.fixture()
         before = self.project_fingerprint()
         code, _, err = self.cli("check", "--ready")
@@ -40,6 +43,7 @@ class MaterialRepairTest(CloseLifecycleCase):
         self.assertEqual(self.project_fingerprint(), before)
 
     def test_check_rejects_active_card_with_archive_evidence(self):
+        """check отклоняет активную карточку с архивным evidence"""
         self.managed_task()
         (self.archive_dir() / "DEV-1-evidence").mkdir(parents=True)
         code, _, err = self.cli("check")
@@ -47,6 +51,7 @@ class MaterialRepairTest(CloseLifecycleCase):
         self.assertIn("docs/archive/tasks/DEV-1-evidence", err)
 
     def test_check_rejects_both_locations_and_empty_leftover(self):
+        """check отклоняет оба расположения и пустой остаток"""
         self.fixture()
         (self.archive_dir() / "DEV-1-evidence").mkdir(parents=True)
         code, _, err = self.cli("check")
@@ -54,6 +59,7 @@ class MaterialRepairTest(CloseLifecycleCase):
         self.assertIn("противоположной стороне", err)
 
     def test_preview_is_read_only(self):
+        """material repair preview не пишет"""
         self.fixture()
         rel = self.request(self.payload("DEV-1"))
         before = self.project_fingerprint()
@@ -63,6 +69,7 @@ class MaterialRepairTest(CloseLifecycleCase):
         self.assertEqual(self.project_fingerprint(), before)
 
     def test_apply_preserves_bytes_dates_links_and_repeat(self):
+        """repair apply сохраняет байты/даты/ссылки, повтор безопасен"""
         src = self.fixture()
         original = {p.relative_to(src): p.read_bytes() for p in src.rglob("*") if p.is_file()}
         card = self.archive_dir() / "DEV-1.md"
@@ -96,6 +103,7 @@ class MaterialRepairTest(CloseLifecycleCase):
         self.assertEqual(self.cli("check", "--ready")[0], 0)
 
     def test_batch_repair_and_cancelled_status(self):
+        """Пакетный repair и cancelled-статусы"""
         self.fixture()
         self.fixture("DEV-2", "cancelled")
         _, rel = self.save_plan(self.payload("DEV-1", "DEV-2"))
@@ -105,6 +113,7 @@ class MaterialRepairTest(CloseLifecycleCase):
         self.assertEqual(self.cli("check", "--ready")[0], 0)
 
     def test_unselected_leftover_and_missing_source_refused(self):
+        """Невыбранный остаток и отсутствующий источник отклонены"""
         self.fixture()
         self.fixture("DEV-2")
         code, _, err = self.cli("lifecycle", "plan", self.request(self.payload("DEV-1")))
@@ -121,6 +130,7 @@ class MaterialRepairTest(CloseLifecycleCase):
         self.assertIn("нет каталога", err)
 
     def test_stale_plan_after_new_material_refused(self):
+        """Устаревший план после нового материала отклонён"""
         src = self.fixture()
         _, rel = self.save_plan(self.payload("DEV-1"))
         (src / "new.log").write_text("late evidence")
@@ -131,6 +141,7 @@ class MaterialRepairTest(CloseLifecycleCase):
         self.assertEqual(self.project_fingerprint(), before)
 
     def test_collision_refused_without_writes(self):
+        """Коллизия repair отклонена без записи"""
         self.fixture()
         (self.archive_dir() / "DEV-1-evidence").mkdir()
         before = self.project_fingerprint()
@@ -140,6 +151,7 @@ class MaterialRepairTest(CloseLifecycleCase):
         self.assertEqual(self.project_fingerprint(), before)
 
     def test_symlink_refused(self):
+        """Symlink при repair отклонён"""
         src = self.fixture()
         (src / "link").symlink_to(self.archive_dir() / "DEV-1.md")
         code, _, err = self.cli("lifecycle", "plan", self.request(self.payload("DEV-1")))
@@ -148,6 +160,7 @@ class MaterialRepairTest(CloseLifecycleCase):
         self.assertTrue(src.exists())
 
     def test_managed_or_active_task_refused(self):
+        """Managed или активная задача отклонена при repair"""
         self.fixture()
         managed_card(self.archive_dir(), "DEV-1", "done")
         code, _, err = self.cli("lifecycle", "plan", self.request(self.payload("DEV-1")))
@@ -160,6 +173,7 @@ class MaterialRepairTest(CloseLifecycleCase):
         self.assertIn("архивной", err)
 
     def test_existing_foreign_ownership_refused(self):
+        """Существующее чужое владение отклонено"""
         src = self.fixture()
         self.add_spec("alpha", materials=[local_material("other", "docs/tasks/DEV-1-evidence")])
         code, _, err = self.cli("lifecycle", "plan", self.request(self.payload("DEV-1")))
@@ -168,6 +182,7 @@ class MaterialRepairTest(CloseLifecycleCase):
         self.assertTrue(src.is_dir())
 
     def test_final_failure_rolls_back_complete_tree(self):
+        """Финальный сбой откатывает всё дерево repair"""
         self.fixture()
         _, rel = self.save_plan(self.payload("DEV-1"))
         before = self.project_fingerprint()

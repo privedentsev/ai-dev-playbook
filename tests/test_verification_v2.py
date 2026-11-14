@@ -20,6 +20,8 @@ def req(ok, msg=""):
 
 
 class VerificationV2Test(fixture.CloseLifecycleCase):
+    """Runner v2: reuse/invalidation, registry, manual/terminal, argv,
+    timeout, stale during run."""
     def setUp(self):
         super().setUp()
         self.project_file = self.root / "ai-dev-playbook/project.json"
@@ -87,6 +89,7 @@ class VerificationV2Test(fixture.CloseLifecycleCase):
         self.cli("index")
 
     def test_environment_change_invalidates_reuse_and_gate_is_ignored(self):
+        """Изменение среды инвалидирует reuse, gate игнорируется"""
         self.settings["task_workflow"]["registry"][0]["argv"] = [
             sys.executable, "-c",
             "import os,sys; sys.exit(0 if os.getenv('PB033_MODE') == 'pass' else 9)"]
@@ -113,6 +116,7 @@ class VerificationV2Test(fixture.CloseLifecycleCase):
             self.assertNotIn('PB033_MODE', ''.join(p.read_text() for p in reports))
 
     def test_independent_registry_change_preserves_other_result(self):
+        """Изменение независимой registry-записи сохраняет чужой результат"""
         other = copy.deepcopy(self.settings["task_workflow"]["registry"][0])
         other["id"] = "other"
         self.add_registry_check(other)
@@ -135,6 +139,7 @@ class VerificationV2Test(fixture.CloseLifecycleCase):
         self.assertIn("RUN: other", out)
 
     def test_terminal_manual_requires_terminal_but_not_browser(self):
+        """Terminal manual требует terminal, но не browser"""
         self.add_registry_check({"id": "terminal", "kind": "manual",
             "scenario": "Read local output in terminal", "required_environment": ["terminal"],
             "applicability": {"kind": "always"}})
@@ -165,6 +170,7 @@ class VerificationV2Test(fixture.CloseLifecycleCase):
         self.assertIn("REUSE: terminal", out)
 
     def test_command_execution_allowed_argv_only(self):
+        """Исполнение команд — только разрешённый argv"""
         self.create_v2_task("DEV-1")
         code, out, err = self.cli("verify", "DEV-1")
         self.assertEqual(code, 0, f"stdout: {out}\nstderr: {err}")
@@ -189,6 +195,7 @@ class VerificationV2Test(fixture.CloseLifecycleCase):
         self.assertTrue((self.root / res["stderr_log"]).is_file())
 
     def test_timeout_handling(self):
+        """Обработка timeout проверок v2"""
         self.add_registry_check({
             "id": "slow-tests",
             "kind": "command",
@@ -229,6 +236,7 @@ class VerificationV2Test(fixture.CloseLifecycleCase):
         self.assertEqual(slow_res["status"], "timeout")
 
     def test_stale_during_run_detection(self):
+        """Обнаружение stale во время прогона"""
         target = self.root / "target_input.txt"
         target.write_text("initial")
         self.add_registry_check({
@@ -270,6 +278,7 @@ class VerificationV2Test(fixture.CloseLifecycleCase):
         self.assertEqual(rep["status"], "stale")
 
     def test_manual_check_candidate_snapshot_and_not_run_without_confirmation(self):
+        """Manual check: snapshot кандидата и not_run без подтверждения"""
         self.add_registry_check({
             "id": "visual-check",
             "kind": "manual",
@@ -314,6 +323,7 @@ class VerificationV2Test(fixture.CloseLifecycleCase):
         self.assertIn("scenario_hash", manual_res)
 
     def test_manual_presentation_cannot_be_rebound_after_scenario_change(self):
+        """Manual presentation нельзя перепривязать после смены scenario"""
         self.add_registry_check({
             "id": "visual", "kind": "manual", "purpose": "UI",
             "scenario": "Inspect color", "applicability": {"kind": "always"},
@@ -354,6 +364,7 @@ class VerificationV2Test(fixture.CloseLifecycleCase):
         self.assertEqual(self.cli("verify", "DEV-1")[0], 0)
 
     def test_record_manual_success_and_stale_candidate_rejection(self):
+        """Запись manual success и отказ stale-кандидата"""
         self.add_registry_check({
             "id": "visual-check",
             "kind": "manual",
@@ -453,6 +464,7 @@ class VerificationV2Test(fixture.CloseLifecycleCase):
         self.assertIn("Заявление со статусом passed требует candidate_snapshot", out + err)
 
     def test_independent_reuse_of_fresh_results(self):
+        """Независимое переиспользование свежих результатов"""
         self.add_registry_check({
             "id": "independent-b",
             "kind": "command",
@@ -505,6 +517,7 @@ class VerificationV2Test(fixture.CloseLifecycleCase):
         self.assertIn("REUSE: independent-b: свежий результат переиспользован", out)
 
     def test_failed_check_not_bypassed_by_reuse(self):
+        """Failed-проверка не обходится переиспользованием"""
         self.add_registry_check({
             "id": "failing-check",
             "kind": "command",
@@ -545,6 +558,7 @@ class VerificationV2Test(fixture.CloseLifecycleCase):
         self.assertNotIn("REUSE: failing-check", out)
 
     def test_index_sync_before_snapshot_in_regular_verify(self):
+        """Синхронизация индекса до snapshot в обычном verify"""
         self.create_v2_task("DEV-1")
         # Tamper with index to make it stale
         index = self.root / "docs/tasks/index.md"
@@ -560,6 +574,7 @@ class VerificationV2Test(fixture.CloseLifecycleCase):
 
     def test_v1_legacy_compatibility(self):
         # Create a v1 task (schema_version == 1)
+        """V1 legacy-совместимость карточек и meta"""
         meta = {
             "schema_version": 1,
             "relations": [],
@@ -577,6 +592,7 @@ class VerificationV2Test(fixture.CloseLifecycleCase):
         self.assertEqual(rep["schema_version"], 1)
 
     def test_later_command_mutates_earlier_input_detected_as_stale(self):
+        """Поздняя команда, мутировавшая ранний вход, — stale"""
         target_file = self.root / "target.txt"
         target_file.write_text("original", encoding="utf-8")
         indep_file = self.root / "independent.txt"

@@ -79,6 +79,8 @@ def make_policy(**overrides):
 
 
 class Project:
+    """Фикстурный проект для выбора проверок: файлы, policy и
+    каталог."""
     def __init__(self, case):
         self.tmp = tempfile.TemporaryDirectory()
         case.addCleanup(self.tmp.cleanup)
@@ -124,6 +126,7 @@ class SelectTest(unittest.TestCase):
                                 **kw)
 
     def test_module_change_selects_own_and_consumers(self):
+        """Изменение модуля выбирает его проверки и проверки потребителей"""
         edges = [{"consumer": "module:checkout",
                   "dependency": "module:payments", "kind": "import",
                   "source": "analyzer", "analyzer_version": "ast-v1",
@@ -140,6 +143,7 @@ class SelectTest(unittest.TestCase):
     def test_transitive_two_edge_chain(self):
         # A-01: обход не обрывается после первого ребра — цепь
         # checkout→payments, cart→checkout достигает cart.
+        """Транзитивная цепочка из двух рёбер расширяет выбор"""
         edges = [
             {"consumer": "module:checkout",
              "dependency": "module:payments", "kind": "import",
@@ -157,6 +161,7 @@ class SelectTest(unittest.TestCase):
 
     def test_closure_digest_chain_cycle_change(self):
         # A-02: digest стабилен для цепей и циклов, меняется с графом.
+        """Изменение в цепочке/цикле closure меняет digest выбора"""
         check = self.policy["checks"][2]
         chain = [{"consumer": "module:cart",
                   "dependency": "module:checkout", "kind": "import",
@@ -180,6 +185,7 @@ class SelectTest(unittest.TestCase):
                 chain[:1], self.policy["checks"][0]))
 
     def test_change_only_inside_module_no_spill(self):
+        """Изменение внутри модуля не затрагивает чужие проверки"""
         out = self.select(["src/cart/basket.py"])
         self.assertEqual(out["checks"]["payments-tests"]["status"],
                          "not_applicable")
@@ -188,11 +194,13 @@ class SelectTest(unittest.TestCase):
         self.assertEqual(out["checks"]["cart-tests"]["status"], "run")
 
     def test_unproven_change_widens(self):
+        """Недоказанное изменение расширяет выбор до run всех проверок"""
         out = self.select(None)
         self.assertTrue(all(e["status"] == "run"
                             for e in out["checks"].values()))
 
     def test_unknown_module_always_affected(self):
+        """Модуль из unknown-записей всегда считается затронутым"""
         unknown = [{"scope": {"kind": "module", "id": "cart"},
                     "reason": "динамический импорт"}]
         out = self.select(["src/payments/pay.py"], unknown=unknown)
@@ -202,6 +210,7 @@ class SelectTest(unittest.TestCase):
                          "not_applicable")
 
     def test_unknown_project_scope_widens(self):
+        """unknown со scope=project расширяет выбор консервативно"""
         unknown = [{"scope": {"kind": "project"},
                     "reason": "динамическая загрузка"}]
         out = self.select(["src/payments/pay.py"], unknown=unknown)
@@ -209,12 +218,14 @@ class SelectTest(unittest.TestCase):
                             for e in out["checks"].values()))
 
     def test_unattributed_path_project_scope(self):
+        """Неатрибутированный путь попадает в unattributed при scope=project"""
         out = self.select(["docs/notes.md"])
         self.assertEqual(out["unattributed"], ["docs/notes.md"])
         self.assertTrue(all(e["status"] == "run"
                             for e in out["checks"].values()))
 
     def test_unattributed_path_blocked_by_scope(self):
+        """Неатрибутированный путь блокируется fallback scope=subsystem"""
         self.policy["fallback"]["unknown_scope"] = "subsystem"
         out = self.select(["docs/notes.md"])
         self.assertIsNotNone(out["blocked"])
@@ -222,6 +233,7 @@ class SelectTest(unittest.TestCase):
                             for e in out["checks"].values()))
 
     def test_unattributed_module_scope_blocked(self):
+        """Неатрибутированный путь блокируется fallback scope=module"""
         self.policy["fallback"]["unknown_scope"] = "module"
         out = self.select(["docs/notes.md"])
         self.assertTrue(all(e["status"] == "blocked"
@@ -229,6 +241,7 @@ class SelectTest(unittest.TestCase):
 
     def test_subsystem_consumer_expands(self):
         # check:ops зависит от целой подсистемы catalog.
+        """Потребитель-подсистема расширяет выбор по своим проверкам"""
         self.policy["checks"].append(
             {"id": "ops", "title": "t", "purpose": "p", "kind": "manual",
              "scenario": "s"})
@@ -244,6 +257,7 @@ class SelectTest(unittest.TestCase):
                             for line in out["checks"]["ops"]["explain"]))
 
     def test_always_and_task_obligations_add(self):
+        """always и обязательства задачи добавляются к выбору"""
         self.policy["checks"].extend([
             {"id": "lint", "title": "t", "purpose": "p", "kind": "command",
              "argv": ["lint"], "timeout_seconds": 5,
@@ -263,6 +277,7 @@ class SelectTest(unittest.TestCase):
                             for line in entry["explain"]))
 
     def test_when_paths_unmatched_not_required(self):
+        """when_paths без совпадения не делает проверку обязательной"""
         self.policy["checks"].append(
             {"id": "docs-check", "title": "t", "purpose": "p",
              "kind": "command", "argv": ["d"], "timeout_seconds": 5,
@@ -272,6 +287,7 @@ class SelectTest(unittest.TestCase):
                          "not_applicable")
 
     def test_checkpoint_not_required_without_flag(self):
+        """Чекпоинт-проверка не обязательна без явного флага"""
         self.policy["checks"].append(
             {"id": "gate", "title": "t", "purpose": "p", "kind": "command",
              "argv": ["g"], "timeout_seconds": 5,
@@ -286,6 +302,7 @@ class SelectTest(unittest.TestCase):
     def test_obligations_never_narrow(self):
         # Обязательства задачи дополняют вычисленный набор: явная
         # when_paths не отменяет графовую обязательность.
+        """Обязательства никогда не сужают выбор проверок"""
         self.policy["checks"][2]["applicability"] = \
             {"kind": "when_paths", "paths": ["nothing/**"]}
         out = self.select(["src/cart/basket.py"])
@@ -315,12 +332,14 @@ class PlanTest(unittest.TestCase):
             cs.universe_inputs(self.policy), **kw)
 
     def test_first_plan_no_baseline_requires_all(self):
+        """Первый план без baseline требует все проверки"""
         out = self.plan(graph=self.graph())
         self.assertIsNone(out["changed"])
         self.assertEqual(out["summary"]["run"], 3)
         self.assertFalse(out["budget_blocked"])
 
     def test_read_only_no_writes(self):
+        """Plan не пишет в дерево проекта"""
         before = self.proj.snapshot_tree()
         self.plan(graph=self.graph(), baseline=self.baseline())
         self.assertEqual(before, self.proj.snapshot_tree())
@@ -328,6 +347,7 @@ class PlanTest(unittest.TestCase):
     def test_edit_selects_consumer_chain(self):
         # checkout импортирует payments: правка payments требует
         # оба набора, cart доказанно независим.
+        """Правка файла выбирает цепочку проверок-потребителей"""
         self.proj.write("src/checkout/order.py",
                         "import payments.pay\n")
         baseline = self.baseline()
@@ -340,6 +360,7 @@ class PlanTest(unittest.TestCase):
                          "not_applicable")
 
     def test_content_edit_detected(self):
+        """Изменение содержимого файла обнаруживается планом"""
         graph = self.graph()
         baseline = self.baseline()
         self.proj.write("src/payments/pay.py", "x = 2\n")
@@ -350,6 +371,7 @@ class PlanTest(unittest.TestCase):
                          "not_applicable")
 
     def test_irrelevant_edit_outside_modules(self):
+        """Правка вне модулей не выбирает проверки"""
         graph = self.graph()
         baseline = self.baseline()
         self.proj.write("logs/run.log", "log\n")
@@ -358,6 +380,7 @@ class PlanTest(unittest.TestCase):
         self.assertEqual(out["summary"]["run"], 3)
 
     def test_deleted_input_required(self):
+        """Удалённый вход делает зависимую проверку обязательной"""
         baseline = self.baseline()
         (self.proj.root / "src/payments/pay.py").unlink()
         out = self.plan(baseline=baseline, graph=self.graph())
@@ -365,12 +388,14 @@ class PlanTest(unittest.TestCase):
         self.assertEqual(out["checks"]["payments-tests"]["status"], "run")
 
     def test_corrupt_baseline_conservative(self):
+        """Повреждённый baseline делает план консервативным"""
         bad = dict(self.baseline(), kind="report")
         out = self.plan(baseline=bad, graph=self.graph())
         self.assertIsNone(out["changed"])
         self.assertEqual(out["summary"]["run"], 3)
 
     def test_hash_counter_expected_set(self):
+        """Счётчик хешей покрывает ровно ожидаемый набор файлов"""
         calls = []
         real = project_view.digest_file
 
@@ -386,6 +411,7 @@ class PlanTest(unittest.TestCase):
         self.assertTrue(all(name.endswith(".py") for name in hashed))
 
     def test_seconds_budget_blocks_before_run(self):
+        """Превышение бюджета секунд блокирует план до запуска"""
         self.policy["fallback"]["limits"]["max_seconds"] = 10
         out = self.plan(graph=self.graph())
         self.assertTrue(out["budget_blocked"])
@@ -396,6 +422,7 @@ class PlanTest(unittest.TestCase):
     def test_bytes_budget_conservative(self):
         # A-04: превышение max_bytes блокирует обязательства до решения
         # инженера, а не расширяет запуск.
+        """Малый байтовый бюджет делает план консервативным"""
         self.policy["fallback"]["limits"]["max_bytes"] = 3
         out = self.plan(graph=self.graph())
         self.assertTrue(out["bytes_exceeded"])
@@ -407,6 +434,7 @@ class PlanTest(unittest.TestCase):
     def test_ast_reads_within_same_budget(self):
         # A-04: внутреннее построение графа читает исходники под тем же
         # лимитом байтов, что и снимок входов.
+        """AST-чтения учитываются в том же байтовом бюджете"""
         self.policy["fallback"]["limits"]["max_bytes"] = 3
         out = cs.plan(self.proj.root, self.policy)
         self.assertTrue(out["bytes_exceeded"])
@@ -441,6 +469,7 @@ class PlanTest(unittest.TestCase):
     def test_reuse_valid_result(self):
         # payments-tests обязателен (always): свежий результат закрывает
         # обязательство без нового запуска; незатронутый cart — нет.
+        """Валидный свежий результат переиспользуется в плане"""
         self.policy["checks"][0]["applicability"] = "always"
         graph = self.graph()
         baseline = self.baseline()
@@ -459,6 +488,7 @@ class PlanTest(unittest.TestCase):
                          "not_applicable")
 
     def test_stale_input_not_reused(self):
+        """Устаревший вход не переиспользует результат"""
         self.policy["checks"][0]["applicability"] = "always"
         graph = self.graph()
         baseline = self.baseline()
@@ -475,6 +505,7 @@ class PlanTest(unittest.TestCase):
                          "run")
 
     def test_newer_failed_hides_older_passed(self):
+        """Более новый failed скрывает старый passed при reuse"""
         self.policy["checks"][0]["applicability"] = "always"
         graph = self.graph()
         baseline = self.baseline()
@@ -497,6 +528,7 @@ class PlanTest(unittest.TestCase):
                          "run")
 
     def test_environment_mismatch_not_reused(self):
+        """Несовпадение среды не переиспользует результат"""
         self.policy["checks"][0]["applicability"] = "always"
         graph = self.graph()
         baseline = self.baseline()
@@ -564,6 +596,7 @@ class CliPlanTest(unittest.TestCase):
         return code, out.getvalue() + err.getvalue()
 
     def test_plan_prints_selection(self):
+        """checks plan печатает выбор проверок с кодом 0"""
         code, text = self.run_plan()
         self.assertEqual(code, 0, text)
         self.assertIn("checks plan DEV-1", text)
@@ -571,6 +604,7 @@ class CliPlanTest(unittest.TestCase):
         self.assertIn("Итог:", text)
 
     def test_plan_read_only(self):
+        """checks plan не изменяет файлы проекта"""
         before = {str(p.relative_to(self.root))
                   for p in self.root.rglob("*") if p.is_file()}
         self.run_plan()
@@ -579,6 +613,7 @@ class CliPlanTest(unittest.TestCase):
         self.assertEqual(before, after)
 
     def test_plan_requires_policy_link(self):
+        """checks plan без checks_policy в project.json отклоняется"""
         proj_file = self.root / "ai-dev-playbook" / "project.json"
         project = json.loads(proj_file.read_text())
         project.pop("checks_policy")
@@ -587,6 +622,7 @@ class CliPlanTest(unittest.TestCase):
         self.assertEqual(code, 1)
 
     def test_plan_requires_task(self):
+        """checks plan без задачи отклоняется"""
         out, err = io.StringIO(), io.StringIO()
         with contextlib.redirect_stdout(out), \
                 contextlib.redirect_stderr(err):

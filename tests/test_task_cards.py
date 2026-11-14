@@ -65,7 +65,10 @@ def text(body=BODY):
 
 
 class ParserTest(unittest.TestCase):
+    """Парсер карточек: шаблон, маркеры, grammar, заголовки и
+    ссылки."""
     def test_default_template_is_supported(self):
+        """Шаблон task.md по умолчанию поддерживается парсером"""
         from pathlib import Path
         template = Path(playbook.__file__).parents[1] / 'templates/task.md'
         parsed = cards.parse(template.read_text())
@@ -73,6 +76,7 @@ class ParserTest(unittest.TestCase):
         self.assertEqual(parsed['entries'], [])
 
     def test_two_fixes_three_audits(self):
+        """Две правки и три аудита парсятся корректно"""
         body = BODY
         for i in range(1, 4):
             body += record('EXEC', i, title='Исправление' if i > 1 else None,
@@ -92,6 +96,7 @@ class ParserTest(unittest.TestCase):
         self.assertEqual(parsed['open_findings'], [])
 
     def test_unsupported_versions_and_bad_markers(self):
+        """Неподдерживаемые версии и битые маркеры отклоняются"""
         for version in (1, 3, 99):
             result = cards.parse(text().replace('"card_format_version": 2', f'"card_format_version": {version}'), 'old.md')
             self.assertEqual(result['status'], 'unsupported')
@@ -103,17 +108,20 @@ class ParserTest(unittest.TestCase):
                 cards.parse(text().replace('"card_format_version": 2', '"card_format_version": ' + value))
 
     def test_fenced_examples_and_duplicate_fields(self):
+        """Примеры в fence и дубли полей игнорируются"""
         body = BODY + record('EXEC', **{'Изменения': '\n```markdown\n### EXEC-99 — Выполнение\nВремя: fake\n```'})
         self.assertEqual(len(cards.parse(text(body))['entries']), 1)
         with self.assertRaisesRegex(ValueError, 'повтор поля'):
             cards.parse(text(body + 'Файлы: twice\n'))
 
     def test_markdown_colons_urls_and_paragraphs_are_not_fields(self):
+        """Markdown-двоеточия, URL и абзацы не поля"""
         value = '\nПервый абзац.\n\nВторой абзац.\n- CLI: добавлен preview.\n- [Отчёт](https://example.test/proof)\nhttps://example.test/proof'
         parsed = cards.parse(text(BODY + record('EXEC', **{'Изменения': value})))
         self.assertEqual(parsed['entries'][0]['fields']['Изменения'], value.strip())
 
     def test_negative_grammar_and_links(self):
+        """Отрицательная грамматика и ссылки записей отклоняются"""
         good = BODY + record('EXEC') + record('CHECK') + record('HANDOFF')
         invalid = [good + record('EXEC'), good.replace('AC-01\n', 'AC-99\n'),
                    good.replace('Результат: passed', 'Результат: green'),
@@ -132,6 +140,7 @@ class ParserTest(unittest.TestCase):
                 cards.parse(text(body))
 
     def test_unknown_header_field_and_extra_task_heading_rejected(self):
+        """Неизвестное поле шапки и лишний заголовок отклонены"""
         with self.assertRaisesRegex(ValueError, 'неизвестное поле шапки Unknown'):
             cards.parse(text().replace('Closed: -', 'Closed: -\nUnknown: ignored'))
         with self.assertRaisesRegex(ValueError, 'повтор поля шапки Closed'):
@@ -141,6 +150,7 @@ class ParserTest(unittest.TestCase):
 
 
     def test_projection_and_journal_binding(self):
+        """Проекция карточки и привязка журнала"""
         base = text(BODY + record('EXEC') + record('CHECK') + record('HANDOFF'))
         entry = cards.parse(base)['entries'][-1]
         meta = {'handoff': {'entry_id': entry['id'], 'journal_sha256': entry['journal_sha256']}}
@@ -154,6 +164,8 @@ class ParserTest(unittest.TestCase):
 
 
 class CardLifecycleTest(CloseLifecycleCase):
+    """CLI жизненного цикла карточек: show/handoff/accept/close и
+    tamper-защита."""
     def setup_card(self):
         self.body = BODY + record('EXEC') + record('CHECK') + record('HANDOFF')
         self.managed_task(meta={**copy.deepcopy(TASK_META), 'card_format_version': 2}, body=self.body)
@@ -163,6 +175,7 @@ class CardLifecycleTest(CloseLifecycleCase):
         with self.path.open('a') as stream: stream.write(value)
 
     def test_cli_show_legacy_and_future(self):
+        """card show работает для legacy и future версий"""
         self.managed_task()
         for version in (None, 9):
             if version:
@@ -172,6 +185,7 @@ class CardLifecycleTest(CloseLifecycleCase):
             self.assertEqual(json.loads(result[1])['status'], 'unsupported')
 
     def test_handoff_accept_close_and_tamper(self):
+        """handoff/accept/close и tamper-защита карточки"""
         self.setup_card()
         self.verify()
         self.assertEqual(self.handoff()[0], 0)
@@ -209,6 +223,7 @@ class CardLifecycleTest(CloseLifecycleCase):
         self.assertEqual(self.cli('close', 'DEV-1', '--dry-run')[0], 1)
 
     def test_return_fix_new_handoff_requires_new_audit(self):
+        """Возврат на доработку требует новый handoff и аудит"""
         self.setup_card(); self.verify()
         self.assertEqual(self.handoff()[0], 0)
         self.append(record('AUDIT', actor='Auditor', **{'Результат': 'changes_requested'}) + finding(1))

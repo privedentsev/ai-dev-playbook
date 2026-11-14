@@ -7,6 +7,8 @@ from test_playbook import playbook, write_card
 
 
 class IndexReplayTest(DocumentCliCase):
+    """Повтор index: возврат к предыдущему состоянию и восстановление
+    после прерывания."""
     def assert_noop(self, *args):
         before = tree_fingerprint(self.root)
         mtimes = {p: p.stat().st_mtime_ns for p in self.root.rglob('*')
@@ -19,6 +21,7 @@ class IndexReplayTest(DocumentCliCase):
         self.assertEqual({p: p.stat().st_mtime_ns for p in mtimes}, mtimes)
 
     def test_task_status_returns_to_previous_indexed_state(self):
+        """Возврат статуса задачи к предыдущему индексированному состоянию"""
         for args in ((), ('--all',)):
             with self.subTest(args=args):
                 for status in ('in_review', 'in_progress', 'in_review',
@@ -34,6 +37,7 @@ class IndexReplayTest(DocumentCliCase):
                     self.assert_noop(*args)
 
     def test_document_returns_to_previous_indexed_state(self):
+        """Возврат документа к предыдущему индексированному состоянию"""
         for state in ('draft', 'accepted', 'draft', 'accepted', 'draft'):
             write_doc(self.specs, 'alpha.md', doc_meta(state=state))
             code, _, err = self.cli('index', '--documents')
@@ -43,6 +47,7 @@ class IndexReplayTest(DocumentCliCase):
             self.assert_noop('--documents')
 
     def test_interrupted_new_request_restores_then_retries(self):
+        """Прерванный новый запрос восстанавливается и повторяется"""
         write_card(self.root / 'docs/tasks', 'DEV-1', 'in_review')
         self.assertEqual(self.cli('index')[0], 0)
         write_card(self.root / 'docs/tasks', 'DEV-1', 'in_progress')

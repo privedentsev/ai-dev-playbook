@@ -12,6 +12,8 @@ import project_view
 
 
 class FutureViewTest(unittest.TestCase):
+    """FutureView: соответствие физическому oracle, свежесть байтов,
+    symlink/hardlink и коллизии."""
     def setUp(self):
         self.tmp = tempfile.TemporaryDirectory()
         self.addCleanup(self.tmp.cleanup)
@@ -26,6 +28,7 @@ class FutureViewTest(unittest.TestCase):
         return p
 
     def test_future_matches_physical_oracle(self):
+        """FutureView соответствует физическому oracle"""
         self.put(self.root, 'docs/old/card.md', '[target](../asset.txt)')
         self.put(self.root, 'docs/asset.txt', 'asset')
         self.put(self.root, 'unchanged.txt', 'untouched')
@@ -46,6 +49,7 @@ class FutureViewTest(unittest.TestCase):
         self.assertFalse((view.path / 'docs/old/card.md').exists())
 
     def test_actual_file_bytes_absence_and_membership_are_fresh(self):
+        """Байты/отсутствие/членство файлов свежи в view"""
         self.put(self.root, 'docs/a', 'old')
         view = project_view.ProjectView(self.root)
         self.assertEqual((view.path/'docs/a').read_bytes(), b'old')
@@ -61,6 +65,7 @@ class FutureViewTest(unittest.TestCase):
         with self.assertRaises(ValueError): view.read_set.recheck()
 
     def test_read_hash_is_not_taken_from_unrelated_second_read(self):
+        """Хеш чтения не берётся из несвязанного второго чтения"""
         p=self.put(self.root, 'a', 'original'); v=project_view.ProjectView(self.root)
         with v.open_binary('a') as reader:
             self.assertEqual(reader.read(3), b'ori')
@@ -69,6 +74,7 @@ class FutureViewTest(unittest.TestCase):
         with self.assertRaises(ValueError): (v.path/'a').read_bytes()
 
     def test_no_implicit_live_path_conversion_or_write(self):
+        """Нет неявной конверсии live-пути или записи"""
         v=project_view.ProjectView(self.root)
         with self.assertRaises(TypeError): Path(v.path)
         with self.assertRaises(AttributeError): (v.path/'a').write_text('bad')
@@ -76,6 +82,7 @@ class FutureViewTest(unittest.TestCase):
         with self.assertRaises(ValueError): v.read_bytes('../outside')
 
     def test_symlinks_and_staged_hardlinks_rejected(self):
+        """Symlink и staged hardlinks отклоняются"""
         original=self.put(self.root,'a','original')
         (self.staged/'a').hardlink_to(original)
         with self.assertRaisesRegex(ValueError,'linked'): project_view.FutureView(self.root,self.staged,['a'])
@@ -85,12 +92,14 @@ class FutureViewTest(unittest.TestCase):
         with self.assertRaises(ValueError): (project_view.ProjectView(self.root).path/'link').read_bytes()
 
     def test_file_directory_collision_is_not_hidden_by_overlay(self):
+        """Коллизия файл/каталог не скрывается overlay"""
         self.put(self.root, 'blocked', 'file')
         self.put(self.staged, 'blocked/child', 'new')
         with self.assertRaisesRegex(ValueError, 'collision'):
             project_view.FutureView(self.root, self.staged, ['blocked/child'])
 
     def test_streaming_payload_does_not_copy_unrelated_trees(self):
+        """Потоковый payload не копирует несвязанные деревья"""
         source=self.root/'large'
         with source.open('wb') as f:
             for _ in range(10): f.write(b'x'*project_view.CHUNK_SIZE)
@@ -106,6 +115,7 @@ class FutureViewTest(unittest.TestCase):
         self.assertFalse(any(p.startswith(('src/','media/','node_modules/')) for p in v.read_set.files))
 
     def test_write_cannot_turn_live_directory_into_file_with_live_children(self):
+        """Запись не превращает live-каталог в файл"""
         self.put(self.root, 'directory/child', 'old')
         self.put(self.staged, 'directory', 'new')
         for removed in ((), ('directory',)):
@@ -113,6 +123,7 @@ class FutureViewTest(unittest.TestCase):
                 project_view.FutureView(self.root,self.staged,['directory'],remove_dirs=removed)
 
     def test_file_to_directory_replacement_and_unlisted_children_are_rejected(self):
+        """Замена файла на каталог с детьми отклонена"""
         self.put(self.root, 'file', 'old')
         self.put(self.staged, 'file/child', 'new')
         with self.assertRaisesRegex(ValueError,'collision'):
@@ -124,6 +135,7 @@ class FutureViewTest(unittest.TestCase):
             project_view.FutureView(self.root,self.staged,remove_dirs=['directory'])
 
     def test_staged_symlink_root_and_ancestor_never_receive_payload(self):
+        """Staged symlink root/ancestor не получают payload"""
         source=self.put(self.root,'source','payload')
         outside=self.base/'outside';outside.mkdir()
         alias=self.base/'alias';alias.symlink_to(outside,target_is_directory=True)
@@ -139,6 +151,7 @@ class FutureViewTest(unittest.TestCase):
         self.assertFalse((self.staged/'new').exists())
 
     def test_file_descendant_is_absent_and_produces_broken_link_error(self):
+        """Потомок файла absent → broken link error"""
         self.put(self.root,'file','old')
         for view in (project_view.ProjectView(self.root),project_view.FutureView(self.root,self.staged)):
             self.assertFalse((view.path/'file/missing').exists())
@@ -151,6 +164,7 @@ class FutureViewTest(unittest.TestCase):
 
 
     def test_root_mutations_and_late_staged_symlink_are_rejected(self):
+        """Мутации корня и поздний staged symlink отклонены"""
         for kwargs in ({'removes':['.']},{'remove_dirs':['.']},{'create_dirs':['.']}):
             with self.assertRaisesRegex(ValueError,'project root'):
                 project_view.FutureView(self.root,self.staged,**kwargs)
@@ -164,6 +178,7 @@ class FutureViewTest(unittest.TestCase):
 
 
     def test_dotdot_staged_alias_cannot_reclassify_live_bytes(self):
+        """Dotdot staged-алиас не реклассифицирует live-байты"""
         original=self.put(self.root,'payload','original')
         alias=self.root/'..'/self.root.name
         with self.assertRaisesRegex(ValueError,'noncanonical'):
@@ -178,6 +193,8 @@ class FutureViewTest(unittest.TestCase):
 
 
 class FutureValidationTest(CliCase):
+    """Валидация через view: зависимости, ссылки, sidecar и moved
+    pair."""
     def setUp(self):
         super().setUp(); self.install(version=REPO_VERSION)
         self.stage_tmp=tempfile.TemporaryDirectory();self.addCleanup(self.stage_tmp.cleanup)
@@ -190,6 +207,7 @@ class FutureValidationTest(CliCase):
         return project_view.FutureView(self.root,self.staged,writes,removes,create_dirs,remove_dirs)
 
     def test_catalog_tasks_and_indices_match_oracle(self):
+        """Каталог задач и индексы совпадают с oracle"""
         old='docs/tasks/DEV-1.md'; new='docs/archive/tasks/DEV-1.md'
         body=(self.root/old).read_text().replace('Status: ready','Status: done').replace('Closed: -','Closed: 2026-02-01T00:00:00Z')
         view=self.overlay({new:body},[old]); data,paths=playbook.config(view.path)
@@ -203,6 +221,7 @@ class FutureValidationTest(CliCase):
         self.assertTrue((self.root/old).exists());self.assertFalse((self.root/new).exists())
 
     def test_missing_dependency_and_future_broken_link_are_not_masked(self):
+        """Отсутствующая зависимость и broken link не маскируются"""
         rel='docs/tasks/DEV-1.md';text=(self.root/rel).read_text()
         view=self.overlay({rel:text.replace('Depends-On: -','Depends-On: MISSING-1')})
         _,paths=playbook.config(view.path)
@@ -214,6 +233,7 @@ class FutureValidationTest(CliCase):
         with self.assertRaisesRegex(ValueError,'absent.md'):playbook.check_links(view.path,paths,catalog)
 
     def test_future_index_and_document_metadata_are_checked(self):
+        """Индекс и meta документов проверяются через view"""
         view=self.overlay({'docs/tasks/index.md':'stale index'})
         check=playbook.lifecycle._consistency(playbook._lifecycle_ctx(None),[],True,'future',playbook.safe_path,playbook.require)
         with self.assertRaisesRegex(ValueError,'индекс задач'):check(view.path)
@@ -225,6 +245,7 @@ class FutureValidationTest(CliCase):
             playbook.documents.load_catalog(view.path,data,paths,records,playbook.safe_path,playbook.require)
 
     def test_external_card_sidecar_is_read_through_view(self):
+        """Sidecar внешней карточки читается через view"""
         code,_,err=self.cli('card','create','DEV-2','--title','external','--apply');self.assertEqual(code,0,err)
         rel='docs/tasks/DEV-2.meta.json';raw=json.loads((self.root/rel).read_text());raw['card_format_version']=None
         view=self.overlay({rel:json.dumps(raw)})
@@ -235,6 +256,7 @@ class FutureValidationTest(CliCase):
         with self.assertRaisesRegex(ValueError,'отсутствует'):playbook.read_tasks(view.path,paths)
 
     def test_moved_external_pair_uses_final_sidecar_path(self):
+        """Перемещённая внешняя пара использует финальный путь sidecar"""
         code,_,err=self.cli('card','create','DEV-2','--title','external','--apply');self.assertEqual(code,0,err)
         old='docs/tasks/DEV-2.md';new='docs/archive/tasks/DEV-2.md'
         old_json='docs/tasks/DEV-2.meta.json';new_json='docs/archive/tasks/DEV-2.meta.json'

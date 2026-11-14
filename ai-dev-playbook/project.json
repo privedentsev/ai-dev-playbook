@@ -99,7 +99,7 @@
           "tests",
           "-v"
         ],
-        "timeout_seconds": 1800
+        "timeout_seconds": 2400
       }
     ]
   },

@@ -31,6 +31,7 @@ import checks_graph
 import checks_inventory
 import checks_runner
 import checks_select
+import checks_setup
 import checks_trust
 import checks_verifier
 
@@ -1193,6 +1194,7 @@ def command_gate(root, args):
                                 "relocate-material"} and args.apply)
                  or (action == "plan" and getattr(args, "save", False))))
         or (args.command == "policy" and action == "apply")
+        or (args.command == "setup" and action == "apply")
         or (args.command == "block"
             and action in {"create-fix", "accept", "close"}
             and getattr(args, "apply", False)))
@@ -1482,6 +1484,73 @@ def _load_policy(root, data):
     policy = json.loads(policy_path.read_text(encoding="utf-8"),
                         object_pairs_hook=documents._unique_pairs)
     return checks_contract.validate_policy(policy, require)
+
+
+def _checks_policy_linked(staged):
+    """staged/final check: project.json связан с checks-policy.json.
+
+    ``config`` на представлении уже проверяет файл политики и схему;
+    здесь дополнительно требуется сама ссылка.
+    """
+    data, _ = config(staged)
+    require(data.get(checks_contract.PROJECT_LINK_FIELD)
+            == checks_contract.POLICY_FILENAME,
+            "staged: ссылка checks_policy не записана")
+
+
+def setup_apply(root, args, gate):
+    """setup apply: записать одобренную checks-политику и связать проект.
+
+    Политика валидируется контрактом PB-057; ``approved_basis`` без
+    TODO-маркеров — заявленное решение инженера, а не авторизация
+    (граница доверия — внешний verifier). Запись — checks-policy.json
+    и ``checks_policy`` в project.json через восстановимую операцию;
+    legacy-поля project.json и прежний v2-контракт не меняются.
+    """
+    data, _ = config(root)
+    require(checks_contract.PROJECT_LINK_FIELD not in data,
+            f"{checks_contract.PROJECT_LINK_FIELD} уже подключена в "
+            "project.json — изменение политики выполняется правкой "
+            "файла и новой ревизией, а не setup apply")
+    source = getattr(args, "policy", None) or checks_contract.POLICY_FILENAME
+    policy_path = safe_path(root, source)
+    require(policy_path.is_file() and not policy_path.is_symlink(),
+            f"setup apply: нет файла политики {source}")
+    policy = json.loads(policy_path.read_text(encoding="utf-8"),
+                        object_pairs_hook=documents._unique_pairs)
+    checks_contract.validate_policy(policy, require)
+    basis = policy["approved_basis"]
+    for field in ("who", "at", "source", "detail"):
+        require("todo" not in str(basis[field]).lower(),
+                f"setup apply: approved_basis.{field} содержит TODO — "
+                "заполните решение инженера перед применением")
+    linked = dict(data)
+    linked[checks_contract.PROJECT_LINK_FIELD] = checks_contract.POLICY_FILENAME
+    writes = {
+        checks_contract.POLICY_FILENAME:
+            checks_setup.policy_json(policy).encode("utf-8"),
+        f"{CORE}/project.json":
+            (json.dumps(linked, ensure_ascii=False, indent=2) + "\n")
+            .encode("utf-8"),
+    }
+    spec = _write_spec(root, "setup-apply", "setup-apply", writes,
+                       [_checks_policy_linked])
+    if source != checks_contract.POLICY_FILENAME:
+        spec["inputs"].update(file_operations.snapshot_paths(
+            root, [source], safe_path, require))
+    spec["basis"] = (f"checks-политика {policy['policy_id']} "
+                     f"rev {policy['revision']}: {basis['detail']} "
+                     f"({basis['who']}, {basis['at']})")
+    result = _run_operation(root, spec, gate)
+    if result["status"] == "already_completed":
+        print(f"setup apply: операция {result['op_id']} уже завершена — "
+              "повторное применение пропущено.")
+    else:
+        print(f"checks-политика {policy['policy_id']} rev "
+              f"{policy['revision']} подключена "
+              f"({checks_contract.POLICY_FILENAME}); project.json → "
+              f"checks_policy. Операция: {result['op_dir']}. "
+              "trust_mode=local не повышает доверие результатов.")
 
 
 def checks_plan(root, args):
@@ -2131,7 +2200,10 @@ def dispatch(root, args, gate):
         else:
             return verifier_gate(root, args)
     elif args.command == "setup":
-        _checks_deferred("setup", args.action, "PB-063")
+        if args.action == "preview":
+            checks_setup.preview(root)
+        else:
+            setup_apply(root, args, gate)
     elif args.command == "adopt":
         updating.adopt(root, args.release_dir,
                        updating.parse_resolves(args.resolve, require),
@@ -2546,11 +2618,15 @@ def main(argv=None):
                                   "политики проверок; контракт PB-057")
     actions = command.add_subparsers(dest="action", required=True)
     actions.add_parser(
-        "preview", help="Обследование, неизвестные пути и diff политики "
-                        "без записи; операция реализуется PB-063")
-    actions.add_parser(
-        "apply", help="Запись одобренной политики; операция "
-                      "реализуется PB-063")
+        "preview", help="Обследование проекта и предложение "
+                        "checks-policy.json без записи и исполнения кода")
+    apply_cmd = actions.add_parser(
+        "apply", help="Записать одобренную checks-policy.json и связать "
+                      "project.json через восстановимую операцию")
+    apply_cmd.add_argument(
+        "--policy", metavar="PATH",
+        help="файл с одобренной политикой "
+             "(по умолчанию checks-policy.json)")
     command = sub.add_parser("index", help="Обновить индекс задач")
     command.add_argument("--documents", action="store_true",
                          help="Обновить только индексы коллекций документов")

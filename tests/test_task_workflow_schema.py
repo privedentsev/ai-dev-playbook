@@ -28,6 +28,7 @@ class LegacyPreservationTest(unittest.TestCase):
     """Старые карточки, конфигурации и отчёты v1 работают по прежнему контракту."""
 
     def test_legacy_v1_task_meta(self):
+        """Legacy v1 task meta принимается по прежнему контракту"""
         v1_meta = {
             "schema_version": 1,
             "relations": [{"relation": "based_on", "target": "spec:test"}],
@@ -42,6 +43,7 @@ class LegacyPreservationTest(unittest.TestCase):
         self.assertIsNone(result.get("verification_plan"))
 
     def test_legacy_v1_report(self):
+        """Legacy v1 report принимается по прежнему контракту"""
         v1_report = {
             "schema_version": 1,
             "run_id": "legacy-run-1",
@@ -62,6 +64,7 @@ class LegacyPreservationTest(unittest.TestCase):
         self.assertEqual(validated["schema_version"], 1)
 
     def test_task_card_without_workflow_has_none_route(self):
+        """Карточка без workflow имеет route=none"""
         with tempfile.TemporaryDirectory() as tmp:
             tmp_root = Path(tmp)
             tasks_dir = tmp_root / "docs" / "tasks"
@@ -111,6 +114,7 @@ class TaskWorkflowV2ConfigTest(unittest.TestCase):
         )["task_workflow"]
 
     def test_valid_task_workflow(self):
+        """Валидный task_workflow v2 проходит валидацию"""
         validated = verification.validate_task_workflow(
             self.root, self.valid_tw, playbook.safe_path, _require
         )
@@ -118,6 +122,7 @@ class TaskWorkflowV2ConfigTest(unittest.TestCase):
         self.assertEqual(len(validated["registry"]), 4)
 
     def test_unknown_field_in_task_workflow_rejected(self):
+        """Неизвестное поле task_workflow отклоняется"""
         tw = copy.deepcopy(self.valid_tw)
         tw["unknown_key"] = "bad"
         with self.assertRaisesRegex(ValueError, "Неизвестные поля в task_workflow"):
@@ -126,6 +131,7 @@ class TaskWorkflowV2ConfigTest(unittest.TestCase):
             )
 
     def test_schema_version_not_2_rejected(self):
+        """schema_version≠2 в task_workflow отклоняется"""
         tw = copy.deepcopy(self.valid_tw)
         tw["schema_version"] = 1
         with self.assertRaisesRegex(ValueError, "неподдерживаемая schema_version"):
@@ -134,6 +140,7 @@ class TaskWorkflowV2ConfigTest(unittest.TestCase):
             )
 
     def test_duplicate_registry_id_rejected(self):
+        """Дубликат id в registry отклоняется"""
         tw = copy.deepcopy(self.valid_tw)
         tw["registry"].append(copy.deepcopy(tw["registry"][0]))
         with self.assertRaisesRegex(ValueError, "Повторный ID проверки в реестре"):
@@ -142,6 +149,7 @@ class TaskWorkflowV2ConfigTest(unittest.TestCase):
             )
 
     def test_command_check_with_scenario_rejected(self):
+        """command-проверка со scenario отклоняется"""
         tw = copy.deepcopy(self.valid_tw)
         tw["registry"][0]["scenario"] = "forbidden"
         with self.assertRaisesRegex(ValueError, "scenario не допускается для command-проверки"):
@@ -150,6 +158,7 @@ class TaskWorkflowV2ConfigTest(unittest.TestCase):
             )
 
     def test_manual_check_with_argv_rejected(self):
+        """manual-проверка с argv отклоняется"""
         tw = copy.deepcopy(self.valid_tw)
         tw["registry"][2]["argv"] = ["echo", "bad"]
         with self.assertRaisesRegex(ValueError, "argv не допускается для manual-проверки"):
@@ -158,6 +167,7 @@ class TaskWorkflowV2ConfigTest(unittest.TestCase):
             )
 
     def test_work_path_in_default_inputs_rejected(self):
+        """work/-путь в default_inputs отклоняется"""
         tw = copy.deepcopy(self.valid_tw)
         tw["registry"][0]["default_inputs"].append("work/cache.json")
         with self.assertRaisesRegex(ValueError, "не должен указывать на корень проекта или work"):
@@ -166,6 +176,7 @@ class TaskWorkflowV2ConfigTest(unittest.TestCase):
             )
 
     def test_checkpoint_with_unknown_check_rejected(self):
+        """Чекпоинт с неизвестной проверкой отклоняется"""
         tw = copy.deepcopy(self.valid_tw)
         tw["checkpoints"]["custom"] = ["nonexistent-check-id"]
         with self.assertRaisesRegex(ValueError, "ссылается на неизвестную проверку"):
@@ -184,6 +195,7 @@ class TaskMetadataV2Test(unittest.TestCase):
         self.registry = {"unit-tests", "lint", "visual-check", "self-check"}
 
     def test_valid_v2_metadata(self):
+        """Валидные метаданные задачи v2 проходят валидацию"""
         errors = []
         result = documents._validate_task_meta(
             self.valid_meta, "task.md", errors, registry=self.registry
@@ -194,6 +206,7 @@ class TaskMetadataV2Test(unittest.TestCase):
         self.assertEqual(result["verification_plan"]["revision"], 1)
 
     def test_allowed_routes(self):
+        """Все допустимые маршруты quick/small/medium/large принимаются"""
         for route in ("quick", "small", "medium", "large"):
             meta = copy.deepcopy(self.valid_meta)
             meta["workflow"]["route"] = route
@@ -203,6 +216,7 @@ class TaskMetadataV2Test(unittest.TestCase):
             self.assertEqual(result["workflow"]["route"], route)
 
     def test_unknown_route_rejected(self):
+        """Неизвестный route отклоняется"""
         meta = copy.deepcopy(self.valid_meta)
         meta["workflow"]["route"] = "ultra_fast"
         errors = []
@@ -210,6 +224,7 @@ class TaskMetadataV2Test(unittest.TestCase):
         self.assertTrue(any("неизвестный route 'ultra_fast'" in e for e in errors))
 
     def test_unknown_schema_version_rejected(self):
+        """schema_version=3 в meta отклоняется"""
         meta = copy.deepcopy(self.valid_meta)
         meta["schema_version"] = 3
         errors = []
@@ -217,6 +232,7 @@ class TaskMetadataV2Test(unittest.TestCase):
         self.assertTrue(any("неизвестная версия 3" in e for e in errors))
 
     def test_unknown_field_in_workflow_rejected(self):
+        """Неизвестное поле workflow отклоняется"""
         meta = copy.deepcopy(self.valid_meta)
         meta["workflow"]["unexpected_key"] = 123
         errors = []
@@ -224,6 +240,7 @@ class TaskMetadataV2Test(unittest.TestCase):
         self.assertTrue(any("неизвестные поля" in e for e in errors))
 
     def test_duplicate_check_id_rejected(self):
+        """Дубликат check id в verification_plan отклоняется"""
         meta = copy.deepcopy(self.valid_meta)
         dup = copy.deepcopy(meta["verification_plan"]["checks"][0])
         meta["verification_plan"]["checks"].append(dup)
@@ -232,6 +249,7 @@ class TaskMetadataV2Test(unittest.TestCase):
         self.assertTrue(any("повторный ID проверки 'unit-tests'" in e for e in errors))
 
     def test_arbitrary_argv_in_card_rejected(self):
+        """Произвольный argv в карточке отклоняется"""
         meta = copy.deepcopy(self.valid_meta)
         meta["verification_plan"]["checks"][0]["argv"] = ["pytest", "-v"]
         errors = []
@@ -239,6 +257,7 @@ class TaskMetadataV2Test(unittest.TestCase):
         self.assertTrue(any("произвольный argv запрещён; используйте registry_id" in e for e in errors))
 
     def test_unknown_registry_id_rejected(self):
+        """Неизвестный registry_id отклоняется"""
         meta = copy.deepcopy(self.valid_meta)
         meta["verification_plan"]["checks"][0]["registry_id"] = "nonexistent-cmd"
         errors = []
@@ -246,6 +265,7 @@ class TaskMetadataV2Test(unittest.TestCase):
         self.assertTrue(any("неизвестная команда реестра 'nonexistent-cmd'" in e for e in errors))
 
     def test_escape_path_in_scope_rejected(self):
+        """Путь выхода за пределы в scope отклоняется"""
         meta = copy.deepcopy(self.valid_meta)
         meta["verification_plan"]["scope"].append("../escape")
         errors = []
@@ -253,6 +273,7 @@ class TaskMetadataV2Test(unittest.TestCase):
         self.assertTrue(any("содержит '..' (выход за корень)" in e for e in errors))
 
     def test_work_path_in_scope_rejected(self):
+        """work/-путь в scope отклоняется"""
         meta = copy.deepcopy(self.valid_meta)
         meta["verification_plan"]["scope"].append("work/tmp")
         errors = []
@@ -260,6 +281,7 @@ class TaskMetadataV2Test(unittest.TestCase):
         self.assertTrue(any("не должен находиться внутри каталога work" in e for e in errors))
 
     def test_escape_path_in_inputs_rejected(self):
+        """Путь выхода в inputs отклоняется"""
         meta = copy.deepcopy(self.valid_meta)
         meta["verification_plan"]["checks"][0]["inputs"].append("../parent_file")
         errors = []
@@ -276,30 +298,35 @@ class ReportV2Test(unittest.TestCase):
         )
 
     def test_valid_report_v2(self):
+        """Валидный отчёт verification v2 проходит валидацию"""
         validated = verification.validate_report(self.valid_report, _require)
         self.assertEqual(validated["schema_version"], 2)
         self.assertEqual(validated["route"], "quick")
         self.assertTrue(validated["coverage"]["satisfied"])
 
     def test_unknown_report_version_rejected(self):
+        """schema_version=3 отчёта отклоняется"""
         rep = copy.deepcopy(self.valid_report)
         rep["schema_version"] = 3
         with self.assertRaisesRegex(ValueError, "Неподдерживаемая schema_version отчёта: 3"):
             verification.validate_report(rep, _require)
 
     def test_unknown_fields_in_report_rejected(self):
+        """Неизвестные поля отчёта отклоняются"""
         rep = copy.deepcopy(self.valid_report)
         rep["extra_top_level"] = "bad"
         with self.assertRaisesRegex(ValueError, "Неизвестные поля в report v2"):
             verification.validate_report(rep, _require)
 
     def test_unknown_route_in_report_rejected(self):
+        """Неизвестный route в отчёте отклоняется"""
         rep = copy.deepcopy(self.valid_report)
         rep["route"] = "mega_fast"
         with self.assertRaisesRegex(ValueError, "Неизвестный route в отчёте: 'mega_fast'"):
             verification.validate_report(rep, _require)
 
     def test_missing_reason_for_not_applicable_rejected(self):
+        """not_applicable без reason отклоняется"""
         rep = copy.deepcopy(self.valid_report)
         rep["results"].append({
             "check_id": "integration-tests",
@@ -311,6 +338,7 @@ class ReportV2Test(unittest.TestCase):
             verification.validate_report(rep, _require)
 
     def test_not_applicable_with_reason_accepted(self):
+        """not_applicable с reason принимается"""
         rep = copy.deepcopy(self.valid_report)
         rep["results"].append({
             "check_id": "integration-tests",
@@ -325,6 +353,7 @@ class ReportV2Test(unittest.TestCase):
         self.assertEqual(len(validated["results"]), 3)
 
     def test_missing_required_coverage_field_rejected(self):
+        """Отсутствие coverage.satisfied отклоняется"""
         rep = copy.deepcopy(self.valid_report)
         del rep["coverage"]["satisfied"]
         with self.assertRaisesRegex(ValueError, "coverage: отсутствует поле 'satisfied'"):
@@ -335,6 +364,7 @@ class FixturesLoadTest(unittest.TestCase):
     """Сквозная проверка всех сохранённых файлов-фикстур."""
 
     def test_all_valid_fixtures(self):
+        """Все valid-фикстуры загружаются"""
         valid_dir = FIXTURES_DIR / "valid"
         proj = json.loads((valid_dir / "project.json").read_text(encoding="utf-8"))
         verification.validate_task_workflow(
@@ -351,6 +381,7 @@ class FixturesLoadTest(unittest.TestCase):
         verification.validate_report(report, _require)
 
     def test_all_invalid_fixtures_fail(self):
+        """Все invalid-фикстуры отклоняются"""
         invalid_dir = FIXTURES_DIR / "invalid"
         reg = {"unit-tests", "lint", "visual-check", "self-check"}
 
@@ -524,12 +555,14 @@ class PlaybookReadTasksRouteIntegrationTest(unittest.TestCase):
         (self.tasks_dir / f"{ident}.md").write_text(content, encoding="utf-8")
 
     def test_read_tasks_extracts_route(self):
+        """read_tasks извлекает route из v2-карточки"""
         self._write_v2_card("PB-100", route="quick")
         records = playbook.read_tasks(self.root, self.paths)
         self.assertIn("PB-100", records)
         self.assertEqual(records["PB-100"]["route"], "quick")
 
     def test_read_tasks_rejects_unknown_route(self):
+        """read_tasks отклоняет неизвестный route"""
         self._write_v2_card("PB-101", route="invalid_route")
         with self.assertRaisesRegex(ValueError, "неизвестный route 'invalid_route'"):
             playbook.read_tasks(self.root, self.paths)
@@ -628,6 +661,7 @@ class AuditFindingsCoverageTest(unittest.TestCase):
 
     def test_PB_031_A1_symlink_in_scope_and_inputs_rejected(self):
         # Включаем task_workflow
+        """PB-031-A1: symlink в scope/inputs отклонён"""
         config = copy.deepcopy(self.project_config)
         config["task_workflow"] = {
             "schema_version": 2,
@@ -715,6 +749,7 @@ class AuditFindingsCoverageTest(unittest.TestCase):
 
     def test_PB_031_A4_v2_card_rejected_without_task_workflow_opt_in(self):
         # project_config НЕ содержит task_workflow
+        """PB-031-A4: v2-карточка без opt-in отклонена"""
         meta = {
             "schema_version": 2,
             "workflow": {"route": "quick"},
@@ -743,6 +778,7 @@ class AuditFindingsCoverageTest(unittest.TestCase):
 
     def test_PB_031_A2_null_plan_and_null_inputs_rejected(self):
         # Включение task_workflow в project.json
+        """PB-031-A2: null plan/inputs отклонены"""
         proj = json.loads((self.root / "ai-dev-playbook/project.json").read_text(encoding="utf-8"))
         tw = json.loads((FIXTURES_DIR / "valid/project.json").read_text(encoding="utf-8"))["task_workflow"]
         proj["task_workflow"] = tw
@@ -768,6 +804,7 @@ class AuditFindingsCoverageTest(unittest.TestCase):
             documents.load_catalog(self.root, data, paths, records, playbook.safe_path, playbook.require)
 
     def test_PB_031_A3_report_snapshots_and_actor_strictly_validated(self):
+        """PB-031-A3: snapshots и actor отчёта валидируются строго"""
         valid_report = json.loads((FIXTURES_DIR / "valid/report_v2.json").read_text(encoding="utf-8"))
 
         # 1. no command snapshots: passed без snapshot_before/snapshot_after отклоняется
@@ -814,6 +851,7 @@ class OldValidatorRejectionTest(unittest.TestCase):
 
     def test_legacy_verification_validate_rejects_task_workflow(self):
         # Старый verification.validate ожидает {inputs, checks} и отклоняет task_workflow {registry}
+        """Старый валидатор отклоняет task_workflow"""
         valid_tw = json.loads(
             (FIXTURES_DIR / "valid" / "project.json").read_text(encoding="utf-8")
         )["task_workflow"]
@@ -822,6 +860,7 @@ class OldValidatorRejectionTest(unittest.TestCase):
 
     def test_legacy_v1_task_meta_rejects_v2_schema_when_schema_version_is_1(self):
         # Если v2 поля передаются в v1 схему (schema_version: 1), TASK_FIELDS_V1 отклоняет неизвестные поля
+        """Старый валидатор отклоняет v2-поля при schema_version=1"""
         meta = {
             "schema_version": 1,
             "workflow": {"route": "quick"},

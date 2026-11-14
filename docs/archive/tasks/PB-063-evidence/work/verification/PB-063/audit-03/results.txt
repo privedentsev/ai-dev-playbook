@@ -1,0 +1,7 @@
+{"case": "factory", "predicted": [], "actual": ["base.Base.test_ok"], "unknowns": {"root_files": [], "orphan_test_files": [], "load_tests_files": [], "id_collisions": [], "parse_errors": [], "problems": [], "ambiguous_imports": [], "unresolved_imports": {}, "class_uncertainties": []}}
+{"case": "mro", "predicted": ["test_a.Base.test_ok", "test_a.Child.test_ok", "test_a.Right.test_ok"], "actual": ["test_a.Base.test_ok", "test_a.Right.test_ok"], "unknowns": {"root_files": [], "orphan_test_files": [], "load_tests_files": [], "id_collisions": [], "parse_errors": [], "problems": [], "ambiguous_imports": [], "unresolved_imports": {}, "class_uncertainties": []}}
+
+23 setup-теста: OK. 53 checks_contract: OK.
+Исходные пробы audit-02 reexport/shadow: predicted == actual.
+Self-project: 1059 predicted ID == 1059 actual discover ID; missing=[], extra=[], fallback=0; class_uncertainties=[], id_collisions=[].
+Audit-ready: отказ — критерии не подтверждены свежими проверками.

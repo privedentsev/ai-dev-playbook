@@ -12,6 +12,8 @@ from test_playbook import playbook
 
 
 class WorkflowInstallTest(CliCase):
+    """Установка/обновление workflow v2: init opt-in, legacy-
+    совместимость, отказы, переходы."""
     def project(self):
         return self.root / 'ai-dev-playbook/project.json'
 
@@ -32,6 +34,7 @@ class WorkflowInstallTest(CliCase):
             *(['--apply'] if apply else []))
 
     def test_new_init_opt_in_preview_and_validation(self):
+        """Новый init --workflow-v2 preview и валидация"""
         self.assertEqual(self.init('--workflow-v2')[0], 0)
         self.assertEqual(list(self.root.iterdir()), [])
         code, out, err = self.init('--workflow-v2', '--apply')
@@ -45,6 +48,7 @@ class WorkflowInstallTest(CliCase):
         self.assertEqual(self.enable()[0], 1)
 
     def test_init_from_artifact_without_project_docs(self):
+        """init из артефакта без documents проекта"""
         artifact = self.fixture_release(version=REPO_VERSION)
         proc = subprocess.run([sys.executable, str(artifact / 'ai-dev-playbook/scripts/playbook.py'),
             'init', str(self.root), '--workflow-v2', '--apply'], capture_output=True, text=True)
@@ -52,6 +56,7 @@ class WorkflowInstallTest(CliCase):
         self.assertEqual(self.cli('check')[0], 0)
 
     def test_existing_opt_in_preserves_legacy_and_records_operation(self):
+        """Существующий opt-in сохраняет legacy и пишет операцию"""
         self.configure()
         data = self.settings()
         data['custom'] = {'keep': ['value']}
@@ -77,6 +82,7 @@ class WorkflowInstallTest(CliCase):
         self.assertEqual(self.project().read_bytes(), saved)
 
     def test_missing_legacy_checks_and_unknown_schema_reject_without_writes(self):
+        """Отсутствие legacy checks и неизвестная схема отклонены без записи"""
         self.install(version=REPO_VERSION)
         before = self.project().read_bytes()
         self.assertEqual(self.enable()[0], 1)
@@ -89,6 +95,7 @@ class WorkflowInstallTest(CliCase):
         self.assertEqual(self.project().read_bytes(), before)
 
     def test_enable_refuses_old_install_and_concurrent_gate(self):
+        """enable отклоняет старую установку и конкурентный gate"""
         self.install(verification={'inputs': ['docs'], 'checks': [PASS_CHECK]})
         self.assertEqual(self.enable()[0], 1)
         gate = playbook.file_operations.acquire_gate(self.root, playbook.safe_path,
@@ -101,6 +108,7 @@ class WorkflowInstallTest(CliCase):
             gate.close()
 
     def test_actual_declared_transitions_preserve_custom_data_and_legacy(self):
+        """Реальные переходы сохраняют custom data и legacy"""
         for version in ('0.0.2', '0.0.3', '0.1.0'):
             with self.subTest(version=version):
                 # Each transition uses a separate installation and real 0.2.0 artifact.
@@ -129,6 +137,7 @@ class WorkflowInstallTest(CliCase):
                         self.root = original_root
 
     def test_old_cli_rejects_new_artifact_before_writes(self):
+        """Старый CLI отклоняет новый артефакт до записи"""
         self.install()
         before = self.project().read_bytes()
         old = REPO / 'tests/fixtures/release-0.0.2/ai-dev-playbook/scripts/playbook.py'
@@ -140,6 +149,7 @@ class WorkflowInstallTest(CliCase):
         self.assertFalse((self.root / 'work/update/plan.json').exists())
 
     def test_old_cli_rejects_enabled_project_before_verify(self):
+        """Старый CLI отклоняет enabled-проект до verify"""
         self.configure()
         self.assertEqual(self.enable()[0], 0)
         managed_card(self.root / 'docs/tasks', 'DEV-1', 'in_progress')
@@ -154,6 +164,7 @@ class WorkflowInstallTest(CliCase):
         self.assertFalse((self.root / 'work/verification').exists())
 
     def test_update_preserves_enabled_project_schema(self):
+        """Обновление сохраняет схему enabled-проекта"""
         self.configure()
         self.assertEqual(self.enable()[0], 0)
         data = self.settings()
@@ -170,6 +181,7 @@ class WorkflowInstallTest(CliCase):
         self.assertEqual(after['task_workflow'], data['task_workflow'])
 
     def test_minimum_cli_and_unknown_updates_schema_reject(self):
+        """Минимальный CLI и неизвестная updates-схема отклонены"""
         self.install()
         for schema, minimum in ((2, '99.0.0'), (99, '0.2.0')):
             artifact = self.fixture_release(version='0.2.0', with_release_json=False)
@@ -179,6 +191,7 @@ class WorkflowInstallTest(CliCase):
         self.assertFalse((self.root / 'work/update/plan.json').exists())
 
     def test_card_migration_preserves_history_and_requires_new_coverage(self):
+        """Миграция карточки сохраняет историю и требует нового покрытия"""
         self.configure()
         self.assertEqual(self.enable()[0], 0)
         managed_card(self.root / 'docs/tasks', 'DEV-1', 'in_progress',
@@ -218,6 +231,7 @@ class WorkflowInstallTest(CliCase):
         self.assertEqual(self.cli('verify', 'DEV-1')[0], 0)
 
     def test_external_card_migration_requires_complete_plan_and_keeps_journal(self):
+        """Миграция внешней карточки требует полного плана и журнала"""
         self.configure()
         self.assertEqual(self.enable()[0], 0)
         self.assertEqual(self.cli('card', 'create', 'DEV-1', '--title', 'Migration', '--apply')[0], 0)
@@ -241,6 +255,7 @@ class WorkflowInstallTest(CliCase):
 
 
     def test_enable_interruption_blocks_work_and_standalone_restore_recovers(self):
+        """Прерывание enable блокирует работу, restore восстанавливает"""
         self.configure()
         before = self.project().read_bytes()
         manifest = (self.root / 'ai-dev-playbook/manifest.json').read_bytes()
@@ -264,6 +279,7 @@ class WorkflowInstallTest(CliCase):
         self.assertEqual(self.enable()[0], 0)
 
     def test_real_update_interruption_corrupt_backup_then_autonomous_restore(self):
+        """Реальное прерывание update + повреждённый backup → автономный restore"""
         self.install(version='0.1.0', verification={'inputs': ['docs'], 'checks': [PASS_CHECK]})
         before = {p: p.read_bytes() for p in (self.root / 'ai-dev-playbook').rglob('*') if p.is_file()}
         self.assertEqual(self.cli('update', 'plan', str(REPO), '--save')[0], 0)
@@ -294,6 +310,7 @@ class WorkflowInstallTest(CliCase):
         self.assertIsNone(playbook.updating.pending_info(self.root))
 
     def test_custom_paths_and_update_conflict_are_preserved(self):
+        """Custom paths и update-конфликт сохраняются"""
         self.install(version='0.1.0', verification={'inputs': ['records'], 'checks': [PASS_CHECK]})
         # Configure custom paths before checking/migrating; installed documents
         # remain available and user data stays outside the managed kit.

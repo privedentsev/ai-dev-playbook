@@ -1,0 +1,243 @@
+{
+  "schema_version": 1,
+  "card_format_version": 2,
+  "relations": [
+    {
+      "relation": "based_on",
+      "target": "spec:dependency-aware-verification"
+    },
+    {
+      "relation": "based_on",
+      "target": "design:dependency-aware-verification"
+    },
+    {
+      "relation": "based_on",
+      "target": "plan:dependency-aware-verification"
+    }
+  ],
+  "materials": [
+    {
+      "id": "evidence-commands",
+      "role": "report",
+      "source": "docs/tasks/PB-063-evidence/commands.md",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-063"
+      ]
+    },
+    {
+      "id": "evidence-preview-self",
+      "role": "log",
+      "source": "docs/tasks/PB-063-evidence/setup-preview-self.txt",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-063"
+      ]
+    },
+    {
+      "id": "verify-afdf4881515f4fca9ddb11c60d8e04a0",
+      "role": "report",
+      "source": "work/verification/PB-063/afdf4881515f4fca9ddb11c60d8e04a0",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-063"
+      ]
+    },
+    {
+      "id": "audit-01",
+      "role": "report",
+      "source": "work/verification/PB-063/audit-01",
+      "storage": "local",
+      "immutable": true,
+      "required": true,
+      "used_by": [
+        "PB-063"
+      ]
+    },
+    {
+      "id": "verify-cf81b336b006438db607e89da25740ae",
+      "role": "report",
+      "source": "work/verification/PB-063/cf81b336b006438db607e89da25740ae",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-063"
+      ]
+    },
+    {
+      "id": "audit-02",
+      "role": "report",
+      "source": "work/verification/PB-063/audit-02",
+      "storage": "local",
+      "immutable": true,
+      "required": true,
+      "used_by": [
+        "PB-063"
+      ]
+    },
+    {
+      "id": "verify-e6a3ffc267eb4f9f9201c48f21ca8dc6",
+      "role": "report",
+      "source": "work/verification/PB-063/e6a3ffc267eb4f9f9201c48f21ca8dc6",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-063"
+      ]
+    },
+    {
+      "id": "verify-077464face0b458f8dccb4c792841fab",
+      "role": "report",
+      "source": "work/verification/PB-063/077464face0b458f8dccb4c792841fab",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-063"
+      ]
+    },
+    {
+      "id": "audit-03",
+      "role": "report",
+      "source": "work/verification/PB-063/audit-03",
+      "storage": "local",
+      "immutable": true,
+      "required": true,
+      "used_by": [
+        "PB-063"
+      ]
+    },
+    {
+      "id": "verify-0cc2ca3d988a40958941ca3834d564eb",
+      "role": "report",
+      "source": "work/verification/PB-063/0cc2ca3d988a40958941ca3834d564eb",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-063"
+      ]
+    },
+    {
+      "id": "verify-1bbfbb9051cc487d8ad22d4a1f41a3f5",
+      "role": "report",
+      "source": "work/verification/PB-063/1bbfbb9051cc487d8ad22d4a1f41a3f5",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-063"
+      ]
+    },
+    {
+      "id": "verify-8dc11b031ced49e3a706f3575a215d3c",
+      "role": "report",
+      "source": "work/verification/PB-063/8dc11b031ced49e3a706f3575a215d3c",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-063"
+      ]
+    },
+    {
+      "id": "audit-04",
+      "role": "report",
+      "source": "work/verification/PB-063/audit-04",
+      "storage": "local",
+      "immutable": true,
+      "required": true,
+      "used_by": [
+        "PB-063"
+      ]
+    },
+    {
+      "id": "verify-04804d35a1484e75a235fbc04b805ab4",
+      "role": "report",
+      "source": "work/verification/PB-063/04804d35a1484e75a235fbc04b805ab4",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-063"
+      ]
+    },
+    {
+      "id": "verify-74ffa8f26ef64d3f99670351aad12250",
+      "role": "report",
+      "source": "work/verification/PB-063/74ffa8f26ef64d3f99670351aad12250",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-063"
+      ]
+    }
+  ],
+  "criterion_evidence": {
+    "CHECK-01": {
+      "check_sha256": "sha256:62ea81ad6356a54f5c1791960f836296f3ee8f126bac4f7a13105c68e060d0db",
+      "card_projection": "sha256:1a85c893f156fb66e4c3c2f512107fad220dc24f38759443fd73d094e795acc1",
+      "report_id": "verify-afdf4881515f4fca9ddb11c60d8e04a0",
+      "report_sha256": "sha256:de0347651cea8ac8f56d2c2c39bab2bc38d0088b8086ac1bdb8b5d8cff231ad9"
+    },
+    "CHECK-02": {
+      "check_sha256": "sha256:973b9ac7f2a77d6f2a56ddf71633b7a11b35ef2a365f711f91a391c40012107d",
+      "card_projection": "sha256:1a85c893f156fb66e4c3c2f512107fad220dc24f38759443fd73d094e795acc1",
+      "report_id": "verify-cf81b336b006438db607e89da25740ae",
+      "report_sha256": "sha256:870ea2a4375090771503a50ca9a607cc9bff7e376612265c098572240716382c"
+    },
+    "CHECK-03": {
+      "check_sha256": "sha256:4a8a8be5bdc12fabbbf526d908ec7f55157c6c4f23d90b1c8386278587e5e896",
+      "card_projection": "sha256:1a85c893f156fb66e4c3c2f512107fad220dc24f38759443fd73d094e795acc1",
+      "report_id": "verify-e6a3ffc267eb4f9f9201c48f21ca8dc6",
+      "report_sha256": "sha256:f7acd15cefaca6bf3e1b1b5062c706b55f75b61e6b48a2d471cf55a63f1dae17"
+    },
+    "CHECK-04": {
+      "check_sha256": "sha256:0c95c4ffed0b396b870459c5e2a1d8b5a7a2a5a39a05af223917aa05ea8e7126",
+      "card_projection": "sha256:1a85c893f156fb66e4c3c2f512107fad220dc24f38759443fd73d094e795acc1",
+      "report_id": "verify-077464face0b458f8dccb4c792841fab",
+      "report_sha256": "sha256:93e3b69fc921fcb2d9881f39c2a5f9c483167bd992f6c5260caeda96ba401c14"
+    },
+    "CHECK-05": {
+      "check_sha256": "sha256:374ad4cad46c1a42afbf3f91d226043c1d8578fa46d69645c668953ef921663c",
+      "card_projection": "sha256:1a85c893f156fb66e4c3c2f512107fad220dc24f38759443fd73d094e795acc1",
+      "report_id": "verify-0cc2ca3d988a40958941ca3834d564eb",
+      "report_sha256": "sha256:46c13dbdc71bf3749b1eca48ad6cf7b71432d3355e164db5d8b2263746bd099f"
+    },
+    "CHECK-06": {
+      "check_sha256": "sha256:3bcab34fc4c68ea3de427846a434126f1d20f688bdb68d5292d05872702204d0",
+      "card_projection": "sha256:1a85c893f156fb66e4c3c2f512107fad220dc24f38759443fd73d094e795acc1",
+      "report_id": "verify-74ffa8f26ef64d3f99670351aad12250",
+      "report_sha256": "sha256:d96dc4691fc419d3224465a24f61dd3ec11f2542dd71627ba4f91b3b023a5aaf"
+    }
+  },
+  "handoff": {
+    "at": "2026-11-14T13:45:22+03:00",
+    "actor": {
+      "name": "Devin",
+      "model": "SWE-2 Flash High"
+    },
+    "summary": "HANDOFF-05",
+    "reports": [
+      "verify-74ffa8f26ef64d3f99670351aad12250"
+    ],
+    "card_projection": "sha256:1a85c893f156fb66e4c3c2f512107fad220dc24f38759443fd73d094e795acc1",
+    "entry_id": "HANDOFF-05",
+    "journal_sha256": "sha256:20463a1ca16e599b5819f3c95d35e7e3800f610479ef23a494852ece8f42bef3"
+  },
+  "audit_packages": {
+    "audit-01": "sha256:59467d72cafe5fb64587ad135859e73f905429f062da09bf0472e1c85fc9da22",
+    "audit-02": "sha256:27729057b974bc3fa5d5197ac1251689718bece348bac03883c0386bee9a7a77",
+    "audit-03": "sha256:f4134993868717923d2b5f3aa231367551052d046116824f2ff8732f553691fc",
+    "audit-04": "sha256:01d68ebfa57b9a8025b93f310d1da08990a07352a97b50e9dc21666b11f3eb05"
+  }
+}

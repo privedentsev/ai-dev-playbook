@@ -1,0 +1,7 @@
+{"case": "container", "predicted": [], "actual": ["base.Original.test_ok"], "unknowns": {"root_files": [], "orphan_test_files": [], "load_tests_files": [], "id_collisions": [], "parse_errors": [], "problems": [], "ambiguous_imports": [], "unresolved_imports": {}, "class_uncertainties": []}}
+{"case": "module_rebind", "predicted": ["test_a.Base.test_ok"], "actual": [], "unknowns": {"root_files": [], "orphan_test_files": [], "load_tests_files": [], "id_collisions": [], "parse_errors": [], "problems": [], "ambiguous_imports": [], "unresolved_imports": {}, "class_uncertainties": []}}
+
+25 setup-тестов: OK. 53 checks_contract: OK.
+Audit-03: mro predicted == actual; factory-call явно в class_uncertainties.
+Self-project: 1061 predicted ID == 1061 actual discover ID; missing=[], extra=[], fallback=0; class_uncertainties=9.
+Audit-ready: отказ — критерии не подтверждены свежими проверками; обновите CHECK/handoff.

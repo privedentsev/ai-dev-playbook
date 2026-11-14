@@ -1,0 +1,75 @@
+{
+  "schema_version": 1,
+  "card_format_version": 2,
+  "relations": [
+    {
+      "relation": "based_on",
+      "target": "spec:dependency-aware-verification"
+    },
+    {
+      "relation": "based_on",
+      "target": "design:dependency-aware-verification"
+    },
+    {
+      "relation": "based_on",
+      "target": "plan:dependency-aware-verification"
+    }
+  ],
+  "materials": [
+    {
+      "id": "evidence-commands",
+      "role": "report",
+      "source": "docs/tasks/PB-063-evidence/commands.md",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-063"
+      ]
+    },
+    {
+      "id": "evidence-preview-self",
+      "role": "log",
+      "source": "docs/tasks/PB-063-evidence/setup-preview-self.txt",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-063"
+      ]
+    },
+    {
+      "id": "verify-afdf4881515f4fca9ddb11c60d8e04a0",
+      "role": "report",
+      "source": "work/verification/PB-063/afdf4881515f4fca9ddb11c60d8e04a0",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-063"
+      ]
+    }
+  ],
+  "criterion_evidence": {
+    "CHECK-01": {
+      "check_sha256": "sha256:62ea81ad6356a54f5c1791960f836296f3ee8f126bac4f7a13105c68e060d0db",
+      "card_projection": "sha256:1a85c893f156fb66e4c3c2f512107fad220dc24f38759443fd73d094e795acc1",
+      "report_id": "verify-afdf4881515f4fca9ddb11c60d8e04a0",
+      "report_sha256": "sha256:de0347651cea8ac8f56d2c2c39bab2bc38d0088b8086ac1bdb8b5d8cff231ad9"
+    }
+  },
+  "handoff": {
+    "at": "2026-11-12T05:37:18+03:00",
+    "actor": {
+      "name": "Devin",
+      "model": "SWE-2 Flash High"
+    },
+    "summary": "HANDOFF-01",
+    "reports": [
+      "verify-afdf4881515f4fca9ddb11c60d8e04a0"
+    ],
+    "card_projection": "sha256:1a85c893f156fb66e4c3c2f512107fad220dc24f38759443fd73d094e795acc1",
+    "entry_id": "HANDOFF-01",
+    "journal_sha256": "sha256:4f13d02a9490c806cca8cca1d56c8d5d7f50c78453db739a21ccd21e7a77c480"
+  }
+}

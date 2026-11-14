@@ -86,7 +86,10 @@ class CollisionCase(CloseLifecycleCase):
 
 
 class EarlyDestinationCheckTest(CollisionCase):
+    """Ранние проверки коллизий архива при регистрации, handoff,
+    preflight и verify."""
     def test_register_rejects_same_archive_destination_equal_bytes(self):
+        """Регистрация отклоняет то же архивное назначение при равных байтах"""
         self.managed_task()
         self.verify()
         self.assertEqual(self.handoff()[0], 0)
@@ -102,6 +105,7 @@ class EarlyDestinationCheckTest(CollisionCase):
             self.assertEqual(before, self.project_fingerprint())
 
     def test_register_rejects_same_destination_different_bytes(self):
+        """Регистрация отклоняет то же назначение при разных байтах"""
         self.managed_task()
         self.verify()
         self.assertEqual(self.handoff()[0], 0)
@@ -113,6 +117,7 @@ class EarlyDestinationCheckTest(CollisionCase):
         self.assertIn('назначены', result[2])
 
     def test_handoff_rejects_when_auto_registration_collides(self):
+        """Handoff отклоняет коллизию авто-регистрации"""
         self.managed_task()
         self.verify()
         _, dest_dir = self.copy_report()
@@ -130,6 +135,7 @@ class EarlyDestinationCheckTest(CollisionCase):
                          self.meta_of(self.tasks_dir() / 'DEV-1.md'))
 
     def test_preflight_and_verify_stop_before_subprocess(self):
+        """Preflight и verify останавливаются до subprocess при коллизии"""
         run_dir, copy_rel = self.collision_state()
         self.counter()
         for args in (('verify', 'DEV-1', '--preflight'), ('verify', 'DEV-1')):
@@ -145,6 +151,7 @@ class EarlyDestinationCheckTest(CollisionCase):
         self.assertIsNone(fops.pending_info(self.root))
 
     def test_same_bytes_different_destinations_pass(self):
+        """Равные байты в разных назначениях проходят"""
         self.managed_task()
         self.verify()
         report = self.runner_dir() / 'report.json'
@@ -157,6 +164,7 @@ class EarlyDestinationCheckTest(CollisionCase):
         self.assertEqual(self.handoff()[0], 0)
 
     def test_nested_directory_collision_and_legit_overlap(self):
+        """Вложенная коллизия каталогов и легитимное пересечение"""
         self.managed_task()
         self.verify()
         _, dest_dir = self.copy_report()
@@ -207,6 +215,7 @@ class EarlyDestinationCheckTest(CollisionCase):
         self.assertIn('Назначение занято', result[2])
 
     def test_prepare_audit_and_foreign_owner(self):
+        """Prepare audit и чужой владелец при коллизиях"""
         self.collision_state()
         # Чужая коллизия не блокирует допустимые операции DEV-2.
         self.managed_task('DEV-2', status='in_progress')
@@ -234,6 +243,7 @@ class AncestorDestinationTest(CollisionCase):
 
     def test_file_parent_destination_rejected_both_orders(self):
         # Первая очередность: ancestor, затем child.
+        """A-01: файл-родитель чужого назначения отклонён в обоих порядках"""
         self.ancestor_pair()
         self.assertEqual(
             self.register('docs/tasks/DEV-1-evidence/docs', 'ancestor',
@@ -275,6 +285,7 @@ class AncestorDestinationTest(CollisionCase):
     def test_directory_parent_destination_allowed(self):
         # Каталог-предок законен: внешний файл может лечь внутрь его
         # архивной области.
+        """A-01: каталог-родитель назначения допустим"""
         self.managed_task()
         evidence = self.tasks_dir() / 'DEV-1-evidence'
         evidence.mkdir(parents=True)
@@ -292,6 +303,7 @@ class OccupiedParentDestinationTest(CollisionCase):
     """A-05: реальный файл на месте родительского каталога назначения."""
 
     def test_file_at_destination_parent_rejected_early(self):
+        """A-05: файл на месте родительского каталога отклонён рано"""
         self.managed_task()
         (self.tasks_dir() / 'loose').mkdir(parents=True)
         (self.tasks_dir() / 'loose' / 'note.txt').write_text('n')
@@ -325,6 +337,7 @@ class OccupiedParentDestinationTest(CollisionCase):
 
     def test_occupied_parent_via_installed_cli(self):
         # A-05: сценарий аудита через установленный playbook.py.
+        """A-05: занятый родитель через установленный CLI"""
         self.managed_task()
         (self.tasks_dir() / 'loose').mkdir(parents=True)
         (self.tasks_dir() / 'loose' / 'note.txt').write_text('n')
@@ -373,6 +386,7 @@ class OccupiedParentDestinationTest(CollisionCase):
     def test_existing_directory_parent_allowed(self):
         # Существующий обычный каталог-предок законен — файл дописывается
         # внутрь при архивировании.
+        """A-05: существующий каталог-родитель допустим"""
         self.managed_task()
         parent = self.archive_dir() / 'shared'
         parent.mkdir(parents=True, exist_ok=True)
@@ -385,7 +399,10 @@ class OccupiedParentDestinationTest(CollisionCase):
 
 
 class RelocateMaterialTest(CollisionCase):
+    """relocate-material: preview без записи, apply, отказы,
+    rollback и общий гейт."""
     def test_preview_shows_plan_without_writes(self):
+        """relocate-material preview показывает план без записи"""
         run_dir, copy_rel = self.collision_state()
         before = self.project_fingerprint()
         code, out, err = self.relocate(
@@ -398,6 +415,7 @@ class RelocateMaterialTest(CollisionCase):
         self.assertEqual(before, self.project_fingerprint())
 
     def test_apply_moves_bytes_updates_links_and_companion(self):
+        """relocate apply переносит байты, обновляет ссылки и companion"""
         run_dir, copy_rel = self.collision_state()
         card = self.tasks_dir() / 'DEV-1.md'
         card.write_text(card.read_text(encoding='utf-8')
@@ -433,6 +451,7 @@ class RelocateMaterialTest(CollisionCase):
         self.assertEqual(result[0], 0, result[2] + result[1])
 
     def test_relocate_rejects_invalid_materials_and_targets(self):
+        """relocate отклоняет невалидные материалы и цели"""
         self.collision_state()
         to = 'docs/tasks/DEV-1-evidence/moved.json'
         cases = [
@@ -484,6 +503,7 @@ class RelocateMaterialTest(CollisionCase):
         self.assertEqual(before, self.project_fingerprint())
 
     def test_foreign_immutable_link_rejected_own_preserved(self):
+        """Чужая immutable-ссылка отклонена, своя сохранена"""
         run_dir, copy_rel = self.collision_state()
         # Чужой immutable-материал со ссылкой на переносимый файл.
         other = self.tasks_dir() / 'DEV-2-evidence'
@@ -536,6 +556,7 @@ class RelocateMaterialTest(CollisionCase):
         self.assertEqual(result[0], 0, result[1] + result[2])
 
     def test_gate_and_final_failure_restore(self):
+        """Сбой gate/final при relocate восстанавливает дерево"""
         self.collision_state()
         to = 'docs/tasks/DEV-1-evidence/manual-reports/copy-report.json'
         before = self.project_fingerprint()
@@ -570,6 +591,7 @@ class RelocateMaterialTest(CollisionCase):
     def test_target_inside_own_evidence_root_material(self):
         # A-02: собственный материал-корень owner-evidence — законное
         # повторное представление, перенос внутрь него разрешён.
+        """Цель внутри собственного evidence-root материала допустима"""
         run_dir, copy_rel = self.collision_state()
         path = self.tasks_dir() / 'DEV-1.md'
         meta = self.meta_of(path)
@@ -594,6 +616,7 @@ class RelocateMaterialTest(CollisionCase):
     def test_stale_source_or_target_rejected_without_writes(self):
         # A-03: изменение входов между подготовкой плана и записью —
         # контролируемый отказ, дерево не меняется.
+        """Устаревший источник/цель отклонены без записи"""
         run_dir, copy_rel = self.collision_state()
         to = 'docs/tasks/DEV-1-evidence/manual-reports/copy-report.json'
         for mutate in ('source', 'target'):
@@ -632,6 +655,7 @@ class RelocateMaterialTest(CollisionCase):
     def test_interruption_and_separate_restore(self):
         # A-03: прерывание применения оставляет pending; штатный
         # restore возвращает пред-образ и снимает маркер.
+        """Прерывание relocate и отдельный restore"""
         run_dir, copy_rel = self.collision_state()
         to = 'docs/tasks/DEV-1-evidence/manual-reports/copy-report.json'
         ctx = dict(playbook._lifecycle_ctx(None))
@@ -667,6 +691,7 @@ class RelocateMaterialTest(CollisionCase):
 
     def test_installed_cli_subprocess(self):
         # A-03: реальный subprocess установленного playbook.py проекта.
+        """relocate через установленный CLI subprocess"""
         run_dir, copy_rel = self.collision_state()
         script = self.installed_script()
         to = 'docs/tasks/DEV-1-evidence/manual-reports/copy-report.json'
@@ -690,6 +715,7 @@ class RelocateMaterialTest(CollisionCase):
     def test_installed_cli_early_rejection_without_runner(self):
         # A-03: original/copy/runner через установленный CLI — ранний
         # отказ до записи и до subprocess runner (счётчик = 0).
+        """Ранний отказ relocate на установленном CLI без runner"""
         run_dir, copy_rel = self.collision_state()
         script = self.installed_script()
         self.counter()
@@ -735,6 +761,7 @@ class RelocateMaterialTest(CollisionCase):
         self.assertEqual(before, self.project_fingerprint())
 
     def test_repeat_is_safe_message_without_new_copy(self):
+        """Повторный relocate — безопасное сообщение без новой копии"""
         self.collision_state()
         to = 'docs/tasks/DEV-1-evidence/manual-reports/copy-report.json'
         self.assertEqual(self.relocate('manual-copy', to, '--apply')[0], 0)
@@ -748,6 +775,7 @@ class RelocateMaterialTest(CollisionCase):
         self.assertEqual(len(companions), 1)
 
     def test_full_pb060_equivalent_close_dry_run_and_close(self):
+        """Полный эквивалент PB-060: dry-run и close после relocate"""
         run_dir, copy_rel = self.collision_state()
         to = 'docs/tasks/DEV-1-evidence/manual-reports/copy-report.json'
         self.assertEqual(self.relocate('manual-copy', to, '--apply')[0], 0)
@@ -778,6 +806,7 @@ class RelocateMaterialTest(CollisionCase):
 
     def test_relocate_on_external_metadata_card(self):
         # Пара Markdown + .meta.json (PB-041): relocate обновляет обе части.
+        """relocate на карточке с external metadata"""
         code, _, err = self.cli('card', 'create', 'DEV-1', '--title',
                                 'Внешняя карточка', '--apply')
         self.assertEqual(code, 0, err)

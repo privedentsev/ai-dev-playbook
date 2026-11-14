@@ -6,6 +6,8 @@ from test_documents import tree_fingerprint
 
 
 class MaterialRegistrationTest(CloseLifecycleCase):
+    """Регистрация материалов: отказы handoff, preview/apply/repeat,
+    общий гейт и rollback."""
     def setup_material(self):
         self.managed_task()
         path = self.tasks_dir() / 'DEV-1-evidence'
@@ -19,6 +21,7 @@ class MaterialRegistrationTest(CloseLifecycleCase):
                         '--required', *flags)
 
     def test_unregistered_evidence_rejects_handoff_without_writes(self):
+        """Незарегистрированный evidence отклоняет handoff без записи"""
         self.managed_task()
         self.verify()
         self.setup_material()
@@ -31,6 +34,7 @@ class MaterialRegistrationTest(CloseLifecycleCase):
         self.assertNotIn('handoff', self.meta_of(self.tasks_dir() / 'DEV-1.md'))
 
     def test_preview_apply_repeat_and_full_close(self):
+        """Регистрация preview/apply/repeat и полный close"""
         self.setup_material()
         before = tree_fingerprint(self.root)
         result = self.register()
@@ -56,6 +60,7 @@ class MaterialRegistrationTest(CloseLifecycleCase):
         self.assertEqual(self.cli('check', '--ready')[0], 0)
 
     def test_partial_registration_detects_new_untracked_file(self):
+        """Частичная регистрация обнаруживает новый untracked-файл"""
         path = self.setup_material()
         result = self.register('docs/tasks/DEV-1-evidence/proof.txt', 'proof', '--apply')
         self.assertEqual(result[0], 0, result)
@@ -68,6 +73,7 @@ class MaterialRegistrationTest(CloseLifecycleCase):
         self.assertIn('extra.txt', result[2])
 
     def test_registration_rejects_invalid_paths_and_collisions(self):
+        """Регистрация отклоняет невалидные пути и коллизии"""
         path = self.setup_material()
         self.assertEqual(self.register('docs/tasks/DEV-1-evidence', 'evidence', '--apply')[0], 0)
         (self.root / 'work/audits').mkdir(parents=True, exist_ok=True)
@@ -97,6 +103,7 @@ class MaterialRegistrationTest(CloseLifecycleCase):
         (path / 'link').unlink()
 
     def test_apply_uses_shared_gate(self):
+        """Регистрация apply использует общий gate"""
         self.setup_material()
         before = self.project_fingerprint()
         gate = fops.acquire_gate(self.root, playbook.safe_path,
@@ -109,6 +116,7 @@ class MaterialRegistrationTest(CloseLifecycleCase):
             gate.close()
 
     def test_failed_final_validation_rolls_back_registration(self):
+        """Сбой финальной валидации откатывает регистрацию"""
         self.setup_material()
         before = self.project_fingerprint()
         ctx = dict(playbook._lifecycle_ctx(None))
@@ -131,6 +139,7 @@ class MaterialRegistrationTest(CloseLifecycleCase):
         self.assertIsNone(fops.pending_info(self.root))
 
     def test_mutable_optional_flags_are_explicit(self):
+        """Флаги mutable/optional выбираются явно"""
         self.setup_material()
         result = self.cli('lifecycle', 'register-material', 'DEV-1',
                           'docs/tasks/DEV-1-evidence', '--id', 'notes',
@@ -141,6 +150,7 @@ class MaterialRegistrationTest(CloseLifecycleCase):
         self.assertFalse(meta['materials'][0]['required'])
 
     def test_registered_audit_logs_are_not_verify_reports(self):
+        """Зарегистрированные audit-логи не считаются verify-отчётами"""
         self.managed_task()
         logs = self.root / 'work/verification/DEV-1/audit-logs'
         logs.mkdir(parents=True)
@@ -155,6 +165,7 @@ class MaterialRegistrationTest(CloseLifecycleCase):
         self.assertEqual(result[0], 1, result)
 
     def test_other_owner_directory_overlap_is_rejected(self):
+        """Пересечение с каталогом другого владельца отклоняется"""
         self.setup_material()
         self.managed_task('DEV-2')
         self.assertEqual(self.register('docs/tasks/DEV-1-evidence', 'evidence', '--apply')[0], 0)

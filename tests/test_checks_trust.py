@@ -110,6 +110,7 @@ class HomeTest(unittest.TestCase):
         self.proj = run_project(self)
 
     def test_init_and_binding(self):
+        """init_home создаёт доверенный дом и привязку проекта"""
         home = make_home(self)
         doc = checks_trust.init_home(
             home, project_id="shop", actor="Devin",
@@ -128,11 +129,13 @@ class HomeTest(unittest.TestCase):
                                    actor="Devin", basis_detail="x")
 
     def test_probe_without_home_is_local(self):
+        """Probe без дома возвращает capability=local"""
         report = checks_trust.probe(self.proj.root, None)
         self.assertEqual(report["capability"], "local")
         self.assertFalse(report["configured"])
 
     def test_probe_inside_project_is_local(self):
+        """Дом внутри проекта даёт capability=local"""
         home = self.proj.root / ".vh"
         checks_trust.init_home(home, project_id="shop", actor="Devin",
                                basis_detail="fixture")
@@ -141,6 +144,7 @@ class HomeTest(unittest.TestCase):
         self.assertTrue(report["inside_project"])
 
     def test_probe_same_uid_is_honest_local(self):
+        """Дом той же OS identity честно даёт local без protected"""
         home = make_home(self)
         checks_trust.init_home(home, project_id="shop", actor="Devin",
                                basis_detail="fixture")
@@ -166,6 +170,7 @@ class ApproveTest(unittest.TestCase):
                                            **kw)
 
     def test_initial_and_require(self):
+        """Политика до одобрения отклоняется require_approved"""
         store = checks_trust.load_home(self.home)
         with self.assertRaisesRegex(ValueError, "не одобрена"):
             checks_trust.require_approved(store)
@@ -177,6 +182,7 @@ class ApproveTest(unittest.TestCase):
                          self.policy["policy_id"])
 
     def test_extension_without_argv_is_routine(self):
+        """Расширение policy без новых argv — routine-одобрение"""
         self.approve(self.policy)
         new = json.loads(json.dumps(self.policy))
         new["revision"] = 2
@@ -201,6 +207,7 @@ class ApproveTest(unittest.TestCase):
         self.assertEqual(verdict["verdict"], "weakening")
 
     def test_removed_check_is_weakening(self):
+        """Удаление проверки классифицируется как weakening"""
         self.approve(self.policy)
         new = json.loads(json.dumps(self.policy))
         new["revision"] = 2
@@ -209,6 +216,7 @@ class ApproveTest(unittest.TestCase):
             self.approve(new)
 
     def test_revoked_policy_digest_refused(self):
+        """Отозванный policy_digest отклоняется verifier'ом"""
         self.approve(self.policy)
         digest = verification_policy.fingerprint(self.policy)
         store = checks_trust.load_home(self.home)
@@ -227,6 +235,7 @@ class VerifierRunTest(unittest.TestCase):
         self.policy = command_policy([sys.executable, "-c", "pass"])
 
     def test_run_issues_valid_receipt(self):
+        """verifier_run выдаёт валидную квитанцию на кандидате"""
         proj, home = init_home(self, self.policy)
         outcome = verifier_run(proj, home)
         receipt = outcome["receipt"]
@@ -244,6 +253,7 @@ class VerifierRunTest(unittest.TestCase):
         self.assertTrue(verdict["ok"], verdict["reasons"])
 
     def test_unapproved_policy_refused(self):
+        """Неподтверждённая policy отклоняется verifier'ом"""
         proj = run_project(self)
         proj.write("checks-policy.json", json.dumps(self.policy))
         home = make_home(self)
@@ -267,6 +277,7 @@ class VerifierRunTest(unittest.TestCase):
             verifier_run(proj, home)
 
     def test_policy_edit_after_approval_refused(self):
+        """Правка policy после одобрения отклоняется"""
         proj, home = init_home(self, self.policy)
         edited = json.loads(json.dumps(self.policy))
         edited["revision"] = 99
@@ -333,6 +344,7 @@ class ReceiptVerifyTest(unittest.TestCase):
                                       **kw)
 
     def test_forged_field_rejected(self):
+        """Изменённое поле квитанции отклоняется verify"""
         doc = json.loads(json.dumps(self.receipt))
         doc["subject"]["results"][0]["status"] = "blocked"
         verdict = self.verify(doc)
@@ -340,10 +352,12 @@ class ReceiptVerifyTest(unittest.TestCase):
         self.assertTrue(any("подпись" in r for r in verdict["reasons"]))
 
     def test_attacker_signature_rejected(self):
+        """Подпись атакующего ключа отклоняется"""
         verdict = self.verify(forge(self.receipt))
         self.assertFalse(verdict["ok"])
 
     def test_unknown_key_replacement_rejected(self):
+        """Замена key_id на неизвестный ключ отклоняется"""
         doc = forge(self.receipt,
                     lambda d: d["signature"].update(
                         key_id="k-attacker"))
@@ -353,6 +367,7 @@ class ReceiptVerifyTest(unittest.TestCase):
                             for r in verdict["reasons"]))
 
     def test_revoked_key_rejected(self):
+        """Отозванный ключ отклоняет свои квитанции"""
         store = checks_trust.load_home(self.home)
         checks_trust.revoke(store, key_id=store["active_key"],
                             actor="Devin")
@@ -361,6 +376,7 @@ class ReceiptVerifyTest(unittest.TestCase):
         self.assertTrue(any("отозван" in r for r in verdict["reasons"]))
 
     def test_revoked_receipt_rejected(self):
+        """Отозванная квитанция отклоняется verify"""
         store = checks_trust.load_home(self.home)
         checks_trust.revoke(store,
                             receipt_id=self.receipt["receipt_id"],
@@ -369,6 +385,7 @@ class ReceiptVerifyTest(unittest.TestCase):
         self.assertFalse(verdict["ok"])
 
     def test_revoked_policy_rejected(self):
+        """Отозванная политика отклоняет свои квитанции"""
         store = checks_trust.load_home(self.home)
         checks_trust.revoke(
             store, policy_digest=self.receipt["policy_digest"],
@@ -406,12 +423,14 @@ class ReceiptVerifyTest(unittest.TestCase):
         self.assertFalse(verdict["ok"])
 
     def test_replay_for_other_candidate_rejected(self):
+        """Replay квитанции на другой candidate отклоняется"""
         verdict = self.verify(
             expect_candidate="sha256:" + "f" * 64)
         self.assertFalse(verdict["ok"])
         self.assertTrue(any("replay" in r for r in verdict["reasons"]))
 
     def test_aggregate_confirms_unchanged(self):
+        """Aggregate-квитанция подтверждает неизменные результаты"""
         result = checks_verifier.aggregate(
             self.home, self.proj.root,
             receipt_ids=[self.receipt["receipt_id"]],
@@ -425,6 +444,7 @@ class ReceiptVerifyTest(unittest.TestCase):
     def test_aggregate_skips_changed_inputs(self):
         # Изменение внутри объявленных входов: пересчёт не сходится,
         # единственная проверка пропускается — aggregate отклоняется.
+        """Aggregate пропускает проверки с изменившимися входами"""
         self.proj.write("src/payments/pay.py", "x = 3\n")
         with self.assertRaisesRegex(ValueError, "ни одна проверка"):
             checks_verifier.aggregate(
@@ -687,6 +707,7 @@ class AuditFixesTest(unittest.TestCase):
     # --- A-04: отзыв источника распространяется на aggregate ---
 
     def test_aggregate_source_revocation_transitive(self):
+        """Отзыв исходной квитанции транзитивно отклоняет aggregate"""
         policy = command_policy([sys.executable, "-c", "pass"])
         proj, home = init_home(self, policy)
         outcome = verifier_run(proj, home)
@@ -713,6 +734,7 @@ class ProbeWritabilityTest(unittest.TestCase):
     """A-05/AUDIT-02: запись в каталоги проверяется marker-файлом."""
 
     def test_writable_dir_marker_created_and_removed(self):
+        """Записываемый каталог: marker создаётся и удаляется"""
         with tempfile.TemporaryDirectory() as directory:
             self.assertTrue(
                 checks_trust._writable(directory, directory=True))
@@ -720,6 +742,7 @@ class ProbeWritabilityTest(unittest.TestCase):
             self.assertEqual(os.listdir(directory), [])
 
     def test_denied_dir_returns_false(self):
+        """Запрещённый каталог возвращает false при probe записи"""
         with tempfile.TemporaryDirectory() as directory:
             os.chmod(directory, 0o555)
             try:
@@ -729,6 +752,7 @@ class ProbeWritabilityTest(unittest.TestCase):
                 os.chmod(directory, 0o755)
 
     def test_unknown_error_returns_none(self):
+        """Неизвестная ошибка записи возвращает none — граница не доказана"""
         real_open = os.open
 
         def fake_open(path, flags, *args):
@@ -771,6 +795,7 @@ class GateTest(unittest.TestCase):
                                     emit=lambda s: None)
 
     def test_no_receipts_uncovered(self):
+        """Без квитанций protected-gate не покрывает область"""
         verdict = self.gate()
         self.assertFalse(verdict["ok"])
         self.assertEqual(verdict["obligated"],
@@ -778,6 +803,7 @@ class GateTest(unittest.TestCase):
         self.assertFalse(verdict["protected_confirmed"])
 
     def test_covered_by_run_receipt(self):
+        """Run-квитанция покрывает область protected-gate"""
         verifier_run(self.proj, self.home)
         verdict = self.gate()
         self.assertTrue(verdict["ok"], verdict["rejections"])
@@ -787,6 +813,7 @@ class GateTest(unittest.TestCase):
         self.assertEqual(verdict["capability"], "local")
 
     def test_forged_file_in_project_rejected(self):
+        """Поддельный receipt-файл в проекте отклоняется gate"""
         verifier_run(self.proj, self.home)
         forged = {"schema_version": 1, "receipt_id": "rc-evil",
                   "project_id": "shop",

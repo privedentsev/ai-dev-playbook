@@ -1,0 +1,12 @@
+work/verification/PB-063/audit-03/probe.py
+{"case": "factory", "predicted": [], "actual": ["base.Base.test_ok"], "unknowns": {"root_files": [], "orphan_test_files": [], "load_tests_files": [], "id_collisions": [], "parse_errors": [], "problems": [], "ambiguous_imports": [], "unresolved_imports": {}, "class_uncertainties": ["tests/test_a.py: from base import Base — имя не разрешено статически в tests/base.py; может быть TestCase-классом"]}}
+{"case": "mro", "predicted": ["test_a.Base.test_ok", "test_a.Right.test_ok"], "actual": ["test_a.Base.test_ok", "test_a.Right.test_ok"], "unknowns": {"root_files": [], "orphan_test_files": [], "load_tests_files": [], "id_collisions": [], "parse_errors": [], "problems": [], "ambiguous_imports": [], "unresolved_imports": {}, "class_uncertainties": []}}
+
+work/verification/PB-063/audit-04/probe.py
+{"case": "container", "predicted": [], "actual": ["base.Original.test_ok"], "unknowns": {"root_files": [], "orphan_test_files": [], "load_tests_files": [], "id_collisions": [], "parse_errors": [], "problems": [], "ambiguous_imports": [], "unresolved_imports": {}, "class_uncertainties": ["tests/test_a.py: from base import Base — имя не разрешено статически в tests/base.py; может быть TestCase-классом"]}}
+{"case": "module_rebind", "predicted": [], "actual": [], "unknowns": {"root_files": [], "orphan_test_files": [], "load_tests_files": [], "id_collisions": [], "parse_errors": [], "problems": [], "ambiguous_imports": [], "unresolved_imports": {}, "class_uncertainties": []}}
+
+29 setup-тестов: OK; 302 test_checks_*.py вне внешней песочницы после завершения prepare-audit: OK.
+Self-project: 1065 predicted ID == 1065 actual; missing=[], extra=[], fallback=0; class_uncertainties=9.
+Начальный audit-ready: критерии не подтверждены при открытых A-05/A-06.
+Внешняя песочница не позволяет sandbox-exec (код 71); первый unsandboxed запуск пересёкся с pending prepare-audit; финальный последовательный запуск OK.

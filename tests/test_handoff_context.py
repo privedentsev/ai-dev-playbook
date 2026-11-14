@@ -10,6 +10,8 @@ from test_playbook import playbook
 
 
 class HandoffContextTest(CloseLifecycleCase):
+    """Контекст handoff: записи, находки, unhanded work, view-флаги,
+    archive и installed CLI."""
     def setup_card(self, body=None, external=False):
         self.managed_task(status='in_progress',
                           meta={**TASK_META, 'card_format_version': 2},
@@ -33,6 +35,7 @@ class HandoffContextTest(CloseLifecycleCase):
         return result[1]
 
     def test_linked_records_findings_and_unhanded_work_are_read_only(self):
+        """Связанные записи, находки и unhanded work — read-only контекст"""
         body = (BODY + record('EXEC') + record('CHECK') + record('HANDOFF')
                 + record('AUDIT', **{'Результат': 'changes_requested'}) + finding(1)
                 + record('EXEC', 2, title='Исправление', **{'Замечания': 'A-01'})
@@ -69,6 +72,7 @@ class HandoffContextTest(CloseLifecycleCase):
                 self.assertEqual(before, tree_fingerprint(self.root))
 
     def test_no_handoff_and_unsupported_fallback(self):
+        """Без handoff — fallback, unsupported-флаги"""
         self.setup_card(external=True)
         before = tree_fingerprint(self.root)
         self.assertIn('Передача ещё не записана.', self.show())
@@ -83,6 +87,7 @@ class HandoffContextTest(CloseLifecycleCase):
         self.assertEqual(before, tree_fingerprint(self.root))
 
     def test_view_flags_are_exclusive_and_old_json_is_unchanged(self):
+        """View-флаги взаимоисключающие, старый JSON неизменен"""
         self.setup_card(BODY + record('EXEC') + record('CHECK') + record('HANDOFF'))
         for flag in ('--full', '--entry'):
             with self.subTest(flag=flag), self.assertRaises(SystemExit) as raised:
@@ -100,6 +105,7 @@ class HandoffContextTest(CloseLifecycleCase):
         self.assertIn('\nПриёмка CLI:', self.cli('card', 'show', 'DEV-1', '--full')[1])
 
     def test_prepared_status_one_verify_and_stale_inputs(self):
+        """Подготовленный статус, один verify и stale-входы"""
         self.setup_card(external=True)
         config = self.root / 'ai-dev-playbook/project.json'
         project = json.loads(config.read_text())
@@ -126,6 +132,7 @@ class HandoffContextTest(CloseLifecycleCase):
         self.assertIn('Передача не подтверждена', self.show())
 
     def test_failed_verify_does_not_confirm_prepared_review(self):
+        """Упавший verify не подтверждает prepared review"""
         self.setup_card(BODY + record('EXEC') + record('CHECK') + record('HANDOFF'))
         self.path.write_text(self.path.read_text().replace('Status: in_progress', 'Status: in_review'))
         config = self.root / 'ai-dev-playbook/project.json'
@@ -140,6 +147,7 @@ class HandoffContextTest(CloseLifecycleCase):
         self.assertEqual(json.loads(self.show('--json'))['context']['handoff_state'], 'not_current')
 
     def test_archive_and_installed_cli(self):
+        """Контекст handoff в архиве и на установленном CLI"""
         self.setup_card(BODY + record('EXEC') + record('CHECK') + record('HANDOFF'))
         self.path.write_text(self.path.read_text().replace('Status: in_progress', 'Status: in_review'))
         self.assertEqual(self.cli('index')[0], 0)

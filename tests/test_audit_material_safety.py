@@ -17,6 +17,8 @@ from test_task_cards import BODY, record
 
 
 class AuditMaterialSafetyTest(CloseLifecycleCase):
+    """Безопасность материалов аудита: ранние отказы коллизий архива,
+    read-only preflight/preview, сохранение raw snapshot, повторные операции."""
     def setUp(self):
         super().setUp()
         self.managed_task()
@@ -37,6 +39,7 @@ class AuditMaterialSafetyTest(CloseLifecycleCase):
         return int(path.read_text()) if path.exists() else 0
 
     def test_unchanged_root_target_is_available_without_physical_staging(self):
+        """Неизменённая цель в корне проекта доступна без физического staging каталога"""
         self.counter()
         audit = self.root / 'work/audits/report.txt'
         audit.parent.mkdir(parents=True)
@@ -55,6 +58,7 @@ class AuditMaterialSafetyTest(CloseLifecycleCase):
 
 
     def test_registration_preview_and_apply_both_reject_finder_file(self):
+        """Регистрация материала отклоняет finder-файл и в preview, и в apply"""
         path = self.tasks_dir() / 'DEV-1-evidence'
         path.mkdir()
         (path / '.DS_Store').write_bytes(b'finder')
@@ -67,6 +71,7 @@ class AuditMaterialSafetyTest(CloseLifecycleCase):
         self.assertEqual((path / '.DS_Store').read_bytes(), b'finder')
 
     def test_preflight_writes_nothing_and_executes_nothing(self):
+        """Preflight не пишет файлы и не запускает команд при неизменных входах"""
         self.counter()
         before = tree_fingerprint(self.root)
         result = self.cli('verify', 'DEV-1', '--preflight')
@@ -75,6 +80,7 @@ class AuditMaterialSafetyTest(CloseLifecycleCase):
         self.assertEqual(self.count(), 0)
 
     def test_audit_preview_apply_repeat_and_archive_preserve_raw_snapshot(self):
+        """Audit preview/apply/повтор и архивация сохраняют raw snapshot побайтно"""
         card = self.tasks_dir() / 'DEV-1.md'
         original = card.read_bytes()
         before = tree_fingerprint(self.root)
@@ -102,6 +108,7 @@ class AuditMaterialSafetyTest(CloseLifecycleCase):
         self.assertEqual(self.prepare('--apply')[0], 1)
 
     def test_prepare_refuses_changed_or_foreign_snapshot_and_uses_shared_gate(self):
+        """Prepare audit отклоняет изменённый или чужой snapshot и использует общий gate"""
         self.assertEqual(self.prepare('--apply')[0], 0)
         folder = self.root / 'work/verification/DEV-1/audit-01'
         (folder / 'snapshot.txt').write_text('tampered')
@@ -114,6 +121,7 @@ class AuditMaterialSafetyTest(CloseLifecycleCase):
         self.assertFalse((self.root / 'work/verification/DEV-1/audit-02').exists())
 
     def test_prepare_repeat_rejects_modified_provenance_without_rewriting_it(self):
+        """Повторный prepare отклоняет изменённый provenance, не переписывая его"""
         self.assertEqual(self.prepare('--apply')[0], 0)
         path = self.root / 'work/verification/DEV-1/audit-01/provenance.json'
         original = path.read_bytes()
@@ -138,6 +146,7 @@ class AuditMaterialSafetyTest(CloseLifecycleCase):
         self.assertEqual(self.cli('verify', 'DEV-1', '--preflight')[0], 1)
 
     def test_prepare_audit_failure_rolls_back_all_files(self):
+        """Сбой prepare audit откатывает все созданные файлы к пред-образу"""
         before = tree_fingerprint(self.root)
         original = fops._write_backup
         def fail(*args):
@@ -151,6 +160,7 @@ class AuditMaterialSafetyTest(CloseLifecycleCase):
         self.assertEqual(tree_fingerprint(self.root)[card], before[card])
 
     def test_explicit_reuse_skips_process_and_changed_input_runs_it(self):
+        """Явное переиспользование пропускает процесс, изменённый вход запускает его заново"""
         self.counter()
         self.verify()
         self.assertEqual(self.count(), 1)
@@ -165,6 +175,7 @@ class AuditMaterialSafetyTest(CloseLifecycleCase):
         self.assertEqual(self.count(), 2)
 
     def test_audit_added_outside_declared_inputs_does_not_force_rerun(self):
+        """Добавленный аудит-файл вне объявленных входов не заставляет повторять прогон"""
         self.counter()
         self.verify()
         self.assertEqual(self.prepare('--apply')[0], 0)
@@ -178,6 +189,7 @@ class AuditMaterialSafetyTest(CloseLifecycleCase):
         self.assertEqual(self.handoff()[0], 0)
 
     def test_changed_environment_or_missing_runtime_requires_real_run(self):
+        """Изменённая среда или отсутствующий runtime требуют реального прогона"""
         self.counter()
         self.verify()
         with patch.dict(os.environ, {'PB054_TEST_ENV': 'changed'}):
@@ -192,6 +204,7 @@ class AuditMaterialSafetyTest(CloseLifecycleCase):
         self.assertEqual(self.count(), 3)
 
     def test_later_failed_report_cannot_reuse_older_pass(self):
+        """Более поздний failed-отчёт не может переиспользовать старый passed"""
         self.counter()
         self.verify()
         report = next((self.root / 'work/verification/DEV-1').glob('*/report.json'))
@@ -206,6 +219,7 @@ class AuditMaterialSafetyTest(CloseLifecycleCase):
         self.assertNotIn('reused:', result[1])
 
     def test_corrupt_nested_checks_cause_real_run_not_exception(self):
+        """Повреждённые вложенные checks вызывают реальный прогон, а не исключение"""
         self.counter()
         self.verify()
         for corrupt in ('corrupt', None):
@@ -221,6 +235,7 @@ class AuditMaterialSafetyTest(CloseLifecycleCase):
             self.assertNotIn('reused:', result[1])
 
     def test_touching_older_pass_cannot_hide_later_failed_run(self):
+        """Касание старого passed не может скрыть более поздний failed прогон"""
         self.counter()
         self.verify()
         path = next((self.root / 'work/verification/DEV-1').glob('*/report.json'))
@@ -237,6 +252,7 @@ class AuditMaterialSafetyTest(CloseLifecycleCase):
         self.assertNotIn('reused:', result[1])
 
     def test_malformed_snapshot_and_inputs_cause_real_run_not_exception(self):
+        """Некорректные snapshot и inputs вызывают реальный прогон, а не исключение"""
         self.counter()
         self.verify()
         corruptions = [
@@ -258,6 +274,7 @@ class AuditMaterialSafetyTest(CloseLifecycleCase):
             self.assertNotIn('reused:', result[1])
 
     def test_corrupt_runner_identity_is_preserved_and_replaced_not_blocked_by_preflight(self):
+        """Повреждённая identity runner сохраняется и заменяется, preflight не блокируется"""
         self.counter()
         self.verify()
         latest = next((self.root / 'work/verification/DEV-1').glob('*/report.json'))
@@ -274,6 +291,7 @@ class AuditMaterialSafetyTest(CloseLifecycleCase):
         self.assertEqual(self.count(), 2)
 
     def test_invalid_json_history_is_diagnostic_material_and_does_not_force_endless_reruns(self):
+        """Невалидная JSON-история — диагностический материал, не вызывает бесконечные прогоны"""
         self.counter()
         self.verify()
         report = next((self.root / 'work/verification/DEV-1').glob('*/report.json'))
@@ -287,6 +305,7 @@ class AuditMaterialSafetyTest(CloseLifecycleCase):
         self.assertEqual(self.count(), 2)
 
     def test_v2_criterion_binding_never_treats_copied_audit_json_as_runner(self):
+        """V2 criterion binding не принимает скопированный audit JSON за runner"""
         self.managed_task(meta={'schema_version': 1, 'card_format_version': 2,
                                'relations': [], 'materials': []},
                           body=BODY.replace('- AC-01:', '- [ ] AC-01:') + record('EXEC'))
@@ -309,6 +328,7 @@ class AuditMaterialSafetyTest(CloseLifecycleCase):
         self.assertEqual(self.cli('close', 'DEV-1')[0], 0)
 
     def test_incidental_cache_inside_material_directory_is_not_required_evidence(self):
+        """Случайный __pycache__ внутри каталога материала не считается обязательным доказательством"""
         self.assertEqual(self.prepare('--apply')[0], 0)
         folder = self.root / 'work/verification/DEV-1/audit-01/__pycache__'
         folder.mkdir()
@@ -318,6 +338,7 @@ class AuditMaterialSafetyTest(CloseLifecycleCase):
     def test_bad_raw_markdown_rejected_in_future_close_tree(self):
         # A snapshot lives outside docs before close; moving it turns it into
         # a checked Markdown document with an incorrect relative base.
+        """Некорректный raw markdown отклоняется в будущем дереве закрытия"""
         folder = self.root / 'work/verification/DEV-1/raw'
         folder.mkdir(parents=True)
         raw = folder / 'card-original.md'
@@ -335,6 +356,7 @@ class AuditMaterialSafetyTest(CloseLifecycleCase):
         self.assertIn('битая', result[2])
 
     def test_close_preview_and_apply_reject_same_future_link_without_touching_evidence(self):
+        """Close preview и apply отклоняют одну будущую ссылку, не трогая доказательства"""
         self.verify()
         self.assertEqual(self.handoff()[0], 0)
         self.assertEqual(self.accept('--result', 'accepted')[0], 0)
@@ -361,6 +383,7 @@ class AuditMaterialSafetyTest(CloseLifecycleCase):
         self.assertIsNone(fops.pending_info(self.root))
 
     def test_preview_refuses_temporary_directory_inside_project(self):
+        """Preview отклоняет временный каталог внутри проекта"""
         before = tree_fingerprint(self.root)
         with patch.object(fops.tempfile, 'gettempdir', return_value=str(self.root)):
             result = self.prepare()
@@ -370,6 +393,8 @@ class AuditMaterialSafetyTest(CloseLifecycleCase):
 
 
 class VersionChangeRegressionTest(unittest.TestCase):
+    """Регрессия смены версии комплекта: следующая версия сохраняет
+    текущие ожидания и исторические фикстуры."""
     def test_next_version_keeps_current_expectations_and_historical_fixtures(self):
         """Run the former PB-052 failures against a next-version local artifact."""
         parts = REPO_VERSION.split('.')

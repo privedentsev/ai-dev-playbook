@@ -41,6 +41,8 @@ def mutate(base, path, value):
 
 
 class SchemaCase(unittest.TestCase):
+    """Базовый case контрактных схем checks: require-хелпер и загрузка
+    фикстур."""
     def check(self, validator, doc, fragment=None):
         if fragment is None:
             self.assertIs(validator(doc, req), doc)
@@ -50,10 +52,14 @@ class SchemaCase(unittest.TestCase):
 
 
 class PolicyFixtureTest(SchemaCase):
+    """Валидная policy-фикстура проходит контракт; константы версий
+    схемы."""
     def test_valid_policy(self):
+        """Валидная policy-фикстура проходит validate_policy без изменений"""
         self.check(cc.validate_policy, fixture("policy.json"))
 
     def test_version_constants(self):
+        """Константы версий схемы policy/graph соответствуют контракту"""
         self.assertEqual(cc.POLICY_SCHEMA_VERSION, 1)
         self.assertEqual(cc.GRAPH_SCHEMA_VERSION, 1)
         self.assertEqual(cc.RESULT_SCHEMA_VERSION, 1)
@@ -63,6 +69,9 @@ class PolicyFixtureTest(SchemaCase):
 
 
 class PolicySchemaTest(SchemaCase):
+    """Схема policy: версия, поля, ID, trust_mode, approved_basis,
+    модули, проверки, зависимости, excludes, environment, fallback,
+    test_catalog."""
     def setUp(self):
         self.policy = fixture("policy.json")
 
@@ -70,6 +79,7 @@ class PolicySchemaTest(SchemaCase):
         super().check(cc.validate_policy, doc, fragment)
 
     def test_unknown_version(self):
+        """schema_version=2 и строковая версия отклоняются"""
         self.check(mutate(self.policy, ["schema_version"], 2),
                    "schema_version")
         self.check(mutate(self.policy, ["schema_version"], "1"),
@@ -78,6 +88,7 @@ class PolicySchemaTest(SchemaCase):
                    "schema_version")
 
     def test_unknown_fields_rejected(self):
+        """Неизвестные поля policy на любом уровне отклоняются"""
         self.check(mutate(self.policy, ["rogue"], 1), "неизвестные поля")
         self.check(mutate(self.policy, ["approved"], True),
                    "неизвестные поля")
@@ -87,6 +98,7 @@ class PolicySchemaTest(SchemaCase):
                    "неизвестные поля")
 
     def test_required_fields(self):
+        """Отсутствие каждого обязательного поля policy отклоняется"""
         for field in ("policy_id", "revision", "project_id", "trust_mode",
                       "approved_basis", "modules", "subsystems", "checks",
                       "dependencies", "excludes", "environment",
@@ -94,6 +106,7 @@ class PolicySchemaTest(SchemaCase):
             self.check(mutate(self.policy, [field], None), field)
 
     def test_ids_and_revision(self):
+        """Невалидные policy_id и revision=0 отклоняются"""
         self.check(mutate(self.policy, ["policy_id"], "BAD-ID"),
                    "policy_id")
         self.check(mutate(self.policy, ["revision"], 0), "revision")
@@ -102,11 +115,13 @@ class PolicySchemaTest(SchemaCase):
         self.check(mutate(self.policy, ["revision"], 1.5), "revision")
 
     def test_trust_mode(self):
+        """trust_mode вне {local, protected} отклоняется"""
         self.check(mutate(self.policy, ["trust_mode"], "trusted"),
                    "trust_mode")
         self.check(mutate(self.policy, ["trust_mode"], "protected"))
 
     def test_approved_basis(self):
+        """approved_basis без who/at/source/detail и с невалидным at отклоняется"""
         for field in ("who", "at", "source", "detail"):
             self.check(mutate(self.policy, ["approved_basis", field], None),
                        field)
@@ -116,6 +131,7 @@ class PolicySchemaTest(SchemaCase):
                    "неизвестные поля")
 
     def test_modules_rules(self):
+        """Пустые modules, нет subsystem_id и битые paths отклоняются"""
         self.check(mutate(self.policy, ["modules"], []), "modules")
         self.check(mutate(self.policy, ["modules", 0, "subsystem_id"],
                           "nope"), "subsystem_id")
@@ -131,6 +147,7 @@ class PolicySchemaTest(SchemaCase):
                           self.policy["modules"] + [dup]), "повторный ID")
 
     def test_module_path_overlap(self):
+        """Пересекающиеся path-модули отклоняются"""
         overlap = {"id": "copy", "title": "Копия", "subsystem_id": "billing",
                    "paths": ["src/payments/**"]}
         self.check(mutate(self.policy, ["modules"],
@@ -142,6 +159,7 @@ class PolicySchemaTest(SchemaCase):
                           base["modules"] + [shared]))
 
     def test_checks_rules(self):
+        """Пустые checks и недопустимый kind отклоняются"""
         self.check(mutate(self.policy, ["checks"], []), "checks")
         self.check(mutate(self.policy, ["checks", 0, "kind"], "probe"),
                    "kind")
@@ -163,6 +181,7 @@ class PolicySchemaTest(SchemaCase):
                    "scenario")
 
     def test_limits_bool_nan(self):
+        """Bool/NaN/отрицательные лимиты timeout и max в fallback отклоняются"""
         for bad in (True, False, float("nan"), float("inf"), 0, -5, "60"):
             self.check(mutate(self.policy,
                               ["checks", 0, "timeout_seconds"], bad),
@@ -183,6 +202,7 @@ class PolicySchemaTest(SchemaCase):
                            "ttl_seconds"], True), "ttl_seconds")
 
     def test_inputs_and_applicability(self):
+        """Входы неизвестного типа и без path отклоняются"""
         self.check(mutate(self.policy, ["checks", 0, "inputs"],
                           [{"type": "ghost", "path": "x"}]), "тип входа")
         self.check(mutate(self.policy, ["checks", 0, "inputs"],
@@ -199,6 +219,7 @@ class PolicySchemaTest(SchemaCase):
                           "sometimes"), "применимость")
 
     def test_dependencies_rules(self):
+        """Ребро с consumer вне модулей отклоняется"""
         edge = {"consumer": "module:ghost", "dependency": "module:cart",
                 "kind": "import", "source": "explicit"}
         self.check(mutate(self.policy, ["dependencies"],
@@ -229,6 +250,7 @@ class PolicySchemaTest(SchemaCase):
                    "analyzer_version")
 
     def test_excludes_rules(self):
+        """Паттерны excludes без **, точечные и дубли отклоняются"""
         for pattern in ("src/**", "src"):
             self.check(mutate(self.policy, ["excludes"],
                               [{"pattern": pattern, "reason": "x",
@@ -280,6 +302,7 @@ class PolicySchemaTest(SchemaCase):
                                 "origin": "manual"}]))
 
     def test_environment_rules(self):
+        """external freshness kind=weekly и ttl_seconds=null отклоняются"""
         self.check(mutate(self.policy,
                           ["environment", "external", 0, "freshness",
                            "kind"], "weekly"), "kind")
@@ -298,6 +321,7 @@ class PolicySchemaTest(SchemaCase):
                    "повторный ID")
 
     def test_fallback_rules(self):
+        """Невалидный expansion_order и unknown_scope отклоняются"""
         self.check(mutate(self.policy,
                           ["fallback", "expansion_order"],
                           ["subsystem", "module", "project"]),
@@ -310,6 +334,7 @@ class PolicySchemaTest(SchemaCase):
                    "неизвестные поля")
 
     def test_catalog_rules(self):
+        """Невалидный adapter и fingerprint формата md5 отклоняются"""
         self.check(mutate(self.policy, ["test_catalog", "adapter"], "x"),
                    "adapter")
         self.check(mutate(self.policy, ["test_catalog", "fingerprint"],
@@ -352,6 +377,7 @@ class PolicySchemaTest(SchemaCase):
 
 
 class GraphSchemaTest(SchemaCase):
+    """Схема графа зависимостей: ссылки, рёбра, unknown_scope."""
     def setUp(self):
         self.graph = fixture("graph.json")
 
@@ -360,9 +386,11 @@ class GraphSchemaTest(SchemaCase):
                       doc, fragment)
 
     def test_valid(self):
+        """Валидный граф зависимостей проходит validate_graph"""
         self.check(self.graph)
 
     def test_known_refs(self):
+        """Graph с known_refs модулей проходит валидацию ссылок"""
         refs = {("module", "checkout"), ("module", "payments"),
                 ("module", "cart"), ("module", "shared-util")}
         cc.validate_graph(self.graph, req, known_refs=refs)
@@ -370,17 +398,20 @@ class GraphSchemaTest(SchemaCase):
             cc.validate_graph(self.graph, req, known_refs=set())
 
     def test_schema_version(self):
+        """schema_version=2 и boolean версия графа отклоняются"""
         self.check(mutate(self.graph, ["schema_version"], 2),
                    "schema_version")
         self.check(mutate(self.graph, ["schema_version"], True),
                    "schema_version")
 
     def test_unknown_fields(self):
+        """Неизвестные поля графа и его рёбер отклоняются"""
         self.check(mutate(self.graph, ["rogue"], 1), "неизвестные поля")
         self.check(mutate(self.graph, ["edges", 0, "rogue"], 1),
                    "неизвестные поля")
 
     def test_edges(self):
+        """Самоссылка ребра и дубли отклоняются"""
         edge = {"consumer": "module:a", "dependency": "module:a",
                 "kind": "import", "source": "explicit"}
         self.check(mutate(self.graph, ["edges"],
@@ -394,6 +425,7 @@ class GraphSchemaTest(SchemaCase):
                           None), "analyzer_version")
 
     def test_unknown_scope(self):
+        """unknown-запись с kind=file и непустым id отклоняется"""
         self.check(mutate(self.graph, ["unknown", 0, "scope", "kind"],
                           "file"), "kind")
         self.check(mutate(self.graph, ["unknown", 1, "scope", "id"],
@@ -405,6 +437,8 @@ class GraphSchemaTest(SchemaCase):
 
 
 class ResultSchemaTest(SchemaCase):
+    """Схема результата проверок: привязка candidate/policy, тесты,
+    статусы и причины."""
     def setUp(self):
         self.result = fixture("result.json")
 
@@ -412,15 +446,18 @@ class ResultSchemaTest(SchemaCase):
         super().check(cc.validate_result, doc, fragment)
 
     def test_valid(self):
+        """Валидный результат проверок проходит схему"""
         self.check(self.result)
 
     def test_version_and_status(self):
+        """schema_version=0 и статус green отклоняются"""
         self.check(mutate(self.result, ["schema_version"], 0),
                    "schema_version")
         self.check(mutate(self.result, ["status"], "green"), "status")
         self.check(mutate(self.result, ["kind"], "probe"), "kind")
 
     def test_binding_required(self):
+        """Отсутствие полей binding и невалидный policy_digest отклоняются"""
         for field in ("policy_digest", "definition_digest", "adapter",
                       "runner", "input_digest",
                       "dependency_closure_digest", "environment"):
@@ -434,6 +471,7 @@ class ResultSchemaTest(SchemaCase):
                    "неизвестные поля")
 
     def test_tests_contract(self):
+        """tests=null и нечисловой expected отклоняются"""
         self.check(mutate(self.result, ["tests"], None), "tests")
         self.check(mutate(self.result, ["tests", "expected"], "x"),
                    "expected")
@@ -450,6 +488,7 @@ class ResultSchemaTest(SchemaCase):
                           expected + [expected[0]]), "повторный test_id")
 
     def test_kind_specific(self):
+        """command-результат без command-полей и наоборот отклоняется"""
         cmd = mutate(self.result, ["kind"], "command")
         cmd["command"] = {"exit_code": 0, "stdout_log": "o",
                           "stderr_log": "e"}
@@ -470,6 +509,7 @@ class ResultSchemaTest(SchemaCase):
         self.check(manual)
 
     def test_status_reason(self):
+        """blocked/not_applicable требуют reason, passed — нет"""
         for status in ("blocked", "not_applicable"):
             doc = mutate(self.result, ["status"], status)
             doc.pop("tests")
@@ -478,6 +518,7 @@ class ResultSchemaTest(SchemaCase):
             self.check(mutate(doc, ["reason"], ""), "reason")
 
     def test_reused(self):
+        """reused-ссылка на прежний результат валидна по схеме"""
         doc = mutate(self.result, ["reused"],
                      {"result_id": "res-0", "issued_at":
                       "2026-11-06T10:00:00+03:00",
@@ -490,6 +531,8 @@ class ResultSchemaTest(SchemaCase):
 
 
 class ReceiptSchemaTest(SchemaCase):
+    """Схема квитанций verifier: дайджесты, subject, aggregate и
+    подпись."""
     def setUp(self):
         self.receipt = fixture("receipt.json")
 
@@ -497,9 +540,11 @@ class ReceiptSchemaTest(SchemaCase):
         super().check(cc.validate_receipt, doc, fragment)
 
     def test_valid(self):
+        """Валидная квитанция verifier проходит схему"""
         self.check(self.receipt)
 
     def test_version_and_digests(self):
+        """Строковая schema_version и digest без sha256 отклоняются"""
         self.check(mutate(self.receipt, ["schema_version"], "1"),
                    "schema_version")
         self.check(mutate(self.receipt, ["candidate_digest"], "x"),
@@ -510,6 +555,7 @@ class ReceiptSchemaTest(SchemaCase):
                    "policy_revision")
 
     def test_subject(self):
+        """subject kind=batch и пустой results отклоняются"""
         self.check(mutate(self.receipt, ["subject", "kind"], "batch"),
                    "kind")
         self.check(mutate(self.receipt, ["subject", "results"], []),
@@ -525,6 +571,7 @@ class ReceiptSchemaTest(SchemaCase):
                    "source_receipts")
 
     def test_aggregate(self):
+        """aggregate-subject требует source_receipts и наоборот"""
         doc = mutate(self.receipt, ["subject", "kind"], "aggregate")
         self.check(mutate(doc, ["subject", "source_receipts"],
                           ["rcpt-0"]))
@@ -534,6 +581,7 @@ class ReceiptSchemaTest(SchemaCase):
                    "source_receipts")
 
     def test_signature(self):
+        """algorithm=rsa и пустая signature value отклоняются"""
         self.check(mutate(self.receipt, ["signature", "algorithm"],
                           "rsa"), "algorithm")
         self.check(mutate(self.receipt, ["signature", "value"], ""),
@@ -543,6 +591,8 @@ class ReceiptSchemaTest(SchemaCase):
 
 
 class ClassifyTest(unittest.TestCase):
+    """Классификация изменений policy: identity/extension/weakening и
+    allowlist argv новых проверок."""
     def setUp(self):
         self.policy = fixture("policy.json")
 
@@ -550,18 +600,21 @@ class ClassifyTest(unittest.TestCase):
         return cc.classify_policy_change(self.policy, new)["verdict"]
 
     def test_unchanged(self):
+        """Изменение только revision классифицируется как unchanged"""
         rev = mutate(self.policy, ["revision"], 4)
         self.assertEqual(self.verdict(rev), "unchanged")
         self.assertEqual(cc.classify_policy_change(
             self.policy, rev)["changes"], [])
 
     def test_identity_change_rejected(self):
+        """Смена policy_id/project_id отклоняется классификацией"""
         for field in ("policy_id", "project_id"):
             with self.assertRaisesRegex(ValueError, field):
                 cc.classify_policy_change(
                     self.policy, mutate(self.policy, [field], "other"))
 
     def test_extension(self):
+        """Добавление новой проверки классифицируется как extension"""
         new = copy.deepcopy(self.policy)
         # argv из ранее одобренных команд — расширение допустимо.
         new["checks"].append({
@@ -586,6 +639,7 @@ class ClassifyTest(unittest.TestCase):
                             for c in result["changes"]))
 
     def test_weakening(self):
+        """Ослабление лимитов/удаление проверок классифицируется как weakening"""
         cases = []
 
         doc = copy.deepcopy(self.policy)
@@ -652,6 +706,7 @@ class ClassifyTest(unittest.TestCase):
                                 for c in result["changes"]), result)
 
     def test_extension_mixed_with_weakening(self):
+        """Смесь extension и weakening отклоняется"""
         doc = copy.deepcopy(self.policy)
         doc["checks"].append({
             "id": "new-one", "title": "t", "purpose": "p", "kind": "test",
@@ -744,6 +799,7 @@ class ClassifyTest(unittest.TestCase):
         self.assertEqual(self.verdict(doc), "extension")
 
     def test_tightening_limits_is_extension(self):
+        """Ужесточение timeout классифицируется как extension"""
         doc = copy.deepcopy(self.policy)
         doc["checks"][0]["timeout_seconds"] = 30
         doc["fallback"]["limits"]["max_seconds"] = 600
@@ -752,7 +808,10 @@ class ClassifyTest(unittest.TestCase):
 
 
 class CliContractTest(LifecycleCase):
+    """CLI-контракт checks: отложенные команды, оси scope, связь
+    checks_policy в project.json и совместимость."""
     def test_deferred_commands(self):
+        """Отложенные команды checks отвечают кодом 1 с пояснением"""
         code, _, err = self.cli("checks", "plan", "DEV-1")
         self.assertEqual(code, 1)
         self.assertIn("checks_policy", err)
@@ -767,12 +826,7 @@ class CliContractTest(LifecycleCase):
         code, _, err = self.cli("checks", "status", "DEV-1")
         self.assertEqual(code, 1)
         self.assertIn("checks_policy", err)
-        code, _, err = self.cli("setup", "preview")
-        self.assertEqual(code, 1)
-        self.assertIn("PB-063", err)
-        code, _, err = self.cli("setup", "apply")
-        self.assertEqual(code, 1)
-        self.assertIn("PB-063", err)
+        # setup preview/apply реализованы PB-063 — см. test_checks_setup.
 
     def test_scope_mode_axes(self):
         """Область и режим — независимые оси; неизвестные значения отклонены."""
@@ -812,6 +866,7 @@ class CliContractTest(LifecycleCase):
             playbook.config(self.root)
 
     def test_policy_link_path_safety(self):
+        """checks_policy с выходом за пределы проекта отклоняется"""
         path = self.root / "ai-dev-playbook" / "project.json"
         project = json.loads(path.read_text(encoding="utf-8"))
         project["checks_policy"] = "../outside.json"
