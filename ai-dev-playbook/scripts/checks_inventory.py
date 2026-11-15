@@ -212,11 +212,112 @@ def build_inventory(root, policy, *, now=None):
     }
 
 
-def resolved_inputs(policy, check):
-    """Объявленные и вычисленные (модульные) входы проверки.
+def _closure(policy, check, edges=(), unknown=()):
+    """Замыкание зависимостей: (упорядоченные модули, проверки).
+
+    Обходятся все виды узлов графа: ``module``/``subsystem``
+    расширяют модульное замыкание, ``check`` ставит зависимую
+    проверку в очередь — её объявленные ``modules`` и исходящие
+    рёбра участвуют в замыкании (циклобезопасно: каждый вид узла
+    посещается не более одного раза).
+    """
+    modules_by_id = {m["id"]: m for m in policy["modules"]}
+    checks_by_id = {c["id"]: c for c in policy["checks"]}
+    all_ids = [m["id"] for m in policy["modules"]]
+    subsystem_modules = {}
+    for mod in policy["modules"]:
+        subsystem_modules.setdefault(mod["subsystem_id"], []).append(mod["id"])
+    unknown_scope = policy.get("fallback", {}).get("unknown_scope", "project")
+    unknown_targets = {}
+    for item in unknown or ():
+        scope = item.get("scope") or {}
+        skind = scope.get("kind")
+        if skind == "project":
+            for mid in all_ids:
+                unknown_targets[mid] = list(all_ids)
+        elif skind == "subsystem":
+            members = subsystem_modules.get(scope.get("id"), [])
+            targets = (list(all_ids) if unknown_scope == "project"
+                       else list(members))
+            for mid in members:
+                unknown_targets.setdefault(mid, []).extend(targets)
+        elif skind == "module":
+            mid = scope.get("id")
+            if mid in modules_by_id:
+                if unknown_scope == "project":
+                    targets = list(all_ids)
+                elif unknown_scope == "subsystem":
+                    targets = list(subsystem_modules.get(
+                        modules_by_id[mid]["subsystem_id"], []))
+                else:
+                    targets = [mid]
+                unknown_targets.setdefault(mid, []).extend(targets)
+
+    seen_modules = set()
+    seen_checks = {check["id"]}
+    reached_checks = []
+    ordered = []
+    queue = [("check", check["id"])]
+    for mid in check.get("modules") or []:
+        if mid in modules_by_id and mid not in seen_modules:
+            seen_modules.add(mid)
+            ordered.append(mid)
+            queue.append(("module", mid))
+    while queue:
+        nkind, ident = queue.pop(0)
+        if nkind == "module":
+            for target_mid in unknown_targets.get(ident, ()):
+                if target_mid in modules_by_id and target_mid not in seen_modules:
+                    seen_modules.add(target_mid)
+                    ordered.append(target_mid)
+                    queue.append(("module", target_mid))
+            consumer_refs = {
+                f"module:{ident}",
+                f"subsystem:{modules_by_id[ident]['subsystem_id']}",
+            }
+        else:
+            consumer_refs = {f"check:{ident}"}
+            dep_check = checks_by_id.get(ident)
+            if dep_check is not None:
+                for mid in dep_check.get("modules") or []:
+                    if mid in modules_by_id and mid not in seen_modules:
+                        seen_modules.add(mid)
+                        ordered.append(mid)
+                        queue.append(("module", mid))
+        for edge in edges or ():
+            if edge.get("consumer") not in consumer_refs:
+                continue
+            dkind, _, did = edge.get("dependency", "").partition(":")
+            if (dkind == "module" and did in modules_by_id
+                    and did not in seen_modules):
+                seen_modules.add(did)
+                ordered.append(did)
+                queue.append(("module", did))
+            elif dkind == "subsystem":
+                for member in subsystem_modules.get(did, ()):
+                    if member not in seen_modules:
+                        seen_modules.add(member)
+                        ordered.append(member)
+                        queue.append(("module", member))
+            elif (dkind == "check" and did in checks_by_id
+                    and did not in seen_checks):
+                seen_checks.add(did)
+                reached_checks.append(did)
+                queue.append(("check", did))
+    return ordered, reached_checks
+
+
+def closure_modules(policy, check, edges=(), unknown=()):
+    """Модули проверки и транзитивное замыкание зависимостей и unknown."""
+    return _closure(policy, check, edges=edges, unknown=unknown)[0]
+
+
+def resolved_inputs(policy, check, *, edges=(), unknown=()):
+    """Объявленные и вычисленные (модульные + транзитивные) входы проверки.
 
     Объявленные ``check.inputs`` валидируются контрактом; каждый glob
-    ``paths`` связанного модуля становится входом-каталогом по литеральной
+    ``paths`` связанного модуля (и транзитивно достигаемых по ``edges`` /
+    ``unknown`` зависимостей) становится входом-каталогом по литеральной
     области с фильтром ``patterns``: байты хешируются только у файлов,
     совпадающих с образцом модуля, а состав каталога фиксируется полностью.
     """
@@ -224,7 +325,22 @@ def resolved_inputs(policy, check):
     checks_contract._validate_inputs(declared, "check.inputs", _raise)
     inputs = list(declared)
     modules_by_id = {m["id"]: m for m in policy["modules"]}
-    for module_id in check.get("modules") or []:
+    checks_by_id = {c["id"]: c for c in policy["checks"]}
+    module_ids, dep_checks = _closure(policy, check, edges=edges,
+                                    unknown=unknown)
+    # Значимые входы транзитивно зависимых проверок: их объявленные
+    # inputs и модульные области входят в снимок потребителя —
+    # изменение любого из них инвалидирует результат зависимости.
+    seen_specs = set()
+    for item in inputs:
+        seen_specs.add(json.dumps(item, sort_keys=True, default=str))
+    for dep_id in dep_checks:
+        for item in checks_by_id[dep_id].get("inputs") or []:
+            key = json.dumps(item, sort_keys=True, default=str)
+            if key not in seen_specs:
+                seen_specs.add(key)
+                inputs.append(item)
+    for module_id in module_ids:
         module = modules_by_id[module_id]
         for pattern in module["paths"]:
             head = checks_contract._literal_head(pattern)

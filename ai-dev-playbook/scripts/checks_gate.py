@@ -212,6 +212,11 @@ def evaluate(root, policy, *, task_id, scope="task", checkpoint=None,
     """
     root = Path(root)
     task_meta = task_meta or {}
+    if isinstance(task_meta, dict) and "has_block" in task_meta:
+        task_meta = {
+            k: v for k, v in task_meta.items()
+            if k != "has_block" and (k != "block" or task_meta["has_block"])
+        }
     task_digest = verification_policy.fingerprint(
         verification_policy.task_projection(task_content, task_meta))
     projections = checks_runner._projections(policy, task_content,

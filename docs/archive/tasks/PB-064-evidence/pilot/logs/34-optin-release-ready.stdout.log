@@ -1,0 +1,11 @@
+checks release-ready PB-064: политика ai-dev-playbook-self-pilot rev 1, trust=local, checkpoint=release
+Ограничение: trust_mode=local: результаты диагностические — локальная история не защищена от владельца проекта; доверенное выполнение требует контура PB-061
+  self-check: covered
+  preflight-regressions: covered
+  block-unit-tests: covered
+  checks-unit-tests: covered
+  cli-unit-tests: covered
+  core-unit-tests: covered
+  verification-unit-tests: covered
+Покрытие: 7 покрыто, 0 не покрыто, 0 ручных, 0 заблокировано
+release-ready: готово

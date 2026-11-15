@@ -462,7 +462,9 @@ def aggregate(home, root, *, receipt_ids, task_projection=None,
             continue
         source = _load_result(store, item["result_digest"])
         binding = source["binding"]
-        inputs = checks_inventory.resolved_inputs(policy, check)
+        inputs = checks_inventory.resolved_inputs(
+            policy, check, edges=edges,
+            unknown=planned["graph"]["unknown"])
         env = checks_select.binding_environment(policy, check)
         reason = None
         try:

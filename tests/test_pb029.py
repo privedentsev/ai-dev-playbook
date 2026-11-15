@@ -699,6 +699,16 @@ class Pb029EndToEndRoutesTest(CliCase):
                 {"id": "self-check", "argv": [sys.executable, "ai-dev-playbook/scripts/playbook.py", "check", "--ready"], "timeout_seconds": 60}
             ]
         }
+        # checks_policy — opt-in контур dependency-aware проверок (PB-057–PB-064):
+        # сценарий AC-12 проверяет прежний legacy-контракт, поэтому связь
+        # и файл политики отключаются вместе с подменой verification.
+        # Поведение checks-контура покрыто tests/test_checks_e2e.py и
+        # self-pilot PB-064.
+        linked_policy = copy_proj.pop("checks_policy", None)
+        if linked_policy:
+            linked_path = copy_root / linked_policy
+            if linked_path.is_file():
+                linked_path.unlink()
         copy_proj_path.write_text(json.dumps(copy_proj, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
         # 3. Полный жизненный цикл задачи PILOT-001 на копии self-project

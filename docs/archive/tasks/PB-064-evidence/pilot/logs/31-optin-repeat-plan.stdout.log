@@ -1,0 +1,21 @@
+checks plan PB-064: политика ai-dev-playbook-self-pilot rev 1, trust=local
+Изменения: 0 путей
+Граф: 13 рёбер, unknown-областей: 0
+Оценка: 0с лимит 7200с; прочитано 107886795 Б / 3161 файлов (лимит 250000000 Б)
+  self-check: reused
+      обязательство задачи (task_projection)
+      обязательство политики (policy_projection)
+      reused d76e85d7f4794c57ab3ddbe1a9a4536f-self-check-reused от 2026-11-14T20:42:39.563962+00:00
+  preflight-regressions: not_applicable
+      обязательства не затронуты
+  block-unit-tests: not_applicable
+      обязательства не затронуты
+  checks-unit-tests: not_applicable
+      обязательства не затронуты
+  cli-unit-tests: not_applicable
+      обязательства не затронуты
+  core-unit-tests: not_applicable
+      обязательства не затронуты
+  verification-unit-tests: not_applicable
+      обязательства не затронуты
+Итог: run=0, reused=1, blocked=0, not_applicable=6

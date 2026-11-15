@@ -1,0 +1,31 @@
+checks plan PB-064: политика ai-dev-playbook-self-pilot rev 1, trust=local
+Изменения: 1 путей
+  ~ ai-dev-playbook/scripts/checks_setup.py
+Граф: 13 рёбер, unknown-областей: 0
+Оценка: 4680с лимит 7200с; прочитано 123803637 Б / 3992 файлов (лимит 250000000 Б)
+  self-check: run
+      зависит от module:checks-code (import, analyzer)
+      зависит от module:core-code (import, analyzer)
+      изменён ai-dev-playbook/scripts/checks_setup.py
+      обязательство задачи (task_projection)
+      обязательство политики (policy_projection)
+      запуск: входы изменились
+  preflight-regressions: run
+      зависит от module:checks-code (import, analyzer)
+      запуск: входы изменились
+  block-unit-tests: run
+      зависит от module:core-code (import, analyzer)
+      запуск: входы изменились
+  checks-unit-tests: run
+      изменён ai-dev-playbook/scripts/checks_setup.py
+      запуск: входы изменились
+  cli-unit-tests: run
+      зависит от module:checks-code (import, analyzer)
+      запуск: входы изменились
+  core-unit-tests: run
+      зависит от module:checks-code (import, analyzer)
+      запуск: входы изменились
+  verification-unit-tests: run
+      зависит от module:checks-code (import, analyzer)
+      запуск: входы изменились
+Итог: run=7, reused=0, blocked=0

@@ -1610,10 +1610,14 @@ def checks_plan(root, args):
     if skipped:
         notes.append(f"пропущено повреждённых результатов: {skipped}")
     # Граф строится внутри плана: AST-чтение идёт под общим
-    # бюджетом max_bytes (аудит A-04).
+    # бюджетом max_bytes (аудит A-04). Проекции карточки и политики
+    # нужны оценке reuse проверок с task_projection/policy_projection.
+    projections = checks_runner._projections(policy, task_content,
+                                             task_meta)
     plan = checks_select.plan(root, policy, baseline=baseline,
                               previous=previous, results=results,
-                              task_digest=task_digest)
+                              task_digest=task_digest,
+                              projections=projections)
 
     print(f"checks plan {args.task_id}: политика "
           f"{policy['policy_id']} rev {policy['revision']}, "
@@ -2114,7 +2118,21 @@ def dispatch(root, args, gate):
                                       reuse=not getattr(args, "no_reuse", False),
                                       checkpoint=checkpoint)
 
-        # Legacy v1 path
+        # Legacy v1 / checks_policy path
+        if data.get("verification") is None and data.get("checks_policy") and (args.preflight or args.audit_ready):
+            _load_policy(root, data)
+            file_operations.read_only_gate_check(root, safe_path, require,
+                                                  token=gate.token if gate else None)
+            lifecycle.verification_preflight(root, args.task_id, _lifecycle_ctx(gate), safe_path, require)
+            if args.preflight:
+                if not task_index_path.is_file() or task_index_path.read_text(encoding="utf-8") != expected_index:
+                    require(False, "Индекс устарел; выполните index")
+            check(root, True, skip_criteria={args.task_id})
+            if args.audit_ready:
+                lifecycle.audit_preflight(root, args.task_id, _lifecycle_ctx(gate), safe_path, require)
+                print('audit-ready: свежая передача и проверки подтверждены; независимый аудит не выполнен')
+            print('preflight: структура, материалы, блокировки и политика checks проверены; поведение CLI и приёмка не подтверждены')
+            return 0
         settings = verification.validate(root, data.get("verification"), safe_path, require)
         if args.preflight or args.audit_ready or not args.dry_run:
             file_operations.read_only_gate_check(root, safe_path, require,

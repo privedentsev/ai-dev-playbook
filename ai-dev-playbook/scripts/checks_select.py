@@ -433,7 +433,7 @@ def evidence_latest(results):
 
 def evaluate_reuse(check, result, *, root, policy, edges, state,
                    hash_fn=None, task_digest=None, now=None,
-                   projections=None, environment=None):
+                   projections=None, environment=None, unknown=()):
     """Решение reuse для одной обязательной проверки (R-11).
 
     ``reused`` требует успешного валидного результата с совпадающими
@@ -483,7 +483,8 @@ def evaluate_reuse(check, result, *, root, policy, edges, state,
     try:
         snap = checks_inventory.snapshot(
             root, policy, checks_inventory.resolved_inputs(
-                policy, check), environment=environment,
+                policy, check, edges=edges, unknown=unknown),
+            environment=environment,
             projections=projections,
             hash_fn=_counting_hasher(
                 state, policy["fallback"]["limits"]
@@ -561,7 +562,7 @@ def plan(root, policy, *, baseline=None, graph=None, previous=None,
             check, latest.get(check["id"]), root=root, policy=policy,
             edges=graph["edges"], state=state, hash_fn=hash_fn,
             task_digest=task_digest, now=now, projections=projections,
-            environment=environment)
+            environment=environment, unknown=graph["unknown"])
         if verdict["status"] == "reused":
             entry["status"] = "reused"
             entry["explain"] = entry["explain"] + [verdict["reason"]]

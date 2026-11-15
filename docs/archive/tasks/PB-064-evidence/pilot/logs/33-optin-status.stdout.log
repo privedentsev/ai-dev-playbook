@@ -1,0 +1,35 @@
+checks status PB-064: политика ai-dev-playbook-self-pilot rev 1
+Ограничение: trust_mode=local: результаты диагностические — локальная история не защищена от владельца проекта; доверенное выполнение требует контура PB-061
+  self-check: reused; последний результат passed d334a97885f64ad9b8747cab2eb222fc-self-check-reused от 2026-11-14T20:46:26.468470+00:00 (reused d76e85d7f4794c57ab3ddbe1a9a4536f-self-check-reused от 2026-11-14T19:41:43.749363+00:00)
+  preflight-regressions: not_applicable; последний результат passed d334a97885f64ad9b8747cab2eb222fc-preflight-regressions-reused от 2026-11-14T20:46:26.496729+00:00 (reused b128ce0ebd4745469e6428d8143e185e-preflight-regressions от 2026-11-14T19:41:47.573710+00:00)
+  block-unit-tests: not_applicable; последний результат passed d334a97885f64ad9b8747cab2eb222fc-block-unit-tests-reused от 2026-11-14T20:46:26.534871+00:00 (reused b128ce0ebd4745469e6428d8143e185e-block-unit-tests от 2026-11-14T19:41:50.467788+00:00); тестов: 39
+      passed: test_block_workflow.BlockStatusTest.test_progression — Статусы блока прогрессируют по приёмке состояний
+      passed: test_block_workflow.CardBlockTest.test_ref_errors — Ошибки ссылок блока: версия, формат document и прочие отказы
+      passed: test_block_workflow.CardBlockTest.test_valid_refs — Блок с допустимыми ссылками на подзадачи и аудит проходит
+      passed: test_block_workflow.CatalogIntegrationTest.test_block_status_and_deferred — Block status и отложенные состояния корректны на проекте
+      passed: test_block_workflow.CatalogIntegrationTest.test_capability_gates_fields — Capability-комплект ограничивает поля project.json для блоков
+  checks-unit-tests: not_applicable; последний результат passed d334a97885f64ad9b8747cab2eb222fc-checks-unit-tests-reused от 2026-11-14T20:46:26.573543+00:00 (reused d76e85d7f4794c57ab3ddbe1a9a4536f-checks-unit-tests от 2026-11-14T20:44:43.533504+00:00); тестов: 313
+      passed: test_checks_contract.ClassifyTest.test_expected_failure_classification — A-04: расширение допуска expected_failure — ослабление.
+      passed: test_checks_contract.ClassifyTest.test_extension — Добавление новой проверки классифицируется как extension
+      passed: test_checks_contract.ClassifyTest.test_extension_mixed_with_weakening — Смесь extension и weakening отклоняется
+      passed: test_checks_contract.ClassifyTest.test_identity_change_rejected — Смена policy_id/project_id отклоняется классификацией
+      passed: test_checks_contract.ClassifyTest.test_new_catalog_entry_with_allowance — A-06: новый ID сразу с допуском — ослабление.
+  cli-unit-tests: not_applicable; последний результат passed d334a97885f64ad9b8747cab2eb222fc-cli-unit-tests-reused от 2026-11-14T20:46:26.612183+00:00 (reused b128ce0ebd4745469e6428d8143e185e-cli-unit-tests от 2026-11-14T19:48:06.657698+00:00); тестов: 164
+      passed: test_cli.AdoptTest.test_adopt_clean — adopt чистой legacy-установки без manifest создаёт manifest
+      passed: test_cli.AdoptTest.test_adopt_conflicting_version — adopt с конфликтующей версией требует явного разрешения
+      passed: test_cli.AdoptTest.test_adopt_refuses_managed_and_force_overwrites — adopt отклоняет managed-файлы, --force перезаписывает
+      passed: test_cli.AdoptTest.test_adopt_release_restores_and_keep_preserves — adopt: release восстанавливает, keep сохраняет локальные правки
+      passed: test_cli.AdoptTest.test_adopt_requires_resolutions — adopt требует разрешений для изменённых файлов
+  core-unit-tests: not_applicable; последний результат passed d334a97885f64ad9b8747cab2eb222fc-core-unit-tests-reused от 2026-11-14T20:46:26.650642+00:00 (reused b128ce0ebd4745469e6428d8143e185e-core-unit-tests от 2026-11-14T20:10:35.118838+00:00); тестов: 510
+      passed: test_audit_material_safety.AuditMaterialSafetyTest.test_audit_added_outside_declared_inputs_does_not_force_rerun — Добавленный аудит-файл вне объявленных входов не заставляет повторять прогон
+      passed: test_audit_material_safety.AuditMaterialSafetyTest.test_audit_preview_apply_repeat_and_archive_preserve_raw_snapshot — Audit preview/apply/повтор и архивация сохраняют raw snapshot побайтно
+      passed: test_audit_material_safety.AuditMaterialSafetyTest.test_bad_raw_markdown_rejected_in_future_close_tree — Некорректный raw markdown отклоняется в будущем дереве закрытия
+      passed: test_audit_material_safety.AuditMaterialSafetyTest.test_changed_environment_or_missing_runtime_requires_real_run — Изменённая среда или отсутствующий runtime требуют реального прогона
+      passed: test_audit_material_safety.AuditMaterialSafetyTest.test_close_preview_and_apply_reject_same_future_link_without_touching_evidence — Close preview и apply отклоняют одну будущую ссылку, не трогая доказательства
+  verification-unit-tests: not_applicable; последний результат passed d334a97885f64ad9b8747cab2eb222fc-verification-unit-tests-reused от 2026-11-14T20:46:26.689093+00:00 (reused b128ce0ebd4745469e6428d8143e185e-verification-unit-tests от 2026-11-14T20:11:24.664192+00:00); тестов: 56
+      passed: test_verification_policy.PolicyTests.test_absent_create_delete_directory_membership — Absent/create/delete и членство каталогов в snapshot
+      passed: test_verification_policy.PolicyTests.test_added_deleted_changed_and_zero_segment_glob — Added/deleted/changed и zero-segment glob
+      passed: test_verification_policy.PolicyTests.test_always_and_explicit_checkpoint — applicability always и explicit checkpoint
+      passed: test_verification_policy.PolicyTests.test_baseline_unknown_is_required — baseline unknown → проверка обязательна
+      passed: test_verification_policy.PolicyTests.test_broad_scope_and_wildcard_prefix — Широкий scope и wildcard-префикс → обязательна
+Покрытие обязательств области задачи: 1/1

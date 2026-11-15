@@ -1,0 +1,6 @@
+HANDOFF_OK (0, 'DEV-09: передача на приёмку записана; отчётов: 1. Независимая приёмка: lifecycle accept.\n', '')
+OLD_RESULTS {'manual-ux': 'confirm-7b4f140622f1-manual-ux', 'old-suite': None, 'scenario-check': '265eb106694d4658aae18e9d02b8e1dc-scenario-check'}
+RERUN (1, 'checks run DEV-09: политика lifecycle-policy rev 1, scope=project mode=stale\nОграничение: trust_mode=local: результаты диагностические — локальная история не защищена от владельца проекта; доверенное выполнение требует контура PB-061\n  old-suite: RUN command\n  old-suite: passed (0.084с)\n  scenario-check: RUN command\n  scenario-check: passed (0.085с)\n  manual-ux: not_run — ручная проверка (Проверить отображение подтверждения заказа и кода отмены.)\nИтог: passed=2, not_run=1; непокрытых обязательств: 1\n', '')
+CONFIRM (0, 'checks confirm DEV-09: manual-ux — подтверждено Инженер в 2026-11-15T04:09:26.492785+00:00; покрытие решает общий расчёт свежести\n', '')
+AUDIT_READY_WITHOUT_NEW_HANDOFF (0, 'OK: структура, ссылки и 1 карточки; каталог документов: 0 документов, 0 legacy. Поведение продукта не проверялось.\naudit-ready: свежая передача и проверки подтверждены; независимый аудит не выполнен\npreflight: структура, материалы, блокировки и политика checks проверены; поведение CLI и приёмка не подтверждены\n', '')
+REPORT_UNCHANGED True

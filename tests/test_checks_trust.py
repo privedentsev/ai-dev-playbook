@@ -498,7 +498,7 @@ class IsolationTest(unittest.TestCase):
         arena.mkdir(parents=True)
         prefix = checks_trust.sandbox_prefix(proj.root, home, arena)
         code_write = (f"from pathlib import Path; "
-                      f"Path({str(home)!r}/'x').write_text('x')")
+                      f"(Path({str(home)!r})/'x').write_text('x')")
         import subprocess
         result = subprocess.run(
             prefix + [sys.executable, "-c", code_write],

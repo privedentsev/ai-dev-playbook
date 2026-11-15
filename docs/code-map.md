@@ -1,5 +1,7 @@
 # Карта кода
 
+PB-064: `tests/test_checks_e2e.py` — постоянная сквозная матрица AC-01–11 dependency-aware проверок на воспроизводимых временных проектах без Git: выбор по зависимостям cart/payment/discounts, fallback и исключения, режимы stale/force/release, негативные исходы адаптера, попытки обхода доверия и единый gate жизненного цикла. Self-pilot на изолированной копии репозитория — `docs/archive/tasks/PB-064-evidence/self_pilot.py` со съёмом команд, хешируемых файлов/байтов и времени против legacy verify и раздельной проверкой local/protected границ; opt-in применяется только к временной копии, основной проект остаётся на legacy-контракте.
+
 PB-037: `tests/test_workflow_e2e.py` объединяет ручные три итерации с устаревшим candidate, независимые счётчики и add/delete входов, small/medium/large с архивом и отдельную release checkpoint. Воспроизводимый self-project pilot — `docs/tasks/PB-037-evidence/self_pilot.py`; opt-in и миграция выполняются только на временной копии с сохранением обязательных команд.
 
 PB-036: `playbook.py` содержит workflow_settings, workflow_enable, workflow_migrate_card и init --workflow-v2; `templates/verification.json` задаёт стартовую структурную проверку. `updating.load_artifact` читает updates schemas 1/2 с minimum_cli_version. `tests/test_workflow_install.py` проверяет реальные локальные переходы, отказ старого CLI, opt-in, перевод карточек с историей, custom paths, конфликты, прерывания и автономный restore.

@@ -1,0 +1,339 @@
+test_ac03_excluded_logs_card_projection_binary_inputs_and_unknown_file (test_checks_e2e.InputsExclusionsFallbackBudgetE2ETest.test_ac03_excluded_logs_card_projection_binary_inputs_and_unknown_file)
+AC-03: лог не запускает тесты, карточка разделяет структуру и критерии, PNG/архив учитываются, неизвестный файл не теряется. ... ok
+test_ac04_subsystem_boundary_eight_reused_two_run_and_budget_stop (test_checks_e2e.InputsExclusionsFallbackBudgetE2ETest.test_ac04_subsystem_boundary_eight_reused_two_run_and_budget_stop)
+AC-04: подсистема расширяет набор в доказанных границах (8 reused, 2 run), при недоказанной независимости reuse запрещён, бюджет блокирует запуск. ... ok
+test_ac05_release_cross_task_stale_force_invalidation_and_late_failed (test_checks_e2e.ReleaseModesFreshnessAndAdapterE2ETest.test_ac05_release_cross_task_stale_force_invalidation_and_late_failed)
+AC-05: релиз собирает обязательства разных задач, stale сохраняет свежие, force запускает всё, смена среды/TTL/команды/фикстуры и поздний failed блокируют reuse. ... ok
+test_ac06_adapter_negatives_descriptions_reused_time_and_label_rename (test_checks_e2e.ReleaseModesFreshnessAndAdapterE2ETest.test_ac06_adapter_negatives_descriptions_reused_time_and_label_rename)
+AC-06: exit 0 с 0 тестов, пропавший ID, лишний skip, дубликат и порча отчёта отклоняются; описания и исходное время reused сохраняются. ... ok
+test_ac01_no_git_manual_edits_payments_and_discounts_counters (test_checks_e2e.ShopGraphE2ETest.test_ac01_no_git_manual_edits_payments_and_discounts_counters)
+AC-01: без .git правка оплаты запускает оплату и checkout при reuse корзины, правка discounts запускает все три. ... ok
+test_ac02_import_cycle_and_dynamic_import_expand_conservatively (test_checks_e2e.ShopGraphE2ETest.test_ac02_import_cycle_and_dynamic_import_expand_conservatively)
+AC-02: циклы импортов не зацикливаются, а dynamic import помечается unknown и исключает ложный пропуск. ... ok
+test_ac02_same_mtime_size_add_delete_rename_and_missing_baseline (test_checks_e2e.ShopGraphE2ETest.test_ac02_same_mtime_size_add_delete_rename_and_missing_baseline)
+AC-02: равные mtime/size при других байтах, add/delete/rename файла и импорта и потеря baseline исключают ложный reuse. ... ok
+test_check_dependency_chain_transitive_input_rerun (test_checks_e2e.ShopGraphE2ETest.test_check_dependency_chain_transitive_input_rerun)
+A-01: цепочка check→check→module — изменение транзитивного ... ok
+test_ac07_input_race_post_run_drift_arena_isolation_and_receipt_tamper (test_checks_e2e.TrustBoundaryLifecycleAndMigrationE2ETest.test_ac07_input_race_post_run_drift_arena_isolation_and_receipt_tamper)
+AC-07: мутация входа во время и после запуска блокирует passed; изолированный кандидат и подмена квитанции проверяются. ... ok
+test_ac08_and_card_ac03_bypass_attempts_and_local_vs_protected_boundary (test_checks_e2e.TrustBoundaryLifecycleAndMigrationE2ETest.test_ac08_and_card_ac03_bypass_attempts_and_local_vs_protected_boundary)
+AC-08 и AC-03 карточки: обходы доверенного gate отклоняются, границы local и protected проверяются раздельно. ... ok
+test_ac09_manual_and_task_criteria_unified_gate_and_archive_provenance (test_checks_e2e.TrustBoundaryLifecycleAndMigrationE2ETest.test_ac09_manual_and_task_criteria_unified_gate_and_archive_provenance)
+AC-09: старый suite не закрывает новое требование и ручную проверку; handoff/accept/release-ready едины, архив сохраняет provenance. ... ok
+test_ac10_legacy_intact_preview_readonly_unsupported_and_restore (test_checks_e2e.TrustBoundaryLifecycleAndMigrationE2ETest.test_ac10_legacy_intact_preview_readonly_unsupported_and_restore)
+AC-10: legacy без checks_policy неизменен, preview не исполняет код, неподдержанные версии и прерывание безопасны. ... ok
+test_coverage_report_binds_terminal_evidence (test_checks_e2e.TrustBoundaryLifecycleAndMigrationE2ETest.test_coverage_report_binds_terminal_evidence)
+A-02: checks-coverage-report привязан к терминальным ... ok
+test_coverage_report_rejects_post_report_rerun_of_not_applicable (test_checks_e2e.TrustBoundaryLifecycleAndMigrationE2ETest.test_coverage_report_rejects_post_report_rerun_of_not_applicable)
+A-04: переход not_applicable → новый прогон после отчёта ... ok
+test_apply_moves_document_materials_and_rewrites_links (test_lifecycle.ArchiveApplyTest.test_apply_moves_document_materials_and_rewrites_links)
+archive apply переносит документ/материалы и переписывает ссылки ... ok
+test_apply_twice_is_already_completed (test_lifecycle.ArchiveApplyTest.test_apply_twice_is_already_completed)
+Повторный archive apply — already_completed ... ok
+test_apply_two_documents_in_one_request (test_lifecycle.ArchiveApplyTest.test_apply_two_documents_in_one_request)
+archive apply двух документов в одном запросе ... ok
+test_archive_plan_document_with_done_tasks (test_lifecycle.ArchiveApplyTest.test_archive_plan_document_with_done_tasks)
+Архив плана-документа с done-задачами ... ok
+test_plan_preview_writes_nothing (test_lifecycle.ArchiveApplyTest.test_plan_preview_writes_nothing)
+archive plan preview не пишет файлов ... ok
+test_already_archived_refused (test_lifecycle.ArchiveRefusalTest.test_already_archived_refused)
+Повторный архив уже архивного отклоняется ... ok
+test_bad_request_shapes_refused (test_lifecycle.ArchiveRefusalTest.test_bad_request_shapes_refused)
+Битые формы запроса отклоняются ... ok
+test_close_task_unknown_task_refused (test_lifecycle.ArchiveRefusalTest.test_close_task_unknown_task_refused)
+close неизвестной задачи в lifecycle plan отклоняется ... ok
+test_destination_collision_refused (test_lifecycle.ArchiveRefusalTest.test_destination_collision_refused)
+Коллизия назначения архива отклоняется ... ok
+test_legacy_document_refused (test_lifecycle.ArchiveRefusalTest.test_legacy_document_refused)
+Архив legacy-документа без meta отклоняется ... ok
+test_missing_material_refused (test_lifecycle.ArchiveRefusalTest.test_missing_material_refused)
+Отсутствующий материал отклоняет архив ... ok
+test_no_documents_section_refused (test_lifecycle.ArchiveRefusalTest.test_no_documents_section_refused)
+Архив без раздела documents отклоняется ... ok
+test_non_final_state_refused (test_lifecycle.ArchiveRefusalTest.test_non_final_state_refused)
+Архив нефинального state отклоняется ... ok
+test_plan_document_with_open_tasks_refused (test_lifecycle.ArchiveRefusalTest.test_plan_document_with_open_tasks_refused)
+План-документ с открытыми задачами отклоняет архив ... ok
+test_scope_mismatch_refused (test_lifecycle.ArchiveRefusalTest.test_scope_mismatch_refused)
+Scope, не совпадающий с запросом, отклоняется ... ok
+test_scope_tasks_mismatch_refused (test_lifecycle.ArchiveRefusalTest.test_scope_tasks_mismatch_refused)
+Несовпадение scope.tasks отклоняется ... ok
+test_successor_missing_refused (test_lifecycle.ArchiveRefusalTest.test_successor_missing_refused)
+Отсутствующий successor отклоняется ... ok
+test_successor_within_same_operation_refused (test_lifecycle.ArchiveRefusalTest.test_successor_within_same_operation_refused)
+Successor внутри той же операции отклоняется ... ok
+test_unaccounted_evidence_refused (test_lifecycle.ArchiveRefusalTest.test_unaccounted_evidence_refused)
+Неучтённый evidence-файл отклоняет архив ... ok
+test_unconfirmed_external_required_refused (test_lifecycle.ArchiveRefusalTest.test_unconfirmed_external_required_refused)
+Неподтверждённый обязательный внешний материал отклоняет архив ... ok
+test_unknown_action_refused (test_lifecycle.ArchiveRefusalTest.test_unknown_action_refused)
+Неизвестное action запроса отклоняется ... ok
+test_unknown_confirmed_material_refused (test_lifecycle.ArchiveRefusalTest.test_unknown_confirmed_material_refused)
+Неизвестный id в confirmed_materials отклоняется ... ok
+test_wikilink_conflict_refused (test_lifecycle.ArchiveRefusalTest.test_wikilink_conflict_refused)
+Wikilink-конфликт при архиве отклоняется ... ok
+test_work_area_material_refused (test_lifecycle.ArchiveRefusalTest.test_work_area_material_refused)
+Материал из work-области отклоняется ... ok
+test_apply_failure_restores_preimage (test_lifecycle.InterruptRestoreTest.test_apply_failure_restores_preimage)
+Сбой apply восстанавливает пред-образ ... ok
+test_crash_mid_apply_then_restore (test_lifecycle.InterruptRestoreTest.test_crash_mid_apply_then_restore)
+Крах посреди apply → restore пред-образа ... ok
+test_restore_without_pending_refused (test_lifecycle.InterruptRestoreTest.test_restore_without_pending_refused)
+lifecycle restore без pending отклоняется ... ok
+test_catalog_change_after_plan_refused (test_lifecycle.StalePlanTest.test_catalog_change_after_plan_refused)
+Изменение каталога после плана отклоняет apply ... ok
+test_input_change_after_plan_refused (test_lifecycle.StalePlanTest.test_input_change_after_plan_refused)
+Изменение входа после плана отклоняет apply ... ok
+test_new_evidence_file_after_plan_refused (test_lifecycle.StalePlanTest.test_new_evidence_file_after_plan_refused)
+Новый evidence-файл после плана отклоняет apply ... ok
+test_plan_from_other_root_refused (test_lifecycle.StalePlanTest.test_plan_from_other_root_refused)
+План из другого root отклоняется ... ok
+test_tampered_plan_refused (test_lifecycle.StalePlanTest.test_tampered_plan_refused)
+Подделанный план отклоняется ... ok
+test_tampered_request_in_plan_refused (test_lifecycle.StalePlanTest.test_tampered_request_in_plan_refused)
+Подделанный запрос внутри плана отклоняется ... ok
+test_status_lists_saved_plans (test_lifecycle.StatusTest.test_status_lists_saved_plans)
+lifecycle status перечисляет сохранённые планы ... ok
+test_close_task_updates_active_plan_index_and_dry_run (test_close_lifecycle.CollectionIndexRetentionTest.test_close_task_updates_active_plan_index_and_dry_run)
+close задачи обновляет индекс активного плана, dry-run безопасен ... ok
+test_manual_links_across_collections_including_none_generator (test_close_lifecycle.CollectionIndexRetentionTest.test_manual_links_across_collections_including_none_generator)
+Ручные ссылки через коллекции, включая none-генератор ... ok
+test_reopen_restores_plan_index_and_blocks_active_dependent (test_close_lifecycle.CollectionIndexRetentionTest.test_reopen_restores_plan_index_and_blocks_active_dependent)
+reopen восстанавливает индекс плана и блокирует активную зависимую ... ok
+test_staged_check_failure_restores_preimage (test_close_lifecycle.CollectionIndexRetentionTest.test_staged_check_failure_restores_preimage)
+Сбой staged-проверки восстанавливает пред-образ ... ok
+test_stale_plan_rejects_modified_collection_index (test_close_lifecycle.CollectionIndexRetentionTest.test_stale_plan_rejects_modified_collection_index)
+Устаревший план отклоняет изменённый индекс коллекции ... ok
+test_combined_close_and_plan_archive (test_close_lifecycle.CombinedClosureTest.test_combined_close_and_plan_archive)
+Совмещённые close и archive плана в одном запросе ... ok
+test_combined_close_refuses_unfinished_task_outside_scope (test_close_lifecycle.CombinedClosureTest.test_combined_close_refuses_unfinished_task_outside_scope)
+Совмещённый close отклоняет незавершённую задачу вне scope ... ok
+test_combined_close_refuses_without_acceptance (test_close_lifecycle.CombinedClosureTest.test_combined_close_refuses_without_acceptance)
+Совмещённый close без приёмки отклоняется ... ok
+test_accept_records_result_and_link (test_close_lifecycle.HandoffAcceptTest.test_accept_records_result_and_link)
+accept записывает результат и ссылку приёмки ... ok
+test_accept_without_handoff_refused (test_close_lifecycle.HandoffAcceptTest.test_accept_without_handoff_refused)
+accept без handoff отклоняется ... ok
+test_handoff_legacy_card_refused (test_close_lifecycle.HandoffAcceptTest.test_handoff_legacy_card_refused)
+handoff legacy-карточки в managed-проекте отклоняется ... ok
+test_handoff_registers_runs_and_projection (test_close_lifecycle.HandoffAcceptTest.test_handoff_registers_runs_and_projection)
+handoff регистрирует прогоны verify и проекцию задачи ... ok
+test_handoff_without_verify_refused (test_close_lifecycle.HandoffAcceptTest.test_handoff_without_verify_refused)
+handoff без свежего verify отклоняется ... ok
+test_close_cancelled_with_acceptance (test_close_lifecycle.ManagedCloseTest.test_close_cancelled_with_acceptance)
+close cancelled с зафиксированной приёмкой ... ok
+test_close_cancelled_without_acceptance_refused (test_close_lifecycle.ManagedCloseTest.test_close_cancelled_without_acceptance_refused)
+close cancelled без приёмки отклоняется ... ok
+test_close_cancelled_without_reason_refused (test_close_lifecycle.ManagedCloseTest.test_close_cancelled_without_reason_refused)
+close cancelled без причины отклоняется ... ok
+test_close_done_card_changed_after_handoff_refused (test_close_lifecycle.ManagedCloseTest.test_close_done_card_changed_after_handoff_refused)
+Изменение карточки после handoff блокирует close ... ok
+test_close_done_in_progress_refused (test_close_lifecycle.ManagedCloseTest.test_close_done_in_progress_refused)
+close done из in_progress отклоняется ... ok
+test_close_done_managed_card (test_close_lifecycle.ManagedCloseTest.test_close_done_managed_card)
+close done управляемой карточки после handoff и accept ... ok
+test_close_done_stale_inputs_refused (test_close_lifecycle.ManagedCloseTest.test_close_done_stale_inputs_refused)
+Устаревшие входы блокируют close done ... ok
+test_close_done_without_acceptance_refused (test_close_lifecycle.ManagedCloseTest.test_close_done_without_acceptance_refused)
+close done без приёмки отклоняется ... ok
+test_close_done_without_handoff_refused (test_close_lifecycle.ManagedCloseTest.test_close_done_without_handoff_refused)
+close done без handoff отклоняется ... ok
+test_close_dry_run_writes_nothing (test_close_lifecycle.ManagedCloseTest.test_close_dry_run_writes_nothing)
+close --dry-run не пишет изменений ... ok
+test_close_legacy_card_in_managed_project (test_close_lifecycle.ManagedCloseTest.test_close_legacy_card_in_managed_project)
+Карточка без метаданных в проекте с documents — legacy-политика. ... ok
+test_diagnostic_acceptance_not_enough (test_close_lifecycle.ManagedCloseTest.test_diagnostic_acceptance_not_enough)
+Диагностическая приёмка не достаточна для close ... ok
+test_promote_archived_refused (test_close_lifecycle.PromoteChangeTest.test_promote_archived_refused)
+promote архивированного изменения отклоняется ... ok
+test_promote_not_implemented_refused (test_close_lifecycle.PromoteChangeTest.test_promote_not_implemented_refused)
+promote нереализованного изменения отклоняется ... ok
+test_promote_unknown_change_refused (test_close_lifecycle.PromoteChangeTest.test_promote_unknown_change_refused)
+promote неизвестного изменения отклоняется ... ok
+test_promote_writes_revision_and_bumps (test_close_lifecycle.PromoteChangeTest.test_promote_writes_revision_and_bumps)
+promote изменений пишет ревизию и bump ... ok
+test_promotion_rejects_missing_wrong_and_stale_acceptance (test_close_lifecycle.PromoteChangeTest.test_promotion_rejects_missing_wrong_and_stale_acceptance)
+promote отклоняет отсутствующую, чужую и устаревшую приёмку ... ok
+test_receipt_changed_after_plan_refuses_apply (test_close_lifecycle.PromoteChangeTest.test_receipt_changed_after_plan_refuses_apply)
+Изменённая после плана квитанция отклоняет apply ... ok
+test_reopen_active_card_refused (test_close_lifecycle.ReopenTest.test_reopen_active_card_refused)
+reopen активной карточки отклоняется ... ok
+test_reopen_active_dependent_blocked (test_close_lifecycle.ReopenTest.test_reopen_active_dependent_blocked)
+Активная зависимая блокирует reopen ... ok
+test_reopen_blocks_dependents (test_close_lifecycle.ReopenTest.test_reopen_blocks_dependents)
+reopen блокирует зависимые задачи ... ok
+test_reopen_combined_with_dependent (test_close_lifecycle.ReopenTest.test_reopen_combined_with_dependent)
+Совмещённый reopen зависимой карточки ... ok
+test_reopen_legacy_card (test_close_lifecycle.ReopenTest.test_reopen_legacy_card)
+reopen legacy-карточки в архиве ... ok
+test_reopen_returns_card_and_clears_acceptance (test_close_lifecycle.ReopenTest.test_reopen_returns_card_and_clears_acceptance)
+reopen возвращает карточку и снимает приёмку ... ok
+test_reopen_with_done_dependent_refused (test_close_lifecycle.ReopenTest.test_reopen_with_done_dependent_refused)
+reopen при done-зависимой отклоняется ... ok
+test_audit_package_and_accept_repeat_do_not_repeat_expensive_check (test_task_workflow_lifecycle.TaskWorkflowLifecycleTest.test_audit_package_and_accept_repeat_do_not_repeat_expensive_check)
+Audit package и повторный accept не повторяют дорогую проверку ... ok
+test_changed_paths_from_real_baseline_add_project_obligations (test_task_workflow_lifecycle.TaskWorkflowLifecycleTest.test_changed_paths_from_real_baseline_add_project_obligations)
+Изменённые пути от baseline добавляют project-обязательства ... ok
+test_changed_read_material_requires_its_check_again (test_task_workflow_lifecycle.TaskWorkflowLifecycleTest.test_changed_read_material_requires_its_check_again)
+Изменённый read-материал требует повторной проверки ... ok
+test_conflict_after_preparation_refuses_and_keeps_external_edit (test_task_workflow_lifecycle.TaskWorkflowLifecycleTest.test_conflict_after_preparation_refuses_and_keeps_external_edit)
+Конфликт после подготовки отклоняется, внешняя правка сохранена ... ok
+test_damaged_latest_run_requires_replacement_and_preserves_history (test_task_workflow_lifecycle.TaskWorkflowLifecycleTest.test_damaged_latest_run_requires_replacement_and_preserves_history)
+Повреждённый поздний прогон требует замены, история сохранена ... ok
+test_external_metadata_pair_start_handoff_and_archive (test_task_workflow_lifecycle.TaskWorkflowLifecycleTest.test_external_metadata_pair_start_handoff_and_archive)
+External metadata пара: start/handoff/archive ... ok
+test_first_start_captures_existing_dirty_git_bytes (test_task_workflow_lifecycle.TaskWorkflowLifecycleTest.test_first_start_captures_existing_dirty_git_bytes)
+Первый start захватывает существующие dirty Git-байты ... ok
+test_handoff_with_no_or_failed_results_refuses (test_task_workflow_lifecycle.TaskWorkflowLifecycleTest.test_handoff_with_no_or_failed_results_refuses)
+handoff без результатов или с failed отклоняется ... ok
+test_immutable_material_file_directory_swap_cannot_preserve_receipt (test_task_workflow_lifecycle.TaskWorkflowLifecycleTest.test_immutable_material_file_directory_swap_cannot_preserve_receipt)
+Swap файл↔каталог immutable-материала не сохраняет receipt ... ok
+test_latest_failure_cannot_be_hidden_by_explicit_old_report (test_task_workflow_lifecycle.TaskWorkflowLifecycleTest.test_latest_failure_cannot_be_hidden_by_explicit_old_report)
+Поздний failure не скрывается явным старым отчётом ... ok
+test_log_bytes_and_baseline_corruption_reject_receipt (test_task_workflow_lifecycle.TaskWorkflowLifecycleTest.test_log_bytes_and_baseline_corruption_reject_receipt)
+Повреждение байтов лога и baseline отклоняет receipt ... ok
+test_manual_only_path_closes_without_command_run (test_task_workflow_lifecycle.TaskWorkflowLifecycleTest.test_manual_only_path_closes_without_command_run)
+Manual-only путь закрывается без запуска команд ... ok
+test_markdown_v2_journal_coverage_and_close (test_task_workflow_lifecycle.TaskWorkflowLifecycleTest.test_markdown_v2_journal_coverage_and_close)
+Markdown v2: покрытие журнала и close ... ok
+test_new_unknown_proof_requires_new_handoff (test_task_workflow_lifecycle.TaskWorkflowLifecycleTest.test_new_unknown_proof_requires_new_handoff)
+Новый unknown-proof требует нового handoff ... ok
+test_pending_and_foreign_lock_prevent_handoff (test_task_workflow_lifecycle.TaskWorkflowLifecycleTest.test_pending_and_foreign_lock_prevent_handoff)
+Pending и чужой lock предотвращают handoff ... ok
+test_real_sigkill_staged_and_mid_write_restore_and_repeat (test_task_workflow_lifecycle.TaskWorkflowLifecycleTest.test_real_sigkill_staged_and_mid_write_restore_and_repeat)
+Реальный SIGKILL staged/mid-write → restore и повтор ... ok
+test_revise_preserves_history_and_stale_acceptance_is_blocked (test_task_workflow_lifecycle.TaskWorkflowLifecycleTest.test_revise_preserves_history_and_stale_acceptance_is_blocked)
+revise сохраняет историю, stale-приёмка блокируется ... ok
+test_route_requires_approval_and_keeps_failures (test_task_workflow_lifecycle.TaskWorkflowLifecycleTest.test_route_requires_approval_and_keeps_failures)
+route требует одобрения и сохраняет отказы ... ok
+test_service_cycle_does_not_rerun_and_preserves_immutable_bytes (test_task_workflow_lifecycle.TaskWorkflowLifecycleTest.test_service_cycle_does_not_rerun_and_preserves_immutable_bytes)
+Сервисный цикл не перезапускает и сохраняет immutable-байты ... ok
+test_stale_source_plan_policy_and_report_reject_acceptance (test_task_workflow_lifecycle.TaskWorkflowLifecycleTest.test_stale_source_plan_policy_and_report_reject_acceptance)
+Устаревшие source/plan/policy/report отклоняют приёмку ... ok
+test_start_missing_goal_or_dependency_refuses_without_writes (test_task_workflow_lifecycle.TaskWorkflowLifecycleTest.test_start_missing_goal_or_dependency_refuses_without_writes)
+start без цели/зависимости отклоняется без записи ... ok
+test_start_no_git_dirty_git_and_idempotence (test_task_workflow_lifecycle.TaskWorkflowLifecycleTest.test_start_no_git_dirty_git_and_idempotence)
+start без Git, с dirty Git и идемпотентность ... ok
+test_start_service_writes_do_not_make_docs_obligation_applicable (test_task_workflow_lifecycle.TaskWorkflowLifecycleTest.test_start_service_writes_do_not_make_docs_obligation_applicable)
+Сервисные записи start не делают docs-обязательство применимым ... ok
+test_no_policy_returns_none (test_checks_gate.LifecycleGateTest.test_no_policy_returns_none)
+Без checks_policy lifecycle возвращает None — legacy-контракт ... ok
+test_policy_requires_coverage (test_checks_gate.LifecycleGateTest.test_policy_requires_coverage)
+С checks_policy lifecycle требует покрытия области задачи ... ok
+test_confirm_covers_and_survives_rerun (test_checks_gate.LocalGateTest.test_confirm_covers_and_survives_rerun)
+Confirm ручной проверки покрывает её и переживает повторный прогон ... ok
+test_input_change_uncovers (test_checks_gate.LocalGateTest.test_input_change_uncovers)
+Изменение входа после прогона снимает покрытие проверки ... ok
+test_manual_without_confirm_blocks_ok (test_checks_gate.LocalGateTest.test_manual_without_confirm_blocks_ok)
+Ручная проверка без confirm блокирует ok даже при зелёном прогоне ... ok
+test_release_scope_reuses_cross_task (test_checks_gate.LocalGateTest.test_release_scope_reuses_cross_task)
+AC-02/05: project-область — весь набор; результаты задачи ... ok
+test_uncovered_before_run (test_checks_gate.LocalGateTest.test_uncovered_before_run)
+До прогона область не покрыта — evaluate возвращает ok=false ... ok
+test_forged_receipt_rejected (test_checks_gate.ProtectedGateTest.test_forged_receipt_rejected)
+Поддельная квитанция verifier отклоняется evaluate ... ok
+test_local_results_do_not_cover_protected (test_checks_gate.ProtectedGateTest.test_local_results_do_not_cover_protected)
+Локальные результаты не покрывают protected-политику ... ok
+test_receipt_covers_but_boundary_required (test_checks_gate.ProtectedGateTest.test_receipt_covers_but_boundary_required)
+Квитанция verifier покрывает проверку, но граница обязательна ... ok
+test_stale_candidate_receipt_not_evidence (test_checks_gate.ProtectedGateTest.test_stale_candidate_receipt_not_evidence)
+Квитанция прежнего кандидата — история, не отказ и не ... ok
+test_aggregate_cannot_override_later_failure (test_checks_gate.ProtectedLatestOutcomeTest.test_aggregate_cannot_override_later_failure)
+Aggregate подтверждает старый passed-результат, но не ... ok
+test_later_failed_blocks_earlier_passed (test_checks_gate.ProtectedLatestOutcomeTest.test_later_failed_blocks_earlier_passed)
+Поздний failed блокирует ранний passed в защищённой истории ... ok
+test_same_timestamp_aggregate_keeps_failed_latest (test_checks_gate.ProtectedLatestOutcomeTest.test_same_timestamp_aggregate_keeps_failed_latest)
+A-05 аудита PB-062: при равных finished_at порядок задаёт ... ok
+test_aggregate_receipt_ttl_expiry_rejected (test_checks_gate.ProtectedTtlTest.test_aggregate_receipt_ttl_expiry_rejected)
+Просроченная aggregate-квитанция не закрывает обязательство ... ok
+test_older_expired_aggregate_does_not_block_fresh (test_checks_gate.ProtectedTtlTest.test_older_expired_aggregate_does_not_block_fresh)
+A-04: aggregate подтверждает исходное время исполнения — ... ok
+test_older_expired_does_not_block_fresh (test_checks_gate.ProtectedTtlTest.test_older_expired_does_not_block_fresh)
+A-04: просроченная квитанция не блокирует более свежее ... ok
+test_run_receipt_ttl_expiry_rejected (test_checks_gate.ProtectedTtlTest.test_run_receipt_ttl_expiry_rejected)
+Просроченная по TTL run-квитанция не закрывает обязательство ... ok
+test_allowed_skip_accepted (test_checks_run.AdapterTest.test_allowed_skip_accepted)
+Skip из allowlist каталога принимается verdict'ом ... ok
+test_error_outcome_and_description (test_checks_run.AdapterTest.test_error_outcome_and_description)
+error-исход попадает в описание результата проверки ... ok
+test_expected_failure_and_unexpected_success (test_checks_run.AdapterTest.test_expected_failure_and_unexpected_success)
+expectedFailure и unexpected success учитываются verdict'ом ... ok
+test_green_suite_passed (test_checks_run.AdapterTest.test_green_suite_passed)
+Зелёный набор тестов даёт verdict passed ... ok
+test_missing_catalog_id_rejected (test_checks_run.AdapterTest.test_missing_catalog_id_rejected)
+Тест вне каталога политики отклоняется ... ok
+test_parse_argv_forms (test_checks_run.AdapterTest.test_parse_argv_forms)
+parse_argv разбирает формы unittest discover/модулей в selection ... ok
+test_subtest_failure_rejected (test_checks_run.AdapterTest.test_subtest_failure_rejected)
+Падение subTest отклоняется verdict'ом ... ok
+test_timeout_status (test_checks_run.AdapterTest.test_timeout_status)
+Превышение timeout проверки даёт статус timeout ... ok
+test_unexpected_skip_rejected (test_checks_run.AdapterTest.test_unexpected_skip_rejected)
+Неожиданный skip вне allowlist отклоняется ... ok
+test_unfinished_and_crash_rejected (test_checks_run.AdapterTest.test_unfinished_and_crash_rejected)
+unfinished/crash исходы тестов отклоняются ... ok
+test_zero_tests_rejected (test_checks_run.AdapterTest.test_zero_tests_rejected)
+Пустой набор без тестов отклоняется verdict'ом ... ok
+test_a01_ttl_from_original_run (test_checks_run.AuditRegressionTest.test_a01_ttl_from_original_run)
+A-01: TTL внешней зависимости считается от исходного прогона ... ok
+test_a02_reuse_rebinding_race_reruns (test_checks_run.AuditRegressionTest.test_a02_reuse_rebinding_race_reruns)
+A-02: гонка перепривязки при переиспользовании вызывает прогон ... ok
+test_a03_corrupt_latest_failed_blocks_reuse (test_checks_run.AuditRegressionTest.test_a03_corrupt_latest_failed_blocks_reuse)
+A-03: повреждённый поздний failed блокирует переиспользование ... ok
+test_a04_status_counts_only_fresh_coverage (test_checks_run.AuditRegressionTest.test_a04_status_counts_only_fresh_coverage)
+A-04: status учитывает только свежее покрытие ... ok
+test_a05_project_import_in_adapter (test_checks_run.AuditRegressionTest.test_a05_project_import_in_adapter)
+A-05: project-импорт в адаптере unittest обрабатывается ... ok
+test_a06_deleted_latest_failed_blocks_reuse (test_checks_run.AuditRegressionTest.test_a06_deleted_latest_failed_blocks_reuse)
+A-06: удалённый поздний failed блокирует переиспользование ... ok
+test_a07_rebuild_preserves_loss_evidence (test_checks_run.AuditRegressionTest.test_a07_rebuild_preserves_loss_evidence)
+A-07: rebuild индекса сохраняет свидетельства потерь ... ok
+test_a07_unrelated_run_keeps_evidence (test_checks_run.AuditRegressionTest.test_a07_unrelated_run_keeps_evidence)
+A-07: несвязанный прогон сохраняет свидетельства потерь ... ok
+test_run_and_status_end_to_end (test_checks_run.CliRunTest.test_run_and_status_end_to_end)
+checks run и status работают end-to-end через CLI ... ok
+test_run_requires_policy (test_checks_run.CliRunTest.test_run_requires_policy)
+checks run без checks_policy в project.json отклоняется ... ok
+test_run_requires_task (test_checks_run.CliRunTest.test_run_requires_task)
+checks run для несуществующей задачи отклоняется ... ok
+test_run_second_time_reuses (test_checks_run.CliRunTest.test_run_second_time_reuses)
+Повторный checks run переиспользует результаты ... ok
+test_changed_input_forces_rerun (test_checks_run.RunnerTest.test_changed_input_forces_rerun)
+Изменённый вход проверки заставляет её повторить ... ok
+test_corrupt_index_rebuilt (test_checks_run.RunnerTest.test_corrupt_index_rebuilt)
+Повреждённый индекс результатов перестраивается ... ok
+test_corrupt_result_no_false_reuse (test_checks_run.RunnerTest.test_corrupt_result_no_false_reuse)
+Повреждённый результат не даёт ложного переиспользования ... ok
+test_cross_task_reuse_same_project (test_checks_run.RunnerTest.test_cross_task_reuse_same_project)
+Результат одной задачи переиспользуется другой в том же проекте ... ok
+test_external_ttl_and_always_run (test_checks_run.RunnerTest.test_external_ttl_and_always_run)
+TTL и always_run внешних зависимостей соблюдаются runner'ом ... ok
+test_external_version_change_breaks_binding (test_checks_run.RunnerTest.test_external_version_change_breaks_binding)
+Смена версии внешней зависимости ломает binding результата ... ok
+test_first_run_stores_results_and_state (test_checks_run.RunnerTest.test_first_run_stores_results_and_state)
+Первый прогон сохраняет результаты и состояние runner'а ... ok
+test_force_reruns_all (test_checks_run.RunnerTest.test_force_reruns_all)
+force-режим перезапускает все проверки области ... ok
+test_late_failed_not_hidden (test_checks_run.RunnerTest.test_late_failed_not_hidden)
+Поздний failed не скрывается старым passed при переиспользовании ... ok
+test_mutation_during_command_blocked (test_checks_run.RunnerTest.test_mutation_during_command_blocked)
+Мутация входов во время команды проверки блокируется ... ok
+test_other_project_result_not_reused (test_checks_run.RunnerTest.test_other_project_result_not_reused)
+Результат другого проекта не переиспользуется ... ok
+test_project_scope_covers_all (test_checks_run.RunnerTest.test_project_scope_covers_all)
+scope=project покрывает все проверки проекта ... ok
+test_stale_reuses_independent_results (test_checks_run.RunnerTest.test_stale_reuses_independent_results)
+stale-режим переиспользует независимые свежие результаты ... ok
+test_status_reports_coverage_and_trust (test_checks_run.RunnerTest.test_status_reports_coverage_and_trust)
+checks status сообщает покрытие и trust_mode ... ok
+test_task_requirements_change_breaks_reuse (test_checks_run.RunnerTest.test_task_requirements_change_breaks_reuse)
+Изменение task_projection-входа ломает переиспользование ... ok
+
+----------------------------------------------------------------------
+Ran 165 tests in 414.769s
+
+OK
+Создано 73 файлов в /private/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/tmpzw7s3n6c; manifest записан. Заполните документы и project.json; setup_status=needs_review.
+Создано 73 файлов в /private/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/tmplqdsjjr7; manifest записан. Заполните документы и project.json; setup_status=needs_review.
+Создано 73 файлов в /private/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/tmp3z8tggxh; manifest записан. Заполните документы и project.json; setup_status=needs_review.
+Создано 73 файлов в /private/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/tmp6cvlcpwb; manifest записан. Заполните документы и project.json; setup_status=needs_review.

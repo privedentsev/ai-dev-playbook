@@ -1,0 +1,6 @@
+checks release-ready PB-064: политика ai-dev-playbook-self-pilot rev 2, trust=protected, checkpoint=release
+Ограничение: trust_mode=protected: локальные результаты не являются доверенными квитанциями; подтверждение — внешний verifier (PB-061)
+  preflight-regressions: covered
+Покрытие: 1 покрыто, 0 не покрыто, 0 ручных, 0 заблокировано
+  примечание: покрытие квитанциями полное, но граница OS/CI identity не доказана — защищённое утверждение заблокировано (R-20)
+release-ready: не готово

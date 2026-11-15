@@ -1,0 +1,164 @@
+{
+  "schema_version": 1,
+  "task_id": "PB-064",
+  "environment": {
+    "platform": "macOS-27.2.1-x86_64-i386-64bit-Mach-O",
+    "python": "3.14.6",
+    "sandbox_exec_available": true,
+    "separate_os_identity_available": false
+  },
+  "source_repository_unchanged": true,
+  "source_checks_policy_enabled": false,
+  "catalog_bijection": {
+    "total_unittest_ids": 1082,
+    "unique_test_ids": 1076,
+    "load_tests_shared_ids": [
+      "test_cli.AdoptTest.test_adopt_conflicting_version",
+      "test_document_links.RewriteTest.test_unrelated_move_preserves_authored_destinations",
+      "test_pb028.Pb028CompatibilityAndUpdateTest.test_real_002_artifact_update_with_custom_paths_and_evidence",
+      "test_task_workflow_schema.AuditFindingsCoverageTest.test_PB_031_A1_symlink_in_scope_and_inputs_rejected",
+      "test_task_workflow_schema.AuditFindingsCoverageTest.test_PB_031_A2_null_plan_and_null_inputs_rejected",
+      "test_task_workflow_schema.AuditFindingsCoverageTest.test_PB_031_A4_v2_card_rejected_without_task_workflow_opt_in"
+    ],
+    "suites": {
+      "block-unit-tests": 39,
+      "checks-unit-tests": 313,
+      "cli-unit-tests": 164,
+      "core-unit-tests": 510,
+      "verification-unit-tests": 56
+    }
+  },
+  "optin_setup_seconds": {
+    "preview": 2.21,
+    "apply": 0.631
+  },
+  "scenarios": {
+    "step1_initial_full_baseline": {
+      "description": "Первичный полный прогон на идентичной чистой копии без .git и work/",
+      "legacy_verify": {
+        "run_id": "1bc6c0d1fa4c40f58d7470c63593f65a",
+        "status": "passed",
+        "commands_executed": 3,
+        "command_ids": [
+          "self-check",
+          "preflight-regressions",
+          "unit-tests"
+        ],
+        "unique_input_files": 2859,
+        "hashed_files_total": 5718,
+        "hashed_bytes_total": 203921216,
+        "check_durations_seconds": {
+          "self-check": 30.276,
+          "preflight-regressions": 4.129,
+          "unit-tests": 1749.439
+        },
+        "wall_seconds": 1870.026
+      },
+      "optin_checks": {
+        "commands_executed": 7,
+        "command_ids": [
+          "self-check",
+          "preflight-regressions",
+          "block-unit-tests",
+          "checks-unit-tests",
+          "cli-unit-tests",
+          "core-unit-tests",
+          "verification-unit-tests"
+        ],
+        "plan_hashed_bytes": 105371303,
+        "plan_hashed_files": 3046,
+        "runner_snapshot_files": 1892,
+        "runner_snapshot_bytes": 36862916,
+        "hashed_files_total": 4938,
+        "hashed_bytes_total": 142234219,
+        "wall_seconds": 1815.206
+      }
+    },
+    "step2_localized_edit_tests_checks_setup": {
+      "description": "Одинаковая локальная правка в tests/test_checks_setup.py",
+      "legacy_verify_reuse": {
+        "run_id": "744c7f7087da485db607ef88947d4782",
+        "status": "passed",
+        "commands_executed": 3,
+        "command_ids": [
+          "self-check",
+          "preflight-regressions",
+          "unit-tests"
+        ],
+        "unique_input_files": 2859,
+        "hashed_files_total": 5718,
+        "hashed_bytes_total": 203921362,
+        "check_durations_seconds": {
+          "self-check": 30.507,
+          "preflight-regressions": 4.249,
+          "unit-tests": 1736.275
+        },
+        "wall_seconds": 1862.941
+      },
+      "optin_checks_task_stale": {
+        "commands_executed": 1,
+        "executed_check_ids": [
+          "checks-unit-tests"
+        ],
+        "reused_check_ids": [
+          "self-check"
+        ],
+        "plan_seconds": 4.744,
+        "plan_hashed_bytes": 111010789,
+        "plan_hashed_files": 3326,
+        "runner_snapshot_files": 445,
+        "runner_snapshot_bytes": 8763334,
+        "hashed_files_total": 3771,
+        "hashed_bytes_total": 119774123,
+        "wall_seconds": 133.064,
+        "run_only_wall_seconds": 128.32
+      }
+    },
+    "step2b_transitive_ast_plan_checks_setup_script": {
+      "description": "Read-only checks plan при правке ai-dev-playbook/scripts/checks_setup.py (транзитивное ребро в playbook.py)",
+      "plan_seconds": 4.714,
+      "block_unit_tests_reused": false,
+      "core_and_cli_selected": true
+    },
+    "step3_repeat_unchanged_and_release_gate": {
+      "description": "Повтор на неизменных входах, release-ready, handoff и audit-ready",
+      "legacy_verify_reuse": {
+        "commands_executed": 0,
+        "hashed_files_total": 2859,
+        "hashed_bytes_total": 101960681,
+        "wall_seconds": 85.882
+      },
+      "optin_checks_project_release_stale": {
+        "commands_executed": 0,
+        "reused_check_ids": [
+          "block-unit-tests",
+          "checks-unit-tests",
+          "cli-unit-tests",
+          "core-unit-tests",
+          "preflight-regressions",
+          "self-check",
+          "verification-unit-tests"
+        ],
+        "plan_hashed_bytes": 107886795,
+        "plan_hashed_files": 3161,
+        "runner_snapshot_files": 946,
+        "runner_snapshot_bytes": 18431531,
+        "hashed_files_total": 4107,
+        "hashed_bytes_total": 126318326,
+        "wall_seconds": 5.033
+      },
+      "handoff_idempotent": false,
+      "audit_ready_passed": true,
+      "close_without_acceptance_refused": true
+    }
+  },
+  "trust_boundaries": {
+    "kind_test_rejected_by_verifier": true,
+    "command_isolated_receipt_verified": true,
+    "receipt_id": "rc-4422cbcd47aa4536",
+    "probe_capability": "local",
+    "sandbox_exec_present": true,
+    "verifier_gate_coverage_ok_capability_local": true,
+    "release_ready_refused_without_separate_os_identity": true
+  }
+}

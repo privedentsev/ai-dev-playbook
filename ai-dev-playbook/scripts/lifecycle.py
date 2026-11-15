@@ -97,6 +97,8 @@ import unicodedata
 from pathlib import Path, PurePosixPath
 
 import checks_gate
+import checks_results
+import checks_select
 import document_links
 import documents
 import task_cards
@@ -137,7 +139,8 @@ REOPEN_STATES = {"draft", "ready", "in_progress", "blocked"}
 # Внутри work/ переносимы только зарегистрированные результаты проверок и
 # сохранённые запросы/планы; живое состояние операций и обновлений
 # материалом не является и не переносится.
-MOVABLE_WORK = ("work/verification/", "work/lifecycle/plans/")
+MOVABLE_WORK = ("work/verification/", "work/lifecycle/plans/",
+                "work/checks/handoffs/")
 FINAL_TASK_STATES = {"done", "cancelled"}
 # Зависимые возвращённой карточки с этими статусами переводятся в blocked.
 BLOCKABLE_STATES = {"ready", "in_progress", "in_review"}
@@ -316,7 +319,8 @@ def _movable_material(rel, material, doc_id, require):
         require(any(rel.startswith(item) for item in MOVABLE_WORK),
                 f"{doc_id}: материал '{material.get('id')}' ({rel}) — "
                 "служебная область work/; переносимы только "
-                "work/verification/<id>/ и work/lifecycle/plans/")
+                "work/verification/<id>/, work/checks/handoffs/<id>/ "
+                "и work/lifecycle/plans/")
 
 
 def _protected_files(paths, records, catalog):
@@ -655,6 +659,107 @@ def _blocked_text(text, dep_id, source_id, stamp, actor, require):
     return new_text
 
 
+def _checks_report_fresh(root, task_id, rel, text, meta, report,
+                         historical=False):
+    """Свежесть снимка покрытия checks-контракта для критериев и handoff."""
+    if (report.get("kind") != "checks-coverage-report"
+            or report.get("task_id") != task_id
+            or report.get("status") != "passed"):
+        return False
+    if historical:
+        return True
+    if report.get("card_projection") != card_projection(text):
+        return False
+    if task_cards.version(text) == 2:
+        target_exec_id, target_exec_sha = task_cards.execution_state(text, rel)
+        if target_exec_id is not None:
+            if (report.get("execution_id") != target_exec_id
+                    or report.get("execution_sha256") != target_exec_sha):
+                return False
+        elif report.get("execution_id") is not None:
+            return False
+    view = getattr(root, "view", None)
+    physical = getattr(view, "root", None) or root
+    policy = checks_gate.load_policy(physical)
+    if policy is None:
+        return False
+    verdict = checks_gate.evaluate(
+        physical, policy, task_id=task_id, task_content=text,
+        task_meta=meta, scope="task")
+    if not verdict["ok"]:
+        return False
+    # Привязка покрытия: отчёт описывает конкретные доказательства,
+    # а не только факт когда-то успешного verdict.ok. Законный reuse
+    # (новая -reused запись на тот же терминальный результат) и рост
+    # covered за счёт reuse ранее не обязательных проверок свежесть
+    # сохраняют — сама запись handoff меняет карточку и тем самым
+    # расширяет покрытие. Новый прогон, иное подтверждение или
+    # изменение значимых входов меняет терминальный результат и
+    # требует нового отчёта/передачи (аудит A-02; R-12, R-15).
+    for field in ("policy_id", "policy_revision", "trust_mode",
+                  "scope", "protected_confirmed"):
+        expected = {"policy_id": policy["policy_id"],
+                    "policy_revision": policy["revision"],
+                    "trust_mode": policy["trust_mode"]}.get(
+            field, verdict.get(field))
+        if report.get(field) != expected:
+            return False
+    if not set(report.get("covered") or []) <= \
+            set(verdict.get("covered") or []):
+        return False
+    stored_checks = report.get("checks") or {}
+    current_checks = verdict.get("checks") or {}
+    results, _notes, _corrupt = checks_results.load_results(physical)
+    by_id = {item["result_id"]: item for item in results}
+    latest = checks_select.evidence_latest(results)
+    report_finished = verification._iso_dt(report.get("finished_at"))
+
+    def terminal_doc(result_id):
+        doc = by_id.get(result_id)
+        seen = set()
+        while (isinstance(doc, dict) and doc.get("reused")
+               and doc["reused"].get("result_id") not in seen):
+            seen.add(doc.get("result_id"))
+            doc = by_id.get(doc["reused"]["result_id"])
+        return doc if isinstance(doc, dict) else None
+
+    def terminal(result_id):
+        doc = terminal_doc(result_id)
+        return doc["result_id"] if doc else result_id
+
+    for cid, stored in stored_checks.items():
+        current = current_checks.get(cid)
+        if current is None:
+            return False
+        stored_id = stored.get("result_id")
+        if stored_id is None:
+            # При передаче проверка не была покрыта (not_applicable или
+            # ручная без подтверждения). Свежесть сохраняет только
+            # терминальное доказательство старше отчёта — законный
+            # reuse неизменных входов. Новый прогон или подтверждение
+            # после отчёта — новые доказательства, которых снимок не
+            # описывает: требуется новый отчёт/передача (аудит A-04;
+            # R-12, R-15). Проверяется последний значимый результат —
+            # not_run ручных записей свидетельством не является.
+            entry = latest.get(cid)
+            if entry is not None:
+                doc = terminal_doc(entry.get("result_id"))
+                finished = verification._iso_dt(
+                    (doc or {}).get("finished_at"))
+                if doc is None or report_finished is None \
+                        or finished is None \
+                        or finished > report_finished:
+                    return False
+            continue
+        if (stored.get("kind") != current.get("kind")
+                or current.get("status") != "covered"
+                or current.get("result_id") is None
+                or terminal(stored_id)
+                != terminal(current["result_id"])):
+            return False
+    return True
+
+
 def _checks_gate(root, task_id, rel, text, task_meta, safe_path, require):
     """Покрытие checks-контракта для handoff/accept/close (PB-062).
 
@@ -732,6 +837,11 @@ def _handoff_evidence(root, task_id, rel, text, task_meta, safe_path, require):
         require(report.get("task_id") == task_id,
                 f"{task_id}: отчёт '{ref}' принадлежит задаче "
                 f"{report.get('task_id')}")
+        if report.get("kind") == "checks-coverage-report":
+            if _checks_report_fresh(root, task_id, rel, text, task_meta,
+                                    report):
+                fresh.append(ref)
+            continue
         if report.get("status") == "passed" \
                 and report.get("inputs_unchanged"):
             ok, _ = verification.inputs_fresh(root, report, {rel},
@@ -2848,18 +2958,97 @@ def handoff_command(root, task_id, summary, actor_name, actor_model,
         binding = {"entry_id": last["id"], "journal_sha256": last["journal_sha256"]}
         summary = last["id"]
     at = file_operations.now_iso()
+    extra_writes = {}
+    pending_reports = {}
+    if checks_verdict is not None:
+        current_proj = card_projection(text)
+        target_exec_id, target_exec_sha = (
+            task_cards.execution_state(text, rel)
+            if task_cards.version(text) == 2 else (None, None))
+        physical = getattr(getattr(root, "view", None), "root", None) or root
+        policy = checks_gate.load_policy(physical)
+        verdict_core = {
+            "task_id": task_id,
+            "card_projection": current_proj,
+            "execution_id": target_exec_id,
+            "execution_sha256": target_exec_sha,
+            "summary": summary,
+            "journal_sha256": binding.get("journal_sha256"),
+            "policy_id": policy["policy_id"],
+            "policy_revision": policy["revision"],
+            "trust_mode": checks_verdict["trust_mode"],
+            "protected_confirmed": checks_verdict["protected_confirmed"],
+            "scope": checks_verdict["scope"],
+            "covered": checks_verdict["covered"],
+            "checks": checks_verdict["checks"],
+        }
+        run_id = file_operations.sha256(
+            _canonical(verdict_core).encode("utf-8"))[7:23]
+        material_id = f"checks-{run_id}"
+        folder = f"work/checks/handoffs/{task_id}/{run_id}"
+        report_rel = f"{folder}/report.json"
+        dest = safe_path(root, folder)
+        report_file = dest / "report.json"
+        if report_file.is_file():
+            payload = report_file.read_bytes()
+            report_doc = verification.load_report(report_file, require)
+        else:
+            report_doc = {"schema_version": 1,
+                          "kind": "checks-coverage-report",
+                          "run_id": run_id, "status": "passed",
+                          "started_at": at, "finished_at": at,
+                          **verdict_core}
+            payload = (json.dumps(report_doc, ensure_ascii=False, indent=2,
+                                  sort_keys=True) + "\n").encode("utf-8")
+            extra_writes[report_rel] = payload
+        material = {"id": material_id, "role": "report", "source": folder,
+                    "storage": "local", "required": True, "immutable": True,
+                    "used_by": [task_id]}
+        existing = next((item for item in materials
+                         if item.get("id") == material_id), None)
+        if existing is None:
+            materials.append(material)
+        else:
+            require(existing.get("source") == folder,
+                    f"{task_id}: материал '{material_id}' указывает на "
+                    f"{existing.get('source')}, ожидался {folder}")
+        _check_destinations(
+            root, task_id,
+            [dict(m, resolved=safe_path(root, m["source"]))
+             for m in materials if m.get("storage") == "local"],
+            paths, safe_path, require)
+        report_refs.append(material_id)
+        pending_reports[material_id] = (
+            dest, file_operations.sha256(payload), report_doc)
     meta = dict(meta)
     meta["materials"] = materials
     if task_cards.version(text) == 2:
-        text, meta = _prepare_criteria(root, task_id, rel, text, meta, safe_path, require)
+        text, meta = _prepare_criteria(
+            root, task_id, rel, text, meta, safe_path, require,
+            pending_reports=pending_reports)
     meta["handoff"] = {"at": at,
                        "actor": {"name": actor_name, "model": actor_model},
                        "summary": summary,
                        "reports": sorted(set(report_refs)),
                        "card_projection": card_projection(text), **binding}
+    op_ctx = ctx
+    if extra_writes:
+        op_ctx = dict(ctx)
+
+        def run_with_catalog(operation_root, spec):
+            def cat_check(staged):
+                _task_material_catalog(staged, task_id, meta, ctx,
+                                       safe_path, require)
+            spec = dict(spec)
+            spec["staged_checks"] = list(spec.get("staged_checks", [])) + [cat_check]
+            spec["final_checks"] = list(spec.get("final_checks", [])) + [cat_check]
+            return ctx["run_operation"](operation_root, spec)
+
+        op_ctx["run_operation"] = run_with_catalog
     result = _write_card_meta(root, rel, text, meta, "handoff",
                               f"{actor_name} (executor)", "lifecycle handoff",
-                              ctx, safe_path, require)
+                              op_ctx, safe_path, require,
+                              extra_writes=extra_writes)
     if result["status"] == "already_completed":
         print(f"{task_id}: такая запись передачи уже сделана — "
               "повтор пропущен.")
@@ -2954,7 +3143,7 @@ def accept_command(root, task_id, result, kind, role, actor_name,
 
 
 def criterion_view(root, task_id, rel, text, meta, safe_path, require,
-                   historical=False):
+                   historical=False, pending_reports=None):
     """Read-only criterion projection; malformed/missing evidence never confirms it."""
     parsed = task_cards.parse(text, rel)
     cache = {}
@@ -2964,12 +3153,20 @@ def criterion_view(root, task_id, rel, text, meta, safe_path, require,
         key = (binding.get('report_id'), binding.get('report_sha256'))
         if key not in cache:
             try:
-                material = materials.get(key[0], {})
-                require(material.get('storage') == 'local', 'Нет локального отчёта')
-                source = safe_path(root, material.get('source'))
-                path = source / 'report.json' if source.is_dir() else source
-                require(file_operations.sha256(path.read_bytes()) == key[1], 'Отчёт изменён')
-                report = verification.load_report(path, require)
+                if pending_reports and key[0] in pending_reports:
+                    _, pending_sha, report = pending_reports[key[0]]
+                    require(pending_sha == key[1], 'Отчёт изменён')
+                else:
+                    material = materials.get(key[0], {})
+                    require(material.get('storage') == 'local', 'Нет локального отчёта')
+                    source = safe_path(root, material.get('source'))
+                    path = source / 'report.json' if source.is_dir() else source
+                    require(file_operations.sha256(path.read_bytes()) == key[1], 'Отчёт изменён')
+                    report = verification.load_report(path, require)
+                if report.get('kind') == 'checks-coverage-report':
+                    cache[key] = _checks_report_fresh(
+                        root, task_id, rel, text, meta, report, historical)
+                    return cache[key]
                 if report.get('schema_version') == 2:
                     valid = _criterion_v2_report(root, task_id, rel, text, meta, report,
                                                  safe_path, require, historical)
@@ -2995,7 +3192,8 @@ def criterion_view(root, task_id, rel, text, meta, safe_path, require,
     return task_cards.criterion_states(parsed, meta, card_projection(text), fresh, historical, root=root)
 
 
-def _prepare_criteria(root, task_id, rel, text, meta, safe_path, require, bind=True):
+def _prepare_criteria(root, task_id, rel, text, meta, safe_path, require,
+                      bind=True, pending_reports=None):
     """Bind new CHECK entries once, then render one canonical criterion view."""
     parsed = task_cards.parse(text, rel)
     require(parsed['status'] == 'supported', 'card sync поддерживает только формат 2')
@@ -3019,7 +3217,9 @@ def _prepare_criteria(root, task_id, rel, text, meta, safe_path, require, bind=T
         audit_sources = {safe_path(root, m['source']) for m in meta['materials']
                          if m.get('storage') == 'local' and m.get('id') in meta.get('audit_packages', {})}
         for material in meta['materials']:
-            if (material.get('storage') == 'local' and material['id'].startswith('verify-')
+            if (material.get('storage') == 'local'
+                    and (material['id'].startswith('verify-')
+                         or material['id'].startswith('checks-'))
                     and material['id'] not in meta.get('audit_packages', {})):
                 source = safe_path(root, material['source'])
                 path = source / 'report.json' if source.is_dir() else source
@@ -3033,9 +3233,16 @@ def _prepare_criteria(root, task_id, rel, text, meta, safe_path, require, bind=T
         for ident, (source, path) in candidates.items():
             try:
                 report = verification.load_report(path, require)
+                if report.get('kind') == 'checks-coverage-report':
+                    if _checks_report_fresh(root, task_id, rel, text, meta, report):
+                        require(verification._iso_dt(report.get('started_at')) is not None, 'Нет времени прогона')
+                        eligible.append((report['started_at'], ident, source,
+                                         file_operations.sha256(path.read_bytes())))
+                    continue
                 if report.get('schema_version') == 2:
                     if _criterion_v2_report(root, task_id, rel, text, meta, report, safe_path, require):
-                        eligible.append((report['started_at'], ident, source, path))
+                        eligible.append((report['started_at'], ident, source,
+                                         file_operations.sha256(path.read_bytes())))
                     continue
                 if (report.get('task_id') == task_id and report.get('status') == 'passed'
                         and report.get('inputs_unchanged') is True
@@ -3048,11 +3255,16 @@ def _prepare_criteria(root, task_id, rel, text, meta, safe_path, require, bind=T
                     elif report.get('execution_id') is not None:
                         continue
                     require(verification._iso_dt(report.get('started_at')) is not None, 'Нет времени прогона')
-                    eligible.append((report['started_at'], ident, source, path))
+                    eligible.append((report['started_at'], ident, source,
+                                     file_operations.sha256(path.read_bytes())))
             except (OSError, ValueError, TypeError, KeyError):
                 continue
+        if not eligible and pending_reports:
+            for ident, (source, digest, report) in pending_reports.items():
+                if _checks_report_fresh(root, task_id, rel, text, meta, report):
+                    eligible.append((report['started_at'], ident, source, digest))
         if eligible:
-            _, ident, source, path = max(eligible)
+            _, ident, source, report_sha = max(eligible)
             if not any(m['id'] == ident for m in meta['materials']):
                 meta['materials'].append({'id': ident, 'role': 'report', 'source': _rel(root, source),
                                          'storage': 'local', 'required': True, 'immutable': True,
@@ -3061,10 +3273,11 @@ def _prepare_criteria(root, task_id, rel, text, meta, safe_path, require, bind=T
                 bindings[entry['id']] = {'check_sha256': entry['sha256'],
                                          'card_projection': current_proj,
                                          'report_id': ident,
-                                         'report_sha256': file_operations.sha256(path.read_bytes())}
+                                         'report_sha256': report_sha}
     if not bindings and not had_bindings:
         meta.pop('criterion_evidence', None)
-    states, _ = criterion_view(root, task_id, rel, text, meta, safe_path, require)
+    states, _ = criterion_view(root, task_id, rel, text, meta, safe_path, require,
+                               pending_reports=pending_reports)
     return task_cards.render_checkboxes(text, states), meta
 
 

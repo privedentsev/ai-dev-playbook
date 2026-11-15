@@ -1,0 +1,10 @@
+checks run PB-064: политика ai-dev-playbook-self-pilot rev 1, scope=project mode=stale checkpoint=release
+Ограничение: trust_mode=local: результаты диагностические — локальная история не защищена от владельца проекта; доверенное выполнение требует контура PB-061
+  self-check: reused — исходный результат d76e85d7f4794c57ab3ddbe1a9a4536f-self-check-reused от 2026-11-14T20:42:39.563962+00:00
+  preflight-regressions: reused — исходный результат b128ce0ebd4745469e6428d8143e185e-preflight-regressions от 2026-11-14T19:41:47.573710+00:00
+  block-unit-tests: reused — исходный результат b128ce0ebd4745469e6428d8143e185e-block-unit-tests от 2026-11-14T19:41:50.467788+00:00
+  checks-unit-tests: reused — исходный результат d76e85d7f4794c57ab3ddbe1a9a4536f-checks-unit-tests от 2026-11-14T20:44:43.533504+00:00
+  cli-unit-tests: reused — исходный результат b128ce0ebd4745469e6428d8143e185e-cli-unit-tests от 2026-11-14T19:48:06.657698+00:00
+  core-unit-tests: reused — исходный результат b128ce0ebd4745469e6428d8143e185e-core-unit-tests от 2026-11-14T20:10:35.118838+00:00
+  verification-unit-tests: reused — исходный результат b128ce0ebd4745469e6428d8143e185e-verification-unit-tests от 2026-11-14T20:11:24.664192+00:00
+Итог: reused=7; непокрытых обязательств: 0

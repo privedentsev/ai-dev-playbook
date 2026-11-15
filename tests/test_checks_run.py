@@ -768,12 +768,12 @@ class AuditRegressionTest(unittest.TestCase):
         real = checks_runner._snapshot_inputs
         fired = []
 
-        def racing(root, policy, check, projections, env, now):
+        def racing(root, policy, check, projections, env, now, **kw):
             if check["id"] == "cart-tests" and not fired:
                 fired.append(True)
                 self.proj.write("tests/test_cart.py",
                                 "import unittest\n")
-            return real(root, policy, check, projections, env, now)
+            return real(root, policy, check, projections, env, now, **kw)
 
         calls.clear()
         with mock.patch.object(checks_unittest, "collect", fake), \

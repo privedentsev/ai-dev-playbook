@@ -186,8 +186,10 @@ def _binding(policy, check, edges, input_digest, task_digest, env):
     return binding
 
 
-def _snapshot_inputs(root, policy, check, projections, env, now):
-    inputs = checks_inventory.resolved_inputs(policy, check)
+def _snapshot_inputs(root, policy, check, projections, env, now,
+                     *, edges=(), unknown=()):
+    inputs = checks_inventory.resolved_inputs(
+        policy, check, edges=edges, unknown=unknown)
     return checks_inventory.snapshot(
         root, policy, inputs, environment=env,
         projections=projections, now=now)
@@ -311,6 +313,7 @@ def execute(root, policy, *, task_id, scope, mode, checkpoint,
               for cid, entry in planned["checks"].items()}
     graph = planned["graph"]
     edges = graph["edges"]
+    unknown = graph["unknown"]
     if scope == "project":
         for check in policy["checks"]:
             entry = checks[check["id"]]
@@ -351,7 +354,8 @@ def execute(root, policy, *, task_id, scope, mode, checkpoint,
             source = latest.get(check["id"])
             try:
                 snap = _snapshot_inputs(root, policy, check,
-                                        projections, bind_env, now)
+                                        projections, bind_env, now,
+                                        edges=edges, unknown=unknown)
                 input_digest = \
                     checks_inventory.snapshot_digest(snap)
                 # A-02: запись reuse только на байтах исходного успеха;
@@ -451,7 +455,8 @@ def execute(root, policy, *, task_id, scope, mode, checkpoint,
         started = time.monotonic()
         try:
             pre = _snapshot_inputs(root, policy, check, projections,
-                                   bind_env, now)
+                                   bind_env, now, edges=edges,
+                                   unknown=unknown)
         except (ValueError, OSError) as error:
             result = {"schema_version": 1,
                       "result_id": f"{run_id}-{check['id']}",
@@ -491,7 +496,8 @@ def execute(root, policy, *, task_id, scope, mode, checkpoint,
         if status_r in {"passed", "failed"}:
             try:
                 post = _snapshot_inputs(root, policy, check,
-                                        projections, bind_env, now)
+                                        projections, bind_env, now,
+                                        edges=edges, unknown=unknown)
                 if checks_inventory.snapshot_digest(post) != \
                         checks_inventory.snapshot_digest(pre):
                     mutation = ("входы изменились во время запуска — "
@@ -599,7 +605,8 @@ def status(root, policy, *, task_id, task_content, task_meta, now=None,
             fails = [a for a in actual
                      if a["outcome"] != "passed"]
             line += f"; тестов: {len(actual)}"
-            for item in fails[:5]:
+            shown = fails[:5] if fails else actual[:5]
+            for item in shown:
                 descr = catalog.get(item["id"], {}).get(
                     "description", "")
                 line += (f"\n      {item['outcome']}: {item['id']}"
@@ -649,7 +656,8 @@ def confirm(root, policy, *, task_id, task_content, task_meta, check_id,
         task_digest=task_digest, now=now, projections=projections)
     bind_env = checks_select.binding_environment(policy, check)
     snap = _snapshot_inputs(root, policy, check, projections, bind_env,
-                            now)
+                            now, edges=planned["graph"]["edges"],
+                            unknown=planned["graph"]["unknown"])
     input_digest = checks_inventory.snapshot_digest(snap)
     run_id = f"confirm-{uuid.uuid4().hex[:12]}"
     stamp = _clock(now)

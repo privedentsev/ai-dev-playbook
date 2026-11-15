@@ -344,10 +344,10 @@ def sandbox_prefix(root, home, arena):
         writable.append(extra)
     allow = " ".join(f'(subpath "{path}")' for path in writable)
     profile = ("(version 1)(allow default)"
-               f'(deny file-read* file-write* (subpath "{home_r}"))'
-               f'(allow file-read* (subpath "{arena_r}"))'
                "(deny file-write*)"
-               f"(allow file-write* {allow})")
+               f"(allow file-write* {allow})"
+               f'(deny file-read* file-write* (subpath "{home_r}"))'
+               f'(allow file-read* file-write* (subpath "{arena_r}"))')
     return [SANDBOX_EXEC, "-p", profile]
 
 
