@@ -1,0 +1,119 @@
+# PB-074: Устранить ложную готовность по повреждённой и старой истории проверок
+
+ID: PB-074
+Status: in_review
+Priority: P1
+Depends-On: -
+Executor: Devin
+Model: SWE-2 Flash High
+Created: 2026-11-16T18:02:16+03:00
+Closed: -
+
+<!-- playbook-meta:external -->
+
+## Задача
+
+### Цель и границы
+
+Устранить A-04 (P1) и A-05 (P2) повторного аудита AUDIT-009: потерю задачного обязательства после повреждения/удаления записи последнего failed и ложную готовность на неоднозначной старой истории без run_seq. Сохранить выбор по зависимостям, законный reuse, legacy/opt-in и честные границы local/protected. Архив PB-057–064/PB-073 и их материалы не переоткрывать и не переписывать. Реализация этой задачи не выполняется в сессии аудита.
+
+### Контекст
+
+[AUDIT-009](AUDIT-009.md), [повторный протокол audit-02](AUDIT-009-evidence/audit-02/report.md), [команды и результаты](AUDIT-009-evidence/audit-02/commands.json). Предыдущее исправление: [PB-073](../archive/tasks/PB-073.md), уже done/accepted; её историческую приёмку не менять. Незавершённая AUDIT-009 не задаётся зависимостью: исправление должно быть доступно до повторной приёмки блока.
+
+Требования: [R-11, R-16, R-19; AC-05, AC-09, AC-10](../specs/dependency-aware-verification.md), [design §5–6](../designs/dependency-aware-verification.md). Повторный аудит выполнен на 6311aa96f59db025b4fde3919775e03760193b3a, macOS 27.2.1 / Python 3.14.6. 328 адресных тестов прошли; собственные составные сценарии ниже выявили остаточные дефекты.
+
+Воспроизведение из корня репозитория:
+- [A-04](AUDIT-009-evidence/audit-02/report.md#a-04): `python3 docs/tasks/AUDIT-009-evidence/audit-02/probe_corrupt_obligation.py . corrupt` и тот же вызов с `delete`. Реальный CLI на временном проекте без Git: project passed → project failed → повреждение/удаление записи failed. До потери истории task gate закрыт, после — ok=true/not_applicable; task stale rc=0 без нового исполнения, счётчик остаётся 2. Release-ready в этом сценарии честно отклонён.
+- [A-05](AUDIT-009-evidence/audit-02/report.md#a-05): `python3 docs/tasks/AUDIT-009-evidence/audit-02/probe_legacy_equal.py .`. Реальные процессы passed → failed, управляемое одинаковое время, UUID в обратном лексикографическом порядке. Новые seq-записи блокируют gate; совместимая фикстура старых записей без run_seq после rebuild индекса выбирает старый passed и даёт project gate.ok=true. Это явная фикстура legacy-формата; естественное совпадение часов и реальная миграция рабочего проекта не заявляются.
+
+Пробы печатают наблюдения; rc=0 их собственного процесса не означает успешное поведение продукта. Полные JSON, логи и ограничения принадлежат AUDIT-009. Старые доказательства не изменять. Чужие docs/index.md, docs/plans/index.md и draft verification-process-readiness.md сохранять.
+
+### Критерии приёмки
+
+- [x] AC-01: Известный check_id с повреждённой/утраченной историей остаётся непокрытым обязательством независимо от пустого diff и от удаления непригодных результатов из расчёта reuse. В обеих CLI-пробах A-04 task run/status/gate/handoff не объявляют готовность без нового успешного доказательства; stale повторяет проверку либо явно блокируется. Регрессии не подменяют модульную применимость always. Свидетельство утраты переживает rebuild индекса, повторный stale и запуск другой задачи; после восстановления целостности истории и нового реального passed покрытие и законный cross-task reuse восстанавливаются.
+- [x] AC-02: Неоднозначный порядок нескольких legacy-записей без run_seq с одинаковым finished_at не разрешается выбором UUID в пользу passed. При отсутствии доказуемого последнего успешного исполнения gate/reuse требуют новый фактический прогон или безопасно блокируются. Проверены оба лексикографических порядка UUID, отсутствие/перестройка производного индекса, новая seq-запись после старой истории и корректное восстановление успешным прогоном. Однозначная старая история и порядок новых seq-записей сохраняются.
+- [x] AC-03: Поведенческие регрессии доказывают task-покрытие для failed/timeout/blocked/manual, повреждённых и удалённых исходов; product release/protected не регрессируют. Изменения, среда и результаты отражены в документации и EXEC/CHECK/HANDOFF; выполнены относящиеся к изменению checks_* и lifecycle/legacy-проверки, index/check --ready и штатный verify, self-manifest обновлён после правок комплекта. Архив и исходные материалы аудита побайтно сохранены.
+
+### План
+
+1. Прочитать AUDIT-009 audit-02 и историческую передачу PB-073, воспроизвести A-04/A-05 на текущем кандидате. Проверить границы передачи знаний о corrupt_ids между results, selector, runner/status и gate.
+2. Сохранить недоказанные обязательства до пригодного покрытия; консервативно обработать неоднозначную legacy-историю. Не обходить проблему изменением политики/выключением reuse или подменой source-проверок always.
+3. Добавить постоянные реальные CLI/adapter-регрессии критериев, включая пустой diff после успешного baseline, поздний failed, порчу/удаление, rebuild и другую задачу. Проверить восстановление после успешного фактического исполнения.
+4. Обновить связанные документы и self-manifest, зарегистрировать новые доказательства, выполнить проверки и штатные preflight/verify/handoff по актуальному контракту. Структурные проверки не выдавать за поведение CLI.
+5. Передать PB-074 независимому аудитору; затем повторить AUDIT-009. Самостоятельно приёмку/закрытие исправления не выполнять; commit/push/release требуют отдельного поручения.
+
+### Ресурсы
+
+Python stdlib, временные проекты без Git, реальные CLI/subprocess и управляемые часы для фикстур истории. resources.policy_revision=2, бюджеты проекта null; исходный self-project остаётся legacy без checks_policy. Внешняя песочница может мешать sandbox-exec: такую ошибку отличать от дефекта продукта. Реальная отдельная OS/CI identity аудитом не подтверждена; local-диагностику не объявлять protected-эксплуатацией. Новые материалы: `docs/tasks/PB-074-evidence/`; исходные контрпримеры — зарегистрированный каталог `docs/tasks/AUDIT-009-evidence/audit-02/`.
+
+## Журнал
+
+### EXEC-01 — Выполнение
+Время: 2026-11-16T20:01:22+03:00
+Исполнитель: Devin
+Модель: SWE-2 Flash High
+Изменения: исправлены A-04 и A-05 AUDIT-009 audit-02. A-04: check_id с повреждённой или утраченной записью результата (по `checks_results.load_results` и свидетельству производного индекса) передаётся в `checks_select.plan` как `corrupt_ids` — обязательство остаётся открытым независимо от пустого diff и удаления непригодных результатов; `checks_plan` в playbook.py переведён на ту же загрузку истории, что run/status/gate, поэтому plan показывает то же требование, что исполнит runner. `next_run_seq` резервирует `run_seq` записей индекса: замещающее доказательство строго позже утраченного при равном `finished_at`. A-05: при равном `(finished_at, run_seq)` — оба legacy без `run_seq` делят -1 — взаимный порядок недоказуем; `_latest_better` консервативно выбирает непокрывающий исход вместо победы `result_id`, поэтому старый passed не скрывает поздний failed при любом UUID-порядке. Порядок seq-записей и однозначная legacy-история сохранены. runner/status/gate/confirm прокидывают `corrupt_ids` и резерв seq; защищённая граница local/protected не менялась.
+Файлы:
+- ai-dev-playbook/scripts/checks_results.py
+- ai-dev-playbook/scripts/checks_select.py
+- ai-dev-playbook/scripts/checks_runner.py
+- ai-dev-playbook/scripts/checks_gate.py
+- ai-dev-playbook/scripts/playbook.py
+- tests/test_checks_run.py
+- tests/test_checks_e2e.py
+- docs/designs/dependency-aware-verification.md
+- CHANGELOG.md
+- ai-dev-playbook/manifest.json
+- docs/tasks/PB-074-evidence/
+
+### CHECK-01 — Проверка
+Время: 2026-11-16T20:36:29+03:00
+Исполнитель: Devin
+Модель: SWE-2 Flash High
+Результат: passed
+Критерии: AC-01, AC-02
+Сценарий: повторены обе CLI-пробы audit-02 на исправленном дереве: `probe_corrupt_obligation.py . corrupt`, `probe_corrupt_obligation.py . delete`, `probe_legacy_equal.py .` (реальный CLI на временных проектах без Git, управляемые часы).
+Среда: macOS, Python 3.14; кандидат — рабочее дерево поверх 6311aa9.
+Факт: A-04 — при corrupt/delete записи последнего failed gate остаётся закрыт (`ok=false`, payment `uncovered`, объяснение «история результата недоказуема»), stale возвращает rc=1 и выполняет реальный повторный прогон (attempts=3), release-ready отклонён; свидетельство утраты переживает rebuild индекса и запуск другой задачи. A-05 — legacy-записи без run_seq с равным finished_at выбирают непокрывающий `failed` при обоих UUID-порядках, gate после позднего failed закрыт, corrupt не заявлен; новая seq-запись и успешный прогон восстанавливают покрытие.
+Доказательства:
+- [probe corrupt](PB-074-evidence/probe-corrupt-fixed.json)
+- [probe delete](PB-074-evidence/probe-deleted-fixed.json)
+- [probe legacy equal](PB-074-evidence/probe-legacy-equal-fixed.json)
+- [заметки](PB-074-evidence/notes.md)
+Ограничения: trust_mode=local — результаты диагностические, protected-граница не заявляется; пробы печатают наблюдения, их rc не является вердиктом продукта.
+
+### CHECK-02 — Проверка
+Время: 2026-11-16T20:36:29+03:00
+Исполнитель: Devin
+Модель: SWE-2 Flash High
+Результат: passed
+Критерии: AC-01, AC-02, AC-03
+Команда: `python3 -m unittest tests.test_checks_run.Audit009PB74RegressionTest tests.test_checks_e2e.Audit009BaselineFailureE2ETest -v`
+Среда: macOS, Python 3.14; временные проекты без Git, реальные subprocess CLI.
+Факт: 7 unit + 8 E2E тестов пройдены: failed/timeout/blocked/manual-until-confirm исходы, corrupt и delete записи, rebuild индекса, видимость обязательства другой задачей, оба лексикографических порядка UUID legacy-истории, новая seq-запись после старой истории, восстановление успешным реальным прогоном и законный cross-task reuse.
+Доказательства:
+- [заметки](PB-074-evidence/notes.md)
+Ограничения: E2E на временных проектах без Git; sandbox-exec внешней песочницы не проверялся как продуктовый путь.
+
+### CHECK-03 — Проверка
+Время: 2026-11-16T20:36:29+03:00
+Исполнитель: Devin
+Модель: SWE-2 Flash High
+Результат: passed
+Критерии: AC-01, AC-02, AC-03
+Команда: `python3 -m unittest discover -s tests -p 'test_checks_*.py' -v`; `python3 ai-dev-playbook/scripts/playbook.py verify PB-074`
+Среда: macOS, Python 3.14.
+Факт: 338 тестов test_checks_* пройдены (~226 с). verify PB-074: self-check, preflight-regressions, unit-tests — все passed; unit-tests: 1107 тестов за 1947 с, OK. `index` и `check --ready` зелёные (структура, ссылки, 88 карточек; поведение CLI этой проверкой не подтверждается). self-manifest актуализирован `adopt . --force --apply` после правок комплекта.
+Доказательства:
+- [отчёт verify](../../work/verification/PB-074/61a094b677df496692d71b42a8e1750d/report.json)
+Ограничения: verify — локальный контракт проекта; protected-режим и реальная OS/CI identity аудитом не подтверждены.
+
+### HANDOFF-01 — Передача
+Время: 2026-11-16T20:36:29+03:00
+Исполнитель: Devin
+Модель: SWE-2 Flash High
+Выполнение: EXEC-01
+Проверки: CHECK-01, CHECK-02, CHECK-03
+Состояние: in_review; изменения не закоммичены; следующий шаг — независимый аудит PB-074, затем повтор AUDIT-009.
+Фокус аудита: (1) corrupt_ids из load_results/index покрывают все пути plan/run/status/gate/confirm без ложной готовности и без блокировки законного reuse; (2) консервативный выбор при равном (finished_at, run_seq) не ломает однозначную legacy-историю и seq-порядок; (3) резерв run_seq из индекса детерминирован при rebuild; (4) регрессии — реальные CLI/E2E, не структурные.

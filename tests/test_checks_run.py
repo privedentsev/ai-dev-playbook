@@ -6,6 +6,7 @@ import sys
 import tempfile
 import unittest
 from pathlib import Path
+from types import SimpleNamespace
 from unittest import mock
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -14,6 +15,7 @@ if str(SCRIPTS_DIR) not in sys.path:
     sys.path.insert(0, str(SCRIPTS_DIR))
 
 import checks_contract
+import checks_gate
 import checks_inventory
 import checks_results
 import checks_runner
@@ -1165,6 +1167,634 @@ class Audit009RegressionTest(unittest.TestCase):
                                  task_id="DEV-1",
                                  task_content=content, task_meta={})
         self.assertIn("payments-tests: run", out.getvalue())
+
+
+class Audit009PB74RegressionTest(unittest.TestCase):
+    """Регрессии PB-074 (A-04/A-05 повторного аудита AUDIT-009):
+    недоказуемая история не снимает обязательство при пустом diff;
+    неоднозначный порядок legacy-записей без run_seq не решается
+    выбором result_id."""
+
+    FROZEN = "2026-11-16T12:00:00+00:00"
+
+    def setUp(self):
+        self.proj = run_project(self)
+        self.policy = run_policy()
+        self.policy["checks"] = [
+            check for check in self.policy["checks"]
+            if check["id"] != "ui-review"]
+        for check in self.policy["checks"]:
+            if check["id"] in {"payments-tests", "checkout-tests",
+                               "cart-tests"}:
+                check.pop("applicability", None)
+
+    def collect_counter(self, reports, direct=None):
+        calls = []
+
+        def fake(root, check, run_dir, *, timeout, env=None):
+            calls.append(check["id"])
+            if direct and check["id"] in direct:
+                return direct[check["id"]]
+            return canned_collect(reports[check["id"]])
+        return calls, fake
+
+    def reports(self):
+        return {cid: green_report([tid]) for cid, tid in zip(
+            ("payments-tests", "checkout-tests", "cart-tests"),
+            ("test_payments.TestPay.test_ok",
+             "test_checkout.TestOrder.test_ok",
+             "test_cart.TestCart.test_ok"))}
+
+    def failed_payments(self):
+        reports = self.reports()
+        reports["payments-tests"] = {
+            "protocol": 1,
+            "expected": ["test_payments.TestPay.test_ok"],
+            "actual": [{"id": "test_payments.TestPay.test_ok",
+                        "outcome": "failed"}], "exit_code": 1}
+        return reports
+
+    @staticmethod
+    def _collected(status, error):
+        return {"status": status, "exit_code": None, "report": None,
+                "error": error,
+                "stdout_log": "work/checks/runs/x/o",
+                "stderr_log": "work/checks/runs/x/e",
+                "report_path": "work/checks/runs/x/a.json"}
+
+    @staticmethod
+    def _result(check_id, status, finished_at, run_seq, result_id,
+                run_id="r"):
+        doc = {"schema_version": 1, "result_id": result_id,
+               "project_id": "shop", "check_id": check_id,
+               "kind": "test",
+               "binding": {
+                   "policy_digest": "sha256:" + "0" * 64,
+                   "definition_digest": "sha256:" + "0" * 64,
+                   "adapter": {"id": "python-unittest",
+                               "version": "1"},
+                   "runner": {"id": "checks-runner", "version": "1"},
+                   "input_digest": "sha256:" + "0" * 64,
+                   "dependency_closure_digest": "sha256:" + "0" * 64,
+                   "environment": {}},
+               "status": status, "started_at": finished_at,
+               "finished_at": finished_at,
+               "tests": {"expected": ["t.t"],
+                         "actual": [{"id": "t.t",
+                                     "outcome": "passed"}]},
+               "evidence": {"run_id": run_id}}
+        if run_seq is not None:
+            doc["evidence"]["run_seq"] = run_seq
+        return doc
+
+    def _result_file(self, check_id, status):
+        for path in (self.proj.root /
+                     "work/checks/results").rglob(check_id + ".json"):
+            doc = json.loads(path.read_text())
+            if doc["status"] == status:
+                return path
+        self.fail(f"результат {check_id} со status={status} не найден")
+
+    def _gate(self):
+        content = (self.proj.root / "docs/tasks/DEV-1.md").read_text()
+        return checks_gate.evaluate(
+            self.proj.root, self.policy, task_id="DEV-1",
+            task_content=content, task_meta={})
+
+    def _status_text(self):
+        content = (self.proj.root / "docs/tasks/DEV-1.md").read_text()
+        out = io.StringIO()
+        with contextlib.redirect_stdout(out):
+            checks_runner.status(self.proj.root, self.policy,
+                                 task_id="DEV-1",
+                                 task_content=content, task_meta={},
+                                 now=self.FROZEN)
+        return out.getvalue()
+
+    def _project_pass_then_fail(self):
+        """project passed → project failed без смены входов: baseline
+        остаётся покрытым, diff пуст, последний исход — failed."""
+        calls, fake = self.collect_counter(self.reports())
+        with mock.patch.object(checks_unittest, "collect", fake):
+            out, _ = execute(self.proj, self.policy, scope="project",
+                             mode="force", now=self.FROZEN)
+        self.assertTrue(out["ok"], out)
+        calls1, fake1 = self.collect_counter(self.failed_payments())
+        with mock.patch.object(checks_unittest, "collect", fake1):
+            out1, _ = execute(self.proj, self.policy, scope="project",
+                              mode="force", now=self.FROZEN)
+        self.assertFalse(out1["ok"])
+        self.assertEqual(out1["outcomes"]["payments-tests"], "failed")
+        return calls1, fake1
+
+    def _assert_corrupt_obligation(self, mutate, between=None):
+        """A-04: после порчи/удаления failed обязательство payments
+        остаётся открытым при пустом diff до нового реального passed."""
+        calls1, fake1 = self._project_pass_then_fail()
+        victim = self._result_file("payments-tests", "failed")
+        mutate(victim)
+        if between is not None:
+            between()
+        # Gate: обязательство не снимается повреждённой историей.
+        verdict = self._gate()
+        self.assertFalse(verdict["ok"], verdict)
+        self.assertIn("payments-tests", verdict["uncovered"])
+        self.assertNotIn("payments-tests", verdict["covered"])
+        # Чужие проверки не затронуты: их not_applicable сохраняется.
+        self.assertEqual(
+            verdict["checks"]["checkout-tests"]["status"],
+            "not_applicable")
+        self.assertIn("payments-tests: run", self._status_text())
+        # Stale повторяет проверку — реальное исполнение, не reuse.
+        calls1.clear()
+        with mock.patch.object(checks_unittest, "collect", fake1):
+            out2, _ = execute(self.proj, self.policy, now=self.FROZEN)
+        self.assertIn("payments-tests", calls1)
+        self.assertEqual(out2["outcomes"]["payments-tests"], "failed")
+        self.assertFalse(out2["ok"])
+        self.assertFalse(self._gate()["ok"])
+        return victim
+
+    def test_a04_corrupt_failed_empty_diff_keeps_obligation(self):
+        """A-04: `{`-запись failed при актуальном baseline не даёт
+        готовности; восстановление — целостность + новый passed."""
+        victim = self._assert_corrupt_obligation(
+            lambda path: path.write_text("{"))
+        # Удаление повреждённого файла: свидетельство индекса о
+        # последнем failed сохраняется — обязательство всё ещё открыто.
+        victim.unlink()
+        self.assertFalse(self._gate()["ok"])
+        # Новый реальный passed: индекс переходит на доказанную
+        # запись, покрытие и reuse восстановлены.
+        calls3, fake3 = self.collect_counter(self.reports())
+        with mock.patch.object(checks_unittest, "collect", fake3):
+            out3, _ = execute(self.proj, self.policy, now=self.FROZEN)
+        self.assertTrue(out3["ok"], out3)
+        self.assertTrue(self._gate()["ok"])
+        # Следующий stale: обязательство покрыто — повторного
+        # исполнения нет.
+        calls3.clear()
+        with mock.patch.object(checks_unittest, "collect", fake3):
+            out4, _ = execute(self.proj, self.policy, now=self.FROZEN)
+        self.assertTrue(out4["ok"], out4)
+        self.assertNotIn("payments-tests", calls3)
+
+    def test_a04_deleted_failed_empty_diff_keeps_obligation(self):
+        """A-04: удалённый failed при сохранённом индексе — то же
+        открытое обязательство; rebuild не снимает свидетельство."""
+        def rebuild_keeps_evidence():
+            # Пересборка индекса сохраняет свидетельство утраты (A-07).
+            checks_results.rebuild_index(self.proj.root, self.policy)
+            _, _, corrupt = checks_results.load_results(
+                self.proj.root)
+            self.assertIn("payments-tests", corrupt)
+            self.assertFalse(self._gate()["ok"])
+
+        self._assert_corrupt_obligation(
+            lambda path: path.unlink(), between=rebuild_keeps_evidence)
+        # После реального failed-прогона свидетельство индекса
+        # замещено доказанной записью — обязательство открыто уже
+        # обычным правилом UNRESOLVED, а не corrupt-флагом.
+        _, _, corrupt = checks_results.load_results(self.proj.root)
+        self.assertNotIn("payments-tests", corrupt)
+        self.assertFalse(self._gate()["ok"])
+        # Новый реальный passed замещает последний failed — покрытие
+        # восстановлено без ручной правки индекса.
+        calls3, fake3 = self.collect_counter(self.reports())
+        with mock.patch.object(checks_unittest, "collect", fake3):
+            out3, _ = execute(self.proj, self.policy, now=self.FROZEN)
+        self.assertTrue(out3["ok"], out3)
+        self.assertTrue(self._gate()["ok"])
+        # Обязательство закрыто: следующий stale не исполняет.
+        calls3.clear()
+        with mock.patch.object(checks_unittest, "collect", fake3):
+            out4, _ = execute(self.proj, self.policy, now=self.FROZEN)
+        self.assertTrue(out4["ok"], out4)
+        self.assertNotIn("payments-tests", calls3)
+
+    def test_a04_corrupt_timeout_record_keeps_obligation(self):
+        """A-04: повреждённый timeout-исход — то же открытое
+        обязательство (механизм не зависит от статуса записи)."""
+        calls1, fake1 = self._project_pass_then_fail()
+        # Заменить failed-отчёт payments на timeout-результат.
+        timeout_direct = {"payments-tests": self._collected(
+            "timeout", "имитация таймаута")}
+        calls_t, fake_t = self.collect_counter(
+            self.reports(), direct=timeout_direct)
+        with mock.patch.object(checks_unittest, "collect", fake_t):
+            out_t, _ = execute(self.proj, self.policy, scope="project",
+                               mode="force", now=self.FROZEN)
+        self.assertEqual(out_t["outcomes"]["payments-tests"], "timeout")
+        victim = self._result_file("payments-tests", "timeout")
+        victim.write_text("{")
+        verdict = self._gate()
+        self.assertFalse(verdict["ok"], verdict)
+        self.assertIn("payments-tests", verdict["uncovered"])
+        calls_t.clear()
+        with mock.patch.object(checks_unittest, "collect", fake_t):
+            out2, _ = execute(self.proj, self.policy, now=self.FROZEN)
+        self.assertIn("payments-tests", calls_t)
+        self.assertFalse(out2["ok"])
+
+    def test_a04_corrupt_manual_record_stays_uncovered(self):
+        """A-04: повреждённая запись ручной проверки не снимает
+        ручное обязательство — gate держит manual, не covered."""
+        review = {"id": "ui-review", "title": "Ручной", "purpose": "p",
+                  "kind": "manual", "modules": ["payments"],
+                  "scenario": "сценарий"}
+        self.policy["checks"].append(review)
+        calls, fake = self.collect_counter(self.reports())
+        with mock.patch.object(checks_unittest, "collect", fake):
+            execute(self.proj, self.policy, scope="project",
+                    mode="force", now=self.FROZEN)
+        # Подтверждение инженера — passed-запись manual.
+        content = (self.proj.root / "docs/tasks/DEV-1.md").read_text()
+        checks_runner.confirm(
+            self.proj.root, self.policy, task_id="DEV-1",
+            task_content=content, task_meta={}, check_id="ui-review",
+            who="Инженер", statement="Проверено", observation="ok",
+            now=self.FROZEN, emit=lambda s: None)
+        victim = self._result_file("ui-review", "passed")
+        victim.write_text("{")
+        verdict = self._gate()
+        self.assertFalse(verdict["ok"], verdict)
+        self.assertIn("ui-review", verdict["manual"])
+        self.assertNotIn("ui-review", verdict["covered"])
+
+    def test_a05_legacy_equal_timestamp_never_picks_passed(self):
+        """A-05: два legacy-результата без run_seq при равном
+        finished_at — непокрывающий исход важнее при любом
+        лексикографическом порядке result_id."""
+        stamp = self.FROZEN
+        for pass_hex, fail_hex in (("0" * 32, "f" * 32),
+                                   ("f" * 32, "0" * 32)):
+            with self.subTest(pass_hex=pass_hex[:1],
+                              fail_hex=fail_hex[:1]):
+                passed = self._result(
+                    "payments-tests", "passed", stamp, None,
+                    f"{pass_hex}-payments-tests", run_id=pass_hex)
+                failed = self._result(
+                    "payments-tests", "failed", stamp, None,
+                    f"{fail_hex}-payments-tests", run_id=fail_hex)
+                for order in ((passed, failed), (failed, passed)):
+                    latest = checks_select.evidence_latest(
+                        list(order))
+                    self.assertEqual(
+                        latest["payments-tests"]["status"], "failed")
+        # Обе passed-записи — однозначное покрытие сохраняется.
+        first = self._result("payments-tests", "passed", stamp, None,
+                             "a" * 32 + "-payments-tests",
+                             run_id="a" * 32)
+        second = self._result("payments-tests", "passed", stamp, None,
+                              "b" * 32 + "-payments-tests",
+                              run_id="b" * 32)
+        latest = checks_select.evidence_latest([first, second])
+        self.assertEqual(latest["payments-tests"]["status"], "passed")
+
+    def test_a05_legacy_equal_end_to_end(self):
+        """A-05: реальные passed → failed, конвертация в legacy без
+        run_seq и равным finished_at — gate закрыт до нового
+        успешного прогона; seq-порядок и однозначная история живы."""
+        for pass_hex, fail_hex in (("f" * 32, "0" * 32),
+                                   ("0" * 32, "f" * 32)):
+            with self.subTest(pass_hex=pass_hex[:1],
+                              fail_hex=fail_hex[:1]):
+                proj = run_project(self)
+                policy = run_policy()
+                policy["checks"] = [
+                    check for check in policy["checks"]
+                    if check["id"] != "ui-review"]
+                for check in policy["checks"]:
+                    if check["id"] in {"payments-tests",
+                                       "checkout-tests", "cart-tests"}:
+                        check.pop("applicability", None)
+                reports = {cid: green_report([tid]) for cid, tid in
+                           zip(("payments-tests", "checkout-tests",
+                                "cart-tests"),
+                               ("test_payments.TestPay.test_ok",
+                                "test_checkout.TestOrder.test_ok",
+                                "test_cart.TestCart.test_ok"))}
+                failed = dict(reports)
+                failed["payments-tests"] = {
+                    "protocol": 1,
+                    "expected": ["test_payments.TestPay.test_ok"],
+                    "actual": [{"id": "test_payments.TestPay.test_ok",
+                                "outcome": "failed"}], "exit_code": 1}
+                content = (proj.root / "docs/tasks/DEV-1.md").read_text()
+
+                def run_once(reports_map, hex_id):
+                    calls, fake = self.collect_counter(reports_map)
+                    with mock.patch.object(
+                            checks_unittest, "collect", fake), \
+                            mock.patch.object(
+                                checks_runner.uuid, "uuid4",
+                                return_value=SimpleNamespace(
+                                    hex=hex_id)):
+                        return execute(proj, policy, scope="project",
+                                       mode="force", now=self.FROZEN)
+
+                out1, _ = run_once(reports, pass_hex)
+                self.assertTrue(out1["ok"], out1)
+                out2, _ = run_once(failed, fail_hex)
+                self.assertFalse(out2["ok"])
+                # Конвертация в legacy-формат: равный finished_at, без
+                # run_seq; индекс удалён и штатно перестроен.
+                stamp = "2026-11-16T03:00:00+00:00"
+                for path in (proj.root / "work/checks/results") \
+                        .rglob("payments-tests.json"):
+                    doc = json.loads(path.read_text())
+                    doc["finished_at"] = stamp
+                    doc.get("evidence", {}).pop("run_seq", None)
+                    path.write_text(json.dumps(
+                        doc, ensure_ascii=False, indent=2) + "\n")
+                index = proj.root / "work/checks/results-index.json"
+                index.unlink()
+                checks_results.rebuild_index(proj.root, policy)
+                results, _notes, corrupt = \
+                    checks_results.load_results(proj.root)
+                self.assertEqual(corrupt, set())
+                latest = checks_select.evidence_latest(results)
+                self.assertEqual(
+                    latest["payments-tests"]["status"], "failed")
+                verdict = checks_gate.evaluate(
+                    proj.root, policy, task_id="DEV-1",
+                    task_content=content, task_meta={})
+                self.assertFalse(verdict["ok"], verdict)
+                self.assertIn("payments-tests", verdict["uncovered"])
+                # Восстановление: новый seq-прогон с passed закрывает
+                # обязательство — порядок новых записей сохранён.
+                calls3, fake3 = self.collect_counter(reports)
+                with mock.patch.object(checks_unittest, "collect",
+                                       fake3):
+                    out3, _ = execute(proj, policy, now=self.FROZEN)
+                self.assertTrue(out3["ok"], out3)
+                verdict = checks_gate.evaluate(
+                    proj.root, policy, task_id="DEV-1",
+                    task_content=content, task_meta={})
+                self.assertTrue(verdict["ok"], verdict)
+
+    def test_a05_seq_order_and_unambiguous_legacy_preserved(self):
+        """A-05: seq-записи упорядочены run_seq; однозначная legacy
+        история и новый seq-результат после неоднозначной пары
+        выбираются корректно."""
+        stamp = self.FROZEN
+        # seq-порядок при равном finished_at сохраняется (A-02).
+        seq_passed = self._result("payments-tests", "passed", stamp, 0,
+                                  "a" * 32 + "-payments-tests",
+                                  run_id="a" * 32)
+        seq_failed = self._result("payments-tests", "failed", stamp, 1,
+                                  "f" * 32 + "-payments-tests",
+                                  run_id="f" * 32)
+        latest = checks_select.evidence_latest([seq_passed, seq_failed])
+        self.assertEqual(latest["payments-tests"]["status"], "failed")
+        latest = checks_select.evidence_latest([seq_failed, seq_passed])
+        self.assertEqual(latest["payments-tests"]["status"], "failed")
+        # Одна legacy-запись — однозначна.
+        lone = self._result("payments-tests", "passed", stamp, None,
+                            "b" * 32 + "-payments-tests",
+                            run_id="b" * 32)
+        latest = checks_select.evidence_latest([lone])
+        self.assertEqual(latest["payments-tests"]["status"], "passed")
+        # Новая seq-запись после неоднозначной legacy-пары —
+        # доказанный последний исход.
+        legacy_passed = self._result(
+            "payments-tests", "passed", stamp, None,
+            "c" * 32 + "-payments-tests", run_id="c" * 32)
+        legacy_failed = self._result(
+            "payments-tests", "failed", stamp, None,
+            "d" * 32 + "-payments-tests", run_id="d" * 32)
+        fresh_passed = self._result(
+            "payments-tests", "passed", stamp, 0,
+            "e" * 32 + "-payments-tests", run_id="e" * 32)
+        latest = checks_select.evidence_latest(
+            [legacy_passed, legacy_failed, fresh_passed])
+        self.assertEqual(latest["payments-tests"]["status"], "passed")
+        self.assertEqual(
+            latest["payments-tests"]["evidence"]["run_seq"], 0)
+
+    def test_audit01_missing_results_dir_keeps_obligation(self):
+        """Аудит-01 A-01: утрата всего каталога results при
+        сохранённом индексе — свидетельство индекса делает check_id
+        недоказуемым и без каталога: gate/status/stale требуют
+        нового реального passed."""
+        import shutil
+        calls1, fake1 = self._project_pass_then_fail()
+        shutil.rmtree(self.proj.root / "work/checks/results")
+        # Пересборка сохраняет свидетельства индекса; load_results
+        # читает их и при отсутствующем каталоге.
+        checks_results.rebuild_index(self.proj.root, self.policy)
+        _results, _notes, corrupt = checks_results.load_results(
+            self.proj.root)
+        self.assertIn("payments-tests", corrupt)
+        verdict = self._gate()
+        self.assertFalse(verdict["ok"], verdict)
+        self.assertIn("payments-tests", verdict["uncovered"])
+        self.assertIn("payments-tests: run", self._status_text())
+        # Stale — реальное исполнение, не reuse.
+        calls1.clear()
+        with mock.patch.object(checks_unittest, "collect", fake1):
+            out2, _ = execute(self.proj, self.policy, now=self.FROZEN)
+        self.assertIn("payments-tests", calls1)
+        self.assertFalse(out2["ok"])
+        self.assertFalse(self._gate()["ok"])
+        # Новый реальный passed восстанавливает покрытие.
+        calls3, fake3 = self.collect_counter(self.reports())
+        with mock.patch.object(checks_unittest, "collect", fake3):
+            out3, _ = execute(self.proj, self.policy, now=self.FROZEN)
+        self.assertTrue(out3["ok"], out3)
+        self.assertTrue(self._gate()["ok"])
+
+    def test_audit01_plan_corrupt_ids_forbid_reuse(self):
+        """Аудит-01 A-02: plan с corrupt_ids и старым passed в
+        results не выдаёт reused — планировщик сам отсекает
+        недоказуемую историю; без флага reuse остаётся законным."""
+        calls1, fake1 = self._project_pass_then_fail()
+        victim = self._result_file("payments-tests", "failed")
+        victim.unlink()
+        checks_results.rebuild_index(self.proj.root, self.policy)
+        results, _notes, corrupt = checks_results.load_results(
+            self.proj.root)
+        self.assertIn("payments-tests", corrupt)
+        content = (self.proj.root / "docs/tasks/DEV-1.md").read_text()
+        task_digest = verification_policy.fingerprint(
+            verification_policy.task_projection(content, {}))
+        projections = checks_runner._projections(
+            self.policy, content, {})
+        # Вызывающий путь checks_plan передаёт историю целиком:
+        # фильтрация corrupt check_id — обязанность планировщика.
+        planned = checks_select.plan(
+            self.proj.root, self.policy, results=results,
+            corrupt_ids=corrupt, task_digest=task_digest,
+            projections=projections, now=self.FROZEN)
+        entry = planned["checks"]["payments-tests"]
+        self.assertEqual(entry["status"], "run", entry)
+        self.assertTrue(any("недоказуема" in line
+                            for line in entry["explain"]), entry)
+        # Контроль: без corrupt_ids тот же старый passed —
+        # законный reuse, фильтрация не ломает обычный расчёт.
+        planned_ok = checks_select.plan(
+            self.proj.root, self.policy, results=results,
+            task_digest=task_digest, projections=projections,
+            now=self.FROZEN)
+        self.assertEqual(
+            planned_ok["checks"]["payments-tests"]["status"],
+            "reused", planned_ok["checks"]["payments-tests"])
+
+    def _legacy_pair_project(self, pass_hex, fail_hex):
+        """Проект с legacy-парой payments-tests равного finished_at
+        без run_seq: passed с UUID pass_hex, failed — fail_hex.
+        Возвращает (proj, policy, content, paths)."""
+        proj = run_project(self)
+        policy = run_policy()
+        policy["checks"] = [
+            check for check in policy["checks"]
+            if check["id"] != "ui-review"]
+        for check in policy["checks"]:
+            if check["id"] in {"payments-tests", "checkout-tests",
+                               "cart-tests"}:
+                check.pop("applicability", None)
+        reports = {cid: green_report([tid]) for cid, tid in zip(
+            ("payments-tests", "checkout-tests", "cart-tests"),
+            ("test_payments.TestPay.test_ok",
+             "test_checkout.TestOrder.test_ok",
+             "test_cart.TestCart.test_ok"))}
+        failed = dict(reports)
+        failed["payments-tests"] = {
+            "protocol": 1,
+            "expected": ["test_payments.TestPay.test_ok"],
+            "actual": [{"id": "test_payments.TestPay.test_ok",
+                        "outcome": "failed"}], "exit_code": 1}
+        content = (proj.root / "docs/tasks/DEV-1.md").read_text()
+
+        def run_once(reports_map, hex_id):
+            _calls, fake = self.collect_counter(reports_map)
+            with mock.patch.object(checks_unittest, "collect", fake), \
+                    mock.patch.object(
+                        checks_runner.uuid, "uuid4",
+                        return_value=SimpleNamespace(hex=hex_id)):
+                return execute(proj, policy, scope="project",
+                               mode="force", now=self.FROZEN)
+
+        out1, _ = run_once(reports, pass_hex)
+        self.assertTrue(out1["ok"], out1)
+        out2, _ = run_once(failed, fail_hex)
+        self.assertFalse(out2["ok"])
+        # Legacy-фикстура: equal finished_at (общий now), без run_seq.
+        for path in (proj.root / "work/checks/results").rglob("*.json"):
+            doc = json.loads(path.read_text())
+            doc["evidence"].pop("run_seq", None)
+            path.write_text(json.dumps(doc, ensure_ascii=False,
+                                       indent=2) + "\n")
+        paths = {}
+        for path in (proj.root / "work/checks/results") \
+                .rglob("payments-tests.json"):
+            doc = json.loads(path.read_text())
+            paths[doc["status"]] = (path, doc)
+        return proj, policy, content, paths, reports
+
+    @staticmethod
+    def _index_entry_for(path, doc, root):
+        return {"result_id": doc["result_id"],
+                "run_id": doc["evidence"]["run_id"],
+                "finished_at": doc["finished_at"], "run_seq": None,
+                "file": str(path.relative_to(root)),
+                "status": doc["status"]}
+
+    def test_audit02_legacy_loss_keeps_obligation(self):
+        """Аудит-02 A-03: legacy-пара равного времени — утрата failed
+        при любом UUID-порядке и любом исходном индексе оставляет
+        обязательство открытым до нового реального passed; rebuild
+        не воскрешает passed поверх failed."""
+        for pass_hex, fail_hex in (("f" * 32, "0" * 32),
+                                   ("0" * 32, "f" * 32)):
+            for old_index in (False, True):
+                with self.subTest(pass_hex=pass_hex[:1],
+                                  fail_hex=fail_hex[:1],
+                                  old_index=old_index):
+                    proj, policy, content, paths, reports = \
+                        self._legacy_pair_project(pass_hex, fail_hex)
+                    index_path = proj.root / \
+                        "work/checks/results-index.json"
+                    if old_index:
+                        # Старый passed-индекс, как у писателя до
+                        # исправления: указывает на старый успех.
+                        passed_path, passed_doc = paths["passed"]
+                        index = {
+                            "schema_version": 1,
+                            "kind": "checks-results-index",
+                            "project_id": policy["project_id"],
+                            "entries": {"payments-tests":
+                                        self._index_entry_for(
+                                            passed_path, passed_doc,
+                                            proj.root)}}
+                        index_path.write_text(json.dumps(index))
+                    else:
+                        index_path.unlink(missing_ok=True)
+                    # Штатный rebuild: консервативный failed —
+                    # единственный допустимый свидетель.
+                    checks_results.rebuild_index(proj.root, policy)
+                    index = json.loads(
+                        index_path.read_text())
+                    self.assertEqual(
+                        index["entries"]["payments-tests"]["status"],
+                        "failed", index["entries"])
+                    # Утрата failed-файла: свидетельство индекса при
+                    # равном времени важнее UUID — corrupt.
+                    paths["failed"][0].unlink()
+                    _r, _n, corrupt = checks_results.load_results(
+                        proj.root)
+                    self.assertIn("payments-tests", corrupt)
+                    for scope in ("project", "task"):
+                        verdict = checks_gate.evaluate(
+                            proj.root, policy, task_id="DEV-1",
+                            scope=scope, task_content=content,
+                            task_meta={}, now=self.FROZEN)
+                        self.assertFalse(verdict["ok"],
+                                         (scope, verdict))
+                        self.assertIn("payments-tests",
+                                      verdict["uncovered"])
+                    # Rebuild после утраты сохраняет свидетельство.
+                    checks_results.rebuild_index(proj.root, policy)
+                    _r, _n, corrupt = checks_results.load_results(
+                        proj.root)
+                    self.assertIn("payments-tests", corrupt)
+                    # Stale — реальное исполнение, не reuse.
+                    calls, fake = self.collect_counter(
+                        {"payments-tests": {
+                            "protocol": 1,
+                            "expected": ["test_payments.TestPay.test_ok"],
+                            "actual": [{"id":
+                                        "test_payments.TestPay.test_ok",
+                                        "outcome": "failed"}],
+                            "exit_code": 1},
+                         "checkout-tests": green_report(
+                             ["test_checkout.TestOrder.test_ok"]),
+                         "cart-tests": green_report(
+                             ["test_cart.TestCart.test_ok"])})
+                    with mock.patch.object(
+                            checks_unittest, "collect", fake):
+                        out3, _ = execute(proj, policy,
+                                          now=self.FROZEN)
+                    self.assertIn("payments-tests", calls)
+                    self.assertFalse(out3["ok"])
+                    self.assertFalse(
+                        checks_gate.evaluate(
+                            proj.root, policy, task_id="DEV-1",
+                            task_content=content, task_meta={},
+                            now=self.FROZEN)["ok"])
+                    # Новый реальный seq-passed восстанавливает
+                    # покрытие — порядок новых записей сохранён.
+                    calls4, fake4 = self.collect_counter(reports)
+                    with mock.patch.object(
+                            checks_unittest, "collect", fake4):
+                        out4, _ = execute(proj, policy,
+                                          now=self.FROZEN)
+                    self.assertTrue(out4["ok"], out4)
+                    self.assertTrue(
+                        checks_gate.evaluate(
+                            proj.root, policy, task_id="DEV-1",
+                            task_content=content, task_meta={},
+                            now=self.FROZEN)["ok"])
 
 
 if __name__ == "__main__":

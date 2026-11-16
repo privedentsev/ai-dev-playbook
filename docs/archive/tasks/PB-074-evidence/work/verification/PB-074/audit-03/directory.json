@@ -1,0 +1,204 @@
+{
+  "history_mutation": "directory",
+  "no_git": true,
+  "last_real_result_before_corruption": "failed",
+  "gate_before_corruption": {
+    "ok": false,
+    "scope": "task",
+    "checkpoint": null,
+    "task_id": "DEV-01",
+    "trust_mode": "local",
+    "checks": {
+      "payment": {
+        "kind": "command",
+        "explain": [
+          "обязательства не затронуты",
+          "обязательство не покрыто: последний результат failed — требуется новое успешное доказательство",
+          "запуск: последний результат failed"
+        ],
+        "status": "uncovered"
+      }
+    },
+    "covered": [],
+    "uncovered": [
+      "payment"
+    ],
+    "manual": [],
+    "blocked": [],
+    "not_applicable": [],
+    "notes": [],
+    "rejections": [],
+    "hashed_bytes": 2649350,
+    "hashed_files": 101,
+    "budget_reasons": [],
+    "trust": {
+      "mode": "local",
+      "capability": "local",
+      "note": "trust_mode=local: результаты диагностические — локальная история не защищена от владельца проекта; доверенное выполнение требует контура PB-061"
+    },
+    "protected_confirmed": false
+  },
+  "gate_after_corruption": {
+    "ok": false,
+    "scope": "task",
+    "checkpoint": null,
+    "task_id": "DEV-01",
+    "trust_mode": "local",
+    "checks": {
+      "payment": {
+        "kind": "command",
+        "explain": [
+          "обязательства не затронуты",
+          "история результата недоказуема (повреждённая или утраченная запись) — требуется новое успешное доказательство",
+          "запуск: результатов нет"
+        ],
+        "status": "uncovered"
+      }
+    },
+    "covered": [],
+    "uncovered": [
+      "payment"
+    ],
+    "manual": [],
+    "blocked": [],
+    "not_applicable": [],
+    "notes": [
+      "запись результата payment по индексу утрачена или подменена — история недоказуема",
+      "повреждённая история check_id ['payment'] — результаты не переиспользуются"
+    ],
+    "rejections": [],
+    "hashed_bytes": 2649350,
+    "hashed_files": 101,
+    "budget_reasons": [],
+    "trust": {
+      "mode": "local",
+      "capability": "local",
+      "note": "trust_mode=local: результаты диагностические — локальная история не защищена от владельца проекта; доверенное выполнение требует контура PB-061"
+    },
+    "protected_confirmed": false
+  },
+  "gate_after_rebuild": {
+    "ok": false,
+    "scope": "task",
+    "checkpoint": null,
+    "task_id": "DEV-01",
+    "trust_mode": "local",
+    "checks": {
+      "payment": {
+        "kind": "command",
+        "explain": [
+          "обязательства не затронуты",
+          "история результата недоказуема (повреждённая или утраченная запись) — требуется новое успешное доказательство",
+          "запуск: результатов нет"
+        ],
+        "status": "uncovered"
+      }
+    },
+    "covered": [],
+    "uncovered": [
+      "payment"
+    ],
+    "manual": [],
+    "blocked": [],
+    "not_applicable": [],
+    "notes": [
+      "запись результата payment по индексу утрачена или подменена — история недоказуема",
+      "повреждённая история check_id ['payment'] — результаты не переиспользуются"
+    ],
+    "rejections": [],
+    "hashed_bytes": 2649350,
+    "hashed_files": 101,
+    "budget_reasons": [],
+    "trust": {
+      "mode": "local",
+      "capability": "local",
+      "note": "trust_mode=local: результаты диагностические — локальная история не защищена от владельца проекта; доверенное выполнение требует контура PB-061"
+    },
+    "protected_confirmed": false
+  },
+  "stale_rc": 1,
+  "attempts": 3,
+  "commands": [
+    {
+      "argv": [
+        "setup",
+        "apply"
+      ],
+      "returncode": 0,
+      "stdout": "checks-политика shop-checks rev 1 подключена (checks-policy.json); project.json → checks_policy. Операция: work/lifecycle/20261117-004946-efd1dc4d. trust_mode=local не повышает доверие результатов.\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "checks",
+        "run",
+        "DEV-01",
+        "--scope",
+        "project",
+        "--mode",
+        "force"
+      ],
+      "returncode": 0,
+      "stdout": "checks run DEV-01: политика shop-checks rev 1, scope=project mode=force\nОграничение: trust_mode=local: результаты диагностические — локальная история не защищена от владельца проекта; доверенное выполнение требует контура PB-061\n  payment: RUN command\n  payment: passed (0.09с)\nИтог: passed=1; непокрытых обязательств: 0\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "checks",
+        "run",
+        "DEV-01",
+        "--scope",
+        "project",
+        "--mode",
+        "force"
+      ],
+      "returncode": 1,
+      "stdout": "checks run DEV-01: политика shop-checks rev 1, scope=project mode=force\nОграничение: trust_mode=local: результаты диагностические — локальная история не защищена от владельца проекта; доверенное выполнение требует контура PB-061\n  payment: RUN command\n  payment: failed — команда завершилась кодом 1\nИтог: failed=1; непокрытых обязательств: 1\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "checks",
+        "plan",
+        "DEV-01"
+      ],
+      "returncode": 0,
+      "stdout": "checks plan DEV-01: политика shop-checks rev 1, trust=local\nИзменения: 0 путей\nГраф: 0 рёбер, unknown-областей: 0\nОценка: 5с лимит 100с; прочитано 2649350 Б / 101 файлов (лимит 10000000 Б)\n  payment: run\n      обязательства не затронуты\n      история результата недоказуема (повреждённая или утраченная запись) — требуется новое успешное доказательство\n      запуск: результатов нет\nПримечание: запись результата payment по индексу утрачена или подменена — история недоказуема\nИтог: run=1, reused=0, blocked=0\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "checks",
+        "status",
+        "DEV-01"
+      ],
+      "returncode": 0,
+      "stdout": "checks status DEV-01: политика shop-checks rev 1\nОграничение: trust_mode=local: результаты диагностические — локальная история не защищена от владельца проекта; доверенное выполнение требует контура PB-061\n  payment: run\nПокрытие обязательств области задачи: 0/1\nПримечание: запись результата payment по индексу утрачена или подменена — история недоказуема\nПримечание: повреждённая история check_id ['payment'] — результаты не переиспользуются\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "checks",
+        "run",
+        "DEV-01",
+        "--scope",
+        "task",
+        "--mode",
+        "stale"
+      ],
+      "returncode": 1,
+      "stdout": "checks run DEV-01: политика shop-checks rev 1, scope=task mode=stale\nОграничение: trust_mode=local: результаты диагностические — локальная история не защищена от владельца проекта; доверенное выполнение требует контура PB-061\n  payment: RUN command\n  payment: failed — команда завершилась кодом 1\nИтог: failed=1; непокрытых обязательств: 1\nПримечание: запись результата payment по индексу утрачена или подменена — история недоказуема\nПримечание: повреждённая история check_id ['payment'] — результаты не переиспользуются\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "checks",
+        "release-ready",
+        "DEV-01"
+      ],
+      "returncode": 1,
+      "stdout": "checks release-ready DEV-01: политика shop-checks rev 1, trust=local, checkpoint=release\nОграничение: trust_mode=local: результаты диагностические — локальная история не защищена от владельца проекта; доверенное выполнение требует контура PB-061\n  payment: uncovered\nПокрытие: 0 покрыто, 1 не покрыто, 0 ручных, 0 заблокировано\nrelease-ready: не готово\n",
+      "stderr": ""
+    }
+  ]
+}

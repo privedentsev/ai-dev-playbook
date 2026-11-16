@@ -1,0 +1,62 @@
+[
+  {
+    "command": "python3 -m unittest discover -s tests -p 'test_checks_*.py' -v",
+    "returncode": 0,
+    "tests": 328,
+    "seconds": 189.731,
+    "log": "checks-tests.log"
+  },
+  {
+    "command": "python3 docs/tasks/AUDIT-009-evidence/audit-02/probe_corrupt_obligation.py . corrupt",
+    "returncode": 0,
+    "result": "task gate false -> true after corrupt failed; stale rc=0, counter remains 2",
+    "log": "probe-corrupt.json"
+  },
+  {
+    "command": "python3 docs/tasks/AUDIT-009-evidence/audit-02/probe_corrupt_obligation.py . delete",
+    "returncode": 0,
+    "result": "task gate false -> true after deleting failed; stale rc=0, counter remains 2",
+    "log": "probe-deleted.json"
+  },
+  {
+    "command": "python3 docs/tasks/AUDIT-009-evidence/probe_equal_timestamps.py .",
+    "returncode": 0,
+    "result": "latest failed, gate false; original A-02 fixed",
+    "log": "probe-equal.json"
+  },
+  {
+    "command": "python3 docs/tasks/AUDIT-009-evidence/probe_failed_baseline.py .",
+    "returncode": 0,
+    "result": "two failed; gate false; original A-01 fixed",
+    "log": "probe-baseline.json"
+  },
+  {
+    "command": "python3 docs/archive/tasks/PB-073-evidence/probe_fixes.py .",
+    "returncode": 0,
+    "result": "failure blocks, success restores, lawful cross-task reuse",
+    "log": "probe-fixes.json"
+  },
+  {
+    "command": "python3 docs/archive/tasks/PB-073-evidence/work/verification/PB-073/audit-02/probe-spawn.py",
+    "returncode": 0,
+    "result": "failed process spawn keeps task gate closed",
+    "log": "probe-spawn.json"
+  },
+  {
+    "command": "python3 docs/archive/tasks/PB-073-evidence/self_pilot.py . /tmp/audit009-repeat-plan --plan-only",
+    "returncode": 0,
+    "result": "PLAN-ONLY OK after PB-073 archive, local boundary explicitly preserved",
+    "log": "pilot-plan.log"
+  },
+  {
+    "command": "python3 ai-dev-playbook/scripts/playbook.py verify AUDIT-009 --audit-ready",
+    "returncode": 1,
+    "result": "requires in_review; no current HANDOFF; no tests executed by this command"
+  },
+  {
+    "command": "python3 docs/tasks/AUDIT-009-evidence/audit-02/probe_legacy_equal.py .",
+    "returncode": 0,
+    "result": "new seq gate false; legacy equal-time histories pick old passed, gate true; synthetic legacy format",
+    "log": "probe-legacy-equal.json"
+  }
+]

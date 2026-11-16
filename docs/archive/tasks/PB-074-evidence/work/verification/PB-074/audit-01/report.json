@@ -1,0 +1,65 @@
+{
+  "task_id": "PB-074",
+  "handoff": "HANDOFF-01",
+  "audit_id": "AUDIT-01",
+  "result": "changes_requested",
+  "actor": {
+    "name": "Codex",
+    "model": "GPT-6"
+  },
+  "findings": [
+    {
+      "id": "A-01",
+      "priority": "P1",
+      "criteria": [
+        "AC-01",
+        "AC-03"
+      ],
+      "file": "ai-dev-playbook/scripts/checks_results.py",
+      "line": 140,
+      "summary": "Missing results directory bypasses retained index and erases unresolved task obligation"
+    },
+    {
+      "id": "A-02",
+      "priority": "P2",
+      "criteria": [
+        "AC-01",
+        "AC-03"
+      ],
+      "file": "ai-dev-playbook/scripts/playbook.py",
+      "line": 1605,
+      "summary": "checks plan reuses an old passed result despite corrupt_ids"
+    }
+  ],
+  "tests": {
+    "targeted_unit": {
+      "count": 7,
+      "passed": true
+    },
+    "targeted_e2e": {
+      "count": 8,
+      "passed": true
+    },
+    "checks": {
+      "count": 338,
+      "failures": 11,
+      "errors": 6
+    },
+    "unsandboxed_gate_trust_and_e2e_recheck": {
+      "count": 64,
+      "passed": true
+    }
+  },
+  "limitations": [
+    "Nested sandbox-exec denied by outer execution sandbox in initial broad run; all failed cases passed in unsandboxed recheck",
+    "Full legacy verify not independently rerun",
+    "Separate OS/CI identity not established"
+  ],
+  "report": "report.md",
+  "structural_checks": {
+    "index": "passed",
+    "check_ready": "passed",
+    "audit_preflight": "passed",
+    "card_sync": "passed"
+  }
+}

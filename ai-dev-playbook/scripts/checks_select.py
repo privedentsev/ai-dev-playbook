@@ -446,20 +446,53 @@ def result_order_key(result):
             result.get("result_id") or "")
 
 
-def next_run_seq(results):
-    """Следующий порядковый номер прогона для новых записей истории."""
-    return max((_run_seq_of(result) for result in results),
-               default=-1) + 1
+def next_run_seq(results, index_entries=None):
+    """Следующий порядковый номер прогона для новых записей истории.
+
+    Учитываются и ``run_seq`` записей производного индекса: номер
+    утраченной записи остаётся занятым, иначе при равном
+    ``finished_at`` новый результат не смог бы доказать более позднее
+    исполнение (A-04 PB-074).
+    """
+    seqs = [_run_seq_of(result) for result in results]
+    for entry in (index_entries or {}).values():
+        if isinstance(entry, dict):
+            seq = entry.get("run_seq")
+            if type(seq) is int:
+                seqs.append(seq)
+    return max(seqs, default=-1) + 1
+
+
+def _latest_better(candidate, current):
+    """Кандидат — более поздняя запись истории, чем current.
+
+    Основной критерий — ``(finished_at, run_seq)``. При равенстве
+    взаимный порядок записей недоказан (legacy-формат без
+    ``run_seq`` делит -1): консервативно важнее непокрывающий исход,
+    а не лексикографический ``result_id`` — иначе старый passed мог
+    скрыть поздний failed (A-05 PB-074).
+    """
+    candidate_key = result_order_key(candidate)
+    current_key = result_order_key(current)
+    if candidate_key[:2] != current_key[:2]:
+        return candidate_key[:2] > current_key[:2]
+    if (candidate.get("status") == "passed") != \
+            (current.get("status") == "passed"):
+        return candidate.get("status") != "passed"
+    return candidate_key > current_key
 
 
 def _latest_results(results):
-    """Последний результат на check_id; поздний failed важнее."""
+    """Последний результат на check_id; поздний failed важнее.
+
+    При равном ``(finished_at, run_seq)`` выбор недоказуем —
+    консервативно берётся непокрывающий исход (``_latest_better``).
+    """
     latest = {}
     for result in results:
         key = result["check_id"]
         prev = latest.get(key)
-        if prev is None or result_order_key(result) > \
-                result_order_key(prev):
+        if prev is None or _latest_better(result, prev):
             latest[key] = result
     return latest
 
@@ -563,20 +596,33 @@ def _counting_reader(root, state, limit, read_file):
 
 
 def plan(root, policy, *, baseline=None, graph=None, previous=None,
-         results=(), task_digest=None, checkpoint=None, hash_fn=None,
-         read_file=None, now=None, projections=None, environment=None):
+         results=(), corrupt_ids=(), task_digest=None, checkpoint=None,
+         hash_fn=None, read_file=None, now=None, projections=None,
+         environment=None):
     """Построить объяснимый план: required/reused/run/blocked + цена.
 
     Ничего не исполняет и не пишет. ``baseline`` — прошлый снимок
     universe (``load_snapshot`` либо None), ``graph`` — объединённый
     документ ``checks-graph.json`` (без него строится из ``previous``
     тем же бюджетом байтов, что и снимок), ``results`` — валидные
-    результаты для оценки reuse, ``task_digest`` — отпечаток проекции
-    карточки. Превышение max_bytes при анализе или снимке блокирует
-    затронутые обязательства, а не расширяет запуск (R-10).
+    результаты для оценки reuse, ``corrupt_ids`` — check_id с
+    недоказуемой историей (повреждённые/утраченные записи
+    ``checks_results.load_results``): их обязательства не зависят от
+    diff и всегда требуют нового успешного доказательства (A-04
+    PB-074), ``task_digest`` — отпечаток проекции карточки.
+    Превышение max_bytes при анализе или снимке блокирует затронутые
+    обязательства, а не расширяет запуск (R-10).
     """
     root = Path(root)
     state = {"bytes": 0, "files": 0}
+    # A-02 PB-074 (аудит-01): результаты check_id с недоказуемой
+    # историей не участвуют ни в покрытии, ни в reuse — независимо от
+    # того, отфильтровал ли их вызывающий путь. Иначе старый passed
+    # мог бы «переиспользоваться» поверх утраченного failed.
+    corrupt = frozenset(corrupt_ids or ())
+    if corrupt:
+        results = [result for result in results
+                   if result.get("check_id") not in corrupt]
     limit = policy["fallback"]["limits"].get("max_bytes")
     ast_reason = ""
     if graph is None:
@@ -614,6 +660,19 @@ def plan(root, policy, *, baseline=None, graph=None, previous=None,
                 f"обязательство не покрыто: последний результат "
                 f"{result['status']} — требуется новое успешное "
                 "доказательство"]
+        # A-04 PB-074: check_id с недоказуемой историей — открытое
+        # обязательство независимо от пустого diff и от удаления
+        # непригодных результатов: старый успех не покрывает, нужен
+        # новый фактический прогон. Результаты такого check_id
+        # отфильтрованы выше — reuse по ним невозможен (A-02 аудита-01).
+        if check["id"] in corrupt_ids:
+            if entry["status"] == "not_applicable":
+                entry["status"] = "run"
+            if entry["status"] == "run":
+                entry["explain"] = entry["explain"] + [
+                    "история результата недоказуема (повреждённая или "
+                    "утраченная запись) — требуется новое успешное "
+                    "доказательство"]
         if entry["status"] != "run":
             continue
         verdict = evaluate_reuse(

@@ -1,0 +1,36 @@
+{
+  "task_id": "PB-074",
+  "handoff": "HANDOFF-02",
+  "audit_id": "AUDIT-02",
+  "result": "changes_requested",
+  "closed_findings": [
+    "A-01",
+    "A-02"
+  ],
+  "findings": [
+    {
+      "id": "A-03",
+      "priority": "P1",
+      "criteria": [
+        "AC-01",
+        "AC-02",
+        "AC-03"
+      ],
+      "file": "ai-dev-playbook/scripts/checks_results.py",
+      "line": 183,
+      "summary": "Index reconciliation ignores retained legacy failed when surviving passed has a larger UUID; task and project gate open without execution"
+    }
+  ],
+  "tests": {
+    "targeted": 19,
+    "passed": true
+  },
+  "audit_ready": "rejected: open prior findings",
+  "full_verify_independently_repeated": false,
+  "structural_checks": {
+    "index": "passed",
+    "card_sync": "passed",
+    "check_ready": "passed",
+    "preflight": "passed"
+  }
+}

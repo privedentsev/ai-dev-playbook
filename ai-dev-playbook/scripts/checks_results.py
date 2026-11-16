@@ -54,6 +54,24 @@ def results_dir(root):
         checks_select.RESULTS_DIR
 
 
+def index_entries(root):
+    """Записи производного индекса результатов.
+
+    ``{}`` при отсутствии или порче индекса — он не источник истины;
+    используется для резерва ``run_seq`` и диагностики (PB-074).
+    """
+    path = Path(root) / checks_select.STATE_DIR / INDEX_FILENAME
+    if not path.is_file() or path.is_symlink():
+        return {}
+    try:
+        entries = json.loads(
+            path.read_text(encoding="utf-8"),
+            object_pairs_hook=_unique_pairs).get("entries")
+    except (ValueError, OSError):
+        return {}
+    return entries if isinstance(entries, dict) else {}
+
+
 def store_result(root, run_id, result):
     """Записать проверенный результат append-only; вернуть путь файла.
 
@@ -93,8 +111,10 @@ def update_index(root, run_id, result):
     rel = str((results_dir(root) / run_id /
                (result["check_id"] + ".json")).relative_to(root))
     current = index["entries"].get(result["check_id"])
-    if current is None or checks_select.result_order_key(result) > \
-            checks_select.result_order_key(current):
+    # A-03 PB-074 (аудит-02): то же консервативное сравнение, что у
+    # selector — при равном (finished_at, run_seq) непокрывающий исход
+    # важнее result_id, иначе индекс хранил бы passed поверх failed.
+    if current is None or checks_select._latest_better(result, current):
         seq = (result.get("evidence") or {}).get("run_seq") \
             if isinstance(result.get("evidence"), dict) else None
         index["entries"][result["check_id"]] = {
@@ -119,20 +139,22 @@ def load_results(root, *, validate=None):
     validate = validate or _raise
     found, notes, corrupt = [], [], set()
     directory = results_dir(root)
-    if not directory.is_dir():
-        return found, notes, corrupt
-    for path in sorted(directory.rglob("*.json")):
-        try:
-            validate(not path.is_symlink(),
-                     f"{path.name}: символическая ссылка")
-            doc = json.loads(path.read_text(encoding="utf-8"),
-                             object_pairs_hook=_unique_pairs)
-            checks_contract.validate_result(doc, validate)
-            found.append(doc)
-        except (ValueError, OSError) as error:
-            corrupt.add(path.stem)
-            notes.append(f"пропущена повреждённая запись "
-                         f"{path.relative_to(root)}: {error}")
+    # A-01 PB-074 (аудит-01): отсутствие каталога results не отменяет
+    # свидетельства индекса — проверка ниже выполняется всегда, иначе
+    # утрата всей истории снимала бы известные обязательства.
+    if directory.is_dir():
+        for path in sorted(directory.rglob("*.json")):
+            try:
+                validate(not path.is_symlink(),
+                         f"{path.name}: символическая ссылка")
+                doc = json.loads(path.read_text(encoding="utf-8"),
+                                 object_pairs_hook=_unique_pairs)
+                checks_contract.validate_result(doc, validate)
+                found.append(doc)
+            except (ValueError, OSError) as error:
+                corrupt.add(path.stem)
+                notes.append(f"пропущена повреждённая запись "
+                             f"{path.relative_to(root)}: {error}")
     # A-06: свидетельства индекса о последних результатах сверяются с
     # файлами — потерянная или подменённая запись делает историю
     # check_id недоказанной, старый passed не разрешает reuse.
@@ -159,9 +181,15 @@ def load_results(root, *, validate=None):
                 # устойчивому ключу порядка, что у selector (A-02).
                 claim = {"finished_at": entry.get("finished_at") or "",
                          "result_id": entry.get("result_id") or "",
-                         "run_seq": entry.get("run_seq")}
-                if actual is None or checks_select.result_order_key(
-                        claim) > checks_select.result_order_key(actual):
+                         "run_seq": entry.get("run_seq"),
+                         "status": entry.get("status")}
+                # A-03 PB-074 (аудит-02): «позднее» — по тому же
+                # консервативному ключу, что у selector: при равном
+                # (finished_at, run_seq) непокрывающий исход важнее
+                # result_id, поэтому утраченный legacy-failed
+                # обнаруживается при любом UUID-порядке.
+                if actual is None or checks_select._latest_better(
+                        claim, actual):
                     corrupt.add(check_id)
                     notes.append(
                         f"запись результата {check_id} по индексу "
@@ -209,14 +237,16 @@ def rebuild_index(root, policy=None):
     # индекс знал о более позднем результате check_id, чем осталось на
     # диске, его запись сохраняется: история остаётся недоказанной до
     # нового фактического результата, старый passed не разрешает reuse.
-    # «Более поздний» — устойчивый ключ (finished_at, run_seq,
-    # result_id), как у selector (A-02 PB-073).
+    # «Более поздний» — консервативный ключ selector (finished_at,
+    # run_seq, затем непокрывающий исход при неоднозначности), как у
+    # A-02/A-03 PB-074: иначе старый passed-индекс воскрешал бы
+    # скрытый failed при равном времени.
     for check_id, entry in previous.items():
         if not isinstance(entry, dict):
             continue
         recorded = entries.get(check_id)
-        if recorded is None or checks_select.result_order_key(entry) > \
-                checks_select.result_order_key(recorded):
+        if recorded is None or checks_select._latest_better(
+                entry, recorded):
             entries[check_id] = entry
             notes.append(f"индекс: запись {check_id} от "
                          f"{entry.get('finished_at')} утрачена — "

@@ -302,8 +302,10 @@ def execute(root, policy, *, task_id, scope, mode, checkpoint,
     notes.extend(load_notes)
     # A-02 PB-073: порядковый номер исходного исполнения для всех
     # записей этого прогона; при равном finished_at поздний failed не
-    # маскируется старым passed.
-    run_seq = checks_select.next_run_seq(results)
+    # маскируется старым passed. A-04 PB-074: seq записей индекса тоже
+    # зарезервированы — номер утраченной записи не переиспользуется.
+    run_seq = checks_select.next_run_seq(
+        results, checks_results.index_entries(root))
     # A-03: повреждённая запись делает историю проверки недоказанной —
     # результаты затронутых check_id не участвуют в reuse, обязательство
     # консервативно перезапускается.
@@ -316,7 +318,8 @@ def execute(root, policy, *, task_id, scope, mode, checkpoint,
 
     planned = checks_select.plan(
         root, policy, baseline=baseline if scope == "task" else None,
-        previous=previous, results=results, task_digest=task_digest,
+        previous=previous, results=results, corrupt_ids=corrupt_ids,
+        task_digest=task_digest,
         checkpoint=checkpoint, now=now, projections=projections)
     checks = {cid: dict(entry)
               for cid, entry in planned["checks"].items()}
@@ -591,7 +594,8 @@ def status(root, policy, *, task_id, task_content, task_meta, now=None,
                      f"переиспользуются")
     planned = checks_select.plan(
         root, policy, baseline=baseline, previous=previous,
-        results=results, task_digest=task_digest, now=now,
+        results=results, corrupt_ids=corrupt_ids,
+        task_digest=task_digest, now=now,
         projections=projections)
     # A-04: status считает покрытие тем же расчётом свежести, что и
     # stale-run, включая внешние ttl/always_run.
@@ -671,7 +675,8 @@ def confirm(root, policy, *, task_id, task_content, task_meta, check_id,
     _baseline, previous, _notes = _load_state(root)
     prior_results, _load_notes, _corrupt = checks_results.load_results(
         root)
-    run_seq = checks_select.next_run_seq(prior_results)
+    run_seq = checks_select.next_run_seq(
+        prior_results, checks_results.index_entries(root))
     planned = checks_select.plan(
         root, policy, baseline=None, previous=previous, results=[],
         task_digest=task_digest, now=now, projections=projections)

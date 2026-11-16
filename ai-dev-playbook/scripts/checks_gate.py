@@ -232,8 +232,9 @@ def evaluate(root, policy, *, task_id, scope="task", checkpoint=None,
                      f"переиспользуются")
     planned = checks_select.plan(
         root, policy, baseline=baseline if scope == "task" else None,
-        previous=previous, results=results, task_digest=task_digest,
-        checkpoint=checkpoint, now=now, projections=projections)
+        previous=previous, results=results, corrupt_ids=corrupt_ids,
+        task_digest=task_digest, checkpoint=checkpoint, now=now,
+        projections=projections)
     checks = {cid: dict(entry)
               for cid, entry in planned["checks"].items()}
     if scope == "project":

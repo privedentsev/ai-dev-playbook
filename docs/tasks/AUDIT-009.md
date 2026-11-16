@@ -41,7 +41,7 @@ Closed: -
 
 Независимая сессия либо инженер, Python, временные проекты, доступный изолированный стенд для проверки прав. Если стенд отсутствует, явно зафиксировать непроверенную границу; не принимать защищённую эксплуатацию по mock-тесту.
 
-Материалы: `docs/tasks/AUDIT-009-evidence/`. [Независимый протокол audit-01](AUDIT-009-evidence/audit-01.md): changes_requested, A-01 (P1), A-02/A-03 (P2). [Исправления PB-073](../archive/tasks/PB-073.md) — новая draft-карточка без зависимости от незавершённой AUDIT-009. Протокол связывает каждый AC спецификации с командой, фактическим результатом и ограничением. Отдельная OS/CI identity и protected deployment не подтверждены. Текущая карточка не имеет HANDOFF; отрицательный протокол сохраняется как собственный материал и failed CHECK, без фиктивной передачи или accepted. Статусы реализации не дублируются в плане.
+Материалы: `docs/tasks/AUDIT-009-evidence/`. [Независимый протокол audit-01](AUDIT-009-evidence/audit-01.md): changes_requested, A-01 (P1), A-02/A-03 (P2). [Исправления PB-073](../archive/tasks/PB-073.md) приняты и архивированы. [Повторный независимый протокол audit-02](AUDIT-009-evidence/audit-02/report.md): changes_requested, A-04 (P1), A-05 (P2). Новая задача оставшихся исправлений — [PB-074](../archive/tasks/PB-074.md), draft; зависимости от незавершённой AUDIT-009 нет. Протокол связывает каждый AC спецификации с командой, фактическим результатом и ограничением. Отдельная OS/CI identity и protected deployment не подтверждены. Текущая карточка не имеет HANDOFF; отрицательный протокол сохраняется как собственный материал и failed CHECK, без фиктивной передачи или accepted. Статусы реализации не дублируются в плане.
 
 ## Журнал
 
@@ -70,3 +70,29 @@ Closed: -
 Факт: changes_requested. 316 адресных тестов (включая 14 E2E) прошли за 171.442с, но собственные пробы воспроизвели A-01 (P1: failed исчезает из task-обязательств, повторный run/gate успешны без passed), A-02 (P2: равный finished_at скрывает поздний failed) и A-03 (P2: пилот после архивации падает до плана). Новая задача исправлений — PB-073; AUDIT-009 не принята и не закрыта. Техническая готовность не подтверждена: audit-ready требует in_review/актуальную передачу; её нет.
 Доказательства: [протокол с A-01–A-03 и матрицей](AUDIT-009-evidence/audit-01.md), [316 тестов](AUDIT-009-evidence/checks-tests-unsandboxed.log), [CLI-контрпример](AUDIT-009-evidence/probe_cli_obligations.json), [порядок исходов](AUDIT-009-evidence/probe_equal_timestamps.json), [отказ пилота](AUDIT-009-evidence/pilot-plan.log), [исправления](../archive/tasks/PB-073.md).
 Ограничения: полный legacy suite и полный пилот заново не выполнялись; пилот остановлен ошибкой подготовки. Реальная отдельная OS/CI identity недоступна, protected-эксплуатация не принята. Журнал AUDIT v2 требует предшествующей HANDOFF с passed CHECK; для отрицательного итогового аудита без передачи не создаётся фиктивная HANDOFF — протокол сохранён в материале и failed CHECK. Первый загрязнённый транзакцией/песочницей прогон исключён из доказательств; адресный повтор прошёл. Следующий шаг — реализация PB-073 и новый независимый аудит.
+
+### EXEC-02 — Выполнение
+Время: 2026-11-16T18:08:00+03:00
+Исполнитель: Codex
+Модель: GPT-6
+Изменения: по поручению инженера проведён повторный независимый аудит после приёмки PB-073 с условием закрытия только при отсутствии замечаний. Прочитаны актуальные передачи и изменения PB-073; исходные сценарии A-01/A-02 повторены, новый пилот проверен после архивирования PB-073. Сохранён штатный snapshot audit-02, новые независимые JSON/логи и отрицательный протокол. Выявлены A-04 (порча/удаление failed стирает task-обязательство) и A-05 (неоднозначная legacy-история без run_seq допускает старый passed); создана отдельная draft PB-074 по сохраняющему силу поручению инженера. Продуктовые исправления и переоткрытие архива не выполнялись.
+Файлы:
+- docs/tasks/AUDIT-009.md
+- docs/tasks/AUDIT-009.meta.json
+- docs/tasks/AUDIT-009-evidence/audit-02/
+- docs/tasks/PB-074.md
+- docs/tasks/PB-074.meta.json
+- docs/tasks/index.md
+- work/verification/AUDIT-009/audit-02/
+
+### CHECK-02 — Проверка
+Время: 2026-11-16T18:08:00+03:00
+Исполнитель: Codex
+Модель: GPT-6
+Результат: failed
+Критерии: AC-01, AC-02, AC-03, AC-04
+Команда: `python3 -m unittest discover -s tests -p 'test_checks_*.py' -v`; `probe_corrupt_obligation.py . corrupt`/`delete`; `probe_legacy_equal.py .`; исходные пробы A-01/A-02, probe_fixes/probe-spawn PB-073; `python3 docs/archive/tasks/PB-073-evidence/self_pilot.py . /tmp/audit009-repeat-plan --plan-only`; `verify AUDIT-009 --audit-ready`.
+Среда: macOS 27.2.1 x86_64, Python 3.14.6, feature/dependency-aware-verification / 6311aa96f59db025b4fde3919775e03760193b3a; временные проекты без Git, реальные CLI/subprocess; часы/legacy-формат в A-05 — контролируемая фикстура.
+Факт: 328 адресных тестов прошли за 189.731с, исходный A-01 и A-02 на новых seq-записях исправлены; plan-only нового пилота после архивирования PB-073 завершён rc=0. Независимые дополнительные пробы выявили A-04 (P1): после порчи или удаления последнего failed task gate.ok=true, stale rc=0, счётчик остаётся 2; и A-05 (P2): старые записи без run_seq с равным временем выбирают старый passed по UUID, project gate.ok=true. Verdict changes_requested, исправления PB-074; условие «если всё хорошо» не выполнено. AUDIT-009 остаётся in_progress без acceptance/close.
+Доказательства: [повторный протокол](AUDIT-009-evidence/audit-02/report.md), [328 тестов](AUDIT-009-evidence/audit-02/checks-tests.log), [повреждение](AUDIT-009-evidence/audit-02/probe-corrupt.json), [удаление](AUDIT-009-evidence/audit-02/probe-deleted.json), [legacy-порядок](AUDIT-009-evidence/audit-02/probe-legacy-equal.json), [plan-only](AUDIT-009-evidence/audit-02/pilot-plan.log), [команды](AUDIT-009-evidence/audit-02/commands.json), [задача исправлений](../archive/tasks/PB-074.md).
+Ограничения: полный двухчасовой self-pilot и полный legacy verify не повторялись; исторические метрики PB-073 не объявляются новым измерением. Реальная отдельная OS/CI identity не подтверждена; local-результаты не являются protected-развёртыванием. Актуальной HANDOFF у AUDIT-009 нет; фиктивная passed-передача ради записи отрицательного AUDIT не создаётся. Протокол и находки — в зарегистрированном собственном материале; результат — failed CHECK и diagnostic lifecycle. Старые записи/доказательства не переписаны; следующий шаг — PB-074 и новый независимый аудит.

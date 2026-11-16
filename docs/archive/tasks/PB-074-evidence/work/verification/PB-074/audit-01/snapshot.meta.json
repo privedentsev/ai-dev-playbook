@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "card_format_version": 2,
+  "relations": [],
+  "materials": [
+    {
+      "id": "evidence",
+      "role": "report",
+      "source": "docs/tasks/PB-074-evidence",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-074"
+      ]
+    },
+    {
+      "id": "verify-61a094b677df496692d71b42a8e1750d",
+      "role": "report",
+      "source": "work/verification/PB-074/61a094b677df496692d71b42a8e1750d",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-074"
+      ]
+    }
+  ],
+  "criterion_evidence": {
+    "CHECK-01": {
+      "check_sha256": "sha256:721b276d4067f112d797ab4d74b707a778ac238f89e8199977f698848b84c50a",
+      "card_projection": "sha256:63e6f33b0ba5fb1c9854754051afd9dfacf1ec42b8eac70cda3539d82d6cad27",
+      "report_id": "verify-61a094b677df496692d71b42a8e1750d",
+      "report_sha256": "sha256:01c9dc0cfedf628df1f27f7857165d882213607b05355b67036226b8c34bbc62"
+    },
+    "CHECK-02": {
+      "check_sha256": "sha256:a7d8c8c58f849f0c3077e08de6e0888ea78586cc6b73917be3c2e8484897f8b0",
+      "card_projection": "sha256:63e6f33b0ba5fb1c9854754051afd9dfacf1ec42b8eac70cda3539d82d6cad27",
+      "report_id": "verify-61a094b677df496692d71b42a8e1750d",
+      "report_sha256": "sha256:01c9dc0cfedf628df1f27f7857165d882213607b05355b67036226b8c34bbc62"
+    },
+    "CHECK-03": {
+      "check_sha256": "sha256:b452b987113a1a5680e9bef1d763cc4bbfb453de76a83c78248ee755eb52d207",
+      "card_projection": "sha256:63e6f33b0ba5fb1c9854754051afd9dfacf1ec42b8eac70cda3539d82d6cad27",
+      "report_id": "verify-61a094b677df496692d71b42a8e1750d",
+      "report_sha256": "sha256:01c9dc0cfedf628df1f27f7857165d882213607b05355b67036226b8c34bbc62"
+    }
+  },
+  "handoff": {
+    "at": "2026-11-16T20:38:33+03:00",
+    "actor": {
+      "name": "Devin",
+      "model": "SWE-2 Flash High"
+    },
+    "summary": "HANDOFF-01",
+    "reports": [
+      "verify-61a094b677df496692d71b42a8e1750d"
+    ],
+    "card_projection": "sha256:63e6f33b0ba5fb1c9854754051afd9dfacf1ec42b8eac70cda3539d82d6cad27",
+    "entry_id": "HANDOFF-01",
+    "journal_sha256": "sha256:7bc91424d79802588c315b579510b4f10663be82a4a3fdd1c6b0c0ef29676c6a"
+  }
+}

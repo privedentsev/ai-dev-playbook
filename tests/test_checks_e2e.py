@@ -20,6 +20,7 @@ if str(SCRIPTS_DIR) not in sys.path:
 
 import checks_contract
 import checks_gate
+import checks_results
 import checks_trust
 import file_operations
 import playbook
@@ -2101,6 +2102,350 @@ class Audit009BaselineFailureE2ETest(NoGitChecksE2ECase):
         # законно переиспользуется задачей DEV-01.
         self.assertTrue(self._gate("DEV-01")["ok"])
         self.assertTrue(self._gate("DEV-02")["ok"])
+
+    def _payment_result_file(self, status):
+        """Файл результата payment с требуемым status (A-09 PB-073)."""
+        for path in (self.root / "work/checks/results").rglob(
+                "payment.json"):
+            doc = json.loads(path.read_text(encoding="utf-8"))
+            if doc["status"] == status:
+                return path
+        return None
+
+    def _rebuild_index(self):
+        checks_results.rebuild_index(
+            self.root, checks_gate.load_policy(self.root))
+
+    def test_corrupt_failed_record_keeps_task_obligation(self):
+        """A-04 PB-074: `{`-запись failed при актуальном baseline не
+        снимает обязательство — gate/status/stale требуют нового
+        прогона; свидетельство переживает rebuild и запуск DEV-02;
+        покрытие восстанавливается целостностью + реальным passed."""
+        self.create_card("DEV-01")
+        self.create_card("DEV-02", title="Вторая задача")
+        self._install_policy(self._payment_policy())
+        self._project_pass_then_fail()
+
+        victim = self._payment_result_file("failed")
+        self.assertIsNotNone(victim)
+        victim.write_text("{")
+
+        gate = self._gate("DEV-01")
+        self.assertFalse(gate["ok"], gate)
+        self.assertIn("payment", gate["uncovered"])
+        self.assertNotIn("payment", gate["covered"])
+        code, out, _ = self.cli("checks", "status", "DEV-01")
+        self.assertEqual(code, 0)
+        self.assertIn("payment: run", out)
+
+        # Stale повторяет проверку реальным исполнением.
+        code, _, _ = self.cli("checks", "run", "DEV-01",
+                              "--scope", "task", "--mode", "stale")
+        self.assertEqual(code, 1)
+        self.assertEqual(self.count("payment"), 3)
+        self.assertFalse(self._gate("DEV-01")["ok"])
+
+        # Пересборка индекса не снимает свидетельство.
+        self._rebuild_index()
+        self.assertFalse(self._gate("DEV-01")["ok"])
+
+        # Запуск другой задачи исполняет обязательство, но повреждённая
+        # запись сохраняет историю недоказуемой — gate закрыт.
+        code, _, _ = self.cli("checks", "run", "DEV-02",
+                              "--scope", "task", "--mode", "stale")
+        self.assertEqual(code, 1)
+        self.assertEqual(self.count("payment"), 4)
+        self.assertFalse(self._gate("DEV-01")["ok"])
+
+        # Новый реальный passed записан, но `{`-файл ещё хранится —
+        # обязательство остаётся открытым (fail-closed).
+        self.allow.write_text("1\n")
+        code, _, _ = self.cli("checks", "run", "DEV-02",
+                              "--scope", "task", "--mode", "stale")
+        self.assertEqual(code, 0)
+        self.assertEqual(self.count("payment"), 5)
+        self.assertFalse(self._gate("DEV-01")["ok"])
+
+        # Восстановление целостности истории + новый passed →
+        # покрытие и законный cross-task reuse восстановлены.
+        victim.unlink()
+        self.assertTrue(self._gate("DEV-01")["ok"])
+        self.assertTrue(self._gate("DEV-02")["ok"])
+
+    def test_deleted_failed_record_keeps_task_obligation(self):
+        """A-04 PB-074: удалённый failed при сохранённом индексе —
+        то же открытое обязательство; rebuild хранит свидетельство;
+        новый passed замещает его и восстанавливает покрытие."""
+        self.create_card("DEV-01")
+        self._install_policy(self._payment_policy())
+        self._project_pass_then_fail()
+
+        victim = self._payment_result_file("failed")
+        self.assertIsNotNone(victim)
+        victim.unlink()
+
+        self.assertFalse(self._gate("DEV-01")["ok"])
+        # Свидетельство утраты переживает пересборку индекса (A-07).
+        self._rebuild_index()
+        _, _, corrupt = checks_results.load_results(self.root)
+        self.assertIn("payment", corrupt)
+        self.assertFalse(self._gate("DEV-01")["ok"])
+
+        code, _, _ = self.cli("checks", "run", "DEV-01",
+                              "--scope", "task", "--mode", "stale")
+        self.assertEqual(code, 1)
+        self.assertEqual(self.count("payment"), 3)
+        self.assertFalse(self._gate("DEV-01")["ok"])
+
+        # Новый реальный passed замещает свидетельство индекса —
+        # покрытие восстановлено без ручной правки индекса.
+        self.allow.write_text("1\n")
+        code, _, _ = self.cli("checks", "run", "DEV-01",
+                              "--scope", "task", "--mode", "stale")
+        self.assertEqual(code, 0)
+        self.assertEqual(self.count("payment"), 4)
+        self.assertTrue(self._gate("DEV-01")["ok"])
+
+    def test_deleted_results_directory_keeps_task_obligation(self):
+        """Аудит-01 A-01: утрата всего каталога results при
+        сохранённом baseline и индексе — свидетельство failed
+        делает историю недоказуемой: gate/plan/status/stale и чужая
+        задача требуют нового реального passed."""
+        self.create_card("DEV-01")
+        self.create_card("DEV-02", title="Вторая задача")
+        self._install_policy(self._payment_policy())
+        self._project_pass_then_fail()
+
+        shutil.rmtree(self.root / "work/checks/results")
+        self._rebuild_index()
+
+        gate = self._gate("DEV-01")
+        self.assertFalse(gate["ok"], gate)
+        self.assertIn("payment", gate["uncovered"])
+        code, out, _ = self.cli("checks", "plan", "DEV-01")
+        self.assertEqual(code, 0)
+        self.assertIn("payment: run", out)
+        self.assertNotIn("payment: reused", out)
+        code, out, _ = self.cli("checks", "status", "DEV-01")
+        self.assertEqual(code, 0)
+        self.assertIn("payment: run", out)
+
+        # Повторный rebuild не снимает свидетельство.
+        self._rebuild_index()
+        self.assertFalse(self._gate("DEV-01")["ok"])
+
+        # Stale — реальное исполнение, а не reuse.
+        code, _, _ = self.cli("checks", "run", "DEV-01",
+                              "--scope", "task", "--mode", "stale")
+        self.assertEqual(code, 1)
+        self.assertEqual(self.count("payment"), 3)
+        self.assertFalse(self._gate("DEV-01")["ok"])
+
+        # Запуск другой задачи исполняет то же обязательство.
+        code, _, _ = self.cli("checks", "run", "DEV-02",
+                              "--scope", "task", "--mode", "stale")
+        self.assertEqual(code, 1)
+        self.assertEqual(self.count("payment"), 4)
+        self.assertFalse(self._gate("DEV-01")["ok"])
+
+        # Восстановление: реальный passed → покрытие и reuse.
+        self.allow.write_text("1\n")
+        code, _, _ = self.cli("checks", "run", "DEV-02",
+                              "--scope", "task", "--mode", "stale")
+        self.assertEqual(code, 0)
+        self.assertEqual(self.count("payment"), 5)
+        self.assertTrue(self._gate("DEV-01")["ok"])
+        self.assertTrue(self._gate("DEV-02")["ok"])
+
+    def test_plan_agrees_with_run_on_lost_history(self):
+        """Аудит-01 A-02: checks plan не «переиспользует» результат
+        недоказуемой истории — plan/status/run дают одинаковое
+        обязательство; после восстановления reuse законен."""
+        self.create_card("DEV-01")
+        self.create_card("DEV-02", title="Вторая задача")
+        self._install_policy(self._payment_policy())
+        self._project_pass_then_fail()
+
+        victim = self._payment_result_file("failed")
+        self.assertIsNotNone(victim)
+        victim.unlink()
+        self._rebuild_index()
+
+        # План показывает то же обязательство, что status/gate/run.
+        code, out, _ = self.cli("checks", "plan", "DEV-01")
+        self.assertEqual(code, 0)
+        self.assertIn("payment: run", out)
+        self.assertNotIn("payment: reused", out)
+        self.assertIn("run=1, reused=0", out)
+        code, out, _ = self.cli("checks", "status", "DEV-01")
+        self.assertEqual(code, 0)
+        self.assertIn("payment: run", out)
+        self.assertFalse(self._gate("DEV-01")["ok"])
+
+        code, _, _ = self.cli("checks", "run", "DEV-01",
+                              "--scope", "task", "--mode", "stale")
+        self.assertEqual(code, 1)
+        self.assertEqual(self.count("payment"), 3)
+
+        # Восстановление: новый реальный passed → покрытие; чужая
+        # задача получает его законным reuse без повторного запуска.
+        self.allow.write_text("1\n")
+        code, _, _ = self.cli("checks", "run", "DEV-01",
+                              "--scope", "task", "--mode", "stale")
+        self.assertEqual(code, 0)
+        self.assertEqual(self.count("payment"), 4)
+        self.assertTrue(self._gate("DEV-01")["ok"])
+        code, _, _ = self.cli("checks", "run", "DEV-02",
+                              "--scope", "task", "--mode", "stale")
+        self.assertEqual(code, 0)
+        self.assertEqual(self.count("payment"), 4)
+        self.assertTrue(self._gate("DEV-02")["ok"])
+
+    def test_legacy_loss_keeps_task_obligation(self):
+        """Аудит-02 A-03: legacy-пара равного времени без run_seq —
+        утрата failed при старом passed-индексе и худшем UUID-порядке
+        не даёт готовности: rebuild хранит failed, gate/plan/status/
+        stale и DEV-02 требуют реального passed."""
+        self.create_card("DEV-01")
+        self.create_card("DEV-02", title="Вторая задача")
+        self._install_policy(self._payment_policy())
+        self._project_pass_then_fail()
+
+        # Legacy-фикстура: равный finished_at, без run_seq; failed
+        # получает лексикографически меньший result_id.
+        stamp = "2026-11-16T03:00:00+00:00"
+        for path in (self.root / "work/checks/results").rglob(
+                "payment.json"):
+            doc = json.loads(path.read_text(encoding="utf-8"))
+            doc["finished_at"] = stamp
+            doc["evidence"].pop("run_seq", None)
+            doc["result_id"] = ("0" * 32 if doc["status"] == "failed"
+                                else "f" * 32) + "-payment"
+            path.write_text(json.dumps(doc, ensure_ascii=False,
+                                       indent=2) + "\n",
+                            encoding="utf-8")
+
+        # Старый passed-индекс (как у писателя до исправления) —
+        # штатный rebuild не должен воскресить passed поверх failed.
+        passed = self._payment_result_file("passed")
+        self.assertIsNotNone(passed)
+        passed_doc = json.loads(passed.read_text(encoding="utf-8"))
+        policy = checks_gate.load_policy(self.root)
+        index = {"schema_version": 1, "kind": "checks-results-index",
+                 "project_id": policy["project_id"],
+                 "entries": {"payment": {
+                     "result_id": passed_doc["result_id"],
+                     "run_id": passed_doc["evidence"]["run_id"],
+                     "finished_at": stamp, "run_seq": None,
+                     "file": str(passed.relative_to(self.root)),
+                     "status": "passed"}}}
+        (self.root / "work/checks/results-index.json").write_text(
+            json.dumps(index, ensure_ascii=False))
+        self._rebuild_index()
+        stored = json.loads(
+            (self.root / "work/checks/results-index.json")
+            .read_text(encoding="utf-8"))
+        self.assertEqual(stored["entries"]["payment"]["status"],
+                         "failed")
+
+        # Утрата failed-файла: обязательство остаётся открытым.
+        victim = self._payment_result_file("failed")
+        self.assertIsNotNone(victim)
+        victim.unlink()
+        self._rebuild_index()
+        _, _, corrupt = checks_results.load_results(self.root)
+        self.assertIn("payment", corrupt)
+        gate = self._gate("DEV-01")
+        self.assertFalse(gate["ok"], gate)
+        self.assertIn("payment", gate["uncovered"])
+        card = self.root / "docs/tasks/DEV-01.md"
+        meta = json.loads(card.with_suffix(".meta.json")
+                          .read_text(encoding="utf-8"))
+        project_gate = checks_gate.evaluate(
+            self.root, policy, task_id="DEV-01", scope="project",
+            task_content=card.read_text(encoding="utf-8"),
+            task_meta=meta)
+        self.assertFalse(project_gate["ok"], project_gate)
+        code, out, _ = self.cli("checks", "plan", "DEV-01")
+        self.assertEqual(code, 0)
+        self.assertIn("payment: run", out)
+        self.assertNotIn("payment: reused", out)
+        code, out, _ = self.cli("checks", "status", "DEV-01")
+        self.assertEqual(code, 0)
+        self.assertIn("payment: run", out)
+
+        # Stale — реальное исполнение, а не reuse.
+        code, _, _ = self.cli("checks", "run", "DEV-01",
+                              "--scope", "task", "--mode", "stale")
+        self.assertEqual(code, 1)
+        self.assertEqual(self.count("payment"), 3)
+        self.assertFalse(self._gate("DEV-01")["ok"])
+
+        # Запуск другой задачи исполняет то же обязательство.
+        code, _, _ = self.cli("checks", "run", "DEV-02",
+                              "--scope", "task", "--mode", "stale")
+        self.assertEqual(code, 1)
+        self.assertEqual(self.count("payment"), 4)
+        self.assertFalse(self._gate("DEV-01")["ok"])
+
+        # Восстановление: реальный seq-passed → покрытие и reuse.
+        self.allow.write_text("1\n")
+        code, _, _ = self.cli("checks", "run", "DEV-02",
+                              "--scope", "task", "--mode", "stale")
+        self.assertEqual(code, 0)
+        self.assertEqual(self.count("payment"), 5)
+        self.assertTrue(self._gate("DEV-01")["ok"])
+        self.assertTrue(self._gate("DEV-02")["ok"])
+
+    def test_legacy_equal_timestamp_history_stays_closed(self):
+        """A-05 PB-074: legacy-записи без run_seq с равным
+        finished_at не разрешаются UUID — gate требует новый
+        фактический прогон; seq-порядок и восстановление живы."""
+        self.create_card("DEV-01")
+        self._install_policy(self._payment_policy())
+        self.allow.write_text("1\n")
+        code, _, err = self.cli("checks", "run", "DEV-01",
+                                "--scope", "project", "--mode", "force")
+        self.assertEqual(code, 0, err)
+        self.allow.unlink()
+        code, _, err = self.cli("checks", "run", "DEV-01",
+                                "--scope", "project", "--mode", "force")
+        self.assertEqual(code, 1, err)
+        self.assertEqual(self.count("payment"), 2)
+
+        # Фикстура legacy-формата: равный finished_at, без run_seq;
+        # индекс удалён и штатно перестроен.
+        stamp = "2026-11-16T03:00:00+00:00"
+        for path in (self.root / "work/checks/results").rglob(
+                "payment.json"):
+            doc = json.loads(path.read_text(encoding="utf-8"))
+            doc["finished_at"] = stamp
+            doc.get("evidence", {}).pop("run_seq", None)
+            path.write_text(json.dumps(doc, ensure_ascii=False,
+                                       indent=2) + "\n",
+                            encoding="utf-8")
+        index = self.root / "work/checks/results-index.json"
+        index.unlink()
+        self._rebuild_index()
+        _, _, corrupt = checks_results.load_results(self.root)
+        self.assertEqual(corrupt, set())
+
+        # Неоднозначная старая история не даёт готовности: выбирается
+        # непокрывающий исход, не победа result_id.
+        gate = self._gate("DEV-01")
+        self.assertFalse(gate["ok"], gate)
+        self.assertIn("payment", gate["uncovered"])
+        code, out, _ = self.cli("checks", "status", "DEV-01")
+        self.assertEqual(code, 0)
+        self.assertIn("payment: run", out)
+
+        # Новый seq-прогон с passed закрывает обязательство.
+        self.allow.write_text("1\n")
+        code, _, _ = self.cli("checks", "run", "DEV-01",
+                              "--scope", "task", "--mode", "stale")
+        self.assertEqual(code, 0)
+        self.assertEqual(self.count("payment"), 3)
+        self.assertTrue(self._gate("DEV-01")["ok"])
 
 
 if __name__ == "__main__":

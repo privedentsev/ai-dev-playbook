@@ -1,0 +1,19 @@
+test_a04_corrupt_failed_empty_diff_keeps_obligation (test_checks_run.Audit009PB74RegressionTest.test_a04_corrupt_failed_empty_diff_keeps_obligation)
+A-04: `{`-запись failed при актуальном baseline не даёт ... ok
+test_a04_corrupt_manual_record_stays_uncovered (test_checks_run.Audit009PB74RegressionTest.test_a04_corrupt_manual_record_stays_uncovered)
+A-04: повреждённая запись ручной проверки не снимает ... ok
+test_a04_corrupt_timeout_record_keeps_obligation (test_checks_run.Audit009PB74RegressionTest.test_a04_corrupt_timeout_record_keeps_obligation)
+A-04: повреждённый timeout-исход — то же открытое ... ok
+test_a04_deleted_failed_empty_diff_keeps_obligation (test_checks_run.Audit009PB74RegressionTest.test_a04_deleted_failed_empty_diff_keeps_obligation)
+A-04: удалённый failed при сохранённом индексе — то же ... ok
+test_a05_legacy_equal_end_to_end (test_checks_run.Audit009PB74RegressionTest.test_a05_legacy_equal_end_to_end)
+A-05: реальные passed → failed, конвертация в legacy без ... ok
+test_a05_legacy_equal_timestamp_never_picks_passed (test_checks_run.Audit009PB74RegressionTest.test_a05_legacy_equal_timestamp_never_picks_passed)
+A-05: два legacy-результата без run_seq при равном ... ok
+test_a05_seq_order_and_unambiguous_legacy_preserved (test_checks_run.Audit009PB74RegressionTest.test_a05_seq_order_and_unambiguous_legacy_preserved)
+A-05: seq-записи упорядочены run_seq; однозначная legacy ... ok
+
+----------------------------------------------------------------------
+Ran 7 tests in 1.642s
+
+OK

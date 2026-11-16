@@ -29,6 +29,7 @@ import checks_contract
 import checks_gate
 import checks_graph
 import checks_inventory
+import checks_results
 import checks_runner
 import checks_select
 import checks_setup
@@ -1594,21 +1595,14 @@ def checks_plan(root, args):
             previous = checks_graph.load_graph(graph_path)
         except (ValueError, OSError) as error:
             notes.append(f"прежний граф непригоден: {error}")
-    results, skipped = [], 0
-    results_dir = safe_path(
-        root, f"{state_dir}/{checks_select.RESULTS_DIR}")
-    if results_dir.is_dir():
-        for item in sorted(results_dir.rglob("*.json")):
-            try:
-                require(not item.is_symlink(), "символическая ссылка")
-                doc = json.loads(item.read_text(encoding="utf-8"),
-                                 object_pairs_hook=documents._unique_pairs)
-                checks_contract.validate_result(doc, require)
-                results.append(doc)
-            except (ValueError, OSError):
-                skipped += 1
-    if skipped:
-        notes.append(f"пропущено повреждённых результатов: {skipped}")
+    # Та же загрузка истории, что у run/status/gate: повреждённые
+    # записи и свидетельства индекса дают corrupt_ids — план
+    # показывает то же обязательство, что исполнит runner. Читается
+    # всегда: при утрате каталога results свидетельство индекса всё
+    # равно делает историю недоказуемой (A-01 аудита PB-074).
+    results, result_notes, corrupt_ids = \
+        checks_results.load_results(root)
+    notes.extend(result_notes)
     # Граф строится внутри плана: AST-чтение идёт под общим
     # бюджетом max_bytes (аудит A-04). Проекции карточки и политики
     # нужны оценке reuse проверок с task_projection/policy_projection.
@@ -1616,6 +1610,7 @@ def checks_plan(root, args):
                                              task_meta)
     plan = checks_select.plan(root, policy, baseline=baseline,
                               previous=previous, results=results,
+                              corrupt_ids=corrupt_ids,
                               task_digest=task_digest,
                               projections=projections)
 
