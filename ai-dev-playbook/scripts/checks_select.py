@@ -39,6 +39,17 @@ RUNNER = {"id": "playbook-runner", "version": "1"}
 
 STATUS_ORDER = ("run", "reused", "blocked", "not_applicable")
 
+# A-01 повторного аудита PB-073: статусы последнего результата,
+# оставляющие обязательство открытым до нового успешного
+# доказательства. Diff к baseline не может скрыть непокрытое
+# обязательство, когда baseline уже соответствует текущим входам
+# (например, прошлый passed-прогон записал baseline, а следующий
+# прогон завершился failed). ``not_applicable`` в истории не
+# хранится, ``passed`` — покрытие; ручное ``not_run`` отсекается
+# ``evidence_latest`` до выбора.
+UNRESOLVED_RESULT_STATUSES = {"failed", "timeout", "blocked",
+                              "not_run"}
+
 
 class BudgetExceeded(Exception):
     """Оценка чтения входов превысила одобренный лимит байтов."""
@@ -406,13 +417,49 @@ def binding_environment(policy, check):
     return env
 
 
+def _run_seq_of(record):
+    """Порядковый номер исходного исполнения записи результата.
+
+    Хранится в ``evidence.run_seq`` результата и в ``run_seq``
+    производной записи индекса; отсутствие — запись, созданная до
+    введения последовательности (A-02 PB-073).
+    """
+    evidence = record.get("evidence")
+    seq = evidence.get("run_seq") if isinstance(evidence, dict) \
+        else None
+    if seq is None:
+        seq = record.get("run_seq")
+    return seq if type(seq) is int else -1
+
+
+def result_order_key(result):
+    """Устойчивый ключ порядка записей истории (A-02 PB-073).
+
+    ``(finished_at, run_seq, result_id)``: при равном времени
+    выигрывает более позднее исходное исполнение; записи без
+    ``run_seq`` старше любой seq-записи при равном ``finished_at`` —
+    они созданы до введения последовательности. ``result_id`` —
+    детерминированный последний критерий.
+    """
+    return (result.get("finished_at") or "",
+            _run_seq_of(result),
+            result.get("result_id") or "")
+
+
+def next_run_seq(results):
+    """Следующий порядковый номер прогона для новых записей истории."""
+    return max((_run_seq_of(result) for result in results),
+               default=-1) + 1
+
+
 def _latest_results(results):
-    """Последний результат на check_id; более поздний failed важнее."""
+    """Последний результат на check_id; поздний failed важнее."""
     latest = {}
     for result in results:
         key = result["check_id"]
         prev = latest.get(key)
-        if prev is None or result["finished_at"] > prev["finished_at"]:
+        if prev is None or result_order_key(result) > \
+                result_order_key(prev):
             latest[key] = result
     return latest
 
@@ -556,6 +603,17 @@ def plan(root, policy, *, baseline=None, graph=None, previous=None,
     latest = evidence_latest(results)
     for check in policy["checks"]:
         entry = selection["checks"][check["id"]]
+        result = latest.get(check["id"])
+        # Обязательство не исчезает из-за пустого diff: непокрытый
+        # последний исход держит проверку в наборе до нового
+        # успешного доказательства (A-01 повторного аудита PB-073).
+        if entry["status"] == "not_applicable" and result is not None \
+                and result["status"] in UNRESOLVED_RESULT_STATUSES:
+            entry["status"] = "run"
+            entry["explain"] = entry["explain"] + [
+                f"обязательство не покрыто: последний результат "
+                f"{result['status']} — требуется новое успешное "
+                "доказательство"]
         if entry["status"] != "run":
             continue
         verdict = evaluate_reuse(

@@ -239,7 +239,11 @@ def _execute_command(root, check, run_dir, now, *, env=None, wrap=None):
     finally:
         if process is not None:
             verification.stop_group(process)
-            command.setdefault("exit_code", process.returncode)
+            if command["exit_code"] is None:
+                # timeout/OSError-ветки не дошли до wait(): код
+                # убитого процесса — честный целый exit_code,
+                # обязательный контрактом и для timeout-результата.
+                command["exit_code"] = process.returncode
     status = "passed" if command["exit_code"] == 0 else "failed"
     reasons = [] if status == "passed" else \
         [f"команда завершилась кодом {command['exit_code']}"]
@@ -249,7 +253,7 @@ def _execute_command(root, check, run_dir, now, *, env=None, wrap=None):
 
 
 def _reused_result(policy, check, source, edges, task_digest, env,
-                   input_digest, run_id, now):
+                   input_digest, run_id, run_seq, now):
     """Строка истории reuse: ссылка на исходный успех, не новый прогон."""
     body = {key: source[key] for key in ("tests", "command", "manual")
             if key in source}
@@ -266,7 +270,8 @@ def _reused_result(policy, check, source, edges, task_digest, env,
                        "issued_at") or source["finished_at"],
                    "input_digest": source["binding"]["input_digest"]},
         "started_at": _clock(now), "finished_at": _clock(now),
-        "evidence": {"run_id": run_id, "source": "history"},
+        "evidence": {"run_id": run_id, "run_seq": run_seq,
+                     "source": "history"},
         **body,
     }
     source_run = source.get("evidence", {}).get("run_id")
@@ -295,6 +300,10 @@ def execute(root, policy, *, task_id, scope, mode, checkpoint,
     baseline, previous, notes = _load_state(root)
     results, load_notes, corrupt_ids = checks_results.load_results(root)
     notes.extend(load_notes)
+    # A-02 PB-073: порядковый номер исходного исполнения для всех
+    # записей этого прогона; при равном finished_at поздний failed не
+    # маскируется старым passed.
+    run_seq = checks_select.next_run_seq(results)
     # A-03: повреждённая запись делает историю проверки недоказанной —
     # результаты затронутых check_id не участвуют в reuse, обязательство
     # консервативно перезапускается.
@@ -368,7 +377,7 @@ def execute(root, policy, *, task_id, scope, mode, checkpoint,
                 else:
                     result = _reused_result(
                         policy, check, source, edges, task_digest,
-                        bind_env, input_digest, run_id, now)
+                        bind_env, input_digest, run_id, run_seq, now)
             except (ValueError, OSError) as error:
                 result = {"schema_version": 1,
                           "result_id": f"{run_id}-{check['id']}",
@@ -384,7 +393,8 @@ def execute(root, policy, *, task_id, scope, mode, checkpoint,
                                     f"при записи reuse: {error}",
                           "started_at": _clock(now),
                           "finished_at": _clock(now),
-                          "evidence": {"run_id": run_id}}
+                          "evidence": {"run_id": run_id,
+                                       "run_seq": run_seq}}
                 checks_contract.validate_result(result, _raise)
                 status = "blocked"
             if status == "reused":
@@ -416,7 +426,8 @@ def execute(root, policy, *, task_id, scope, mode, checkpoint,
                       "status": "blocked", "reason": reason,
                       "started_at": _clock(now),
                       "finished_at": _clock(now),
-                      "evidence": {"run_id": run_id}}
+                      "evidence": {"run_id": run_id,
+                                   "run_seq": run_seq}}
             checks_contract.validate_result(result, _raise)
             checks_results.store_result(root, run_id, result)
             checks_results.update_index(root, run_id, result)
@@ -441,7 +452,8 @@ def execute(root, policy, *, task_id, scope, mode, checkpoint,
                                 "подтверждение — инженер",
                       "started_at": _clock(now),
                       "finished_at": _clock(now),
-                      "evidence": {"run_id": run_id}}
+                      "evidence": {"run_id": run_id,
+                                   "run_seq": run_seq}}
             checks_contract.validate_result(result, _raise)
             checks_results.store_result(root, run_id, result)
             checks_results.update_index(root, run_id, result)
@@ -469,7 +481,8 @@ def execute(root, policy, *, task_id, scope, mode, checkpoint,
                       "reason": f"снимок входов не построен: {error}",
                       "started_at": started_at,
                       "finished_at": _clock(now),
-                      "evidence": {"run_id": run_id}}
+                      "evidence": {"run_id": run_id,
+                                   "run_seq": run_seq}}
             checks_contract.validate_result(result, _raise)
             checks_results.store_result(root, run_id, result)
             checks_results.update_index(root, run_id, result)
@@ -492,6 +505,7 @@ def execute(root, policy, *, task_id, scope, mode, checkpoint,
             status_r, reasons, evidence, body = _execute_command(
                 root, check, run_dir, now, env=env, wrap=argv_prefix)
         evidence["run_id"] = run_id
+        evidence["run_seq"] = run_seq
         mutation = None
         if status_r in {"passed", "failed"}:
             try:
@@ -536,8 +550,6 @@ def execute(root, policy, *, task_id, scope, mode, checkpoint,
         else:
             emit(f"  {check['id']}: {status_r} — {result['reason']}")
 
-    _persist_state(root, planned["snapshot"], graph)
-    checks_results.rebuild_index(root, policy)
     summary = {"passed": 0, "reused": 0, "failed": 0, "timeout": 0,
                "blocked": 0, "not_run": 0, "not_applicable": 0}
     for value in outcomes.values():
@@ -546,6 +558,12 @@ def execute(root, policy, *, task_id, scope, mode, checkpoint,
                  if outcomes.get(check["id"]) not in
                  {"passed", "reused", "not_applicable"}]
     ok = not uncovered
+    # A-01 PB-073: baseline — снимок состояния последнего подтверждённого
+    # покрытия. Прогон с непокрытыми обязательствами (failed/timeout/
+    # blocked/not_run) его не продвигает: иначе diff исчезает и
+    # обязательство теряется до успешного покрытия (R-11, R-16).
+    _persist_state(root, planned["snapshot"] if ok else None, graph)
+    checks_results.rebuild_index(root, policy)
     emit("Итог: " + ", ".join(f"{k}={v}" for k, v in summary.items()
                               if v) + f"; непокрытых обязательств: "
          f"{len(uncovered)}")
@@ -651,6 +669,9 @@ def confirm(root, policy, *, task_id, task_content, task_meta, check_id,
         verification_policy.task_projection(task_content, task_meta))
     projections = _projections(policy, task_content, task_meta)
     _baseline, previous, _notes = _load_state(root)
+    prior_results, _load_notes, _corrupt = checks_results.load_results(
+        root)
+    run_seq = checks_select.next_run_seq(prior_results)
     planned = checks_select.plan(
         root, policy, baseline=None, previous=previous, results=[],
         task_digest=task_digest, now=now, projections=projections)
@@ -676,7 +697,8 @@ def confirm(root, policy, *, task_id, task_content, task_meta, check_id,
                 check.get("scenario")),
             "confirmation": {"who": who, "at": stamp,
                              "statement": statement}},
-        "evidence": {"run_id": run_id, "source": "engineer"},
+        "evidence": {"run_id": run_id, "run_seq": run_seq,
+                     "source": "engineer"},
     }
     checks_contract.validate_result(result, _raise)
     checks_results.store_result(root, run_id, result)

@@ -9,9 +9,11 @@
 (design §6). Повреждённая запись отклоняется валидатором, а не
 угадывается — ложного reuse нет.
 
-Последний по ``finished_at`` результат на check_id решает: более
-поздний failed/timeout/blocked/not_run не скрывается старым passed
-(R-11). Записи разных проектов не смешиваются: результат хранит
+Последний результат на check_id по устойчивому порядку
+``(finished_at, run_seq, result_id)`` решает: более поздний
+failed/timeout/blocked/not_run не скрывается старым passed, а при
+равном ``finished_at`` — более позднее исходное исполнение (R-11,
+A-02 PB-073). Записи разных проектов не смешиваются: результат хранит
 ``project_id`` и потребитель сверяет его с политикой.
 """
 import json
@@ -72,8 +74,9 @@ def update_index(root, run_id, result):
     """Обновить производный индекс последними записями прогона.
 
     Индекс читается целиком; повреждённый игнорируется (пересборка).
-    Победитель — запись с максимальным ``finished_at`` среди индекса и
-    новой записи.
+    Победитель — запись с максимальным ключом порядка
+    ``(finished_at, run_seq, result_id)`` среди индекса и новой
+    записи (A-02 PB-073).
     """
     index_path = Path(root) / checks_select.STATE_DIR / INDEX_FILENAME
     index = {"schema_version": 1, "kind": INDEX_KIND,
@@ -90,12 +93,15 @@ def update_index(root, run_id, result):
     rel = str((results_dir(root) / run_id /
                (result["check_id"] + ".json")).relative_to(root))
     current = index["entries"].get(result["check_id"])
-    if current is None or \
-            result["finished_at"] > current.get("finished_at", ""):
+    if current is None or checks_select.result_order_key(result) > \
+            checks_select.result_order_key(current):
+        seq = (result.get("evidence") or {}).get("run_seq") \
+            if isinstance(result.get("evidence"), dict) else None
         index["entries"][result["check_id"]] = {
             "result_id": result["result_id"], "run_id": run_id,
-            "finished_at": result["finished_at"], "file": rel,
-            "status": result["status"]}
+            "finished_at": result["finished_at"],
+            "run_seq": seq if type(seq) is int else None,
+            "file": rel, "status": result["status"]}
     _atomic_write(index_path, index)
 
 
@@ -149,14 +155,13 @@ def load_results(root, *, validate=None):
                 actual = actual_latest.get(check_id)
                 # Индекс знает о более позднем результате, которого нет
                 # на диске — запись утрачена/подменена, старый passed
-                # не разрешает reuse.
-                if actual is None or \
-                        actual["finished_at"] < \
-                        entry.get("finished_at", "") or (
-                        actual["finished_at"] ==
-                        entry.get("finished_at", "") and
-                        actual["result_id"] !=
-                        entry.get("result_id")):
+                # не разрешает reuse. «Более поздний» — по тому же
+                # устойчивому ключу порядка, что у selector (A-02).
+                claim = {"finished_at": entry.get("finished_at") or "",
+                         "result_id": entry.get("result_id") or "",
+                         "run_seq": entry.get("run_seq")}
+                if actual is None or checks_select.result_order_key(
+                        claim) > checks_select.result_order_key(actual):
                     corrupt.add(check_id)
                     notes.append(
                         f"запись результата {check_id} по индексу "
@@ -192,22 +197,26 @@ def rebuild_index(root, policy=None):
         if policy is not None and \
                 result["project_id"] != policy["project_id"]:
             continue
+        seq = (result.get("evidence") or {}).get("run_seq") \
+            if isinstance(result.get("evidence"), dict) else None
         entries[check_id] = {
             "result_id": result["result_id"],
             "run_id": result.get("evidence", {}).get("run_id", ""),
             "finished_at": result["finished_at"],
+            "run_seq": seq if type(seq) is int else None,
             "status": result["status"]}
     # A-07: свидетельство утраты переживает пересборку — если прежний
     # индекс знал о более позднем результате check_id, чем осталось на
     # диске, его запись сохраняется: история остаётся недоказанной до
     # нового фактического результата, старый passed не разрешает reuse.
+    # «Более поздний» — устойчивый ключ (finished_at, run_seq,
+    # result_id), как у selector (A-02 PB-073).
     for check_id, entry in previous.items():
         if not isinstance(entry, dict):
             continue
         recorded = entries.get(check_id)
-        if recorded is None or \
-                recorded["finished_at"] < \
-                entry.get("finished_at", ""):
+        if recorded is None or checks_select.result_order_key(entry) > \
+                checks_select.result_order_key(recorded):
             entries[check_id] = entry
             notes.append(f"индекс: запись {check_id} от "
                          f"{entry.get('finished_at')} утрачена — "

@@ -1,0 +1,5 @@
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/docs/tasks/AUDIT-009-evidence/probe_cli_obligations.py", line 26, in <module>
+    assert cli('checks','run','DEV-01','--scope','task','--mode','stale').returncode==0,events[-1]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: {'argv': ('checks', 'run', 'DEV-01', '--scope', 'task', '--mode', 'stale'), 'returncode': 1, 'stdout': 'checks run DEV-01: политика shop-checks rev 1, scope=task mode=stale\nОграничение: trust_mode=local: результаты диагностические — локальная история не защищена от владельца проекта; доверенное выполнение требует контура PB-061\n  payment: RUN command\n  payment: failed — команда завершилась кодом 1\nИтог: failed=1; непокрытых обязательств: 1\n', 'stderr': ''}

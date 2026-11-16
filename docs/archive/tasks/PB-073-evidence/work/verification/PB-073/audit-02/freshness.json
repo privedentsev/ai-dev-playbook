@@ -1,0 +1,15 @@
+{
+  "inputs_fresh": [
+    true,
+    []
+  ],
+  "execution_state": [
+    "EXEC-02",
+    "sha256:04adc35cff999f5812e5f2e4734427bbd16275606a88c613f25ebd9322ac64d0"
+  ],
+  "report_execution": [
+    "EXEC-02",
+    "sha256:04adc35cff999f5812e5f2e4734427bbd16275606a88c613f25ebd9322ac64d0"
+  ],
+  "projection_match": true
+}

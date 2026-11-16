@@ -24,6 +24,7 @@ import checks_trust
 import file_operations
 import playbook
 import verification_policy
+from test_checks_select import make_policy
 
 
 COUNTER_HELPER = """import os
@@ -1896,6 +1897,210 @@ class TrustBoundaryLifecycleAndMigrationE2ETest(NoGitChecksE2ECase):
         merged_proj = json.loads(proj_path.read_text(encoding="utf-8"))
         self.assertIn("verification", merged_proj)
         self.assertEqual(merged_proj["checks_policy"], "checks-policy.json")
+
+
+class Audit009BaselineFailureE2ETest(NoGitChecksE2ECase):
+    """A-01 повторного аудита PB-073: непокрытое обязательство не
+    исчезает при уже актуальном baseline — passed → failed →
+    task stale обязан исполнить проверку снова, а gate — закрыт."""
+
+    def setUp(self):
+        super().setUp()
+        self.allow = self.base / "allow"
+        self.write("src/payments/pay.py", "value = 1\n")
+
+    def _payment_argv(self, mode):
+        """Команда payment со счётчиком попыток; поведение по режиму.
+
+        ``flag`` — exit 0 при наличии флага ``allow``; ``timeout`` —
+        то же, но без флага спит до таймаута; ``mutate`` — вторая
+        попытка портит входы и завершается кодом 0 (blocked).
+        """
+        base, counters = repr(str(self.base)), repr(str(self.counters_dir))
+        bump = (f"c=Path({counters})/'payment.count'; "
+                "n=int(c.read_text()) if c.exists() else 0; n+=1; "
+                "c.write_text(str(n)); ")
+        if mode == "flag":
+            tail = (f"sys.exit(0 if (Path({base})/'allow').exists() "
+                    "else 1)")
+        elif mode == "timeout":
+            tail = (f"sys.exit(0 if (Path({base})/'allow').exists() "
+                    "else (time.sleep(30), 1)[1])")
+        elif mode == "mutate":
+            tail = ("Path('src/payments/junk.tmp').write_text('x') "
+                    "if n == 2 else None; sys.exit(0)")
+        else:
+            raise AssertionError(mode)
+        imports = "import sys, time; from pathlib import Path; " \
+            if mode == "timeout" else \
+            "import sys; from pathlib import Path; "
+        return [sys.executable, "-c", imports + bump + tail]
+
+    def _payment_policy(self, mode="flag", extra_checks=(),
+                        timeout_seconds=10):
+        policy = make_policy()
+        check = {"id": "payment", "title": "Payment",
+                 "purpose": "Must pass", "kind": "command",
+                 "modules": ["payments"],
+                 "argv": self._payment_argv(mode),
+                 "timeout_seconds": timeout_seconds}
+        policy["checks"] = [check, *extra_checks]
+        return policy
+
+    def _install_policy(self, policy):
+        self.write("checks-policy.json",
+                   json.dumps(policy, ensure_ascii=False, indent=2)
+                   + "\n")
+        self.assertEqual(self.cli("setup", "apply")[0], 0)
+
+    def _gate(self, task_id):
+        card = self.root / "docs" / "tasks" / f"{task_id}.md"
+        meta = json.loads(
+            card.with_suffix(".meta.json").read_text(encoding="utf-8"))
+        return checks_gate.evaluate(
+            self.root, checks_gate.load_policy(self.root),
+            task_id=task_id,
+            task_content=card.read_text(encoding="utf-8"),
+            task_meta=meta)
+
+    def _project_pass_then_fail(self):
+        """passed project → failed project: baseline остаётся на
+        покрытом состоянии, последний исход — failed."""
+        self.allow.write_text("1\n")
+        code, _, err = self.cli("checks", "run", "DEV-01",
+                                "--scope", "project", "--mode", "force")
+        self.assertEqual(code, 0, err)
+        self.allow.unlink()
+        code, _, err = self.cli("checks", "run", "DEV-01",
+                                "--scope", "project", "--mode", "force")
+        self.assertEqual(code, 1, err)
+        self.assertEqual(self.count("payment"), 2)
+
+    def test_failed_after_baseline_reopens_task_obligation(self):
+        """passed → failed при неизменных входах: task stale снова
+        исполняет payment, gate закрыт; новый passed восстанавливает."""
+        self.create_card("DEV-01")
+        self._install_policy(self._payment_policy())
+        self._project_pass_then_fail()
+
+        code, out, err = self.cli("checks", "run", "DEV-01",
+                                  "--scope", "task", "--mode", "stale")
+        self.assertEqual(code, 1, err)
+        self.assertEqual(self.count("payment"), 3)
+        self.assertIn("payment: failed", out)
+        gate = self._gate("DEV-01")
+        self.assertFalse(gate["ok"])
+        self.assertIn("payment", gate["uncovered"])
+        self.assertNotIn("payment", gate["not_applicable"])
+
+        # Исправление окружения: новый успешный прогон покрывает
+        # обязательство, gate открывается.
+        self.allow.write_text("1\n")
+        code, _, err = self.cli("checks", "run", "DEV-01",
+                                "--scope", "task", "--mode", "stale")
+        self.assertEqual(code, 0, err)
+        self.assertEqual(self.count("payment"), 4)
+        gate = self._gate("DEV-01")
+        self.assertTrue(gate["ok"], gate)
+
+    def test_timeout_after_baseline_reopens_task_obligation(self):
+        """timeout-прогон при актуальном baseline: обязательство
+        остаётся и повторно исполняется."""
+        self.create_card("DEV-01")
+        self._install_policy(
+            self._payment_policy(mode="timeout", timeout_seconds=2))
+        self._project_pass_then_fail()
+
+        code, _, err = self.cli("checks", "run", "DEV-01",
+                                "--scope", "task", "--mode", "stale")
+        self.assertEqual(code, 1, err)
+        self.assertEqual(self.count("payment"), 3)
+        gate = self._gate("DEV-01")
+        self.assertFalse(gate["ok"])
+        self.assertIn("payment", gate["uncovered"])
+
+    def test_blocked_after_baseline_reopens_task_obligation(self):
+        """blocked-прогон (входы испорчены и возвращены): обязательство
+        не теряется даже когда diff пуст."""
+        self.create_card("DEV-01")
+        self._install_policy(self._payment_policy(mode="mutate"))
+        self.allow.write_text("1\n")
+        code, _, err = self.cli("checks", "run", "DEV-01",
+                                "--scope", "project", "--mode", "force")
+        self.assertEqual(code, 0, err)
+        # Вторая попытка портит входы → blocked; baseline не двигается.
+        code, _, err = self.cli("checks", "run", "DEV-01",
+                                "--scope", "project", "--mode", "force")
+        self.assertEqual(code, 1, err)
+        self.assertEqual(self.count("payment"), 2)
+        junk = self.root / "src/payments/junk.tmp"
+        self.assertTrue(junk.is_file())
+        junk.unlink()
+        # Входы вернулись к baseline: diff пуст, но последний исход —
+        # blocked, обязательство обязано исполниться снова.
+        code, _, err = self.cli("checks", "run", "DEV-01",
+                                "--scope", "task", "--mode", "stale")
+        self.assertEqual(code, 0, err)
+        self.assertEqual(self.count("payment"), 3)
+        gate = self._gate("DEV-01")
+        self.assertTrue(gate["ok"], gate)
+
+    def test_manual_obligation_survives_until_confirm(self):
+        """Ручная проверка без подтверждения держит run и gate
+        закрытыми; confirm восстанавливает покрытие."""
+        self.create_card("DEV-01")
+        review = {"id": "review", "title": "Ревью", "purpose": "Глазами",
+                  "kind": "manual", "modules": ["payments"],
+                  "scenario": "Проверить сценарий оплаты глазами"}
+        self._install_policy(self._payment_policy(extra_checks=(review,)))
+        self.allow.write_text("1\n")
+
+        code, _, err = self.cli("checks", "run", "DEV-01",
+                                "--scope", "project", "--mode", "force")
+        self.assertEqual(code, 1, err)  # review: not_run
+        code, _, err = self.cli("checks", "run", "DEV-01",
+                                "--scope", "task", "--mode", "stale")
+        self.assertEqual(code, 1, err)
+        gate = self._gate("DEV-01")
+        self.assertFalse(gate["ok"])
+        self.assertIn("review", gate["manual"])
+
+        code, _, err = self.cli(
+            "checks", "confirm", "DEV-01", "--check", "review",
+            "--who", "Инженер", "--statement", "Сценарий проверен",
+            "--observation", "Оплата работает штатно")
+        self.assertEqual(code, 0, err)
+        code, _, err = self.cli("checks", "run", "DEV-01",
+                                "--scope", "task", "--mode", "stale")
+        self.assertEqual(code, 0, err)
+        gate = self._gate("DEV-01")
+        self.assertTrue(gate["ok"], gate)
+
+    def test_other_task_sees_failed_obligation_and_reuse_recovers(self):
+        """Запуск другой задачи не скрывает failed: DEV-02 stale тоже
+        исполняет payment; последующий passed закрывает обе задачи
+        законным cross-task reuse."""
+        self.create_card("DEV-01")
+        self.create_card("DEV-02", title="Вторая задача")
+        self._install_policy(self._payment_policy())
+        self._project_pass_then_fail()
+
+        code, _, err = self.cli("checks", "run", "DEV-02",
+                                "--scope", "task", "--mode", "stale")
+        self.assertEqual(code, 1, err)
+        self.assertEqual(self.count("payment"), 3)
+        self.assertFalse(self._gate("DEV-01")["ok"])
+        self.assertFalse(self._gate("DEV-02")["ok"])
+
+        self.allow.write_text("1\n")
+        code, _, err = self.cli("checks", "run", "DEV-02",
+                                "--scope", "task", "--mode", "stale")
+        self.assertEqual(code, 0, err)
+        self.assertEqual(self.count("payment"), 4)
+        # Прошёл один и тот же check на тех же входах — покрытие
+        # законно переиспользуется задачей DEV-01.
+        self.assertTrue(self._gate("DEV-01")["ok"])
+        self.assertTrue(self._gate("DEV-02")["ok"])
 
 
 if __name__ == "__main__":

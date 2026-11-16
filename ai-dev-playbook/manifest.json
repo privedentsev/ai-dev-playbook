@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
   "playbook_version": "0.2.0",
-  "release_id": "sha256:453accaaec4c6ece35dcf35f224651f89de9d78f23f951296b39aff869f46197",
-  "installed_at": "2026-11-15T15:38:55+03:00",
+  "release_id": "sha256:f0997063ba61d6d3712149633aee9d010e91e39333573c5ed1238d3fe6625eb8",
+  "installed_at": "2026-11-16T14:38:09+03:00",
   "origin": "adopt:checkout",
   "files": {
     "ai-dev-playbook/README.md": "sha256:b32337257154d9744e2330468a0ca0e26e01d6f8b57a73483ddfe8851d344600",
@@ -21,9 +21,9 @@
     "ai-dev-playbook/scripts/checks_gate.py": "sha256:24541e60699709b33eef8661fd814e04532d0e6572b6766b4b4c5d0d8fcb9d27",
     "ai-dev-playbook/scripts/checks_graph.py": "sha256:672b2d578a933f29a74013aa92a74ed659137a9e2d667647c34f10ec31abfc08",
     "ai-dev-playbook/scripts/checks_inventory.py": "sha256:e11900376e72e2e254d39369f01856b8b04873f68f45c33940df65afca6f939a",
-    "ai-dev-playbook/scripts/checks_results.py": "sha256:2ac1184ef6b4b9434051be91dcd4e42e82beb65ab1a26f868c02d2fa6f2b7a06",
-    "ai-dev-playbook/scripts/checks_runner.py": "sha256:d1d572d2c2706e67a3bb32f6cbe542496b91bc8e6bbb659e3b16641aa23fbf00",
-    "ai-dev-playbook/scripts/checks_select.py": "sha256:88a9ef6accc8a006b0c13166fb1bf2add04ead099efb0cc07228ce1b2aadc1b2",
+    "ai-dev-playbook/scripts/checks_results.py": "sha256:505bf11c72d81bd2f5d63ba7fe5e1ebb535e2c8d11316dfc74c1201285c3aa5c",
+    "ai-dev-playbook/scripts/checks_runner.py": "sha256:0068a97091c70eea95e2a731c9b8da7d076b6c706bb3f4e66e276139021611e2",
+    "ai-dev-playbook/scripts/checks_select.py": "sha256:88731b78076c08d38cf91e1915aac2315aea79ca7d20bd1ed01598752e2a6df9",
     "ai-dev-playbook/scripts/checks_setup.py": "sha256:0f67116493300aa3472b26c731d4ca90f082a841dc2e255758b578a4a4f82680",
     "ai-dev-playbook/scripts/checks_trust.py": "sha256:e9b8931ed1a0c693db6901ca8fef07c7a7688ec6dd2dc07ddfb7a6b54e450b61",
     "ai-dev-playbook/scripts/checks_unittest.py": "sha256:0f1b2d91d94ea80a500f8480fbd7377bcc87c18aeac709c0267c1d0ad70ebb75",

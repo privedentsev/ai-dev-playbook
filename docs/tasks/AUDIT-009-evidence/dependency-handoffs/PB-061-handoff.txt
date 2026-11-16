@@ -1,0 +1,126 @@
+# PB-061: Подтверждать результаты и политику в защищённом контуре
+Статус: done; передача CLI: historical; приёмка CLI: historical
+Передача: HANDOFF-05; аудит: AUDIT-05; вердикт журнала: accepted
+
+### Цель и границы
+Граница доверия. Доверенный verifier/receipt adapter, deployment contract и тесты изоляции. Не получать доступ к аккаунтам и не настраивать production без отдельного поручения; выбор хостинга не навязывается.
+
+### Контекст
+[Спецификация](../../specs/dependency-aware-verification.md): R-17–18,20; сценарии AC-07–08,11. [Design](../../designs/dependency-aware-verification.md), [ADR-0006](../../adr/0006-dependency-aware-verification.md), [план](../../plans/dependency-aware-verification.md).
+
+Подготовлено по поручению инженера 2026-11-07. Выполнение пока не разрешено. Перед стартом: принятие технического проекта, завершённые зависимости, актуальный card show/handoff затрагиваемых работ и назначение исполнителя. Исходные чужие изменения сохранять.
+
+### Критерии приёмки
+- [x] AC-01: Реализовать verifier protocol и эталонный executor/consumer: одобренная policy, закреплённый runner, независимый пересчёт candidate, изолированный запуск, authenticated receipt. Клиентские результаты не подписываются как собственные.
+- [x] AC-02: Агент и тестовый процесс не имеют доступа записи к policy/history/ключам. Forgery/replay/cross-project/revocation/key replacement/local approved отклоняются; обычное расширение не разрешает новые недоверенные команды.
+- [x] AC-03: Инструкция реального OS/CI развёртывания и capability probe различают local/protected. Проверить реальную границу прав на доступном стенде; без неё зафиксировать ограничение и не объявлять защищённую эксплуатацию принятой.
+- [x] AC-04: Целевые поведенческие проверки и связанные регрессии пройдены; документация и self-manifest актуальны, EXEC/CHECK/HANDOFF содержат реальные доказательства и ограничения; передача зарегистрирована штатным CLI.
+
+### План
+1. Уточнить фактические интерфейсы зависимостей и связать изменения с критериями этой карточки.
+2. Реализовать ограниченный объём, добавить постоянные позитивные и негативные проверки критериев AC-01–03; не подменять их структурной проверкой.
+3. Обновить затронутые документы/шаблоны и self-manifest при изменениях комплекта; выполнить адресные проверки, index и check --ready.
+4. Подготовить материалы и пройти действующие preflight/verify/handoff. До явного opt-in использовать прежний контракт; не отключать полный legacy suite ради экономии.
+5. Записать EXEC/CHECK/HANDOFF и передать независимому аудитору; самостоятельно не закрывать.
+
+### Ресурсы
+Python и стандартная библиотека для основного CLI; локальные временные проекты и subprocess-счётчики. Новые зависимости защищённого executor обосновать в рамках принятого design. Фактические среда, policy_revision и бюджет фиксируются при старте; доступность отдельной OS/CI identity не предполагается.
+
+Материалы: `docs/tasks/PB-061-evidence/`; команды воспроизведения и отчёты принадлежат этой карточке. Общие материалы и сквозная матрица — AUDIT-009/PB-064.
+
+### Указатель актуальных записей
+- EXEC-01 — Выполнение
+- EXEC-02 — Исправление
+- EXEC-03 — Исправление
+- EXEC-04 — Исправление
+- CHECK-05 — Проверка (passed)
+- HANDOFF-05 — Передача
+- AUDIT-05 — Аудит (accepted)
+Открытых замечаний нет.
+
+Подробности: python3 ai-dev-playbook/scripts/playbook.py card show PB-061 --entry <ID>
+Полная история: python3 ai-dev-playbook/scripts/playbook.py card show PB-061 --full
+
+## Записи последней передачи
+
+### EXEC-01 — Выполнение
+Время: 2026-11-10T17:35:00+03:00
+Исполнитель: Devin
+Модель: SWE-2 High
+Изменения: доверенный контур по design §8 и spec R-17–18,20. `checks_trust.py` — verifier home вне project.json (engine/project_id, ключи HMAC, одобренная политика целиком, revocations, append-only журнал, results/receipts/arena): одобрение digest через канал — weakening (включая новый argv) только с явным --reapprove; `scrub_env` и `sandbox_prefix` (подтверждённый на стенде Seatbelt: deny read/write дома и запись вне arena); `probe` честно различает local/protected. `checks_verifier.py` — самостоятельный candidate manifest по байтам, изолированный снимок с повторным хешированием (мутация — отказ), прогон закреплённого runner, receipts run/aggregate, verify (подпись/журнал/project/engine/отзывы/ожидаемые digest), consumer gate с `protected_confirmed` только при доказанной OS identity. Runner получил `env`/`argv_prefix` и возврат `results`; адаптер — `wrap`; исправлена утечка мутации env в binding.environment; `collect` копирует env. CLI `verifier *` в playbook.py. Постоянные тесты tests/test_checks_trust.py — 32 сценария AC-01–03 (forgery/replay/cross-project/revocation/key replacement/editable approved/real sandbox deny). Deploy contract — rules/verification.md; architecture/code-map/CHANGELOG актуальны; self-manifest пересобран.
+Файлы:
+- ai-dev-playbook/scripts/checks_trust.py
+- ai-dev-playbook/scripts/checks_verifier.py
+- ai-dev-playbook/scripts/checks_runner.py
+- ai-dev-playbook/scripts/checks_unittest.py
+- ai-dev-playbook/scripts/playbook.py
+- ai-dev-playbook/rules/verification.md
+- ai-dev-playbook/manifest.json
+- tests/test_checks_trust.py
+- docs/architecture.md
+- docs/code-map.md
+- docs/tasks/PB-061-evidence/commands.md
+- CHANGELOG.md
+
+### EXEC-02 — Исправление
+Время: 2026-11-10T19:20:00+03:00
+Исполнитель: Devin
+Модель: SWE-2 High
+Замечания: A-01, A-02, A-03, A-04
+Изменения: все четыре замечания AUDIT-01. A-01: канал отчёта адаптера выведен из-под записи тестового процесса — suite не получает путь отчёта, отчёт уходит строкой с маркером в stdout и подтверждается родителем ack-байтом stdin только у живого процесса; posthumous-строка, дубликат и отсутствие отчёта — crash; `adapter.json` пишет родитель; дочерний код завершается `os._exit`, закрывая подделку через `atexit`. Остаточное self-reported ограничение заявлено в docstring, rules и architecture. A-02: probe больше не выводит protected из одного marker — требуется иная OS identity (st_uid != euid), отказ записи по EACCES/EPERM во всех чувствительных точках (дом, родительский каталог, keys, approved, revocations, journal, активный ключ) и реальный прогон sandbox-профиля; chmod того же uid и любой иной OSError оставляют local. A-03: в checks_runner разделены окружение процесса (`env`) и идентичность среды привязки (`bind_env`) — binding_environment больше не попадает в subprocess env; проверено поведение HOME/TMPDIR внутри arena и запуск с required_environment always_run. A-04: verify рекурсивно проверяет source_receipts aggregate — отзыв исходной квитанции распространяется транзитивно по цепочке run→aggregate→aggregate, циклы отклоняются. Тесты: +7 регрессий AUDIT-01 в tests/test_checks_trust.py (подделка файла/stdout/дубликат отчёта, chmod-probe, env изоляции, транзитивный отзыв); документация актуализирована.
+Файлы:
+- ai-dev-playbook/scripts/checks_unittest.py
+- ai-dev-playbook/scripts/checks_runner.py
+- ai-dev-playbook/scripts/checks_trust.py
+- ai-dev-playbook/scripts/checks_verifier.py
+- tests/test_checks_trust.py
+- ai-dev-playbook/rules/verification.md
+- docs/architecture.md
+- ai-dev-playbook/manifest.json
+
+### EXEC-03 — Исправление
+Время: 2026-11-10T22:18:00+03:00
+Исполнитель: Devin
+Модель: SWE-2 High
+Замечания: A-01, A-05
+Изменения: A-01 закрыт блокировкой по критерию аудита «либо доказанное происхождение, либо блок защищённого подтверждения». Для `python-unittest` происхождение исходов недоказуемо в принципе — тестовый код исполняется в том же процессе и читает любой канал (файл, stdout, ack из stdin), поэтому ack-протокол принципиально не защищает результат. `checks_verifier.run` теперь отклоняет политику с исполняемыми `kind=test` проверками до исполнения: квитанция не выпускается, gate остаётся непокрытым, подделанный «валидный» отчёт не может стать passed. Подтверждаются только наблюдаемые результаты (command — spawn+exit родителя); локальный `checks run` остаётся диагностическим путём без изменений. Дополнительно `verify` разрешает каждый результат квитанции в хранилище дома по digest и отклоняет `kind=test` — квитанции, выпущенные до блокировки run, тоже не проходят (ретро-отклонение). Тестовые политики run/receipt/gate/aggregate переведены на command-проверки; добавлены регрессии: отказ self-reported политики, три сценария подделки AUDIT-02 (пустой модуль с валидным отчётом и os._exit, posthumous sentinel, дубликат строки) — все дают отказ verifier'а, а не passed, и отклонение verify для подписанной квитанции на kind=test результат. A-05: `_writable(directory=True)` создаёт уникальный `.probe-*` marker внутри каталога и удаляет только его (O_EXCL на самом каталоге давал EEXIST и ничего не проверял); каталоги дом/родитель/keys проверяются marker'ом, существующие файлы — открытием без изменения содержимого; EACCES/EPERM → отказ прав, прочие OSError → «неизвестно» (agent_can_write=None). Поведенческие тесты: marker создаётся и удаляется, chmod 0555 → False, EIO → None, probe доступного дома заполняет writable_points и не оставляет marker'ов; защищённость без отдельной identity не заявляется (capability=local).
+Файлы:
+- ai-dev-playbook/scripts/checks_verifier.py
+- ai-dev-playbook/scripts/checks_trust.py
+- tests/test_checks_trust.py
+- ai-dev-playbook/rules/verification.md
+- docs/architecture.md
+- CHANGELOG.md
+- docs/tasks/PB-061-evidence/commands.md
+- ai-dev-playbook/manifest.json
+
+### EXEC-04 — Исправление
+Время: 2026-11-11T04:26:25+03:00
+Исполнитель: Codex
+Модель: GPT-6.1 Sol (Low)
+Замечания: A-06, A-07
+Изменения: оформлено процессное исправление A-06/A-07 отдельной записью EXEC, необходимой для последующего закрытия замечаний аудитором. Утверждение CHECK-04/HANDOFF-04 об отсутствии необходимости нового EXEC ошибочно; прежний журнал сохранён. Подготовлены окончательные атрибуция и статус карточки для нового полного verify, привязанного к EXEC-04; его результаты и свежесть будут отражены в новых CHECK/HANDOFF. Реализация не менялась; ограничение capability=local сохраняется.
+Файлы:
+- docs/tasks/PB-061.md
+- docs/tasks/index.md
+
+### CHECK-05 — Проверка
+Время: 2026-11-11T04:55:02+03:00
+Исполнитель: Codex
+Модель: GPT-6.1 Sol (Low)
+Результат: passed
+Критерии: AC-01, AC-02, AC-03, AC-04
+Команда: `python3 ai-dev-playbook/scripts/playbook.py index`; `python3 ai-dev-playbook/scripts/playbook.py check --ready`; `python3 ai-dev-playbook/scripts/playbook.py verify PB-061 --preflight`; `python3 ai-dev-playbook/scripts/playbook.py verify PB-061`.
+Среда: macOS Darwin 27, Python 3.14.6; полный verify вне sandbox Codex для реальных sandbox-exec и subprocess-проверок; ветка dev.
+Факт: окончательные статус in_review, атрибуция, EXEC-04 и индекс подготовлены до verify. Self-check и preflight-regressions passed; полный unit-tests — 1024 теста за 1509.279 s, OK. Отчёт f23706d1d192477eba0a72343324d903 — passed, привязан к последнему EXEC-04. A-06/A-07 оформлены как исправленные отдельным EXEC; закрытие замечаний остаётся за независимым аудитом. Значимые входы после прогона не менялись: добавлены только новые записи журнала собственной карточки.
+Доказательства: [отчёт verify](PB-061-evidence/work/verification/PB-061/f23706d1d192477eba0a72343324d903/report.json), [лог 1024 тестов](PB-061-evidence/work/verification/PB-061/f23706d1d192477eba0a72343324d903/unit-tests.stderr.log).
+Ограничения: самопроверка исполнителя; отдельная OS/CI identity отсутствует, capability=local, защищённая эксплуатация не заявлена. Независимый аудит не выполнялся.
+
+### HANDOFF-05 — Передача
+Время: 2026-11-11T04:55:02+03:00
+Исполнитель: Codex
+Модель: GPT-6.1 Sol (Low)
+Выполнение: EXEC-01, EXEC-02, EXEC-03, EXEC-04
+Проверки: CHECK-05
+Состояние: in_review; dev; изменения не закоммичены. Процессные замечания A-06/A-07 исправлены в EXEC-04; новая полная проверка выполнена после подготовки окончательных входов. Следующий шаг — независимый аудит с закрытием A-06/A-07 при подтверждении исправления; самостоятельная приёмка и закрытие не выполнялись. Ограничение protected deployment сохраняется: capability=local.
+Фокус аудита: корректная связь EXEC-04 с A-06/A-07 и новым verify/CHECK-05; свежесть отчёта f23706d1d192477eba0a72343324d903 и зарегистрированной HANDOFF-05; возможность штатного закрытия замечаний валидатором без изменения прежней истории. Реализация verifier остаётся по EXEC-01–03: блок kind=test, отзыв исходных aggregate receipts, scrubbed env, честный probe/local без отдельной identity; защищённая эксплуатация не принимается.

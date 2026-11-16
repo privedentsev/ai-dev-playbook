@@ -1,0 +1,78 @@
+# PB-062: Подключить выбор проверок к задачам и готовности релиза
+Статус: done; передача CLI: historical; приёмка CLI: historical
+Передача: HANDOFF-04; аудит: AUDIT-04; вердикт журнала: accepted
+
+### Цель и границы
+Жизненный цикл и релиз. playbook.py/lifecycle.py, CLI modes/checkpoint и consumer gate, правила жизненного цикла. Не публиковать релиз и не создавать автоматические коммиты.
+
+### Контекст
+[Спецификация](../../specs/dependency-aware-verification.md): R-08,12,16–18,20; сценарии AC-05,08–09. [Design](../../designs/dependency-aware-verification.md), [ADR-0006](../../adr/0006-dependency-aware-verification.md), [план](../../plans/dependency-aware-verification.md).
+
+Подготовлено по поручению инженера 2026-11-07. Выполнение пока не разрешено. Перед стартом: принятие технического проекта, завершённые зависимости, актуальный card show/handoff затрагиваемых работ и назначение исполнителя. Исходные чужие изменения сохранять.
+
+### Критерии приёмки
+- [x] AC-01: Handoff/accept/release-ready используют один selector+coverage; текущие байты сверяются с проверенным candidate. В protected режиме local/поддельные отчёты не закрывают обязательства.
+- [x] AC-02: Release требует весь актуальный набор с cross-task reuse, force запускает всё; commit не триггер авторизации. Самостоятельная проверка/релиз владеют обычной карточкой, запуск в текущей задаче не создаёт новую.
+- [x] AC-03: Manual и новые сценарии приёмки не заменяются старым suite; stale передачи, перенос evidence, concurrent edits, restore и запреты внешнего release проверены.
+- [x] AC-04: Целевые поведенческие проверки и связанные регрессии пройдены; документация и self-manifest актуальны, EXEC/CHECK/HANDOFF содержат реальные доказательства и ограничения; передача зарегистрирована штатным CLI.
+
+### План
+1. Уточнить фактические интерфейсы зависимостей и связать изменения с критериями этой карточки.
+2. Реализовать ограниченный объём, добавить постоянные позитивные и негативные проверки критериев AC-01–03; не подменять их структурной проверкой.
+3. Обновить затронутые документы/шаблоны и self-manifest при изменениях комплекта; выполнить адресные проверки, index и check --ready.
+4. Подготовить материалы и пройти действующие preflight/verify/handoff. До явного opt-in использовать прежний контракт; не отключать полный legacy suite ради экономии.
+5. Записать EXEC/CHECK/HANDOFF и передать независимому аудитору; самостоятельно не закрывать.
+
+### Ресурсы
+Python и стандартная библиотека для основного CLI; локальные временные проекты и subprocess-счётчики. Новые зависимости защищённого executor обосновать в рамках принятого design. Фактические среда, policy_revision и бюджет фиксируются при старте; доступность отдельной OS/CI identity не предполагается.
+
+Материалы: `docs/tasks/PB-062-evidence/`; команды воспроизведения и отчёты принадлежат этой карточке. Общие материалы и сквозная матрица — AUDIT-009/PB-064.
+
+### Указатель актуальных записей
+- EXEC-04 — Исправление
+- CHECK-04 — Проверка (passed)
+- HANDOFF-04 — Передача
+- AUDIT-04 — Аудит (accepted)
+Открытых замечаний нет.
+
+Подробности: python3 ai-dev-playbook/scripts/playbook.py card show PB-062 --entry <ID>
+Полная история: python3 ai-dev-playbook/scripts/playbook.py card show PB-062 --full
+
+## Записи последней передачи
+
+### EXEC-04 — Исправление
+Время: 2026-11-12T02:49:00+03:00
+Исполнитель: Devin
+Модель: SWE-2 Flash High
+Замечания: A-05
+Изменения: `_protected_receipts` — порядок исходов при равных `finished_at` переведён на устойчивую доверенную последовательность запусков: `exec_seq` — позиция receipt-события run-квитанции в журнале verifier для каждого result_digest (построена по всем валидным run-квитанциям дома, включая прежние эпохи — источники aggregate). Aggregate не становится новым исполнением: его исход наследует `exec_seq` исходного run, поэтому при коллизии временных меток aggregate старого passed не отменяет более поздний failed; восстановление — только новым реальным passed. Квитанции вне текущего кандидата/политики валидируются без expect-digest и в исходы не входят; невалидные квитанции прежних эпох отказов не создают. Поведенческая регрессия tests/test_checks_gate.py::test_same_timestamp_aggregate_keeps_failed_latest (passed→failed→aggregate→passed при одном now). Аудитская проба work/verification/PB-062/audit-03/probe.py: after_aggregate ok=False/uncovered=[probe]. Документация: rules/verification.md, architecture.md, code-map.md, CHANGELOG.md, commands.md; self-manifest пересобран.
+Файлы:
+- ai-dev-playbook/scripts/checks_gate.py
+- tests/test_checks_gate.py
+- ai-dev-playbook/rules/verification.md
+- ai-dev-playbook/manifest.json
+- docs/architecture.md
+- docs/code-map.md
+- CHANGELOG.md
+- docs/tasks/PB-062-evidence/commands.md
+
+### CHECK-04 — Проверка
+Время: 2026-11-12T03:18:00+03:00
+Исполнитель: Devin
+Модель: SWE-2 Flash High
+Результат: passed
+Критерии: AC-01, AC-02, AC-03, AC-04
+Команда: `python3 -m unittest discover -s tests -p "test_checks_gate.py" -v` (18 сценариев), `python3 -m unittest test_checks_contract test_checks_graph test_checks_inventory test_checks_run test_checks_select test_checks_trust test_checks_gate test_lifecycle` (307 тестов), аудитские пробы `work/verification/PB-062/audit-02/probe.py` и `work/verification/PB-062/audit-03/probe.py`, полный `playbook.py verify PB-062` (self-check, preflight-regressions, unit-tests — отчёт ddec203142ea47bf8b2c62ceaeb4c45e, inputs_unchanged)
+Среда: macOS Darwin 27, Python 3.14.6; временные проекты-фикстуры в /tmp; checkout dev.
+Факт: A-05 исправлено — `_protected_receipts` строит `exec_seq` (позиция receipt-события исходного run в журнале verifier для каждого result_digest, по всем валидным run-квитанциям дома включая прежние эпохи); aggregate наследует `exec_seq` исходного исполнения и не становится новым прогоном: при равных `finished_at` aggregate старого passed не отменяет поздний failed (проба audit-03: after_aggregate ok=False/uncovered), восстановление — только новым реальным passed (регрессия test_same_timestamp_aggregate_keeps_failed_latest). Пробы audit-02 без регрессий: expired-only отвергнут, expired+fresh в обоих порядках ok, passed→failed непокрыт.
+Доказательства: [команды и ограничения](PB-062-evidence/commands.md), [отчёт verify](PB-062-evidence/work/verification/PB-062/ddec203142ea47bf8b2c62ceaeb4c45e/report.json), [протокол аудита](PB-062-evidence/work/verification/PB-062/audit-03/findings.txt)
+Ограничения: самопроверка исполнителя. Стенд без отдельной OS identity — capability=local; protected-вердикт покрыт тестом с подменой probe. `checks_policy` в self-project не подключена (PB-063). Изменения не закоммичены.
+
+### HANDOFF-04 — Передача
+Время: 2026-11-12T03:18:00+03:00
+Исполнитель: Devin
+Модель: SWE-2 Flash High
+Выполнение: EXEC-04
+Проверки: CHECK-04
+Состояние: in_review; dev; изменения не закоммичены. Исправлено A-05 (порядок исходов при равных finished_at — exec_seq по журналу verifier; aggregate наследует исходную последовательность и не отменяет поздний failed); полный verify passed. Следующий шаг — повторный независимый аудит.
+Фокус аудита: `exec_seq` строится по всем валидным run-квитанциям дома (включая прежние кандидаты — источники aggregate), агрегатные исходы берут seq исходного run; невалидные квитанции прежних эпох отказов не создают; регрессия покрывает равные метки, aggregate после failed и восстановление новым passed; CHECK-04 привязан к отчёту ddec2031.

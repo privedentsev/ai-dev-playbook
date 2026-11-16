@@ -1,0 +1,25 @@
+.............FF....
+======================================================================
+FAIL: test_ac07_input_race_post_run_drift_arena_isolation_and_receipt_tamper (test_checks_e2e.TrustBoundaryLifecycleAndMigrationE2ETest.test_ac07_input_race_post_run_drift_arena_isolation_and_receipt_tamper)
+AC-07: мутация входа во время и после запуска блокирует passed; изолированный кандидат и подмена квитанции проверяются.
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_checks_e2e.py", line 1167, in test_ac07_input_race_post_run_drift_arena_isolation_and_receipt_tamper
+    self.assertEqual(self.cli("verifier", "run", "--home", str(home), "--scope", "project")[0], 0)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 1 != 0
+
+======================================================================
+FAIL: test_ac08_and_card_ac03_bypass_attempts_and_local_vs_protected_boundary (test_checks_e2e.TrustBoundaryLifecycleAndMigrationE2ETest.test_ac08_and_card_ac03_bypass_attempts_and_local_vs_protected_boundary)
+AC-08 и AC-03 карточки: обходы доверенного gate отклоняются, границы local и protected проверяются раздельно.
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_checks_e2e.py", line 1207, in test_ac08_and_card_ac03_bypass_attempts_and_local_vs_protected_boundary
+    self.assertEqual(self.cli("verifier", "run", "--home", str(home), "--scope", "project")[0], 0)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 1 != 0
+
+----------------------------------------------------------------------
+Ran 19 tests in 176.007s
+
+FAILED (failures=2)

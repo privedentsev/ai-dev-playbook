@@ -1,0 +1,137 @@
+.........F.EFEEEFF
+======================================================================
+ERROR: test_aggregate_cannot_override_later_failure (test_checks_gate.ProtectedLatestOutcomeTest.test_aggregate_cannot_override_later_failure)
+Aggregate подтверждает старый passed-результат, но не
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_checks_gate.py", line 337, in test_aggregate_cannot_override_later_failure
+    checks_verifier.aggregate(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^
+        self.home, self.proj.root,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^
+        receipt_ids=[outcome["receipt"]["receipt_id"]],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        now="2026-01-01T00:02:00+00:00", emit=lambda s: None)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/ai-dev-playbook/scripts/checks_verifier.py", line 499, in aggregate
+    _raise(confirmed, "агрегирование: ни одна проверка не подтвердилась "
+    ~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                      "на текущем кандидате")
+                      ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/ai-dev-playbook/scripts/checks_verifier.py", line 51, in _raise
+    raise ValueError(message)
+ValueError: агрегирование: ни одна проверка не подтвердилась на текущем кандидате
+
+======================================================================
+ERROR: test_same_timestamp_aggregate_keeps_failed_latest (test_checks_gate.ProtectedLatestOutcomeTest.test_same_timestamp_aggregate_keeps_failed_latest)
+A-05 аудита PB-062: при равных finished_at порядок задаёт
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_checks_gate.py", line 354, in test_same_timestamp_aggregate_keeps_failed_latest
+    checks_verifier.aggregate(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^
+        self.home, self.proj.root,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^
+        receipt_ids=[outcome["receipt"]["receipt_id"]],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        now=stamp, emit=lambda s: None)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/ai-dev-playbook/scripts/checks_verifier.py", line 499, in aggregate
+    _raise(confirmed, "агрегирование: ни одна проверка не подтвердилась "
+    ~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                      "на текущем кандидате")
+                      ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/ai-dev-playbook/scripts/checks_verifier.py", line 51, in _raise
+    raise ValueError(message)
+ValueError: агрегирование: ни одна проверка не подтвердилась на текущем кандидате
+
+======================================================================
+ERROR: test_aggregate_receipt_ttl_expiry_rejected (test_checks_gate.ProtectedTtlTest.test_aggregate_receipt_ttl_expiry_rejected)
+Просроченная aggregate-квитанция не закрывает обязательство
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_checks_gate.py", line 231, in test_aggregate_receipt_ttl_expiry_rejected
+    checks_verifier.aggregate(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^
+        self.home, self.proj.root,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^
+        receipt_ids=[outcome["receipt"]["receipt_id"]],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        emit=lambda s: None)
+        ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/ai-dev-playbook/scripts/checks_verifier.py", line 499, in aggregate
+    _raise(confirmed, "агрегирование: ни одна проверка не подтвердилась "
+    ~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                      "на текущем кандидате")
+                      ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/ai-dev-playbook/scripts/checks_verifier.py", line 51, in _raise
+    raise ValueError(message)
+ValueError: агрегирование: ни одна проверка не подтвердилась на текущем кандидате
+
+======================================================================
+ERROR: test_older_expired_aggregate_does_not_block_fresh (test_checks_gate.ProtectedTtlTest.test_older_expired_aggregate_does_not_block_fresh)
+A-04: aggregate подтверждает исходное время исполнения —
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_checks_gate.py", line 270, in test_older_expired_aggregate_does_not_block_fresh
+    checks_verifier.aggregate(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^
+        self.home, self.proj.root,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^
+        receipt_ids=[outcome["receipt"]["receipt_id"]],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        now="2026-01-01T00:00:30+00:00", emit=lambda s: None)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/ai-dev-playbook/scripts/checks_verifier.py", line 499, in aggregate
+    _raise(confirmed, "агрегирование: ни одна проверка не подтвердилась "
+    ~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                      "на текущем кандидате")
+                      ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/ai-dev-playbook/scripts/checks_verifier.py", line 51, in _raise
+    raise ValueError(message)
+ValueError: агрегирование: ни одна проверка не подтвердилась на текущем кандидате
+
+======================================================================
+FAIL: test_receipt_covers_but_boundary_required (test_checks_gate.ProtectedGateTest.test_receipt_covers_but_boundary_required)
+Квитанция verifier покрывает проверку, но граница обязательна
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_checks_gate.py", line 162, in test_receipt_covers_but_boundary_required
+    self.assertIn("probe", verdict["covered"])
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'probe' not found in []
+
+======================================================================
+FAIL: test_later_failed_blocks_earlier_passed (test_checks_gate.ProtectedLatestOutcomeTest.test_later_failed_blocks_earlier_passed)
+Поздний failed блокирует ранний passed в защищённой истории
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_checks_gate.py", line 307, in test_later_failed_blocks_earlier_passed
+    self.assertIn("probe", self.evaluate()["covered"])
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'probe' not found in []
+
+======================================================================
+FAIL: test_older_expired_does_not_block_fresh (test_checks_gate.ProtectedTtlTest.test_older_expired_does_not_block_fresh)
+A-04: просроченная квитанция не блокирует более свежее
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_checks_gate.py", line 251, in test_older_expired_does_not_block_fresh
+    self.assertIn("probe", verdict["covered"])
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'probe' not found in []
+
+======================================================================
+FAIL: test_run_receipt_ttl_expiry_rejected (test_checks_gate.ProtectedTtlTest.test_run_receipt_ttl_expiry_rejected)
+Просроченная по TTL run-квитанция не закрывает обязательство
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_checks_gate.py", line 221, in test_run_receipt_ttl_expiry_rejected
+    self.assertIn("probe", fresh["covered"])
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'probe' not found in []
+
+----------------------------------------------------------------------
+Ran 18 tests in 2.073s
+
+FAILED (failures=4, errors=4)

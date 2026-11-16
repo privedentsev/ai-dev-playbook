@@ -1,0 +1,41 @@
+{
+  "at": "2026-11-16T06:51:24+03:00",
+  "index": {
+    "returncode": 0,
+    "output": "Индексы уже актуальны.\n"
+  },
+  "check_ready": {
+    "returncode": 0,
+    "output": "OK: структура, ссылки и 83 карточки; каталог документов: 29 документов, 2 legacy. Поведение продукта не проверялось.\n",
+    "meaning": "structure and links only; not product behavior"
+  },
+  "git_diff_check": {
+    "returncode": 0,
+    "output": ""
+  },
+  "source_unchanged": true,
+  "source_drift": [],
+  "archive_byte_identical": true,
+  "archive_files": 2730,
+  "audit_status": "in_progress",
+  "fix_task": "PB-073",
+  "fix_status": "draft",
+  "diagnostic": {
+    "at": "2026-11-16T06:48:16+03:00",
+    "actor": {
+      "name": "Codex",
+      "model": "GPT-6"
+    },
+    "role": "auditor",
+    "kind": "diagnostic",
+    "result": "cancelled",
+    "handoff_at": null,
+    "session": null,
+    "detail": "Независимый аудит: changes_requested. A-01 P1 — потеря task-обязательств после failed; A-02 P2 — старый passed при равном finished_at; A-03 P2 — self-pilot не воспроизводится после архивирования. Протокол: docs/tasks/AUDIT-009-evidence/audit-01.md; исправления: PB-073. result=cancelled/kind=diagnostic — отрицательная диагностическая запись, не acceptance и не отмена задачи; Status остаётся in_progress. HANDOFF отсутствует, фиктивная передача не создавалась. Архив и реализация не изменены, protected deployment не принят."
+  },
+  "handoff_present": false,
+  "evidence_registered": [
+    "work/verification/AUDIT-009/audit-01",
+    "docs/tasks/AUDIT-009-evidence"
+  ]
+}

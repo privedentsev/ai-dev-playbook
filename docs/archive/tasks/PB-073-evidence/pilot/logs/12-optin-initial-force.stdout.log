@@ -1,0 +1,17 @@
+checks run PILOT-01: политика ai-dev-playbook-self-pilot rev 1, scope=project mode=force
+Ограничение: trust_mode=local: результаты диагностические — локальная история не защищена от владельца проекта; доверенное выполнение требует контура PB-061
+  self-check: RUN command
+  self-check: passed (31.413с)
+  preflight-regressions: RUN command
+  preflight-regressions: passed (3.973с)
+  block-unit-tests: RUN test
+  block-unit-tests: passed (2.945с)
+  checks-unit-tests: RUN test
+  checks-unit-tests: passed (169.664с)
+  cli-unit-tests: RUN test
+  cli-unit-tests: passed (248.755с)
+  core-unit-tests: RUN test
+  core-unit-tests: passed (1408.834с)
+  verification-unit-tests: RUN test
+  verification-unit-tests: passed (47.117с)
+Итог: passed=7; непокрытых обязательств: 0

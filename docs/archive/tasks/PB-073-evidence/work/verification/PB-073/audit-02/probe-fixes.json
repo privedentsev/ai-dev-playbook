@@ -1,0 +1,121 @@
+{
+  "no_git": true,
+  "attempts": 3,
+  "gate_after_two_failures": {
+    "ok": false,
+    "uncovered": [
+      "payment"
+    ]
+  },
+  "gate_after_success": {
+    "ok": true,
+    "covered": [
+      "payment"
+    ]
+  },
+  "cross_task": {
+    "dev02_ok": true,
+    "reused_without_execution": true,
+    "run_seqs": [
+      2,
+      1,
+      0,
+      3
+    ]
+  },
+  "commands": [
+    {
+      "argv": [
+        "setup",
+        "apply"
+      ],
+      "returncode": 0,
+      "stdout": "checks-политика shop-checks rev 1 подключена (checks-policy.json); project.json → checks_policy. Операция: work/lifecycle/20261116-173034-38e0b39e. trust_mode=local не повышает доверие результатов.\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "checks",
+        "run",
+        "DEV-01",
+        "--scope",
+        "task",
+        "--mode",
+        "stale"
+      ],
+      "returncode": 1,
+      "stdout": "checks run DEV-01: политика shop-checks rev 1, scope=task mode=stale\nОграничение: trust_mode=local: результаты диагностические — локальная история не защищена от владельца проекта; доверенное выполнение требует контура PB-061\n  payment: RUN command\n  payment: failed — команда завершилась кодом 1\nИтог: failed=1; непокрытых обязательств: 1\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "checks",
+        "status",
+        "DEV-01"
+      ],
+      "returncode": 0,
+      "stdout": "checks status DEV-01: политика shop-checks rev 1\nОграничение: trust_mode=local: результаты диагностические — локальная история не защищена от владельца проекта; доверенное выполнение требует контура PB-061\n  payment: run; последний результат failed cbb7008b746a4d59930f152196a4bfa9-payment от 2026-11-16T14:30:35.624430+00:00\nПокрытие обязательств области задачи: 0/1\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "checks",
+        "run",
+        "DEV-01",
+        "--scope",
+        "task",
+        "--mode",
+        "stale"
+      ],
+      "returncode": 1,
+      "stdout": "checks run DEV-01: политика shop-checks rev 1, scope=task mode=stale\nОграничение: trust_mode=local: результаты диагностические — локальная история не защищена от владельца проекта; доверенное выполнение требует контура PB-061\n  payment: RUN command\n  payment: failed — команда завершилась кодом 1\nИтог: failed=1; непокрытых обязательств: 1\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "checks",
+        "release-ready",
+        "DEV-01"
+      ],
+      "returncode": 1,
+      "stdout": "checks release-ready DEV-01: политика shop-checks rev 1, trust=local, checkpoint=release\nОграничение: trust_mode=local: результаты диагностические — локальная история не защищена от владельца проекта; доверенное выполнение требует контура PB-061\n  payment: uncovered\nПокрытие: 0 покрыто, 1 не покрыто, 0 ручных, 0 заблокировано\nrelease-ready: не готово\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "checks",
+        "run",
+        "DEV-01",
+        "--scope",
+        "task",
+        "--mode",
+        "stale"
+      ],
+      "returncode": 0,
+      "stdout": "checks run DEV-01: политика shop-checks rev 1, scope=task mode=stale\nОграничение: trust_mode=local: результаты диагностические — локальная история не защищена от владельца проекта; доверенное выполнение требует контура PB-061\n  payment: RUN command\n  payment: passed (0.081с)\nИтог: passed=1; непокрытых обязательств: 0\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "index"
+      ],
+      "returncode": 0,
+      "stdout": "Индексы уже актуальны.\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "checks",
+        "run",
+        "DEV-02",
+        "--scope",
+        "task",
+        "--mode",
+        "stale"
+      ],
+      "returncode": 0,
+      "stdout": "checks run DEV-02: политика shop-checks rev 1, scope=task mode=stale\nОграничение: trust_mode=local: результаты диагностические — локальная история не защищена от владельца проекта; доверенное выполнение требует контура PB-061\n  payment: reused — исходный результат 37c71e0089bf41a1b96216c58464ba9b-payment от 2026-11-16T14:30:40.049099+00:00\nИтог: reused=1; непокрытых обязательств: 0\n",
+      "stderr": ""
+    }
+  ]
+}

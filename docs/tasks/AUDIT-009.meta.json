@@ -15,5 +15,44 @@
       "target": "plan:dependency-aware-verification"
     }
   ],
-  "materials": []
+  "materials": [
+    {
+      "id": "audit-01",
+      "role": "report",
+      "source": "work/verification/AUDIT-009/audit-01",
+      "storage": "local",
+      "immutable": true,
+      "required": true,
+      "used_by": [
+        "AUDIT-009"
+      ]
+    },
+    {
+      "id": "independent-audit-01",
+      "role": "report",
+      "source": "docs/tasks/AUDIT-009-evidence",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "AUDIT-009"
+      ]
+    }
+  ],
+  "audit_packages": {
+    "audit-01": "sha256:e73d4ab66d27e814eaa3664c121c08542aba7390fcc2877529d9a47f8f524676"
+  },
+  "acceptance": {
+    "at": "2026-11-16T06:48:16+03:00",
+    "actor": {
+      "name": "Codex",
+      "model": "GPT-6"
+    },
+    "role": "auditor",
+    "kind": "diagnostic",
+    "result": "cancelled",
+    "handoff_at": null,
+    "session": null,
+    "detail": "Независимый аудит: changes_requested. A-01 P1 — потеря task-обязательств после failed; A-02 P2 — старый passed при равном finished_at; A-03 P2 — self-pilot не воспроизводится после архивирования. Протокол: docs/tasks/AUDIT-009-evidence/audit-01.md; исправления: PB-073. result=cancelled/kind=diagnostic — отрицательная диагностическая запись, не acceptance и не отмена задачи; Status остаётся in_progress. HANDOFF отсутствует, фиктивная передача не создавалась. Архив и реализация не изменены, protected deployment не принят."
+  }
 }
