@@ -1,0 +1,110 @@
+# PB-078: Не допускать ложную готовность при обратном ходе часов проверок
+
+ID: PB-078
+Status: in_review
+Priority: P2
+Depends-On: -
+Executor: Devin
+Model: SWE-2 Flash High
+Created: 2026-11-17T01:44:28+03:00
+Closed: -
+
+<!-- playbook-meta:external -->
+
+## Задача
+
+### Цель и границы
+
+Устранить A-06 повторного AUDIT-009: поздний failed не должен скрываться старым passed при откате wall clock, если новый run_seq уже свидетельствует о следующем исполнении. Сохранить безопасную обработку legacy, равных меток, повреждённой истории и reuse. Архив PB-057–064/PB-073/PB-074 не менять; реализация в сессии аудита не выполняется.
+
+### Контекст
+
+[AUDIT-009](AUDIT-009.md), [протокол audit-03](AUDIT-009-evidence/audit-03/report.md), [проба](AUDIT-009-evidence/audit-03/probe_clock_rollback.py), [результат](AUDIT-009-evidence/audit-03/clock-rollback.json). Требования: [R-11/R-16, AC-05/AC-09](../specs/dependency-aware-verification.md).
+
+Воспроизведение: `python3 docs/tasks/AUDIT-009-evidence/audit-03/probe_clock_rollback.py .`. Настоящие subprocess-команды, временный проект без Git; время управляется аргументом runner now, часы машины не меняются. Passed/seq=0 → failed/seq=1 при времени на секунду раньше → task/project gate.ok=true; stale reused=1, счётчик остаётся 2. История не редактируется, UUID не подменяются. Причина: checks_select.result_order_key / _latest_better сравнивают finished_at раньше run_seq.
+
+### Критерии приёмки
+
+- [x] AC-01: После последовательных passed → failed/timeout/blocked с большим run_seq, но меньшим finished_at, task/project gate не дают готовность по старому успеху. Status/plan/stale/handoff используют согласованный безопасный расчёт; stale реально перезапускает обязательство либо явно блокирует его. Есть регрессия с subprocess-счётчиком без редактирования истории.
+- [x] AC-02: Обработка индекса, утраты записи, rebuild и reuse согласована с выбранным порядком; новый реальный успешный прогон восстанавливает покрытие. Legacy без run_seq, равные метки и конкурентные/перекрывающиеся исполнения не дают старому успеху скрыть недоказанное обязательство. Управление порядком и ограничения явно документированы.
+- [x] AC-03: Адресные checks_*/lifecycle-регрессии и штатные index/check/verify проходят, self-manifest обновлён после правок комплекта. Передача содержит новые доказательства, команды и ограничения local/protected; архивные доказательства сохранены. Независимый аудит исправления выполняется отдельно.
+
+### План
+
+1. Прочитать audit-03 и воспроизвести A-06; определить доказуемый порядок истории при несовпадении часов, sequence и параллельных прогонов.
+2. Исправить общий выбор и индекс согласованно, добавить поведенческие регрессии; не ослаблять проверки и не скрывать обязательства.
+3. Обновить документы и manifest, выполнить проверки и verify, записать EXEC/CHECK/HANDOFF и передать независимому аудитору. После приёмки исправления повторить AUDIT-009.
+
+### Ресурсы
+
+Python stdlib, временные проекты вне репозитория, реальные subprocess и управляемые часы. Бюджеты проекта null; конкретные затраты проверяются перед запуском. Реальная protected OS/CI identity не подтверждена. Зависимости от незавершённой AUDIT-009 нет, чтобы исправление было доступно до повторной приёмки блока. Commit/push/release только по отдельному поручению.
+
+## Журнал
+
+### EXEC-01 — Выполнение
+Время: 2026-11-17T02:04:44+03:00
+Исполнитель: Devin
+Модель: SWE-2 Flash High
+Изменения: исправлена A-06 повторного аудита AUDIT-009 — откат wall clock больше не прячет поздний неуспех за старым passed. `checks_select.result_order_key` перестроен в `(run_seq, finished_at, result_id)`: `run_seq` — порядковый номер исходного исполнения прогона, доказанный runner'ом по append-only истории (`next_run_seq`), и старше `finished_at`; `_latest_better` при различном `run_seq` выбирает больший seq независимо от меток времени. При равном `run_seq >= 0` записи принадлежат параллельным прогонам с общим номером — взаимный порядок недоказан, wall clock не доказывает поздний исход, консервативно важнее непокрывающий статус; внутри равного статуса решает `(finished_at, result_id)`. Legacy-пара без `run_seq` (-1) упорядочена `finished_at` как единственным свидетельством, при равной метке — непокрывающий исход (A-05 PB-074 сохранён). То же сравнение едино для selector, производного индекса, его сверки и пересборки: утрата seq-записи теперь обнаруживается индексом независимо от `finished_at`, а rebuild сохраняет свидетельство утраты по seq-порядку. В защищённом контуре `_protected_receipts` выбирает актуальный исход по `(exec_seq, непокрывающий статус, finished_at, result_digest)` — позиция receipt-события в доверенном журнале старше wall clock, семантика aggregate унаследованного порядка сохранена. Статус/plan/stale/handoff используют общий `evidence_latest`/`_latest_better`, поэтому stale реально перезапускает обязательство, а новый фактический passed восстанавливает покрытие. Продуктовые проверки не ослаблены: corrupt_ids, резерв seq индекса и границы local/protected не менялись.
+Файлы:
+- ai-dev-playbook/scripts/checks_select.py
+- ai-dev-playbook/scripts/checks_results.py
+- ai-dev-playbook/scripts/checks_runner.py
+- ai-dev-playbook/scripts/checks_gate.py
+- ai-dev-playbook/rules/verification.md
+- docs/designs/dependency-aware-verification.md
+- tests/test_checks_run.py
+- tests/test_checks_gate.py
+- CHANGELOG.md
+- ai-dev-playbook/manifest.json
+- docs/tasks/PB-078-evidence/
+
+### CHECK-01 — Проверка
+Время: 2026-11-17T02:51:00+03:00
+Исполнитель: Devin
+Модель: SWE-2 Flash High
+Результат: passed
+Критерии: AC-01, AC-02
+Сценарий: повторена CLI-проба audit-03 `probe_clock_rollback.py` на исправленном дереве: passed/seq=0 → failed/seq=1 при finished_at на секунду раньше; task/project gate, stale, plan, status на временном проекте без Git с управляемыми часами runner.
+Среда: macOS, Python 3.14; кандидат — рабочее дерево с правками PB-078.
+Факт: выбранный результат — `failed`, run_seq=1; stale возвращает ok=false (failed=1, reused=0), счётчик реальных subprocess-попыток растёт 2→3; task и project gate закрыты (ok=false). До исправления тот же сценарий давал selected=passed/seq=0, stale reused=1, attempts=2, gate ok=true.
+Доказательства:
+- [результат исправленной пробы](PB-078-evidence/probe-clock-rollback-fixed.json)
+- [заметки](PB-078-evidence/notes.md)
+Ограничения: trust_mode=local — результаты диагностические; protected-граница подтверждается отдельными тестами CHECK-02, не этой пробой.
+
+### CHECK-02 — Проверка
+Время: 2026-11-17T02:51:00+03:00
+Исполнитель: Devin
+Модель: SWE-2 Flash High
+Результат: passed
+Критерии: AC-01, AC-02, AC-03
+Команда: `python3 -m unittest tests.test_checks_run.Audit009PB78RegressionTest tests.test_checks_gate.ProtectedLatestOutcomeTest -v`
+Среда: macOS, Python 3.14; временные проекты без Git, реальные subprocess CLI и управляемые часы.
+Факт: 10 тестов пройдены. Local: поздний failed/timeout/blocked с большим run_seq и меньшим finished_at не скрывается старым passed; gate/status/plan/stale согласованы; stale реально перезапускает обязательство; новый реальный passed восстанавливает покрытие; индекс, rebuild и утрата seq-записи следуют seq-порядку; равный run_seq у параллельных прогонов и legacy-пары без run_seq остаются консервативными; seq-записи старше legacy независимо от меток. Protected: receipt с поздним exec_seq и откатом finished_at выбирается актуальным исходом.
+Доказательства:
+- [заметки](PB-078-evidence/notes.md)
+Ограничения: protected-тесты работают на тестовом trusted home, реальная OS/CI identity не заявляется.
+
+### CHECK-03 — Проверка
+Время: 2026-11-17T02:51:00+03:00
+Исполнитель: Devin
+Модель: SWE-2 Flash High
+Результат: passed
+Критерии: AC-01, AC-02, AC-03
+Команда: `python3 -m unittest discover -s tests -p 'test_checks_*.py' -v`; `python3 ai-dev-playbook/scripts/playbook.py index`; `python3 ai-dev-playbook/scripts/playbook.py check --ready`; `python3 ai-dev-playbook/scripts/playbook.py verify PB-078`
+Среда: macOS, Python 3.14.
+Факт: 351 тест test_checks_* пройдены (~264 с). verify PB-078: self-check, preflight-regressions, unit-tests — все passed; unit-tests — полный `unittest discover -s tests -v` за 2058 с, OK; inputs_unchanged=true. `index` и `check --ready` зелёные (89 карточек; поведение CLI этой проверкой не подтверждается). self-manifest актуализирован `adopt . --force --apply` после правок комплекта; правила verification.md и контракт dependency-aware-verification.md описывают seq-первичный порядок и его ограничения.
+Доказательства:
+- [отчёт verify](../../work/verification/PB-078/96537a85dec1409ab46f7262ab96a967/report.json)
+- [заметки](PB-078-evidence/notes.md)
+Ограничения: полный прогон — legacy unittest-набор; реальная protected deployment/CI identity не проверялась и не заявляется. Архивные доказательства AUDIT-009 и PB-057–064/PB-073/PB-074 не изменялись.
+
+### HANDOFF-01 — Передача
+Время: 2026-11-17T02:51:00+03:00
+Исполнитель: Devin
+Модель: SWE-2 Flash High
+Выполнение: EXEC-01
+Проверки: CHECK-01, CHECK-02, CHECK-03
+Состояние: in_review; изменения не закоммичены; следующий шаг — независимый аудит PB-078 (A-06), затем повтор AUDIT-009.
+Фокус аудита: (1) `result_order_key`/`_latest_better` — run_seq первичен, finished_at только внутри seq и у legacy-пар; равный seq>=0 консервативно выбирает непокрывающий исход; (2) согласованность selector/index/rebuild/load_results и protected `_protected_receipts` по exec_seq; (3) отсутствие ослабления corrupt_ids, резерва seq и границ local/protected; (4) регрессии — реальные CLI/subprocess и защищённые квитанции, не структурные.

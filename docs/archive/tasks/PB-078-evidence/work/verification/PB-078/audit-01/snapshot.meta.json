@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "card_format_version": 2,
+  "relations": [],
+  "materials": [
+    {
+      "id": "pb078-evidence",
+      "role": "report",
+      "source": "docs/tasks/PB-078-evidence",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-078"
+      ]
+    },
+    {
+      "id": "verify-96537a85dec1409ab46f7262ab96a967",
+      "role": "report",
+      "source": "work/verification/PB-078/96537a85dec1409ab46f7262ab96a967",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-078"
+      ]
+    }
+  ],
+  "criterion_evidence": {
+    "CHECK-01": {
+      "check_sha256": "sha256:50f62f1578f848415534954a07023d434a99ef7c84888153cee2e48195922c07",
+      "card_projection": "sha256:b9537888d8b56665eee562bcc88f44b1ec00596cdfe330505d3bacc264316c8d",
+      "report_id": "verify-96537a85dec1409ab46f7262ab96a967",
+      "report_sha256": "sha256:bcc8132520c51e12a7feb9976a6decfb789b1f6437f457bb9f7bb328bf47f1f2"
+    },
+    "CHECK-02": {
+      "check_sha256": "sha256:2897070fd2635e14c2f83010dda2aa0ff82239ca54761083a2d679700abe0186",
+      "card_projection": "sha256:b9537888d8b56665eee562bcc88f44b1ec00596cdfe330505d3bacc264316c8d",
+      "report_id": "verify-96537a85dec1409ab46f7262ab96a967",
+      "report_sha256": "sha256:bcc8132520c51e12a7feb9976a6decfb789b1f6437f457bb9f7bb328bf47f1f2"
+    },
+    "CHECK-03": {
+      "check_sha256": "sha256:2450dc9b092108d2b28a6c3d65b933ca741d6779f97a055375ce9afebae0d6f5",
+      "card_projection": "sha256:b9537888d8b56665eee562bcc88f44b1ec00596cdfe330505d3bacc264316c8d",
+      "report_id": "verify-96537a85dec1409ab46f7262ab96a967",
+      "report_sha256": "sha256:bcc8132520c51e12a7feb9976a6decfb789b1f6437f457bb9f7bb328bf47f1f2"
+    }
+  },
+  "handoff": {
+    "at": "2026-11-17T02:56:28+03:00",
+    "actor": {
+      "name": "Devin",
+      "model": "SWE-2 Flash High"
+    },
+    "summary": "HANDOFF-01",
+    "reports": [
+      "verify-96537a85dec1409ab46f7262ab96a967"
+    ],
+    "card_projection": "sha256:b9537888d8b56665eee562bcc88f44b1ec00596cdfe330505d3bacc264316c8d",
+    "entry_id": "HANDOFF-01",
+    "journal_sha256": "sha256:94feb04fbe36f078bfa2127f7e3dff41d29bf719d0d5366328db4792562e4ac6"
+  }
+}

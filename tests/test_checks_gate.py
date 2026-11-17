@@ -365,6 +365,32 @@ class ProtectedLatestOutcomeTest(unittest.TestCase):
         verdict = self.evaluate(now="2026-01-01T00:00:30+00:00")
         self.assertIn("probe", verdict["covered"])
 
+    def test_clock_rollback_failed_stays_latest(self):
+        """A-06 PB-078: protected — поздний failed с меньшим
+        finished_at (откат wall clock) не скрывается старым passed:
+        порядок задаёт доверенный журнал exec_seq, а не метки
+        времени. Новый реальный passed восстанавливает покрытие."""
+        verifier_run(self.proj, self.home,
+                     now="2026-01-01T00:00:00+00:00")
+        verdict = self.evaluate(now="2026-01-01T00:00:30+00:00")
+        self.assertIn("probe", verdict["covered"])
+        self.flag.write_text("1")
+        # Откат часов на секунду: finished_at второй квитанции раньше,
+        # но её позиция в журнале позже — failed остаётся актуальным.
+        verifier_run(self.proj, self.home,
+                     now="2025-12-31T23:59:59+00:00")
+        verdict = self.evaluate(now="2025-12-31T23:59:59+00:00")
+        self.assertIn("probe", verdict["uncovered"])
+        self.assertNotIn("probe", verdict["covered"])
+        self.assertFalse(verdict["ok"])
+        # Восстановление — новый реальный passed с любой меткой.
+        self.flag.write_text("0")
+        verifier_run(self.proj, self.home,
+                     now="2026-01-01T00:01:00+00:00")
+        verdict = self.evaluate(now="2026-01-01T00:01:30+00:00")
+        self.assertIn("probe", verdict["covered"])
+        self.assertNotIn("probe", verdict["uncovered"])
+
 
 class LifecycleGateTest(unittest.TestCase):
     """AC-01: lifecycle использует тот же расчёт; без policy — legacy."""

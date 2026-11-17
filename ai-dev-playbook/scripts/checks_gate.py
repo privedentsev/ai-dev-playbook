@@ -75,17 +75,21 @@ def _protected_receipts(store, approved, policy, candidate_digest,
     кандидата и одобренной политики — остальные относятся к прежним
     эпохам и пропускаются.
 
-    Для каждой проверки актуальный исход — доверенный результат с
-    максимальным ``finished_at`` среди валидных квитанций: поздний
-    failed/timeout блокирует старый passed, а просроченная по ``ttl``
-    квитанция отклоняется, только когда она актуальная — старая
-    просроченная не блокирует более свежее успешное доказательство.
-    Порядок при равных ``finished_at`` определяется устойчивой
-    доверенной последовательностью исходных запусков (A-05 аудита
-    PB-062): ``exec_seq`` — позиция receipt-события run-квитанции в
-    журнале для каждого результата; aggregate — не новое исполнение,
-    его исход наследует ``exec_seq`` исходного run и не может
-    переопределить более поздний failed. Для проверок с входом
+    Для каждой проверки актуальный исход выбирается тем же
+    состоянием порядка, что у локальной истории
+    (``checks_select``): ``exec_seq`` — позиция receipt-события в
+    журнале, порядок коммита квитанций, сам по себе не доказывающий
+    порядок завершения перекрывающихся прогонов; ``finished_at`` —
+    метка исполнения и при откате wall clock. Покрывающий ``passed``
+    принимается только когда ``exec_seq`` строго больше ``exec_seq``
+    любой непокрывающей квитанции **и** ``finished_at`` не
+    противоречит меткам непокрывающих (A-06/A-01 PB-078); при
+    равном ``exec_seq`` (параллельные квитанции с общим исходным
+    запуском) взаимный порядок недоказан — консервативно важнее
+    непокрывающий исход. Просроченная по ``ttl`` квитанция
+    отклоняется, только когда она актуальная — старая просроченная
+    не блокирует более свежее успешное доказательство.
+    Для проверок с входом
     ``task_projection`` дополнительно требуется совпадение
     ``task_requirements_digest`` результата с текущей проекцией задачи
     (R-12). Возвращает ``(covered, rejections, notes)``:
@@ -172,8 +176,23 @@ def _protected_receipts(store, approved, policy, candidate_digest,
         check = by_id.get(cid)
         if check is None or check["kind"] == "manual":
             continue
-        latest = max(items, key=lambda o: (
-            o["finished_at"], o["seq"], o["result_digest"]))
+        # exec_seq — порядок коммита квитанций в журнале; покрытие
+        # требует согласия exec_seq и finished_at с каждым
+        # непокрывающим исходом — то же состояние порядка, что у
+        # локальной истории (A-06/A-01 PB-078).
+        state = checks_select._new_order_state()
+        for item in items:
+            checks_select._merge_order_state(state, {
+                "check_id": cid, "status": item["status"],
+                "finished_at": item["finished_at"],
+                "result_id": item["result_digest"],
+                "result_digest": item["result_digest"],
+                "run_seq": item["seq"],
+                "doc": item["doc"],
+                "receipt_id": item["receipt_id"]})
+        latest = checks_select._choose_order_state(state)
+        if latest is None:
+            continue
         if latest["status"] != "passed":
             notes.append(
                 f"{cid}: последний доверенный исход "

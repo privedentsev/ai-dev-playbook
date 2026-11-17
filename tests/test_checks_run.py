@@ -1797,5 +1797,559 @@ class Audit009PB74RegressionTest(unittest.TestCase):
                             now=self.FROZEN)["ok"])
 
 
+class Audit009PB78RegressionTest(unittest.TestCase):
+    """Регрессии PB-078 (A-06 повторного аудита AUDIT-009):
+    ``run_seq`` — доказанный порядок исходных исполнений и старше
+    wall clock; откат часов не прячет поздний неуспех за старым
+    passed. Равный ``run_seq >= 0`` — параллельные прогоны с
+    недоказанным взаимным порядком: непокрывающий исход важнее
+    метки. Legacy без ``run_seq`` упорядочены ``finished_at``.
+    Индекс, rebuild, утрата записи и reuse используют тот же
+    расчёт."""
+
+    FROZEN = "2026-11-17T12:00:00+00:00"
+    EARLIER = "2026-11-17T11:59:59+00:00"
+
+    def setUp(self):
+        self.proj = run_project(self)
+        self.policy = run_policy()
+
+    @staticmethod
+    def _result(check_id, status, finished_at, run_seq, result_id,
+                run_id="r"):
+        """Валидная запись результата схемы 1 с заданным run_seq."""
+        doc = {"schema_version": 1, "result_id": result_id,
+               "project_id": "shop", "check_id": check_id,
+               "kind": "test",
+               "binding": {
+                   "policy_digest": "sha256:" + "0" * 64,
+                   "definition_digest": "sha256:" + "0" * 64,
+                   "adapter": {"id": "python-unittest",
+                               "version": "1"},
+                   "runner": {"id": "checks-runner", "version": "1"},
+                   "input_digest": "sha256:" + "0" * 64,
+                   "dependency_closure_digest": "sha256:" + "0" * 64,
+                   "environment": {}},
+               "status": status, "started_at": finished_at,
+               "finished_at": finished_at,
+               "tests": {"expected": ["t.t"],
+                         "actual": [{"id": "t.t",
+                                     "outcome": "passed"}]},
+               "evidence": {"run_id": run_id}}
+        if run_seq is not None:
+            doc["evidence"]["run_seq"] = run_seq
+        return doc
+
+    def _gate(self, scope="task", policy=None):
+        policy = policy or self.policy
+        content = (self.proj.root / "docs/tasks/DEV-1.md").read_text()
+        return checks_gate.evaluate(
+            self.proj.root, policy, task_id="DEV-1",
+            scope=scope, task_content=content, task_meta={})
+
+    def test_a06_later_seq_beats_rolled_back_clock(self):
+        """A-06: passed seq0 с поздним finished_at против failed seq1
+        с finished_at на секунду раньше — выбирается failed:
+        run_seq доказывает порядок исполнений."""
+        passed = self._result("payments-tests", "passed",
+                              self.FROZEN, 0,
+                              "a" * 32 + "-payments-tests",
+                              run_id="a" * 32)
+        failed = self._result("payments-tests", "failed",
+                              self.EARLIER, 1,
+                              "f" * 32 + "-payments-tests",
+                              run_id="f" * 32)
+        for order in ((passed, failed), (failed, passed)):
+            latest = checks_select.evidence_latest(list(order))
+            self.assertEqual(
+                latest["payments-tests"]["status"], "failed")
+            self.assertEqual(
+                latest["payments-tests"]["evidence"]["run_seq"], 1)
+        # Согласованное направление (seq и часы совпадают) — тот же
+        # доказанный порядок.
+        failed_late = self._result("payments-tests", "failed",
+                                   self.FROZEN, 1,
+                                   "f" * 32 + "-payments-tests",
+                                   run_id="f" * 32)
+        passed_early = self._result("payments-tests", "passed",
+                                    self.EARLIER, 0,
+                                    "a" * 32 + "-payments-tests",
+                                    run_id="a" * 32)
+        latest = checks_select.evidence_latest(
+            [passed_early, failed_late])
+        self.assertEqual(latest["payments-tests"]["status"], "failed")
+
+    def test_a06_legacy_failure_blocks_until_clock_agrees(self):
+        """A-01 аудита PB-078: legacy-запись без run_seq не
+        упорядочена seq — её finished_at остаётся свидетельством.
+        Seq-запись passed покрывает legacy failed только когда её
+        метка позже; до согласия часов консервативно выбирается
+        непокрывающий исход. Seq-запись с непокрывающим исходом
+        всегда старше legacy-покрытия."""
+        legacy_failed = self._result("payments-tests", "failed",
+                                     self.FROZEN, None,
+                                     "b" * 32 + "-payments-tests",
+                                     run_id="b" * 32)
+        fresh_passed_early = self._result("payments-tests", "passed",
+                                          self.EARLIER, 0,
+                                          "c" * 32 + "-payments-tests",
+                                          run_id="c" * 32)
+        latest = checks_select.evidence_latest(
+            [legacy_failed, fresh_passed_early])
+        self.assertEqual(latest["payments-tests"]["status"], "failed")
+        fresh_passed_late = self._result("payments-tests", "passed",
+                                         "2026-11-17T12:00:01+00:00",
+                                         1,
+                                         "a" * 32 + "-payments-tests",
+                                         run_id="a" * 32)
+        latest = checks_select.evidence_latest(
+            [legacy_failed, fresh_passed_late])
+        self.assertEqual(latest["payments-tests"]["status"], "passed")
+        legacy_passed = self._result("payments-tests", "passed",
+                                     self.FROZEN, None,
+                                     "d" * 32 + "-payments-tests",
+                                     run_id="d" * 32)
+        fresh_failed = self._result("payments-tests", "failed",
+                                    self.EARLIER, 0,
+                                    "e" * 32 + "-payments-tests",
+                                    run_id="e" * 32)
+        latest = checks_select.evidence_latest(
+            [legacy_passed, fresh_failed])
+        self.assertEqual(latest["payments-tests"]["status"], "failed")
+
+    def test_a06_equal_seq_concurrent_is_conservative(self):
+        """A-06: равный run_seq >= 0 — параллельные прогоны с общим
+        номером, взаимный порядок недоказан: непокрывающий исход
+        важнее wall clock при любом направлении меток."""
+        passed = self._result("payments-tests", "passed",
+                              self.FROZEN, 5,
+                              "a" * 32 + "-payments-tests",
+                              run_id="a" * 32)
+        failed = self._result("payments-tests", "failed",
+                              self.EARLIER, 5,
+                              "f" * 32 + "-payments-tests",
+                              run_id="f" * 32)
+        for order in ((passed, failed), (failed, passed)):
+            latest = checks_select.evidence_latest(list(order))
+            self.assertEqual(
+                latest["payments-tests"]["status"], "failed")
+        # Обе записи passed — однозначное покрытие; поздняя метка
+        # выбирается детерминированно.
+        second = self._result("payments-tests", "passed",
+                              self.FROZEN, 5,
+                              "b" * 32 + "-payments-tests",
+                              run_id="b" * 32)
+        third = self._result("payments-tests", "passed",
+                             self.EARLIER, 5,
+                             "c" * 32 + "-payments-tests",
+                             run_id="c" * 32)
+        latest = checks_select.evidence_latest([third, second])
+        self.assertEqual(latest["payments-tests"]["result_id"],
+                         second["result_id"])
+
+    def test_a06_legacy_clock_order_preserved(self):
+        """A-06: legacy-пара без run_seq упорядочена finished_at —
+        единственным свидетельством; поздний passed покрывает ранний
+        failed, поздний failed скрывает ранний passed."""
+        legacy_passed = self._result("payments-tests", "passed",
+                                     self.FROZEN, None,
+                                     "a" * 32 + "-payments-tests",
+                                     run_id="a" * 32)
+        legacy_failed_early = self._result(
+            "payments-tests", "failed", self.EARLIER, None,
+            "b" * 32 + "-payments-tests", run_id="b" * 32)
+        latest = checks_select.evidence_latest(
+            [legacy_failed_early, legacy_passed])
+        self.assertEqual(latest["payments-tests"]["status"], "passed")
+        legacy_failed = self._result("payments-tests", "failed",
+                                     self.FROZEN, None,
+                                     "c" * 32 + "-payments-tests",
+                                     run_id="c" * 32)
+        legacy_passed_early = self._result(
+            "payments-tests", "passed", self.EARLIER, None,
+            "d" * 32 + "-payments-tests", run_id="d" * 32)
+        latest = checks_select.evidence_latest(
+            [legacy_passed_early, legacy_failed])
+        self.assertEqual(latest["payments-tests"]["status"], "failed")
+
+    def test_a06_index_rebuild_and_loss_follow_seq(self):
+        """A-06: индекс, пересборка и свидетельство утраты используют
+        seq-порядок — откат finished_at не воскрешает passed и не
+        скрывает потерянную позднюю запись."""
+        passed = self._result("payments-tests", "passed",
+                              self.FROZEN, 0,
+                              "a" * 32 + "-payments-tests",
+                              run_id="a" * 32)
+        failed = self._result("payments-tests", "failed",
+                              self.EARLIER, 1,
+                              "f" * 32 + "-payments-tests",
+                              run_id="f" * 32)
+        checks_results.store_result(self.proj.root, "a" * 32, passed)
+        checks_results.store_result(self.proj.root, "f" * 32, failed)
+        checks_results.update_index(self.proj.root, "a" * 32, passed)
+        checks_results.update_index(self.proj.root, "f" * 32, failed)
+        index = json.loads(
+            (self.proj.root / "work/checks/results-index.json")
+            .read_text())
+        entry = index["entries"]["payments-tests"]
+        self.assertEqual(entry["status"], "failed")
+        self.assertEqual(entry["run_seq"], 1)
+        checks_results.rebuild_index(self.proj.root, self.policy)
+        index = json.loads(
+            (self.proj.root / "work/checks/results-index.json")
+            .read_text())
+        self.assertEqual(
+            index["entries"]["payments-tests"]["status"], "failed")
+        results, _notes, corrupt = checks_results.load_results(
+            self.proj.root)
+        self.assertEqual(corrupt, set())
+        self.assertEqual(
+            checks_select.evidence_latest(results)
+            ["payments-tests"]["status"], "failed")
+        # Утрата seq-записи: индекс знает о более позднем исходе —
+        # corrupt независимо от того, что его finished_at раньше.
+        candidates = [p for p in
+                      (self.proj.root / "work/checks/results")
+                      .rglob("payments-tests.json")
+                      if json.loads(p.read_text())["status"]
+                      == "failed"]
+        self.assertEqual(len(candidates), 1)
+        candidates[0].unlink()
+        _r, _n, corrupt = checks_results.load_results(self.proj.root)
+        self.assertIn("payments-tests", corrupt)
+        # Пересборка сохраняет свидетельство утраты (seq-порядок).
+        checks_results.rebuild_index(self.proj.root, self.policy)
+        index = json.loads(
+            (self.proj.root / "work/checks/results-index.json")
+            .read_text())
+        self.assertEqual(
+            index["entries"]["payments-tests"]["status"], "failed")
+
+    def test_a06_clock_rollback_end_to_end(self):
+        """A-06: реальные subprocess-команды со счётчиком, управляемые
+        часы — passed → failed с большим run_seq и меньшим
+        finished_at закрывает task/project gate; stale реально
+        перезапускает обязательство; новый passed восстанавливает
+        покрытие. История не редактируется."""
+        counter = Path(self.proj.tmp.name) / "counter"
+        cmd = ("from pathlib import Path; p=Path(%r); "
+               "n=int(p.read_text())+1 if p.exists() else 1; "
+               "p.write_text(str(n)); raise SystemExit(1 if n == 2 "
+               "else 0)" % str(counter))
+        policy = make_policy()
+        policy["checks"] = [
+            {"id": "payment", "title": "Payment",
+             "purpose": "Поздний failed важнее старого passed при "
+                        "откате часов",
+             "kind": "command", "modules": ["payments"],
+             "applicability": "always",
+             "argv": [sys.executable, "-c", cmd],
+             "timeout_seconds": 10}]
+        first = "2026-11-17T12:00:00+00:00"
+        second = "2026-11-17T11:59:59+00:00"
+        out1, _ = execute(self.proj, policy, scope="project",
+                          mode="force", now=first)
+        self.assertTrue(out1["ok"], out1)
+        self.assertEqual(int(counter.read_text()), 1)
+        out2, _ = execute(self.proj, policy, scope="project",
+                          mode="force", now=second)
+        self.assertFalse(out2["ok"], out2)
+        self.assertEqual(out2["outcomes"]["payment"], "failed")
+        self.assertEqual(int(counter.read_text()), 2)
+        # Последний доказанный исход — failed seq1 при более ранней
+        # метке: gate task и project не дают готовность.
+        results, _notes, corrupt = checks_results.load_results(
+            self.proj.root)
+        self.assertEqual(corrupt, set())
+        latest = checks_select.evidence_latest(results)
+        self.assertEqual(latest["payment"]["status"], "failed")
+        self.assertEqual(latest["payment"]["evidence"]["run_seq"], 1)
+        for scope in ("task", "project"):
+            verdict = self._gate(scope, policy)
+            self.assertFalse(verdict["ok"], (scope, verdict))
+            self.assertIn("payment", verdict["uncovered"])
+        # Stale — реальное исполнение обязательства, не reuse:
+        # счётчик растёт, новый passed восстанавливает покрытие.
+        third = "2026-11-17T12:00:01+00:00"
+        out3, _ = execute(self.proj, policy, now=third)
+        self.assertTrue(out3["ok"], out3)
+        self.assertEqual(int(counter.read_text()), 3)
+        results, _n, _c = checks_results.load_results(self.proj.root)
+        latest = checks_select.evidence_latest(results)
+        self.assertEqual(latest["payment"]["status"], "passed")
+        self.assertEqual(latest["payment"]["evidence"]["run_seq"], 2)
+        for scope in ("task", "project"):
+            self.assertTrue(self._gate(scope, policy)["ok"], scope)
+
+    def test_a01_overlapping_runs_keep_late_failure(self):
+        """A-01 аудита PB-078: перекрывающиеся прогоны с различными
+        run_seq — seq доказывает только порядок резервации, поэтому
+        поздний failed seq0 не скрывается более ранним passed seq1;
+        gate закрыт, stale реально перезапускает, новый
+        неперекрывающийся passed восстанавливает покрытие."""
+        import os
+        from concurrent.futures import ThreadPoolExecutor
+        ready = Path(self.proj.tmp.name) / "ready"
+        release = Path(self.proj.tmp.name) / "release"
+        code = ("import os,time\n"
+                "from pathlib import Path\n"
+                "if os.environ.get('AUDIT_CASE')=='A':\n"
+                f" Path({str(ready)!r}).touch()\n"
+                f" while not Path({str(release)!r}).exists():"
+                " time.sleep(.02)\n"
+                " raise SystemExit(1)\n")
+        policy = make_policy()
+        common = {"kind": "command", "modules": ["payments"],
+                  "applicability": "always", "timeout_seconds": 15,
+                  "title": "probe", "purpose": "overlap"}
+        policy["checks"] = [
+            dict(common, id="first",
+                 argv=[sys.executable, "-c", "pass"]),
+            dict(common, id="payment",
+                 argv=[sys.executable, "-c", code])]
+        content = (self.proj.root / "docs/tasks/DEV-1.md").read_text()
+
+        def run(case, mode="force"):
+            return checks_runner.execute(
+                self.proj.root, policy, task_id="DEV-1",
+                scope="project", mode=mode, checkpoint=None,
+                task_content=content, task_meta={},
+                env=dict(os.environ, AUDIT_CASE=case),
+                emit=lambda s: None)
+
+        with ThreadPoolExecutor() as pool:
+            future = pool.submit(run, "A")
+            deadline = __import__("time").monotonic() + 10
+            while not ready.exists():
+                self.assertLess(__import__("time").monotonic(),
+                                deadline)
+                __import__("time").sleep(.02)
+            run("B")
+            release.touch()
+            run_a = future.result()
+        payment_a = [r for r in run_a["results"]
+                     if r["check_id"] == "payment"][0]
+        payment_b = [r for r in
+                     checks_results.load_results(self.proj.root)[0]
+                     if r["check_id"] == "payment"
+                     and r["evidence"].get("run_seq") == 1]
+        self.assertEqual(payment_a["status"], "failed")
+        self.assertEqual(payment_a["evidence"]["run_seq"], 0)
+        self.assertTrue(payment_b)
+        self.assertEqual(payment_b[0]["status"], "passed")
+        # failed seq0 завершился позже passed seq1 — выбирается
+        # failed: перекрытие делает seq-порядок недоказанным.
+        results, notes, corrupt = checks_results.load_results(
+            self.proj.root)
+        self.assertEqual(corrupt, set())
+        latest = checks_select.evidence_latest(results)
+        self.assertEqual(latest["payment"]["status"], "failed")
+        self.assertEqual(latest["payment"]["evidence"]["run_seq"], 0)
+        index = json.loads(
+            (self.proj.root / "work/checks/results-index.json")
+            .read_text())
+        self.assertEqual(
+            index["entries"]["payment"]["status"], "failed")
+        checks_results.rebuild_index(self.proj.root, policy)
+        index = json.loads(
+            (self.proj.root / "work/checks/results-index.json")
+            .read_text())
+        self.assertEqual(
+            index["entries"]["payment"]["status"], "failed")
+        for scope in ("task", "project"):
+            verdict = self._gate(scope, policy)
+            self.assertFalse(verdict["ok"], (scope, verdict))
+            self.assertIn("payment", verdict["uncovered"])
+        # Stale реально перезапускает обязательство; новый
+        # неперекрывающийся passed восстанавливает покрытие.
+        out3 = run("B", mode="stale")
+        self.assertTrue(out3["ok"], out3)
+        results, _n, _c = checks_results.load_results(self.proj.root)
+        latest = checks_select.evidence_latest(results)
+        self.assertEqual(latest["payment"]["status"], "passed")
+        self.assertGreater(
+            latest["payment"]["evidence"]["run_seq"], 1)
+        for scope in ("task", "project"):
+            self.assertTrue(self._gate(scope, policy)["ok"], scope)
+
+    def test_a02_lost_nf_component_keeps_obligation(self):
+        """A-02 аудита PB-078: максимум ``finished_at`` среди
+        непокрывающих (``nf``) ставит запись, не являющуюся
+        компонентом состояния (``nw`` — по ``run_seq``). Утрата
+        nf-источника не снимает свидетельство: индекс заявляет
+        состояние, выбирающее иной исход, чем файлы, — corrupt,
+        gate закрыт, rebuild сохраняет ``nf``, stale реально
+        перезапускает, новый passed восстанавливает покрытие."""
+        counter = Path(self.proj.tmp.name) / "counter"
+        cmd = ("from pathlib import Path; p=Path(%r); "
+               "n=int(p.read_text())+1 if p.exists() else 1; "
+               "p.write_text(str(n)); raise SystemExit(int(n<3))"
+               % str(counter))
+        policy = make_policy()
+        policy["checks"] = [
+            {"id": "payment", "title": "Payment",
+             "purpose": "Утрата nf-компонента не снимает "
+                        "обязательство",
+             "kind": "command", "modules": ["payments"],
+             "applicability": "always",
+             "argv": [sys.executable, "-c", cmd],
+             "timeout_seconds": 10}]
+        # seq0/failed/12:00 — источник nf; seq1/failed/10:00 — nw;
+        # seq2/passed/11:00 — pw. Максимумы seq и finished_at
+        # непокрывающих разнесены по разным записям.
+        out1, _ = execute(self.proj, policy, scope="project",
+                          mode="force", now="2026-11-17T12:00:00+00:00")
+        self.assertFalse(out1["ok"], out1)
+        out2, _ = execute(self.proj, policy, scope="project",
+                          mode="force", now="2026-11-17T10:00:00+00:00")
+        self.assertFalse(out2["ok"], out2)
+        out3, _ = execute(self.proj, policy, scope="project",
+                          mode="force", now="2026-11-17T11:00:00+00:00")
+        self.assertTrue(out3["ok"], out3)
+        index = json.loads(
+            (self.proj.root / "work/checks/results-index.json")
+            .read_text())
+        order = index["entries"]["payment"]["order"]
+        self.assertEqual(order["nf"], "2026-11-17T12:00:00+00:00")
+        self.assertEqual(order["nw"]["run_seq"], 1)
+        for scope in ("task", "project"):
+            self.assertFalse(self._gate(scope, policy)["ok"], scope)
+        # Удаление файла seq0/failed: nf=12:00 теряет источник,
+        # но свидетельство индекса делает историю недоказуемой.
+        victim = [path for path in
+                  (self.proj.root / "work/checks/results")
+                  .rglob("payment.json")
+                  if json.loads(path.read_text())
+                  ["evidence"].get("run_seq") == 0]
+        self.assertEqual(len(victim), 1)
+        victim[0].unlink()
+        results, _n, corrupt = checks_results.load_results(
+            self.proj.root)
+        self.assertIn("payment", corrupt)
+        for scope in ("task", "project"):
+            verdict = self._gate(scope, policy)
+            self.assertFalse(verdict["ok"], (scope, verdict))
+            self.assertIn("payment", verdict["uncovered"])
+        # Rebuild сохраняет свидетельство утраты — corrupt остаётся.
+        checks_results.rebuild_index(self.proj.root, policy)
+        _r, _n, corrupt = checks_results.load_results(self.proj.root)
+        self.assertIn("payment", corrupt)
+        index = json.loads(
+            (self.proj.root / "work/checks/results-index.json")
+            .read_text())
+        self.assertEqual(index["entries"]["payment"]["status"],
+                         "failed")
+        # Stale — реальное исполнение, не reuse: счётчик 3→4.
+        # passed с меткой раньше сохранённого nf=12:00 противоречит
+        # свидетельству утраты — обязательство остаётся открытым.
+        out4, _ = execute(self.proj, policy, now="2026-11-17T11:00:01+00:00")
+        self.assertTrue(out4["ok"], out4)
+        self.assertEqual(int(counter.read_text()), 4)
+        _r, _n, corrupt = checks_results.load_results(self.proj.root)
+        self.assertIn("payment", corrupt)
+        for scope in ("task", "project"):
+            self.assertFalse(self._gate(scope, policy)["ok"], scope)
+        # passed с меткой не раньше nf — доказанное покрытие:
+        # счётчик 4→5, gate открывается.
+        out5, _ = execute(self.proj, policy, now="2026-11-17T12:00:01+00:00")
+        self.assertTrue(out5["ok"], out5)
+        self.assertEqual(int(counter.read_text()), 5)
+        _r, _n, corrupt = checks_results.load_results(self.proj.root)
+        self.assertNotIn("payment", corrupt)
+        for scope in ("task", "project"):
+            self.assertTrue(self._gate(scope, policy)["ok"], scope)
+
+    @staticmethod
+    def _command_result(check_id, status, finished_at, run_seq,
+                        result_id, run_id):
+        """Валидная запись kind=command схемы 1 для store_result."""
+        return {"schema_version": 1, "result_id": result_id,
+                "project_id": "shop", "check_id": check_id,
+                "kind": "command",
+                "binding": {
+                    "policy_digest": "sha256:" + "0" * 64,
+                    "definition_digest": "sha256:" + "0" * 64,
+                    "adapter": {"id": "a", "version": "1"},
+                    "runner": {"id": "r", "version": "1"},
+                    "input_digest": "sha256:" + "0" * 64,
+                    "dependency_closure_digest": "sha256:" + "0" * 64,
+                    "environment": {}},
+                "status": status, "started_at": finished_at,
+                "finished_at": finished_at,
+                "command": {"exit_code": 0 if status == "passed"
+                            else 1,
+                            "stdout_log": "-", "stderr_log": "-"},
+                "evidence": {"run_id": run_id, "run_seq": run_seq}}
+
+    def _put_result(self, check_id, status, finished_at, run_seq,
+                    tag):
+        result = self._command_result(
+            check_id, status, finished_at, run_seq,
+            f"{tag}-{check_id}", f"run-{tag}")
+        checks_results.store_result(self.proj.root, f"run-{tag}",
+                                    result)
+        checks_results.update_index(self.proj.root, f"run-{tag}",
+                                    result)
+
+    def test_a02_loss_without_winner_change_keeps_max(self):
+        """A-02 аудита PB-078: утрата nf-источника без смены
+        победителя тоже обнаруживается — rebuild не снимает
+        блокирующий максимум. Passed с меткой не раньше nf
+        восстанавливает покрытие; сохранённый nf продолжает
+        блокировать поздние passed с противоречащей меткой."""
+        check_id = "payment"
+        self._put_result(check_id, "failed",
+                         "2026-11-17T12:00:00+00:00", 0, "f0")
+        self._put_result(check_id, "failed",
+                         "2026-11-17T10:00:00+00:00", 1, "f1")
+        # Оба исхода failed: удаление seq0 не меняет победителя
+        # (nw=f1), но снимает nf=12:00.
+        victim = [path for path in
+                  (self.proj.root / "work/checks/results")
+                  .rglob(f"{check_id}.json")
+                  if json.loads(path.read_text())
+                  ["evidence"].get("run_seq") == 0]
+        self.assertEqual(len(victim), 1)
+        victim[0].unlink()
+        _r, _n, corrupt = checks_results.load_results(self.proj.root)
+        self.assertIn(check_id, corrupt)
+        checks_results.rebuild_index(self.proj.root, self.policy)
+        index = json.loads(
+            (self.proj.root / "work/checks/results-index.json")
+            .read_text())
+        self.assertEqual(
+            index["entries"][check_id]["order"]["nf"],
+            "2026-11-17T12:00:00+00:00")
+        _r, _n, corrupt = checks_results.load_results(self.proj.root)
+        self.assertIn(check_id, corrupt)
+        # passed с меткой раньше nf — покрытие не даёт.
+        self._put_result(check_id, "passed",
+                         "2026-11-17T11:30:00+00:00", 2, "p2")
+        _r, _n, corrupt = checks_results.load_results(self.proj.root)
+        self.assertIn(check_id, corrupt)
+        # passed с меткой не раньше nf — доказанное покрытие.
+        self._put_result(check_id, "passed",
+                         "2026-11-17T12:00:01+00:00", 3, "p3")
+        _r, _n, corrupt = checks_results.load_results(self.proj.root)
+        self.assertNotIn(check_id, corrupt)
+        # A-03 аудита PB-078: rebuild после исцеления не теряет
+        # перекрытый утраченный максимум — runner вызывает его
+        # автоматически в конце execute.
+        checks_results.rebuild_index(self.proj.root, self.policy)
+        index = json.loads(
+            (self.proj.root / "work/checks/results-index.json")
+            .read_text())
+        self.assertEqual(
+            index["entries"][check_id]["order"]["nf"],
+            "2026-11-17T12:00:00+00:00")
+        _r, _n, corrupt = checks_results.load_results(self.proj.root)
+        self.assertNotIn(check_id, corrupt)
+        # Фантомный nf сохранён в состоянии индекса: поздний по
+        # seq, но ранний по метке passed покрытия не даёт.
+        self._put_result(check_id, "passed",
+                         "2026-11-17T11:00:00+00:00", 4, "p4")
+        _r, _n, corrupt = checks_results.load_results(self.proj.root)
+        self.assertIn(check_id, corrupt)
+
 if __name__ == "__main__":
     unittest.main()

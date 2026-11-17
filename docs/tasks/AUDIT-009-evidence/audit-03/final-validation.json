@@ -1,0 +1,15 @@
+{
+  "index_rc": 0,
+  "check_ready_rc": 0,
+  "preflight_rc": 0,
+  "unit_checks_rc": 0,
+  "unit_checks_count": 344,
+  "unit_checks_seconds": 251.125,
+  "pilot_plan_only_rc": 0,
+  "audit_result": "changes_requested",
+  "open_finding": "A-06 P2",
+  "task_status": "in_progress",
+  "accepted": false,
+  "full_legacy_verify_rerun": false,
+  "full_self_pilot_rerun": false
+}

@@ -1,0 +1,207 @@
+{
+  "runs": [
+    {
+      "status": "failed",
+      "seq": 0,
+      "finished_at": "2026-11-17T12:00:00+00:00"
+    },
+    {
+      "status": "failed",
+      "seq": 1,
+      "finished_at": "2026-11-17T10:00:00+00:00"
+    },
+    {
+      "status": "passed",
+      "seq": 2,
+      "finished_at": "2026-11-17T11:00:00+00:00"
+    }
+  ],
+  "before": {
+    "selected": {
+      "payment": {
+        "status": "failed",
+        "seq": 1
+      }
+    },
+    "corrupt": [],
+    "gate_ok": false,
+    "notes": []
+  },
+  "index": {
+    "payment": {
+      "result_id": "ee0f0b78680a415d8eb6a2162b82d0af-payment",
+      "run_id": "ee0f0b78680a415d8eb6a2162b82d0af",
+      "project_id": "shop",
+      "finished_at": "2026-11-17T10:00:00+00:00",
+      "run_seq": 1,
+      "file": "work/checks/results/ee0f0b78680a415d8eb6a2162b82d0af/payment.json",
+      "status": "failed",
+      "order": {
+        "v": 1,
+        "has_seq": true,
+        "pw": {
+          "result_id": "8680889ef7a448d5a391ac8bca4a759c-payment",
+          "run_id": "8680889ef7a448d5a391ac8bca4a759c",
+          "project_id": "shop",
+          "finished_at": "2026-11-17T11:00:00+00:00",
+          "run_seq": 2,
+          "file": "work/checks/results/8680889ef7a448d5a391ac8bca4a759c/payment.json",
+          "status": "passed"
+        },
+        "nw": {
+          "result_id": "ee0f0b78680a415d8eb6a2162b82d0af-payment",
+          "run_id": "ee0f0b78680a415d8eb6a2162b82d0af",
+          "project_id": "shop",
+          "finished_at": "2026-11-17T10:00:00+00:00",
+          "run_seq": 1,
+          "file": "work/checks/results/ee0f0b78680a415d8eb6a2162b82d0af/payment.json",
+          "status": "failed"
+        },
+        "ns": 1,
+        "nf": "2026-11-17T12:00:00+00:00",
+        "lw": null,
+        "lnw": null
+      }
+    }
+  },
+  "after_loss": {
+    "selected": {
+      "payment": {
+        "status": "passed",
+        "seq": 2
+      }
+    },
+    "corrupt": [
+      "payment"
+    ],
+    "gate_ok": false,
+    "notes": [
+      "\u0437\u0430\u043f\u0438\u0441\u044c \u0440\u0435\u0437\u0443\u043b\u044c\u0442\u0430\u0442\u0430 payment \u043f\u043e \u0438\u043d\u0434\u0435\u043a\u0441\u0443 \u0443\u0442\u0440\u0430\u0447\u0435\u043d\u0430 \u0438\u043b\u0438 \u043f\u043e\u0434\u043c\u0435\u043d\u0435\u043d\u0430 \u2014 \u0438\u0441\u0442\u043e\u0440\u0438\u044f \u043d\u0435\u0434\u043e\u043a\u0430\u0437\u0443\u0435\u043c\u0430"
+    ]
+  },
+  "after_rebuild": {
+    "selected": {
+      "payment": {
+        "status": "passed",
+        "seq": 2
+      }
+    },
+    "corrupt": [
+      "payment"
+    ],
+    "gate_ok": false,
+    "notes": [
+      "\u0437\u0430\u043f\u0438\u0441\u044c \u0440\u0435\u0437\u0443\u043b\u044c\u0442\u0430\u0442\u0430 payment \u043f\u043e \u0438\u043d\u0434\u0435\u043a\u0441\u0443 \u0443\u0442\u0440\u0430\u0447\u0435\u043d\u0430 \u0438\u043b\u0438 \u043f\u043e\u0434\u043c\u0435\u043d\u0435\u043d\u0430 \u2014 \u0438\u0441\u0442\u043e\u0440\u0438\u044f \u043d\u0435\u0434\u043e\u043a\u0430\u0437\u0443\u0435\u043c\u0430"
+    ]
+  },
+  "healed": {
+    "selected": {
+      "payment": {
+        "status": "passed",
+        "seq": 3
+      }
+    },
+    "corrupt": [],
+    "gate_ok": true,
+    "notes": []
+  },
+  "before_rebuild": {
+    "payment": {
+      "result_id": "31e218482f9f42648718a3fc25444989-payment",
+      "run_id": "31e218482f9f42648718a3fc25444989",
+      "project_id": "shop",
+      "finished_at": "2026-11-17T12:00:01+00:00",
+      "run_seq": 3,
+      "file": "work/checks/results/31e218482f9f42648718a3fc25444989/payment.json",
+      "status": "passed",
+      "order": {
+        "v": 1,
+        "has_seq": true,
+        "pw": {
+          "result_id": "31e218482f9f42648718a3fc25444989-payment",
+          "run_id": "31e218482f9f42648718a3fc25444989",
+          "project_id": "shop",
+          "finished_at": "2026-11-17T12:00:01+00:00",
+          "run_seq": 3,
+          "file": "work/checks/results/31e218482f9f42648718a3fc25444989/payment.json",
+          "status": "passed"
+        },
+        "nw": {
+          "result_id": "ee0f0b78680a415d8eb6a2162b82d0af-payment",
+          "run_id": "ee0f0b78680a415d8eb6a2162b82d0af",
+          "project_id": "shop",
+          "finished_at": "2026-11-17T10:00:00+00:00",
+          "run_seq": 1,
+          "file": "work/checks/results/ee0f0b78680a415d8eb6a2162b82d0af/payment.json",
+          "status": "failed"
+        },
+        "ns": 1,
+        "nf": "2026-11-17T12:00:00+00:00",
+        "lw": null,
+        "lnw": null
+      }
+    }
+  },
+  "after_index": {
+    "payment": {
+      "result_id": "31e218482f9f42648718a3fc25444989-payment",
+      "run_id": "31e218482f9f42648718a3fc25444989",
+      "project_id": "shop",
+      "finished_at": "2026-11-17T12:00:01+00:00",
+      "run_seq": 3,
+      "file": "work/checks/results/31e218482f9f42648718a3fc25444989/payment.json",
+      "status": "passed",
+      "order": {
+        "v": 1,
+        "has_seq": true,
+        "pw": {
+          "result_id": "31e218482f9f42648718a3fc25444989-payment",
+          "run_id": "31e218482f9f42648718a3fc25444989",
+          "project_id": "shop",
+          "finished_at": "2026-11-17T12:00:01+00:00",
+          "run_seq": 3,
+          "file": "work/checks/results/31e218482f9f42648718a3fc25444989/payment.json",
+          "status": "passed"
+        },
+        "nw": {
+          "result_id": "ee0f0b78680a415d8eb6a2162b82d0af-payment",
+          "run_id": "ee0f0b78680a415d8eb6a2162b82d0af",
+          "project_id": "shop",
+          "finished_at": "2026-11-17T10:00:00+00:00",
+          "run_seq": 1,
+          "file": "work/checks/results/ee0f0b78680a415d8eb6a2162b82d0af/payment.json",
+          "status": "failed"
+        },
+        "ns": 1,
+        "nf": "2026-11-17T12:00:00+00:00",
+        "lw": null,
+        "lnw": null
+      }
+    }
+  },
+  "final": {
+    "selected": {
+      "payment": {
+        "status": "passed",
+        "seq": 4
+      }
+    },
+    "corrupt": [
+      "payment"
+    ],
+    "gate_ok": false,
+    "notes": [
+      "\u0437\u0430\u043f\u0438\u0441\u044c \u0440\u0435\u0437\u0443\u043b\u044c\u0442\u0430\u0442\u0430 payment \u043f\u043e \u0438\u043d\u0434\u0435\u043a\u0441\u0443 \u0443\u0442\u0440\u0430\u0447\u0435\u043d\u0430 \u0438\u043b\u0438 \u043f\u043e\u0434\u043c\u0435\u043d\u0435\u043d\u0430 \u2014 \u0438\u0441\u0442\u043e\u0440\u0438\u044f \u043d\u0435\u0434\u043e\u043a\u0430\u0437\u0443\u0435\u043c\u0430"
+    ]
+  },
+  "stale": {
+    "passed": 1,
+    "reused": 0,
+    "failed": 0,
+    "timeout": 0,
+    "blocked": 0,
+    "not_run": 0,
+    "not_applicable": 0
+  },
+  "attempts": 5
+}

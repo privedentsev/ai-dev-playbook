@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "task_id": "PB-078",
+  "audit_id": "audit-04",
+  "at": "2026-11-17T12:25:11+03:00",
+  "actor": "cli:privedentsev1",
+  "files": {
+    "snapshot.txt": {
+      "source": "docs/tasks/PB-078.md",
+      "sha256": "sha256:e5528fa701ec2bb37fa98af9a86cfac3a12b23b7930819f044f89bd945050e7b"
+    },
+    "snapshot.meta.json": {
+      "source": "docs/tasks/PB-078.meta.json",
+      "sha256": "sha256:9461ef11c717ad98f37b434a97adde0c6fa637faf7a85b46408b36dee4196770"
+    }
+  }
+}

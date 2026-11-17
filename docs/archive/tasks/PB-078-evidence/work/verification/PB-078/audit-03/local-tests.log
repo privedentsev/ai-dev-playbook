@@ -1,0 +1,23 @@
+test_a01_overlapping_runs_keep_late_failure (test_checks_run.Audit009PB78RegressionTest.test_a01_overlapping_runs_keep_late_failure)
+A-01 аудита PB-078: перекрывающиеся прогоны с различными ... ok
+test_a02_loss_without_winner_change_keeps_max (test_checks_run.Audit009PB78RegressionTest.test_a02_loss_without_winner_change_keeps_max)
+A-02 аудита PB-078: утрата nf-источника без смены ... ok
+test_a02_lost_nf_component_keeps_obligation (test_checks_run.Audit009PB78RegressionTest.test_a02_lost_nf_component_keeps_obligation)
+A-02 аудита PB-078: максимум ``finished_at`` среди ... ok
+test_a06_clock_rollback_end_to_end (test_checks_run.Audit009PB78RegressionTest.test_a06_clock_rollback_end_to_end)
+A-06: реальные subprocess-команды со счётчиком, управляемые ... ok
+test_a06_equal_seq_concurrent_is_conservative (test_checks_run.Audit009PB78RegressionTest.test_a06_equal_seq_concurrent_is_conservative)
+A-06: равный run_seq >= 0 — параллельные прогоны с общим ... ok
+test_a06_index_rebuild_and_loss_follow_seq (test_checks_run.Audit009PB78RegressionTest.test_a06_index_rebuild_and_loss_follow_seq)
+A-06: индекс, пересборка и свидетельство утраты используют ... ok
+test_a06_later_seq_beats_rolled_back_clock (test_checks_run.Audit009PB78RegressionTest.test_a06_later_seq_beats_rolled_back_clock)
+A-06: passed seq0 с поздним finished_at против failed seq1 ... ok
+test_a06_legacy_clock_order_preserved (test_checks_run.Audit009PB78RegressionTest.test_a06_legacy_clock_order_preserved)
+A-06: legacy-пара без run_seq упорядочена finished_at — ... ok
+test_a06_legacy_failure_blocks_until_clock_agrees (test_checks_run.Audit009PB78RegressionTest.test_a06_legacy_failure_blocks_until_clock_agrees)
+A-01 аудита PB-078: legacy-запись без run_seq не ... ok
+
+----------------------------------------------------------------------
+Ran 9 tests in 1.481s
+
+OK

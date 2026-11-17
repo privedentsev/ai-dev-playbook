@@ -433,16 +433,18 @@ def _run_seq_of(record):
 
 
 def result_order_key(result):
-    """Устойчивый ключ порядка записей истории (A-02 PB-073).
+    """Устойчивый ключ порядка записей истории с ``run_seq >= 0``.
 
-    ``(finished_at, run_seq, result_id)``: при равном времени
-    выигрывает более позднее исходное исполнение; записи без
-    ``run_seq`` старше любой seq-записи при равном ``finished_at`` —
-    они созданы до введения последовательности. ``result_id`` —
-    детерминированный последний критерий.
+    ``(run_seq, finished_at, result_id)``: ``run_seq`` — порядковый
+    номер прогона, доказанный runner'ом по append-only истории
+    (``next_run_seq``); это порядок резервации/старта исполнений,
+    поэтому сам по себе он не доказывает порядок завершения
+    перекрывающихся прогонов (A-01 аудита PB-078). Внутри одного
+    ``run_seq`` и как детерминированный последний критерий
+    ``result_id``.
     """
-    return (result.get("finished_at") or "",
-            _run_seq_of(result),
+    return (_run_seq_of(result),
+            result.get("finished_at") or "",
             result.get("result_id") or "")
 
 
@@ -463,37 +465,120 @@ def next_run_seq(results, index_entries=None):
     return max(seqs, default=-1) + 1
 
 
-def _latest_better(candidate, current):
-    """Кандидат — более поздняя запись истории, чем current.
+def _legacy_order_key(record):
+    """Ключ порядка legacy-записей без ``run_seq`` (A-05 PB-074).
 
-    Основной критерий — ``(finished_at, run_seq)``. При равенстве
-    взаимный порядок записей недоказан (legacy-формат без
-    ``run_seq`` делит -1): консервативно важнее непокрывающий исход,
-    а не лексикографический ``result_id`` — иначе старый passed мог
-    скрыть поздний failed (A-05 PB-074).
+    ``finished_at`` — единственное доступное свидетельство; при
+    равной метке выбор недоказан и непокрывающий исход важнее
+    ``result_id``.
     """
-    candidate_key = result_order_key(candidate)
-    current_key = result_order_key(current)
-    if candidate_key[:2] != current_key[:2]:
-        return candidate_key[:2] > current_key[:2]
-    if (candidate.get("status") == "passed") != \
-            (current.get("status") == "passed"):
-        return candidate.get("status") != "passed"
-    return candidate_key > current_key
+    return (record.get("finished_at") or "",
+            0 if record.get("status") == "passed" else 1,
+            record.get("result_id") or "")
+
+
+def _new_order_state():
+    """Пустое состояние порядка одного check_id.
+
+    Компоненты — лучшие записи каждого класса: ``pw``/``nw`` —
+    seq-записи (``run_seq >= 0``) с покрывающим/непокрывающим исходом
+    по ключу ``result_order_key``; ``ns``/``nf`` — максимумы
+    ``run_seq``/``finished_at`` среди seq-записей с непокрывающим
+    исходом (независимые оси доминации); ``lw``/``lnw`` — лучшие
+    legacy-записи без ``run_seq`` по ``_legacy_order_key``.
+    """
+    return {"has_seq": False, "pw": None, "nw": None, "ns": -1,
+            "nf": "", "lw": None, "lnw": None}
+
+
+def _merge_order_state(state, record):
+    """Добавить запись результата в состояние порядка её check_id."""
+    seq = _run_seq_of(record)
+    passed = record.get("status") == "passed"
+    if seq >= 0:
+        state["has_seq"] = True
+        if passed:
+            if state["pw"] is None or result_order_key(record) > \
+                    result_order_key(state["pw"]):
+                state["pw"] = record
+        else:
+            if state["nw"] is None or result_order_key(record) > \
+                    result_order_key(state["nw"]):
+                state["nw"] = record
+            state["ns"] = max(state["ns"], seq)
+            state["nf"] = max(state["nf"],
+                               record.get("finished_at") or "")
+    else:
+        if state["lw"] is None or _legacy_order_key(record) > \
+                _legacy_order_key(state["lw"]):
+            state["lw"] = record
+        if not passed and (state["lnw"] is None or
+                           _legacy_order_key(record) >
+                           _legacy_order_key(state["lnw"])):
+            state["lnw"] = record
+
+
+def _choose_order_state(state):
+    """Доказанно позднейший результат check_id по его состоянию.
+
+    ``run_seq`` — порядок резервации исполнений, ``finished_at`` —
+    заявленная метка завершения; ни одно не доказывает порядок
+    завершения перекрывающихся прогонов или при откате wall clock
+    по отдельности (A-01 аудита PB-078). Поэтому seq-запись
+    ``passed`` считается покрытием только когда свидетельства не
+    противоречат: её ``run_seq`` строго больше ``run_seq`` любой
+    непокрывающей seq-записи **и** её ``finished_at`` не раньше
+    метки любой непокрывающей записи (seq и legacy). Метка
+    непокрывающего исхода позже метки passed — доказанное
+    противоречие: порядок недоказан, консервативно выбирается
+    непокрывающий исход; равные метки не противоречат, решает
+    ``run_seq``. При отсутствии непокрывающих — seq-победитель по
+    ``result_order_key``. Без seq-записей вообще действует
+    legacy-порядок ``_legacy_order_key``.
+    """
+    if not state["has_seq"]:
+        return state["lw"]
+    pw = state["pw"]
+    if pw is not None:
+        pw_seq, pw_fin = result_order_key(pw)[:2]
+        lnw = state["lnw"]
+        if pw_seq > state["ns"] and pw_fin >= state["nf"] and \
+                (lnw is None or pw_fin >=
+                 (lnw.get("finished_at") or "")):
+            return pw
+    candidates = [v for v in (state["nw"], state["lnw"])
+                  if v is not None]
+    if candidates:
+        return max(candidates, key=result_order_key)
+    return pw
+
+
+def result_states(results):
+    """Состояние порядка по check_id для списка записей истории."""
+    states = {}
+    for result in results:
+        state = states.setdefault(result["check_id"],
+                                  _new_order_state())
+        _merge_order_state(state, result)
+    return states
 
 
 def _latest_results(results):
-    """Последний результат на check_id; поздний failed важнее.
+    """Последний результат на check_id; порядок — ``_choose_order_state``.
 
-    При равном ``(finished_at, run_seq)`` выбор недоказуем —
-    консервативно берётся непокрывающий исход (``_latest_better``).
+    Множество записей check_id сводится к состоянию порядка, а не к
+    парному сравнению: доминация ``passed`` требует ``run_seq``
+    строго позже всех непокрывающих seq-записей и ``finished_at``
+    не противоречащего их меткам, поэтому параллельные и
+    перекрывающиеся прогоны с различными ``run_seq`` не дают
+    старому успеху скрыть поздний неуспех (A-06/A-01 аудита
+    PB-078).
     """
     latest = {}
-    for result in results:
-        key = result["check_id"]
-        prev = latest.get(key)
-        if prev is None or _latest_better(result, prev):
-            latest[key] = result
+    for check_id, state in result_states(results).items():
+        winner = _choose_order_state(state)
+        if winner is not None:
+            latest[check_id] = winner
     return latest
 
 

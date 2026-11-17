@@ -9,11 +9,22 @@
 (design §6). Повреждённая запись отклоняется валидатором, а не
 угадывается — ложного reuse нет.
 
-Последний результат на check_id по устойчивому порядку
-``(finished_at, run_seq, result_id)`` решает: более поздний
-failed/timeout/blocked/not_run не скрывается старым passed, а при
-равном ``finished_at`` — более позднее исходное исполнение (R-11,
-A-02 PB-073). Записи разных проектов не смешиваются: результат хранит
+Последний результат на check_id выбирается состоянием порядка
+``checks_select``: seq-запись ``passed`` — покрытие только когда
+её ``run_seq`` строго позже ``run_seq`` любой непокрывающей
+seq-записи **и** её ``finished_at`` не противоречит (не раньше)
+меткам всех непокрывающих исходов; ``run_seq`` — порядок
+резервации исполнений и сам по себе не доказывает порядок
+завершения перекрывающихся прогонов (A-01 аудита PB-078), а
+``finished_at`` не доказывает его при откате wall clock
+(A-06 PB-078) — метка непокрывающего исхода позже метки passed
+есть доказанное противоречие, консервативно важнее
+непокрывающий исход; равные метки не противоречат, решает
+``run_seq``. При равном ``run_seq`` порядок недоказан —
+непокрывающий исход важнее метки; legacy-записи без ``run_seq``
+упорядочены ``finished_at`` как единственным свидетельством
+(A-02 PB-073, A-05 PB-074).
+Записи разных проектов не смешиваются: результат хранит
 ``project_id`` и потребитель сверяет его с политикой.
 """
 import json
@@ -72,6 +83,181 @@ def index_entries(root):
     return entries if isinstance(entries, dict) else {}
 
 
+ORDER_STATE_VERSION = 1
+
+
+def _record_mini(record, check_id):
+    """Минимальная запись порядка для производного индекса.
+
+    Содержит поля, достаточные для состояния порядка и фильтра
+    проекта; полной записи результата в индексе нет — источник
+    истины остаётся append-only файлами.
+    """
+    evidence = record.get("evidence")
+    evidence = evidence if isinstance(evidence, dict) else {}
+    run_id = record.get("run_id") or evidence.get("run_id") or ""
+    seq = evidence.get("run_seq") if "run_seq" in evidence \
+        else record.get("run_seq")
+    rel = record.get("file") or (
+        f"{checks_select.STATE_DIR}/{checks_select.RESULTS_DIR}/"
+        f"{run_id}/{check_id}.json" if run_id else "")
+    return {"result_id": record.get("result_id") or "",
+            "run_id": run_id,
+            "project_id": record.get("project_id"),
+            "finished_at": record.get("finished_at") or "",
+            "run_seq": seq if type(seq) is int else None,
+            "file": rel, "status": record.get("status")}
+
+
+def _state_from_entry(entry, check_id):
+    """Состояние порядка из записи индекса.
+
+    Записи с ``order.v == 1`` несут компоненты состояния; старые
+    записи (только победитель) дают состояние из одной записи —
+    консервативно достаточное до пересборки.
+    """
+    state = checks_select._new_order_state()
+    order = entry.get("order")
+    if isinstance(order, dict) and \
+            order.get("v") == ORDER_STATE_VERSION:
+        state["has_seq"] = bool(order.get("has_seq"))
+        for key in ("pw", "nw", "lw", "lnw"):
+            mini = order.get(key)
+            state[key] = dict(mini) if isinstance(mini, dict) \
+                else None
+        ns = order.get("ns")
+        state["ns"] = ns if type(ns) is int else -1
+        nf = order.get("nf")
+        state["nf"] = nf if isinstance(nf, str) else ""
+        return state
+    pseudo = {key: entry.get(key) for key in
+              ("result_id", "run_id", "project_id", "finished_at",
+               "run_seq", "file", "status")}
+    pseudo["check_id"] = check_id
+    checks_select._merge_order_state(state, pseudo)
+    return state
+
+
+def _entry_from_state(state, check_id):
+    """Запись индекса: победитель + состояние порядка для merge."""
+    winner = checks_select._choose_order_state(state)
+    if winner is None:
+        return None
+
+    def mini(record):
+        return _record_mini(record, check_id) \
+            if record is not None else None
+
+    top = mini(winner)
+    top["order"] = {"v": ORDER_STATE_VERSION,
+                    "has_seq": state["has_seq"],
+                    "pw": mini(state["pw"]),
+                    "nw": mini(state["nw"]),
+                    "ns": state["ns"], "nf": state["nf"],
+                    "lw": mini(state["lw"]),
+                    "lnw": mini(state["lnw"])}
+    return top
+
+
+def _accounted_evidence(results):
+    """Свидетельства порядка, воспроизводимые файлами check_id.
+
+    ``{check_id: {"ids", "has_seq", "ns", "nf"}}``: result_id всех
+    записей и максимумы ``run_seq``/``finished_at`` среди seq-записей
+    с непокрывающим исходом — те же величины, что состояние порядка
+    хранит скалярами (A-02 аудита PB-078).
+    """
+    info = {}
+    for record in results:
+        slot = info.setdefault(record["check_id"],
+                               {"ids": set(), "has_seq": False,
+                                "ns": -1, "nf": ""})
+        slot["ids"].add(record.get("result_id") or "")
+        seq = checks_select._run_seq_of(record)
+        if seq >= 0:
+            slot["has_seq"] = True
+            if record.get("status") != "passed":
+                slot["ns"] = max(slot["ns"], seq)
+                slot["nf"] = max(slot["nf"],
+                                 record.get("finished_at") or "")
+    return info
+
+
+def _claim_unaccounted(check_id, entry, accounted):
+    """Индекс заявляет свидетельство, утраченное на диске.
+
+    ``True``, если состояние порядка, восстановленное из записи
+    индекса (компоненты ``order.v=1`` и скалярные максимумы
+    ``ns``/``nf`` непобедивших записей), не воспроизводимо
+    сохранившимися файлами check_id: компонентной записи нет на
+    диске либо скалярный максимум превышает файловый — источник
+    ``nf`` мог не быть компонентом состояния (A-02 аудита
+    PB-078). Индекс — производный и не бывает «новее» файлов,
+    поэтому любое невоспроизводимое заявление есть утрата или
+    подмена записи; проверка не зависит от совпадения
+    победителей: иначе rebuild молча снимал бы блокирующий
+    максимум ``nf``, не менявший исход, и поздний passed с
+    противоречащей меткой получил бы покрытие. Устаревший, но не
+    ложный индекс (заявленное воспроизводимо файлами) corrupt
+    не создаёт — пересборка его исправляет.
+
+    Заявленный победитель — покрывающий ``passed``, чья запись
+    есть на диске, доказывает порядок над всем заявленным
+    непокрывающим свидетельством (``_choose_order_state``
+    возвращает его только при доминации по ``run_seq`` и
+    ``finished_at``): утраченные максимумы им уже перекрыты и не
+    могут изменить исход — флаг не нужен, иначе сохранённое
+    свидетельство утраты было бы неисцелимым. При этом само
+    состояние индекса максимум сохраняет: поздний passed с
+    меткой раньше утраченного ``nf`` по-прежнему не получает
+    покрытия, а следующий passed с меткой не раньше ``nf``
+    восстанавливает его.
+    """
+    claimed_state = _state_from_entry(entry, check_id)
+    acc = accounted.get(check_id) or {"ids": set(), "has_seq": False,
+                                      "ns": -1, "nf": ""}
+    unaccounted = claimed_state["has_seq"] and not acc["has_seq"]
+    for key in ("pw", "nw", "lw", "lnw"):
+        mini = claimed_state[key]
+        if mini is not None and \
+                (mini.get("result_id") or "") not in acc["ids"]:
+            unaccounted = True
+    unaccounted = unaccounted or claimed_state["ns"] > acc["ns"] or \
+        claimed_state["nf"] > acc["nf"]
+    if not unaccounted:
+        return False
+    winner = checks_select._choose_order_state(claimed_state)
+    return not (winner is not None
+                and winner.get("status") == "passed"
+                and (winner.get("result_id") or "") in acc["ids"])
+
+
+def _merge_claimed_blocking(state, claimed):
+    """Поднять блокирующие свидетельства файла заявленными.
+
+    Состояние прежней записи индекса может нести доказательства
+    утраченных записей — скалярные максимумы ``ns``/``nf``,
+    компоненты ``nw``/``lnw`` и ``has_seq``, — которые файловое
+    состояние не воспроизводит. При пересборке они поднимают
+    файловое состояние: для честного (устаревшего) индекса
+    заявленное ⊆ файлового и merge — no-op; для перекрытых
+    покрывающим passed утраченных максимумов — сохранение
+    блокирующего свидетельства (A-03 аудита PB-078). Покрывающие
+    компоненты ``pw``/``lw`` не переносятся: лучший passed на
+    диске уже известен файлам, а утрата passed ложной готовности
+    не создаёт.
+    """
+    state["has_seq"] = state["has_seq"] or claimed["has_seq"]
+    state["ns"] = max(state["ns"], claimed["ns"])
+    state["nf"] = max(state["nf"], claimed["nf"])
+    for key in ("nw", "lnw"):
+        current, old = state[key], claimed[key]
+        if old is not None and (current is None or
+                checks_select.result_order_key(old) >
+                checks_select.result_order_key(current)):
+            state[key] = old
+
+
 def store_result(root, run_id, result):
     """Записать проверенный результат append-only; вернуть путь файла.
 
@@ -92,9 +278,10 @@ def update_index(root, run_id, result):
     """Обновить производный индекс последними записями прогона.
 
     Индекс читается целиком; повреждённый игнорируется (пересборка).
-    Победитель — запись с максимальным ключом порядка
-    ``(finished_at, run_seq, result_id)`` среди индекса и новой
-    записи (A-02 PB-073).
+    Запись check_id — состояние порядка ``checks_select``: новая
+    запись сливается с сохранёнными компонентами, победитель
+    вычисляется тем же правилом, что у selector (A-06/A-01 аудита
+    PB-078).
     """
     index_path = Path(root) / checks_select.STATE_DIR / INDEX_FILENAME
     index = {"schema_version": 1, "kind": INDEX_KIND,
@@ -108,20 +295,14 @@ def update_index(root, run_id, result):
                 index["entries"] = previous["entries"]
         except (ValueError, OSError):
             pass
-    rel = str((results_dir(root) / run_id /
-               (result["check_id"] + ".json")).relative_to(root))
-    current = index["entries"].get(result["check_id"])
-    # A-03 PB-074 (аудит-02): то же консервативное сравнение, что у
-    # selector — при равном (finished_at, run_seq) непокрывающий исход
-    # важнее result_id, иначе индекс хранил бы passed поверх failed.
-    if current is None or checks_select._latest_better(result, current):
-        seq = (result.get("evidence") or {}).get("run_seq") \
-            if isinstance(result.get("evidence"), dict) else None
-        index["entries"][result["check_id"]] = {
-            "result_id": result["result_id"], "run_id": run_id,
-            "finished_at": result["finished_at"],
-            "run_seq": seq if type(seq) is int else None,
-            "file": rel, "status": result["status"]}
+    check_id = result["check_id"]
+    current = index["entries"].get(check_id)
+    state = _state_from_entry(current, check_id) \
+        if isinstance(current, dict) else checks_select._new_order_state()
+    checks_select._merge_order_state(state, result)
+    entry = _entry_from_state(state, check_id)
+    if entry is not None:
+        index["entries"][check_id] = entry
     _atomic_write(index_path, index)
 
 
@@ -170,26 +351,18 @@ def load_results(root, *, validate=None):
             entries = None
             notes.append(f"индекс результатов нечитаем: {error}")
         if isinstance(entries, dict):
-            actual_latest = latest(found)
+            accounted = _accounted_evidence(found)
             for check_id, entry in entries.items():
                 if not isinstance(entry, dict):
                     continue
-                actual = actual_latest.get(check_id)
-                # Индекс знает о более позднем результате, которого нет
-                # на диске — запись утрачена/подменена, старый passed
-                # не разрешает reuse. «Более поздний» — по тому же
-                # устойчивому ключу порядка, что у selector (A-02).
-                claim = {"finished_at": entry.get("finished_at") or "",
-                         "result_id": entry.get("result_id") or "",
-                         "run_seq": entry.get("run_seq"),
-                         "status": entry.get("status")}
-                # A-03 PB-074 (аудит-02): «позднее» — по тому же
-                # консервативному ключу, что у selector: при равном
-                # (finished_at, run_seq) непокрывающий исход важнее
-                # result_id, поэтому утраченный legacy-failed
-                # обнаруживается при любом UUID-порядке.
-                if actual is None or checks_select._latest_better(
-                        claim, actual):
+                # Индекс заявляет свидетельство, которого нет на
+                # диске — запись утрачена/подменена, старый passed
+                # не разрешает reuse. Заявленное состояние порядка
+                # сверяется с файловым по всем компонентам и
+                # скалярным максимумам: невоспроизводимое
+                # заявление — утрата (A-02, A-06 PB-078, A-01/A-02
+                # аудита PB-078).
+                if _claim_unaccounted(check_id, entry, accounted):
                     corrupt.add(check_id)
                     notes.append(
                         f"запись результата {check_id} по индексу "
@@ -199,7 +372,7 @@ def load_results(root, *, validate=None):
 
 
 def latest(results):
-    """Последний результат на check_id по времени завершения."""
+    """Последний результат на check_id по выбору ``checks_select``."""
     return checks_select._latest_results(results)
 
 
@@ -220,33 +393,40 @@ def rebuild_index(root, policy=None):
         except (ValueError, OSError):
             previous = {}
     results, notes, _corrupt = load_results(root)
+    states = {}
+    for result in results:
+        state = states.setdefault(result["check_id"],
+                                  checks_select._new_order_state())
+        checks_select._merge_order_state(state, result)
+    accounted = _accounted_evidence(results)
     entries = {}
-    for check_id, result in latest(results).items():
-        if policy is not None and \
-                result["project_id"] != policy["project_id"]:
+    for check_id, state in states.items():
+        previous_entry = previous.get(check_id)
+        if isinstance(previous_entry, dict):
+            _merge_claimed_blocking(
+                state, _state_from_entry(previous_entry, check_id))
+        winner = checks_select._choose_order_state(state)
+        if winner is None:
             continue
-        seq = (result.get("evidence") or {}).get("run_seq") \
-            if isinstance(result.get("evidence"), dict) else None
-        entries[check_id] = {
-            "result_id": result["result_id"],
-            "run_id": result.get("evidence", {}).get("run_id", ""),
-            "finished_at": result["finished_at"],
-            "run_seq": seq if type(seq) is int else None,
-            "status": result["status"]}
+        if policy is not None and \
+                winner.get("project_id") != policy["project_id"]:
+            continue
+        entry = _entry_from_state(state, check_id)
+        if entry is not None:
+            entries[check_id] = entry
     # A-07: свидетельство утраты переживает пересборку — если прежний
-    # индекс знал о более позднем результате check_id, чем осталось на
-    # диске, его запись сохраняется: история остаётся недоказанной до
-    # нового фактического результата, старый passed не разрешает reuse.
-    # «Более поздний» — консервативный ключ selector (finished_at,
-    # run_seq, затем непокрывающий исход при неоднозначности), как у
-    # A-02/A-03 PB-074: иначе старый passed-индекс воскрешал бы
-    # скрытый failed при равном времени.
+    # индекс заявляет состояние порядка check_id, которое не
+    # воспроизводимо записями (компонент или скалярный максимум
+    # ``ns``/``nf`` без источника на диске), его запись сохраняется:
+    # история остаётся недоказанной до нового фактического результата,
+    # старый passed не разрешает reuse (A-02/A-03 PB-074, A-06 PB-078,
+    # A-01/A-02 аудита PB-078). Перекрытые покрывающим passed
+    # максимумы corrupt не создают, но переносятся в состояние
+    # выше — rebuild их не теряет (A-03 аудита PB-078).
     for check_id, entry in previous.items():
         if not isinstance(entry, dict):
             continue
-        recorded = entries.get(check_id)
-        if recorded is None or checks_select._latest_better(
-                entry, recorded):
+        if _claim_unaccounted(check_id, entry, accounted):
             entries[check_id] = entry
             notes.append(f"индекс: запись {check_id} от "
                          f"{entry.get('finished_at')} утрачена — "
