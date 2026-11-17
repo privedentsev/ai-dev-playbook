@@ -209,10 +209,15 @@ class ProtectedTtlTest(unittest.TestCase):
         self.proj, self.home = init_home(self, self.policy)
 
     def evaluate(self, **kw):
-        return checks_gate.evaluate(
+        result = checks_gate.evaluate(
             self.proj.root, self.policy, task_id="DEV-1",
             task_content="", task_meta={}, verifier_home=self.home,
             **kw)
+        reference = checks_verifier.gate(
+            self.proj.root, self.home, now=kw.get("now"), emit=lambda s: None)
+        self.assertEqual(reference["covered"], len(result["covered"]))
+        self.assertEqual(reference["uncovered"], result["uncovered"])
+        return result
 
     def test_run_receipt_ttl_expiry_rejected(self):
         """Просроченная по TTL run-квитанция не закрывает обязательство"""
@@ -295,10 +300,15 @@ class ProtectedLatestOutcomeTest(unittest.TestCase):
         self.proj, self.home = init_home(self, self.policy)
 
     def evaluate(self, **kw):
-        return checks_gate.evaluate(
+        result = checks_gate.evaluate(
             self.proj.root, self.policy, task_id="DEV-1",
             task_content="", task_meta={}, verifier_home=self.home,
             **kw)
+        reference = checks_verifier.gate(
+            self.proj.root, self.home, now=kw.get("now"), emit=lambda s: None)
+        self.assertEqual(reference["covered"], len(result["covered"]))
+        self.assertEqual(reference["uncovered"], result["uncovered"])
+        return result
 
     def test_later_failed_blocks_earlier_passed(self):
         """Поздний failed блокирует ранний passed в защищённой истории"""

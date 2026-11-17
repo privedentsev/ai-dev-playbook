@@ -1,0 +1,10 @@
+{
+  "verdict": "accepted",
+  "acceptance": "registered",
+  "checks_tests": 365,
+  "check_ready": "passed",
+  "preflight": "passed",
+  "close_dry_run": "passed",
+  "real_close": false,
+  "AUDIT-009": "requires independent repeat audit"
+}

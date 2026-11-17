@@ -1,0 +1,202 @@
+План lc-f2da5b6fa6b8d9a1 (lifecycle):
+Основание: playbook.py close PB-079
+Исполнитель: cli:privedentsev1 (cli)
+Действия:
+  close_task PB-079: docs/tasks/PB-079.md → docs/archive/tasks/PB-079.md (done)
+Переносы:
+  docs/tasks/PB-079-evidence → docs/archive/tasks/PB-079-evidence
+  docs/tasks/PB-079-evidence/after.json → docs/archive/tasks/PB-079-evidence/after.json
+  docs/tasks/PB-079-evidence/before.json → docs/archive/tasks/PB-079-evidence/before.json
+  docs/tasks/PB-079-evidence/checks-initial.log → docs/archive/tasks/PB-079-evidence/checks-initial.log
+  docs/tasks/PB-079-evidence/focused.log → docs/archive/tasks/PB-079-evidence/focused.log
+  docs/tasks/PB-079-evidence/preservation.json → docs/archive/tasks/PB-079-evidence/preservation.json
+  docs/tasks/PB-079-evidence/report.md → docs/archive/tasks/PB-079-evidence/report.md
+  docs/tasks/PB-079-evidence/trust.log → docs/archive/tasks/PB-079-evidence/trust.log
+  docs/tasks/PB-079.md → docs/archive/tasks/PB-079.md
+  docs/tasks/PB-079.meta.json → docs/archive/tasks/PB-079.meta.json
+  work/verification/PB-079/audit-01 → docs/archive/tasks/PB-079-evidence/work/verification/PB-079/audit-01
+  work/verification/PB-079/audit-01/accept.log → docs/archive/tasks/PB-079-evidence/work/verification/PB-079/audit-01/accept.log
+  work/verification/PB-079/audit-01/candidate.json → docs/archive/tasks/PB-079-evidence/work/verification/PB-079/audit-01/candidate.json
+  work/verification/PB-079/audit-01/check-ready.log → docs/archive/tasks/PB-079-evidence/work/verification/PB-079/audit-01/check-ready.log
+  work/verification/PB-079/audit-01/checks-initial.log → docs/archive/tasks/PB-079-evidence/work/verification/PB-079/audit-01/checks-initial.log
+  work/verification/PB-079/audit-01/checks.log → docs/archive/tasks/PB-079-evidence/work/verification/PB-079/audit-01/checks.log
+  work/verification/PB-079/audit-01/close-dry-run.log → docs/archive/tasks/PB-079-evidence/work/verification/PB-079/audit-01/close-dry-run.log
+  work/verification/PB-079/audit-01/index.log → docs/archive/tasks/PB-079-evidence/work/verification/PB-079/audit-01/index.log
+  work/verification/PB-079/audit-01/overlap.json → docs/archive/tasks/PB-079-evidence/work/verification/PB-079/audit-01/overlap.json
+  work/verification/PB-079/audit-01/preflight.log → docs/archive/tasks/PB-079-evidence/work/verification/PB-079/audit-01/preflight.log
+  work/verification/PB-079/audit-01/preservation.json → docs/archive/tasks/PB-079-evidence/work/verification/PB-079/audit-01/preservation.json
+  work/verification/PB-079/audit-01/probe_overlap.py → docs/archive/tasks/PB-079-evidence/work/verification/PB-079/audit-01/probe_overlap.py
+  work/verification/PB-079/audit-01/provenance.json → docs/archive/tasks/PB-079-evidence/work/verification/PB-079/audit-01/provenance.json
+  work/verification/PB-079/audit-01/provenance.sha256 → docs/archive/tasks/PB-079-evidence/work/verification/PB-079/audit-01/provenance.sha256
+  work/verification/PB-079/audit-01/report.md → docs/archive/tasks/PB-079-evidence/work/verification/PB-079/audit-01/report.md
+  work/verification/PB-079/audit-01/snapshot.meta.json → docs/archive/tasks/PB-079-evidence/work/verification/PB-079/audit-01/snapshot.meta.json
+  work/verification/PB-079/audit-01/snapshot.txt → docs/archive/tasks/PB-079-evidence/work/verification/PB-079/audit-01/snapshot.txt
+  work/verification/PB-079/caac4ffccd94445489fb46f6d49aee03 → docs/archive/tasks/PB-079-evidence/work/verification/PB-079/caac4ffccd94445489fb46f6d49aee03
+  work/verification/PB-079/caac4ffccd94445489fb46f6d49aee03/preflight-regressions.stderr.log → docs/archive/tasks/PB-079-evidence/work/verification/PB-079/caac4ffccd94445489fb46f6d49aee03/preflight-regressions.stderr.log
+  work/verification/PB-079/caac4ffccd94445489fb46f6d49aee03/preflight-regressions.stdout.log → docs/archive/tasks/PB-079-evidence/work/verification/PB-079/caac4ffccd94445489fb46f6d49aee03/preflight-regressions.stdout.log
+  work/verification/PB-079/caac4ffccd94445489fb46f6d49aee03/report.json → docs/archive/tasks/PB-079-evidence/work/verification/PB-079/caac4ffccd94445489fb46f6d49aee03/report.json
+  work/verification/PB-079/caac4ffccd94445489fb46f6d49aee03/self-check.stderr.log → docs/archive/tasks/PB-079-evidence/work/verification/PB-079/caac4ffccd94445489fb46f6d49aee03/self-check.stderr.log
+  work/verification/PB-079/caac4ffccd94445489fb46f6d49aee03/self-check.stdout.log → docs/archive/tasks/PB-079-evidence/work/verification/PB-079/caac4ffccd94445489fb46f6d49aee03/self-check.stdout.log
+  work/verification/PB-079/caac4ffccd94445489fb46f6d49aee03/unit-tests.stderr.log → docs/archive/tasks/PB-079-evidence/work/verification/PB-079/caac4ffccd94445489fb46f6d49aee03/unit-tests.stderr.log
+  work/verification/PB-079/caac4ffccd94445489fb46f6d49aee03/unit-tests.stdout.log → docs/archive/tasks/PB-079-evidence/work/verification/PB-079/caac4ffccd94445489fb46f6d49aee03/unit-tests.stdout.log
+Удаляются каталоги:
+  docs/tasks/PB-079-evidence
+  work/verification/PB-079/audit-01
+  work/verification/PB-079/caac4ffccd94445489fb46f6d49aee03
+Записей: 35, удалений файлов: 32
+Diff записей (.md):
+  docs/archive/tasks/PB-079-evidence/after.json: prepared stream sha256:9d12a6fbe6b16f91208839984c7466c47d2e3acde129b5aa3b14d0fae3823334
+  docs/archive/tasks/PB-079-evidence/before.json: prepared stream sha256:98f0b167b85af3d7126bb073fb17bd70efbc5de8b68236783dde0d8099a6d457
+  docs/archive/tasks/PB-079-evidence/checks-initial.log: prepared stream sha256:434bc46def420ff87ec337e38bb4edfc0159c02ada65bb0aeb4d333b03366256
+  docs/archive/tasks/PB-079-evidence/focused.log: prepared stream sha256:3d924aabd33c0cc4ce5131312f45d62b193a4d9bc8c1b0e8444bf4788ea5dda8
+  docs/archive/tasks/PB-079-evidence/preservation.json: prepared stream sha256:b2c7ac08c0110332604ae8866f256de95d19e19f9c342b1431033b27af8ef41d
+  docs/archive/tasks/PB-079-evidence/report.md: prepared stream sha256:ef5f9f05ada72ec392a765f7658b322d8d07b80b4933de28b70c46aa925960b3
+  docs/archive/tasks/PB-079-evidence/trust.log: prepared stream sha256:b9c5049c292b32302a852abaa2a16b062d527d4120bb3acdaec1f21e4139bd79
+  docs/archive/tasks/PB-079-evidence/work/verification/PB-079/audit-01/accept.log: prepared stream sha256:0a7acd867cfac474fcbe683c2225fc7c71d421c9c5eb6baf6e44bffc50b7e928
+  docs/archive/tasks/PB-079-evidence/work/verification/PB-079/audit-01/candidate.json: prepared stream sha256:b07476e9d38aaf8ea346a5ee54a45d3eb408bd006e118eeff2c1cd15e97e366b
+  docs/archive/tasks/PB-079-evidence/work/verification/PB-079/audit-01/check-ready.log: prepared stream sha256:57bb2ae11be02da1deebc972848280d32f0f51d573ee3e1fb6c9b1b122b20217
+  docs/archive/tasks/PB-079-evidence/work/verification/PB-079/audit-01/checks-initial.log: prepared stream sha256:d404f1fddd694dc2995de848d53c2c4fce9efb4f997fe5be1f9e0f27b13d3aa4
+  docs/archive/tasks/PB-079-evidence/work/verification/PB-079/audit-01/checks.log: prepared stream sha256:074d6297001dacc6802c4db5d14e114250667911a43afcbf692da6ee46909f7a
+  docs/archive/tasks/PB-079-evidence/work/verification/PB-079/audit-01/close-dry-run.log: prepared stream sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+  docs/archive/tasks/PB-079-evidence/work/verification/PB-079/audit-01/index.log: prepared stream sha256:019159b0d4c5da578d50ebd39364e3e33f3cfd2b14311378b75b1719fddadbed
+  docs/archive/tasks/PB-079-evidence/work/verification/PB-079/audit-01/overlap.json: prepared stream sha256:7aacd521eb48621cbddab45b7bbe470340167e794826644419d6801e6513eaa4
+  docs/archive/tasks/PB-079-evidence/work/verification/PB-079/audit-01/preflight.log: prepared stream sha256:02f200e4c2c41474d02599e16ac243e44193c6ac3bf0e17b74620091c2a4d9b8
+  docs/archive/tasks/PB-079-evidence/work/verification/PB-079/audit-01/preservation.json: prepared stream sha256:531d059c3bd4e6f45f677a007b305711038d3c07cf519de4ea4d650671449d89
+  docs/archive/tasks/PB-079-evidence/work/verification/PB-079/audit-01/probe_overlap.py: prepared stream sha256:df59eab2f8b356bf455a7884ea9bbc236cbc79bd184d879920d3a3af8d4b9e5f
+  docs/archive/tasks/PB-079-evidence/work/verification/PB-079/audit-01/provenance.json: prepared stream sha256:e99a22d9c445509e4eb8dda8e37267480be77b58fe1d95a856cf2b9928de0f15
+  docs/archive/tasks/PB-079-evidence/work/verification/PB-079/audit-01/provenance.sha256: prepared stream sha256:7d9b55329cb85f1edef9d96629b4a4933f2c97780137259e37cbe65a1a9b8125
+  docs/archive/tasks/PB-079-evidence/work/verification/PB-079/audit-01/report.md: prepared stream sha256:9254f6916e1780d9fb4cfd86de163d8f30c0361d3ae6d6de9dcb5a7c871f4a7c
+  docs/archive/tasks/PB-079-evidence/work/verification/PB-079/audit-01/snapshot.meta.json: prepared stream sha256:20051c78b93d3707462253bcb1631b2ccb72bcaf09b09013264a49790abacade
+  docs/archive/tasks/PB-079-evidence/work/verification/PB-079/audit-01/snapshot.txt: prepared stream sha256:8fca01222eafb811e5ad0e5e5fc45856ce3d94e68fb70c36c401be2832e7e850
+  docs/archive/tasks/PB-079-evidence/work/verification/PB-079/caac4ffccd94445489fb46f6d49aee03/preflight-regressions.stderr.log: prepared stream sha256:ea966c325b44696e720387db0f112ca93a0183fe8c5cf9fedf699d9b45b1c9f3
+  docs/archive/tasks/PB-079-evidence/work/verification/PB-079/caac4ffccd94445489fb46f6d49aee03/preflight-regressions.stdout.log: prepared stream sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+  docs/archive/tasks/PB-079-evidence/work/verification/PB-079/caac4ffccd94445489fb46f6d49aee03/report.json: prepared stream sha256:d3d13fbe114a7aea080d874d9678b8e8bf79c62e3e2512ca87c82bab3026b108
+  docs/archive/tasks/PB-079-evidence/work/verification/PB-079/caac4ffccd94445489fb46f6d49aee03/self-check.stderr.log: prepared stream sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+  docs/archive/tasks/PB-079-evidence/work/verification/PB-079/caac4ffccd94445489fb46f6d49aee03/self-check.stdout.log: prepared stream sha256:57bb2ae11be02da1deebc972848280d32f0f51d573ee3e1fb6c9b1b122b20217
+  docs/archive/tasks/PB-079-evidence/work/verification/PB-079/caac4ffccd94445489fb46f6d49aee03/unit-tests.stderr.log: prepared stream sha256:7d483d2bf7918ec8ca688ecbc5f84cee4e212bdb38f7cf2f2f595dab4f6de854
+  docs/archive/tasks/PB-079-evidence/work/verification/PB-079/caac4ffccd94445489fb46f6d49aee03/unit-tests.stdout.log: prepared stream sha256:cdad4eb04b9cec77afde372bbee5fd129760d353eba617c1f20615917fd2f740
+--- /dev/null
++++ b/docs/archive/tasks/PB-079.md
+@@ -0,0 +1,86 @@
++# PB-079: Согласовать verifier gate с актуальной доверенной историей проверок
++
++ID: PB-079
++Status: done
++Priority: P1
++Depends-On: -
++Executor: Codex
++Model: GPT-6.1 Sol (Low)
++Created: 2026-11-17T14:28:03+03:00
++Closed: 2026-11-17T15:42:08+03:00
++
++<!-- playbook-meta:external -->
++
++## Задача
++
++### Цель и границы
++
++Устранить A-07 AUDIT-009: эталонный `verifier gate` не должен подтверждать покрытие старым passed после более позднего неуспеха того же кандидата. Согласовать consumer с общей моделью актуального покрытия и доверенной историей. Не переоткрывать архив PB-057–064/PB-073/PB-074/PB-078; код в сессии аудита не менять.
++
++### Контекст
++
++[AUDIT-009](../../tasks/AUDIT-009.md), [протокол audit-04](../../tasks/AUDIT-009-evidence/audit-04/report.md), [реальная проба](../../tasks/AUDIT-009-evidence/audit-04/probe_verifier_gate.py), [подписанные квитанции и CLI-результат](../../tasks/AUDIT-009-evidence/audit-04/verifier-gate.json). Требования [R-11/R-16, AC-05/AC-08/AC-09](../../specs/dependency-aware-verification.md), [verification](../../../ai-dev-playbook/rules/verification.md).
++
++Воспроизведение: `python3 docs/tasks/AUDIT-009-evidence/audit-04/probe_verifier_gate.py .`. Настоящие verifier subprocess-команды и валидные подписи, один candidate/policy, последовательные passed→failed; записи истории и квитанции не меняются. Task/project checks_gate оставляют probe uncovered; checks_verifier.gate даёт ok=true/covered=1, реальный CLI verifier gate — rc=0. Причина: checks_verifier.py gate() объединяет любые passed из проектных копий вместо выбора актуального доверенного исхода. Стенд capability=local, protected_confirmed=false; реальный OS/CI обход не заявляется.
++
++### Критерии приёмки
++
++- [x] AC-01: Последовательные passed→failed/timeout/blocked одного candidate/policy дают uncovered и ненулевой CLI exit у verifier gate; старый passed не покрывает поздний неуспех. Поведение согласовано с checks_gate для тех же обязательств. Есть реальная subprocess/CLI-регрессия с валидными квитанциями без mock; новый фактический passed восстанавливает покрытие.
++- [x] AC-02: Покрытие исходит из актуальной доверенной истории; удаление/переименование проектных копий не воскрешает старый успех и не теряет актуальное доказательство. Проверены candidate/policy/task bindings, TTL/always_run, aggregate/replay/revocation, равные и откатившиеся часы, перекрытие прогонов и непригодная история; безопасные отказы не превращаются в успешное покрытие. Семантика manual и capability/local/protected явно сохранена.
++- [x] AC-03: Пройдены адресные checks_gate/trust/e2e и необходимые lifecycle/legacy-регрессии, штатные index/check/verify; документы, self-manifest и передача актуальны. Архивные материалы побайтно сохранены. Исправление передано независимому аудитору; AUDIT-009 не считается принятой автоматически.
++
++### План
++
++1. Прочитать audit-04 и воспроизвести A-07; сопоставить checks_verifier.gate и checks_gate._protected_receipts, границы их CLI-значений ok/protected_confirmed.
++2. Согласовать вычисление покрытия через общий контракт без копирования расходящейся логики; добавить реальные поведенческие регрессии и негативные сценарии.
++3. Обновить документацию/manifest, выполнить проверки и verify, записать EXEC/CHECK/HANDOFF; независимый аудит исправления, затем повтор AUDIT-009.
++
++### Ресурсы
++
++Python stdlib, временные проекты и trusted home вне репозитория; sandbox-exec вне внешней песочницы. Бюджеты проекта null; реальные затраты проверять до дорогого запуска. Полномочия реальной отдельной OS/CI identity не подтверждены. Зависимости от незавершённой AUDIT-009 нет. Commit/push/release — по отдельному поручению.
++
++## Журнал
++
++### EXEC-01 — Выполнение
++Время: 2026-11-17T14:40:30+03:00
++Исполнитель: Codex
++Модель: GPT-6.1 Sol (Low)
++Изменения: A-07 устранён общим расчётом актуального покрытия checks_coverage.protected_receipts для основного gate и verifier gate. Источник — доверенная история; пропавшие выданные квитанции и непригодный журнал дают отказ. Добавлен --task для явной текущей проекции; manual и различие ok/protected_confirmed сохранены. Добавлены реальные subprocess/CLI-регрессии и сравнение consumer в существующих TTL/ordering тестах. Исходные изменения инженера по AUDIT-009/планированию сохранены.
++Файлы: ai-dev-playbook/scripts/checks_coverage.py, checks_gate.py, checks_verifier.py, playbook.py; tests/test_checks_verifier_gate.py, test_checks_gate.py, test_checks_trust.py; ai-dev-playbook/rules/verification.md, manifest.json; docs/code-map.md, CHANGELOG.md; [материалы](PB-079-evidence/report.md).
++
++### CHECK-01 — Проверка
++Время: 2026-11-17T15:22:38+03:00
++Исполнитель: Codex
++Модель: GPT-6.1 Sol (Low)
++Результат: passed
++Критерии: AC-01, AC-02, AC-03
++Команда: `python3 -m unittest discover -s tests -p 'test_checks_verifier_gate.py' -v`; `python3 -m unittest discover -s tests -p 'test_checks_trust.py' -v`; `python3 ai-dev-playbook/scripts/playbook.py index`; `python3 ai-dev-playbook/scripts/playbook.py check --ready`; `python3 ai-dev-playbook/scripts/playbook.py verify PB-079`.
++Среда: macOS, Python 3.14.6; реальные subprocess/sandbox-exec и CLI вне внешней песочницы, временные проекты/trusted homes той же OS identity.
++Факт: 11 адресных регрессий и 44 trust-теста — OK. Финальный штатный verify caac4ffccd94445489fb46f6d49aee03: self-check, preflight-regressions, unit-tests passed, inputs_unchanged=true; полный suite — 1134 теста за 1990.012 с, OK. Исходный A-07 реально воспроизведён на HEAD API; исправленный CLI даёт exit 1 после позднего failed. Постоянные тесты подтверждают также timeout/blocked, восстановление новым passed, проектные копии, повреждённую доверенную историю, привязки task/candidate/policy, TTL/always_run, aggregate/rollback/равные часы и безопасные отказы. Полный suite включает e2e/trust, локальное перекрытие прогонов, lifecycle/legacy и успешный self-project-copy pilot. 3051 архивный файл совпадает с HEAD; diff архива пуст. Manifest актуализирован.
++Доказательства:
++- [Обзор, команды и границы доказательств](PB-079-evidence/report.md)
++- [Адресные регрессии](PB-079-evidence/focused.log), [trust](PB-079-evidence/trust.log)
++- [До исправления](PB-079-evidence/before.json), [после исправления](PB-079-evidence/after.json)
++- [Сохранность архива](PB-079-evidence/preservation.json)
++- [Финальный verify](PB-079-evidence/work/verification/PB-079/caac4ffccd94445489fb46f6d49aee03/report.json), [полный suite](PB-079-evidence/work/verification/PB-079/caac4ffccd94445489fb46f6d49aee03/unit-tests.stderr.log)
++Ограничения: Реальная отдельная OS/CI identity не проверена; local не выдаётся за protected. Несовместимый порядок завершения/выдачи verifier проверен реальными последовательными запусками с заданными метками; отдельный параллельный verifier-стенд не запускался. Это самопроверка исполнителя, не независимый аудит PB-079 или приёмка AUDIT-009; полный dependency-aware self-pilot PB-064 отдельно не повторялся.
++
++### HANDOFF-01 — Передача
++Время: 2026-11-17T15:22:38+03:00
++Исполнитель: Codex
++Модель: GPT-6.1 Sol (Low)
++Выполнение: EXEC-01
++Проверки: CHECK-01
++Состояние: in_review; реализация и самопроверка завершены, изменения не закоммичены. Следующий шаг — независимый аудит PB-079 отдельной сессией, после его приёмки повтор AUDIT-009; AUDIT-009 автоматически не принята. Исходные правки инженера и архив сохранены.
++Фокус аудита: Общий контракт checks_coverage для обоих consumer; поздние failed/timeout/blocked и восстановление; доверенная история вместо проектных копий; согласие exec_seq/finished_at и aggregate; потеря/порча источника и журнала; current task/candidate/policy, TTL/always_run; manual и различие ok/protected_confirmed. Проверить достаточность доказательств перекрытия и границы local/protected без заявления отдельной OS identity.
++
++### AUDIT-01 — Аудит
++Время: 2026-11-17T15:38:34+03:00
++Исполнитель: Codex
++Модель: GPT-6
++Передача: HANDOFF-01
++Результат: accepted
++Критерии: AC-01, AC-02, AC-03
++Независимо проверено: актуальность передачи и полного verify; 365 tests/checks (OK), настоящие CLI/subprocess, общий расчёт покрытия, поздние неуспехи/восстановление, bindings, TTL/aggregate/rollback, утрата/порча истории, replay/revocation, manual/local/protected. Дополнительная проба перекрытия с задержанной выдачей раннего passed: оба gate uncovered, CLI rc=1; новый passed восстанавливает покрытие. Архив: 3051 файл совпадает с HEAD. Замечаний нет.
++Доказательства: [Протокол и ограничения](PB-079-evidence/work/verification/PB-079/audit-01/report.md), [365 тестов](PB-079-evidence/work/verification/PB-079/audit-01/checks.log), [перекрытие](PB-079-evidence/work/verification/PB-079/audit-01/overlap.json), [сохранность](PB-079-evidence/work/verification/PB-079/audit-01/preservation.json).
++Ограничения: отдельная OS/CI identity и полный self-pilot не проверены; полный legacy verify принят по свежему отчёту исполнителя, не повторён целиком. Ошибки первого запуска матрицы из-за параллельной prepare-audit устранены повтором; код не менялся. AUDIT-009 требует отдельного повторного аудита. Реальное закрытие — по отдельному поручению.
+--- a/docs/tasks/AUDIT-009.md
++++ b/docs/tasks/AUDIT-009.md
+@@ -41,7 +41,7 @@
+ 
+ Независимая сессия либо инженер, Python, временные проекты, доступный изолированный стенд для проверки прав. Если стенд отсутствует, явно зафиксировать непроверенную границу; не принимать защищённую эксплуатацию по mock-тесту.
+ 
+-Материалы: `docs/tasks/AUDIT-009-evidence/`. [Независимый протокол audit-01](AUDIT-009-evidence/audit-01.md): changes_requested, A-01 (P1), A-02/A-03 (P2). [Исправления PB-073](../archive/tasks/PB-073.md) приняты и архивированы. [Повторный независимый протокол audit-02](AUDIT-009-evidence/audit-02/report.md): changes_requested, A-04 (P1), A-05 (P2). Исправления [PB-074](../archive/tasks/PB-074.md) приняты и архивированы; зависимости от незавершённой AUDIT-009 нет. Протокол связывает каждый AC спецификации с командой, фактическим результатом и ограничением. Отдельная OS/CI identity и protected deployment не подтверждены. Текущая карточка не имеет HANDOFF; отрицательный протокол сохраняется как собственный материал и failed CHECK, без фиктивной передачи или accepted. Статусы реализации не дублируются в плане. [Повторный протокол audit-03](AUDIT-009-evidence/audit-03/report.md): changes_requested, новая A-06 (P2) — откат часов скрывает поздний failed несмотря на больший run_seq; исправление [PB-078](../archive/tasks/PB-078.md). Прежние A-04/A-05 закрыты по новым воспроизведениям. [Повторный протокол audit-04](AUDIT-009-evidence/audit-04/report.md): A-06 устранена, новые пробы PB-078 пройдены; changes_requested из-за A-07 (P1) — verifier gate принимает старый passed после позднего failed. Исправление [PB-079](PB-079.md).
++Материалы: `docs/tasks/AUDIT-009-evidence/`. [Независимый протокол audit-01](AUDIT-009-evidence/audit-01.md): changes_requested, A-01 (P1), A-02/A-03 (P2). [Исправления PB-073](../archive/tasks/PB-073.md) приняты и архивированы. [Повторный независимый протокол audit-02](AUDIT-009-evidence/audit-02/report.md): changes_requested, A-04 (P1), A-05 (P2). Исправления [PB-074](../archive/tasks/PB-074.md) приняты и архивированы; зависимости от незавершённой AUDIT-009 нет. Протокол связывает каждый AC спецификации с командой, фактическим результатом и ограничением. Отдельная OS/CI identity и protected deployment не подтверждены. Текущая карточка не имеет HANDOFF; отрицательный протокол сохраняется как собственный материал и failed CHECK, без фиктивной передачи или accepted. Статусы реализации не дублируются в плане. [Повторный протокол audit-03](AUDIT-009-evidence/audit-03/report.md): changes_requested, новая A-06 (P2) — откат часов скрывает поздний failed несмотря на больший run_seq; исправление [PB-078](../archive/tasks/PB-078.md). Прежние A-04/A-05 закрыты по новым воспроизведениям. [Повторный протокол audit-04](AUDIT-009-evidence/audit-04/report.md): A-06 устранена, новые пробы PB-078 пройдены; changes_requested из-за A-07 (P1) — verifier gate принимает старый passed после позднего failed. Исправление [PB-079](../archive/tasks/PB-079.md).
+ 
+ ## Журнал
+ 
+@@ -146,5 +146,5 @@
+ Команда: `python3 -m unittest discover -s tests -p 'test_checks_*.py' -v`; пробы A-04/A-05/A-06; subprocess-пробы overlap/loss/healed-rebuild/control PB-078; `python3 docs/tasks/AUDIT-009-evidence/audit-04/probe_verifier_gate.py .`; self_pilot.py на временной копии (полный начат/остановлен, отдельный --plan-only завершён); verify AUDIT-009 --audit-ready.
+ Среда: macOS/Python и candidate 1c99fe8 из candidate.json. Настоящие subprocess/sandbox-exec и подписанные квитанции; trusted home той же OS identity. В новой пробе mock нет, история/квитанции/UUID не редактируются, сравниваются одинаковые candidate/policy и реально исполненные passed→failed.
+ Факт: 354 теста OK за 258.133 с. A-06 исправлена: task/project gate=false, stale реально повторяет исполнение (attempts=3); прежние потери/legacy и сценарии PB-078 блокируются корректно, новый успех восстанавливает покрытие. Новая A-07: обе подписи валидны, candidate одинаков; checks_gate оставляет probe uncovered в task/project, а checks_verifier.gate даёт ok=true/covered=1, реальный CLI verifier gate — rc=0. Причина: объединение любых passed из проектных копий вместо общего расчёта актуального доверенного исхода. Verdict changes_requested; AUDIT-009 остаётся in_progress, без приёмки и закрытия.
+-Доказательства: [протокол A-07 и матрица](AUDIT-009-evidence/audit-04/report.md), [354 теста](AUDIT-009-evidence/audit-04/checks-tests.log), [проба](AUDIT-009-evidence/audit-04/probe_verifier_gate.py), [квитанции и CLI](AUDIT-009-evidence/audit-04/verifier-gate.json), [plan-only](AUDIT-009-evidence/audit-04/pilot-plan.log), [PB-079](PB-079.md).
++Доказательства: [протокол A-07 и матрица](AUDIT-009-evidence/audit-04/report.md), [354 теста](AUDIT-009-evidence/audit-04/checks-tests.log), [проба](AUDIT-009-evidence/audit-04/probe_verifier_gate.py), [квитанции и CLI](AUDIT-009-evidence/audit-04/verifier-gate.json), [plan-only](AUDIT-009-evidence/audit-04/pilot-plan.log), [PB-079](../archive/tasks/PB-079.md).
+ Ограничения: полный пилот остановлен SIGTERM/rc=143 после подтверждения блокирующей A-07; это незавершённый прогон, не продуктовый failed. Preview/apply/initial plan/legacy preflight прошли, полный verify и сравнительные метрики не завершены. Отдельный plan-only прошёл: discovery 1123 экземпляра/1117 уникальных ID, receipt проверен, capability=local, protected release-ready отклонён. Реальная OS/CI identity и protected-обход не заявляются. Начальная проба имела ошибку сериализации результата; исправленная повторена, ошибка инструмента не считается дефектом продукта. Audit-ready требует in_review/HANDOFF; фиктивная передача не создавалась. Отрицательный протокол регистрируется diagnostic lifecycle; отмена самой AUDIT-009 не выполняется.
+--- a/docs/tasks/index.md
++++ b/docs/tasks/index.md
+@@ -8,7 +8,6 @@
+ |---|---|---|---|---|---|---|---|
+ | AUDIT-004 | [AUDIT-004: Повторная приёмка PB-005 и аудит PB-007](AUDIT-004.md) | in_review | P1 | Codex / GPT-6 Sol | unknown | — | — |
+ | PB-007 | [PB-007: Покрыть основной CLI сценарными проверками](PB-007.md) | in_review | P1 | Devin / SWE-2 High | unknown | — | — |
+-| PB-079 | [PB-079: Согласовать verifier gate с актуальной доверенной историей проверок](PB-079.md) | in_review | P1 | Codex / GPT-6.1 Sol (Low) | 2026-11-17 14:28 | — | — |
+ | AUDIT-008 | [AUDIT-008: Независимо принять выборочные операции и ограниченную историю](AUDIT-008.md) | draft | P2 | — | 2026-10-26 17:56 | — | PB-045, PB-046, PB-047, PB-048, PB-049, PB-050 |
+ | AUDIT-009 | [AUDIT-009: Независимо принять автоматический выбор и доверенные результаты проверок](AUDIT-009.md) | in_progress | P2 | Codex / GPT-6 | 2026-11-07 01:09 | — | PB-057, PB-058, PB-059, PB-060, PB-061, PB-062, PB-063, PB-064 |
+ | AUDIT-010 | [AUDIT-010: Независимо принять варианты аудита и исправления без возврата архива](AUDIT-010.md) | draft | P2 | — | 2026-11-07 01:38 | — | PB-065, PB-066, PB-067, PB-068, PB-069, PB-070, PB-071 |
+@@ -36,6 +35,7 @@
+ 
+ | ID | Задача | Статус | Приоритет | Исполнитель | Создана | Закрыта | Зависимости |
+ |---|---|---|---|---|---|---|---|
++| PB-079 | [PB-079: Согласовать verifier gate с актуальной доверенной историей проверок](../archive/tasks/PB-079.md) | done | P1 | Codex / GPT-6.1 Sol (Low) | 2026-11-17 14:28 | 2026-11-17 15:42 | — |
+ | PB-078 | [PB-078: Не допускать ложную готовность при обратном ходе часов проверок](../archive/tasks/PB-078.md) | done | P2 | Devin / SWE-2 Flash High | 2026-11-17 01:44 | 2026-11-17 14:06 | — |
+ | PB-074 | [PB-074: Устранить ложную готовность по повреждённой и старой истории проверок](../archive/tasks/PB-074.md) | done | P1 | Devin / SWE-2 Flash High | 2026-11-16 18:02 | 2026-11-17 01:08 | — |
+ | PB-073 | [PB-073: Устранить замечания AUDIT-009 к выбору проверок и пилоту](../archive/tasks/PB-073.md) | done | P1 | Devin / SWE-2 Flash High | 2026-11-16 06:37 | 2026-11-16 17:42 | — |

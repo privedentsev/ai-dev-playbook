@@ -1,0 +1,18 @@
+{
+  "audit_result": "changes_requested",
+  "open_finding": "A-07 P1",
+  "task_status": "in_progress",
+  "accepted": false,
+  "checks_tests": 354,
+  "checks_seconds": 258.133,
+  "checks_rc": 0,
+  "pilot_plan_only_rc": 0,
+  "pilot_full_rc": 143,
+  "pilot_full_completed": false,
+  "pilot_stop_reason": "Confirmed A-07 blocks acceptance",
+  "index_rc": 0,
+  "check_ready_rc": 0,
+  "preflight_rc": 0,
+  "full_verify_completed": false,
+  "real_protected_identity_verified": false
+}

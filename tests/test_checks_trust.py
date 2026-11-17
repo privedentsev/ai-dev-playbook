@@ -313,7 +313,8 @@ class VerifierRunTest(unittest.TestCase):
         target.write_text(json.dumps(fake), encoding="utf-8")
         verdict = checks_verifier.gate(proj.root, home, emit=lambda s: None)
         self.assertFalse(verdict["ok"])
-        self.assertTrue(any("rc-fake" in r for r in verdict["rejections"]))
+        self.assertEqual(verdict["covered"], 0)
+        self.assertNotIn("rc-fake", verdict["receipts"])
 
     def test_snapshot_substitution_detected(self):
         """AC-07: изменение после прогона — replay отклонён."""
@@ -327,7 +328,8 @@ class VerifierRunTest(unittest.TestCase):
         self.assertFalse(verdict["ok"])
         gate = checks_verifier.gate(proj.root, home, emit=lambda s: None)
         self.assertFalse(gate["ok"])
-        self.assertTrue(any("replay" in r for r in gate["rejections"]))
+        self.assertEqual(gate["covered"], 0)
+        self.assertIn("probe", gate["uncovered"])
 
 
 class ReceiptVerifyTest(unittest.TestCase):
@@ -812,8 +814,8 @@ class GateTest(unittest.TestCase):
         self.assertFalse(verdict["protected_confirmed"])
         self.assertEqual(verdict["capability"], "local")
 
-    def test_forged_file_in_project_rejected(self):
-        """Поддельный receipt-файл в проекте отклоняется gate"""
+    def test_forged_file_in_project_is_not_authoritative(self):
+        """Проектная копия не создаёт и не отменяет доверенное покрытие."""
         verifier_run(self.proj, self.home)
         forged = {"schema_version": 1, "receipt_id": "rc-evil",
                   "project_id": "shop",
@@ -833,9 +835,8 @@ class GateTest(unittest.TestCase):
             "rc-evil.json"
         target.write_text(json.dumps(forge(forged)), encoding="utf-8")
         verdict = self.gate()
-        self.assertFalse(verdict["ok"])
-        self.assertTrue(any("rc-evil" in r
-                            for r in verdict["rejections"]))
+        self.assertTrue(verdict["ok"], verdict["rejections"])
+        self.assertNotIn("rc-evil", verdict["receipts"])
 
 
 if __name__ == "__main__":

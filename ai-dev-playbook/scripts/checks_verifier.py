@@ -527,9 +527,12 @@ def _obligations(policy, checkpoint):
     return obligated, manual
 
 
-def gate(root, home, *, checkpoint=None, emit=print):
+def gate(root, home, *, checkpoint=None, task_projection=None,
+         now=None, emit=print):
     """Эталонный consumer: покрытие обязательств валидными квитанциями.
 
+    Покрытие вычисляется общим контрактом checks_coverage по актуальной
+    доверенной истории. Task-зависимым проверкам нужна task_projection.
     Receipt принимается только при совпадении candidate/policy digest
     текущего состояния; локальные надписи и файлы проекта доверия не
     создают. ``protected_confirmed`` истинно только при доказанной
@@ -549,40 +552,27 @@ def gate(root, home, *, checkpoint=None, emit=print):
     store = checks_trust.load_home(home)
     try:
         approved = checks_trust.require_approved(store)
+        _raise(_fingerprint(_declared_policy(root)) == approved["policy_digest"],
+               "объявленная политика не совпадает с одобренной в доме")
     except ValueError as error:
         verdict["rejections"].append(str(error))
         return verdict
     policy = approved["policy"]
-    manifest, candidate_digest = candidate_manifest(root, policy)
+    manifest, candidate_digest = candidate_manifest(root, policy, now=now)
     verdict["candidate_digest"] = candidate_digest
     obligated, manual = _obligations(policy, checkpoint)
     verdict["obligated"] = len(obligated)
     verdict["manual"] = [check["id"] for check in manual]
-    verified = {}
-    receipts_dir = root / checks_trust.PROJECT_RECEIPTS_DIR
-    if receipts_dir.is_dir():
-        for path in sorted(receipts_dir.glob("*.json")):
-            if path.is_symlink():
-                verdict["rejections"].append(
-                    f"{path.name}: символическая ссылка — пропущено")
-                continue
-            try:
-                receipt = checks_trust._read_json(path, "receipt")
-            except ValueError as error:
-                verdict["rejections"].append(f"{path.name}: {error}")
-                continue
-            result = verify(
-                home, receipt, expect_candidate=candidate_digest,
-                expect_policy=approved["policy_digest"])
-            if not result["ok"]:
-                verdict["rejections"].append(
-                    f"{path.name}: {'; '.join(result['reasons'])}")
-                continue
-            verdict["receipts"].append(receipt["receipt_id"])
-            for item in result["results"]:
-                if item["status"] == "passed" \
-                        and item["check_id"] not in verified:
-                    verified[item["check_id"]] = receipt["receipt_id"]
+    # Runtime import: coverage verifies receipts through this module.
+    from checks_coverage import protected_receipts
+    by_id = {check["id"]: check for check in policy["checks"]}
+    verified, rejections, notes = protected_receipts(
+        store, approved, policy, candidate_digest,
+        _fingerprint(task_projection) if task_projection is not None else None,
+        [check["id"] for check in obligated], by_id, now,
+        receipt_ids=verdict["receipts"])
+    verdict["rejections"].extend(rejections)
+    verdict["notes"].extend(notes)
     for check in obligated:
         if check["id"] in verified:
             verdict["covered"] += 1

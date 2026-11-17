@@ -1,0 +1,130 @@
+[
+  {
+    "argv": [
+      "python3",
+      "docs/tasks/AUDIT-009-evidence/audit-03/probe_clock_rollback.py",
+      "."
+    ],
+    "rc": 0,
+    "seconds": 0.49837966705672443,
+    "output": "rollback.json"
+  },
+  {
+    "argv": [
+      "python3",
+      "docs/archive/tasks/PB-078-evidence/work/verification/PB-078/audit-01/probe_overlap.py",
+      "."
+    ],
+    "rc": 0,
+    "seconds": 0.694869750062935,
+    "output": "overlap.json"
+  },
+  {
+    "argv": [
+      "python3",
+      "docs/archive/tasks/PB-078-evidence/work/verification/PB-078/audit-02/probe_loss.py",
+      "."
+    ],
+    "rc": 0,
+    "seconds": 0.5566492080688477,
+    "output": "loss.json"
+  },
+  {
+    "argv": [
+      "python3",
+      "docs/archive/tasks/PB-078-evidence/work/verification/PB-078/audit-03/probe_healed_rebuild.py",
+      "."
+    ],
+    "rc": 0,
+    "seconds": 0.6674979579402134,
+    "output": "healed-rebuild.json"
+  },
+  {
+    "argv": [
+      "python3",
+      "docs/archive/tasks/PB-078-evidence/work/verification/PB-078/audit-03/probe_healed_control.py",
+      "."
+    ],
+    "rc": 0,
+    "seconds": 0.6823347919853404,
+    "output": "healed-control.json"
+  },
+  {
+    "argv": [
+      "python3",
+      "docs/tasks/AUDIT-009-evidence/audit-02/probe_corrupt_obligation.py",
+      ".",
+      "corrupt"
+    ],
+    "rc": 0,
+    "seconds": 7.64833095902577
+  },
+  {
+    "argv": [
+      "python3",
+      "docs/tasks/AUDIT-009-evidence/audit-02/probe_corrupt_obligation.py",
+      ".",
+      "delete"
+    ],
+    "rc": 0,
+    "seconds": 7.970546624972485
+  },
+  {
+    "argv": [
+      "python3",
+      "docs/tasks/AUDIT-009-evidence/audit-02/probe_legacy_equal.py",
+      "."
+    ],
+    "rc": 0
+  },
+  {
+    "argv": [
+      "python3",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tests",
+      "-p",
+      "test_checks_*.py",
+      "-v"
+    ],
+    "rc": 0,
+    "tests": 354,
+    "seconds": 258.133,
+    "output": "checks-tests.log",
+    "sandbox": "outside outer sandbox; real nested sandbox-exec"
+  },
+  {
+    "argv": [
+      "python3",
+      "docs/tasks/AUDIT-009-evidence/audit-04/probe_verifier_gate.py",
+      "."
+    ],
+    "rc": 0,
+    "output": "verifier-gate.json",
+    "note": "Initial attempt failed while serializing receipt.results (probe error); fixed to outcome.results and repeated. Probe rc=0 is completion, not a correct product verdict. Real nested verifier gate rc=0 despite later failed is A-07."
+  },
+  {
+    "argv": [
+      "python3",
+      "docs/archive/tasks/PB-073-evidence/self_pilot.py",
+      "/tmp/audit009-20261117-repeat/source-snapshot",
+      "/tmp/audit009-20261117-repeat/pilot-full"
+    ],
+    "rc": 143,
+    "completion": "stopped by auditor after A-07; not a product failure or completed metric",
+    "output": "pilot-full.log"
+  },
+  {
+    "argv": [
+      "python3",
+      "docs/archive/tasks/PB-073-evidence/self_pilot.py",
+      "/tmp/audit009-20261117-repeat/source-snapshot",
+      "/tmp/audit009-20261117-repeat/pilot-plan",
+      "--plan-only"
+    ],
+    "rc": 0,
+    "output": "pilot-plan.log"
+  }
+]

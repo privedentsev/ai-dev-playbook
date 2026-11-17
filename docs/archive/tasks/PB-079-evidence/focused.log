@@ -1,0 +1,16 @@
+test_always_run_prevents_coverage (test_checks_verifier_gate.VerifierHistoryTest.test_always_run_prevents_coverage) ... ok
+test_candidate_change_invalidates_receipt (test_checks_verifier_gate.VerifierHistoryTest.test_candidate_change_invalidates_receipt) ... ok
+test_conflicting_completion_and_commit_order (test_checks_verifier_gate.VerifierHistoryTest.test_conflicting_completion_and_commit_order) ... ok
+test_corrupt_journal_fails_closed (test_checks_verifier_gate.VerifierHistoryTest.test_corrupt_journal_fails_closed) ... ok
+test_corrupt_trusted_failure_cannot_resurrect_pass (test_checks_verifier_gate.VerifierHistoryTest.test_corrupt_trusted_failure_cannot_resurrect_pass) ... ok
+test_declared_policy_must_match_approved (test_checks_verifier_gate.VerifierHistoryTest.test_declared_policy_must_match_approved) ... ok
+test_later_nonpass_and_recovery (test_checks_verifier_gate.VerifierHistoryTest.test_later_nonpass_and_recovery) ... ok
+test_manual_stays_outside_reference_consumer (test_checks_verifier_gate.VerifierHistoryTest.test_manual_stays_outside_reference_consumer) ... ok
+test_missing_trusted_failure_cannot_resurrect_pass (test_checks_verifier_gate.VerifierHistoryTest.test_missing_trusted_failure_cannot_resurrect_pass) ... ok
+test_tampered_epoch_cannot_hide_failure (test_checks_verifier_gate.VerifierHistoryTest.test_tampered_epoch_cannot_hide_failure) ... ok
+test_task_binding_requires_matching_projection (test_checks_verifier_gate.VerifierHistoryTest.test_task_binding_requires_matching_projection) ... ok
+
+----------------------------------------------------------------------
+Ran 11 tests in 10.411s
+
+OK

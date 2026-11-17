@@ -1897,8 +1897,12 @@ def verifier_aggregate(root, args):
 def verifier_gate(root, args):
     """verifier gate: покрытие обязательств валидными квитанциями."""
     home = _verifier_home(args)
-    verdict = checks_verifier.gate(root, home,
-                                   checkpoint=args.checkpoint)
+    projection = None
+    if args.task:
+        content, meta = _verifier_task(root, args.task)
+        projection = verification.verification_policy.task_projection(content, meta)
+    verdict = checks_verifier.gate(root, home, checkpoint=args.checkpoint,
+                                   task_projection=projection)
     return 0 if verdict["ok"] else 1
 
 
@@ -2626,6 +2630,7 @@ def main(argv=None):
     action.add_argument("--home", type=Path, required=True)
     action.add_argument("--checkpoint",
                         help="контрольная точка обязательности")
+    action.add_argument("--task", help="ID карточки для task_projection")
     command = sub.add_parser("setup",
                              help="Обследование проекта и одобрение "
                                   "политики проверок; контракт PB-057")

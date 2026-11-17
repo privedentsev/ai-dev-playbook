@@ -1,0 +1,5 @@
+{
+  "match": true,
+  "file_count": 3496,
+  "exclusions": "copy_clean_repo: .git, work lifecycle/update/checks, caches; all declared source input bytes match"
+}

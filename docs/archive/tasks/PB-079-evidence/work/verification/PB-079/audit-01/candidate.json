@@ -1,0 +1,15 @@
+{
+  "head": "1c99fe8226683b704e7f82ae62543f5bdff68451",
+  "python": "3.14.6 (main, Jun 10 2026, 10:03:53) [Clang 21.0.0 (clang-2100.0.123.102)]",
+  "platform": "macOS-27.2.1-x86_64-i386-64bit-Mach-O",
+  "files": {
+    "ai-dev-playbook/scripts/checks_coverage.py": "sha256:40ea6a2bee4ea4b2464299017092d0110b5d64798bceb91ea2f61fe1821931e7",
+    "ai-dev-playbook/scripts/checks_gate.py": "sha256:8f0e423f1833e243c0a80caed4b90f8c8922f6dbea3caea6e0aec0cf8e9da1d6",
+    "ai-dev-playbook/scripts/checks_verifier.py": "sha256:137c2b3d2be1b0d29b35454993af8689d0efa8c6b03f003fa58c0fe059d0d20b",
+    "ai-dev-playbook/scripts/playbook.py": "sha256:32c556c6a971abf278e983841576e8bd67969806a0caedd28a72ae5a74078b62",
+    "tests/test_checks_verifier_gate.py": "sha256:9b0c17d9e4d84d91064709b7008e92d446672118416739db4456f1d3c538e917",
+    "tests/test_checks_gate.py": "sha256:721fce6925716a60ab4d578b916ba143dd63374fb85e468887695f5575119436",
+    "tests/test_checks_trust.py": "sha256:3643ad3d0158daf652d78fe3d60758db0859437fe4bb10a1f72f411954fbad55",
+    "ai-dev-playbook/manifest.json": "sha256:f81834c07caeabfb64f2b6436d5e5f85a7de28968f775d97c49c1d3a5fa82823"
+  }
+}
