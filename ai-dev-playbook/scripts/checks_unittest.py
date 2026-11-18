@@ -7,7 +7,7 @@ test ID (discovery по тому же argv) и фактические исход
 unexpected_success, включая subtests. Текстовый разбор ``-v`` не
 используется: события результата — единственный источник факта.
 
-Подпроцесс запускается ``sys.executable checks_unittest.py --suite
+Подпроцесс запускается ``<одобренный Python> checks_unittest.py --suite
 --argv JSON`` в корне проекта: загружает suite без исполнения
 discovery вне одобренной команды, исполняет и выдаёт отчёт одной
 строкой с маркером ``REPORT_SENTINEL`` в stdout. Путь файла отчёта
@@ -30,8 +30,10 @@ ID и skip/expected_failure вне допусков отклоняются.
 а не на неподделываемость заявлений тестов.
 """
 import argparse
+import hashlib
 import json
 import os
+import shutil
 import subprocess
 import sys
 import tempfile
@@ -49,6 +51,53 @@ REPORT_SENTINEL = "CHECKS-REPORT-V1 "
 
 _PASSED = "passed"
 _FAIL_OUTCOMES = {"failed", "error"}
+
+
+def interpreter_identity(root, argv, env=None):
+    """Привязка без запуска Python при plan/status/gate."""
+    try:
+        parse_argv(argv)
+    except ValueError as error:
+        return {"error": str(error)}
+    executable = argv[0]
+    env = os.environ if env is None else env
+    search = os.pathsep.join(os.path.join(root, entry)
+                             for entry in os.get_exec_path(env))
+    candidate = shutil.which(os.path.join(root, executable)
+                             if os.path.dirname(executable) else executable,
+                             path=search)
+    if candidate is None:
+        return {"error": "интерпретатор отсутствует или недоступен"}
+    path = Path(candidate)
+    try:
+        resolved = path.resolve(strict=True)
+        stat = resolved.stat()
+        # A launcher can select another runtime without changing its own file.
+        # Recognize only the base executable of the running CPython, while
+        # preserving the selected path below for venv startup and binding.
+        if sys.implementation.name != "cpython" or not os.path.samestat(
+                stat, os.stat(sys._base_executable)):
+            return {"error": "неподдерживаемый launcher: укажите прямой путь "
+                             "к базовому CPython CLI или его symlink в venv"}
+        # CPython ищет pyvenv.cfg рядом с launcher и на уровень выше.
+        # Не сводим launcher к realpath: venv может ссылаться на тот же binary.
+        configs = {}
+        for directory in (path.parent, path.parent.parent):
+            config = directory / "pyvenv.cfg"
+            try:
+                configs[str(config)] = hashlib.sha256(config.read_bytes()).hexdigest()
+            except FileNotFoundError:
+                configs[str(config)] = None
+    except (OSError, RuntimeError):
+        return {"error": "контекст интерпретатора недоступен"}
+    startup = {key: value for key, value in env.items()
+               if key.startswith("PYTHON") and key not in {
+                   "PYTHONPYCACHEPREFIX", "PYTHONDONTWRITEBYTECODE"}}
+    digest = hashlib.sha256(json.dumps(startup, sort_keys=True).encode()).hexdigest()
+    return {"launcher": str(path), "binary": str(resolved),
+            "stat": [stat.st_dev, stat.st_ino, stat.st_size,
+                     stat.st_mtime_ns, stat.st_ctime_ns],
+            "venv": configs, "startup_digest": digest}
 
 
 def parse_argv(argv):
@@ -217,6 +266,10 @@ def _subprocess_main(argv=None):
     report = {"protocol": REPORT_PROTOCOL, "expected": [],
               "actual": [], "exit_code": 2}
     try:
+        if not sys.dont_write_bytecode or not getattr(sys, "pycache_prefix", None):
+            raise RuntimeError("интерпретатор не поддерживает изоляцию bytecode")
+        report["runtime"] = {"executable": sys.executable, "prefix": sys.prefix,
+                             "base_prefix": sys.base_prefix, "version": sys.version}
         selection = parse_argv(json.loads(args.argv))
         suite = _load_suite(selection)
         report["expected"] = _flatten(suite)
@@ -278,7 +331,7 @@ def _collect(root, check, run_dir, *, timeout, env, wrap, cache_prefix):
     root = Path(root)
     script = Path(__file__).resolve()
     out_path = run_dir / (check["id"] + ".adapter.json")
-    argv = [sys.executable, "-B", "-X", f"pycache_prefix={cache_prefix}",
+    argv = [check["argv"][0], "-B", "-X", f"pycache_prefix={cache_prefix}",
             str(script), "--suite", "--argv",
             json.dumps(check["argv"], ensure_ascii=False)]
     if wrap:
@@ -305,11 +358,16 @@ def _collect(root, check, run_dir, *, timeout, env, wrap, cache_prefix):
     reports_lock = threading.Lock()
     acked = False
     posthumous = False
+    interpreter = interpreter_identity(root, check["argv"], env)
+    if "error" in interpreter:
+        collected.update(status="spawn_error", error=interpreter["error"])
+        return collected
     try:
         with stdout.open("xb") as out_file, \
                 stderr.open("xb") as err:
             process = subprocess.Popen(
-                argv, cwd=root, stdin=subprocess.PIPE,
+                argv, executable=None if wrap else interpreter["launcher"],
+                cwd=root, stdin=subprocess.PIPE,
                 stdout=subprocess.PIPE, stderr=err, env=env,
                 start_new_session=True)
 
@@ -382,6 +440,7 @@ def _collect(root, check, run_dir, *, timeout, env, wrap, cache_prefix):
         report = json.loads(payload.decode("utf-8").strip(),
                             object_pairs_hook=_unique_pairs)
         _validate_report(report)
+        report["argv"] = argv
         _write_report(out_path, report)
         collected["report"] = report
     except (ValueError, OSError, UnicodeDecodeError) as error:

@@ -365,7 +365,8 @@ def execute(root, policy, *, task_id, scope, mode, checkpoint,
         # A-03/A-05 аудита PB-061: окружение процесса (env) и идентичность
         # среды привязки (bind_env) — разные величины; binding_environment
         # не является окружением подпроцесса.
-        bind_env = checks_select.binding_environment(policy, check)
+        bind_env = checks_select.binding_environment(
+            root, policy, check, launch_env=env)
         if status == "reused":
             source = latest.get(check["id"])
             try:
@@ -377,7 +378,8 @@ def execute(root, policy, *, task_id, scope, mode, checkpoint,
                 # A-02: запись reuse только на байтах исходного успеха;
                 # расхождение снимков — гонка, обязательство идёт на
                 # запуск, старый успех не перепривязывается.
-                if input_digest != source["binding"]["input_digest"]:
+                if bind_env != source["binding"]["environment"] or \
+                        input_digest != source["binding"]["input_digest"]:
                     status = "run"
                     emit(f"  {check['id']}: входы изменились после "
                          f"оценки reuse — запуск")
@@ -499,7 +501,11 @@ def execute(root, policy, *, task_id, scope, mode, checkpoint,
             continue
         emit(f"  {check['id']}: RUN {check['kind']}")
         if check["kind"] == "test":
-            if check.get("adapter") != checks_contract.BUILTIN_ADAPTER:
+            runtime_error = bind_env["python-unittest"].get("error")
+            if runtime_error:
+                status_r, reasons, evidence, body = "blocked", [runtime_error], {}, {
+                    "tests": {"expected": [], "actual": []}}
+            elif check.get("adapter") != checks_contract.BUILTIN_ADAPTER:
                 status_r, reasons, evidence, body = "blocked", [
                     f"неподдерживаемый адаптер "
                     f"{check.get('adapter')!r}"], {"run_id": run_id}, \
@@ -519,7 +525,11 @@ def execute(root, policy, *, task_id, scope, mode, checkpoint,
                 post = _snapshot_inputs(root, policy, check,
                                         projections, bind_env, now,
                                         edges=edges, unknown=unknown)
-                if checks_inventory.snapshot_digest(post) != \
+                if check["kind"] == "test" and bind_env != \
+                        checks_select.binding_environment(root, policy, check,
+                                                          launch_env=env):
+                    mutation = "контекст интерпретатора изменился во время запуска"
+                elif checks_inventory.snapshot_digest(post) != \
                         checks_inventory.snapshot_digest(pre):
                     mutation = ("входы изменились во время запуска — "
                                 "локальный режим не изолирует кандидат")
@@ -684,7 +694,7 @@ def confirm(root, policy, *, task_id, task_content, task_meta, check_id,
     planned = checks_select.plan(
         root, policy, baseline=None, previous=previous, results=[],
         task_digest=task_digest, now=now, projections=projections)
-    bind_env = checks_select.binding_environment(policy, check)
+    bind_env = checks_select.binding_environment(root, policy, check)
     snap = _snapshot_inputs(root, policy, check, projections, bind_env,
                             now, edges=planned["graph"]["edges"],
                             unknown=planned["graph"]["unknown"])

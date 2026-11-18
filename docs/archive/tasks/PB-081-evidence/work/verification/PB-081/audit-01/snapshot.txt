@@ -1,0 +1,73 @@
+# PB-081: Исполнять unittest одобренным Python или безопасно отклонять несовпадающий интерпретатор
+
+ID: PB-081
+Status: in_review
+Priority: P1
+Depends-On: -
+Executor: Codex
+Model: GPT-6.2 Sol (Low)
+Created: 2026-11-18T05:11:11+03:00
+Closed: -
+
+<!-- playbook-meta:external -->
+
+## Задача
+
+### Цель и границы
+
+Устранить A-09 AUDIT-009: python-unittest не должен подменять интерпретатор одобренного argv системным Python родителя и объявлять passed для другой среды. Исполнять объявленный Python с сохранением контекста bytecode PB-080 либо явно отклонять неподдерживаемое несовпадение до объявления покрытия. Архивные карточки и их доказательства не переоткрывать; в сессии аудита код не исправляется.
+
+### Контекст
+
+[AUDIT-009](AUDIT-009.md), [протокол audit-06](../../work/verification/AUDIT-009/audit-06/report.md), [CLI-воспроизведение](../../work/verification/AUDIT-009/audit-06/probe_interpreter.py), [результаты](../../work/verification/AUDIT-009/audit-06/interpreter.json). Контракт: [R-11/R-13/R-15/R-19, AC-05/AC-07](../specs/dependency-aware-verification.md).
+
+Команда: `python3 work/verification/AUDIT-009/audit-06/probe_interpreter.py .`. Настоящий временный no-Git проект и stdlib venv без pip. Одобренный argv начинается абсолютным venv/bin/python3; тест записывает sys.executable/sys.prefix/sys.base_prefix и проверяет равенство prefix/base_prefix. Прямое выполнение ровно одобренного argv падает (rc=1), а checks run --scope project --mode force исполняет тот же тест Python родителя (prefix=base_prefix), даёт passed/rc=0 и gate.ok=true. Mock, редактирования истории/исходов и отсутствующего executable нет.
+
+Причина: checks_unittest.parse_argv проверяет только имя python* и отбрасывает argv[0]; _collect запускает sys.executable. Binding описывает одобренную команду, не отражая подмену реального runtime. Это локальная надёжность, не обход protected OS/CI.
+
+### Критерии приёмки
+
+- [x] AC-01: В реальном CLI-контрпримере direct rc=1 не сопровождается passed/gate.ok=true от другого Python. Запускается именно одобренный venv с наблюдаемыми executable/prefix либо несовместимая конфигурация безопасно отклоняется с объяснением; status/handoff не считают её покрытой.
+- [x] AC-02: Есть реальные регрессии абсолютного venv/bin/python3, разрешения python/python3 через PATH, отсутствующего/недоступного интерпретатора и отличающегося runtime. Эквивалентность не доказывается только resolve/samefile: venv и base могут ссылаться на один binary при разных prefix/site-packages. Запись argv в отчёте соответствует фактическому исполнению; неподдерживаемые формы не подменяются молча.
+- [x] AC-03: Старый unsafe passed не покрывает новый контракт без фактического повторения. Binding/identity учитывает необходимый runtime-контекст; законные reuse/cross-task/release сохраняются. Bytecode-изоляция PB-080, целостность пользовательских caches и безопасный отказ protected kind=test сохраняются.
+- [x] AC-04: Пройдены адресные adapter/run/gate/e2e, необходимые legacy/lifecycle-регрессии и штатный verify; после изменения комплекта актуализирован self-manifest. CHECK/HANDOFF содержат независимые наблюдения среды и команды. Отдельная приёмка PB-081 предшествует повтору AUDIT-009.
+
+### План
+
+1. Воспроизвести A-09 и проверить parsing/launch/runtime binding; определить поддерживаемый способ выбора одобренного Python и безопасный отказ остальных форм.
+2. Реализовать исправление и постоянные subprocess/CLI-регрессии; решить инвалидирование старого unsafe результата и сохранить контракт PB-080.
+3. Обновить документы и manifest; проверить index/check/verify, оформить EXEC/CHECK/HANDOFF для отдельного независимого аудитора. Архив не изменять.
+
+### Ресурсы
+
+Python stdlib/venv без установки пакетов, временные проекты, реальные subprocess/CLI. Бюджеты проекта null; стоимость полного verify оценить до запуска. Зависимости от незавершённой AUDIT-009 нет. Реальная отдельная OS/CI identity не подтверждена. Карточка фиксирует замечание; её создание не разрешает реализацию, commit/push/release.
+
+## Журнал
+
+### EXEC-01 — Выполнение
+Время: 2026-11-18T05:26:57+03:00
+Исполнитель: Codex
+Модель: GPT-6.2 Sol (Low)
+Изменения: устранена подмена одобренного Python. Адаптер сохраняет bytecode-контекст PB-080 и записывает фактический argv и наблюдаемый runtime. Binding версии 3 учитывает launcher, binary, pyvenv.cfg и переменные запуска Python. Добавлены реальные CLI-регрессии выбора Python и инвалидирования прежнего результата.
+Файлы: ai-dev-playbook/scripts/checks_{unittest,contract,select,runner,verifier}.py, ai-dev-playbook/rules/verification.md, ai-dev-playbook/manifest.json, docs/designs/dependency-aware-verification.md, tests/test_checks_{interpreter,bytecode,contract}.py.
+
+### CHECK-01 — Проверка
+Время: 2026-11-18T06:08:47+03:00
+Исполнитель: Codex
+Модель: GPT-6.2 Sol (Low)
+Результат: passed
+Критерии: AC-01, AC-02, AC-03, AC-04
+Команда: `python3 work/verification/AUDIT-009/audit-06/probe_interpreter.py .`; `python3 -m unittest discover -s tests -p 'test_checks_interpreter.py' -v`; `python3 ai-dev-playbook/scripts/playbook.py verify PB-081 --preflight`; `python3 ai-dev-playbook/scripts/playbook.py verify PB-081`.
+Среда: macOS 27.2.1, Python 3.14.6, временный проект без Git и stdlib venv без pip. Полный verify с вложенным sandbox-exec.
+Факт: в пробе прямой argv начинался с абсолютного approved-venv/bin/python3. Прямой запуск и адаптер вернули rc=1, наблюдали совпадающие sys.executable и sys.prefix внутри approved-venv и отдельный sys.base_prefix системного Python. Gate вернул ok=false. CLI-регрессии прошли для абсолютного пути, python и python3 через PATH, смены runtime, отсутствующего и неисполняемого launcher. Полный verify: 1140 тестов, включая адресные checks/gate/e2e, bytecode, cross-task/release, protected verifier и lifecycle-пилот. Все три команды verify passed, inputs_unchanged=true. Self-manifest обновлён.
+Доказательства: [отчёт verify](../../work/verification/PB-081/f9d224ec0ab04b8b99173540921263f2/report.json), [журнал тестов](../../work/verification/PB-081/f9d224ec0ab04b8b99173540921263f2/unit-tests.stderr.log), [воспроизводимая CLI-проба](../../work/verification/AUDIT-009/audit-06/probe_interpreter.py).
+Ограничения: изменения внешних пакетов учитываются политикой входов или внешних зависимостей. Отдельная OS/CI identity не проверялась. Независимая приёмка PB-081 и повтор AUDIT-009 остаются следующими этапами.
+
+### HANDOFF-01 — Передача
+Время: 2026-11-18T06:08:47+03:00
+Исполнитель: Codex
+Модель: GPT-6.2 Sol (Low)
+Выполнение: EXEC-01
+Проверки: CHECK-01
+Состояние: in_review. Следующий этап — независимая приёмка PB-081 перед повтором AUDIT-009.
+Фокус аудита: сверить прямой утверждённый argv и фактический runtime адаптера в абсолютном venv и при смене PATH. Проверить, что совпадающая цель symlink не склеивает venv и системный Python, версия 2 требует реального прогона, а законный reuse и bytecode-изоляция сохраняются.

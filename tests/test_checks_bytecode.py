@@ -99,7 +99,7 @@ class BytecodeContextTest(unittest.TestCase):
         policy["checks"] = policy["checks"][:1]
         # Real old-identity run; no synthesized result/IDs/outcomes.
         with mock.patch.object(checks_unittest, 'ADAPTER',
-                               {'id': checks_contract.BUILTIN_ADAPTER, 'version': '1'}):
+                               {'id': checks_contract.BUILTIN_ADAPTER, 'version': '3'}):
             first, _ = execute(proj, policy, scope='project', mode='force')
         self.assertTrue(first["ok"], first)
         gate = checks_gate.evaluate(
@@ -111,7 +111,7 @@ class BytecodeContextTest(unittest.TestCase):
         records, _, _ = checks_results.load_results(proj.root)
         tests = [r for r in records if r['kind'] == 'test']
         latest = checks_select.evidence_latest(tests)['payments-tests']
-        self.assertEqual(latest['binding']['adapter']['version'], '2')
+        self.assertEqual(latest['binding']['adapter']['version'], '4')
         self.assertFalse(latest.get('reused'))
         count = len(records)
         old_ids = {r["result_id"] for r in records}

@@ -465,7 +465,7 @@ def aggregate(home, root, *, receipt_ids, task_projection=None,
         inputs = checks_inventory.resolved_inputs(
             policy, check, edges=edges,
             unknown=planned["graph"]["unknown"])
-        env = checks_select.binding_environment(policy, check)
+        env = checks_select.binding_environment(root, policy, check)
         reason = None
         try:
             snap = checks_inventory.snapshot(

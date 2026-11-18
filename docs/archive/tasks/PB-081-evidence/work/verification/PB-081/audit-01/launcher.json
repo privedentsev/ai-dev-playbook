@@ -1,0 +1,56 @@
+[
+  {
+    "label": "setup",
+    "rc": 0,
+    "stdout": "checks-политика shop-checks rev 1 подключена (checks-policy.json); project.json → checks_policy. Операция: work/lifecycle/20261118-065351-7aba7ad0. trust_mode=local не повышает доверие результатов.\n",
+    "stderr": "",
+    "runtime": null
+  },
+  {
+    "label": "force / base",
+    "rc": 0,
+    "stdout": "checks run DEV-01: политика shop-checks rev 1, scope=project mode=force\nОграничение: trust_mode=local: результаты диагностические — локальная история не защищена от владельца проекта; доверенное выполнение требует контура PB-061\n  payments-tests: RUN test\n  payments-tests: passed (0.622с)\nИтог: passed=1; непокрытых обязательств: 0\n",
+    "stderr": "",
+    "runtime": {
+      "executable": "/usr/local/opt/python@3.14/bin/python3.14",
+      "prefix": "/usr/local/opt/python@3.14/Frameworks/Python.framework/Versions/3.14",
+      "base_prefix": "/usr/local/opt/python@3.14/Frameworks/Python.framework/Versions/3.14"
+    }
+  },
+  {
+    "label": "direct / venv",
+    "rc": 1,
+    "stdout": "",
+    "stderr": "F\n======================================================================\nFAIL: test_ok (test_payments.TestPay.test_ok)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/private/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/pb064-e2e-ewc752fi/project/tests/test_payments.py\", line 10, in test_ok\n    self.assertEqual(sys.prefix, sys.base_prefix)\n    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: '/private/var/folders/53/qpdfw9ls555gkkcwh7[44 chars]venv' != '/usr/local/opt/python@3.14/Frameworks/Pyth[22 chars]3.14'\n- /private/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/pb064-e2e-ewc752fi/alternate-venv\n+ /usr/local/opt/python@3.14/Frameworks/Python.framework/Versions/3.14\n\n\n----------------------------------------------------------------------\nRan 1 test in 0.001s\n\nFAILED (failures=1)\n",
+    "runtime": {
+      "executable": "/private/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/pb064-e2e-ewc752fi/alternate-venv/bin/python-runtime",
+      "prefix": "/private/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/pb064-e2e-ewc752fi/alternate-venv",
+      "base_prefix": "/usr/local/opt/python@3.14/Frameworks/Python.framework/Versions/3.14"
+    }
+  },
+  {
+    "label": "status / venv",
+    "rc": 0,
+    "stdout": "checks status DEV-01: политика shop-checks rev 1\nОграничение: trust_mode=local: результаты диагностические — локальная история не защищена от владельца проекта; доверенное выполнение требует контура PB-061\n  payments-tests: reused; последний результат passed 09d18e78269740bf93ab8e7ffb646869-payments-tests от 2026-11-18T03:53:53.181823+00:00; тестов: 1\n      passed: test_payments.TestPay.test_ok — оплата\nПокрытие обязательств области задачи: 1/1\n",
+    "stderr": "",
+    "runtime": null
+  },
+  {
+    "label": "stale / venv",
+    "rc": 0,
+    "stdout": "checks run DEV-01: политика shop-checks rev 1, scope=project mode=stale\nОграничение: trust_mode=local: результаты диагностические — локальная история не защищена от владельца проекта; доверенное выполнение требует контура PB-061\n  payments-tests: reused — исходный результат 09d18e78269740bf93ab8e7ffb646869-payments-tests от 2026-11-18T03:53:53.181823+00:00\nИтог: reused=1; непокрытых обязательств: 0\n",
+    "stderr": "",
+    "runtime": null
+  },
+  {
+    "label": "force / venv",
+    "rc": 1,
+    "stdout": "checks run DEV-01: политика shop-checks rev 1, scope=project mode=force\nОграничение: trust_mode=local: результаты диагностические — локальная история не защищена от владельца проекта; доверенное выполнение требует контура PB-061\n  payments-tests: RUN test\n  payments-tests: failed — тест failed: test_payments.TestPay.test_ok — оплата\nИтог: failed=1; непокрытых обязательств: 1\n",
+    "stderr": "",
+    "runtime": {
+      "executable": "/private/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/pb064-e2e-ewc752fi/alternate-venv/bin/python-runtime",
+      "prefix": "/private/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/pb064-e2e-ewc752fi/alternate-venv",
+      "base_prefix": "/usr/local/opt/python@3.14/Frameworks/Python.framework/Versions/3.14"
+    }
+  }
+]

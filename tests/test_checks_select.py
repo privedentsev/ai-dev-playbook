@@ -459,7 +459,7 @@ class PlanTest(unittest.TestCase):
                 "input_digest": checks_inventory.snapshot_digest(snap),
                 "dependency_closure_digest":
                     cs.closure_digest(graph["edges"], check),
-                "environment": env or cs.environment_identity(policy),
+                "environment": env or cs.binding_environment(self.proj.root, policy, check),
             },
             "status": status,
             "started_at": finished, "finished_at": finished,

@@ -1,0 +1,48 @@
+[
+  {
+    "label": "setup",
+    "rc": 0,
+    "stdout": "checks-политика shop-checks rev 1 подключена (checks-policy.json); project.json → checks_policy. Операция: work/lifecycle/20261118-075428-f63d1615. trust_mode=local не повышает доверие результатов.\n",
+    "stderr": "",
+    "runtime": null
+  },
+  {
+    "label": "force / base",
+    "rc": 1,
+    "stdout": "checks run DEV-01: политика shop-checks rev 1, scope=project mode=force\nОграничение: trust_mode=local: результаты диагностические — локальная история не защищена от владельца проекта; доверенное выполнение требует контура PB-061\n  payments-tests: RUN test\n  payments-tests: blocked — неподдерживаемый launcher: укажите прямой путь к базовому CPython CLI или его symlink в venv\nИтог: blocked=1; непокрытых обязательств: 1\n",
+    "stderr": "",
+    "runtime": null
+  },
+  {
+    "label": "direct / venv",
+    "rc": 1,
+    "stdout": "",
+    "stderr": "F\n======================================================================\nFAIL: test_ok (test_payments.TestPay.test_ok)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/private/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/pb064-e2e-ocnfmr4z/project/tests/test_payments.py\", line 10, in test_ok\n    self.assertEqual(sys.prefix, sys.base_prefix)\n    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: '/private/var/folders/53/qpdfw9ls555gkkcwh7[44 chars]venv' != '/usr/local/opt/python@3.14/Frameworks/Pyth[22 chars]3.14'\n- /private/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/pb064-e2e-ocnfmr4z/alternate-venv\n+ /usr/local/opt/python@3.14/Frameworks/Python.framework/Versions/3.14\n\n\n----------------------------------------------------------------------\nRan 1 test in 0.001s\n\nFAILED (failures=1)\n",
+    "runtime": {
+      "executable": "/private/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/pb064-e2e-ocnfmr4z/alternate-venv/bin/python-runtime",
+      "prefix": "/private/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/pb064-e2e-ocnfmr4z/alternate-venv",
+      "base_prefix": "/usr/local/opt/python@3.14/Frameworks/Python.framework/Versions/3.14"
+    }
+  },
+  {
+    "label": "status / venv",
+    "rc": 0,
+    "stdout": "checks status DEV-01: политика shop-checks rev 1\nОграничение: trust_mode=local: результаты диагностические — локальная история не защищена от владельца проекта; доверенное выполнение требует контура PB-061\n  payments-tests: run; последний результат blocked 5f44b13d9abd4ef3845ccfa4c31cd5dc-payments-tests от 2026-11-18T04:54:30.051661+00:00; тестов: 0\nПокрытие обязательств области задачи: 0/1\n",
+    "stderr": "",
+    "runtime": null
+  },
+  {
+    "label": "stale / venv",
+    "rc": 1,
+    "stdout": "checks run DEV-01: политика shop-checks rev 1, scope=project mode=stale\nОграничение: trust_mode=local: результаты диагностические — локальная история не защищена от владельца проекта; доверенное выполнение требует контура PB-061\n  payments-tests: RUN test\n  payments-tests: blocked — неподдерживаемый launcher: укажите прямой путь к базовому CPython CLI или его symlink в venv\nИтог: blocked=1; непокрытых обязательств: 1\n",
+    "stderr": "",
+    "runtime": null
+  },
+  {
+    "label": "force / venv",
+    "rc": 1,
+    "stdout": "checks run DEV-01: политика shop-checks rev 1, scope=project mode=force\nОграничение: trust_mode=local: результаты диагностические — локальная история не защищена от владельца проекта; доверенное выполнение требует контура PB-061\n  payments-tests: RUN test\n  payments-tests: blocked — неподдерживаемый launcher: укажите прямой путь к базовому CPython CLI или его symlink в venv\nИтог: blocked=1; непокрытых обязательств: 1\n",
+    "stderr": "",
+    "runtime": null
+  }
+]

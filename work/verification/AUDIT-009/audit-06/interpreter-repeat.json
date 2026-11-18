@@ -1,0 +1,185 @@
+{
+  "fixture": "Temporary no-Git project and stdlib venv without pip; real setup/apply, actual approved interpreter command and CLI. No mocks, history/outcome edits or missing executable. Test records Python runtime and compares sys.prefix with base_prefix.",
+  "approved_argv": [
+    "/private/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/pb064-e2e-cmf8axy1/approved-venv/bin/python3",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "tests",
+    "-p",
+    "test_payments.py"
+  ],
+  "direct_rc": 1,
+  "direct_stdout": "",
+  "direct_stderr": "F\n======================================================================\nFAIL: test_ok (test_payments.TestPay.test_ok)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/private/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/pb064-e2e-cmf8axy1/project/tests/test_payments.py\", line 6, in test_ok\n    self.assertEqual(sys.prefix, sys.base_prefix)\n    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: '/private/var/folders/53/qpdfw9ls555gkkcwh7[43 chars]venv' != '/usr/local/opt/python@3.14/Frameworks/Pyth[22 chars]3.14'\n- /private/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/pb064-e2e-cmf8axy1/approved-venv\n+ /usr/local/opt/python@3.14/Frameworks/Python.framework/Versions/3.14\n\n\n----------------------------------------------------------------------\nRan 1 test in 0.001s\n\nFAILED (failures=1)\n",
+  "direct_observed": {
+    "executable": "/private/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/pb064-e2e-cmf8axy1/approved-venv/bin/python3",
+    "prefix": "/private/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/pb064-e2e-cmf8axy1/approved-venv",
+    "base_prefix": "/usr/local/opt/python@3.14/Frameworks/Python.framework/Versions/3.14"
+  },
+  "adapter_rc": 0,
+  "adapter_observed": {
+    "executable": "/usr/local/opt/python@3.14/bin/python3.14",
+    "prefix": "/usr/local/opt/python@3.14/Frameworks/Python.framework/Versions/3.14",
+    "base_prefix": "/usr/local/opt/python@3.14/Frameworks/Python.framework/Versions/3.14"
+  },
+  "results": [
+    {
+      "schema_version": 1,
+      "result_id": "e87e0459eff44de2a68d410499f0931f-payments-tests",
+      "project_id": "shop",
+      "check_id": "payments-tests",
+      "kind": "test",
+      "binding": {
+        "policy_digest": "sha256:90d142630bf44ec985000a0f23123036212762c389f4e2475ef542774fda8702",
+        "definition_digest": "sha256:12d4e335a3cca37582c046d8ec100fa0efb4aaed64af81d2b86e7d7e32e75e55",
+        "adapter": {
+          "id": "python-unittest",
+          "version": "2"
+        },
+        "runner": {
+          "id": "playbook-runner",
+          "version": "1"
+        },
+        "input_digest": "sha256:9628a504d7b2138521241ad3b7cd3cfb82435706ad3899e08911e8652b7607bb",
+        "dependency_closure_digest": "sha256:763e8b7da1ee6ea32c1d08ea98364405c38ce3fe2d16f145bf995f2f13498655",
+        "environment": {
+          "platform": "darwin"
+        }
+      },
+      "status": "passed",
+      "started_at": "2026-11-18T02:14:23.487331+00:00",
+      "finished_at": "2026-11-18T02:14:23.979939+00:00",
+      "duration_seconds": 0.493,
+      "evidence": {
+        "stdout_log": "work/checks/runs/e87e0459eff44de2a68d410499f0931f/payments-tests.stdout.log",
+        "stderr_log": "work/checks/runs/e87e0459eff44de2a68d410499f0931f/payments-tests.stderr.log",
+        "adapter_report": "work/checks/runs/e87e0459eff44de2a68d410499f0931f/payments-tests.adapter.json",
+        "run_id": "e87e0459eff44de2a68d410499f0931f",
+        "run_seq": 0
+      },
+      "tests": {
+        "expected": [
+          "test_payments.TestPay.test_ok"
+        ],
+        "actual": [
+          {
+            "id": "test_payments.TestPay.test_ok",
+            "outcome": "passed"
+          }
+        ]
+      }
+    }
+  ],
+  "gate": {
+    "ok": true,
+    "scope": "project",
+    "checkpoint": null,
+    "task_id": "DEV-01",
+    "trust_mode": "local",
+    "checks": {
+      "payments-tests": {
+        "kind": "test",
+        "explain": [
+          "изменения не доказаны — консервативный набор",
+          "применимость always",
+          "reused e87e0459eff44de2a68d410499f0931f-payments-tests от 2026-11-18T02:14:23.979939+00:00",
+          "область project — весь обязательный набор"
+        ],
+        "status": "covered",
+        "result_id": "e87e0459eff44de2a68d410499f0931f-payments-tests"
+      }
+    },
+    "covered": [
+      "payments-tests"
+    ],
+    "uncovered": [],
+    "manual": [],
+    "blocked": [],
+    "not_applicable": [],
+    "notes": [],
+    "rejections": [],
+    "hashed_bytes": 2691187,
+    "hashed_files": 104,
+    "budget_reasons": [],
+    "trust": {
+      "mode": "local",
+      "capability": "local",
+      "note": "trust_mode=local: результаты диагностические — локальная история не защищена от владельца проекта; доверенное выполнение требует контура PB-061"
+    },
+    "protected_confirmed": false
+  },
+  "commands": [
+    {
+      "argv": [
+        "setup",
+        "apply"
+      ],
+      "rc": 0,
+      "stdout": "checks-политика shop-checks rev 1 подключена (checks-policy.json); project.json → checks_policy. Операция: work/lifecycle/20261118-051422-6380273f. trust_mode=local не повышает доверие результатов.\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "checks",
+        "run",
+        "DEV-01",
+        "--scope",
+        "project",
+        "--mode",
+        "force"
+      ],
+      "rc": 0,
+      "stdout": "checks run DEV-01: политика shop-checks rev 1, scope=project mode=force\nОграничение: trust_mode=local: результаты диагностические — локальная история не защищена от владельца проекта; доверенное выполнение требует контура PB-061\n  payments-tests: RUN test\n  payments-tests: passed (0.493с)\nИтог: passed=1; непокрытых обязательств: 0\n",
+      "stderr": ""
+    }
+  ],
+  "venv_parent_control": {
+    "rc": 1,
+    "stdout": "checks run DEV-01: политика shop-checks rev 1, scope=project mode=force\nОграничение: trust_mode=local: результаты диагностические — локальная история не защищена от владельца проекта; доверенное выполнение требует контура PB-061\n  payments-tests: RUN test\n  payments-tests: failed — тест failed: test_payments.TestPay.test_ok — оплата\nИтог: failed=1; непокрытых обязательств: 1\n",
+    "stderr": "",
+    "observed": {
+      "executable": "/private/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/pb064-e2e-cmf8axy1/approved-venv/bin/python3",
+      "prefix": "/private/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/pb064-e2e-cmf8axy1/approved-venv",
+      "base_prefix": "/usr/local/opt/python@3.14/Frameworks/Python.framework/Versions/3.14"
+    },
+    "gate": {
+      "ok": false,
+      "scope": "project",
+      "checkpoint": null,
+      "task_id": "DEV-01",
+      "trust_mode": "local",
+      "checks": {
+        "payments-tests": {
+          "kind": "test",
+          "explain": [
+            "изменения не доказаны — консервативный набор",
+            "применимость always",
+            "запуск: последний результат failed",
+            "область project — весь обязательный набор"
+          ],
+          "status": "uncovered"
+        }
+      },
+      "covered": [],
+      "uncovered": [
+        "payments-tests"
+      ],
+      "manual": [],
+      "blocked": [],
+      "not_applicable": [],
+      "notes": [],
+      "rejections": [],
+      "hashed_bytes": 2690829,
+      "hashed_files": 103,
+      "budget_reasons": [],
+      "trust": {
+        "mode": "local",
+        "capability": "local",
+        "note": "trust_mode=local: результаты диагностические — локальная история не защищена от владельца проекта; доверенное выполнение требует контура PB-061"
+      },
+      "protected_confirmed": false
+    }
+  }
+}

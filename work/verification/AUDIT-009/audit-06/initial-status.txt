@@ -1,0 +1,17 @@
+ M docs/designs/index.md
+ M docs/index.md
+ M docs/plans/index.md
+ M docs/specs/index.md
+ M docs/tasks/AUDIT-009.meta.json
+ M docs/tasks/index.md
+?? docs/designs/verification-evidence-separation.md
+?? docs/plans/verification-process-readiness.md
+?? docs/specs/verification-evidence-separation.md
+?? docs/tasks/AUDIT-011.md
+?? docs/tasks/AUDIT-011.meta.json
+?? docs/tasks/PB-075.md
+?? docs/tasks/PB-075.meta.json
+?? docs/tasks/PB-076.md
+?? docs/tasks/PB-076.meta.json
+?? docs/tasks/PB-077.md
+?? docs/tasks/PB-077.meta.json

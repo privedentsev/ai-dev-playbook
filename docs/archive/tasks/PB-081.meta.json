@@ -1,0 +1,133 @@
+{
+  "schema_version": 1,
+  "card_format_version": 2,
+  "relations": [],
+  "materials": [
+    {
+      "id": "verify-f9d224ec0ab04b8b99173540921263f2",
+      "role": "report",
+      "source": "docs/archive/tasks/PB-081-evidence/work/verification/PB-081/f9d224ec0ab04b8b99173540921263f2",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-081"
+      ]
+    },
+    {
+      "id": "audit-01",
+      "role": "report",
+      "source": "docs/archive/tasks/PB-081-evidence/work/verification/PB-081/audit-01",
+      "storage": "local",
+      "immutable": true,
+      "required": true,
+      "used_by": [
+        "PB-081"
+      ]
+    },
+    {
+      "id": "verify-a6da3111e6c24843afd0cd6d0a53a09d",
+      "role": "report",
+      "source": "docs/archive/tasks/PB-081-evidence/work/verification/PB-081/a6da3111e6c24843afd0cd6d0a53a09d",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-081"
+      ]
+    },
+    {
+      "id": "audit-02",
+      "role": "report",
+      "source": "docs/archive/tasks/PB-081-evidence/work/verification/PB-081/audit-02",
+      "storage": "local",
+      "immutable": true,
+      "required": true,
+      "used_by": [
+        "PB-081"
+      ]
+    },
+    {
+      "id": "lifecycle-lc-59c8e98c37e71fe4",
+      "role": "report",
+      "source": "docs/archive/tasks/PB-081-evidence/close-lc-59c8e98c37e71fe4.json",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": []
+    }
+  ],
+  "criterion_evidence": {
+    "CHECK-01": {
+      "check_sha256": "sha256:1a7282114d8364e9fc3cee591a12bf48fbd27bd01005f9a4711a80a9caee361c",
+      "card_projection": "sha256:744c5a65a6929c2257e574ef6a0d4c63af4811228aeb7caa65374360e628ed61",
+      "report_id": "verify-f9d224ec0ab04b8b99173540921263f2",
+      "report_sha256": "sha256:5fc30bd3d2888a23572608615d93a4c36a1ed7e54f0e7c837b0682d736f449e8"
+    },
+    "CHECK-02": {
+      "check_sha256": "sha256:b2f69dac125497d6714b7ca378563620e010c01c9647524f50aea6799fe9bb2a",
+      "card_projection": "sha256:744c5a65a6929c2257e574ef6a0d4c63af4811228aeb7caa65374360e628ed61",
+      "report_id": "verify-a6da3111e6c24843afd0cd6d0a53a09d",
+      "report_sha256": "sha256:40c6764b7f640c596adab0aacf317d3a8b50aaeccdb8b5789ab03967bfc33eb3"
+    }
+  },
+  "handoff": {
+    "at": "2026-11-18T07:49:32+03:00",
+    "actor": {
+      "name": "Codex",
+      "model": "GPT-6.2 Sol (Low)"
+    },
+    "summary": "HANDOFF-02",
+    "reports": [
+      "verify-a6da3111e6c24843afd0cd6d0a53a09d"
+    ],
+    "card_projection": "sha256:744c5a65a6929c2257e574ef6a0d4c63af4811228aeb7caa65374360e628ed61",
+    "entry_id": "HANDOFF-02",
+    "journal_sha256": "sha256:60881b4ee1391f2003607275b21651acbb68a864b560b7cde09f0e5a040d781c"
+  },
+  "audit_packages": {
+    "audit-01": "sha256:98474cbe71deccdb1a9ecf2f28569a58172cb41b67978dabd7b6dd05e7f1876f",
+    "audit-02": "sha256:a6c80fc7f3a2e91566a0b55525ff78360dbabba1d35c75bc3c65c1bb9c2087e2"
+  },
+  "acceptance": {
+    "at": "2026-11-18T07:58:32+03:00",
+    "actor": {
+      "name": "Codex",
+      "model": "GPT-6.2 Sol (Medium)"
+    },
+    "role": "auditor",
+    "kind": "acceptance",
+    "result": "accepted",
+    "handoff_at": "2026-11-18T07:49:32+03:00",
+    "session": null,
+    "detail": null,
+    "audit_id": "AUDIT-02",
+    "audit_sha256": "sha256:16f17145b150760939a65619a5773c8fb43f63f22a7b00d437c00c0e15a14216"
+  },
+  "moves": [
+    {
+      "from": "work/verification/PB-081/f9d224ec0ab04b8b99173540921263f2",
+      "to": "docs/archive/tasks/PB-081-evidence/work/verification/PB-081/f9d224ec0ab04b8b99173540921263f2"
+    },
+    {
+      "from": "work/verification/PB-081/audit-01",
+      "to": "docs/archive/tasks/PB-081-evidence/work/verification/PB-081/audit-01"
+    },
+    {
+      "from": "work/verification/PB-081/a6da3111e6c24843afd0cd6d0a53a09d",
+      "to": "docs/archive/tasks/PB-081-evidence/work/verification/PB-081/a6da3111e6c24843afd0cd6d0a53a09d"
+    },
+    {
+      "from": "work/verification/PB-081/audit-02",
+      "to": "docs/archive/tasks/PB-081-evidence/work/verification/PB-081/audit-02"
+    },
+    {
+      "from": "docs/tasks/PB-081.md",
+      "to": "docs/archive/tasks/PB-081.md"
+    },
+    {
+      "from": "docs/tasks/PB-081.meta.json",
+      "to": "docs/archive/tasks/PB-081.meta.json"
+    }
+  ]
+}

@@ -28,6 +28,7 @@ from pathlib import Path
 import checks_contract
 import checks_graph
 import checks_inventory
+import checks_unittest
 import project_view
 import verification_policy
 
@@ -391,7 +392,7 @@ def environment_identity(policy):
     return env
 
 
-def binding_environment(policy, check):
+def binding_environment(root, policy, check, *, launch_env=None):
     """Среда привязки результата конкретной проверки (R-11).
 
     К наблюдаемой ``environment_identity`` добавляются внешние факты,
@@ -402,6 +403,9 @@ def binding_environment(policy, check):
     сам TTL/always_run оценивает runner отдельно от identity.
     """
     env = environment_identity(policy)
+    if check["kind"] == "test":
+        env["python-unittest"] = checks_unittest.interpreter_identity(
+            root, check["argv"], launch_env)
     externals = {item["id"]: item for item in
                  policy["environment"].get("external") or []}
     for name in check.get("required_environment") or []:
@@ -634,7 +638,9 @@ def evaluate_reuse(check, result, *, root, policy, edges, state,
     if binding["runner"] != RUNNER:
         return {"status": "run", "reason": "другой runner"}
     environment = (environment if environment is not None
-                   else binding_environment(policy, check))
+                   else binding_environment(root, policy, check))
+    if "error" in environment.get("python-unittest", {}):
+        return {"status": "run", "reason": environment["python-unittest"]["error"]}
     if binding["environment"] != environment:
         return {"status": "run",
                 "reason": "среда отличается или неизвестна"}

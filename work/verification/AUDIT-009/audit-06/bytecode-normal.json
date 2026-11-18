@@ -1,0 +1,151 @@
+{
+  "fixture": "No-Git temporary project, real setup/apply and CLI subprocesses. No mock or bytecode editing. A normal unittest seed generates standard cache before the isolated adapter; source changes preserve size/mtime; control retains all temporary cache files. Baseline uses normal cache env; optional dont-write sets PYTHONDONTWRITEBYTECODE=1 for subsequent runs without clearing the existing cache.",
+  "variant": "normal",
+  "no_git": true,
+  "cache_files": [
+    "src/payments/__pycache__/pay.cpython-314.pyc"
+  ],
+  "same_size": true,
+  "same_mtime_ns": true,
+  "old_sha256": "585c93666fcb046b7b264d3fa73202aa2a38254ae82a4b3ba19e873c2d5a9886",
+  "new_sha256": "69ef4f409b530264b0da21ad4054978ada08895c93631a0da1957e2a10b592b5",
+  "source_after_edit": "value = 2\n",
+  "second_rc": 1,
+  "gate_before_control": {
+    "ok": false,
+    "scope": "project",
+    "checkpoint": null,
+    "task_id": "DEV-01",
+    "trust_mode": "local",
+    "checks": {
+      "payments-tests": {
+        "kind": "test",
+        "explain": [
+          "изменения не доказаны — консервативный набор",
+          "применимость always",
+          "запуск: последний результат failed",
+          "область project — весь обязательный набор"
+        ],
+        "status": "uncovered"
+      }
+    },
+    "covered": [],
+    "uncovered": [
+      "payments-tests"
+    ],
+    "manual": [],
+    "blocked": [],
+    "not_applicable": [],
+    "notes": [],
+    "rejections": [],
+    "hashed_bytes": 2690659,
+    "hashed_files": 105,
+    "budget_reasons": [],
+    "trust": {
+      "mode": "local",
+      "capability": "local",
+      "note": "trust_mode=local: результаты диагностические — локальная история не защищена от владельца проекта; доверенное выполнение требует контура PB-061"
+    },
+    "protected_confirmed": false
+  },
+  "observed_before_control": [
+    1,
+    2
+  ],
+  "control_rc": 1,
+  "observed_all": [
+    1,
+    2,
+    2
+  ],
+  "results_in_order": [
+    {
+      "status": "passed",
+      "reused": null,
+      "input_digest": "sha256:52c212c3186d362be5d7dff843751d5b24cae4dfed79ba1a5617cbef4a7025c3"
+    },
+    {
+      "status": "failed",
+      "reused": null,
+      "input_digest": "sha256:a53e4d0d297a4694c92fa901a831f17f98695900dcc519fa978966141c6484bf"
+    },
+    {
+      "status": "failed",
+      "reused": null,
+      "input_digest": "sha256:a53e4d0d297a4694c92fa901a831f17f98695900dcc519fa978966141c6484bf"
+    }
+  ],
+  "commands": [
+    {
+      "argv": [
+        "setup",
+        "apply"
+      ],
+      "rc": 0,
+      "stdout": "checks-политика shop-checks rev 1 подключена (checks-policy.json); project.json → checks_policy. Операция: work/lifecycle/20261118-050832-ed9b3af1. trust_mode=local не повышает доверие результатов.\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "checks",
+        "run",
+        "DEV-01",
+        "--scope",
+        "project",
+        "--mode",
+        "force"
+      ],
+      "rc": 0,
+      "stdout": "checks run DEV-01: политика shop-checks rev 1, scope=project mode=force\nОграничение: trust_mode=local: результаты диагностические — локальная история не защищена от владельца проекта; доверенное выполнение требует контура PB-061\n  payments-tests: RUN test\n  payments-tests: passed (0.516с)\nИтог: passed=1; непокрытых обязательств: 0\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "checks",
+        "plan",
+        "DEV-01"
+      ],
+      "rc": 0,
+      "stdout": "checks plan DEV-01: политика shop-checks rev 1, trust=local\nИзменения: 1 путей\n  ~ src/payments/pay.py\nГраф: 1 рёбер, unknown-областей: 0\nОценка: 5с лимит 100с; прочитано 2690962 Б / 107 файлов (лимит 10000000 Б)\n  payments-tests: run\n      изменён src/payments/pay.py\n      применимость always\n      запуск: входы изменились\nИтог: run=1, reused=0, blocked=0\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "checks",
+        "run",
+        "DEV-01",
+        "--scope",
+        "task",
+        "--mode",
+        "stale"
+      ],
+      "rc": 1,
+      "stdout": "checks run DEV-01: политика shop-checks rev 1, scope=task mode=stale\nОграничение: trust_mode=local: результаты диагностические — локальная история не защищена от владельца проекта; доверенное выполнение требует контура PB-061\n  payments-tests: RUN test\n  payments-tests: failed — тест failed: test_payments.TestPay.test_ok — оплата\nИтог: failed=1; непокрытых обязательств: 1\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "checks",
+        "status",
+        "DEV-01"
+      ],
+      "rc": 0,
+      "stdout": "checks status DEV-01: политика shop-checks rev 1\nОграничение: trust_mode=local: результаты диагностические — локальная история не защищена от владельца проекта; доверенное выполнение требует контура PB-061\n  payments-tests: run; последний результат failed a0687a24f70a43efa34e4bd703abe75e-payments-tests от 2026-11-18T02:08:36.926797+00:00; тестов: 1\n      failed: test_payments.TestPay.test_ok — оплата\nПокрытие обязательств области задачи: 0/1\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "checks",
+        "run",
+        "DEV-01",
+        "--scope",
+        "project",
+        "--mode",
+        "force"
+      ],
+      "rc": 1,
+      "stdout": "checks run DEV-01: политика shop-checks rev 1, scope=project mode=force\nОграничение: trust_mode=local: результаты диагностические — локальная история не защищена от владельца проекта; доверенное выполнение требует контура PB-061\n  payments-tests: RUN test\n  payments-tests: failed — тест failed: test_payments.TestPay.test_ok — оплата\nИтог: failed=1; непокрытых обязательств: 1\n",
+      "stderr": ""
+    }
+  ]
+}

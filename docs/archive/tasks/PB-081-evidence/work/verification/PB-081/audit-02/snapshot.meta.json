@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "card_format_version": 2,
+  "relations": [],
+  "materials": [
+    {
+      "id": "verify-f9d224ec0ab04b8b99173540921263f2",
+      "role": "report",
+      "source": "work/verification/PB-081/f9d224ec0ab04b8b99173540921263f2",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-081"
+      ]
+    },
+    {
+      "id": "audit-01",
+      "role": "report",
+      "source": "work/verification/PB-081/audit-01",
+      "storage": "local",
+      "immutable": true,
+      "required": true,
+      "used_by": [
+        "PB-081"
+      ]
+    },
+    {
+      "id": "verify-a6da3111e6c24843afd0cd6d0a53a09d",
+      "role": "report",
+      "source": "work/verification/PB-081/a6da3111e6c24843afd0cd6d0a53a09d",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-081"
+      ]
+    }
+  ],
+  "criterion_evidence": {
+    "CHECK-01": {
+      "check_sha256": "sha256:53224e8052ad266264692d793112aafc253bd1b76bf4decb22d8807f3a437ebf",
+      "card_projection": "sha256:744c5a65a6929c2257e574ef6a0d4c63af4811228aeb7caa65374360e628ed61",
+      "report_id": "verify-f9d224ec0ab04b8b99173540921263f2",
+      "report_sha256": "sha256:5fc30bd3d2888a23572608615d93a4c36a1ed7e54f0e7c837b0682d736f449e8"
+    },
+    "CHECK-02": {
+      "check_sha256": "sha256:39db1d51293e5f2647dfebb5f7e759b875d5197c15cf15ef8a8d7c7aef680a6e",
+      "card_projection": "sha256:744c5a65a6929c2257e574ef6a0d4c63af4811228aeb7caa65374360e628ed61",
+      "report_id": "verify-a6da3111e6c24843afd0cd6d0a53a09d",
+      "report_sha256": "sha256:40c6764b7f640c596adab0aacf317d3a8b50aaeccdb8b5789ab03967bfc33eb3"
+    }
+  },
+  "handoff": {
+    "at": "2026-11-18T07:49:32+03:00",
+    "actor": {
+      "name": "Codex",
+      "model": "GPT-6.2 Sol (Low)"
+    },
+    "summary": "HANDOFF-02",
+    "reports": [
+      "verify-a6da3111e6c24843afd0cd6d0a53a09d"
+    ],
+    "card_projection": "sha256:744c5a65a6929c2257e574ef6a0d4c63af4811228aeb7caa65374360e628ed61",
+    "entry_id": "HANDOFF-02",
+    "journal_sha256": "sha256:e4b61a30522dc44ea0b03dc650866d16d936745e823558ee2b2b7da7de7e5478"
+  },
+  "audit_packages": {
+    "audit-01": "sha256:98474cbe71deccdb1a9ecf2f28569a58172cb41b67978dabd7b6dd05e7f1876f"
+  }
+}

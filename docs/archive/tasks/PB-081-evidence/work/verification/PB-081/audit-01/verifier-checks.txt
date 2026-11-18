@@ -1,0 +1,8 @@
+Команда для кандидата и HEAD b6f20ea в отдельных временных копиях
+PYTHONPATH=tests python3 -m unittest test_checks_run test_checks_gate test_checks_verifier_gate
+
+Кандидат и HEAD дали один набор из 18 failures и 4 errors на 94 тестах. Отличий по списку неуспешных тестов нет. Вложенный sandbox-exec в этой сессии недоступен.
+
+Контроль среды
+/usr/bin/sandbox-exec -p '(version 1) (allow default)' /usr/bin/true
+sandbox-exec: sandbox_apply: Operation not permitted
