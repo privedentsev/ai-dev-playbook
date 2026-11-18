@@ -1,0 +1,11 @@
+{
+  "argv": [
+    "python3",
+    "ai-dev-playbook/scripts/playbook.py",
+    "verify",
+    "AUDIT-009",
+    "--audit-ready"
+  ],
+  "exit_code": 1,
+  "observed": "ERROR: AUDIT-009: аудит требует in_review; структура 92 карточки/31 документов/2 legacy OK. Текущей HANDOFF нет; готовность не заявляется."
+}

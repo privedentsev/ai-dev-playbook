@@ -6,9 +6,9 @@
   "schema_version": 1,
   "document_id": "plan:dependency-aware-verification",
   "kind": "plan",
-  "state": "accepted",
+  "state": "completed",
   "created_at": "2026-11-07T01:05:41+03:00",
-  "updated_at": "2026-11-11T06:35:54+03:00",
+  "updated_at": "2026-11-18T09:43:20+03:00",
   "current_revision": 1,
   "relations": [
     {
@@ -28,30 +28,52 @@
     "AUDIT-009"
   ],
   "changes": [],
-  "materials": [],
-  "archive": null
+  "materials": [
+    {
+      "id": "lifecycle-lc-30fc1d369e023e48",
+      "role": "report",
+      "source": "docs/archive/plans/dependency-aware-verification-evidence/archive-lc-30fc1d369e023e48.json",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": []
+    }
+  ],
+  "archive": {
+    "at": "2026-11-18T09:43:20+03:00",
+    "reason": "Подзадачи и итоговая совместная приёмка AUDIT-009 завершены; план исполнен. Protected rollout остаётся отдельным поручением.",
+    "successor": null,
+    "operation_id": "lc-30fc1d369e023e48",
+    "original_path": "docs/plans/dependency-aware-verification.md"
+  },
+  "moves": [
+    {
+      "from": "docs/plans/dependency-aware-verification.md",
+      "to": "docs/archive/plans/dependency-aware-verification.md"
+    }
+  ]
 }
 ```
 <!-- playbook-meta:end -->
 
 ## Статус и область
 
-Подготовка по поручению инженера 2026-11-07. Карточки draft; реализация и развёртывание не начаты. Источник статусов — карточки и индекс, не этот план. Существующая очередь и незавершённые задачи не переупорядочиваются.
+План подготовлен по поручению инженера 2026-11-07. Реализация и индивидуальная приёмка отражены в карточках подзадач; итоговая совместная приёмка — в AUDIT-009. Источник статусов — карточки и индекс, не этот план. Внешнее protected-развёртывание не выполнено; существующая очередь не переупорядочивается.
 
-[Требования](../specs/dependency-aware-verification.md), [design](../designs/dependency-aware-verification.md), [ADR-0006](../adr/0006-dependency-aware-verification.md).
+[Требования](../../specs/dependency-aware-verification.md), [design](../../designs/dependency-aware-verification.md), [ADR-0006](../../adr/0006-dependency-aware-verification.md).
 
 ## Порядок реализации
 
 | Этап | Результат | Зависимость | Приёмка спецификации |
 |---|---|---|---|
-| [PB-057](../archive/tasks/PB-057.md) | Контракт и политика | — | AC-03–06,08,10 |
-| [PB-058](../archive/tasks/PB-058.md) | Снимки и исключения | PB-057 | AC-02–03,07 |
-| [PB-059](../archive/tasks/PB-059.md) | Граф и выбор | PB-058 | AC-01–04 |
-| [PB-060](../archive/tasks/PB-060.md) | Runner и результаты | PB-059 | AC-04–07 |
-| [PB-061](../archive/tasks/PB-061.md) | Граница доверия | PB-060 | AC-07–08,11 |
-| [PB-062](../archive/tasks/PB-062.md) | Жизненный цикл и релиз | PB-061 | AC-05,08–09 |
-| [PB-063](../archive/tasks/PB-063.md) | Настройка и миграция | PB-062 | AC-03,06,10 |
-| [PB-064](../archive/tasks/PB-064.md) | Сквозной пилот | PB-063 | AC-01–11 |
+| [PB-057](../tasks/PB-057.md) | Контракт и политика | — | AC-03–06,08,10 |
+| [PB-058](../tasks/PB-058.md) | Снимки и исключения | PB-057 | AC-02–03,07 |
+| [PB-059](../tasks/PB-059.md) | Граф и выбор | PB-058 | AC-01–04 |
+| [PB-060](../tasks/PB-060.md) | Runner и результаты | PB-059 | AC-04–07 |
+| [PB-061](../tasks/PB-061.md) | Граница доверия | PB-060 | AC-07–08,11 |
+| [PB-062](../tasks/PB-062.md) | Жизненный цикл и релиз | PB-061 | AC-05,08–09 |
+| [PB-063](../tasks/PB-063.md) | Настройка и миграция | PB-062 | AC-03,06,10 |
+| [PB-064](../tasks/PB-064.md) | Сквозной пилот | PB-063 | AC-01–11 |
 | [AUDIT-009](../tasks/AUDIT-009.md) | Независимая приёмка всего блока | PB-057–064 | AC-01–11 |
 
 ## Контрольные точки
@@ -70,7 +92,7 @@
 
 ## Решения для старта и подключения
 
-Для старта: принять подготовленные spec/design/ADR и разрешить PB-057. Числовые лимиты fallback и место доверенного executor задаются при подключении; их отсутствие не мешает тестированию контрактов на fixtures, но не даёт разрешения неограниченного запуска в рабочем проекте. Если реальной границы прав нет, protected-эксплуатацию нельзя объявить принятой; инженер выбирает стенд или явно оставляет local-режим без заявленной защиты.
+Числовые лимиты fallback и место доверенного executor задаются при подключении; fixtures не разрешают неограниченный запуск в рабочем проекте. При отсутствии доказанной границы прав результаты остаются local; protected-эксплуатация требует отдельной OS/CI identity и отдельного подключения.
 
 Не включены: автоматический commit/push/release, универсальные анализаторы всех языков, обещание полного семантического покрытия, настройка чужих аккаунтов. Отдельная карточка нужна для самостоятельного релиза/проверки; каждый запуск внутри текущей задачи остаётся в её истории.
 

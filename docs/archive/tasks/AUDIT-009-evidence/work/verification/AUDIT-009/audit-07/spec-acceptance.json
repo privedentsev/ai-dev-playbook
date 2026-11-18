@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "document": "spec:dependency-aware-verification",
+  "change": "dependency-aware-verification",
+  "revision": 1,
+  "result": "accepted",
+  "kind": "acceptance",
+  "actor": {
+    "name": "Codex",
+    "role": "auditor"
+  },
+  "at": "2026-11-18T09:13:55+03:00",
+  "document_sha256": "sha256:7c067125708d16774f8e5f4095638a5389480c52c7ec3247832b2e3f804c953b",
+  "payload_sha256": "sha256:7f448bf08e70af5d6b23512c1379b8a24b9fdc9d2d9a196a735e058bec9dbf4e"
+}

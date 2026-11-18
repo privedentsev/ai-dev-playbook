@@ -1,0 +1,248 @@
+# AUDIT-009: Независимо принять автоматический выбор и доверенные результаты проверок
+
+ID: AUDIT-009
+Status: done
+Priority: P2
+Depends-On: PB-057, PB-058, PB-059, PB-060, PB-061, PB-062, PB-063, PB-064
+Executor: Codex
+Model: GPT-6
+Created: 2026-11-07T01:09:51+03:00
+Closed: 2026-11-18T09:28:43+03:00
+
+<!-- playbook-meta:external -->
+
+## Задача
+
+### Цель и границы
+
+Независимо принять совместную работу PB-057–064 по AC-01–11 спецификации. Проверить автономность выбора, достаточность тестового каталога, достоверность reuse и реальные границы защиты. Не реализовывать исправления в сессии аудита.
+
+### Контекст
+
+[Спецификация](../../specs/dependency-aware-verification.md), [design](../../designs/dependency-aware-verification.md), [ADR-0006](../../adr/0006-dependency-aware-verification.md), [план](../plans/dependency-aware-verification.md).
+
+Независимый аудит начат 2026-11-16 по явному поручению инженера. Зависимости PB-057–064 завершены; прочитаны актуальные передачи. Архивные карточки не переоткрывать: найденные дефекты оформить отдельной новой задачей со ссылками, воспроизведением и приёмкой. Исправления не выполнять; при блокирующих замечаниях AUDIT-009 не принимать и не закрывать. Исходные чужие правки docs/index.md, docs/plans/index.md и draft verification-process-readiness.md сохраняются. Проверяемая реализация создана в прежних сессиях; текущая сессия выполняет независимый аудит блока.
+
+### Критерии приёмки
+
+- [x] AC-01: Независимая матрица спецификации AC-01–11 воспроизведена с реальными CLI/subprocess counters, включая no-Git, ручные правки, unknown fallback, exclusions и release/stale/force; не только unit/структурная проверка.
+- [x] AC-02: Forgery/replay/policy weakening/zero tests/skip/corrupt history/race не дают готовности. Реальная граница прав отделена от mock-протокола; отсутствие protected-развёртывания и семантические ограничения не скрыты.
+- [x] AC-03: Legacy/opt-in/update/recovery и cross-task reuse сохранены; отсутствуют открытые блокирующие находки. Измерения PB-064 воспроизводимы, обещания экономии соответствуют данным.
+- [x] AC-04: Протокол с доказательствами и решением зарегистрирован штатным lifecycle. Promotion/архивирование общих документов выполняются только после успешной приёмки; отдельного разрешения на commit/push/release аудит не даёт.
+
+### План
+
+1. Проверить зависимости, прочитать card show --handoff и связанные записи; выполнить audit-ready по действующему контракту.
+2. Подготовить собственные материалы и независимо проверить критические обходы и всю сквозную матрицу.
+3. Сохранить независимый протокол и доказательства; при ошибках создать отдельную задачу исправлений по поручению инженера, не переоткрывая архив и не исправляя реализацию. Формат журнала/CLI не обходить фиктивной передачей.
+4. После принятия всех требований зарегистрировать accept/close и promotion документов штатным CLI; обновить индексы.
+
+### Ресурсы
+
+Независимая сессия либо инженер, Python, временные проекты, доступный изолированный стенд для проверки прав. Если стенд отсутствует, явно зафиксировать непроверенную границу; не принимать защищённую эксплуатацию по mock-тесту.
+
+Материалы: `docs/tasks/AUDIT-009-evidence/`. [Независимый протокол audit-01](AUDIT-009-evidence/audit-01.md): changes_requested, A-01 (P1), A-02/A-03 (P2). [Исправления PB-073](PB-073.md) приняты и архивированы. [Повторный независимый протокол audit-02](AUDIT-009-evidence/audit-02/report.md): changes_requested, A-04 (P1), A-05 (P2). Исправления [PB-074](PB-074.md) приняты и архивированы; зависимости от незавершённой AUDIT-009 нет. Протокол связывает каждый AC спецификации с командой, фактическим результатом и ограничением. Отдельная OS/CI identity и protected deployment не подтверждены. Предыдущие отрицательные протоколы сохранены как собственные материалы и failed CHECK; фиктивные передачи не создавались. Статусы реализации не дублируются в плане. [Повторный протокол audit-03](AUDIT-009-evidence/audit-03/report.md): changes_requested, новая A-06 (P2) — откат часов скрывает поздний failed несмотря на больший run_seq; исправление [PB-078](PB-078.md). Прежние A-04/A-05 закрыты по новым воспроизведениям. [Повторный протокол audit-04](AUDIT-009-evidence/audit-04/report.md): A-06 устранена, новые пробы PB-078 пройдены; changes_requested из-за A-07 (P1) — verifier gate принимает старый passed после позднего failed. Исправление [PB-079](PB-079.md). Новые независимые результаты — [audit-05](AUDIT-009-evidence/work/verification/AUDIT-009/audit-05/report.md): A-07 устранена, полный verify и self-pilot завершены, changes_requested из-за A-08 (P1) — старый Python cache исполняется вместо новых исходников. Исправление [PB-080](PB-080.md). [Повторный протокол audit-06](AUDIT-009-evidence/work/verification/AUDIT-009/audit-06/report.md): A-08 устранена; A-09 (P1) — unittest-адаптер подменяет Python одобренной команды интерпретатором родителя и выдаёт ложный passed. Исправление [PB-081](PB-081.md).
+
+## Журнал
+
+### EXEC-01 — Выполнение
+Время: 2026-11-16T06:43:12+03:00
+Исполнитель: Codex
+Модель: GPT-6
+Изменения: выполнен независимый аудит реализации прежних сессий PB-057–064; прочитаны передачи всех зависимостей, подготовлен штатный snapshot audit-01, сохранены протокол/матрица/независимые пробы и логи. По явному поручению инженера создана отдельная draft-карточка PB-073 на A-01–A-03; исправления не выполнялись, архив не переоткрывался. Основной self-project остаётся на legacy; incoming draft verification-process-readiness и его индексные изменения сохранены.
+Файлы:
+- docs/tasks/AUDIT-009.md
+- docs/tasks/AUDIT-009.meta.json
+- docs/tasks/AUDIT-009-evidence/
+- docs/tasks/PB-073.md
+- docs/tasks/PB-073.meta.json
+- docs/tasks/index.md
+- work/verification/AUDIT-009/audit-01/
+
+### CHECK-01 — Проверка
+Время: 2026-11-16T06:43:12+03:00
+Исполнитель: Codex
+Модель: GPT-6
+Результат: failed
+Критерии: AC-01, AC-02, AC-03, AC-04
+Команда: `python3 -m unittest discover -s tests -p 'test_checks_*.py' -v`; `python3 docs/tasks/AUDIT-009-evidence/probe_cli_obligations.py .`; `python3 docs/tasks/AUDIT-009-evidence/probe_equal_timestamps.py .`; архивированный self_pilot.py с --plan-only; `verify AUDIT-009 --audit-ready`.
+Среда: macOS 27.2.1 x86_64, Python 3.14.6; feature/dependency-aware-verification; реальные временные проекты без Git и subprocess, часы в A-02 управляемые; точная модификация базовой модели GPT-6 средой не предоставлена.
+Факт: changes_requested. 316 адресных тестов (включая 14 E2E) прошли за 171.442с, но собственные пробы воспроизвели A-01 (P1: failed исчезает из task-обязательств, повторный run/gate успешны без passed), A-02 (P2: равный finished_at скрывает поздний failed) и A-03 (P2: пилот после архивации падает до плана). Новая задача исправлений — PB-073; AUDIT-009 не принята и не закрыта. Техническая готовность не подтверждена: audit-ready требует in_review/актуальную передачу; её нет.
+Доказательства: [протокол с A-01–A-03 и матрицей](AUDIT-009-evidence/audit-01.md), [316 тестов](AUDIT-009-evidence/checks-tests-unsandboxed.log), [CLI-контрпример](AUDIT-009-evidence/probe_cli_obligations.json), [порядок исходов](AUDIT-009-evidence/probe_equal_timestamps.json), [отказ пилота](AUDIT-009-evidence/pilot-plan.log), [исправления](PB-073.md).
+Ограничения: полный legacy suite и полный пилот заново не выполнялись; пилот остановлен ошибкой подготовки. Реальная отдельная OS/CI identity недоступна, protected-эксплуатация не принята. Журнал AUDIT v2 требует предшествующей HANDOFF с passed CHECK; для отрицательного итогового аудита без передачи не создаётся фиктивная HANDOFF — протокол сохранён в материале и failed CHECK. Первый загрязнённый транзакцией/песочницей прогон исключён из доказательств; адресный повтор прошёл. Следующий шаг — реализация PB-073 и новый независимый аудит.
+
+### EXEC-02 — Выполнение
+Время: 2026-11-16T18:08:00+03:00
+Исполнитель: Codex
+Модель: GPT-6
+Изменения: по поручению инженера проведён повторный независимый аудит после приёмки PB-073 с условием закрытия только при отсутствии замечаний. Прочитаны актуальные передачи и изменения PB-073; исходные сценарии A-01/A-02 повторены, новый пилот проверен после архивирования PB-073. Сохранён штатный snapshot audit-02, новые независимые JSON/логи и отрицательный протокол. Выявлены A-04 (порча/удаление failed стирает task-обязательство) и A-05 (неоднозначная legacy-история без run_seq допускает старый passed); создана отдельная draft PB-074 по сохраняющему силу поручению инженера. Продуктовые исправления и переоткрытие архива не выполнялись.
+Файлы:
+- docs/tasks/AUDIT-009.md
+- docs/tasks/AUDIT-009.meta.json
+- docs/tasks/AUDIT-009-evidence/audit-02/
+- docs/tasks/PB-074.md
+- docs/tasks/PB-074.meta.json
+- docs/tasks/index.md
+- work/verification/AUDIT-009/audit-02/
+
+### CHECK-02 — Проверка
+Время: 2026-11-16T18:08:00+03:00
+Исполнитель: Codex
+Модель: GPT-6
+Результат: failed
+Критерии: AC-01, AC-02, AC-03, AC-04
+Команда: `python3 -m unittest discover -s tests -p 'test_checks_*.py' -v`; `probe_corrupt_obligation.py . corrupt`/`delete`; `probe_legacy_equal.py .`; исходные пробы A-01/A-02, probe_fixes/probe-spawn PB-073; `python3 docs/archive/tasks/PB-073-evidence/self_pilot.py . /tmp/audit009-repeat-plan --plan-only`; `verify AUDIT-009 --audit-ready`.
+Среда: macOS 27.2.1 x86_64, Python 3.14.6, feature/dependency-aware-verification / 6311aa96f59db025b4fde3919775e03760193b3a; временные проекты без Git, реальные CLI/subprocess; часы/legacy-формат в A-05 — контролируемая фикстура.
+Факт: 328 адресных тестов прошли за 189.731с, исходный A-01 и A-02 на новых seq-записях исправлены; plan-only нового пилота после архивирования PB-073 завершён rc=0. Независимые дополнительные пробы выявили A-04 (P1): после порчи или удаления последнего failed task gate.ok=true, stale rc=0, счётчик остаётся 2; и A-05 (P2): старые записи без run_seq с равным временем выбирают старый passed по UUID, project gate.ok=true. Verdict changes_requested, исправления PB-074; условие «если всё хорошо» не выполнено. AUDIT-009 остаётся in_progress без acceptance/close.
+Доказательства: [повторный протокол](AUDIT-009-evidence/audit-02/report.md), [328 тестов](AUDIT-009-evidence/audit-02/checks-tests.log), [повреждение](AUDIT-009-evidence/audit-02/probe-corrupt.json), [удаление](AUDIT-009-evidence/audit-02/probe-deleted.json), [legacy-порядок](AUDIT-009-evidence/audit-02/probe-legacy-equal.json), [plan-only](AUDIT-009-evidence/audit-02/pilot-plan.log), [команды](AUDIT-009-evidence/audit-02/commands.json), [задача исправлений](PB-074.md).
+Ограничения: полный двухчасовой self-pilot и полный legacy verify не повторялись; исторические метрики PB-073 не объявляются новым измерением. Реальная отдельная OS/CI identity не подтверждена; local-результаты не являются protected-развёртыванием. Актуальной HANDOFF у AUDIT-009 нет; фиктивная passed-передача ради записи отрицательного AUDIT не создаётся. Протокол и находки — в зарегистрированном собственном материале; результат — failed CHECK и diagnostic lifecycle. Старые записи/доказательства не переписаны; следующий шаг — PB-074 и новый независимый аудит.
+
+### EXEC-03 — Выполнение
+Время: 2026-11-17T01:45:47+03:00
+Исполнитель: Codex
+Модель: GPT-6
+Изменения: повторный независимый аудит блока после принятия PB-074; подготовлен штатный audit-03, воспроизведены прежние A-04/A-05 и сквозная матрица tests/checks, выполнен новый plan-only самопилот. Найдена A-06 (P2): более поздний failed при откате часов скрывается старым passed; создана draft PB-078. Код и постоянные тесты не менялись, архив не переоткрывался.
+Файлы:
+- docs/tasks/AUDIT-009.md
+- docs/tasks/AUDIT-009.meta.json
+- docs/tasks/AUDIT-009-evidence/audit-03/
+- docs/tasks/PB-078.md
+- docs/tasks/PB-078.meta.json
+- docs/tasks/index.md
+- work/verification/AUDIT-009/audit-03/
+
+### CHECK-03 — Проверка
+Время: 2026-11-17T01:45:47+03:00
+Исполнитель: Codex
+Модель: GPT-6
+Результат: failed
+Критерии: AC-01, AC-02, AC-03, AC-04
+Команда: `python3 -m unittest discover -s tests -p 'test_checks_*.py' -v`; старые пробы audit-02 corrupt/delete/legacy; `python3 docs/tasks/AUDIT-009-evidence/audit-03/probe_clock_rollback.py .`; архивный self_pilot.py с --plan-only; начальный verify AUDIT-009 --audit-ready.
+Среда: macOS/Python из environment.json; временные проекты без Git, реальные subprocess команд. В A-06 управляется только время runner now, часы машины не менялись, история/UUID не подменялись.
+Факт: чистый набор — 344 теста OK за 251.125 с. Прежние A-04/A-05 не воспроизводятся: task gate закрыт, stale повторяет исполнение; legacy-неоднозначность выбирает failed. Новый plan-only — rc=0, PLAN-ONLY OK, discovery 1113 экземпляров/1107 уникальных ID. A-06 — passed/seq=0 затем failed/seq=1 со временем на секунду раньше: task/project gate.ok=true, task stale reused=1, реальных запусков всего 2. Verdict changes_requested; AUDIT-009 остаётся in_progress, не принята и не закрыта.
+Доказательства: [протокол с A-06 и матрицей](AUDIT-009-evidence/audit-03/report.md), [344 теста](AUDIT-009-evidence/audit-03/checks-tests-clean.log), [проба](AUDIT-009-evidence/audit-03/probe_clock_rollback.py), [JSON](AUDIT-009-evidence/audit-03/clock-rollback.json), [plan-only](AUDIT-009-evidence/audit-03/pilot-plan.log), [исправление PB-078](PB-078.md).
+Ограничения: первый прогон загрязнён собственной параллельной prepare-audit и внешней песочницей, исключён из доказательств; чистый прогон выполнен после завершения транзакции, вне внешней песочницы. Полный legacy verify и полный двухчасовой self-pilot при блокирующей A-06 не повторялись; новые метрики экономии не заявляются. Реальная отдельная OS/CI identity не подтверждена. Audit-ready отвергает in_progress/отсутствие HANDOFF; фиктивная передача не создавалась. Отрицательный протокол сохраняется через failed CHECK и diagnostic lifecycle, не как accepted или отмена карточки.
+
+### EXEC-04 — Выполнение
+Время: 2026-11-17T14:30:06+03:00
+Исполнитель: Codex
+Модель: GPT-6
+Изменения: повторный независимый аудит после принятия PB-078; подготовлен audit-04, повторены исходные A-04/A-05/A-06 и составные сценарии PB-078. Выполнен чистый набор checks_*; начат полный пилот на побайтно совпадающей временной копии и после подтверждения A-07 остановлены только собственные процессы, затем завершён отдельный plan-only. Новая A-07 (P1) — verifier gate принимает любой старый passed после позднего failed того же кандидата; создана PB-079. Код и постоянные тесты не менялись, архив не переоткрывался.
+Файлы:
+- docs/tasks/AUDIT-009.md
+- docs/tasks/AUDIT-009.meta.json
+- docs/tasks/AUDIT-009-evidence/audit-04/
+- docs/tasks/PB-079.md
+- docs/tasks/PB-079.meta.json
+- docs/tasks/index.md
+- work/verification/AUDIT-009/audit-04/
+
+### CHECK-04 — Проверка
+Время: 2026-11-17T14:30:06+03:00
+Исполнитель: Codex
+Модель: GPT-6
+Результат: failed
+Критерии: AC-01, AC-02, AC-03, AC-04
+Команда: `python3 -m unittest discover -s tests -p 'test_checks_*.py' -v`; пробы A-04/A-05/A-06; subprocess-пробы overlap/loss/healed-rebuild/control PB-078; `python3 docs/tasks/AUDIT-009-evidence/audit-04/probe_verifier_gate.py .`; self_pilot.py на временной копии (полный начат/остановлен, отдельный --plan-only завершён); verify AUDIT-009 --audit-ready.
+Среда: macOS/Python и candidate 1c99fe8 из candidate.json. Настоящие subprocess/sandbox-exec и подписанные квитанции; trusted home той же OS identity. В новой пробе mock нет, история/квитанции/UUID не редактируются, сравниваются одинаковые candidate/policy и реально исполненные passed→failed.
+Факт: 354 теста OK за 258.133 с. A-06 исправлена: task/project gate=false, stale реально повторяет исполнение (attempts=3); прежние потери/legacy и сценарии PB-078 блокируются корректно, новый успех восстанавливает покрытие. Новая A-07: обе подписи валидны, candidate одинаков; checks_gate оставляет probe uncovered в task/project, а checks_verifier.gate даёт ok=true/covered=1, реальный CLI verifier gate — rc=0. Причина: объединение любых passed из проектных копий вместо общего расчёта актуального доверенного исхода. Verdict changes_requested; AUDIT-009 остаётся in_progress, без приёмки и закрытия.
+Доказательства: [протокол A-07 и матрица](AUDIT-009-evidence/audit-04/report.md), [354 теста](AUDIT-009-evidence/audit-04/checks-tests.log), [проба](AUDIT-009-evidence/audit-04/probe_verifier_gate.py), [квитанции и CLI](AUDIT-009-evidence/audit-04/verifier-gate.json), [plan-only](AUDIT-009-evidence/audit-04/pilot-plan.log), [PB-079](PB-079.md).
+Ограничения: полный пилот остановлен SIGTERM/rc=143 после подтверждения блокирующей A-07; это незавершённый прогон, не продуктовый failed. Preview/apply/initial plan/legacy preflight прошли, полный verify и сравнительные метрики не завершены. Отдельный plan-only прошёл: discovery 1123 экземпляра/1117 уникальных ID, receipt проверен, capability=local, protected release-ready отклонён. Реальная OS/CI identity и protected-обход не заявляются. Начальная проба имела ошибку сериализации результата; исправленная повторена, ошибка инструмента не считается дефектом продукта. Audit-ready требует in_review/HANDOFF; фиктивная передача не создавалась. Отрицательный протокол регистрируется diagnostic lifecycle; отмена самой AUDIT-009 не выполняется.
+
+### EXEC-05 — Выполнение
+Время: 2026-11-17T17:03:18+03:00
+Исполнитель: Codex
+Модель: GPT-6
+Изменения: повторный независимый аудит блока после приёмки PB-079. Подготовлен штатный audit-05; независимо повторены исходная A-07, настоящее перекрытие verifier-исполнений, A-06, утрата/восстановление nf и прежние corrupt/delete/legacy. 365 тестов checks_* пройдены. Общий расчёт checks_coverage, доверенная история, привязки, TTL/always_run, aggregate и local/protected изучены. Подготовлены фактические статусы документации и карточка in_review для полного verify; полный самопилот будет выполнен на побайтно совпадающей временной копии. Итоговый CHECK/HANDOFF/приёмка будут записаны только после завершения доказательств. Продуктовый код и постоянные тесты не менялись.
+Файлы:
+- docs/tasks/AUDIT-009.md
+- docs/tasks/AUDIT-009.meta.json
+- docs/tasks/index.md
+- docs/specs/dependency-aware-verification.md
+- docs/designs/dependency-aware-verification.md
+- docs/index.md
+- work/verification/AUDIT-009/audit-05/
+
+### EXEC-06 — Выполнение
+Время: 2026-11-17T20:41:37+03:00
+Исполнитель: Codex
+Модель: GPT-6
+Изменения: завершён полный независимый self-pilot b11e60b на предварительно сверенной временной копии; сохранены исходные команды, метрики и отрицательный протокол. Дополнительно проверена связь байтов Python-исходника с фактическим исполнением при существующем timestamp bytecode-cache. Реальный CLI и API воспроизвели A-08 (P1): новый источник выбран для run, но старый pyc даёт passed/готовность; контроль без временного cache падает на том же binding. Создана PB-080. Код/постоянные тесты не исправлялись, архив не переоткрывался, promotion/закрытие блока не выполняются.
+Файлы:
+- docs/tasks/AUDIT-009.md
+- docs/tasks/AUDIT-009.meta.json
+- docs/tasks/PB-080.md
+- docs/tasks/PB-080.meta.json
+- docs/tasks/index.md
+- work/verification/AUDIT-009/audit-05/
+
+### CHECK-05 — Проверка
+Время: 2026-11-17T20:41:37+03:00
+Исполнитель: Codex
+Модель: GPT-6
+Результат: failed
+Критерии: AC-01, AC-02, AC-03, AC-04
+Команда: `python3 -m unittest discover -s tests -p 'test_checks*.py' -v`; `verify AUDIT-009`; исходные A-04/A-05/A-06/A-07 и overlap/loss/healed-rebuild; архивный self_pilot.py на временной копии (полный); `probe_bytecode_cache_cli.py .` и `. dont-write`; API bytecode-cache контроль.
+Среда: macOS/Python и b11e60b из candidate.json, настоящие subprocess/sandbox-exec и CLI, без Git на стендах. В A-08 cache создаёт первый реальный run, bytecode/отчёты/UUID не редактируются; сохраняется файловый mtime, системные часы не меняются. Тест пишет только наблюдаемый value, внешнее наблюдение не читает.
+Факт: 365 checks-тестов OK за 260.783 с; штатный полный verify passed/inputs_unchanged=true, 1134 теста OK за 1993.169 с. Полный self-pilot rc=0: базис legacy/opt-in 1924.802/1875.462 с; после локальной правки 3 legacy-команды за 1987.130 с против 1 checks-группы за 258.100 с; неизменный повтор 0 исполнений, все 7 opt-in результатов reused. A-07 и прежние находки устранены. Новая A-08: source 1→2 при равных size/mtime, план run/reused=0, фактические наблюдения [1,1,2], stale rc=0/gate=true; force без cache rc=1, input_digest второго passed и контрольного failed одинаков. Обычный env и PYTHONDONTWRITEBYTECODE=1 воспроизводят дефект. Verdict changes_requested, исправление PB-080; AUDIT-009 остаётся in_progress без новой передачи/приёмки/закрытия.
+Доказательства: [протокол и A-08](AUDIT-009-evidence/work/verification/AUDIT-009/audit-05/report.md), [365 тестов](AUDIT-009-evidence/work/verification/AUDIT-009/audit-05/checks-tests.log), [оригинальный verify](AUDIT-009-evidence/work/verification/AUDIT-009/84693ca6b4d149da9bad2908c0b2e8b5/report.json), [полный пилот](AUDIT-009-evidence/work/verification/AUDIT-009/audit-05/pilot-full/summary.json), [CLI cache](AUDIT-009-evidence/work/verification/AUDIT-009/audit-05/bytecode-cache-cli.json), [dont-write](AUDIT-009-evidence/work/verification/AUDIT-009/audit-05/bytecode-cache-dont-write.json), [PB-080](PB-080.md).
+Ограничения: широкие успешные прогоны не покрывали новую A-08 и не считаются приёмкой. Полный verify был выполнен до оформления новой находки/задачи; свежая положительная передача текущего отрицательного аудита не заявляется. Формальный handoff/accept на cache-фикстуре не запускался; реальная protected OS/CI identity не проверялась, protected kind=test остаётся заблокирован. Метрики хеширования — ограниченный учёт снимков, не всех I/O; один сценарий не даёт универсального процента экономии. Legacy-повтор handoff записал передачу заново (summary idempotent=false); обещание идемпотентности не делается. Отрицательный результат регистрируется diagnostic lifecycle, не отменяет карточку; следующий шаг — независимое исправление PB-080.
+
+### EXEC-07 — Выполнение
+Время: 2026-11-18T05:13:24+03:00
+Исполнитель: Codex
+Модель: GPT-6
+Изменения: независимый повтор AUDIT-009 после архивирования PB-080. Продолжен ранее подготовленный контейнер audit-06; сохранены SHA-256 кандидата/архива и исходный diff. Реальные CLI-пробы normal/dont-write подтверждают исправление A-08; A-04/A-05/A-06/A-07 перепроверены. Найдена A-09 (P1): одобренный venv Python падает, но адаптер запускает Python родителя и выдаёт passed/gate.ok=true. Создана отдельная draft PB-081; код и архив не менялись. Итоговый CHECK будет записан после чистого набора checks.
+Файлы: docs/tasks/AUDIT-009.md, docs/tasks/AUDIT-009.meta.json, docs/tasks/PB-081.md, docs/tasks/PB-081.meta.json, docs/tasks/index.md, work/verification/AUDIT-009/audit-06/.
+
+### CHECK-06 — Проверка
+Время: 2026-11-18T05:19:52+03:00
+Исполнитель: Codex
+Модель: GPT-6
+Результат: failed
+Критерии: AC-01, AC-02, AC-03, AC-04
+Команда: `python3 -m unittest discover -s tests -p 'test_checks*.py' -v`; `python3 work/verification/AUDIT-009/audit-06/probe_interpreter.py .`; CLI-пробы bytecode normal/dont-write и прежние corrupt/delete/legacy/rollback/verifier gate; архивный self_pilot.py с --plan-only; `index`, `check --ready`, `verify AUDIT-009 --preflight`.
+Среда: macOS 27.2.1 x86_64, Python 3.14.6, feature/dependency-aware-verification / b6f20ea; временные no-Git проекты, stdlib venv без pip, реальные subprocess/CLI. Чистый широкий набор и verifier запущены вне внешней песочницы для вложенного sandbox-exec.
+Факт: 368 tests OK за 307.262 с; A-08 исправлена ([1,2,2], stale/force rc=1, gate=false), A-04/A-05/A-06/A-07 повторно не воспроизводятся. Новый plan-only rc=0, 1137 экземпляров/1131 уникальный ID, capability=local, protected release-ready отказал. A-09 (P1) воспроизведена дважды: одобренный venv argv падает/rc=1, checks run запускает системный Python и даёт passed/rc=0/gate=true. Контроль с запуском CLI через тот же venv даёт failed/rc=1/gate=false при неизменных политике/тесте. Создана draft PB-081; changes_requested, AUDIT-009 остаётся in_progress без положительной передачи/приёмки/close. Диагностический отрицательный протокол зарегистрирован штатным lifecycle; index актуален, check --ready и preflight прошли (только структура/переносимость).
+Доказательства: [протокол с A-09 и матрицей](AUDIT-009-evidence/work/verification/AUDIT-009/audit-06/report.md), [368 tests](AUDIT-009-evidence/work/verification/AUDIT-009/audit-06/checks-tests.log), [CLI-контрпример](AUDIT-009-evidence/work/verification/AUDIT-009/audit-06/interpreter.json), [повтор и контроль](AUDIT-009-evidence/work/verification/AUDIT-009/audit-06/interpreter-repeat.json), [сохранность](AUDIT-009-evidence/work/verification/AUDIT-009/audit-06/preservation.json), [PB-081](PB-081.md).
+Ограничения: полный legacy verify и полный дорогой self-pilot при доказанной A-09 не запускались; исторические результаты audit-05/PB-080 не выдаются за новые. Отдельная OS/CI identity не проверялась; protected kind=test заблокирован. Начальный audit-ready отказал по in_progress/отсутствию передачи; фиктивная passed HANDOFF не создаётся. Первый sandbox-прогон остановлен, второй загрязнён собственной CLI-транзакцией создания PB-081; оба исключены, чистый третий набор прошёл. Исходная ошибка выходного пути plan-only исправлена без изменения harness. Все 3121 архивных файла/167 файлов кода и тестов неизменны. Уточнение инженера о GPT-6.1 Sol (High) сохранено в протоколе как сообщение инженера; текущая среда сообщает GPT-6, прежняя атрибуция не переписана. Следующий шаг — отдельная реализация/приёмка PB-081 и повтор AUDIT-009.
+
+### EXEC-08 — Выполнение
+Время: 2026-11-18T08:32:39+03:00
+Исполнитель: Codex
+Модель: GPT-6.1 Sol (High)
+Изменения: независимый повтор блока после приёмки PB-081. Подготовлен audit-07, сохранён исходный снимок, SHA-256 кода/тестов и прежней истории. A-09, bytecode, corrupt/delete/legacy/rollback/verifier и shim-контрпримеры перепроверены; новые CLI-пробы подтверждают реальный venv, законный reuse и инвалидирование при изменении pyvenv.cfg с прежними size/mtime и PYTHONPATH. Актуализированы устаревшие описания статуса spec/design/плана без изменения требований. Карточка подготовлена in_review для полного verify; это ещё не передача и не приёмка. Код и постоянные тесты не изменялись.
+Файлы: docs/tasks/AUDIT-009.md, docs/tasks/AUDIT-009.meta.json, docs/tasks/index.md, docs/specs/dependency-aware-verification.md, docs/designs/dependency-aware-verification.md, docs/plans/dependency-aware-verification.md, work/verification/AUDIT-009/audit-07/.
+
+### CHECK-07 — Проверка
+Время: 2026-11-18T09:13:55+03:00
+Исполнитель: Codex
+Модель: GPT-6.1 Sol (High)
+Результат: passed
+Критерии: AC-01, AC-02, AC-03, AC-04
+Команда: `python3 ai-dev-playbook/scripts/playbook.py verify AUDIT-009 --preflight`; `python3 ai-dev-playbook/scripts/playbook.py verify AUDIT-009`; реальные CLI-пробы A-04–A-09, shim и runtime context; архивный self_pilot.py с --plan-only.
+Среда: macOS 27.2.1, Python 3.14.6, 63b197f / feature/dependency-aware-verification; временные no-Git проекты и venv без pip. Полный verify и verifier — вне внешней песочницы для вложенного sandbox-exec; источник во время прогона не менялся.
+Факт: полный verify passed/inputs_unchanged=true, все три команды passed, 1141 tests OK за 2197.047 с. Матрица AC-01–11 пройдена в заявленных границах; A-01–A-09 не воспроизводятся. Одобренный venv совпадает с прямым запуском, shim блокируется; pyvenv.cfg/PYTHONPATH инвалидируют reuse, неизменный runtime допускает cross-task/release. Plan-only rc=0, 1141/1135 IDs. Независимый протокол и запрос финальных lifecycle-операций подготовлены; код/тесты и прежняя история неизменны. Новых блокирующих замечаний нет.
+Доказательства: [протокол audit-07](AUDIT-009-evidence/work/verification/AUDIT-009/audit-07/report.md), [полный verify](AUDIT-009-evidence/work/verification/AUDIT-009/7138133c57a04bba80bb0f222a964380/report.json), [unit log](AUDIT-009-evidence/work/verification/AUDIT-009/7138133c57a04bba80bb0f222a964380/unit-tests.stderr.log), [runtime](AUDIT-009-evidence/work/verification/AUDIT-009/audit-07/runtime-context.json), [сохранность](AUDIT-009-evidence/work/verification/AUDIT-009/audit-07/preservation-pre-close.json).
+Ограничения: отдельная OS/CI identity не проверялась; protected kind=test и неподтверждённая protected release-ready безопасно блокируются. Новый полный сравнительный self-pilot не запускался; метрики audit-05 остаются историческими. Формальные accept/close/promotion следуют после свежей передачи; внешнее подключение, commit/push/release не выполняются.
+
+### HANDOFF-01 — Передача
+Время: 2026-11-18T09:13:55+03:00
+Исполнитель: Codex
+Модель: GPT-6.1 Sol (High)
+Выполнение: EXEC-08
+Проверки: CHECK-07
+Состояние: in_review; полный verify завершён, исходники не изменялись. Следующий шаг — зарегистрировать независимую приёмку AUDIT-01, проверить close --dry-run и выполнить подготовленные lifecycle-запросы в рамках поручения инженера.
+Фокус аудита: актуальность отчёта и матрицы, исправление A-09/шимов/bytecode, порядок позднего failed и потерь истории, граница local/protected; staged-переносимость материалов, promotion спецификации и архивирование общего плана без изменения чужих drafts.
+
+### AUDIT-01 — Аудит
+Время: 2026-11-18T09:18:25+03:00
+Исполнитель: Codex
+Модель: GPT-6.1 Sol (High)
+Передача: HANDOFF-01
+Результат: accepted
+Критерии: AC-01, AC-02, AC-03, AC-04
+Независимо проверено: требования R-01–20 и матрица спецификации AC-01–11; текущий diff PB-081, реальные CLI-контрпримеры A-04–A-09, shim и положительный runtime/reuse-контроль; полный независимый verify 1141 tests OK/inputs_unchanged=true, включая self-project lifecycle pilot; свежая зарегистрированная HANDOFF-01. Код, тесты и прежние материалы до закрытия совпадают с исходными SHA-256. Независимость — от реализации и приёмки PB-081 в прежних сессиях; в этой сессии продуктовых исправлений не было.
+Доказательства: [протокол audit-07 и матрица](AUDIT-009-evidence/work/verification/AUDIT-009/audit-07/report.md), [полный verify](AUDIT-009-evidence/work/verification/AUDIT-009/7138133c57a04bba80bb0f222a964380/report.json), [1141 tests](AUDIT-009-evidence/work/verification/AUDIT-009/7138133c57a04bba80bb0f222a964380/unit-tests.stderr.log), [runtime-контроль](AUDIT-009-evidence/work/verification/AUDIT-009/audit-07/runtime-context.json), [сохранность](AUDIT-009-evidence/work/verification/AUDIT-009/audit-07/preservation-pre-close.json).
+Ограничения: отдельная OS/CI identity и внешнее protected-развёртывание не подтверждены. Принят заявленный local/protocol-контракт с безопасным отказом неподтверждённой protected-готовности; protected kind=test заблокирован. Новый полный сравнительный self-pilot не запускался, исторические метрики не выдаются за новые. Смысл assertions по-прежнему требует человеческой приёмки. Commit/push/release и self-project opt-in не разрешены этой приёмкой.
+Замечания: открытых блокирующих замечаний нет. A-01–A-09 из прежних внешних протоколов устранены и повторно проверены; их история сохранена. Следующий шаг — lifecycle accept, close --dry-run и штатные операции закрытия/promotion/архивирования плана по поручению инженера.

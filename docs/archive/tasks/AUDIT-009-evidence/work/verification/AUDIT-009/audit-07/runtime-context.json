@@ -1,0 +1,300 @@
+{
+  "fixture": "No-Git project, stdlib venv, real CLI. Test only records process observations. No history/outcome edits or mocks. pyvenv.cfg changes preserve size/mtime_ns.",
+  "steps": [
+    {
+      "rc": 0,
+      "reused": false,
+      "status": "passed",
+      "executions": 1,
+      "binding": {
+        "policy_digest": "sha256:c818d83053a10c9ac2da690fc468f176c953f6861461f98418fe02a2ba9ab4c0",
+        "definition_digest": "sha256:cbdd8ed424e5e4fef04c3ef9c1628aa138e52139ae8952f62b23178cc1d2ad60",
+        "adapter": {
+          "id": "python-unittest",
+          "version": "4"
+        },
+        "runner": {
+          "id": "playbook-runner",
+          "version": "1"
+        },
+        "input_digest": "sha256:253c87a278bbd596cc35be36127a63a9ed4991ffb5a2a812505dab504feb2065",
+        "dependency_closure_digest": "sha256:763e8b7da1ee6ea32c1d08ea98364405c38ce3fe2d16f145bf995f2f13498655",
+        "environment": {
+          "platform": "darwin",
+          "python-unittest": {
+            "launcher": "/private/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/pb064-e2e-2vxxq8oc/runtime-venv/bin/python3",
+            "binary": "/usr/local/Cellar/python@3.14/3.14.6/Frameworks/Python.framework/Versions/3.14/bin/python3.14",
+            "stat": [
+              16777229,
+              224026217,
+              13592,
+              1782635448219935459,
+              1782635448219935459
+            ],
+            "venv": {
+              "/private/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/pb064-e2e-2vxxq8oc/runtime-venv/bin/pyvenv.cfg": null,
+              "/private/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/pb064-e2e-2vxxq8oc/runtime-venv/pyvenv.cfg": "ae274ef1a736c3e90ddf406d95f50e78ed29e4222d7837bac66b09eac5533234"
+            },
+            "startup_digest": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+          }
+        }
+      }
+    },
+    {
+      "rc": 0,
+      "reused": true,
+      "status": "passed",
+      "executions": 1,
+      "binding": {
+        "policy_digest": "sha256:c818d83053a10c9ac2da690fc468f176c953f6861461f98418fe02a2ba9ab4c0",
+        "definition_digest": "sha256:cbdd8ed424e5e4fef04c3ef9c1628aa138e52139ae8952f62b23178cc1d2ad60",
+        "adapter": {
+          "id": "python-unittest",
+          "version": "4"
+        },
+        "runner": {
+          "id": "playbook-runner",
+          "version": "1"
+        },
+        "input_digest": "sha256:253c87a278bbd596cc35be36127a63a9ed4991ffb5a2a812505dab504feb2065",
+        "dependency_closure_digest": "sha256:763e8b7da1ee6ea32c1d08ea98364405c38ce3fe2d16f145bf995f2f13498655",
+        "environment": {
+          "platform": "darwin",
+          "python-unittest": {
+            "launcher": "/private/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/pb064-e2e-2vxxq8oc/runtime-venv/bin/python3",
+            "binary": "/usr/local/Cellar/python@3.14/3.14.6/Frameworks/Python.framework/Versions/3.14/bin/python3.14",
+            "stat": [
+              16777229,
+              224026217,
+              13592,
+              1782635448219935459,
+              1782635448219935459
+            ],
+            "venv": {
+              "/private/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/pb064-e2e-2vxxq8oc/runtime-venv/bin/pyvenv.cfg": null,
+              "/private/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/pb064-e2e-2vxxq8oc/runtime-venv/pyvenv.cfg": "ae274ef1a736c3e90ddf406d95f50e78ed29e4222d7837bac66b09eac5533234"
+            },
+            "startup_digest": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+          }
+        }
+      }
+    },
+    {
+      "rc": 0,
+      "reused": false,
+      "status": "passed",
+      "executions": 2,
+      "binding": {
+        "policy_digest": "sha256:c818d83053a10c9ac2da690fc468f176c953f6861461f98418fe02a2ba9ab4c0",
+        "definition_digest": "sha256:cbdd8ed424e5e4fef04c3ef9c1628aa138e52139ae8952f62b23178cc1d2ad60",
+        "adapter": {
+          "id": "python-unittest",
+          "version": "4"
+        },
+        "runner": {
+          "id": "playbook-runner",
+          "version": "1"
+        },
+        "input_digest": "sha256:253c87a278bbd596cc35be36127a63a9ed4991ffb5a2a812505dab504feb2065",
+        "dependency_closure_digest": "sha256:763e8b7da1ee6ea32c1d08ea98364405c38ce3fe2d16f145bf995f2f13498655",
+        "environment": {
+          "platform": "darwin",
+          "python-unittest": {
+            "launcher": "/private/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/pb064-e2e-2vxxq8oc/runtime-venv/bin/python3",
+            "binary": "/usr/local/Cellar/python@3.14/3.14.6/Frameworks/Python.framework/Versions/3.14/bin/python3.14",
+            "stat": [
+              16777229,
+              224026217,
+              13592,
+              1782635448219935459,
+              1782635448219935459
+            ],
+            "venv": {
+              "/private/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/pb064-e2e-2vxxq8oc/runtime-venv/bin/pyvenv.cfg": null,
+              "/private/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/pb064-e2e-2vxxq8oc/runtime-venv/pyvenv.cfg": "0883bba2de988bd18b5e14831523e4aa9d639d391b64ca4fca10ae466c53b05a"
+            },
+            "startup_digest": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+          }
+        }
+      }
+    },
+    {
+      "rc": 0,
+      "reused": false,
+      "status": "passed",
+      "executions": 3,
+      "binding": {
+        "policy_digest": "sha256:c818d83053a10c9ac2da690fc468f176c953f6861461f98418fe02a2ba9ab4c0",
+        "definition_digest": "sha256:cbdd8ed424e5e4fef04c3ef9c1628aa138e52139ae8952f62b23178cc1d2ad60",
+        "adapter": {
+          "id": "python-unittest",
+          "version": "4"
+        },
+        "runner": {
+          "id": "playbook-runner",
+          "version": "1"
+        },
+        "input_digest": "sha256:253c87a278bbd596cc35be36127a63a9ed4991ffb5a2a812505dab504feb2065",
+        "dependency_closure_digest": "sha256:763e8b7da1ee6ea32c1d08ea98364405c38ce3fe2d16f145bf995f2f13498655",
+        "environment": {
+          "platform": "darwin",
+          "python-unittest": {
+            "launcher": "/private/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/pb064-e2e-2vxxq8oc/runtime-venv/bin/python3",
+            "binary": "/usr/local/Cellar/python@3.14/3.14.6/Frameworks/Python.framework/Versions/3.14/bin/python3.14",
+            "stat": [
+              16777229,
+              224026217,
+              13592,
+              1782635448219935459,
+              1782635448219935459
+            ],
+            "venv": {
+              "/private/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/pb064-e2e-2vxxq8oc/runtime-venv/bin/pyvenv.cfg": null,
+              "/private/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/pb064-e2e-2vxxq8oc/runtime-venv/pyvenv.cfg": "0883bba2de988bd18b5e14831523e4aa9d639d391b64ca4fca10ae466c53b05a"
+            },
+            "startup_digest": "fb1dfb49e5256682ac3c4638642ea3a6fe8ea5559a293a25849c2234e387b75f"
+          }
+        }
+      }
+    },
+    {
+      "rc": 0,
+      "reused": true,
+      "status": "passed",
+      "executions": 3,
+      "binding": {
+        "policy_digest": "sha256:c818d83053a10c9ac2da690fc468f176c953f6861461f98418fe02a2ba9ab4c0",
+        "definition_digest": "sha256:cbdd8ed424e5e4fef04c3ef9c1628aa138e52139ae8952f62b23178cc1d2ad60",
+        "adapter": {
+          "id": "python-unittest",
+          "version": "4"
+        },
+        "runner": {
+          "id": "playbook-runner",
+          "version": "1"
+        },
+        "input_digest": "sha256:253c87a278bbd596cc35be36127a63a9ed4991ffb5a2a812505dab504feb2065",
+        "dependency_closure_digest": "sha256:763e8b7da1ee6ea32c1d08ea98364405c38ce3fe2d16f145bf995f2f13498655",
+        "environment": {
+          "platform": "darwin",
+          "python-unittest": {
+            "launcher": "/private/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/pb064-e2e-2vxxq8oc/runtime-venv/bin/python3",
+            "binary": "/usr/local/Cellar/python@3.14/3.14.6/Frameworks/Python.framework/Versions/3.14/bin/python3.14",
+            "stat": [
+              16777229,
+              224026217,
+              13592,
+              1782635448219935459,
+              1782635448219935459
+            ],
+            "venv": {
+              "/private/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/pb064-e2e-2vxxq8oc/runtime-venv/bin/pyvenv.cfg": null,
+              "/private/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/pb064-e2e-2vxxq8oc/runtime-venv/pyvenv.cfg": "0883bba2de988bd18b5e14831523e4aa9d639d391b64ca4fca10ae466c53b05a"
+            },
+            "startup_digest": "fb1dfb49e5256682ac3c4638642ea3a6fe8ea5559a293a25849c2234e387b75f"
+          }
+        }
+      }
+    }
+  ],
+  "observations": [
+    {
+      "executable": "/private/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/pb064-e2e-2vxxq8oc/runtime-venv/bin/python3",
+      "prefix": "/private/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/pb064-e2e-2vxxq8oc/runtime-venv",
+      "base_prefix": "/usr/local/opt/python@3.14/Frameworks/Python.framework/Versions/3.14"
+    },
+    {
+      "executable": "/private/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/pb064-e2e-2vxxq8oc/runtime-venv/bin/python3",
+      "prefix": "/private/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/pb064-e2e-2vxxq8oc/runtime-venv",
+      "base_prefix": "/usr/local/opt/python@3.14/Frameworks/Python.framework/Versions/3.14"
+    },
+    {
+      "executable": "/private/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/pb064-e2e-2vxxq8oc/runtime-venv/bin/python3",
+      "prefix": "/private/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/pb064-e2e-2vxxq8oc/runtime-venv",
+      "base_prefix": "/usr/local/opt/python@3.14/Frameworks/Python.framework/Versions/3.14"
+    }
+  ],
+  "commands": [
+    {
+      "argv": [
+        "setup",
+        "apply"
+      ],
+      "rc": 0,
+      "stdout": "checks-политика shop-checks rev 1 подключена (checks-policy.json); project.json → checks_policy. Операция: work/lifecycle/20261118-083033-fc5ee436. trust_mode=local не повышает доверие результатов.\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "checks",
+        "run",
+        "DEV-01",
+        "--scope",
+        "project",
+        "--mode",
+        "force"
+      ],
+      "rc": 0,
+      "stdout": "checks run DEV-01: политика shop-checks rev 1, scope=project mode=force\nОграничение: trust_mode=local: результаты диагностические — локальная история не защищена от владельца проекта; доверенное выполнение требует контура PB-061\n  payments-tests: RUN test\n  payments-tests: passed (0.526с)\nИтог: passed=1; непокрытых обязательств: 0\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "checks",
+        "run",
+        "DEV-01",
+        "--scope",
+        "project",
+        "--mode",
+        "stale"
+      ],
+      "rc": 0,
+      "stdout": "checks run DEV-01: политика shop-checks rev 1, scope=project mode=stale\nОграничение: trust_mode=local: результаты диагностические — локальная история не защищена от владельца проекта; доверенное выполнение требует контура PB-061\n  payments-tests: reused — исходный результат d203c01c55434353822171ff7a71c8e4-payments-tests от 2026-11-18T05:30:35.328407+00:00\nИтог: reused=1; непокрытых обязательств: 0\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "checks",
+        "run",
+        "DEV-01",
+        "--scope",
+        "project",
+        "--mode",
+        "stale"
+      ],
+      "rc": 0,
+      "stdout": "checks run DEV-01: политика shop-checks rev 1, scope=project mode=stale\nОграничение: trust_mode=local: результаты диагностические — локальная история не защищена от владельца проекта; доверенное выполнение требует контура PB-061\n  payments-tests: RUN test\n  payments-tests: passed (0.519с)\nИтог: passed=1; непокрытых обязательств: 0\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "checks",
+        "run",
+        "DEV-01",
+        "--scope",
+        "project",
+        "--mode",
+        "stale"
+      ],
+      "rc": 0,
+      "stdout": "checks run DEV-01: политика shop-checks rev 1, scope=project mode=stale\nОграничение: trust_mode=local: результаты диагностические — локальная история не защищена от владельца проекта; доверенное выполнение требует контура PB-061\n  payments-tests: RUN test\n  payments-tests: passed (0.521с)\nИтог: passed=1; непокрытых обязательств: 0\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "checks",
+        "run",
+        "DEV-02",
+        "--scope",
+        "project",
+        "--mode",
+        "stale",
+        "--checkpoint",
+        "release-ready"
+      ],
+      "rc": 0,
+      "stdout": "checks run DEV-02: политика shop-checks rev 1, scope=project mode=stale checkpoint=release-ready\nОграничение: trust_mode=local: результаты диагностические — локальная история не защищена от владельца проекта; доверенное выполнение требует контура PB-061\n  payments-tests: reused — исходный результат db682938089148b6b7f0496a5fb036cc-payments-tests от 2026-11-18T05:30:39.065804+00:00\nИтог: reused=1; непокрытых обязательств: 0\n",
+      "stderr": ""
+    }
+  ]
+}

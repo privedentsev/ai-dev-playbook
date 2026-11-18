@@ -36,7 +36,7 @@
 
 ## Статус
 
-Реализация PB-057–064 и исправлений PB-073/PB-074/PB-078/PB-079 прошла индивидуальную приёмку; совместный результат проверяется в AUDIT-009. Основание — [требования R-01–20](../specs/dependency-aware-verification.md). [План](../plans/dependency-aware-verification.md), [ADR-0006](../adr/0006-dependency-aware-verification.md). PB-057 закрепила версии схем и CLI перед разработкой зависимых этапов; действующие ограничения описаны в правилах verification.
+Реализация PB-057–064 и исправлений PB-073/PB-074/PB-078/PB-079/PB-080/PB-081 прошла индивидуальную приёмку; совместный результат и решение по блоку фиксируются в AUDIT-009. Основание — [требования R-01–20](../specs/dependency-aware-verification.md). [План](../archive/plans/dependency-aware-verification.md), [ADR-0006](../adr/0006-dependency-aware-verification.md). PB-057 закрепила версии схем и CLI перед разработкой зависимых этапов; действующие ограничения описаны в правилах verification.
 
 ## 1. Поток данных
 
