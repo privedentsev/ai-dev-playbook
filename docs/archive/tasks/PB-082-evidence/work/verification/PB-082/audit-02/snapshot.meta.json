@@ -1,0 +1,82 @@
+{
+  "schema_version": 1,
+  "card_format_version": 2,
+  "relations": [],
+  "materials": [
+    {
+      "id": "checks-policy-draft",
+      "role": "other",
+      "source": "docs/tasks/PB-082-evidence/checks-policy.draft.json",
+      "storage": "local",
+      "required": false,
+      "immutable": true,
+      "used_by": [
+        "PB-082"
+      ]
+    },
+    {
+      "id": "checks-be2417f555b656e1",
+      "role": "report",
+      "source": "work/checks/handoffs/PB-082/be2417f555b656e1",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-082"
+      ]
+    },
+    {
+      "id": "audit-01",
+      "role": "report",
+      "source": "work/verification/PB-082/audit-01",
+      "storage": "local",
+      "immutable": true,
+      "required": true,
+      "used_by": [
+        "PB-082"
+      ]
+    },
+    {
+      "id": "checks-3a2cf95881dd3e5d",
+      "role": "report",
+      "source": "work/checks/handoffs/PB-082/3a2cf95881dd3e5d",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-082"
+      ]
+    }
+  ],
+  "criterion_evidence": {
+    "CHECK-01": {
+      "check_sha256": "sha256:1be15a392936b2c5c7194e54dbb971f4ffe0eb32d29272c9b1583b7f2bd26074",
+      "card_projection": "sha256:ddd13bbcee5d9c998113ad07cdfcece5d85575d611b9b69f4998e77a6062f08d",
+      "report_id": "checks-be2417f555b656e1",
+      "report_sha256": "sha256:9c48f90ba49b2036325eea53a1bac77ed1762926f58dda5454a83cf868bfc8b7"
+    },
+    "CHECK-02": {
+      "check_sha256": "sha256:66003bc538454767915d2b56e1fbe18afd04514db056d0470e9165950f40a4fd",
+      "card_projection": "sha256:356a49a2af6ca23147c6989b0b14c90fc4a875fd9bd0a98db06a8601cb060d6b",
+      "report_id": "checks-3a2cf95881dd3e5d",
+      "report_sha256": "sha256:8cc83e0095471d7a106c1cf793af01d09134fe38c9e4e89ddcc87d0393990fc6"
+    }
+  },
+  "handoff": {
+    "at": "2026-11-18T14:46:57+03:00",
+    "actor": {
+      "name": "Codex",
+      "model": "GPT-6.2 Sol (Low)"
+    },
+    "summary": "HANDOFF-02",
+    "reports": [
+      "checks-3a2cf95881dd3e5d"
+    ],
+    "card_projection": "sha256:356a49a2af6ca23147c6989b0b14c90fc4a875fd9bd0a98db06a8601cb060d6b",
+    "entry_id": "HANDOFF-02",
+    "journal_sha256": "sha256:2cb0f8954e7776f9e7815ea0c0121d5065ee3c7c3b48cd4e3265220b8cd9613d"
+  },
+  "audit_packages": {
+    "audit-01": "sha256:89be8c38d473fd382bee4a5ab1f6d9d79cff6c57f5fb24d87889c30ad02b053d"
+  }
+}

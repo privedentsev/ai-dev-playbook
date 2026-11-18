@@ -1,0 +1,22 @@
+checks plan PB-082: политика ai-dev-playbook-local rev 4, trust=local
+Изменения: 1 путей
+  ~ docs/tasks/PB-065-evidence/commands.md
+Граф: 23 рёбер, unknown-областей: 0
+Оценка: 0с лимит 7200с; прочитано 159777630 Б / 4379 файлов (лимит 2000000000 Б)
+  self-check: reused
+      обязательство задачи (task_projection)
+      обязательство политики (policy_projection)
+      reused 9793e2dd73b2438ca1dd4f6ae8b4d927-self-check-reused от 2026-11-18T14:19:51.743572+00:00
+  preflight-regressions: not_applicable
+      обязательства не затронуты
+  block-unit-tests: not_applicable
+      обязательства не затронуты
+  checks-unit-tests: not_applicable
+      обязательства не затронуты
+  cli-unit-tests: not_applicable
+      обязательства не затронуты
+  core-unit-tests: not_applicable
+      обязательства не затронуты
+  verification-unit-tests: not_applicable
+      обязательства не затронуты
+Итог: run=0, reused=1, blocked=0, not_applicable=6

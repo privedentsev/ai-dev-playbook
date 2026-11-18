@@ -281,6 +281,20 @@ class SnapshotTest(unittest.TestCase):
         kw.setdefault("now", "2026-11-08T12:00:00+03:00")
         return ci.snapshot(self.proj.root, self.policy, inputs, **kw)
 
+    def test_task_card_snapshot_keeps_prose_and_normalizes_marks(self):
+        """Снимок карточек игнорирует отметки критериев и сохраняет Markdown журнала."""
+        from test_task_cards import BODY, record, text
+
+        source = text(BODY + record("EXEC"))
+        card = self.proj.write("docs/tasks/DEV-1.md", source.encode())
+        inputs = [{"type": "task_cards", "path": "docs/tasks"}]
+        before = self.snap(inputs)
+        ci.validate_snapshot(before, req)
+        card.write_text(source.replace("- AC-01:", "- [x] AC-01:"), encoding="utf-8")
+        self.assertEqual(ci.snapshot_digest(before), ci.snapshot_digest(self.snap(inputs)))
+        card.write_text(card.read_text(encoding="utf-8") + "\n[Ссылка](changed.md)\n", encoding="utf-8")
+        self.assertNotEqual(ci.snapshot_digest(before), ci.snapshot_digest(self.snap(inputs)))
+
     def test_directory_and_file_inputs(self):
         """Снимок покрывает входы-файлы и входы-каталоги"""
         doc = self.snap(["src/payments", "tests/test_payments.py"])

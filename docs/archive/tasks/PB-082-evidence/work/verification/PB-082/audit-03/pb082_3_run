@@ -1,0 +1,11 @@
+checks run PB-082: политика ai-dev-playbook-local rev 5, scope=task mode=stale
+Ограничение: trust_mode=local: результаты диагностические — локальная история не защищена от владельца проекта; доверенное выполнение требует контура PB-061
+  self-check: RUN command
+  self-check: failed — команда завершилась кодом 1
+  preflight-regressions: not_applicable
+  block-unit-tests: not_applicable
+  checks-unit-tests: not_applicable
+  cli-unit-tests: not_applicable
+  core-unit-tests: not_applicable
+  verification-unit-tests: not_applicable
+Итог: failed=1, not_applicable=6; непокрытых обязательств: 1

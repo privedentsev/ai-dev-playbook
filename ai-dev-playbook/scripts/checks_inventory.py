@@ -18,7 +18,7 @@ created_at, entries, excluded, unknown_paths}``. ``entries`` отображае�
 ``checks-input-snapshot`` (schema_version 1): ``{project_id,
 policy_digest, created_at, entries}``. ``entries`` отображает ключ входа
 в ``file``/``directory``/``absent``/``projection``/``value``. Ключи —
-``path:<rel>``, ``task_projection``, ``policy_projection`` и
+``path:<rel>``, ``task_cards:<rel>``, ``task_projection``, ``policy_projection`` и
 ``environment:<name>``; каталог хранит полный состав потомков, файлы —
 SHA-256. Новый файл внутри области входа заметен по составу каталога, не
 только по прежнему списку. Снимок входов — отдельный артефакт и не
@@ -47,10 +47,14 @@ SHA-256. Новый файл внутри области входа замете
 import datetime
 import json
 import stat
+from functools import partial
 from pathlib import Path
 
 import checks_contract
+import document_links
+import documents
 import project_view
+import task_cards
 import verification_policy
 
 
@@ -126,7 +130,7 @@ def _declared_input_areas(policy):
             if isinstance(entry, str):
                 areas.append(entry)
             elif (isinstance(entry, dict)
-                  and entry.get("type") in {"file", "directory", "path"}):
+                  and entry.get("type") in {"file", "directory", "path", "task_cards"}):
                 areas.append(entry["path"])
     return areas
 
@@ -360,7 +364,7 @@ def _normalize_input(spec, label):
     extra = sorted(set(spec) - {"type", "path", "names", "patterns"})
     _raise(not extra, f"{label}: неизвестные поля {extra}")
     kind = spec.get("type")
-    if kind in {"file", "directory", "path"}:
+    if kind in {"file", "directory", "path", "task_cards"}:
         if spec.get("path") != ".":
             checks_contract._path(spec.get("path"), f"{label}.path",
                                   _raise)
@@ -393,8 +397,7 @@ def _group_inputs(inputs):
     for idx, spec in enumerate(inputs):
         item = _normalize_input(spec, f"inputs[{idx}]")
         kind, rel = item["type"], item.get("path")
-        if kind == "environment" or kind in {"task_projection",
-                                             "policy_projection"}:
+        if kind in {"environment", "task_projection", "policy_projection", "task_cards"}:
             other.append(item)
         elif kind == "file":
             files.add(rel)
@@ -417,8 +420,32 @@ def _group_inputs(inputs):
     return files, dirs, anys, other
 
 
+def task_card_digest(path, *, root):
+    """Keep requirements and evidence, with a valid acceptance suffix projected out."""
+    text = task_cards.normalize_checkboxes(path.read_text(encoding="utf-8")).rstrip()
+    if "\n### AUDIT-" not in text:
+        return task_cards.digest(text)
+    # An accepted audit completes an existing handoff. Its links still
+    # need to resolve, including when a previously linked file disappears.
+    try:
+        card = task_cards.parse(text)
+    except ValueError:
+        return task_cards.digest(text)
+    prefix = text
+    for entry in reversed(card.get("entries", [])):
+        if entry["type"] != "audit" or entry["fields"]["Результат"] != "accepted":
+            break
+        if not prefix.endswith(entry["raw"]):
+            break
+        prefix = prefix[:-len(entry["raw"])].rstrip()
+    if prefix != text and not document_links.check_text(
+            text, str(path.relative_to(root)), path.parent, root.resolve()):
+        text = prefix
+    return task_cards.digest(text)
+
+
 def snapshot(root, policy, inputs, *, environment=None, projections=None,
-             hash_fn=None, now=None):
+             hash_fn=None, task_card_hash_fn=None, now=None):
     """Проверенный снимок объявленных и вычисленных входов.
 
     Один файл хешируется потоково ровно один раз на снимок. После снятия
@@ -430,6 +457,7 @@ def snapshot(root, policy, inputs, *, environment=None, projections=None,
     root = Path(root)
     _require_root(root)
     digest = hash_fn or project_view.digest_file
+    card_digest = task_card_hash_fn or partial(task_card_digest, root=root)
     excludes = [(e["pattern"], e["reason"], e["origin"])
                 for e in policy["excludes"]]
     file_digests, watch_files, watch_dirs = {}, {}, {}
@@ -474,12 +502,15 @@ def snapshot(root, policy, inputs, *, environment=None, projections=None,
                 watch_states[current] = kind
         return path
 
-    def hash_file(rel, abs_path):
-        if rel not in file_digests:
+    def hash_file(rel, abs_path, *, card_text=False):
+        key = (rel, card_text)
+        if key not in file_digests:
             st = abs_path.lstat()
-            watch_files[rel] = (st.st_size, st.st_mtime_ns)
-            file_digests[rel] = digest(abs_path)
-        return file_digests[rel]
+            signature = (st.st_size, st.st_mtime_ns)
+            if watch_files.setdefault(rel, signature) != signature:
+                raise ValueError(f"checks-snapshot: вход {rel!r} изменился во время снимка")
+            file_digests[key] = (card_digest if card_text else digest)(abs_path)
+        return file_digests[key]
 
     def check_excluded_entry(child, full_rel, is_dir, patterns):
         """Исключённый член внутри входа: совпадение со входом — отказ."""
@@ -511,7 +542,7 @@ def snapshot(root, policy, inputs, *, environment=None, projections=None,
                     return True
         return False
 
-    def descend_input(abs_dir, base_rel, rel, patterns, members):
+    def descend_input(abs_dir, base_rel, rel, patterns, members, *, task_docs):
         listing = []
         for child in sorted(abs_dir.iterdir(), key=lambda p: p.name):
             st = child.lstat()
@@ -542,18 +573,21 @@ def snapshot(root, policy, inputs, *, environment=None, projections=None,
             if is_dir:
                 members[member_rel] = {"type": "dir"}
                 descend_input(child, base_rel, member_rel, patterns,
-                              members)
-            elif patterns is None or any(
-                    checks_contract._match(full_rel, p) for p in patterns):
-                members[member_rel] = {"type": "file",
-                                       "sha256": hash_file(full_rel, child)}
+                              members, task_docs=task_docs)
+            elif (not task_docs or member_rel != "index.md") and (
+                    patterns is None or any(
+                        checks_contract._match(full_rel, p) for p in patterns)):
+                card_text = task_docs and not rel and bool(
+                    documents.TASK_ID.fullmatch(child.stem))
+                members[member_rel] = {
+                    "type": "file", "sha256": hash_file(full_rel, child, card_text=card_text)}
             else:
                 members[member_rel] = {"type": "file"}
         watch_dirs[_join(base_rel, rel)] = (tuple(listing), patterns)
 
-    def directory_entry(rel, abs_path, patterns):
+    def directory_entry(rel, abs_path, patterns, *, task_docs=False):
         members = {}
-        descend_input(abs_path, rel, "", patterns, members)
+        descend_input(abs_path, rel, "", patterns, members, task_docs=task_docs)
         return {"type": "directory", "members": members}
 
     def check_service(rel):
@@ -599,7 +633,21 @@ def snapshot(root, policy, inputs, *, environment=None, projections=None,
                                       "sha256": hash_file(rel, path)}
     for item in other:
         kind = item["type"]
-        if kind == "environment":
+        if kind == "task_cards":
+            rel = item["path"]
+            check_service(rel)
+            if _matched_exclude(rel, excludes) is not None:
+                raise ValueError(f"checks-snapshot: вход {rel!r} исключён одобренной политикой")
+            path = resolve(rel)
+            key = "task_cards:" + rel
+            if not path.exists():
+                entries[key] = {"type": "absent"}
+            elif not path.is_dir():
+                raise ValueError(f"checks-snapshot: вход {rel!r} не является каталогом")
+            else:
+                entries[key] = directory_entry(
+                    rel, path, [_join(rel, "**/*.md")], task_docs=True)
+        elif kind == "environment":
             for name in item["names"]:
                 if environment is None or name not in environment:
                     raise ValueError(f"checks-snapshot: неизвестный факт "
@@ -926,12 +974,18 @@ def validate_snapshot(doc, require):
         if key.startswith("path:"):
             if key[5:] != ".":
                 checks_contract._path(key[5:], f"{label} path", require)
+        elif key.startswith("task_cards:"):
+            checks_contract._path(key.removeprefix("task_cards:"), f"{label} path", require)
+
         elif key.startswith("environment:"):
             checks_contract._str(key[12:], f"{label} name", require)
         else:
             require(key in {"task_projection", "policy_projection"},
                     f"{label}: неизвестный ключ входа {key!r}")
         _validate_entry(entry, label, require)
+        if key.startswith("task_cards:"):
+            require(entry["type"] in {"absent", "directory"},
+                    f"{label}: ожидается каталог карточек")
     return doc
 
 

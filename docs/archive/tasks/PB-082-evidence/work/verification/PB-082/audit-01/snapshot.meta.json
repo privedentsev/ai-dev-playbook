@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "card_format_version": 2,
+  "relations": [],
+  "materials": [
+    {
+      "id": "checks-policy-draft",
+      "role": "other",
+      "source": "docs/tasks/PB-082-evidence/checks-policy.draft.json",
+      "storage": "local",
+      "required": false,
+      "immutable": true,
+      "used_by": [
+        "PB-082"
+      ]
+    },
+    {
+      "id": "checks-be2417f555b656e1",
+      "role": "report",
+      "source": "work/checks/handoffs/PB-082/be2417f555b656e1",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-082"
+      ]
+    }
+  ],
+  "criterion_evidence": {
+    "CHECK-01": {
+      "check_sha256": "sha256:1be15a392936b2c5c7194e54dbb971f4ffe0eb32d29272c9b1583b7f2bd26074",
+      "card_projection": "sha256:ddd13bbcee5d9c998113ad07cdfcece5d85575d611b9b69f4998e77a6062f08d",
+      "report_id": "checks-be2417f555b656e1",
+      "report_sha256": "sha256:9c48f90ba49b2036325eea53a1bac77ed1762926f58dda5454a83cf868bfc8b7"
+    }
+  },
+  "handoff": {
+    "at": "2026-11-18T12:51:00+03:00",
+    "actor": {
+      "name": "Codex",
+      "model": "GPT-6"
+    },
+    "summary": "HANDOFF-01",
+    "reports": [
+      "checks-be2417f555b656e1"
+    ],
+    "card_projection": "sha256:ddd13bbcee5d9c998113ad07cdfcece5d85575d611b9b69f4998e77a6062f08d",
+    "entry_id": "HANDOFF-01",
+    "journal_sha256": "sha256:1ebc56ca2a2ffe4faee71fbd6b0348318df4d79d8f51e32f65d393a75e3ba8c7"
+  }
+}

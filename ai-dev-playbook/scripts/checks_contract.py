@@ -182,7 +182,7 @@ SIGNATURE_FIELDS = {"algorithm", "key_id", "value"}
 
 INPUT_FIELDS = {"type", "path", "names"}
 INPUT_TYPES = {"file", "directory", "path", "task_projection",
-               "policy_projection", "environment"}
+               "policy_projection", "environment", "task_cards"}
 APPLICABILITY_FIELDS = {"kind", "paths", "checkpoint"}
 APPLICABILITY_KINDS = {"always", "when_paths", "checkpoint"}
 
@@ -300,7 +300,7 @@ def _validate_inputs(value, label, require):
         kind = entry.get("type")
         require(kind in INPUT_TYPES,
                 f"{item_label}: неизвестный тип входа {kind!r}")
-        if kind in {"file", "directory", "path"}:
+        if kind in {"file", "directory", "path", "task_cards"}:
             _path(entry.get("path"), f"{item_label}.path", require)
         elif kind == "environment":
             names = entry.get("names")
