@@ -453,7 +453,8 @@ class PlanTest(unittest.TestCase):
             "binding": {
                 "policy_digest": verification_policy.fingerprint(policy),
                 "definition_digest": cs.definition_digest(check),
-                "adapter": {"id": "python-unittest", "version": "1"},
+                "adapter": {"id": "python-unittest",
+                            "version": str(cs.checks_contract.ADAPTER_PROTOCOL_VERSION)},
                 "runner": dict(cs.RUNNER),
                 "input_digest": checks_inventory.snapshot_digest(snap),
                 "dependency_closure_digest":

@@ -1,0 +1,152 @@
+[
+  {
+    "argv": [
+      "python3",
+      "docs/tasks/AUDIT-009-evidence/audit-04/probe_verifier_gate.py",
+      "."
+    ],
+    "rc": 0,
+    "seconds": 0.8928310000001147,
+    "output": "verifier-gate.json"
+  },
+  {
+    "argv": [
+      "python3",
+      "docs/archive/tasks/PB-079-evidence/work/verification/PB-079/audit-01/probe_overlap.py",
+      "."
+    ],
+    "rc": 0,
+    "seconds": 0.9938486670002931,
+    "output": "protected-overlap.json"
+  },
+  {
+    "argv": [
+      "python3",
+      "docs/tasks/AUDIT-009-evidence/audit-03/probe_clock_rollback.py",
+      "."
+    ],
+    "rc": 0,
+    "seconds": 0.4437043339999036,
+    "output": "rollback.json"
+  },
+  {
+    "argv": [
+      "python3",
+      "docs/archive/tasks/PB-078-evidence/work/verification/PB-078/audit-02/probe_loss.py",
+      "."
+    ],
+    "rc": 0,
+    "seconds": 0.5348278750002464,
+    "output": "loss.json"
+  },
+  {
+    "argv": [
+      "python3",
+      "docs/archive/tasks/PB-078-evidence/work/verification/PB-078/audit-03/probe_healed_rebuild.py",
+      "."
+    ],
+    "rc": 0,
+    "seconds": 0.6283853750001072,
+    "output": "healed-rebuild.json"
+  },
+  {
+    "argv": [
+      "python3",
+      "docs/tasks/AUDIT-009-evidence/audit-02/probe_corrupt_obligation.py",
+      ".",
+      "corrupt"
+    ],
+    "rc": 0,
+    "output": "old-corrupt.json"
+  },
+  {
+    "argv": [
+      "python3",
+      "docs/tasks/AUDIT-009-evidence/audit-02/probe_corrupt_obligation.py",
+      ".",
+      "delete"
+    ],
+    "rc": 0,
+    "output": "old-delete.json"
+  },
+  {
+    "argv": [
+      "python3",
+      "docs/tasks/AUDIT-009-evidence/audit-02/probe_legacy_equal.py",
+      "."
+    ],
+    "rc": 0,
+    "output": "old-legacy.json"
+  },
+  {
+    "argv": [
+      "python3",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tests",
+      "-p",
+      "test_checks*.py",
+      "-v"
+    ],
+    "rc": 0,
+    "tests": 365,
+    "seconds": 260.783
+  },
+  {
+    "argv": [
+      "python3",
+      "ai-dev-playbook/scripts/playbook.py",
+      "verify",
+      "AUDIT-009"
+    ],
+    "rc": 0,
+    "run_id": "84693ca6b4d149da9bad2908c0b2e8b5",
+    "tests": 1134,
+    "unit_seconds": 1993.169,
+    "note": "Historical pre-finding run; no current positive handoff."
+  },
+  {
+    "argv": [
+      "python3",
+      "docs/archive/tasks/PB-073-evidence/self_pilot.py",
+      "/tmp/audit009-20261117-05/source-snapshot",
+      "/tmp/audit009-20261117-05/pilot-full"
+    ],
+    "rc": 0,
+    "output": "pilot-full/summary.json"
+  },
+  {
+    "argv": [
+      "python3",
+      "work/verification/AUDIT-009/audit-05/probe_bytecode_cache_cli.py",
+      "."
+    ],
+    "rc": 0,
+    "product_stale_rc": 0,
+    "product_control_rc": 1,
+    "observed": [
+      1,
+      1,
+      2
+    ],
+    "meaning": "Probe completion rc=0; product false passed is A-08."
+  },
+  {
+    "argv": [
+      "python3",
+      "work/verification/AUDIT-009/audit-05/probe_bytecode_cache_cli.py",
+      ".",
+      "dont-write"
+    ],
+    "rc": 0,
+    "product_stale_rc": 0,
+    "product_control_rc": 1,
+    "observed": [
+      1,
+      1,
+      2
+    ]
+  }
+]

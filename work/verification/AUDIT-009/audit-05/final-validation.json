@@ -1,0 +1,31 @@
+{
+  "audit_result": "changes_requested",
+  "finding": "A-08 P1",
+  "previous_A07": "fixed",
+  "task_status": "in_progress",
+  "accepted": false,
+  "new_handoff_created": false,
+  "checks_tests": 365,
+  "checks_seconds": 260.783,
+  "full_verify_tests": 1134,
+  "full_verify_unit_seconds": 1993.169,
+  "full_verify_rc": 0,
+  "full_verify_is_current_acceptance_evidence": false,
+  "full_self_pilot_rc": 0,
+  "full_self_pilot_completed": true,
+  "cache_cli_observed": [
+    1,
+    1,
+    2
+  ],
+  "cache_stale_rc": 0,
+  "cache_gate_ok": true,
+  "cache_control_rc": 1,
+  "cache_same_input_digest_for_passed_and_failed": true,
+  "dont_write_reproduces": true,
+  "index_rc": 0,
+  "sync_rc": 0,
+  "check_ready_rc": 0,
+  "preflight_rc": 0,
+  "real_protected_OS_identity_verified": false
+}

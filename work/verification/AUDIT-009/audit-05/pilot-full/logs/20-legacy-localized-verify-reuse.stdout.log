@@ -1,0 +1,7 @@
+OK: структура, ссылки и 91 карточки; каталог документов: 31 документов, 2 legacy. Поведение продукта не проверялось.
+PILOT-01: чекбоксы уже актуальны.
+Новый прогон: 91e760aaaeb2404ca253df77cb43610e: изменились входы: tests/test_checks_setup.py
+RUN: self-check
+RUN: preflight-regressions
+RUN: unit-tests
+passed: /private/tmp/audit009-20261117-05/pilot-tmp/pb073-self-pilot-raex9d63/copy_a_legacy/work/verification/PILOT-01/735bdc6d4c1b412b9e965c2235ae2d0c/report.json

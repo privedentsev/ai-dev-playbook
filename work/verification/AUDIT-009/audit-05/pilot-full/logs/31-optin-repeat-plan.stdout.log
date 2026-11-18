@@ -1,0 +1,21 @@
+checks plan PILOT-01: политика ai-dev-playbook-self-pilot rev 1, trust=local
+Изменения: 0 путей
+Граф: 13 рёбер, unknown-областей: 0
+Оценка: 0с лимит 7200с; прочитано 144636168 Б / 3935 файлов (лимит 250000000 Б)
+  self-check: reused
+      обязательство задачи (task_projection)
+      обязательство политики (policy_projection)
+      reused b117baaf5b8f4af6b5e739307f74ff45-self-check-reused от 2026-11-17T17:15:24.029127+00:00
+  preflight-regressions: not_applicable
+      обязательства не затронуты
+  block-unit-tests: not_applicable
+      обязательства не затронуты
+  checks-unit-tests: not_applicable
+      обязательства не затронуты
+  cli-unit-tests: not_applicable
+      обязательства не затронуты
+  core-unit-tests: not_applicable
+      обязательства не затронуты
+  verification-unit-tests: not_applicable
+      обязательства не затронуты
+Итог: run=0, reused=1, blocked=0, not_applicable=6

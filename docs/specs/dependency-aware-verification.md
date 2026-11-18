@@ -30,7 +30,7 @@
   "changes": [
     {
       "id": "dependency-aware-verification",
-      "state": "approved",
+      "state": "implemented",
       "section": "Планируемые требования",
       "basis": {
         "type": "authorized_scope",

@@ -48,14 +48,61 @@
       "used_by": [
         "AUDIT-009"
       ]
+    },
+    {
+      "id": "audit-03",
+      "role": "report",
+      "source": "work/verification/AUDIT-009/audit-03",
+      "storage": "local",
+      "immutable": true,
+      "required": true,
+      "used_by": [
+        "AUDIT-009"
+      ]
+    },
+    {
+      "id": "audit-04",
+      "role": "report",
+      "source": "work/verification/AUDIT-009/audit-04",
+      "storage": "local",
+      "immutable": true,
+      "required": true,
+      "used_by": [
+        "AUDIT-009"
+      ]
+    },
+    {
+      "id": "audit-05",
+      "role": "report",
+      "source": "work/verification/AUDIT-009/audit-05",
+      "storage": "local",
+      "immutable": true,
+      "required": true,
+      "used_by": [
+        "AUDIT-009"
+      ]
+    },
+    {
+      "id": "verify-84693ca6b4d149da9bad2908c0b2e8b5",
+      "role": "report",
+      "source": "work/verification/AUDIT-009/84693ca6b4d149da9bad2908c0b2e8b5",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "AUDIT-009"
+      ]
     }
   ],
   "audit_packages": {
     "audit-01": "sha256:e73d4ab66d27e814eaa3664c121c08542aba7390fcc2877529d9a47f8f524676",
-    "audit-02": "sha256:ab47d908d1452591b23514a8ed29a9accd7709bfb7ac980f64f2bae8154871ee"
+    "audit-02": "sha256:ab47d908d1452591b23514a8ed29a9accd7709bfb7ac980f64f2bae8154871ee",
+    "audit-03": "sha256:38ce9338df2910ec1ba1527fb13e930fde44a247c32560dbd0283c2a793c1ab5",
+    "audit-04": "sha256:3be78a0e7aa213375f26ebbc1c646b79795c3ca8b63cf6ee2266973ae58d89b7",
+    "audit-05": "sha256:e3416e33d8a683ae1c33764a517261c8833830259e9a6b9baf7495705fb5c6df"
   },
   "acceptance": {
-    "at": "2026-11-16T18:08:51+03:00",
+    "at": "2026-11-17T20:41:38+03:00",
     "actor": {
       "name": "Codex",
       "model": "GPT-6"
@@ -65,6 +112,6 @@
     "result": "cancelled",
     "handoff_at": null,
     "session": null,
-    "detail": "Повторный независимый аудит audit-02: changes_requested. Исходные A-01/A-02 на новых seq-записях и подготовка пилота после архивации исправлены, 328 адресных тестов прошли. Новые A-04 P1 — повреждение/удаление последнего failed снимает task-обязательство; A-05 P2 — неоднозначная legacy-история без run_seq выбирает старый passed. Протокол: docs/tasks/AUDIT-009-evidence/audit-02/report.md; исправления: PB-074. result=cancelled/kind=diagnostic — отрицательный диагностический протокол, не принятие и не отмена карточки. AUDIT-009 остаётся in_progress, без HANDOFF/acceptance/close. Условие инженера «если всё хорошо» не выполнено. Архив PB-073 не переоткрывался, продуктовая реализация не менялась."
+    "detail": "audit-05: changes_requested. A-07 устранена; 365 checks OK, полный verify 1134 tests OK, полный self-pilot завершён rc=0 с новыми метриками. A-08 P1: после одинаковых size/mtime нового исходника planner run/reused=0, но Python читает старый pyc и даёт passed/CLI0/gate=true; наблюдения [1,1,2], холодный контроль failed/CLI1 при том же input_digest. Воспроизводится также с PYTHONDONTWRITEBYTECODE=1. Протокол work/verification/AUDIT-009/audit-05/report.md; исправление PB-080. Diagnostic cancelled — отрицательный протокол, не отмена карточки. Статус in_progress; без новой HANDOFF/acceptance/close/promotion. Реальная OS/CI identity не проверялась; код и архив не менялись."
   }
 }

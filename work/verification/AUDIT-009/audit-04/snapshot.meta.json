@@ -1,0 +1,82 @@
+{
+  "schema_version": 1,
+  "card_format_version": 2,
+  "relations": [
+    {
+      "relation": "based_on",
+      "target": "spec:dependency-aware-verification"
+    },
+    {
+      "relation": "based_on",
+      "target": "design:dependency-aware-verification"
+    },
+    {
+      "relation": "based_on",
+      "target": "plan:dependency-aware-verification"
+    }
+  ],
+  "materials": [
+    {
+      "id": "audit-01",
+      "role": "report",
+      "source": "work/verification/AUDIT-009/audit-01",
+      "storage": "local",
+      "immutable": true,
+      "required": true,
+      "used_by": [
+        "AUDIT-009"
+      ]
+    },
+    {
+      "id": "independent-audit-01",
+      "role": "report",
+      "source": "docs/tasks/AUDIT-009-evidence",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "AUDIT-009"
+      ]
+    },
+    {
+      "id": "audit-02",
+      "role": "report",
+      "source": "work/verification/AUDIT-009/audit-02",
+      "storage": "local",
+      "immutable": true,
+      "required": true,
+      "used_by": [
+        "AUDIT-009"
+      ]
+    },
+    {
+      "id": "audit-03",
+      "role": "report",
+      "source": "work/verification/AUDIT-009/audit-03",
+      "storage": "local",
+      "immutable": true,
+      "required": true,
+      "used_by": [
+        "AUDIT-009"
+      ]
+    }
+  ],
+  "audit_packages": {
+    "audit-01": "sha256:e73d4ab66d27e814eaa3664c121c08542aba7390fcc2877529d9a47f8f524676",
+    "audit-02": "sha256:ab47d908d1452591b23514a8ed29a9accd7709bfb7ac980f64f2bae8154871ee",
+    "audit-03": "sha256:38ce9338df2910ec1ba1527fb13e930fde44a247c32560dbd0283c2a793c1ab5"
+  },
+  "acceptance": {
+    "at": "2026-11-17T01:45:48+03:00",
+    "actor": {
+      "name": "Codex",
+      "model": "GPT-6"
+    },
+    "role": "auditor",
+    "kind": "diagnostic",
+    "result": "cancelled",
+    "handoff_at": null,
+    "session": null,
+    "detail": "audit-03: changes_requested. 344 tests OK (251.125s), старые A-04/A-05 устранены, новый plan-only OK. A-06 P2: после passed seq=0 и failed seq=1 при откате wall clock на секунду task/project gate.ok=true; stale reused=1, фактических запусков 2. Протокол docs/tasks/AUDIT-009-evidence/audit-03/report.md, исправление PB-078. Diagnostic cancelled — отрицательный протокол, не отмена карточки. AUDIT-009 остаётся in_progress, без HANDOFF/accepted/close; продуктовый код и архив не менялись."
+  }
+}

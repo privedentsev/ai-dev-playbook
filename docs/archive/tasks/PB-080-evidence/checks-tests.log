@@ -1,0 +1,643 @@
+E................................................................FFFFFFFFFFFFFFFF.........F.EFFEEEFF..........................................................................................................................................................................................................................E.F....F.FF.....F.....E.............F..FFFFFFFFFFFFF
+======================================================================
+ERROR: test_stale_force_release_and_cross_task (test_checks_bytecode.BytecodeCliTest.test_stale_force_release_and_cross_task)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_checks_bytecode.py", line 158, in test_stale_force_release_and_cross_task
+    self.assertTrue(records[-1]["reused"])
+                    ~~~~~~~~~~~^^^^^^^^^^
+KeyError: 'reused'
+
+======================================================================
+ERROR: test_aggregate_cannot_override_later_failure (test_checks_gate.ProtectedLatestOutcomeTest.test_aggregate_cannot_override_later_failure)
+Aggregate подтверждает старый passed-результат, но не
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_checks_gate.py", line 347, in test_aggregate_cannot_override_later_failure
+    checks_verifier.aggregate(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^
+        self.home, self.proj.root,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^
+        receipt_ids=[outcome["receipt"]["receipt_id"]],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        now="2026-01-01T00:02:00+00:00", emit=lambda s: None)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/ai-dev-playbook/scripts/checks_verifier.py", line 499, in aggregate
+    _raise(confirmed, "агрегирование: ни одна проверка не подтвердилась "
+    ~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                      "на текущем кандидате")
+                      ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/ai-dev-playbook/scripts/checks_verifier.py", line 51, in _raise
+    raise ValueError(message)
+ValueError: агрегирование: ни одна проверка не подтвердилась на текущем кандидате
+
+======================================================================
+ERROR: test_same_timestamp_aggregate_keeps_failed_latest (test_checks_gate.ProtectedLatestOutcomeTest.test_same_timestamp_aggregate_keeps_failed_latest)
+A-05 аудита PB-062: при равных finished_at порядок задаёт
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_checks_gate.py", line 364, in test_same_timestamp_aggregate_keeps_failed_latest
+    checks_verifier.aggregate(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^
+        self.home, self.proj.root,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^
+        receipt_ids=[outcome["receipt"]["receipt_id"]],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        now=stamp, emit=lambda s: None)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/ai-dev-playbook/scripts/checks_verifier.py", line 499, in aggregate
+    _raise(confirmed, "агрегирование: ни одна проверка не подтвердилась "
+    ~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                      "на текущем кандидате")
+                      ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/ai-dev-playbook/scripts/checks_verifier.py", line 51, in _raise
+    raise ValueError(message)
+ValueError: агрегирование: ни одна проверка не подтвердилась на текущем кандидате
+
+======================================================================
+ERROR: test_aggregate_receipt_ttl_expiry_rejected (test_checks_gate.ProtectedTtlTest.test_aggregate_receipt_ttl_expiry_rejected)
+Просроченная aggregate-квитанция не закрывает обязательство
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_checks_gate.py", line 236, in test_aggregate_receipt_ttl_expiry_rejected
+    checks_verifier.aggregate(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^
+        self.home, self.proj.root,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^
+        receipt_ids=[outcome["receipt"]["receipt_id"]],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        emit=lambda s: None)
+        ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/ai-dev-playbook/scripts/checks_verifier.py", line 499, in aggregate
+    _raise(confirmed, "агрегирование: ни одна проверка не подтвердилась "
+    ~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                      "на текущем кандидате")
+                      ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/ai-dev-playbook/scripts/checks_verifier.py", line 51, in _raise
+    raise ValueError(message)
+ValueError: агрегирование: ни одна проверка не подтвердилась на текущем кандидате
+
+======================================================================
+ERROR: test_older_expired_aggregate_does_not_block_fresh (test_checks_gate.ProtectedTtlTest.test_older_expired_aggregate_does_not_block_fresh)
+A-04: aggregate подтверждает исходное время исполнения —
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_checks_gate.py", line 275, in test_older_expired_aggregate_does_not_block_fresh
+    checks_verifier.aggregate(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^
+        self.home, self.proj.root,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^
+        receipt_ids=[outcome["receipt"]["receipt_id"]],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        now="2026-01-01T00:00:30+00:00", emit=lambda s: None)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/ai-dev-playbook/scripts/checks_verifier.py", line 499, in aggregate
+    _raise(confirmed, "агрегирование: ни одна проверка не подтвердилась "
+    ~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                      "на текущем кандидате")
+                      ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/ai-dev-playbook/scripts/checks_verifier.py", line 51, in _raise
+    raise ValueError(message)
+ValueError: агрегирование: ни одна проверка не подтвердилась на текущем кандидате
+
+======================================================================
+ERROR: test_aggregate_source_revocation_transitive (test_checks_trust.AuditFixesTest.test_aggregate_source_revocation_transitive)
+Отзыв исходной квитанции транзитивно отклоняет aggregate
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_checks_trust.py", line 717, in test_aggregate_source_revocation_transitive
+    agg = checks_verifier.aggregate(
+        home, proj.root, receipt_ids=[run_id], emit=lambda s: None)
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/ai-dev-playbook/scripts/checks_verifier.py", line 499, in aggregate
+    _raise(confirmed, "агрегирование: ни одна проверка не подтвердилась "
+    ~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                      "на текущем кандидате")
+                      ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/ai-dev-playbook/scripts/checks_verifier.py", line 51, in _raise
+    raise ValueError(message)
+ValueError: агрегирование: ни одна проверка не подтвердилась на текущем кандидате
+
+======================================================================
+ERROR: test_aggregate_confirms_unchanged (test_checks_trust.ReceiptVerifyTest.test_aggregate_confirms_unchanged)
+Aggregate-квитанция подтверждает неизменные результаты
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_checks_trust.py", line 436, in test_aggregate_confirms_unchanged
+    result = checks_verifier.aggregate(
+        self.home, self.proj.root,
+        receipt_ids=[self.receipt["receipt_id"]],
+        emit=lambda s: None)
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/ai-dev-playbook/scripts/checks_verifier.py", line 499, in aggregate
+    _raise(confirmed, "агрегирование: ни одна проверка не подтвердилась "
+    ~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                      "на текущем кандидате")
+                      ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/ai-dev-playbook/scripts/checks_verifier.py", line 51, in _raise
+    raise ValueError(message)
+ValueError: агрегирование: ни одна проверка не подтвердилась на текущем кандидате
+
+======================================================================
+FAIL: test_plan_agrees_with_run_on_lost_history (test_checks_e2e.Audit009BaselineFailureE2ETest.test_plan_agrees_with_run_on_lost_history)
+Аудит-01 A-02: checks plan не «переиспользует» результат
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_checks_e2e.py", line 1909, in setUp
+    super().setUp()
+    ~~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_checks_e2e.py", line 81, in setUp
+    self.assertEqual(code, 0, err)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+AssertionError: 1 != 0 : ERROR: Незавершённая операция документов (20261117-212807-8b242762): обычные команды заблокированы. Восстановление: python3 work/lifecycle/20261117-212807-8b242762/restore.py
+
+
+======================================================================
+FAIL: test_timeout_after_baseline_reopens_task_obligation (test_checks_e2e.Audit009BaselineFailureE2ETest.test_timeout_after_baseline_reopens_task_obligation)
+timeout-прогон при актуальном baseline: обязательство
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_checks_e2e.py", line 1909, in setUp
+    super().setUp()
+    ~~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_checks_e2e.py", line 81, in setUp
+    self.assertEqual(code, 0, err)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+AssertionError: 1 != 0 : ERROR: Незавершённая операция документов (20261117-212807-8b242762): обычные команды заблокированы. Восстановление: python3 work/lifecycle/20261117-212807-8b242762/restore.py
+
+
+======================================================================
+FAIL: test_ac03_excluded_logs_card_projection_binary_inputs_and_unknown_file (test_checks_e2e.InputsExclusionsFallbackBudgetE2ETest.test_ac03_excluded_logs_card_projection_binary_inputs_and_unknown_file)
+AC-03: лог не запускает тесты, карточка разделяет структуру и критерии, PNG/архив учитываются, неизвестный файл не теряется.
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_checks_e2e.py", line 81, in setUp
+    self.assertEqual(code, 0, err)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+AssertionError: 1 != 0 : ERROR: Незавершённая операция документов (20261117-212807-8b242762): обычные команды заблокированы. Восстановление: python3 work/lifecycle/20261117-212807-8b242762/restore.py
+
+
+======================================================================
+FAIL: test_ac04_subsystem_boundary_eight_reused_two_run_and_budget_stop (test_checks_e2e.InputsExclusionsFallbackBudgetE2ETest.test_ac04_subsystem_boundary_eight_reused_two_run_and_budget_stop)
+AC-04: подсистема расширяет набор в доказанных границах (8 reused, 2 run), при недоказанной независимости reuse запрещён, бюджет блокирует запуск.
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_checks_e2e.py", line 81, in setUp
+    self.assertEqual(code, 0, err)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+AssertionError: 1 != 0 : ERROR: Незавершённая операция документов (20261117-212807-8b242762): обычные команды заблокированы. Восстановление: python3 work/lifecycle/20261117-212807-8b242762/restore.py
+
+
+======================================================================
+FAIL: test_ac05_release_cross_task_stale_force_invalidation_and_late_failed (test_checks_e2e.ReleaseModesFreshnessAndAdapterE2ETest.test_ac05_release_cross_task_stale_force_invalidation_and_late_failed)
+AC-05: релиз собирает обязательства разных задач, stale сохраняет свежие, force запускает всё, смена среды/TTL/команды/фикстуры и поздний failed блокируют reuse.
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_checks_e2e.py", line 81, in setUp
+    self.assertEqual(code, 0, err)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+AssertionError: 1 != 0 : ERROR: Незавершённая операция документов (20261117-212807-8b242762): обычные команды заблокированы. Восстановление: python3 work/lifecycle/20261117-212807-8b242762/restore.py
+
+
+======================================================================
+FAIL: test_ac06_adapter_negatives_descriptions_reused_time_and_label_rename (test_checks_e2e.ReleaseModesFreshnessAndAdapterE2ETest.test_ac06_adapter_negatives_descriptions_reused_time_and_label_rename)
+AC-06: exit 0 с 0 тестов, пропавший ID, лишний skip, дубликат и порча отчёта отклоняются; описания и исходное время reused сохраняются.
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_checks_e2e.py", line 81, in setUp
+    self.assertEqual(code, 0, err)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+AssertionError: 1 != 0 : ERROR: Незавершённая операция документов (20261117-212807-8b242762): обычные команды заблокированы. Восстановление: python3 work/lifecycle/20261117-212807-8b242762/restore.py
+
+
+======================================================================
+FAIL: test_ac01_no_git_manual_edits_payments_and_discounts_counters (test_checks_e2e.ShopGraphE2ETest.test_ac01_no_git_manual_edits_payments_and_discounts_counters)
+AC-01: без .git правка оплаты запускает оплату и checkout при reuse корзины, правка discounts запускает все три.
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_checks_e2e.py", line 81, in setUp
+    self.assertEqual(code, 0, err)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+AssertionError: 1 != 0 : ERROR: Незавершённая операция документов (20261117-212807-8b242762): обычные команды заблокированы. Восстановление: python3 work/lifecycle/20261117-212807-8b242762/restore.py
+
+
+======================================================================
+FAIL: test_ac02_import_cycle_and_dynamic_import_expand_conservatively (test_checks_e2e.ShopGraphE2ETest.test_ac02_import_cycle_and_dynamic_import_expand_conservatively)
+AC-02: циклы импортов не зацикливаются, а dynamic import помечается unknown и исключает ложный пропуск.
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_checks_e2e.py", line 81, in setUp
+    self.assertEqual(code, 0, err)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+AssertionError: 1 != 0 : ERROR: Незавершённая операция документов (20261117-212807-8b242762): обычные команды заблокированы. Восстановление: python3 work/lifecycle/20261117-212807-8b242762/restore.py
+
+
+======================================================================
+FAIL: test_ac02_same_mtime_size_add_delete_rename_and_missing_baseline (test_checks_e2e.ShopGraphE2ETest.test_ac02_same_mtime_size_add_delete_rename_and_missing_baseline)
+AC-02: равные mtime/size при других байтах, add/delete/rename файла и импорта и потеря baseline исключают ложный reuse.
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_checks_e2e.py", line 81, in setUp
+    self.assertEqual(code, 0, err)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+AssertionError: 1 != 0 : ERROR: Незавершённая операция документов (20261117-212807-8b242762): обычные команды заблокированы. Восстановление: python3 work/lifecycle/20261117-212807-8b242762/restore.py
+
+
+======================================================================
+FAIL: test_check_dependency_chain_transitive_input_rerun (test_checks_e2e.ShopGraphE2ETest.test_check_dependency_chain_transitive_input_rerun)
+A-01: цепочка check→check→module — изменение транзитивного
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_checks_e2e.py", line 81, in setUp
+    self.assertEqual(code, 0, err)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+AssertionError: 1 != 0 : ERROR: Незавершённая операция документов (20261117-212807-8b242762): обычные команды заблокированы. Восстановление: python3 work/lifecycle/20261117-212807-8b242762/restore.py
+
+
+======================================================================
+FAIL: test_ac07_input_race_post_run_drift_arena_isolation_and_receipt_tamper (test_checks_e2e.TrustBoundaryLifecycleAndMigrationE2ETest.test_ac07_input_race_post_run_drift_arena_isolation_and_receipt_tamper)
+AC-07: мутация входа во время и после запуска блокирует passed; изолированный кандидат и подмена квитанции проверяются.
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_checks_e2e.py", line 81, in setUp
+    self.assertEqual(code, 0, err)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+AssertionError: 1 != 0 : ERROR: Незавершённая операция документов (20261117-212807-8b242762): обычные команды заблокированы. Восстановление: python3 work/lifecycle/20261117-212807-8b242762/restore.py
+
+
+======================================================================
+FAIL: test_ac08_and_card_ac03_bypass_attempts_and_local_vs_protected_boundary (test_checks_e2e.TrustBoundaryLifecycleAndMigrationE2ETest.test_ac08_and_card_ac03_bypass_attempts_and_local_vs_protected_boundary)
+AC-08 и AC-03 карточки: обходы доверенного gate отклоняются, границы local и protected проверяются раздельно.
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_checks_e2e.py", line 81, in setUp
+    self.assertEqual(code, 0, err)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+AssertionError: 1 != 0 : ERROR: Незавершённая операция документов (20261117-212807-8b242762): обычные команды заблокированы. Восстановление: python3 work/lifecycle/20261117-212807-8b242762/restore.py
+
+
+======================================================================
+FAIL: test_ac09_manual_and_task_criteria_unified_gate_and_archive_provenance (test_checks_e2e.TrustBoundaryLifecycleAndMigrationE2ETest.test_ac09_manual_and_task_criteria_unified_gate_and_archive_provenance)
+AC-09: старый suite не закрывает новое требование и ручную проверку; handoff/accept/release-ready едины, архив сохраняет provenance.
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_checks_e2e.py", line 81, in setUp
+    self.assertEqual(code, 0, err)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+AssertionError: 1 != 0 : ERROR: Незавершённая операция документов (20261117-212807-8b242762): обычные команды заблокированы. Восстановление: python3 work/lifecycle/20261117-212807-8b242762/restore.py
+
+
+======================================================================
+FAIL: test_ac10_legacy_intact_preview_readonly_unsupported_and_restore (test_checks_e2e.TrustBoundaryLifecycleAndMigrationE2ETest.test_ac10_legacy_intact_preview_readonly_unsupported_and_restore)
+AC-10: legacy без checks_policy неизменен, preview не исполняет код, неподдержанные версии и прерывание безопасны.
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_checks_e2e.py", line 81, in setUp
+    self.assertEqual(code, 0, err)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+AssertionError: 1 != 0 : ERROR: Незавершённая операция документов (20261117-212807-8b242762): обычные команды заблокированы. Восстановление: python3 work/lifecycle/20261117-212807-8b242762/restore.py
+
+
+======================================================================
+FAIL: test_coverage_report_binds_terminal_evidence (test_checks_e2e.TrustBoundaryLifecycleAndMigrationE2ETest.test_coverage_report_binds_terminal_evidence)
+A-02: checks-coverage-report привязан к терминальным
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_checks_e2e.py", line 81, in setUp
+    self.assertEqual(code, 0, err)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+AssertionError: 1 != 0 : ERROR: Незавершённая операция документов (20261117-212807-8b242762): обычные команды заблокированы. Восстановление: python3 work/lifecycle/20261117-212807-8b242762/restore.py
+
+
+======================================================================
+FAIL: test_coverage_report_rejects_post_report_rerun_of_not_applicable (test_checks_e2e.TrustBoundaryLifecycleAndMigrationE2ETest.test_coverage_report_rejects_post_report_rerun_of_not_applicable)
+A-04: переход not_applicable → новый прогон после отчёта
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_checks_e2e.py", line 81, in setUp
+    self.assertEqual(code, 0, err)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+AssertionError: 1 != 0 : ERROR: Незавершённая операция документов (20261117-212807-8b242762): обычные команды заблокированы. Восстановление: python3 work/lifecycle/20261117-212807-8b242762/restore.py
+
+
+======================================================================
+FAIL: test_receipt_covers_but_boundary_required (test_checks_gate.ProtectedGateTest.test_receipt_covers_but_boundary_required)
+Квитанция verifier покрывает проверку, но граница обязательна
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_checks_gate.py", line 162, in test_receipt_covers_but_boundary_required
+    self.assertIn("probe", verdict["covered"])
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'probe' not found in []
+
+======================================================================
+FAIL: test_clock_rollback_failed_stays_latest (test_checks_gate.ProtectedLatestOutcomeTest.test_clock_rollback_failed_stays_latest)
+A-06 PB-078: protected — поздний failed с меньшим
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_checks_gate.py", line 386, in test_clock_rollback_failed_stays_latest
+    self.assertIn("probe", verdict["covered"])
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'probe' not found in []
+
+======================================================================
+FAIL: test_later_failed_blocks_earlier_passed (test_checks_gate.ProtectedLatestOutcomeTest.test_later_failed_blocks_earlier_passed)
+Поздний failed блокирует ранний passed в защищённой истории
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_checks_gate.py", line 317, in test_later_failed_blocks_earlier_passed
+    self.assertIn("probe", self.evaluate()["covered"])
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'probe' not found in []
+
+======================================================================
+FAIL: test_older_expired_does_not_block_fresh (test_checks_gate.ProtectedTtlTest.test_older_expired_does_not_block_fresh)
+A-04: просроченная квитанция не блокирует более свежее
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_checks_gate.py", line 256, in test_older_expired_does_not_block_fresh
+    self.assertIn("probe", verdict["covered"])
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'probe' not found in []
+
+======================================================================
+FAIL: test_run_receipt_ttl_expiry_rejected (test_checks_gate.ProtectedTtlTest.test_run_receipt_ttl_expiry_rejected)
+Просроченная по TTL run-квитанция не закрывает обязательство
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_checks_gate.py", line 226, in test_run_receipt_ttl_expiry_rejected
+    self.assertIn("probe", fresh["covered"])
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'probe' not found in []
+
+======================================================================
+FAIL: test_external_always_run_does_not_break_env (test_checks_trust.AuditFixesTest.test_external_always_run_does_not_break_env)
+required_environment с dict-значением не ломает subprocess (A-03).
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_checks_trust.py", line 707, in test_external_always_run_does_not_break_env
+    self.assertEqual(statuses["probe"], "passed")
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'failed' != 'passed'
+- failed
++ passed
+
+
+======================================================================
+FAIL: test_scrubbed_env_reaches_subprocess (test_checks_trust.AuditFixesTest.test_scrubbed_env_reaches_subprocess)
+HOME/TMPDIR внутри arena, PATH есть; binding env не подменяет.
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_checks_trust.py", line 689, in test_scrubbed_env_reaches_subprocess
+    self.assertEqual(statuses["probe"], "passed")
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'failed' != 'passed'
+- failed
++ passed
+
+
+======================================================================
+FAIL: test_covered_by_run_receipt (test_checks_trust.GateTest.test_covered_by_run_receipt)
+Run-квитанция покрывает область protected-gate
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_checks_trust.py", line 811, in test_covered_by_run_receipt
+    self.assertTrue(verdict["ok"], verdict["rejections"])
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : []
+
+======================================================================
+FAIL: test_forged_file_in_project_is_not_authoritative (test_checks_trust.GateTest.test_forged_file_in_project_is_not_authoritative)
+Проектная копия не создаёт и не отменяет доверенное покрытие.
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_checks_trust.py", line 838, in test_forged_file_in_project_is_not_authoritative
+    self.assertTrue(verdict["ok"], verdict["rejections"])
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : []
+
+======================================================================
+FAIL: test_env_scrubbed_for_test_process (test_checks_trust.IsolationTest.test_env_scrubbed_for_test_process)
+Переменные доверенной стороны не доходят до подпроцесса.
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_checks_trust.py", line 488, in test_env_scrubbed_for_test_process
+    self.assertIn("clean", stdout.read_text())
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'clean' not found in ''
+
+======================================================================
+FAIL: test_run_issues_valid_receipt (test_checks_trust.VerifierRunTest.test_run_issues_valid_receipt)
+verifier_run выдаёт валидную квитанцию на кандидате
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_checks_trust.py", line 247, in test_run_issues_valid_receipt
+    self.assertEqual(statuses["probe"], "passed")
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'failed' != 'passed'
+- failed
++ passed
+
+
+======================================================================
+FAIL: test_always_run_prevents_coverage (test_checks_verifier_gate.VerifierHistoryTest.test_always_run_prevents_coverage)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_checks_verifier_gate.py", line 143, in test_always_run_prevents_coverage
+    self.run_outcome(0, '2026-11-17T10:00:00+00:00')
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_checks_verifier_gate.py", line 36, in run_outcome
+    self.assertEqual(out['receipt']['subject']['results'][0]['status'], expected)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'failed' != 'passed'
+- failed
++ passed
+
+
+======================================================================
+FAIL: test_candidate_change_invalidates_receipt (test_checks_verifier_gate.VerifierHistoryTest.test_candidate_change_invalidates_receipt)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_checks_verifier_gate.py", line 123, in test_candidate_change_invalidates_receipt
+    self.run_outcome(0, '2026-11-17T10:00:00+00:00')
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_checks_verifier_gate.py", line 36, in run_outcome
+    self.assertEqual(out['receipt']['subject']['results'][0]['status'], expected)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'failed' != 'passed'
+- failed
++ passed
+
+
+======================================================================
+FAIL: test_conflicting_completion_and_commit_order (test_checks_verifier_gate.VerifierHistoryTest.test_conflicting_completion_and_commit_order)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_checks_verifier_gate.py", line 82, in test_conflicting_completion_and_commit_order
+    self.run_outcome(0, '2026-11-17T10:01:00+00:00')
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_checks_verifier_gate.py", line 36, in run_outcome
+    self.assertEqual(out['receipt']['subject']['results'][0]['status'], expected)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'failed' != 'passed'
+- failed
++ passed
+
+
+======================================================================
+FAIL: test_corrupt_journal_fails_closed (test_checks_verifier_gate.VerifierHistoryTest.test_corrupt_journal_fails_closed)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_checks_verifier_gate.py", line 116, in test_corrupt_journal_fails_closed
+    self.run_outcome(0, '2026-11-17T10:00:00+00:00')
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_checks_verifier_gate.py", line 36, in run_outcome
+    self.assertEqual(out['receipt']['subject']['results'][0]['status'], expected)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'failed' != 'passed'
+- failed
++ passed
+
+
+======================================================================
+FAIL: test_corrupt_trusted_failure_cannot_resurrect_pass (test_checks_verifier_gate.VerifierHistoryTest.test_corrupt_trusted_failure_cannot_resurrect_pass)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_checks_verifier_gate.py", line 98, in test_corrupt_trusted_failure_cannot_resurrect_pass
+    self.run_outcome(0, '2026-11-17T10:00:00+00:00')
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_checks_verifier_gate.py", line 36, in run_outcome
+    self.assertEqual(out['receipt']['subject']['results'][0]['status'], expected)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'failed' != 'passed'
+- failed
++ passed
+
+
+======================================================================
+FAIL: test_declared_policy_must_match_approved (test_checks_verifier_gate.VerifierHistoryTest.test_declared_policy_must_match_approved)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_checks_verifier_gate.py", line 128, in test_declared_policy_must_match_approved
+    self.run_outcome(0, '2026-11-17T10:00:00+00:00')
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_checks_verifier_gate.py", line 36, in run_outcome
+    self.assertEqual(out['receipt']['subject']['results'][0]['status'], expected)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'failed' != 'passed'
+- failed
++ passed
+
+
+======================================================================
+FAIL: test_later_nonpass_and_recovery (test_checks_verifier_gate.VerifierHistoryTest.test_later_nonpass_and_recovery) (state=1)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_checks_verifier_gate.py", line 66, in test_later_nonpass_and_recovery
+    self.run_outcome(0, f'2026-11-17T{state+10}:00:00+00:00')
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_checks_verifier_gate.py", line 36, in run_outcome
+    self.assertEqual(out['receipt']['subject']['results'][0]['status'], expected)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'failed' != 'passed'
+- failed
++ passed
+
+
+======================================================================
+FAIL: test_later_nonpass_and_recovery (test_checks_verifier_gate.VerifierHistoryTest.test_later_nonpass_and_recovery) (state=2)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_checks_verifier_gate.py", line 66, in test_later_nonpass_and_recovery
+    self.run_outcome(0, f'2026-11-17T{state+10}:00:00+00:00')
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_checks_verifier_gate.py", line 36, in run_outcome
+    self.assertEqual(out['receipt']['subject']['results'][0]['status'], expected)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'failed' != 'passed'
+- failed
++ passed
+
+
+======================================================================
+FAIL: test_later_nonpass_and_recovery (test_checks_verifier_gate.VerifierHistoryTest.test_later_nonpass_and_recovery) (state=3)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_checks_verifier_gate.py", line 66, in test_later_nonpass_and_recovery
+    self.run_outcome(0, f'2026-11-17T{state+10}:00:00+00:00')
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_checks_verifier_gate.py", line 36, in run_outcome
+    self.assertEqual(out['receipt']['subject']['results'][0]['status'], expected)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'failed' != 'passed'
+- failed
++ passed
+
+
+======================================================================
+FAIL: test_manual_stays_outside_reference_consumer (test_checks_verifier_gate.VerifierHistoryTest.test_manual_stays_outside_reference_consumer)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_checks_verifier_gate.py", line 154, in test_manual_stays_outside_reference_consumer
+    self.run_outcome(0, '2026-11-17T10:00:00+00:00')
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_checks_verifier_gate.py", line 36, in run_outcome
+    self.assertEqual(out['receipt']['subject']['results'][0]['status'], expected)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'failed' != 'passed'
+- failed
++ passed
+
+
+======================================================================
+FAIL: test_missing_trusted_failure_cannot_resurrect_pass (test_checks_verifier_gate.VerifierHistoryTest.test_missing_trusted_failure_cannot_resurrect_pass)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_checks_verifier_gate.py", line 88, in test_missing_trusted_failure_cannot_resurrect_pass
+    self.run_outcome(0, '2026-11-17T10:00:00+00:00')
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_checks_verifier_gate.py", line 36, in run_outcome
+    self.assertEqual(out['receipt']['subject']['results'][0]['status'], expected)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'failed' != 'passed'
+- failed
++ passed
+
+
+======================================================================
+FAIL: test_tampered_epoch_cannot_hide_failure (test_checks_verifier_gate.VerifierHistoryTest.test_tampered_epoch_cannot_hide_failure)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_checks_verifier_gate.py", line 106, in test_tampered_epoch_cannot_hide_failure
+    self.run_outcome(0, '2026-11-17T10:00:00+00:00')
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_checks_verifier_gate.py", line 36, in run_outcome
+    self.assertEqual(out['receipt']['subject']['results'][0]['status'], expected)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'failed' != 'passed'
+- failed
++ passed
+
+
+======================================================================
+FAIL: test_task_binding_requires_matching_projection (test_checks_verifier_gate.VerifierHistoryTest.test_task_binding_requires_matching_projection)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_checks_verifier_gate.py", line 177, in test_task_binding_requires_matching_projection
+    self.assertEqual(out['receipt']['subject']['results'][0]['status'], 'passed')
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'failed' != 'passed'
+- failed
++ passed
+
+
+----------------------------------------------------------------------
+Ran 368 tests in 123.446s
+
+FAILED (failures=40, errors=7)
+Создано 74 файлов в /private/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/tmp945s83va; manifest записан. Заполните документы и project.json; setup_status=needs_review.
+Создано 74 файлов в /private/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/tmp_nuto3v3; manifest записан. Заполните документы и project.json; setup_status=needs_review.
+Создано 74 файлов в /private/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/tmpkysh8h9c; manifest записан. Заполните документы и project.json; setup_status=needs_review.
+Создано 74 файлов в /private/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/tmpcxg3vk9z; manifest записан. Заполните документы и project.json; setup_status=needs_review.
+Создано 74 файлов в /private/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/tmpc__r_3hp; manifest записан. Заполните документы и project.json; setup_status=needs_review.
+Создано 74 файлов в /private/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/tmpicecz_g2; manifest записан. Заполните документы и project.json; setup_status=needs_review.
+Создано 74 файлов в /private/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/tmpgp9leuvz; manifest записан. Заполните документы и project.json; setup_status=needs_review.
+Создано 74 файлов в /private/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/tmpdg_pspu8; manifest записан. Заполните документы и project.json; setup_status=needs_review.

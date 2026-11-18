@@ -34,6 +34,7 @@ import json
 import os
 import subprocess
 import sys
+import tempfile
 import threading
 import time
 import unittest
@@ -263,11 +264,22 @@ def collect(root, check, run_dir, *, timeout, env=None, wrap=None):
     отчёта (подделка поверх настоящей) — crash. ``adapter.json``
     перезаписывается родителем только проверенным содержимым.
     """
+    # PB-080: -B alone still reads timestamp-valid source-side pyc.
+    # A fresh private prefix changes every source cache lookup from startup;
+    # disabling writes keeps it empty throughout this execution. Never remove
+    # project/user caches. TemporaryDirectory also cleans up timeout/crash paths.
+    with tempfile.TemporaryDirectory(prefix="playbook-bytecode-") as cache:
+        return _collect(root, check, run_dir, timeout=timeout, env=env,
+                        wrap=wrap, cache_prefix=cache)
+
+
+def _collect(root, check, run_dir, *, timeout, env, wrap, cache_prefix):
     import verification
     root = Path(root)
     script = Path(__file__).resolve()
     out_path = run_dir / (check["id"] + ".adapter.json")
-    argv = [sys.executable, str(script), "--suite", "--argv",
+    argv = [sys.executable, "-B", "-X", f"pycache_prefix={cache_prefix}",
+            str(script), "--suite", "--argv",
             json.dumps(check["argv"], ensure_ascii=False)]
     if wrap:
         argv = list(wrap) + argv
@@ -281,6 +293,8 @@ def collect(root, check, run_dir, *, timeout, env=None, wrap=None):
     # файл-скрипт ставит scripts/ — корень добавляем через PYTHONPATH,
     # иначе импорты модулей проекта не воспроизводят одобренную команду.
     env = dict(os.environ if env is None else env)
+    env["PYTHONPYCACHEPREFIX"] = cache_prefix
+    env["PYTHONDONTWRITEBYTECODE"] = "1"
     root_abs = str(root.resolve())
     if env.get("PYTHONPATH"):
         env["PYTHONPATH"] = root_abs + os.pathsep + env["PYTHONPATH"]

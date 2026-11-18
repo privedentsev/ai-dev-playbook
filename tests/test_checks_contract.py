@@ -64,7 +64,7 @@ class PolicyFixtureTest(SchemaCase):
         self.assertEqual(cc.GRAPH_SCHEMA_VERSION, 1)
         self.assertEqual(cc.RESULT_SCHEMA_VERSION, 1)
         self.assertEqual(cc.RECEIPT_SCHEMA_VERSION, 1)
-        self.assertEqual(cc.ADAPTER_PROTOCOL_VERSION, 1)
+        self.assertEqual(cc.ADAPTER_PROTOCOL_VERSION, 2)
         self.assertEqual(cc.PROJECT_LINK_FIELD, "checks_policy")
 
 

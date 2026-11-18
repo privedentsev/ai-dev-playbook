@@ -1,0 +1,11 @@
+checks run PILOT-01: политика ai-dev-playbook-self-pilot rev 1, scope=task mode=stale
+Ограничение: trust_mode=local: результаты диагностические — локальная история не защищена от владельца проекта; доверенное выполнение требует контура PB-061
+  self-check: reused — исходный результат abd1698a6fa445c39a17d338ab8e59f9-self-check от 2026-11-17T16:11:26.165941+00:00
+  preflight-regressions: not_applicable
+  block-unit-tests: not_applicable
+  checks-unit-tests: RUN test
+  checks-unit-tests: passed (248.588с)
+  cli-unit-tests: not_applicable
+  core-unit-tests: not_applicable
+  verification-unit-tests: not_applicable
+Итог: passed=1, reused=1, not_applicable=5; непокрытых обязательств: 0
