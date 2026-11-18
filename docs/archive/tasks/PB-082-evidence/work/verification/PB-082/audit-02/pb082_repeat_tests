@@ -1,0 +1,9 @@
+test_peer_card_link_invalidates_structural_reuse (test_checks_e2e.TaskCardStructureE2ETest.test_peer_card_link_invalidates_structural_reuse)
+Битая ссылка в соседней карточке требует повторной проверки структуры. ... ok
+test_task_card_snapshot_keeps_prose_and_normalizes_marks (test_checks_inventory.SnapshotTest.test_task_card_snapshot_keeps_prose_and_normalizes_marks)
+Снимок карточек игнорирует отметки критериев и сохраняет Markdown журнала. ... ok
+
+----------------------------------------------------------------------
+Ran 2 tests in 6.198s
+
+OK

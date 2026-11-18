@@ -1,0 +1,76 @@
+{
+  "card_projection": "sha256:ddd13bbcee5d9c998113ad07cdfcece5d85575d611b9b69f4998e77a6062f08d",
+  "checks": {
+    "block-unit-tests": {
+      "explain": [
+        "обязательства не затронуты"
+      ],
+      "kind": "test",
+      "status": "not_applicable"
+    },
+    "checks-unit-tests": {
+      "explain": [
+        "обязательства не затронуты"
+      ],
+      "kind": "test",
+      "status": "not_applicable"
+    },
+    "cli-unit-tests": {
+      "explain": [
+        "обязательства не затронуты"
+      ],
+      "kind": "test",
+      "status": "not_applicable"
+    },
+    "core-unit-tests": {
+      "explain": [
+        "обязательства не затронуты"
+      ],
+      "kind": "test",
+      "status": "not_applicable"
+    },
+    "preflight-regressions": {
+      "explain": [
+        "обязательства не затронуты"
+      ],
+      "kind": "command",
+      "status": "not_applicable"
+    },
+    "self-check": {
+      "explain": [
+        "обязательство задачи (task_projection)",
+        "обязательство политики (policy_projection)",
+        "reused 90ec3171b7584543a0da3749cd1eb750-self-check от 2026-11-18T09:09:01.752612+00:00"
+      ],
+      "kind": "command",
+      "result_id": "90ec3171b7584543a0da3749cd1eb750-self-check",
+      "status": "covered"
+    },
+    "verification-unit-tests": {
+      "explain": [
+        "обязательства не затронуты"
+      ],
+      "kind": "test",
+      "status": "not_applicable"
+    }
+  },
+  "covered": [
+    "self-check"
+  ],
+  "execution_id": "EXEC-01",
+  "execution_sha256": "sha256:5f67f6b2598d4e144826bc5f8bc907e0f30b6a1890bc900ec7a57320e638dbe9",
+  "finished_at": "2026-11-18T12:51:00+03:00",
+  "journal_sha256": "sha256:1ebc56ca2a2ffe4faee71fbd6b0348318df4d79d8f51e32f65d393a75e3ba8c7",
+  "kind": "checks-coverage-report",
+  "policy_id": "ai-dev-playbook-local",
+  "policy_revision": 3,
+  "protected_confirmed": false,
+  "run_id": "be2417f555b656e1",
+  "schema_version": 1,
+  "scope": "task",
+  "started_at": "2026-11-18T12:51:00+03:00",
+  "status": "passed",
+  "summary": "HANDOFF-01",
+  "task_id": "PB-082",
+  "trust_mode": "local"
+}

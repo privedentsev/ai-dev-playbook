@@ -1,0 +1,38 @@
+checks plan PB-082: политика ai-dev-playbook-local rev 5, trust=local
+Изменения: 3 путей
+  ~ docs/tasks/PB-082.md
+  ~ docs/tasks/PB-082.meta.json
+  ~ untouched-new-area.txt
+Вне модулей: untouched-new-area.txt
+Граф: 23 рёбер, unknown-областей: 0
+Оценка: 0с лимит 7200с; прочитано 178270301 Б / 5429 файлов (лимит 2000000000 Б)
+  self-check: reused
+      неприписанные пути — расширение до проекта
+      обязательство задачи (task_projection)
+      обязательство политики (policy_projection)
+      reused e27dd2db85774605a2bb7c1c048157d0-self-check от 2026-11-18T15:11:25.970417+00:00
+  preflight-regressions: reused
+      неприписанные пути — расширение до проекта
+      обязательства не затронуты
+      reused 427e478e6e9840bb93f6733d227286f9-preflight-regressions от 2026-11-18T14:30:02.860076+00:00
+  block-unit-tests: reused
+      неприписанные пути — расширение до проекта
+      обязательства не затронуты
+      reused 427e478e6e9840bb93f6733d227286f9-block-unit-tests от 2026-11-18T14:30:06.307263+00:00
+  checks-unit-tests: reused
+      неприписанные пути — расширение до проекта
+      обязательства не затронуты
+      reused 427e478e6e9840bb93f6733d227286f9-checks-unit-tests от 2026-11-18T14:36:54.749874+00:00
+  cli-unit-tests: reused
+      неприписанные пути — расширение до проекта
+      обязательства не затронуты
+      reused 427e478e6e9840bb93f6733d227286f9-cli-unit-tests от 2026-11-18T14:41:21.815768+00:00
+  core-unit-tests: reused
+      неприписанные пути — расширение до проекта
+      обязательства не затронуты
+      reused 427e478e6e9840bb93f6733d227286f9-core-unit-tests от 2026-11-18T15:09:33.760609+00:00
+  verification-unit-tests: reused
+      неприписанные пути — расширение до проекта
+      обязательства не затронуты
+      reused 427e478e6e9840bb93f6733d227286f9-verification-unit-tests от 2026-11-18T15:10:24.311409+00:00
+Итог: run=0, reused=7, blocked=0

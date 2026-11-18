@@ -23,6 +23,7 @@ applicability legacy/v2 не ослабляется.
 """
 import json
 import sys
+from functools import partial
 from pathlib import Path
 
 import checks_contract
@@ -659,7 +660,11 @@ def evaluate_reuse(check, result, *, root, policy, edges, state,
             projections=projections,
             hash_fn=_counting_hasher(
                 state, policy["fallback"]["limits"]
-                .get("max_bytes"), hash_fn), now=now)
+                .get("max_bytes"), hash_fn),
+            task_card_hash_fn=_counting_hasher(
+                state, policy["fallback"]["limits"].get("max_bytes"),
+                partial(checks_inventory.task_card_digest, root=Path(root))),
+            now=now)
     except BudgetExceeded as error:
         return {"status": "run", "reason": str(error)}
     if binding["input_digest"] != \

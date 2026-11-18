@@ -156,6 +156,87 @@ class NoGitChecksE2ECase(unittest.TestCase):
         return [sys.executable, "-c", script]
 
 
+class TaskCardStructureE2ETest(NoGitChecksE2ECase):
+    def apply_structural_policy(self):
+        policy = make_policy(
+            modules=[{"id": "core", "title": "CLI", "subsystem_id": "billing",
+                      "paths": ["ai-dev-playbook/**"]}],
+            checks=[{
+                "id": "self-check", "title": "Структура", "purpose": "Проверить ссылки",
+                "kind": "command", "modules": ["core"], "timeout_seconds": 20,
+                "argv": [sys.executable, "ai-dev-playbook/scripts/playbook.py", "check", "--ready"],
+                "inputs": [{"type": "task_projection"}, {"type": "task_cards", "path": "docs/tasks"}],
+            }],
+        )
+        self.write("checks-policy.json", json.dumps(policy))
+        self.assertEqual(self.cli("setup", "apply")[0], 0)
+
+    def test_accepted_audit_preserves_structural_evidence_for_close(self):
+        """Приёмка с актуальной ссылкой сохраняет доказательства передачи до close."""
+        from test_task_cards import record
+
+        card = self.create_card("DEV-1", status="in_review")
+        body = card.read_text(encoding="utf-8")
+        body += record("EXEC") + record("CHECK") + record("HANDOFF")
+        card.write_text(body, encoding="utf-8")
+        self.apply_structural_policy()
+
+        def ok(*args):
+            result = self.cli(*args)
+            self.assertEqual(result[0], 0, result)
+            return result[1]
+
+        ok("checks", "run", "DEV-1")
+        ok("lifecycle", "handoff", "DEV-1", "--summary", "HANDOFF-01",
+           "--actor", "Devin", "--model", "SWE-2 High")
+        meta = card.with_suffix(".meta.json")
+        original_evidence = json.loads(meta.read_text())["criterion_evidence"]
+        self.assertTrue(original_evidence)
+
+        handed = card.read_text(encoding="utf-8")
+        audit = record("AUDIT", actor="Codex",
+                       **{"Доказательства": "[Проверка](../product.md)."})
+        card.write_text(handed + audit.replace("product.md", "missing.md"), encoding="utf-8")
+        self.assertIn("self-check: run", ok("checks", "plan", "DEV-1"))
+        broken = self.cli("check", "--ready")
+        self.assertEqual(broken[0], 1, broken)
+        self.assertIn("missing.md", broken[2])
+
+        card.write_text(handed + audit, encoding="utf-8")
+        self.assertIn("self-check: reused", ok("checks", "run", "DEV-1"))
+        ok("lifecycle", "accept", "DEV-1", "--result", "accepted", "--kind",
+           "acceptance", "--role", "auditor", "--actor", "Codex",
+           "--model", "SWE-2 High")
+        ok("close", "DEV-1", "--dry-run")
+        self.assertEqual(original_evidence, json.loads(meta.read_text())["criterion_evidence"])
+
+    def test_peer_card_link_invalidates_structural_reuse(self):
+        """Битая ссылка в соседней карточке или вложенном материале требует повторной проверки структуры."""
+        self.create_card("DEV-1")
+        peer = self.create_card("DEV-2")
+        material = self.write("docs/tasks/DEV-2-evidence/nested/commands.md", "Команды.\n")
+        self.apply_structural_policy()
+        result = self.cli("checks", "run", "DEV-1")
+        self.assertEqual(result[0], 0, result)
+        self.assertIn("self-check: reused", self.cli("checks", "plan", "DEV-1")[1])
+
+        for path, marker in ((peer, "Проверка сценария без Git."), (material, "Команды.")):
+            with self.subTest(path=path.name):
+                original = path.read_text(encoding="utf-8")
+                missing = f"absent-{path.stem}.md"
+                path.write_text(original.replace(marker, f"[Отсутствует]({missing})."),
+                                encoding="utf-8")
+                self.assertIn("self-check: run", self.cli("checks", "plan", "DEV-1")[1])
+                result = self.cli("checks", "run", "DEV-1")
+                self.assertEqual(result[0], 1, result)
+                self.assertIn("self-check: failed", result[1])
+                self.assertTrue(any(missing in log.read_text(encoding="utf-8")
+                                    for log in self.root.glob("work/checks/runs/*/self-check.stderr.log")))
+                path.write_text(original, encoding="utf-8")
+                result = self.cli("checks", "run", "DEV-1")
+                self.assertEqual(result[0], 0, result)
+
+
 class ShopGraphE2ETest(NoGitChecksE2ECase):
     """AC-01 и AC-02 спецификации: граф cart/payments/discounts без Git и защита от ложного reuse."""
 
