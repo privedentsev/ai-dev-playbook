@@ -75,7 +75,10 @@ class EngineCase(unittest.TestCase):
 
 
 class EngineTest(EngineCase):
+    """Engine file_operations: apply/reapply, перепроверка inputs,
+    staged/final checks, recovery."""
     def test_apply_writes_removes_and_creates_dirs(self):
+        """apply пишет, удаляет и создаёт каталоги по спецификации"""
         result = self.apply(self.spec())
         self.assertEqual(result["status"], "completed")
         self.assertEqual((self.root / "docs/a.md").read_bytes(), b"NEW-A\n")
@@ -101,6 +104,7 @@ class EngineTest(EngineCase):
         self.assertLess(events.index("rechecked"), events.index("write"))
 
     def test_repeated_plan_is_idempotent(self):
+        """Повторный apply того же плана идемпотентен"""
         first = self.apply(self.spec())
         second = self.apply(self.spec())
         self.assertEqual(second["status"], "already_completed")
@@ -108,6 +112,7 @@ class EngineTest(EngineCase):
         self.assertEqual(len(self.op_dirs()), 1)
 
     def test_remove_dirs(self):
+        """apply удаляет каталоги рекурсивно"""
         (self.root / "docs/old").mkdir()
         (self.root / "docs/old/c.md").write_text("OLD-C\n", encoding="utf-8")
         spec = self.spec(writes={}, removes=["docs/old/c.md"],
@@ -117,6 +122,7 @@ class EngineTest(EngineCase):
         self.assertFalse((self.root / "docs/old").exists())
 
     def test_spec_validation_rejects_bad_input(self):
+        """Невалидная спецификация операции отклоняется до записи"""
         base = self.spec()
         cases = [
             dict(base, unknown_field=1),
@@ -141,6 +147,7 @@ class EngineTest(EngineCase):
         self.assertEqual(self.op_dirs(), [])
 
     def test_inputs_rechecked_before_write(self):
+        """Входы перепроверяются перед записью — чужое изменение отклоняет"""
         spec = self.spec()
         (self.root / "docs/b.md").write_text("FOREIGN\n", encoding="utf-8")
         with self.assertRaisesRegex(ValueError, "Входы изменились"):
@@ -150,6 +157,7 @@ class EngineTest(EngineCase):
         self.assertIsNone(fops.pending_info(self.root))
 
     def test_staged_check_failure_aborts_before_write(self):
+        """Сбой staged check отменяет apply до записи"""
         def check(staged):
             playbook.require((staged / "docs/new/x.md").is_file()
                              and not (staged / "docs/b.md").exists(),
@@ -164,6 +172,7 @@ class EngineTest(EngineCase):
         self.assertEqual(self.op_dirs(), [])  # no backup: no durable operation history
 
     def test_final_check_failure_restores_preimage(self):
+        """Сбой final check восстанавливает пред-образ"""
         os.chmod(self.root / "docs/a.md", 0o640)
         def check(root):
             playbook.require(False, "post-write check failed")
@@ -179,6 +188,7 @@ class EngineTest(EngineCase):
         self.assertEqual(events[-2:], ["failed", "restored"])
 
     def test_write_error_mid_apply_rolls_back(self):
+        """Ошибка записи в середине apply откатывает изменения"""
         original = fops._atomic_write
         calls = []
 
@@ -200,6 +210,7 @@ class EngineTest(EngineCase):
         self.assertIsNone(fops.pending_info(self.root))
 
     def test_interrupted_operation_restored_by_engine(self):
+        """Прерванная операция восстанавливается движком"""
         def crash(root):
             raise KeyboardInterrupt()
         with self.assertRaises(KeyboardInterrupt):
@@ -215,6 +226,7 @@ class EngineTest(EngineCase):
         self.assertIsNone(fops.pending_info(self.root))
 
     def test_pending_blocks_new_operation(self):
+        """Pending-маркер блокирует новую операцию"""
         def crash(root):
             raise KeyboardInterrupt()
         with self.assertRaises(KeyboardInterrupt):
@@ -223,11 +235,13 @@ class EngineTest(EngineCase):
             self.apply(self.spec(plan_id="plan-2"))
 
     def test_restore_without_pending_refused(self):
+        """restore без pending отклоняется"""
         with self.assertRaisesRegex(ValueError, "Нет незавершённой"):
             fops.restore_operation(self.root, playbook.safe_path,
                                    playbook.require)
 
     def test_late_external_edit_preserved_as_conflict(self):
+        """Поздняя внешняя правка сохраняется как конфликт при restore"""
         op_dir = self._interrupted_op()
         # Посторонняя правка после прерывания: не совпадает ни с пред-образом,
         # ни с планом — сохраняется в conflicts/, пред-образ возвращается.
@@ -241,6 +255,7 @@ class EngineTest(EngineCase):
         self.assertIsNone(fops.pending_info(self.root))
 
     def test_restore_rejects_corrupt_backup_copy(self):
+        """Restore отклоняет повреждённую копию backup"""
         op_dir = self._interrupted_op()
         (op_dir / "backup/docs/a.md").write_text("CORRUPT\n", encoding="utf-8")
         with self.assertRaisesRegex(ValueError, "повреждена"):
@@ -249,6 +264,7 @@ class EngineTest(EngineCase):
         self.assertIsNotNone(fops.pending_info(self.root))
 
     def test_restore_rejects_incomplete_backup_index(self):
+        """Restore отклоняет неполный backup_index"""
         op_dir = self._interrupted_op()
         index = json.loads((op_dir / "backup_index.json").read_text("utf-8"))
         del index["hashes"]["docs/b.md"]
@@ -260,6 +276,7 @@ class EngineTest(EngineCase):
         self.assertIsNotNone(fops.pending_info(self.root))
 
     def test_restore_rejects_foreign_pending(self):
+        """Restore отклоняет чужой pending-маркер"""
         op_dir = self._interrupted_op()
         marker = self.root / fops.PENDING_FILE
         data = json.loads(marker.read_text("utf-8"))
@@ -271,6 +288,7 @@ class EngineTest(EngineCase):
         self.assertIsNotNone(fops.pending_info(self.root))
 
     def test_restore_refuses_live_operation(self):
+        """Restore отклоняется при живой операции"""
         self._interrupted_op()
         lock = fops._operation_lock(self.root, playbook.safe_path)
         self.assertIsNotNone(lock)
@@ -284,6 +302,7 @@ class EngineTest(EngineCase):
 
     def test_pre_write_interruption_clears_marker(self):
         # KeyboardInterrupt в staged-проверке: маркер остаётся, записи не было.
+        """Прерывание до записи очищает pending-маркер"""
         def crash(staged):
             raise KeyboardInterrupt()
         with self.assertRaises(KeyboardInterrupt):
@@ -298,6 +317,7 @@ class EngineTest(EngineCase):
     def test_missing_index_with_write_journal_refuses(self):
         # Индекс удалён внешне ПОСЛЕ записи: журнал показывает события write —
         # восстановление отклоняется, маркер сохраняется.
+        """Отсутствие индекса при журнале записи отклоняет restore"""
         op_dir = self._interrupted_op()
         (op_dir / "backup_index.json").unlink()
         with self.assertRaisesRegex(ValueError, "пред-образ утрачен"):
@@ -307,6 +327,7 @@ class EngineTest(EngineCase):
 
     # PB-023-A1: файл с похожим именем temp не перезаписывается операцией
     def test_foreign_temp_like_file_untouched(self):
+        """Чужой temp-подобный файл не трогается"""
         stray = self.root / "docs/a.md.fop-tmp"
         stray.write_bytes(b"USER DATA")
         result = self.apply(self.spec())
@@ -315,6 +336,7 @@ class EngineTest(EngineCase):
 
     # PB-023-A1: остаток temp этой операции убирается restore, чужой — нет
     def test_own_temp_leftover_cleaned_by_restore(self):
+        """Свой temp-остаток очищается restore"""
         op_dir = self._interrupted_op()
         stray = self.root / "docs" / f".a.md.fop-{op_dir.name}-deadbeef.tmp"
         stray.write_bytes(b"PARTIAL")
@@ -329,6 +351,7 @@ class EngineTest(EngineCase):
     # PB-023-A2 (повторный аудит): kill restore до нейтрализации receipt —
     # повтор плана обязан отказаться по pending, а не «already_completed»
     def test_restore_kill_before_neutralize_blocks_retry(self):
+        """Kill до нейтрализации блокирует повторный restore"""
         saved_release = fops._release_pending
         fops._release_pending = lambda *a, **k: (_ for _ in ()).throw(
             KeyboardInterrupt())
@@ -365,6 +388,7 @@ class EngineTest(EngineCase):
     # PB-023-A2 (третий аудит): квитанция читается только под gate, после
     # проверки pending — restore не может вклиниться между чтением и ответом
     def test_completed_decision_under_gate_after_pending(self):
+        """Решение completed под gate после pending"""
         self.apply(self.spec())
         calls = []
         saved = (fops.acquire_gate, fops.pending_info, fops.find_completed)
@@ -399,6 +423,7 @@ class EngineTest(EngineCase):
     # PB-023-A2: kill после receipt до снятия маркера — откат + квитанция
     # перестаёт считаться применением
     def test_receipt_after_rollback_is_not_completed(self):
+        """Receipt после отката не считается completed"""
         saved = fops._release_pending
         fops._release_pending = lambda *a, **k: (_ for _ in ()).throw(
             KeyboardInterrupt())
@@ -420,6 +445,7 @@ class EngineTest(EngineCase):
 
     # PB-023-A3: журнал прошёл точку backup — отсутствие индекса не «до записи»
     def test_missing_index_after_backup_refuses(self):
+        """Отсутствие индекса после backup отклоняет restore"""
         def crash(staged):
             raise KeyboardInterrupt()
         with self.assertRaises(KeyboardInterrupt):
@@ -435,6 +461,7 @@ class EngineTest(EngineCase):
 
     # PB-023-A4: откат восстанавливает режим удалённого каталога
     def test_removed_dir_mode_restored_on_rollback(self):
+        """Права удалённого каталога восстанавливаются при откате"""
         directory = self.root / "docs" / "private"
         directory.mkdir()
         (directory / "x.md").write_text("x\n", encoding="utf-8")
@@ -453,6 +480,7 @@ class EngineTest(EngineCase):
         self.assertEqual(stat.S_IMODE(directory.stat().st_mode), 0o700)
 
     def test_removed_dir_mode_restored_by_engine_restore(self):
+        """Права удалённого каталога восстанавливаются engine restore"""
         directory = self.root / "docs" / "private"
         directory.mkdir()
         (directory / "x.md").write_text("x\n", encoding="utf-8")
@@ -475,6 +503,7 @@ class EngineTest(EngineCase):
         self.assertEqual((directory / "x.md").read_bytes(), b"x\n")
 
     def test_snapshot_marks_missing_and_dir(self):
+        """Snapshot помечает отсутствующие пути и каталоги"""
         (self.root / "docs/old").mkdir()
         snap = fops.snapshot_paths(self.root, ["docs/a.md", "docs/old",
                                                "docs/absent.md"],
@@ -541,6 +570,7 @@ fops.run_operation(root, spec, playbook.safe_path, playbook.require)
                               capture_output=True, text=True)
 
     def test_sigkill_mid_write_then_standalone_restore(self):
+        """SIGKILL посреди записи → автономный restore"""
         op_dir = self.kill_child("write")
         self.assertEqual((self.root / "docs/a.md").read_bytes(), b"NEW-A\n")
         self.assertIsNotNone(fops.pending_info(self.root))
@@ -557,6 +587,7 @@ fops.run_operation(root, spec, playbook.safe_path, playbook.require)
         self.assertIn("уже выполнено", again.stderr)
 
     def test_sigkill_before_backup_clears_marker(self):
+        """SIGKILL до backup очищает pending-маркер"""
         op_dir = self.kill_child("staged")
         self.assertIsNotNone(fops.pending_info(self.root))
         self.assertFalse((op_dir / "backup_index.json").exists())
@@ -567,6 +598,7 @@ fops.run_operation(root, spec, playbook.safe_path, playbook.require)
         self.assertEqual((self.root / "docs/a.md").read_bytes(), b"OLD-A\n")
 
     def test_standalone_restore_needs_no_kit(self):
+        """Автономный restore работает без установленного комплекта"""
         op_dir = self.kill_child("write")
         # Комплект в проекте отсутствует изначально: restore.py самодостаточен.
         self.assertFalse((self.root / "ai-dev-playbook").exists())
@@ -574,6 +606,7 @@ fops.run_operation(root, spec, playbook.safe_path, playbook.require)
         self.assertEqual(result.returncode, 0, result.stderr)
 
     def test_standalone_restore_refuses_live_operation(self):
+        """Автономный restore отклоняется при живой операции"""
         op_dir = self.kill_child("write")
         lock = fops._operation_lock(self.root, playbook.safe_path)
         self.assertIsNotNone(lock)
@@ -586,6 +619,7 @@ fops.run_operation(root, spec, playbook.safe_path, playbook.require)
         self.assertIsNotNone(fops.pending_info(self.root))
 
     def test_standalone_restore_refuses_foreign_marker(self):
+        """Автономный restore отклоняет чужой маркер"""
         op_dir = self.kill_child("write")
         marker = self.root / fops.PENDING_FILE
         data = json.loads(marker.read_text("utf-8"))
@@ -599,6 +633,7 @@ fops.run_operation(root, spec, playbook.safe_path, playbook.require)
     # PB-023-A1 (повторный аудит): standalone сохраняет чужой файл, чьё имя
     # лишь содержит .fop-<op_id>-, но не является temp-именем операции
     def test_standalone_restore_preserves_foreign_fop_name(self):
+        """Автономный restore сохраняет чужой fop-файл"""
         op_dir = self._interrupted_op()
         foreign = self.root / "docs" / f".notes.fop-{op_dir.name}-manual.tmp"
         foreign.write_bytes(b"FOREIGN")
@@ -608,6 +643,7 @@ fops.run_operation(root, spec, playbook.safe_path, playbook.require)
 
     # PB-023-A1: kill между созданием temp и replace — restore убирает остаток
     def test_sigkill_during_replace_cleans_own_temp(self):
+        """SIGKILL при replace очищает свой temp-файл"""
         op_dir = self.kill_child("replace")
         temps = list((self.root / "docs").glob("*.fop-*.tmp"))
         self.assertTrue(temps)
@@ -620,6 +656,7 @@ fops.run_operation(root, spec, playbook.safe_path, playbook.require)
     # PB-023-A2: kill после receipt — restore возвращает пред-образ,
     # квитанция перестаёт считаться применением, повторный запуск работает
     def test_sigkill_after_receipt_then_rerun(self):
+        """SIGKILL после receipt → повторный запуск"""
         op_dir = self.kill_child("receipt")
         self.assertIsNotNone(fops.pending_info(self.root))
         receipt = json.loads((op_dir / "receipt.json").read_text("utf-8"))
@@ -635,6 +672,7 @@ fops.run_operation(root, spec, playbook.safe_path, playbook.require)
 
     # PB-023-A3: kill после backup и удаление индекса — отказ, маркер остаётся
     def test_sigkill_lost_index_refuses_restore(self):
+        """SIGKILL с потерянным индексом отклоняет restore"""
         op_dir = self.kill_child("write")
         (op_dir / "backup_index.json").unlink()
         result = self.run_restore(op_dir)
@@ -643,6 +681,7 @@ fops.run_operation(root, spec, playbook.safe_path, playbook.require)
         self.assertIsNotNone(fops.pending_info(self.root))
 
     def test_standalone_restore_refuses_corrupt_backup(self):
+        """Автономный restore отклоняет повреждённый backup"""
         op_dir = self.kill_child("write")
         (op_dir / "backup/docs/b.md").write_text("CORRUPT\n", encoding="utf-8")
         result = self.run_restore(op_dir)
@@ -668,6 +707,7 @@ class GateTest(CliCase):
                                  playbook.require, owner="test")
 
     def test_mutating_commands_share_gate(self):
+        """Мутирующие команды разделяют общий gate"""
         self.install()
         write_card(self.root / "docs" / "tasks", "DEV-1", "in_review")
         self.cli("index")
@@ -685,6 +725,7 @@ class GateTest(CliCase):
         self.assertEqual(code, 0, err)
 
     def test_read_only_check_while_gate_held(self):
+        """Read-only check работает при удерживаемом gate"""
         self.install()
         gate = self.gate()
         try:
@@ -694,6 +735,7 @@ class GateTest(CliCase):
             gate.close()
 
     def test_nested_token_allows_child(self):
+        """Вложенный токен разрешает дочернюю команду"""
         self.install()
         gate = self.gate()
         try:
@@ -705,6 +747,7 @@ class GateTest(CliCase):
             gate.close()
 
     def test_stale_token_does_not_bypass_busy_gate(self):
+        """Устаревший токен не обходит занятый gate"""
         self.install()
         os.environ[fops.GATE_ENV] = "stale-token"
         gate = self.gate()
@@ -718,6 +761,7 @@ class GateTest(CliCase):
         self.assertEqual(code, 0, err)
 
     def test_update_pending_blocks_commands(self):
+        """Update-pending блокирует команды"""
         self.install()
         update_dir = self.root / "work" / "update"
         update_dir.mkdir(parents=True)
@@ -732,6 +776,7 @@ class GateTest(CliCase):
         self.assertIn("Незавершённая операция", out)
 
     def test_lifecycle_pending_blocks_commands(self):
+        """Lifecycle-pending блокирует команды"""
         self.install()
         write_card(self.root / "docs" / "tasks", "DEV-1", "in_review")
         self.cli("index")
@@ -751,6 +796,7 @@ class GateTest(CliCase):
         self.assertIn("операция документов", out)
 
     def test_verify_holds_gate_and_nests_children(self):
+        """Verify держит gate и вкладывает дочерние команды"""
         scripts = self.root / "ai-dev-playbook" / "scripts" / "playbook.py"
         nested_index = {
             "id": "nested-index",

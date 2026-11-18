@@ -28,6 +28,8 @@ def run_cli(*argv):
 
 
 class CliCase(unittest.TestCase):
+    """Базовый case CLI: временный установленный комплект и запуск
+    playbook.py."""
     def setUp(self):
         tmp = tempfile.TemporaryDirectory()
         self.addCleanup(tmp.cleanup)
@@ -122,13 +124,17 @@ class CliCase(unittest.TestCase):
 
 
 class InitTest(CliCase):
+    """init: preview без записи, apply создаёт комплект, конфликты и
+    повторное применение."""
     def test_preview_writes_nothing(self):
+        """init без --apply — preview без записи файлов"""
         code, out, err = self.init()
         self.assertEqual(code, 0, err)
         self.assertIn("Предпросмотр", out)
         self.assertEqual(list(self.root.iterdir()), [])
 
     def test_apply_creates_kit(self):
+        """init --apply создаёт комплект в проекте"""
         code, out, err = self.init("--apply")
         self.assertEqual(code, 0, err)
         for relative in ("ai-dev-playbook/VERSION", "ai-dev-playbook/project.json",
@@ -138,6 +144,7 @@ class InitTest(CliCase):
             self.assertTrue((self.root / relative).is_file(), relative)
 
     def test_conflict_aborts_before_writes(self):
+        """Конфликт существующего файла отменяет init до записей"""
         mine = self.root / "AGENTS.md"
         mine.write_text("mine", encoding="utf-8")
         code, _, err = self.init("--apply")
@@ -148,6 +155,7 @@ class InitTest(CliCase):
         self.assertFalse((self.root / "docs").exists())
 
     def test_reapply_conflicts_and_keeps_files(self):
+        """Повторный init конфликтует и сохраняет существующие файлы"""
         code, _, err = self.init("--apply")
         self.assertEqual(code, 0, err)
         code, _, err = self.init("--apply")
@@ -156,6 +164,7 @@ class InitTest(CliCase):
         self.assertTrue((self.root / "ai-dev-playbook" / "VERSION").is_file())
 
     def test_install_over_source_rejected(self):
+        """init поверх исходного репозитория комплекта отклоняется"""
         source = Path(playbook.__file__).resolve().parents[2]
         code, _, err = run_cli("init", str(source), "--apply")
         self.assertEqual(code, 1)
@@ -163,7 +172,10 @@ class InitTest(CliCase):
 
 
 class CheckTest(CliCase):
+    """check: свежая установка, готовность setup, битые ссылки,
+    устаревший индекс, отсутствие комплекта."""
     def test_fresh_install_passes_check(self):
+        """Свежая установка проходит check"""
         code, _, err = self.init("--apply")
         self.assertEqual(code, 0, err)
         code, out, err = self.cli("check")
@@ -171,6 +183,7 @@ class CheckTest(CliCase):
         self.assertIn("OK:", out)
 
     def test_ready_rejects_unfinished_setup(self):
+        """check --ready отклоняет незаконченную настройку"""
         code, _, err = self.init("--apply")
         self.assertEqual(code, 0, err)
         code, _, err = self.cli("check", "--ready")
@@ -178,12 +191,14 @@ class CheckTest(CliCase):
         self.assertIn("Первичная настройка не завершена", err)
 
     def test_ready_passes_after_setup(self):
+        """check --ready проходит после завершения настройки"""
         self.install()
         code, out, err = self.cli("check", "--ready")
         self.assertEqual(code, 0, err)
         self.assertIn("OK:", out)
 
     def test_broken_link_detected(self):
+        """Битая ссылка в документации обнаруживается check"""
         code, _, err = self.init("--apply")
         self.assertEqual(code, 0, err)
         doc = self.root / "docs" / "product.md"
@@ -194,6 +209,7 @@ class CheckTest(CliCase):
         self.assertIn("битая", err)
 
     def test_stale_index_detected(self):
+        """Устаревший индекс задач обнаруживается check"""
         self.install()
         write_card(self.root / "docs" / "tasks", "DEV-1", "ready")
         code, _, err = self.cli("check")
@@ -201,11 +217,13 @@ class CheckTest(CliCase):
         self.assertIn("Индекс устарел", err)
 
     def test_missing_playbook_fails(self):
+        """check без установленного playbook падает"""
         code, _, err = self.cli("check")
         self.assertEqual(code, 1)
         self.assertIn("ERROR", err)
 
     def test_check_warns_unconfirmed_model(self):
+        """check предупреждает о неподтверждённой модели исполнителя"""
         self.install()
         write_card(self.root / "docs" / "tasks", "DEV-1", "in_review",
                    executor="Codex", model="GPT-6 (не подтверждено)")
@@ -218,6 +236,7 @@ class CheckTest(CliCase):
         self.assertIn("OK:", out)
 
     def test_check_no_warning_for_marker_in_code(self):
+        """Маркер модели в коде карточки не даёт предупреждения"""
         self.install()
         card = self.root / "docs" / "tasks" / "DEV-1.md"
         write_card(self.root / "docs" / "tasks", "DEV-1", "ready")
@@ -231,6 +250,7 @@ class CheckTest(CliCase):
         self.assertNotIn("ВНИМАНИЕ", out)
 
     def test_check_no_warning_for_archived_card(self):
+        """Архивная карточка не даёт предупреждения о модели"""
         self.install()
         write_card(self.root / "docs" / "archive" / "tasks", "DEV-1", "done")
         code, _, err = self.cli("index")
@@ -241,10 +261,13 @@ class CheckTest(CliCase):
 
 
 class VerifyTest(CliCase):
+    """verify: dry-run, блоки конфигурации, записи отчётов и логов
+    прогонов."""
     def install_verified(self, checks):
         self.install(verification={"inputs": ["docs"], "checks": checks})
 
     def test_dry_run_prints_plan_without_work(self):
+        """verify --dry-run печатает план без создания work"""
         self.install_verified([PASS_CHECK])
         write_card(self.root / "docs" / "tasks", "DEV-1", "ready")
         code, out, err = self.cli("verify", "DEV-1", "--dry-run")
@@ -255,6 +278,7 @@ class VerifyTest(CliCase):
         self.assertFalse((self.root / "work").exists())
 
     def test_missing_verification_block(self):
+        """verify без блока верификации в project.json отклоняется"""
         self.install()
         self.add_task()
         code, _, err = self.cli("verify", "DEV-1", "--dry-run")
@@ -262,12 +286,14 @@ class VerifyTest(CliCase):
         self.assertIn("Нет verification", err)
 
     def test_unknown_task_rejected(self):
+        """verify несуществующей задачи отклоняется"""
         self.install_verified([PASS_CHECK])
         code, _, err = self.cli("verify", "DEV-9")
         self.assertEqual(code, 1)
         self.assertIn("Нет задачи", err)
 
     def test_draft_task_rejected(self):
+        """verify draft-задачи отклоняется"""
         self.install_verified([PASS_CHECK])
         self.add_task(status="draft")
         code, _, err = self.cli("verify", "DEV-1")
@@ -275,6 +301,7 @@ class VerifyTest(CliCase):
         self.assertIn("verify требует активную задачу", err)
 
     def test_passed_run_writes_report_and_logs(self):
+        """Успешный прогон пишет report и логи проверок"""
         self.install_verified([PASS_CHECK])
         self.add_task()
         code, out, err = self.cli("verify", "DEV-1")
@@ -287,6 +314,7 @@ class VerifyTest(CliCase):
         self.assertIn("ok", (directory / "unit.stdout.log").read_text(encoding="utf-8"))
 
     def test_failed_check_skips_rest(self):
+        """Упавшая проверка пропускает остальные в прогоне"""
         self.install_verified([FAIL_CHECK, PASS_CHECK])
         self.add_task()
         code, _, _ = self.cli("verify", "DEV-1")
@@ -298,6 +326,7 @@ class VerifyTest(CliCase):
         self.assertEqual(report["checks"][1]["status"], "skipped")
 
     def test_modified_input_marks_stale(self):
+        """Изменённый вход помечает результат проверки stale"""
         change = {"id": "edit",
                   "argv": ["python3", "-c", "open('docs/tasks/DEV-1.md', 'a').write('x')"],
                   "timeout_seconds": 30}
@@ -310,6 +339,7 @@ class VerifyTest(CliCase):
         self.assertFalse(report["inputs_unchanged"])
 
     def test_timeout_check(self):
+        """Превышение timeout проверки фиксируется в отчёте"""
         hang = {"id": "hang", "argv": ["python3", "-c", "import time; time.sleep(30)"],
                 "timeout_seconds": 0.5}
         self.install_verified([hang])
@@ -322,7 +352,10 @@ class VerifyTest(CliCase):
 
 
 class CloseTest(CliCase):
+    """close: переходы done/cancelled, маркеры готовности к аудиту,
+    обновление входящих ссылок."""
     def test_close_done_moves_stamps_and_indexes(self):
+        """close done переносит карточку, штампует и обновляет индекс"""
         self.install()
         self.add_task(status="in_review")
         code, out, err = self.cli("close", "DEV-1")
@@ -337,6 +370,7 @@ class CloseTest(CliCase):
         self.assertEqual(code, 0, err)
 
     def test_close_done_requires_in_review(self):
+        """close done требует статус in_review"""
         self.install()
         self.add_task(status="ready")
         code, _, err = self.cli("close", "DEV-1")
@@ -346,6 +380,7 @@ class CloseTest(CliCase):
         self.assertFalse((self.root / "docs" / "archive" / "tasks" / "DEV-1.md").exists())
 
     def test_close_cancelled_from_draft(self):
+        """close cancelled работает из draft"""
         self.install()
         self.add_task(status="draft")
         code, _, err = self.cli("close", "DEV-1", "--status", "cancelled")
@@ -354,12 +389,14 @@ class CloseTest(CliCase):
         self.assertIn("Status: cancelled", text)
 
     def test_close_unknown_task(self):
+        """close несуществующей задачи отклоняется"""
         self.install()
         code, _, err = self.cli("close", "DEV-9")
         self.assertEqual(code, 1)
         self.assertIn("Нет задачи", err)
 
     def test_close_failure_keeps_original_state(self):
+        """Сбой close сохраняет исходное состояние карточки"""
         self.install()
         write_card(self.root / "docs" / "tasks", "DEV-1", "in_review",
                    created="2099-01-01T00:00:00+00:00")
@@ -376,6 +413,7 @@ class CloseTest(CliCase):
         self.assertEqual(code, 0, err)
 
     def test_close_updates_incoming_links(self):
+        """close обновляет входящие ссылки на карточку"""
         self.install()
         self.add_task(status="in_review")
         peer = self.root / "docs" / "tasks" / "DEV-2.md"
@@ -395,6 +433,7 @@ class CloseTest(CliCase):
         self.assertEqual(code, 0, err)
 
     def test_close_relocates_card_own_links(self):
+        """close переносит собственные ссылки карточки в архив"""
         self.install()
         card = self.root / "docs" / "tasks" / "DEV-1.md"
         write_card(self.root / "docs" / "tasks", "DEV-1", "in_review")
@@ -410,6 +449,7 @@ class CloseTest(CliCase):
         self.assertEqual(code, 0, err)
 
     def test_close_relocates_card_self_link(self):
+        """close корректно обрабатывает самоссылку карточки"""
         self.install()
         card = self.root / "docs" / "tasks" / "DEV-1.md"
         write_card(self.root / "docs" / "tasks", "DEV-1", "in_review")
@@ -425,6 +465,7 @@ class CloseTest(CliCase):
         self.assertEqual(code, 0, err)
 
     def test_close_done_requires_confirmed_model(self):
+        """close done требует подтверждённую модель исполнителя"""
         self.install()
         write_card(self.root / "docs" / "tasks", "DEV-1", "in_review",
                    executor="Codex", model="GPT-6 (не подтверждено)")
@@ -444,6 +485,7 @@ class CloseTest(CliCase):
         self.assertEqual(code, 0, err)
 
     def test_close_done_blocked_by_audit_marker(self):
+        """close done блокируется маркером аудита"""
         self.install()
         card = self.root / "docs" / "tasks" / "DEV-1.md"
         write_card(self.root / "docs" / "tasks", "DEV-1", "in_review")
@@ -459,6 +501,7 @@ class CloseTest(CliCase):
         self.assertTrue(card.is_file())
 
     def test_close_done_unknown_model_allowed(self):
+        """Модель «неизвестна» допускается при close done"""
         self.install()
         write_card(self.root / "docs" / "tasks", "DEV-1", "in_review",
                    executor="Codex", model="неизвестна")
@@ -468,6 +511,7 @@ class CloseTest(CliCase):
         self.assertEqual(code, 0, err)
 
     def test_close_done_blocked_by_work_record_marker(self):
+        """close done блокируется маркером записи о работе"""
         self.install()
         card = self.root / "docs" / "tasks" / "DEV-1.md"
         write_card(self.root / "docs" / "tasks", "DEV-1", "in_review",
@@ -490,6 +534,7 @@ class CloseTest(CliCase):
         self.assertEqual(code, 0, err)
 
     def test_close_done_marker_in_code_allowed(self):
+        """Маркер в коде карточки не блокирует close done"""
         self.install()
         card = self.root / "docs" / "tasks" / "DEV-1.md"
         write_card(self.root / "docs" / "tasks", "DEV-1", "in_review")
@@ -503,6 +548,7 @@ class CloseTest(CliCase):
         self.assertEqual(code, 0, err)
 
     def test_close_done_marker_in_tilde_fence_allowed(self):
+        """Маркер в tilde-fence не блокирует close done"""
         self.install()
         card = self.root / "docs" / "tasks" / "DEV-1.md"
         write_card(self.root / "docs" / "tasks", "DEV-1", "in_review")
@@ -515,6 +561,7 @@ class CloseTest(CliCase):
         self.assertEqual(code, 0, err)
 
     def test_close_rolls_back_on_index_conflict(self):
+        """Конфликт индекса откатывает close к исходному состоянию"""
         self.install()
         self.add_task(status="in_review")
         roadmap = self.root / "docs" / "roadmap.md"
@@ -535,7 +582,10 @@ class CloseTest(CliCase):
 
 
 class ManifestTest(CliCase):
+    """manifest внедрения: запись при init, подстановка VERSION,
+    проверка config и резервные пути."""
     def test_init_writes_manifest(self):
+        """init записывает manifest внедрения комплекта"""
         code, _, err = self.init("--apply")
         self.assertEqual(code, 0, err)
         manifest = self.manifest()
@@ -554,6 +604,7 @@ class ManifestTest(CliCase):
         self.assertNotIn("AGENTS.md", manifest["files"])
 
     def test_init_substitutes_version_from_VERSION(self):
+        """init подставляет VERSION из файла версии"""
         code, _, err = self.init("--apply")
         self.assertEqual(code, 0, err)
         project = json.loads((self.root / "ai-dev-playbook" / "project.json")
@@ -565,6 +616,7 @@ class ManifestTest(CliCase):
         self.assertNotIn(f'"{version}"', template)
 
     def test_release_id_deterministic(self):
+        """release_id в manifest детерминирован"""
         code, _, err = self.init("--apply")
         self.assertEqual(code, 0, err)
         first = self.manifest()["release_id"]
@@ -577,6 +629,7 @@ class ManifestTest(CliCase):
         self.assertEqual(first, second)
 
     def test_check_requires_manifest(self):
+        """check требует наличия manifest"""
         code, _, err = self.init("--apply")
         self.assertEqual(code, 0, err)
         (self.root / "ai-dev-playbook" / "manifest.json").unlink()
@@ -585,6 +638,7 @@ class ManifestTest(CliCase):
         self.assertIn("adopt", err)
 
     def test_corrupt_manifest_rejected(self):
+        """Повреждённый manifest отклоняется"""
         code, _, err = self.init("--apply")
         self.assertEqual(code, 0, err)
         path = self.root / "ai-dev-playbook" / "manifest.json"
@@ -631,6 +685,7 @@ class ManifestTest(CliCase):
         self.assertFalse((self.root / "work").exists())
 
     def test_manifest_release_id_mismatch_rejected(self):
+        """Несовпадение release_id manifest отклоняется"""
         code, _, err = self.init("--apply")
         self.assertEqual(code, 0, err)
         victim = "ai-dev-playbook/rules/tasks.md"
@@ -642,6 +697,7 @@ class ManifestTest(CliCase):
         self.assertIn("release_id", err)
 
     def test_manifest_noncanonical_path_rejected(self):
+        """Неканонический путь в manifest отклоняется"""
         code, _, err = self.init("--apply")
         self.assertEqual(code, 0, err)
         self.rewrite_manifest(
@@ -652,6 +708,7 @@ class ManifestTest(CliCase):
         self.assertIn("канонического", err)
 
     def test_manifest_missing_required_core_rejected(self):
+        """Отсутствие обязательного core-файла в manifest отклоняется"""
         code, _, err = self.init("--apply")
         self.assertEqual(code, 0, err)
         self.rewrite_manifest(
@@ -662,6 +719,8 @@ class ManifestTest(CliCase):
 
 
 class AdoptTest(CliCase):
+    """adopt установок без manifest: разрешения конфликтов версий и
+    managed-файлов."""
     def legacy_install(self):
         """Установка без manifest — состояние до механизма обновления."""
         code, _, err = self.init("--apply")
@@ -669,6 +728,7 @@ class AdoptTest(CliCase):
         (self.root / "ai-dev-playbook" / "manifest.json").unlink()
 
     def test_adopt_clean(self):
+        """adopt чистой legacy-установки без manifest создаёт manifest"""
         self.legacy_install()
         code, out, err = self.cli("adopt", str(REPO))
         self.assertEqual(code, 0, err + out)
@@ -682,6 +742,7 @@ class AdoptTest(CliCase):
         self.assertEqual(code, 0, err)
 
     def test_adopt_requires_resolutions(self):
+        """adopt требует разрешений для изменённых файлов"""
         self.legacy_install()
         (self.root / "ai-dev-playbook" / "rules" / "tasks.md") \
             .write_text("local edit", encoding="utf-8")
@@ -694,6 +755,7 @@ class AdoptTest(CliCase):
         self.assertFalse((self.root / "ai-dev-playbook" / "manifest.json").exists())
 
     def test_adopt_release_restores_and_keep_preserves(self):
+        """adopt: release восстанавливает, keep сохраняет локальные правки"""
         self.legacy_install()
         (self.root / "ai-dev-playbook" / "rules" / "tasks.md") \
             .write_text("local edit", encoding="utf-8")
@@ -713,6 +775,7 @@ class AdoptTest(CliCase):
                          .read_bytes(), reference)
 
     def test_adopt_conflicting_version(self):
+        """adopt с конфликтующей версией требует явного разрешения"""
         self.legacy_install()
         conflicting_version = REPO_VERSION + "-conflict"
         version_path = self.root / "ai-dev-playbook" / "VERSION"
@@ -736,6 +799,7 @@ class AdoptTest(CliCase):
         self.assertEqual(self.manifest()["playbook_version"], REPO_VERSION)
 
     def test_adopt_refuses_managed_and_force_overwrites(self):
+        """adopt отклоняет managed-файлы, --force перезаписывает"""
         code, _, err = self.init("--apply")
         self.assertEqual(code, 0, err)
         code, _, err = self.cli("adopt", str(REPO))
@@ -745,6 +809,7 @@ class AdoptTest(CliCase):
         self.assertEqual(code, 0, err)
 
     def test_adopt_version_keep_forbidden(self):
+        """keep для VERSION-файла запрещён в adopt"""
         self.legacy_install()
         (self.root / "ai-dev-playbook" / "VERSION").write_text(REPO_VERSION + "-conflict\n", encoding="utf-8")
         code, _, err = self.cli("adopt", str(REPO), "--apply",
@@ -754,7 +819,10 @@ class AdoptTest(CliCase):
 
 
 class UpdatePlanTest(CliCase):
+    """update plan: предпросмотр без записи, --save, устаревание и
+    блокировки изменений."""
     def test_empty_plan_for_same_state(self):
+        """update plan для той же версии даёт пустой план"""
         code, _, err = self.init("--apply")
         self.assertEqual(code, 0, err)
         code, out, err = self.cli("update", "plan", str(REPO))
@@ -763,6 +831,7 @@ class UpdatePlanTest(CliCase):
         self.assertFalse((self.root / "work").exists())
 
     def test_plan_lists_changes_without_writes(self):
+        """update plan перечисляет изменения без записи"""
         self.install(version="0.0.2")
 
         def mutate(kit):
@@ -787,6 +856,7 @@ class UpdatePlanTest(CliCase):
         self.assertEqual(before, after)
 
     def test_plan_save_and_stale_detection(self):
+        """update plan --save сохраняет план и отслеживает устаревание"""
         self.install(version="0.0.2")
         release = self.fixture_release()
         code, _, err = self.cli("update", "plan", str(release), "--save")
@@ -803,6 +873,7 @@ class UpdatePlanTest(CliCase):
         self.assertIn("устарел", err)
 
     def test_modified_managed_file_blocks_apply(self):
+        """Изменённый managed-файл блокирует update apply"""
         self.install(version="0.0.2")
         (self.root / "ai-dev-playbook" / "rules" / "tasks.md") \
             .write_text("local edit", encoding="utf-8")
@@ -823,6 +894,7 @@ class UpdatePlanTest(CliCase):
                          .read_text(encoding="utf-8"), "local edit")
 
     def test_unsupported_transition_blocked(self):
+        """Переход вне updates_from релиза блокируется"""
         self.install(version="0.0.2")
         release = self.fixture_release(updates_from={})
         code, _, err = self.cli("update", "plan", str(release))
@@ -830,6 +902,7 @@ class UpdatePlanTest(CliCase):
         self.assertIn("Неподдерживаемый переход", err)
 
     def test_downgrade_blocked(self):
+        """Переход на более старую версию блокируется"""
         self.install(version="0.0.2")
         release = self.fixture_release(version="0.0.1")
         code, _, err = self.cli("update", "plan", str(release))
@@ -837,6 +910,7 @@ class UpdatePlanTest(CliCase):
         self.assertIn("downgrade", err)
 
     def test_same_version_different_content_rejected(self):
+        """Та же версия с иным содержимым отклоняется"""
         self.install(version="0.0.2")
 
         def mutate(kit):
@@ -850,6 +924,7 @@ class UpdatePlanTest(CliCase):
         self.assertIn("Неоднозначный релиз", err)
 
     def test_tampered_release_json_rejected(self):
+        """Подделанный release.json отклоняется"""
         self.install(version="0.0.2")
         release = self.fixture_release()
         meta = json.loads((release / "release.json").read_text(encoding="utf-8"))
@@ -861,7 +936,10 @@ class UpdatePlanTest(CliCase):
 
 
 class MigrationTest(CliCase):
+    """Миграции схем project.json: шаги, совместимость CLI,
+    идемпотентность."""
     def test_migration_steps_applied_and_values_preserved(self):
+        """Шаги миграции применяются, значения сохраняются"""
         self.install()
         project_path = self.root / "ai-dev-playbook" / "project.json"
         project = json.loads(project_path.read_text(encoding="utf-8"))
@@ -885,6 +963,7 @@ class MigrationTest(CliCase):
         self.assertEqual(project["name"], "test-project")
 
     def test_schema_change_without_steps_blocked(self):
+        """Смена schema_version без шагов миграции блокируется"""
         self.install()
 
         def mutate(kit):
@@ -959,6 +1038,7 @@ class MigrationTest(CliCase):
             self.assertEqual(result.returncode, 0, str(argv) + result.stderr)
 
     def test_card_format_change_noted(self):
+        """Смена card_format фиксируется в плане обновления"""
         self.install(version="0.0.2")
 
         def mutate(kit):
@@ -973,6 +1053,7 @@ class MigrationTest(CliCase):
         self.assertIn("Формат карточек", out)
 
     def test_migrations_idempotent(self):
+        """Шаги миграций идемпотентны при повторном применении"""
         steps = [{"op": "json_set", "file": "ai-dev-playbook/project.json",
                   "key": "a.b", "value": 1},
                  {"op": "json_delete", "file": "ai-dev-playbook/project.json",
@@ -1057,7 +1138,10 @@ class MigrationTest(CliCase):
 
 
 class UpdateApplyTest(CliCase):
+    """update apply: end-to-end, no-op при пустом плане, keep/release
+    разрешения, чужие файлы."""
     def test_apply_end_to_end(self):
+        """update apply end-to-end применяет изменения комплекта"""
         self.install()
 
         def mutate(kit):
@@ -1095,6 +1179,7 @@ class UpdateApplyTest(CliCase):
         self.assertEqual(code, 0, err)
 
     def test_apply_is_noop_when_plan_empty(self):
+        """update apply при пустом плане — no-op"""
         code, _, err = self.init("--apply")
         self.assertEqual(code, 0, err)
         code, _, err = self.cli("update", "plan", str(REPO), "--save")
@@ -1104,6 +1189,7 @@ class UpdateApplyTest(CliCase):
         self.assertIn("нечего", out)
 
     def test_second_plan_after_update_is_empty(self):
+        """План после применения обновления пуст"""
         self.install()
         release = self.fixture_release()
         code, _, err = self.cli("update", "plan", str(release), "--save")
@@ -1115,6 +1201,7 @@ class UpdateApplyTest(CliCase):
         self.assertIn("План пуст", out)
 
     def test_keep_resolution_preserves_local_edit(self):
+        """keep-разрешение сохраняет локальную правку"""
         self.install()
         (self.root / "ai-dev-playbook" / "rules" / "tasks.md") \
             .write_text("local edit", encoding="utf-8")
@@ -1138,6 +1225,7 @@ class UpdateApplyTest(CliCase):
                          .read_text().strip(), "0.0.3")
 
     def test_release_resolution_overwrites_local_edit(self):
+        """release-разрешение перезаписывает локальную правку"""
         self.install()
         (self.root / "ai-dev-playbook" / "rules" / "tasks.md") \
             .write_text("local edit", encoding="utf-8")
@@ -1160,6 +1248,7 @@ class UpdateApplyTest(CliCase):
         self.assertNotIn("kept", self.manifest())
 
     def test_unknown_kit_files_untouched(self):
+        """Неизвестные файлы комплекта не трогаются apply"""
         self.install()
         local = self.root / "ai-dev-playbook" / "notes.md"
         local.write_text("project note", encoding="utf-8")
@@ -1221,6 +1310,7 @@ class UpdateApplyTest(CliCase):
         self.assertIn("План пуст", out)
 
     def test_apply_aborts_on_failed_staged_check(self):
+        """Упавшая staged-проверка отменяет apply"""
         self.install(verification={"inputs": ["docs"],
                                    "checks": [{"id": "fail",
                                                "argv": ["python3", "-c",
@@ -1238,6 +1328,7 @@ class UpdateApplyTest(CliCase):
         self.assertEqual(self.manifest()["playbook_version"], "0.0.2")
 
     def test_apply_passes_staged_check(self):
+        """Проходящая staged-проверка пропускает apply"""
         self.install(verification={"inputs": ["docs"], "checks": [PASS_CHECK]})
         release = self.fixture_release()
         code, _, err = self.cli("update", "plan", str(release), "--save")
@@ -1248,6 +1339,7 @@ class UpdateApplyTest(CliCase):
                          .read_text().strip(), "0.0.3")
 
     def test_write_failure_restores_previous_state(self):
+        """Сбой записи восстанавливает прежнее состояние"""
         self.install()
 
         def mutate(kit):
@@ -1290,6 +1382,7 @@ class UpdateApplyTest(CliCase):
         self.assertIn('"event": "restored"', text)
 
     def test_pending_blocks_commands_and_restore_recovers(self):
+        """Pending блокирует команды, restore восстанавливает"""
         self.install()
         pending_dir = self.root / "work" / "update"
         op = pending_dir / "op-x"
@@ -1399,6 +1492,7 @@ class UpdateApplyTest(CliCase):
         self.assertFalse((pending_dir / "pending.json").exists())
 
     def test_standalone_restore_script(self):
+        """Автономный restore-скрипт восстанавливает состояние"""
         self.install()
         release = self.fixture_release()
         code, _, err = self.cli("update", "plan", str(release), "--save")
@@ -1602,6 +1696,7 @@ class UpdatePlanProtectionTest(CliCase):
     """AUDIT-005-A1/A7: план защищён от изменений затрагиваемых путей до записи."""
 
     def test_new_release_path_created_after_plan_rejects_apply(self):
+        """Новый путь релиза после плана отклоняет apply"""
         rel = "ai-dev-playbook/rules/new.md"
         release = self.fixture_release(
             mutate=lambda kit: (kit / "rules" / "new.md")
@@ -1619,6 +1714,7 @@ class UpdatePlanProtectionTest(CliCase):
         self.assertFalse((self.root / "work" / "update" / "pending.json").exists())
 
     def test_collision_change_after_resolution_rejects_apply(self):
+        """Изменение коллизии после разрешения отклоняет apply"""
         rel = "ai-dev-playbook/rules/new.md"
         release = self.fixture_release(
             mutate=lambda kit: (kit / "rules" / "new.md")
@@ -1637,6 +1733,7 @@ class UpdatePlanProtectionTest(CliCase):
         self.assertEqual(target.read_text(encoding="utf-8"), "local collision EDITED")
 
     def test_managed_path_removed_after_plan_rejects_apply(self):
+        """Удаление managed-пути после плана отклоняет apply"""
         release = self.fixture_release()
         self.install()
         code, _, err = self.cli("update", "plan", str(release), "--save")
@@ -1651,6 +1748,7 @@ class UpdatePlanProtectionTest(CliCase):
         target.write_bytes(before)
 
     def test_edit_during_staged_checks_rejects_apply(self):
+        """Правка во время staged-проверок отклоняет apply"""
         target = self.root / "ai-dev-playbook" / "rules" / "git.md"
         editor = {"id": "editor",
                   "argv": [sys.executable, "-c",
@@ -1689,6 +1787,7 @@ class UpdatePlanProtectionTest(CliCase):
         self.assertEqual(code, 0, err)
 
     def test_parallel_apply_rejected(self):
+        """Параллельный apply отклоняется"""
         slow = {"id": "slow",
                 "argv": [sys.executable, "-c", "import time; time.sleep(2)"],
                 "timeout_seconds": 15}
@@ -1720,6 +1819,7 @@ class UpdatePlanProtectionTest(CliCase):
         self.assertEqual(code, 0, err)
 
     def test_restore_refused_for_running_apply(self):
+        """Restore отклоняется при работающем apply"""
         marker = self.root / "work" / "check-started"
         gate = self.root / "work" / "check-continue"
         script = ("from pathlib import Path; import time; "
@@ -1769,6 +1869,7 @@ class UpdatePlanProtectionTest(CliCase):
         self.assertEqual(code, 0, err)
 
     def test_pending_release_checks_owner(self):
+        """Pending-проверки подтверждают владельца релиза"""
         pending = self.root / "work" / "update" / "pending.json"
         pending.parent.mkdir(parents=True)
         pending.write_text(json.dumps({"op_id": "foreign"}), encoding="utf-8")

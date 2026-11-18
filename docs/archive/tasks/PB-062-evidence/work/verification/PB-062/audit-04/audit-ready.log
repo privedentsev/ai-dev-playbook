@@ -1,0 +1,58 @@
+OK: структура, ссылки и 82 карточки; каталог документов: 29 документов, 2 legacy. Поведение продукта не проверялось.
+audit-ready: свежая передача и проверки подтверждены; независимый аудит не выполнен
+preflight: структура, материалы, блокировки, команды и лимиты проверены; поведение CLI и приёмка не подтверждены
+{
+  "task_id": "PB-062",
+  "cwd": "/Users/privedentsev1/Dev/ai-dev-playbook",
+  "inputs": [
+    "AGENTS.md",
+    "CHANGELOG.md",
+    "README.md",
+    "ai-dev-playbook",
+    "ai-dev-playbook/project.json",
+    "ai-dev-playbook/resources.json",
+    "docs",
+    "docs/tasks/PB-062.md",
+    "tests"
+  ],
+  "checks": [
+    {
+      "id": "self-check",
+      "argv": [
+        "python3",
+        "ai-dev-playbook/scripts/playbook.py",
+        "check",
+        "--ready"
+      ],
+      "timeout_seconds": 60
+    },
+    {
+      "id": "preflight-regressions",
+      "argv": [
+        "python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-p",
+        "test_verification_smoke.py",
+        "-v"
+      ],
+      "timeout_seconds": 120
+    },
+    {
+      "id": "unit-tests",
+      "argv": [
+        "python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-v"
+      ],
+      "timeout_seconds": 1800
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+ATTEMPT 0 FORCE (0, 'checks run DEV-11: политика growth-policy rev 1, scope=project mode=force\nОграничение: trust_mode=local: результаты диагностические — локальная история не защищена от владельца проекта; доверенное выполнение требует контура PB-061\n  feat-check: RUN command\n  feat-check: passed (0.086с)\n  other-suite: RUN command\n  other-suite: passed (0.086с)\nИтог: passed=2; непокрытых обязательств: 0\n', '')
+HANDOFF (0, 'DEV-11: передача на приёмку записана; отчётов: 1. Независимая приёмка: lifecycle accept.\n', '')
+REPORT_TIME 2026-11-15T12:15:36+03:00 STORED {'explain': ['обязательства не затронуты'], 'kind': 'command', 'status': 'not_applicable'}
+OTHER_RESULT a7069273cc7745cd92f2402ce1b85339-other-suite 2026-11-15T09:15:34.862017+00:00
+OTHER_RESULT c9ee05f577a44d29b741ab8f20356c55-other-suite 2026-11-15T09:15:33.077130+00:00
+READY (0, 'OK: структура, ссылки и 1 карточки; каталог документов: 0 документов, 0 legacy. Поведение продукта не проверялось.\naudit-ready: свежая передача и проверки подтверждены; независимый аудит не выполнен\npreflight: структура, материалы, блокировки и политика checks проверены; поведение CLI и приёмка не подтверждены\n', '')
+ATTEMPT 1 FORCE (0, 'checks run DEV-11: политика growth-policy rev 1, scope=project mode=force\nОграничение: trust_mode=local: результаты диагностические — локальная история не защищена от владельца проекта; доверенное выполнение требует контура PB-061\n  feat-check: RUN command\n  feat-check: passed (0.084с)\n  other-suite: RUN command\n  other-suite: passed (0.082с)\nИтог: passed=2; непокрытых обязательств: 0\n', '')
+HANDOFF (0, 'DEV-11: передача на приёмку записана; отчётов: 1. Независимая приёмка: lifecycle accept.\n', '')
+REPORT_TIME 2026-11-15T12:15:47+03:00 STORED {'explain': ['обязательства не затронуты'], 'kind': 'command', 'status': 'not_applicable'}
+OTHER_RESULT d66293b88a8a4639b1e36968a308f0d8-other-suite 2026-11-15T09:15:44.364985+00:00
+OTHER_RESULT 64d5305dac2e406d879a6cd4b27ea37b-other-suite 2026-11-15T09:15:45.875516+00:00
+READY (0, 'OK: структура, ссылки и 1 карточки; каталог документов: 0 документов, 0 legacy. Поведение продукта не проверялось.\naudit-ready: свежая передача и проверки подтверждены; независимый аудит не выполнен\npreflight: структура, материалы, блокировки и политика checks проверены; поведение CLI и приёмка не подтверждены\n', '')
+ATTEMPT 2 FORCE (0, 'checks run DEV-11: политика growth-policy rev 1, scope=project mode=force\nОграничение: trust_mode=local: результаты диагностические — локальная история не защищена от владельца проекта; доверенное выполнение требует контура PB-061\n  feat-check: RUN command\n  feat-check: passed (0.088с)\n  other-suite: RUN command\n  other-suite: passed (0.088с)\nИтог: passed=2; непокрытых обязательств: 0\n', '')
+HANDOFF (0, 'DEV-11: передача на приёмку записана; отчётов: 1. Независимая приёмка: lifecycle accept.\n', '')
+REPORT_TIME 2026-11-15T12:15:59+03:00 STORED {'explain': ['обязательства не затронуты'], 'kind': 'command', 'status': 'not_applicable'}
+OTHER_RESULT 78358012acae461a811391caa38c5edf-other-suite 2026-11-15T09:15:57.893076+00:00
+OTHER_RESULT 5e557aaab3ef4efea2c4b0142c2d4ef2-other-suite 2026-11-15T09:15:55.800854+00:00
+READY (0, 'OK: структура, ссылки и 1 карточки; каталог документов: 0 документов, 0 legacy. Поведение продукта не проверялось.\naudit-ready: свежая передача и проверки подтверждены; независимый аудит не выполнен\npreflight: структура, материалы, блокировки и политика checks проверены; поведение CLI и приёмка не подтверждены\n', '')
+ATTEMPT 3 FORCE (0, 'checks run DEV-11: политика growth-policy rev 1, scope=project mode=force\nОграничение: trust_mode=local: результаты диагностические — локальная история не защищена от владельца проекта; доверенное выполнение требует контура PB-061\n  feat-check: RUN command\n  feat-check: passed (0.09с)\n  other-suite: RUN command\n  other-suite: passed (0.088с)\nИтог: passed=2; непокрытых обязательств: 0\n', '')
+HANDOFF (0, 'DEV-11: передача на приёмку записана; отчётов: 1. Независимая приёмка: lifecycle accept.\n', '')
+REPORT_TIME 2026-11-15T12:16:10+03:00 STORED {'explain': ['обязательства не затронуты'], 'kind': 'command', 'status': 'not_applicable'}
+OTHER_RESULT e4721e28504442aeaf7103e993bf5a27-other-suite 2026-11-15T09:16:08.891947+00:00
+OTHER_RESULT afc09ecd2f414f078169960bb052e54b-other-suite 2026-11-15T09:16:07.608975+00:00
+READY (0, 'OK: структура, ссылки и 1 карточки; каталог документов: 0 документов, 0 legacy. Поведение продукта не проверялось.\naudit-ready: свежая передача и проверки подтверждены; независимый аудит не выполнен\npreflight: структура, материалы, блокировки и политика checks проверены; поведение CLI и приёмка не подтверждены\n', '')

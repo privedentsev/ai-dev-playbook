@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "policy_id": "checks-policy",
+  "revision": 1,
+  "project_id": "project",
+  "trust_mode": "local",
+  "approved_basis": {
+    "who": "Инженер",
+    "at": "2026-01-01T00:00:00+00:00",
+    "source": "поручение",
+    "detail": "Одобрение начальной политики проверок по зависимостям"
+  },
+  "subsystems": [
+    {"id": "core", "title": "Основная подсистема"}
+  ],
+  "modules": [
+    {
+      "id": "app",
+      "title": "Код приложения",
+      "subsystem_id": "core",
+      "paths": ["src/**"]
+    }
+  ],
+  "checks": [
+    {
+      "id": "unit",
+      "title": "Модульные тесты",
+      "purpose": "Проверить поведение модулей приложения",
+      "kind": "test",
+      "modules": ["app"],
+      "adapter": "python-unittest",
+      "argv": ["python3", "-m", "unittest", "discover", "-s", "tests", "-v"],
+      "timeout_seconds": 300,
+      "inputs": ["src", "tests"]
+    }
+  ],
+  "dependencies": [],
+  "excludes": [
+    {
+      "pattern": "work/**",
+      "reason": "Служебный runtime-каталог комплекта",
+      "origin": "template"
+    }
+  ],
+  "environment": {
+    "toolchain": [{"id": "python", "version": "3"}],
+    "external": []
+  },
+  "fallback": {
+    "expansion_order": ["module", "subsystem", "project"],
+    "approved_commands": [],
+    "limits": {"max_seconds": 3600},
+    "unknown_scope": "project"
+  },
+  "test_catalog": {
+    "adapter": "python-unittest",
+    "fingerprint": "sha256:0000000000000000000000000000000000000000000000000000000000000000",
+    "entries": [
+      {
+        "id": "tests.test_example.TestExample.test_behavior",
+        "description": "условие сценария → ожидаемый результат"
+      }
+    ]
+  }
+}

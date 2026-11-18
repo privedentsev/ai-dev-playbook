@@ -1,0 +1,7 @@
+{"case": "shadow", "predicted": ["test_a.Base.test_ok", "test_a.Child.test_ok"], "actual": ["test_a.Base.test_ok"], "unknowns": {"root_files": [], "orphan_test_files": [], "load_tests_files": [], "id_collisions": [], "parse_errors": [], "problems": [], "ambiguous_imports": [], "unresolved_imports": {}, "class_uncertainties": []}}
+{"case": "reexport", "predicted": [], "actual": ["base.Base.test_ok"], "unknowns": {"root_files": [], "orphan_test_files": [], "load_tests_files": [], "id_collisions": [], "parse_errors": [], "problems": [], "ambiguous_imports": [], "unresolved_imports": {}, "class_uncertainties": []}}
+
+18 setup-тестов: OK. 53 checks_contract: OK.
+Self survey: 1054 entries, 1054 unique descriptions, fallback=0.
+AST: 35 из 36 изменённых tracked test-файлов меняют только docstring; test_checks_contract.py также содержит изменение deferred setup, проверенное в первом аудите.
+Audit-ready: отказ — критерии не подтверждены свежими проверками.

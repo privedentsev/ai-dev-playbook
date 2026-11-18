@@ -95,7 +95,10 @@ class LifecycleCase(DocumentCliCase):
 
 
 class ArchiveApplyTest(LifecycleCase):
+    """archive apply: preview без записи, apply с переносом и
+    переписыванием ссылок, идемпотентность."""
     def test_plan_preview_writes_nothing(self):
+        """archive plan preview не пишет файлов"""
         self.add_spec("alpha")
         rel = self.request(request_json("spec:alpha"))
         before = tree_fingerprint(self.root)
@@ -106,6 +109,7 @@ class ArchiveApplyTest(LifecycleCase):
         self.assertEqual(tree_fingerprint(self.root), before)
 
     def test_apply_moves_document_materials_and_rewrites_links(self):
+        """archive apply переносит документ/материалы и переписывает ссылки"""
         evidence = self.specs / "alpha-evidence"
         evidence.mkdir(parents=True)
         (evidence / "report.md").write_text("Отчёт\n", encoding="utf-8")
@@ -176,6 +180,7 @@ class ArchiveApplyTest(LifecycleCase):
         self.assertEqual(code, 0, err)
 
     def test_apply_twice_is_already_completed(self):
+        """Повторный archive apply — already_completed"""
         self.add_spec("alpha")
         _, plan_rel = self.save_plan(request_json("spec:alpha"))
         code, _, err = self.cli("lifecycle", "apply", plan_rel)
@@ -190,6 +195,7 @@ class ArchiveApplyTest(LifecycleCase):
         self.assertEqual(len(archived), 1)
 
     def test_apply_two_documents_in_one_request(self):
+        """archive apply двух документов в одном запросе"""
         self.add_spec("alpha")
         self.add_spec("beta", document_id="spec:beta")
         payload = {"schema_version": 1,
@@ -210,6 +216,7 @@ class ArchiveApplyTest(LifecycleCase):
         self.assertEqual(code, 0, err)
 
     def test_archive_plan_document_with_done_tasks(self):
+        """Архив плана-документа с done-задачами"""
         write_card(self.root / "docs" / "archive" / "tasks", "DEV-9",
                    "done", closed="2026-02-01T00:00:00Z")
         code, _, err = self.cli("index")
@@ -235,6 +242,7 @@ class ArchiveRefusalTest(LifecycleCase):
         self.assertEqual(self.project_fingerprint(), before)
 
     def test_non_final_state_refused(self):
+        """Архив нефинального state отклоняется"""
         self.add_spec("alpha", state="accepted")
         rel = self.request(request_json("spec:alpha"))
         before = tree_fingerprint(self.root)
@@ -244,6 +252,7 @@ class ArchiveRefusalTest(LifecycleCase):
         self.assertEqual(tree_fingerprint(self.root), before)
 
     def test_legacy_document_refused(self):
+        """Архив legacy-документа без meta отклоняется"""
         write_doc(self.specs, "alpha.md", None)
         code, _, err = self.cli("lifecycle", "plan",
                                 self.request(request_json("spec:alpha")))
@@ -251,6 +260,7 @@ class ArchiveRefusalTest(LifecycleCase):
         self.assertIn("register", err)
 
     def test_already_archived_refused(self):
+        """Повторный архив уже архивного отклоняется"""
         self.add_spec("alpha")
         _, plan_rel = self.save_plan(request_json("spec:alpha"))
         code, _, err = self.cli("lifecycle", "apply", plan_rel)
@@ -263,6 +273,7 @@ class ArchiveRefusalTest(LifecycleCase):
         self.assertIn("уже в архиве", err)
 
     def test_destination_collision_refused(self):
+        """Коллизия назначения архива отклоняется"""
         self.add_spec("alpha")
         blocker = self.archived("alpha")
         blocker.parent.mkdir(parents=True, exist_ok=True)
@@ -273,6 +284,7 @@ class ArchiveRefusalTest(LifecycleCase):
         self.assertIn("Назначение занято", err)
 
     def test_unconfirmed_external_required_refused(self):
+        """Неподтверждённый обязательный внешний материал отклоняет архив"""
         self.add_spec("alpha", materials=[
             {"id": "m-ext", "role": "other", "source": "https://ex.com/x",
              "storage": "external", "required": True, "immutable": False,
@@ -290,17 +302,20 @@ class ArchiveRefusalTest(LifecycleCase):
         self.assertEqual(code, 0, err)
 
     def test_unknown_confirmed_material_refused(self):
+        """Неизвестный id в confirmed_materials отклоняется"""
         self.assert_refused(request_json("spec:alpha",
                                          confirmed_materials=["nope"]),
                             "неизвестные id")
 
     def test_unaccounted_evidence_refused(self):
+        """Неучтённый evidence-файл отклоняет архив"""
         evidence = self.specs / "alpha-evidence"
         evidence.mkdir(parents=True)
         (evidence / "stray.bin").write_bytes(b"x")
         self.assert_refused(request_json("spec:alpha"), "неучтённые")
 
     def test_work_area_material_refused(self):
+        """Материал из work-области отклоняется"""
         live = self.root / "work" / "lifecycle" / "data"
         live.mkdir(parents=True)
         (live / "x.bin").write_bytes(b"x")
@@ -314,6 +329,7 @@ class ArchiveRefusalTest(LifecycleCase):
         self.assertEqual(self.project_fingerprint(), before)
 
     def test_missing_material_refused(self):
+        """Отсутствующий материал отклоняет архив"""
         self.add_spec("alpha", materials=[local_material(
             "m-1", "docs/specs/alpha-evidence/missing.md",
             required=False)])
@@ -323,22 +339,26 @@ class ArchiveRefusalTest(LifecycleCase):
         self.assertIn("отсутствует", err)
 
     def test_scope_mismatch_refused(self):
+        """Scope, не совпадающий с запросом, отклоняется"""
         payload = request_json("spec:alpha")
         payload["scope"]["documents"].append("spec:beta")
         self.assert_refused(payload, "не совпадает")
 
     def test_close_task_unknown_task_refused(self):
+        """close неизвестной задачи в lifecycle plan отклоняется"""
         code, _, err = self.cli("lifecycle", "plan",
                                 self.request(task_request("DEV-9")))
         self.assertEqual(code, 1)
         self.assertIn("Нет задачи", err)
 
     def test_scope_tasks_mismatch_refused(self):
+        """Несовпадение scope.tasks отклоняется"""
         payload = task_request("DEV-9")
         payload["scope"]["tasks"].append("DEV-10")
         self.assert_refused(payload, "не совпадает")
 
     def test_unknown_action_refused(self):
+        """Неизвестное action запроса отклоняется"""
         self.add_spec("alpha")
         payload = request_json("spec:alpha")
         payload["actions"][0]["action"] = "explode"
@@ -348,11 +368,13 @@ class ArchiveRefusalTest(LifecycleCase):
         self.assertIn("неизвестное действие", err)
 
     def test_successor_missing_refused(self):
+        """Отсутствующий successor отклоняется"""
         self.assert_refused(request_json("spec:alpha",
                                          successor="spec:ghost"),
                             "successor")
 
     def test_successor_within_same_operation_refused(self):
+        """Successor внутри той же операции отклоняется"""
         self.add_spec("alpha")
         self.add_spec("beta", document_id="spec:beta")
         payload = {"schema_version": 1,
@@ -370,6 +392,7 @@ class ArchiveRefusalTest(LifecycleCase):
         self.assertIn("преемник", err)
 
     def test_plan_document_with_open_tasks_refused(self):
+        """План-документ с открытыми задачами отклоняет архив"""
         write_card(self.root / "docs" / "tasks", "DEV-3", "in_progress")
         code, _, err = self.cli("index")
         self.assertEqual(code, 0, err)
@@ -380,6 +403,7 @@ class ArchiveRefusalTest(LifecycleCase):
         self.assertIn("незаверш", err)
 
     def test_bad_request_shapes_refused(self):
+        """Битые формы запроса отклоняются"""
         self.add_spec("alpha")
         for bad in ("{", "[1]", json.dumps({"schema_version": 2}),
                     json.dumps({"schema_version": 1, "actor": {},
@@ -393,6 +417,7 @@ class ArchiveRefusalTest(LifecycleCase):
             self.assertEqual(code, 1, bad)
 
     def test_wikilink_conflict_refused(self):
+        """Wikilink-конфликт при архиве отклоняется"""
         self.add_spec("alpha")
         self.add_spec("beta", document_id="spec:beta", state="accepted",
                       body="См. [[alpha]].\n")
@@ -402,6 +427,7 @@ class ArchiveRefusalTest(LifecycleCase):
         self.assertIn("ручного разбора", err)
 
     def test_no_documents_section_refused(self):
+        """Архив без раздела documents отклоняется"""
         path = self.root / "ai-dev-playbook" / "project.json"
         project = json.loads(path.read_text(encoding="utf-8"))
         del project["documents"]
@@ -414,7 +440,10 @@ class ArchiveRefusalTest(LifecycleCase):
 
 
 class StalePlanTest(LifecycleCase):
+    """Устаревшие планы: изменения входов/каталогов/новых файлов,
+    подмена плана и запроса."""
     def test_input_change_after_plan_refused(self):
+        """Изменение входа после плана отклоняет apply"""
         self.add_spec("alpha")
         self.add_spec("beta", document_id="spec:beta", state="accepted",
                       body="См. [alpha](alpha.md).\n")
@@ -431,6 +460,7 @@ class StalePlanTest(LifecycleCase):
     def test_catalog_change_after_plan_refused(self):
         # Новый документ коллекции, появившийся после планирования, меняет
         # состав каталога и входов — сохранённый план устаревает.
+        """Изменение каталога после плана отклоняет apply"""
         self.add_spec("alpha")
         _, plan_rel = self.save_plan(request_json("spec:alpha"))
         self.add_spec("gamma", document_id="spec:gamma", state="accepted",
@@ -441,6 +471,7 @@ class StalePlanTest(LifecycleCase):
         self.assertTrue((self.specs / "alpha.md").is_file())
 
     def test_new_evidence_file_after_plan_refused(self):
+        """Новый evidence-файл после плана отклоняет apply"""
         evidence = self.specs / "alpha-evidence"
         evidence.mkdir(parents=True)
         (evidence / "r.md").write_text("Отчёт\n", encoding="utf-8")
@@ -454,6 +485,7 @@ class StalePlanTest(LifecycleCase):
         self.assertTrue((evidence / "late.bin").is_file())
 
     def test_tampered_plan_refused(self):
+        """Подделанный план отклоняется"""
         self.add_spec("alpha")
         _, plan_rel = self.save_plan(request_json("spec:alpha"))
         plan_path = self.root / plan_rel
@@ -469,6 +501,7 @@ class StalePlanTest(LifecycleCase):
                          .exists())
 
     def test_tampered_request_in_plan_refused(self):
+        """Подделанный запрос внутри плана отклоняется"""
         self.add_spec("alpha")
         _, plan_rel = self.save_plan(request_json("spec:alpha"))
         plan_path = self.root / plan_rel
@@ -481,6 +514,7 @@ class StalePlanTest(LifecycleCase):
         self.assertIn("устарел", err)
 
     def test_plan_from_other_root_refused(self):
+        """План из другого root отклоняется"""
         self.add_spec("alpha")
         _, plan_rel = self.save_plan(request_json("spec:alpha"))
         plan_path = self.root / plan_rel
@@ -494,7 +528,9 @@ class StalePlanTest(LifecycleCase):
 
 
 class InterruptRestoreTest(LifecycleCase):
+    """Прерывание lifecycle-операций и restore пред-образа."""
     def test_crash_mid_apply_then_restore(self):
+        """Крах посреди apply → restore пред-образа"""
         evidence = self.specs / "alpha-evidence"
         evidence.mkdir(parents=True)
         (evidence / "r.md").write_text("Отчёт\n", encoding="utf-8")
@@ -539,11 +575,13 @@ class InterruptRestoreTest(LifecycleCase):
         self.assertEqual(code, 0, err)
 
     def test_restore_without_pending_refused(self):
+        """lifecycle restore без pending отклоняется"""
         code, _, err = self.cli("lifecycle", "restore")
         self.assertEqual(code, 1)
         self.assertIn("Нет незаверш", err)
 
     def test_apply_failure_restores_preimage(self):
+        """Сбой apply восстанавливает пред-образ"""
         evidence = self.specs / "alpha-evidence"
         evidence.mkdir(parents=True)
         (evidence / "r.md").write_text("Отчёт\n", encoding="utf-8")
@@ -580,7 +618,9 @@ class InterruptRestoreTest(LifecycleCase):
 
 
 class StatusTest(LifecycleCase):
+    """lifecycle status: список сохранённых планов."""
     def test_status_lists_saved_plans(self):
+        """lifecycle status перечисляет сохранённые планы"""
         self.add_spec("alpha")
         _, plan_rel = self.save_plan(request_json("spec:alpha"))
         code, out, err = self.cli("lifecycle", "status")

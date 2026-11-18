@@ -14,6 +14,8 @@ import verification
 
 
 class VerificationPreflightTest(fixture.CloseLifecycleCase):
+    """Preflight проверок: read-only, применимость и свежесть,
+    stale index, материалы, exclusion отказов."""
     def setUp(self):
         super().setUp()
         self.project_file = self.root / "ai-dev-playbook/project.json"
@@ -116,6 +118,7 @@ class VerificationPreflightTest(fixture.CloseLifecycleCase):
         self.cli("index")
 
     def test_preflight_does_not_execute_commands_or_write_files(self):
+        """Preflight не исполняет команды и не пишет"""
         self.create_v2_task("DEV-1")
         before_tree = tree_fingerprint(self.root)
         
@@ -144,6 +147,7 @@ class VerificationPreflightTest(fixture.CloseLifecycleCase):
     def test_preflight_shows_applicability_and_freshness(self):
         # A real bound baseline proves unchanged docs; an unbound empty JSON
         # cannot establish independence from the current tree.
+        """Preflight показывает применимость и свежесть"""
         self.create_v2_task('DEV-1', status='draft', scope=['ai-dev-playbook'])
         self.start_task()
         code, out, err = self.cli('verify', 'DEV-1', '--preflight')
@@ -154,6 +158,7 @@ class VerificationPreflightTest(fixture.CloseLifecycleCase):
         self.assertIn('not_run', out)
 
     def test_preflight_detects_stale_index_and_gives_remediation(self):
+        """Preflight обнаруживает stale index с рекомендацией"""
         self.create_v2_task("DEV-1")
         # Tamper with index to make it stale
         index = self.root / "docs/tasks/index.md"
@@ -169,6 +174,7 @@ class VerificationPreflightTest(fixture.CloseLifecycleCase):
         self.assertEqual(before_tree, tree_fingerprint(self.root))
 
     def test_preflight_detects_unaccounted_materials(self):
+        """Preflight обнаруживает неучтённые материалы"""
         self.create_v2_task("DEV-1")
         evidence_dir = self.root / "docs/tasks/DEV-1-evidence"
         evidence_dir.mkdir(parents=True, exist_ok=True)
@@ -181,6 +187,7 @@ class VerificationPreflightTest(fixture.CloseLifecycleCase):
 
     def test_preflight_detects_missing_required_registry_check(self):
         # verification_plan only contains visual-check, but unit-tests is 'always' required in registry
+        """Preflight обнаруживает отсутствующую обязательную проверку"""
         checks = [
             {
                 "id": "visual-check",
@@ -198,6 +205,7 @@ class VerificationPreflightTest(fixture.CloseLifecycleCase):
         self.assertIn("Способ исправления:", out + err)
 
     def test_preflight_detects_unapproved_exclusion_of_failed_check(self):
+        """Preflight обнаруживает неутверждённое исключение failed-проверки"""
         self.settings['task_workflow']['registry'].append({
             'id': 'opt-check', 'kind': 'command', 'purpose': 'Optional check',
             'argv': [sys.executable, '-c', 'raise SystemExit(1)'], 'timeout_seconds': 30,
@@ -228,6 +236,7 @@ class VerificationPreflightTest(fixture.CloseLifecycleCase):
 
     def test_preflight_does_not_require_future_reports(self):
         # A newly created ready task with no verification reports must pass preflight
+        """Preflight не требует будущих отчётов"""
         self.create_v2_task("DEV-1", status="ready")
         code, out, err = self.cli("verify", "DEV-1", "--preflight")
         self.assertEqual(code, 0, f"stdout: {out}\nstderr: {err}")

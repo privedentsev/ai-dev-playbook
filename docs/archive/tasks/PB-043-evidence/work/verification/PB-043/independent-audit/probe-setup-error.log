@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/work/verification/PB-043/independent-audit/probe.py", line 21, in <module>
+    cli('lifecycle','handoff','DEV-1','--summary','independent probe')
+    ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/work/verification/PB-043/independent-audit/probe.py", line 9, in cli
+    assert p.returncode==ok,(args,p.stdout,p.stderr)
+           ^^^^^^^^^^^^^^^^
+AssertionError: (('lifecycle', 'handoff', 'DEV-1', '--summary', 'independent probe'), '', 'ERROR: Атрибуция handoff не совпадает с журналом\n')

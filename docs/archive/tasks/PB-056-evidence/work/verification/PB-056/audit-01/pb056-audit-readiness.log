@@ -1,0 +1,16 @@
+test_audit_ready_requires_handoff_and_detects_stale_inputs_without_tests (test_verification_readiness.VerificationReadinessTest.test_audit_ready_requires_handoff_and_detects_stale_inputs_without_tests) ... ok
+test_failed_corrupt_foreign_and_other_commands_do_not_block_retry (test_verification_readiness.VerificationReadinessTest.test_failed_corrupt_foreign_and_other_commands_do_not_block_retry) ... ok
+test_legacy_without_documents_also_checks_index (test_verification_readiness.VerificationReadinessTest.test_legacy_without_documents_also_checks_index) ... ok
+test_live_gate_is_probed_without_changing_holder (test_verification_readiness.VerificationReadinessTest.test_live_gate_is_probed_without_changing_holder) ... ok
+test_measured_duration_rejects_insufficient_timeout_without_writing (test_verification_readiness.VerificationReadinessTest.test_measured_duration_rejects_insufficient_timeout_without_writing) ... ok
+test_missing_command_blocks_before_any_command (test_verification_readiness.VerificationReadinessTest.test_missing_command_blocks_before_any_command) ... ok
+test_missing_component_blocks_before_tests (test_verification_readiness.VerificationReadinessTest.test_missing_component_blocks_before_tests) ... ok
+test_pending_markers_fail_read_only_even_without_lock (test_verification_readiness.VerificationReadinessTest.test_pending_markers_fail_read_only_even_without_lock) ... ok
+test_stale_task_index_blocks_before_tests (test_verification_readiness.VerificationReadinessTest.test_stale_task_index_blocks_before_tests) ... ok
+test_temporary_directory_inside_project_rejected_before_tests (test_verification_readiness.VerificationReadinessTest.test_temporary_directory_inside_project_rejected_before_tests) ... ok
+test_version_mismatch_blocks_before_tests (test_verification_readiness.VerificationReadinessTest.test_version_mismatch_blocks_before_tests) ... ok
+
+----------------------------------------------------------------------
+Ran 11 tests in 12.592s
+
+OK

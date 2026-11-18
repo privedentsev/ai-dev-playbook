@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "card_format_version": 2,
+  "relations": [
+    {
+      "relation": "based_on",
+      "target": "spec:scoped-file-operations"
+    },
+    {
+      "relation": "based_on",
+      "target": "design:scoped-file-operations"
+    },
+    {
+      "relation": "based_on",
+      "target": "plan:scoped-file-operations"
+    }
+  ],
+  "materials": [
+    {
+      "id": "implementation-evidence",
+      "role": "report",
+      "source": "docs/tasks/PB-045-evidence",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-045"
+      ]
+    },
+    {
+      "id": "verify-9acd1892cd334f609ad983239aad0099",
+      "role": "report",
+      "source": "work/verification/PB-045/9acd1892cd334f609ad983239aad0099",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-045"
+      ]
+    }
+  ],
+  "criterion_evidence": {
+    "CHECK-01": {
+      "check_sha256": "sha256:e0aa38b004f30161371927c48a3e46d377af9b38b2fde4fcbf6428a2ebccb549",
+      "card_projection": "sha256:600ac71d4bc3cedf47da00c9117952a355583f8f0ab3a9b0ac7eb619453d214d",
+      "report_id": "verify-9acd1892cd334f609ad983239aad0099",
+      "report_sha256": "sha256:44d7bac3a34859fef8596cb6d16f58e4265a75759340c00d7e95e78ad0e0359f"
+    }
+  },
+  "handoff": {
+    "at": "2026-10-28T08:35:37+03:00",
+    "actor": {
+      "name": "Codex",
+      "model": "GPT-6.1 Sol"
+    },
+    "summary": "HANDOFF-01",
+    "reports": [
+      "verify-9acd1892cd334f609ad983239aad0099"
+    ],
+    "card_projection": "sha256:600ac71d4bc3cedf47da00c9117952a355583f8f0ab3a9b0ac7eb619453d214d",
+    "entry_id": "HANDOFF-01",
+    "journal_sha256": "sha256:4efa3eeb9c39431af00802ecf75e3020cd9e842f1b1a5fda082610dbf53bcabd"
+  }
+}

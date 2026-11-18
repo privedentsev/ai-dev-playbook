@@ -1,0 +1,41 @@
+PASS command: matching snapshots
+PASS command: A-01 schema-valid mismatch rejected
+PASS command: input_snapshot/old
+PASS command: input_snapshot/absent
+PASS command: input_snapshot/opaque
+PASS command: input_snapshot/empty
+PASS command: input_snapshot/other read-set
+PASS command: missing input_snapshot
+PASS command: snapshot_before/old
+PASS command: snapshot_before/absent
+PASS command: snapshot_before/opaque
+PASS command: snapshot_before/empty
+PASS command: snapshot_before/other read-set
+PASS command: missing snapshot_before
+PASS command: snapshot_after/old
+PASS command: snapshot_after/absent
+PASS command: snapshot_after/opaque
+PASS command: snapshot_after/empty
+PASS command: snapshot_after/other read-set
+PASS command: missing snapshot_after
+PASS manual: matching snapshots
+PASS manual: A-01 schema-valid mismatch rejected
+PASS manual: input_snapshot/old
+PASS manual: input_snapshot/absent
+PASS manual: input_snapshot/opaque
+PASS manual: input_snapshot/empty
+PASS manual: input_snapshot/other read-set
+PASS manual: missing input_snapshot
+PASS manual: candidate_snapshot/old
+PASS manual: candidate_snapshot/absent
+PASS manual: candidate_snapshot/opaque
+PASS manual: candidate_snapshot/empty
+PASS manual: candidate_snapshot/other read-set
+PASS manual: missing candidate_snapshot
+PASS independent b remains reusable after a changes
+PASS coverage rejects b=failed
+PASS coverage rejects b=timeout
+PASS coverage rejects b=not_run
+PASS local close does not require release regression
+PASS release requires omitted regression
+TOTAL 40 PASS

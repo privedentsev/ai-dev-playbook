@@ -1,0 +1,93 @@
+test_extension_without_argv_is_routine (test_checks_trust.ApproveTest.test_extension_without_argv_is_routine)
+Расширение policy без новых argv — routine-одобрение ... ok
+test_initial_and_require (test_checks_trust.ApproveTest.test_initial_and_require)
+Политика до одобрения отклоняется require_approved ... ok
+test_new_argv_is_weakening (test_checks_trust.ApproveTest.test_new_argv_is_weakening)
+Обычное расширение не разрешает новые недоверенные команды. ... ok
+test_removed_check_is_weakening (test_checks_trust.ApproveTest.test_removed_check_is_weakening)
+Удаление проверки классифицируется как weakening ... ok
+test_revoked_policy_digest_refused (test_checks_trust.ApproveTest.test_revoked_policy_digest_refused)
+Отозванный policy_digest отклоняется verifier'ом ... ok
+test_aggregate_source_revocation_transitive (test_checks_trust.AuditFixesTest.test_aggregate_source_revocation_transitive)
+Отзыв исходной квитанции транзитивно отклоняет aggregate ... ok
+test_duplicate_report_lines_rejected (test_checks_trust.AuditFixesTest.test_duplicate_report_lines_rejected)
+Подделка поверх настоящего отчёта — квитанция не выдаётся. ... ok
+test_external_always_run_does_not_break_env (test_checks_trust.AuditFixesTest.test_external_always_run_does_not_break_env)
+required_environment с dict-значением не ломает subprocess (A-03). ... ok
+test_forged_report_file_rejected (test_checks_trust.AuditFixesTest.test_forged_report_file_rejected)
+Поддельный adapter.json + os._exit — квитанция не выдаётся. ... ok
+test_forged_stdout_sentinel_posthumous (test_checks_trust.AuditFixesTest.test_forged_stdout_sentinel_posthumous)
+Строка отчёта, за которой процесс умер — квитанция не выдаётся. ... ok
+test_legacy_self_reported_receipt_rejected (test_checks_trust.AuditFixesTest.test_legacy_self_reported_receipt_rejected)
+Квитанция на kind=test результат отклоняется verify (A-01). ... ok
+test_probe_readonly_root_stays_local (test_checks_trust.AuditFixesTest.test_probe_readonly_root_stays_local)
+chmod 0555 на доме того же uid не даёт protected (A-02). ... ok
+test_scrubbed_env_reaches_subprocess (test_checks_trust.AuditFixesTest.test_scrubbed_env_reaches_subprocess)
+HOME/TMPDIR внутри arena, PATH есть; binding env не подменяет. ... ok
+test_self_reported_policy_refused (test_checks_trust.AuditFixesTest.test_self_reported_policy_refused)
+Политика с test-проверками не получает квитанцию (A-01/AUDIT-02). ... ok
+test_covered_by_run_receipt (test_checks_trust.GateTest.test_covered_by_run_receipt)
+Run-квитанция покрывает область protected-gate ... ok
+test_forged_file_in_project_is_not_authoritative (test_checks_trust.GateTest.test_forged_file_in_project_is_not_authoritative)
+Проектная копия не создаёт и не отменяет доверенное покрытие. ... ok
+test_no_receipts_uncovered (test_checks_trust.GateTest.test_no_receipts_uncovered)
+Без квитанций protected-gate не покрывает область ... ok
+test_init_and_binding (test_checks_trust.HomeTest.test_init_and_binding)
+init_home создаёт доверенный дом и привязку проекта ... ok
+test_probe_inside_project_is_local (test_checks_trust.HomeTest.test_probe_inside_project_is_local)
+Дом внутри проекта даёт capability=local ... ok
+test_probe_same_uid_is_honest_local (test_checks_trust.HomeTest.test_probe_same_uid_is_honest_local)
+Дом той же OS identity честно даёт local без protected ... ok
+test_probe_without_home_is_local (test_checks_trust.HomeTest.test_probe_without_home_is_local)
+Probe без дома возвращает capability=local ... ok
+test_env_scrubbed_for_test_process (test_checks_trust.IsolationTest.test_env_scrubbed_for_test_process)
+Переменные доверенной стороны не доходят до подпроцесса. ... ok
+test_sandbox_denies_home_access (test_checks_trust.IsolationTest.test_sandbox_denies_home_access)
+Реальная граница на стенде: запись/чтение дома запрещены. ... ok
+test_denied_dir_returns_false (test_checks_trust.ProbeWritabilityTest.test_denied_dir_returns_false)
+Запрещённый каталог возвращает false при probe записи ... ok
+test_probe_reports_writable_home_points (test_checks_trust.ProbeWritabilityTest.test_probe_reports_writable_home_points)
+Доступный для записи дом: writable_points заполнены, ... ok
+test_unknown_error_returns_none (test_checks_trust.ProbeWritabilityTest.test_unknown_error_returns_none)
+Неизвестная ошибка записи возвращает none — граница не доказана ... ok
+test_writable_dir_marker_created_and_removed (test_checks_trust.ProbeWritabilityTest.test_writable_dir_marker_created_and_removed)
+Записываемый каталог: marker создаётся и удаляется ... ok
+test_aggregate_confirms_unchanged (test_checks_trust.ReceiptVerifyTest.test_aggregate_confirms_unchanged)
+Aggregate-квитанция подтверждает неизменные результаты ... ok
+test_aggregate_skips_changed_inputs (test_checks_trust.ReceiptVerifyTest.test_aggregate_skips_changed_inputs)
+Aggregate пропускает проверки с изменившимися входами ... ok
+test_attacker_signature_rejected (test_checks_trust.ReceiptVerifyTest.test_attacker_signature_rejected)
+Подпись атакующего ключа отклоняется ... ok
+test_cross_project_rejected (test_checks_trust.ReceiptVerifyTest.test_cross_project_rejected)
+Квитанция чужого проекта не принимается этим домом. ... ok
+test_foreign_home_receipt_rejected (test_checks_trust.ReceiptVerifyTest.test_foreign_home_receipt_rejected)
+Квитанция другого дома того же проекта — журнал/ключ иные. ... ok
+test_forged_field_rejected (test_checks_trust.ReceiptVerifyTest.test_forged_field_rejected)
+Изменённое поле квитанции отклоняется verify ... ok
+test_replay_for_other_candidate_rejected (test_checks_trust.ReceiptVerifyTest.test_replay_for_other_candidate_rejected)
+Replay квитанции на другой candidate отклоняется ... ok
+test_revoked_key_rejected (test_checks_trust.ReceiptVerifyTest.test_revoked_key_rejected)
+Отозванный ключ отклоняет свои квитанции ... ok
+test_revoked_policy_rejected (test_checks_trust.ReceiptVerifyTest.test_revoked_policy_rejected)
+Отозванная политика отклоняет свои квитанции ... ok
+test_revoked_receipt_rejected (test_checks_trust.ReceiptVerifyTest.test_revoked_receipt_rejected)
+Отозванная квитанция отклоняется verify ... ok
+test_unknown_key_replacement_rejected (test_checks_trust.ReceiptVerifyTest.test_unknown_key_replacement_rejected)
+Замена key_id на неизвестный ключ отклоняется ... ok
+test_client_results_never_signed (test_checks_trust.VerifierRunTest.test_client_results_never_signed)
+Файл, подброшенный агентом, не становится квитанцией. ... ok
+test_editable_approved_is_not_authorization (test_checks_trust.VerifierRunTest.test_editable_approved_is_not_authorization)
+approved_basis в файле проекта не заменяет одобрение дома. ... ok
+test_policy_edit_after_approval_refused (test_checks_trust.VerifierRunTest.test_policy_edit_after_approval_refused)
+Правка policy после одобрения отклоняется ... ok
+test_run_issues_valid_receipt (test_checks_trust.VerifierRunTest.test_run_issues_valid_receipt)
+verifier_run выдаёт валидную квитанцию на кандидате ... ok
+test_snapshot_substitution_detected (test_checks_trust.VerifierRunTest.test_snapshot_substitution_detected)
+AC-07: изменение после прогона — replay отклонён. ... ok
+test_unapproved_policy_refused (test_checks_trust.VerifierRunTest.test_unapproved_policy_refused)
+Неподтверждённая policy отклоняется verifier'ом ... ok
+
+----------------------------------------------------------------------
+Ran 44 tests in 3.324s
+
+OK

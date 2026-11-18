@@ -1,0 +1,10 @@
+test_bad_plan_and_missing_reason_leave_no_card (test_quick_route.QuickRouteTest.test_bad_plan_and_missing_reason_leave_no_card) ... ok
+test_legacy_refusal_and_standard_creation_unchanged (test_quick_route.QuickRouteTest.test_legacy_refusal_and_standard_creation_unchanged) ... ok
+test_preview_create_and_incomplete_start (test_quick_route.QuickRouteTest.test_preview_create_and_incomplete_start) ... ok
+test_review_revise_and_raise_same_card_preserve_history (test_quick_route.QuickRouteTest.test_review_revise_and_raise_same_card_preserve_history) ... ok
+test_three_iterations_one_id_then_explicit_engineer_acceptance (test_quick_route.QuickRouteTest.test_three_iterations_one_id_then_explicit_engineer_acceptance) ... ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 24.316s
+
+OK

@@ -1,0 +1,6 @@
+hydration metadata parsed: None
+inline control returncode: 0 example preserved: True
+fenced header marker: (1, '', "ERROR: 'DEV-1'\n")
+read_only: True
+example preserved: False
+title marker: (1, '', 'ERROR: card format: неверная шапка карточки\n')

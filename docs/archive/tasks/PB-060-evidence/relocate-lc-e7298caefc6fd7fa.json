@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "type": "lifecycle-relocate-material",
+  "plan_id": "lc-e7298caefc6fd7fa",
+  "task": "PB-060",
+  "material": "verify-070dadde",
+  "at": "2026-11-10T11:31:56+03:00",
+  "actor": {
+    "name": "Devin",
+    "model": "SWE-2 High"
+  },
+  "reason": "Устранение коллизии архивных назначений PB-060 (AUDIT-05): копия отчёта размещена вне runner-каталога; оригинал остаётся на месте",
+  "files": [
+    {
+      "from": "docs/tasks/PB-060-evidence/work/verification/PB-060/070daddef15143dcbfa2d1c5415df265/report.json",
+      "to": "docs/tasks/PB-060-evidence/manual-reports/070dadde-report.json",
+      "sha256": "sha256:7b761cc2f8032eed30abc6413e5dd7a984e2caec812dbe290df322711080652c",
+      "bytes": 796771
+    }
+  ],
+  "links": [
+    {
+      "path": "docs/tasks/PB-060.md",
+      "changes": [
+        {
+          "line": 80,
+          "old": "PB-060-evidence/work/verification/PB-060/070daddef15143dcbfa2d1c5415df265/report.json",
+          "new": "PB-060-evidence/manual-reports/070dadde-report.json"
+        },
+        {
+          "line": 181,
+          "old": "PB-060-evidence/work/verification/PB-060/070daddef15143dcbfa2d1c5415df265/report.json",
+          "new": "PB-060-evidence/manual-reports/070dadde-report.json"
+        },
+        {
+          "line": 241,
+          "old": "PB-060-evidence/work/verification/PB-060/070daddef15143dcbfa2d1c5415df265/report.json",
+          "new": "PB-060-evidence/manual-reports/070dadde-report.json"
+        },
+        {
+          "line": 310,
+          "old": "PB-060-evidence/work/verification/PB-060/070daddef15143dcbfa2d1c5415df265/report.json",
+          "new": "PB-060-evidence/manual-reports/070dadde-report.json"
+        },
+        {
+          "line": 369,
+          "old": "PB-060-evidence/work/verification/PB-060/070daddef15143dcbfa2d1c5415df265/report.json",
+          "new": "PB-060-evidence/manual-reports/070dadde-report.json"
+        }
+      ]
+    }
+  ],
+  "receipts": {
+    "handoff": {
+      "at": "2026-11-09T18:21:18+03:00",
+      "summary": "HANDOFF-05"
+    },
+    "acceptance": {
+      "at": "2026-11-09T21:06:02+03:00",
+      "result": "accepted",
+      "handoff_at": "2026-11-09T18:21:18+03:00"
+    }
+  }
+}

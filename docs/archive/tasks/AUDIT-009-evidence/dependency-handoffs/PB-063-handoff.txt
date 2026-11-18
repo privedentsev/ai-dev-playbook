@@ -1,0 +1,74 @@
+# PB-063: Внедрить настройку проекта и совместимое обновление
+Статус: done; передача CLI: historical; приёмка CLI: historical
+Передача: HANDOFF-06; аудит: AUDIT-06; вердикт журнала: accepted
+
+### Цель и границы
+Настройка и миграция. setup/install/update/шаблоны, описания тестов и документация. Согласовать совместную работу с PB-046–050 по фактическому состоянию; не менять их контракты скрытно.
+
+### Контекст
+[Спецификация](../../specs/dependency-aware-verification.md): R-02,06–07,14,18–20; сценарии AC-03,06,10. [Design](../../designs/dependency-aware-verification.md), [ADR-0006](../../adr/0006-dependency-aware-verification.md), [план](../../plans/dependency-aware-verification.md).
+
+Подготовлено по поручению инженера 2026-11-07. Условия старта проверены 2026-11-12: технический проект (spec/design/ADR/plan) принят, зависимость PB-062 завершена и принята аудитом, исполнитель назначен (Devin / SWE-2 Flash High). Чужие изменения сохранены; self-config не включён — `checks_policy` в self-project отсутствует, механизм проверен на временных проектах (явное решение о self-config — после пилота, PB-064/AUDIT-009).
+
+### Критерии приёмки
+- [x] AC-01: Setup preview предлагает модули/checks/exclusions/unknown без записи и исполнения импортов; apply использует одобренную policy и существующий recovery. Новые файлы наследуют безопасные правила.
+- [x] AC-02: Opt-in installation/update строго версионированы; legacy и прежний v2 сохраняются, старые результаты не становятся protected, обязательные checks не исчезают. Прерывание/restore/unsupported версии покрыты.
+- [x] AC-03: Обновить правила, руководство, карту/архитектуру и переносимые шаблоны; descriptions существующих тестов добавить без ненужной смены IDs. Self-config включать только явно и после пилота/разрешения.
+- [x] AC-04: Целевые поведенческие проверки и связанные регрессии пройдены; документация и self-manifest актуальны, EXEC/CHECK/HANDOFF содержат реальные доказательства и ограничения; передача зарегистрирована штатным CLI.
+
+### План
+1. Уточнить фактические интерфейсы зависимостей и связать изменения с критериями этой карточки.
+2. Реализовать ограниченный объём, добавить постоянные позитивные и негативные проверки критериев AC-01–03; не подменять их структурной проверкой.
+3. Обновить затронутые документы/шаблоны и self-manifest при изменениях комплекта; выполнить адресные проверки, index и check --ready.
+4. Подготовить материалы и пройти действующие preflight/verify/handoff. До явного opt-in использовать прежний контракт; не отключать полный legacy suite ради экономии.
+5. Записать EXEC/CHECK/HANDOFF и передать независимому аудитору; самостоятельно не закрывать.
+
+### Ресурсы
+Python и стандартная библиотека для основного CLI; локальные временные проекты и subprocess-счётчики. Новые зависимости защищённого executor обосновать в рамках принятого design. Фактические среда, policy_revision и бюджет фиксируются при старте; доступность отдельной OS/CI identity не предполагается.
+
+Материалы: `docs/tasks/PB-063-evidence/`; команды воспроизведения и отчёты принадлежат этой карточке. Общие материалы и сквозная матрица — AUDIT-009/PB-064.
+
+### Указатель актуальных записей
+- EXEC-05 — Исправление
+- CHECK-06 — Проверка (passed)
+- HANDOFF-06 — Передача
+- AUDIT-06 — Аудит (accepted)
+Открытых замечаний нет.
+
+Подробности: python3 ai-dev-playbook/scripts/playbook.py card show PB-063 --entry <ID>
+Полная история: python3 ai-dev-playbook/scripts/playbook.py card show PB-063 --full
+
+## Записи последней передачи
+
+### EXEC-05 — Исправление
+Время: 2026-11-14T12:11:30+03:00
+Исполнитель: Devin
+Модель: SWE-2 Flash High
+Замечания: A-05, A-06
+Изменения: исправлены замечания AUDIT-04. A-05: `_provably_nonclass` больше не разворачивает `Attribute`/`Subscript` до корня — доказанно не-классом остаются только литералы, коллекции как целое значение и lambda; `Base = [Original][0]` (элемент коллекции может быть TestCase) и любые Name/Attribute/Subscript/Call идут в `unknowns.class_uncertainties` как консервативное предупреждение — критерий аудита «разрешение значения либо предупреждение» выполнен второй ветвью. A-06: `_scan` ведёт last-binding-wins по привязкам верхнего уровня модуля — ClassDef/from-импорт/alive-привязки учитываются только как ПОСЛЕДНЯЯ привязка имени; `class Base` + `Base = None` и `from m import Base` + `Base = None` детерминированно убирают имя из namespace (predicted == discover, без unknowns), перепривязка выражением неизвестного значения (`Base = make()`) даёт class_uncertainties; `aliases` и `module_bound` вычисляются по итоговым привязкам; `del` считается удалением. Тесты: +4 поведенческих сценария в `test_checks_setup.py` (container-element import → unknowns, module rebind literal/unknown/imported — всего 29); self-project 1065 ID точно совпадает с `unittest discover` в обе стороны, 9 честных class_uncertainties без изменений; свежие module-level присваивания без предыдущей привязки задокументированы как ограничение в rules/verification.md и commands.md. Документация: rules/verification.md, docs/tasks/PB-063-evidence/commands.md.
+Файлы:
+- ai-dev-playbook/scripts/checks_setup.py
+- tests/test_checks_setup.py
+- ai-dev-playbook/rules/verification.md
+- docs/tasks/PB-063-evidence/commands.md
+
+### CHECK-06 — Проверка
+Время: 2026-11-14T12:55:00+03:00
+Исполнитель: Devin
+Модель: SWE-2 Flash High
+Результат: passed
+Критерии: AC-01, AC-02, AC-03, AC-04
+Команда: `python3 work/verification/PB-063/audit-04/probe.py` (пробы контейнерного элемента и module-level перепривязки: container → class_uncertainties, module_rebind → predicted == actual), `python3 -m unittest discover -s tests -p "test_checks_setup.py"` (29 сценариев PB-063), `python3 -m unittest discover -s tests -p "test_checks_*.py"` (302 теста), `python3 -m unittest discover -s tests -p "test_file_operations.py"` (45), `python3 -m unittest discover -s tests -p "test_cli.py"` (100), `python3 -m unittest discover -s tests -p "test_verification_smoke.py"` (6) из каталога tests/, сличение каталога self-project с `unittest discover` (1065 ID точно в обе стороны), `playbook.py index`, `playbook.py check --ready`, `playbook.py adopt . --force --apply`, `playbook.py setup preview` (перегенерирован evidence), полный `playbook.py verify PB-063` (self-check, preflight-regressions, unit-tests — отчёт 74ffa8f26ef64d3f99670351aad12250, inputs_unchanged)
+Среда: macOS Darwin 27, Python 3.14.6; временные проекты-фикстуры в /tmp; checkout feature/dependency-aware-verification.
+Факт: A-05 закрыт по критерию «разрешение значения либо консервативное предупреждение» — `_provably_nonclass` больше не разворачивает Attribute/Subscript: `Base = [Original][0]` даёт явный class_uncertainties у class-like импорта (проба audit-04 container). A-06 закрыт — `_scan` реализует last-binding-wins для привязок верхнего уровня: `class Base` + `Base = None` и `from m import Base` + `Base = None` убирают имя из namespace (проба module_rebind: predicted == actual == пусто, без unknowns); `Base = make()` после ClassDef даёт class_uncertainties; self-project: 1065 ID точно совпадает с discover, 9 честных class_uncertainties без изменений.
+Доказательства: [команды и ограничения](PB-063-evidence/commands.md), [вывод preview self-project](PB-063-evidence/setup-preview-self.txt), [отчёт verify](PB-063-evidence/work/verification/PB-063/74ffa8f26ef64d3f99670351aad12250/report.json)
+Ограничения: самопроверка исполнителя. Стенд без отдельной OS/CI identity — trust_mode local, защищённая эксплуатация не заявляется. Apply на self-project не выполнялся. Статическое предсказание не видит динамические механизмы (load_tests, метаклассы, `__init_subclass__`, exec, runtime-инъекция, фабричные классы, атрибутные алиасы, свежие module-level присваивания без предыдущей привязки класса/импорта, перепривязки внутри if/try/for-тел) — первые перечислены в unknowns/class_uncertainties, ID не выдумываются. Изменения не закоммичены.
+
+### HANDOFF-06 — Передача
+Время: 2026-11-14T14:21:26+03:00
+Исполнитель: Codex
+Модель: GPT-6.1 Sol (Low)
+Выполнение: EXEC-05
+Проверки: CHECK-06
+Состояние: по явному поручению инженера подготовлено закрытие PB-063, commit и push. Инженер уточнил модель AUDIT-01–04: GPT-6.1 Sol (Low); исправлены только эти четыре поля атрибуции. Исходные тексты сохранены в зарегистрированных snapshot.txt пакетов audit-01–05. Продуктовый код, требования, тесты и переданные отчёты не менялись. Новая передача заменяет отпечаток журнала после уточнения атрибуции; успешный полный verify 74ffa8f26ef64d3f99670351aad12250 и независимые 302 теста AUDIT-05 остаются доказательствами.
+Фокус аудита: только уточнение атрибуции AUDIT-01–04 по ответу инженера; неизменность реализации, критериев и CHECK-06; свежесть прежних доказательств; повторная регистрация приёмки перед штатным close.

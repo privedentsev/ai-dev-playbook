@@ -1,0 +1,27 @@
+{
+  "kind": "planning-source-case",
+  "recorded_at": "2026-11-10T08:24:36+03:00",
+  "owner": "PB-072",
+  "source_task": "PB-060",
+  "source_audit": "AUDIT-05",
+  "material_ids": [
+    "verify-070dadde",
+    "verify-070daddef15143dcbfa2d1c5415df265"
+  ],
+  "sources": [
+    {
+      "source": "docs/tasks/PB-060-evidence/work/verification/PB-060/070daddef15143dcbfa2d1c5415df265/report.json",
+      "sha256": "7b761cc2f8032eed30abc6413e5dd7a984e2caec812dbe290df322711080652c"
+    },
+    {
+      "source": "work/verification/PB-060/070daddef15143dcbfa2d1c5415df265/report.json",
+      "sha256": "7b761cc2f8032eed30abc6413e5dd7a984e2caec812dbe290df322711080652c"
+    }
+  ],
+  "bytes_equal": true,
+  "colliding_archive_destination": "docs/archive/tasks/PB-060-evidence/work/verification/PB-060/070daddef15143dcbfa2d1c5415df265/report.json",
+  "historical_failure_log": "work/verification/PB-060/audit-05/close-dry-run.log",
+  "historical_failure": "ERROR: Коллизия назначений: docs/archive/tasks/PB-060-evidence/work/verification/PB-060/070daddef15143dcbfa2d1c5415df265/report.json от docs/tasks/PB-060-evidence/work/verification/PB-060/070daddef15143dcbfa2d1c5415df265/report.json и work/verification/PB-060/070daddef15143dcbfa2d1c5415df265/report.json",
+  "proposed_copy_destination": "docs/tasks/PB-060-evidence/manual-reports/070dadde-report.json",
+  "implementation_performed": false
+}

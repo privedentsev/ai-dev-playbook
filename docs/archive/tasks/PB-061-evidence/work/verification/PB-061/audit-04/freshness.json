@@ -1,0 +1,35 @@
+{
+  "report_id": "d8c86c4037834f28b8f9438ba34f1315",
+  "status": "passed",
+  "inputs_unchanged": true,
+  "fresh": true,
+  "changed": [],
+  "code_or_tests_changed_since_previous_audit": [],
+  "manifest_drift": [],
+  "checks": [
+    {
+      "id": "self-check",
+      "status": "passed",
+      "exit_code": 0,
+      "duration_seconds": 20.009,
+      "stdout": "work/verification/PB-061/d8c86c4037834f28b8f9438ba34f1315/self-check.stdout.log",
+      "stderr": "work/verification/PB-061/d8c86c4037834f28b8f9438ba34f1315/self-check.stderr.log"
+    },
+    {
+      "id": "preflight-regressions",
+      "status": "passed",
+      "exit_code": 0,
+      "duration_seconds": 3.395,
+      "stdout": "work/verification/PB-061/d8c86c4037834f28b8f9438ba34f1315/preflight-regressions.stdout.log",
+      "stderr": "work/verification/PB-061/d8c86c4037834f28b8f9438ba34f1315/preflight-regressions.stderr.log"
+    },
+    {
+      "id": "unit-tests",
+      "status": "passed",
+      "exit_code": 0,
+      "duration_seconds": 1543.866,
+      "stdout": "work/verification/PB-061/d8c86c4037834f28b8f9438ba34f1315/unit-tests.stdout.log",
+      "stderr": "work/verification/PB-061/d8c86c4037834f28b8f9438ba34f1315/unit-tests.stderr.log"
+    }
+  ]
+}

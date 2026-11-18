@@ -1,0 +1,88 @@
+[
+  {
+    "argv": [
+      "python3",
+      "docs/tasks/AUDIT-009-evidence/audit-02/probe_corrupt_obligation.py",
+      ".",
+      "corrupt"
+    ],
+    "rc": 0,
+    "seconds": 7.58161445800215,
+    "phase": "initial-probes",
+    "included_as_success_evidence": true
+  },
+  {
+    "argv": [
+      "python3",
+      "docs/tasks/AUDIT-009-evidence/audit-02/probe_corrupt_obligation.py",
+      ".",
+      "delete"
+    ],
+    "rc": 1,
+    "seconds": 0.22587916598422453,
+    "phase": "initial-probes",
+    "included_as_success_evidence": false,
+    "limitation": "Own prepare-audit transaction was pending; excluded."
+  },
+  {
+    "argv": [
+      "python3",
+      "docs/tasks/AUDIT-009-evidence/audit-02/probe_legacy_equal.py",
+      "."
+    ],
+    "rc": 0,
+    "seconds": 0.40618016599910334,
+    "phase": "initial-probes",
+    "included_as_success_evidence": true
+  },
+  {
+    "argv": [
+      "python3",
+      "docs/tasks/AUDIT-009-evidence/audit-02/probe_corrupt_obligation.py",
+      ".",
+      "delete"
+    ],
+    "phase": "clean-repeat",
+    "rc": 0,
+    "output": "delete.json"
+  },
+  {
+    "argv": [
+      "python3",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tests",
+      "-p",
+      "test_checks_*.py",
+      "-v"
+    ],
+    "phase": "clean-repeat-outside-outer-sandbox",
+    "rc": 0,
+    "output": "checks-tests-clean.log",
+    "tests": 344,
+    "seconds": 251.125
+  },
+  {
+    "argv": [
+      "python3",
+      "docs/tasks/AUDIT-009-evidence/audit-03/probe_clock_rollback.py",
+      "."
+    ],
+    "rc": 0,
+    "output": "clock-rollback.json",
+    "note": "Probe prints observations; its rc=0 does not mean product readiness is correct."
+  },
+  {
+    "argv": [
+      "python3",
+      "docs/archive/tasks/PB-073-evidence/self_pilot.py",
+      ".",
+      "/tmp/audit009-20261117/pilot-plan",
+      "--plan-only"
+    ],
+    "rc": 0,
+    "output": "pilot-plan.log"
+  }
+]

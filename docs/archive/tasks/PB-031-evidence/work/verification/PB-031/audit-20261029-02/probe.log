@@ -1,0 +1,36 @@
+HANDOFF_REPORT passed unchanged= True fresh= True diff= []
+CARD_PROJECTION_MATCH True
+missing_plan REJECT ["missing_plan: нет обязательных полей ['verification_plan']", "missing_plan: поле 'verification_plan': verification_plan должен быть объектом"]
+null_plan REJECT ["null_plan: поле 'verification_plan': verification_plan должен быть объектом"]
+missing_inputs REJECT ["missing_inputs.verification_plan.checks[0]: нет обязательных полей ['inputs']", "missing_inputs.verification_plan.checks[0]: поле 'inputs': inputs должен быть списком"]
+null_inputs REJECT ["null_inputs.verification_plan.checks[0]: поле 'inputs': inputs должен быть списком"]
+file_without_path REJECT ["file_without_path.verification_plan.checks[0].inputs[0]: нет обязательных полей ['path']"]
+environment_invalid REJECT ["environment_invalid.verification_plan.checks[0]: поле 'inputs[0].names': names должен быть непустым списком строк"]
+no_at REJECT report v2: отсутствует обязательное поле 'at'
+no_actor REJECT results[0] (unit-tests): отсутствует поле происхождения 'actor'
+no_command_snapshots REJECT results[0] (unit-tests): snapshot_before обязателен для command-результата
+invalid_snapshots_and_actor REJECT results[0] (unit-tests): actor.name должен быть непустой строкой
+no_manual_scenario REJECT results[1] (visual-check): scenario_hash обязателен для manual-результата
+invalid_candidate REJECT results[1] (visual-check).candidate_snapshot.files должен быть объектом
+CLI external exit= 1 ERROR: docs/tasks/PB-031.md: поле 'verification_plan.scope[0]': Символическая ссылка в управляемом пути: audit-external
+docs/tasks/PB-031.md.verification_plan.checks[0]: поле 'inputs[0]': Символическая ссылка в управляемом пути: audit-external
+CLI internal exit= 1 ERROR: docs/tasks/PB-031.md: поле 'verification_plan.scope[0]': Символическая ссылка в управляемом пути: audit-internal
+docs/tasks/PB-031.md.verification_plan.checks[0]: поле 'inputs[0]': Символическая ссылка в управляемом пути: audit-internal
+CLI parent exit= 1 ERROR: docs/tasks/PB-031.md: поле 'verification_plan.scope[0]': Символическая ссылка в управляемом пути: audit-parent/link/new.py
+docs/tasks/PB-031.md.verification_plan.checks[0]: поле 'inputs[0]': Символическая ссылка в управляемом пути: audit-parent/link/new.py
+CLI absent exit= 0 OK: структура, ссылки и 64 карточки; каталог документов: 18 документов, 2 legacy. Поведение продукта не проверялось.
+CLI disabled exit= 1 ERROR: docs/tasks/PB-031.md: поле 'schema_version': карточка использует schema_version 2, но task_workflow v2 не включён в project.json
+docs/tasks/PB-031.md.verification_plan.checks[0]: поле 'registry_id': неизвестная команда реестра 'unit-tests': task_workflow реестр не настроен
+CLI unknown exit= 1 ERROR: docs/tasks/PB-031.md.verification_plan.checks[0]: поле 'registry_id': неизвестная команда реестра 'DOES-NOT-EXIST'
+CLI null_plan_cli exit= 1 ERROR: docs/tasks/PB-031.md: поле 'verification_plan': verification_plan должен быть объектом
+CLI null_inputs_cli exit= 1 ERROR: docs/tasks/PB-031.md.verification_plan.checks[0]: поле 'inputs': inputs должен быть списком
+VALID_REPORT_LOADER ACCEPT
+LOADER actor_name_integer REJECT results[0] (unit-tests): actor.name должен быть непустой строкой
+LOADER actor_name_blank REJECT results[0] (unit-tests): actor.name должен быть непустой строкой
+LOADER input_files_integer REJECT results[0] (unit-tests).input_snapshot.files должен быть объектом
+LOADER input_empty_object REJECT results[0] (unit-tests).input_snapshot: должен содержать 'files' или 'sha256'
+LOADER before_string REJECT results[0] (unit-tests).snapshot_before должен быть объектом
+LOADER after_boolean REJECT results[0] (unit-tests).snapshot_after должен быть объектом
+LOADER candidate_files_integer REJECT results[1] (visual-check).candidate_snapshot.files должен быть объектом
+LOADER candidate_unknown_field REJECT results[1] (visual-check).candidate_snapshot: неизвестные поля ['extra']
+LOADER_MUTATIONS_PASS

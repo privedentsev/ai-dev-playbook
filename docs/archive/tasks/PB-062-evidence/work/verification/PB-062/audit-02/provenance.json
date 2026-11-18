@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "task_id": "PB-062",
+  "audit_id": "audit-02",
+  "at": "2026-11-11T10:06:39+03:00",
+  "actor": "Codex",
+  "files": {
+    "snapshot.txt": {
+      "source": "docs/tasks/PB-062.md",
+      "sha256": "sha256:967cac29a9fb5aa05f286ba758be6e1f738677c9f2987b31628727b72f293c62"
+    },
+    "snapshot.meta.json": {
+      "source": "docs/tasks/PB-062.meta.json",
+      "sha256": "sha256:2eb705eb37213d72ac5eac7eaae18cacf79fc77cb6aec94765ab1e06b8334cd1"
+    }
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "task_id": "PB-041",
+  "audit_id": "audit-03",
+  "at": "2026-11-06T23:04:01+03:00",
+  "actor": "Codex",
+  "files": {
+    "snapshot.txt": {
+      "source": "docs/tasks/PB-041.md",
+      "sha256": "sha256:798f8c10163a119aeb19c1012dba476863feaa94ecaf033c01524017e7af7ae4"
+    }
+  }
+}

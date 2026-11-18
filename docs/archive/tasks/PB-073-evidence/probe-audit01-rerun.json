@@ -1,0 +1,94 @@
+{
+  "no_git": true,
+  "attempts": 3,
+  "stale_rc": 1,
+  "gate": {
+    "ok": false,
+    "scope": "task",
+    "checkpoint": null,
+    "task_id": "DEV-01",
+    "trust_mode": "local",
+    "checks": {
+      "payment": {
+        "kind": "command",
+        "explain": [
+          "обязательства не затронуты",
+          "обязательство не покрыто: последний результат failed — требуется новое успешное доказательство",
+          "запуск: последний результат failed"
+        ],
+        "status": "uncovered"
+      }
+    },
+    "covered": [],
+    "uncovered": [
+      "payment"
+    ],
+    "manual": [],
+    "blocked": [],
+    "not_applicable": [],
+    "notes": [],
+    "rejections": [],
+    "hashed_bytes": 2637157,
+    "hashed_files": 101,
+    "budget_reasons": [],
+    "trust": {
+      "mode": "local",
+      "capability": "local",
+      "note": "trust_mode=local: результаты диагностические — локальная история не защищена от владельца проекта; доверенное выполнение требует контура PB-061"
+    },
+    "protected_confirmed": false
+  },
+  "commands": [
+    {
+      "argv": [
+        "setup",
+        "apply"
+      ],
+      "rc": 0,
+      "stdout": "checks-политика shop-checks rev 1 подключена (checks-policy.json); project.json → checks_policy. Операция: work/lifecycle/20261116-142354-fcd770bf. trust_mode=local не повышает доверие результатов.\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "checks",
+        "run",
+        "DEV-01",
+        "--scope",
+        "project",
+        "--mode",
+        "force"
+      ],
+      "rc": 0,
+      "stdout": "checks run DEV-01: политика shop-checks rev 1, scope=project mode=force\nОграничение: trust_mode=local: результаты диагностические — локальная история не защищена от владельца проекта; доверенное выполнение требует контура PB-061\n  payment: RUN command\n  payment: passed (0.085с)\nИтог: passed=1; непокрытых обязательств: 0\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "checks",
+        "run",
+        "DEV-01",
+        "--scope",
+        "project",
+        "--mode",
+        "force"
+      ],
+      "rc": 1,
+      "stdout": "checks run DEV-01: политика shop-checks rev 1, scope=project mode=force\nОграничение: trust_mode=local: результаты диагностические — локальная история не защищена от владельца проекта; доверенное выполнение требует контура PB-061\n  payment: RUN command\n  payment: failed — команда завершилась кодом 1\nИтог: failed=1; непокрытых обязательств: 1\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "checks",
+        "run",
+        "DEV-01",
+        "--scope",
+        "task",
+        "--mode",
+        "stale"
+      ],
+      "rc": 1,
+      "stdout": "checks run DEV-01: политика shop-checks rev 1, scope=task mode=stale\nОграничение: trust_mode=local: результаты диагностические — локальная история не защищена от владельца проекта; доверенное выполнение требует контура PB-061\n  payment: RUN command\n  payment: failed — команда завершилась кодом 1\nИтог: failed=1; непокрытых обязательств: 1\n",
+      "stderr": ""
+    }
+  ]
+}

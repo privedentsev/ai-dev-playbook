@@ -1,0 +1,14 @@
+test_apply_uses_shared_gate (test_material_registration.MaterialRegistrationTest.test_apply_uses_shared_gate) ... ok
+test_failed_final_validation_rolls_back_registration (test_material_registration.MaterialRegistrationTest.test_failed_final_validation_rolls_back_registration) ... ok
+test_mutable_optional_flags_are_explicit (test_material_registration.MaterialRegistrationTest.test_mutable_optional_flags_are_explicit) ... ok
+test_other_owner_directory_overlap_is_rejected (test_material_registration.MaterialRegistrationTest.test_other_owner_directory_overlap_is_rejected) ... ok
+test_partial_registration_detects_new_untracked_file (test_material_registration.MaterialRegistrationTest.test_partial_registration_detects_new_untracked_file) ... ok
+test_preview_apply_repeat_and_full_close (test_material_registration.MaterialRegistrationTest.test_preview_apply_repeat_and_full_close) ... ok
+test_registered_audit_logs_are_not_verify_reports (test_material_registration.MaterialRegistrationTest.test_registered_audit_logs_are_not_verify_reports) ... ok
+test_registration_rejects_invalid_paths_and_collisions (test_material_registration.MaterialRegistrationTest.test_registration_rejects_invalid_paths_and_collisions) ... ok
+test_unregistered_evidence_rejects_handoff_without_writes (test_material_registration.MaterialRegistrationTest.test_unregistered_evidence_rejects_handoff_without_writes) ... ok
+
+----------------------------------------------------------------------
+Ran 9 tests in 4.721s
+
+OK

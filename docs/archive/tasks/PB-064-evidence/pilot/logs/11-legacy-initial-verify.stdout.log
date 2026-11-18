@@ -1,0 +1,6 @@
+OK: структура, ссылки и 82 карточки; каталог документов: 29 документов, 2 legacy. Поведение продукта не проверялось.
+PB-064: чекбоксы уже актуальны.
+RUN: self-check
+RUN: preflight-regressions
+RUN: unit-tests
+passed: /private/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/pb064-self-pilot-ugcaklby/copy_a_legacy/work/verification/PB-064/1bc6c0d1fa4c40f58d7470c63593f65a/report.json

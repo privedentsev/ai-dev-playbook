@@ -1,0 +1,13 @@
+COMMAND ('lifecycle', 'register-material', 'DEV-1', 'docs/tasks/loose/note.txt', '--id', 'note', '--role', 'report', '--immutable', '--required', '--apply')
+RESULT (0, "DEV-1: материал 'note' зарегистрирован.\n", '')
+COMMAND ('verify', 'DEV-1', '--preflight')
+RESULT (0, 'OK: структура, ссылки и 1 карточки; каталог документов: 0 документов, 0 legacy. Поведение продукта не проверялось.\npreflight: структура, материалы, блокировки, команды и лимиты проверены; поведение CLI и приёмка не подтверждены\n{\n  "task_id": "DEV-1",\n  "cwd": "/private/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/tmpt2gaudd9",\n  "inputs": [\n    "ai-dev-playbook/project.json",\n    "ai-dev-playbook/resources.json",\n    "docs",\n    "docs/tasks/DEV-1.md"\n  ],\n  "checks": [\n    {\n      "id": "unit",\n      "argv": [\n        "python3",\n        "-c",\n        "print(\'ok\')"\n      ],\n      "timeout_seconds": 30\n    }\n  ]\n}\n', '')
+COMMAND ('verify', 'DEV-1')
+RESULT (0, 'OK: структура, ссылки и 1 карточки; каталог документов: 0 документов, 0 legacy. Поведение продукта не проверялось.\nRUN: unit\npassed: /private/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/tmpt2gaudd9/work/verification/DEV-1/f8bea6cfb20e4f0db0fee4eef0b556c5/report.json\n', '')
+COMMAND ('lifecycle', 'handoff', 'DEV-1', '--summary', 'ready', '--actor', 'Devin', '--model', 'SWE-2 High')
+RESULT (0, 'DEV-1: передача на приёмку записана; отчётов: 1. Независимая приёмка: lifecycle accept.\n', '')
+COMMAND ('lifecycle', 'accept', 'DEV-1', '--result', 'accepted', '--actor', 'Auditor', '--model', 'GPT-6')
+RESULT (0, 'DEV-1: записана приёмка result=accepted kind=acceptance.\n', '')
+COMMAND ('close', 'DEV-1', '--dry-run')
+RESULT (1, '', 'ERROR: file/directory collision: docs/archive/tasks/loose\n')
+EXISTING_ARCHIVE_BYTES existing archive file

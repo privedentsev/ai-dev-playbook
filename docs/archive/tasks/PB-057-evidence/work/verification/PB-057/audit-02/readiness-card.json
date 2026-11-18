@@ -1,0 +1,284 @@
+{
+  "status": "supported",
+  "card_format_version": 2,
+  "markdown_path": "docs/tasks/PB-057.md",
+  "header": {
+    "title": "PB-057: Определить форматы модулей, проверок и одобренной политики",
+    "id": "PB-057",
+    "status": "in_review",
+    "priority": "P2",
+    "depends_on": "-",
+    "executor": "Devin",
+    "model": "SWE-2 High",
+    "created": "2026-11-07T01:06:09+03:00",
+    "closed": "-"
+  },
+  "task": {
+    "Цель и границы": "Контракт и политика. Валидаторы project/task_workflow, новые схемы/шаблоны, контракт адаптеров и policy; документация. Не выполнять анализ/runner/внешнее развёртывание.",
+    "Контекст": "[Спецификация](../specs/dependency-aware-verification.md): R-01–02,07–08,10,14,18–19; сценарии AC-03–06,08,10. [Design](../designs/dependency-aware-verification.md), [ADR-0006](../adr/0006-dependency-aware-verification.md), [план](../plans/dependency-aware-verification.md).\n\nПодготовлено по поручению инженера 2026-11-07. Выполнение пока не разрешено. Перед стартом: принятие технического проекта, завершённые зависимости, актуальный card show/handoff затрагиваемых работ и назначение исполнителя. Исходные чужие изменения сохранять.",
+    "Критерии приёмки": "- [ ] AC-01: Зафиксировать версионированные схемы policy/graph/result/receipt и окончательный CLI API, отделив task/project от stale/force; валидировать неизвестные поля, bool/NaN лимиты и дубли ID.\n- [ ] AC-02: Определить одобрение начальной политики и классификацию расширения/ослабления; локальный approved не даёт авторизации. Не включать режим в self-project.\n- [ ] AC-03: Определить контракт discovery/test descriptions/skip и backward compatibility; fixtures форматов и негативные тесты валидатора проверяют контракты.\n- [x] AC-04: Целевые поведенческие проверки и связанные регрессии пройдены; документация и self-manifest актуальны, EXEC/CHECK/HANDOFF содержат реальные доказательства и ограничения; передача зарегистрирована штатным CLI.",
+    "План": "1. Уточнить фактические интерфейсы зависимостей и связать изменения с критериями этой карточки.\n2. Реализовать ограниченный объём, добавить постоянные позитивные и негативные проверки критериев AC-01–03; не подменять их структурной проверкой.\n3. Обновить затронутые документы/шаблоны и self-manifest при изменениях комплекта; выполнить адресные проверки, index и check --ready.\n4. Подготовить материалы и пройти действующие preflight/verify/handoff. До явного opt-in использовать прежний контракт; не отключать полный legacy suite ради экономии.\n5. Записать EXEC/CHECK/HANDOFF и передать независимому аудитору; самостоятельно не закрывать.",
+    "Ресурсы": "Python и стандартная библиотека для основного CLI; локальные временные проекты и subprocess-счётчики. Новые зависимости защищённого executor обосновать в рамках принятого design. Фактические среда, policy_revision и бюджет фиксируются при старте; доступность отдельной OS/CI identity не предполагается.\n\nМатериалы: `docs/tasks/PB-057-evidence/`; команды воспроизведения и отчёты принадлежат этой карточке. Общие материалы и сквозная матрица — AUDIT-009/PB-064."
+  },
+  "criteria": {
+    "AC-01": "Зафиксировать версионированные схемы policy/graph/result/receipt и окончательный CLI API, отделив task/project от stale/force; валидировать неизвестные поля, bool/NaN лимиты и дубли ID.",
+    "AC-02": "Определить одобрение начальной политики и классификацию расширения/ослабления; локальный approved не даёт авторизации. Не включать режим в self-project.",
+    "AC-03": "Определить контракт discovery/test descriptions/skip и backward compatibility; fixtures форматов и негативные тесты валидатора проверяют контракты.",
+    "AC-04": "Целевые поведенческие проверки и связанные регрессии пройдены; документация и self-manifest актуальны, EXEC/CHECK/HANDOFF содержат реальные доказательства и ограничения; передача зарегистрирована штатным CLI."
+  },
+  "criterion_markers": {
+    "AC-01": false,
+    "AC-02": false,
+    "AC-03": false,
+    "AC-04": true
+  },
+  "entries": [
+    {
+      "id": "EXEC-01",
+      "type": "execution",
+      "title": "Выполнение",
+      "fields": {
+        "Время": "2026-11-08T03:13:50+03:00",
+        "Исполнитель": "Devin",
+        "Модель": "SWE-2 High",
+        "Изменения": "новый модуль checks_contract.py — контракт выбора проверок по зависимостям: схемы policy/graph/result/receipt (schema_version 1), контракт адаптера python-unittest (protocol 1, каталог со стабильными ID и обязательными описаниями, допустимые skip), классификация правок политики classify_policy_change (extension/weakening/unchanged; смена policy_id/project_id — ошибка). Строгие валидаторы: неизвестные поля/версии, bool/NaN лимиты, повторные ID и рёбра, ссылки module:|subsystem:|check:, конфликт широких исключений с объявленными входами (селективный glob внутри области допустим). Одобрение — запись approved_basis; поле approved отклоняется как неизвестное и авторизацией не является. CLI: checks plan|run|status с ортогональными --scope task|project и --mode stale|force + --checkpoint, setup preview|apply; операции отвечают контролируемым отказом с владельцами PB-059/060/063. В config() добавлена строгая валидация ссылки project.json → checks_policy (путь, файл, схема политики); self-project режим не включает, task_workflow и report v1/v2 неизменны. Шаблон templates/checks-policy.json, fixtures всех форматов, адресные тесты. self-manifest обновлён adopt.",
+        "Файлы": "- ai-dev-playbook/scripts/checks_contract.py\n- ai-dev-playbook/scripts/playbook.py\n- ai-dev-playbook/templates/checks-policy.json\n- tests/test_checks_contract.py\n- tests/fixtures/checks_contract/{policy,graph,result,receipt}.json\n- docs/architecture.md\n- docs/code-map.md\n- CHANGELOG.md\n- docs/tasks/PB-057-evidence/commands.md\n- ai-dev-playbook/manifest.json\n- docs/tasks/PB-057.md\n- docs/tasks/index.md"
+      },
+      "findings": [],
+      "raw": "### EXEC-01 — Выполнение\nВремя: 2026-11-08T03:13:50+03:00\nИсполнитель: Devin\nМодель: SWE-2 High\nИзменения: новый модуль checks_contract.py — контракт выбора проверок по зависимостям: схемы policy/graph/result/receipt (schema_version 1), контракт адаптера python-unittest (protocol 1, каталог со стабильными ID и обязательными описаниями, допустимые skip), классификация правок политики classify_policy_change (extension/weakening/unchanged; смена policy_id/project_id — ошибка). Строгие валидаторы: неизвестные поля/версии, bool/NaN лимиты, повторные ID и рёбра, ссылки module:|subsystem:|check:, конфликт широких исключений с объявленными входами (селективный glob внутри области допустим). Одобрение — запись approved_basis; поле approved отклоняется как неизвестное и авторизацией не является. CLI: checks plan|run|status с ортогональными --scope task|project и --mode stale|force + --checkpoint, setup preview|apply; операции отвечают контролируемым отказом с владельцами PB-059/060/063. В config() добавлена строгая валидация ссылки project.json → checks_policy (путь, файл, схема политики); self-project режим не включает, task_workflow и report v1/v2 неизменны. Шаблон templates/checks-policy.json, fixtures всех форматов, адресные тесты. self-manifest обновлён adopt.\nФайлы:\n- ai-dev-playbook/scripts/checks_contract.py\n- ai-dev-playbook/scripts/playbook.py\n- ai-dev-playbook/templates/checks-policy.json\n- tests/test_checks_contract.py\n- tests/fixtures/checks_contract/{policy,graph,result,receipt}.json\n- docs/architecture.md\n- docs/code-map.md\n- CHANGELOG.md\n- docs/tasks/PB-057-evidence/commands.md\n- ai-dev-playbook/manifest.json\n- docs/tasks/PB-057.md\n- docs/tasks/index.md",
+      "sha256": "sha256:51068fbc3b33ea20a82e65330138cbcc4fc849496e5d70b505fb8d6f9bc4ec94",
+      "journal_sha256": "sha256:6dfe798ecf96a4a5e3904b16fa90f97d589619f3d9728adcb6b59ce66687560a"
+    },
+    {
+      "id": "CHECK-01",
+      "type": "verification",
+      "title": "Проверка",
+      "fields": {
+        "Время": "2026-11-08T03:52:00+03:00",
+        "Исполнитель": "Devin",
+        "Модель": "SWE-2 High",
+        "Результат": "passed",
+        "Критерии": "AC-01, AC-02, AC-03, AC-04",
+        "Команда": "`python3 ai-dev-playbook/scripts/playbook.py verify PB-057`; адресные `python3 -m unittest discover -s tests -p \"test_checks_contract.py\" -v`",
+        "Среда": "macOS, Python 3.14, checkout feature/dependency-aware-verification; временные проекты для CLI и config().",
+        "Факт": "финальный verify 961381f50fd94752ab9a1cff7873d155 passed, inputs_unchanged=true; 791 тест (47 новых), unit-tests 1273s. Адресные 47 тестов покрывают схемы, валидаторы, классификацию и отложенный CLI.",
+        "Доказательства": "- [Отчёт verify](../../work/verification/PB-057/961381f50fd94752ab9a1cff7873d155/report.json)\n- [Команды и ограничения](PB-057-evidence/commands.md)",
+        "Ограничения": "самопроверка исполнителя. checks plan/run/status и setup preview/apply — синтаксис контракта с контролируемым отказом; анализ, runner, криптография квитанций и доверенный контур не реализованы (PB-058–063). Режим не включён в self-project."
+      },
+      "findings": [],
+      "raw": "### CHECK-01 — Проверка\nВремя: 2026-11-08T03:52:00+03:00\nИсполнитель: Devin\nМодель: SWE-2 High\nРезультат: passed\nКритерии: AC-01, AC-02, AC-03, AC-04\nКоманда: `python3 ai-dev-playbook/scripts/playbook.py verify PB-057`; адресные `python3 -m unittest discover -s tests -p \"test_checks_contract.py\" -v`\nСреда: macOS, Python 3.14, checkout feature/dependency-aware-verification; временные проекты для CLI и config().\nФакт: финальный verify 961381f50fd94752ab9a1cff7873d155 passed, inputs_unchanged=true; 791 тест (47 новых), unit-tests 1273s. Адресные 47 тестов покрывают схемы, валидаторы, классификацию и отложенный CLI.\nДоказательства:\n- [Отчёт verify](../../work/verification/PB-057/961381f50fd94752ab9a1cff7873d155/report.json)\n- [Команды и ограничения](PB-057-evidence/commands.md)\nОграничения: самопроверка исполнителя. checks plan/run/status и setup preview/apply — синтаксис контракта с контролируемым отказом; анализ, runner, криптография квитанций и доверенный контур не реализованы (PB-058–063). Режим не включён в self-project.",
+      "sha256": "sha256:e3101bf0d72444e6e59a4c4479b28d201ca6ae48cbc65fdce931ebd457221731",
+      "journal_sha256": "sha256:976a76b72f43cfb96f79baa4cb1cde3f78cb77de158ef24bd06e0f2f633688cb"
+    },
+    {
+      "id": "HANDOFF-01",
+      "type": "handoff",
+      "title": "Передача",
+      "fields": {
+        "Время": "2026-11-08T03:52:00+03:00",
+        "Исполнитель": "Devin",
+        "Модель": "SWE-2 High",
+        "Выполнение": "EXEC-01",
+        "Проверки": "CHECK-01",
+        "Состояние": "in_review, ветка feature/dependency-aware-verification, изменения не закоммичены. Следующий шаг — независимый аудит; PB-058 стартует только после приёмки.",
+        "Фокус аудита": "полнота схем policy/graph/result/receipt по spec R-01–02,07–08,10,14,18–19 и design §2–9; классификация extension/weakening и отсутствие авторизации через approved; конфликт-семантика исключений (широкое против селективного glob); ортогональность --scope/--mode; строгость валидаторов (bool/NaN/дубли); обратная совместимость; контролируемые отказы отложенных команд."
+      },
+      "findings": [],
+      "raw": "### HANDOFF-01 — Передача\nВремя: 2026-11-08T03:52:00+03:00\nИсполнитель: Devin\nМодель: SWE-2 High\nВыполнение: EXEC-01\nПроверки: CHECK-01\nСостояние: in_review, ветка feature/dependency-aware-verification, изменения не закоммичены. Следующий шаг — независимый аудит; PB-058 стартует только после приёмки.\nФокус аудита: полнота схем policy/graph/result/receipt по spec R-01–02,07–08,10,14,18–19 и design §2–9; классификация extension/weakening и отсутствие авторизации через approved; конфликт-семантика исключений (широкое против селективного glob); ортогональность --scope/--mode; строгость валидаторов (bool/NaN/дубли); обратная совместимость; контролируемые отказы отложенных команд.",
+      "sha256": "sha256:5d9f1eb06b886d821018c7d6c6d16717453816d3843bac0b1fde7056d2114878",
+      "journal_sha256": "sha256:0ec8913b136741fb3c2353c36136131290c32d457b2f90768c55dbc76e2be7bd"
+    },
+    {
+      "id": "AUDIT-01",
+      "type": "audit",
+      "title": "Аудит",
+      "fields": {
+        "Время": "2026-11-08T08:24:46+03:00",
+        "Исполнитель": "Codex",
+        "Модель": "GPT-6",
+        "Передача": "HANDOFF-01",
+        "Результат": "changes_requested",
+        "Критерии": "AC-01, AC-02, AC-03, AC-04",
+        "Независимо проверено": "audit-ready подтвердил свежесть HANDOFF-01 и verify 961381f50fd94752ab9a1cff7873d155 (passed, inputs_unchanged=true). Изучены diff, схемы, fixtures, тесты, spec R-01–02,07–08,10,14,18–19 и design §2–10. Повторены 47 адресных тестов; дополнительные пробы воспроизвели A-01–04. CLI остаётся отложенным, self-project не включает checks_policy.",
+        "Доказательства": "- [Независимые пробы](../../work/verification/PB-057/audit-01/probes.py)\n- [Результаты проб](../../work/verification/PB-057/audit-01/probes.log)\n- [Адресные тесты](../../work/verification/PB-057/audit-01/targeted-tests.log)\n- [Исходный снимок](../../work/verification/PB-057/audit-01/snapshot.txt)",
+        "Ограничения": "полный suite независимо не повторялся; его свежесть проверена audit-ready. Анализатор, runner и внешний verifier в PB-057 не реализуются; замечания относятся к фиксируемым контрактам, а не к доказанному обходу работающего защищённого контура. Исправления реализации не выполнялись."
+      },
+      "findings": [
+        {
+          "id": "A-01",
+          "audit_id": "AUDIT-01",
+          "fields": {
+            "Серьёзность": "P1",
+            "Критерии": "AC-01",
+            "Проблема": "проверка коллизий исключений теряет glob без литерального префикса: _literal_head(pattern) or pattern подставляет сам glob вместо области, а _exclude_conflicts сравнивает его как строковый путь (checks_contract.py:536–548).",
+            "Воспроизведение": "probes.py; заменить excludes fixture политики на один pattern **, **/* либо **/payments/**.",
+            "Факт": "validate_policy принимает все три исключения при объявленных src/payments/** и inputs src/payments, tests/test_payments.py.",
+            "Влияние": "контракт допускает исключение объявленных входов, вплоть до всего проекта, вопреки R-07; последующий inventory может потерять значимые изменения.",
+            "Критерий исправления": "отклонять доказанные пересечения glob-исключений с объявленными входами; для недоказуемого пересечения применять консервативное правило. Добавить негативные тесты glob без литерального префикса, сохранив явно согласованную семантику допустимых селективных исключений."
+          },
+          "criteria": [
+            "AC-01"
+          ],
+          "criteria_inferred": false
+        },
+        {
+          "id": "A-02",
+          "audit_id": "AUDIT-01",
+          "fields": {
+            "Серьёзность": "P1",
+            "Критерии": "AC-02",
+            "Проблема": "новая проверка безусловно считается extension, после чего ветка prev is None пропускает анализ её argv (checks_contract.py:976–983). Новая исполняемая команда не сверяется с ранее одобренными командами.",
+            "Воспроизведение": "probes.py; добавить kind=command с новым ID, argv [unapproved-tool, --execute], timeout_seconds=60, не меняя approved_basis и fallback.approved_commands.",
+            "Факт": "обе политики проходят validate_policy, classify_policy_change возвращает только extension.",
+            "Влияние": "потребитель классификации не отличит разрешённое расширение контроля от добавления новой команды, требующего отдельного решения инженера по R-18. Аналогичный эффект возможен при замене argv через новый ID без удаления старой проверки.",
+            "Критерий исправления": "расширение исполняемого allowlist новой проверкой классифицировать как требующее одобрения; разрешать автоматическое расширение только в пределах ранее одобренных команд и бюджета. Проверить новые command/test IDs позитивными и негативными сценариями."
+          },
+          "criteria": [
+            "AC-02"
+          ],
+          "criteria_inferred": false
+        },
+        {
+          "id": "A-03",
+          "audit_id": "AUDIT-01",
+          "fields": {
+            "Серьёзность": "P2",
+            "Критерии": "AC-01",
+            "Проблема": "_validate_tests проверяет уникальность actual IDs, но не expected IDs (checks_contract.py:713–727).",
+            "Воспроизведение": "probes.py; дописать первый test_id в tests.expected fixture результата второй раз.",
+            "Факт": "validate_result принимает результат с повторным ожидаемым test_id.",
+            "Влияние": "нарушено требование AC-01 отклонять дубли ID; контракт ожидаемого набора неоднозначен для сравнения IDs/count в PB-060.",
+            "Критерий исправления": "отклонять повторные expected test IDs; добавить постоянный негативный тест. Это проверка формата, а не реализация runner."
+          },
+          "criteria": [
+            "AC-01"
+          ],
+          "criteria_inferred": false
+        },
+        {
+          "id": "A-04",
+          "audit_id": "AUDIT-01",
+          "fields": {
+            "Серьёзность": "P2",
+            "Критерии": "AC-03",
+            "Проблема": "design §7 требует явной политики допустимых expected failure, но схема каталога разрешает только id/description/group/skip; SKIP_FIELDS содержит только allowed/reason. При этом expected_failure уже входит в TEST_OUTCOMES.",
+            "Воспроизведение": "изучить CATALOG_ENTRY_FIELDS/SKIP_FIELDS и probes.py; попытаться добавить запись разрешения expected_failure в test_catalog.entries.",
+            "Факт": "отдельного правила допуска expected_failure в контракте нет; дополнительное поле отклоняется как неизвестное. skip.allowed не различает skipped и expected_failure, а документация связывает его только со skip.",
+            "Влияние": "адаптер PB-060 не сможет выразить согласованную политику допустимых expected failure без изменения уже фиксируемой схемы либо неявного решения о допуске.",
+            "Критерий исправления": "определить явный формат и семантику допуска expected_failure (отдельно от skipped/unexpected_success), классификацию расширения допуска как ослабления и fixtures/негативные тесты. Либо согласовать изменение design до приёмки контракта."
+          },
+          "criteria": [
+            "AC-03"
+          ],
+          "criteria_inferred": false
+        }
+      ],
+      "raw": "### AUDIT-01 — Аудит\nВремя: 2026-11-08T08:24:46+03:00\nИсполнитель: Codex\nМодель: GPT-6\nПередача: HANDOFF-01\nРезультат: changes_requested\nКритерии: AC-01, AC-02, AC-03, AC-04\nНезависимо проверено: audit-ready подтвердил свежесть HANDOFF-01 и verify 961381f50fd94752ab9a1cff7873d155 (passed, inputs_unchanged=true). Изучены diff, схемы, fixtures, тесты, spec R-01–02,07–08,10,14,18–19 и design §2–10. Повторены 47 адресных тестов; дополнительные пробы воспроизвели A-01–04. CLI остаётся отложенным, self-project не включает checks_policy.\nДоказательства:\n- [Независимые пробы](../../work/verification/PB-057/audit-01/probes.py)\n- [Результаты проб](../../work/verification/PB-057/audit-01/probes.log)\n- [Адресные тесты](../../work/verification/PB-057/audit-01/targeted-tests.log)\n- [Исходный снимок](../../work/verification/PB-057/audit-01/snapshot.txt)\nОграничения: полный suite независимо не повторялся; его свежесть проверена audit-ready. Анализатор, runner и внешний verifier в PB-057 не реализуются; замечания относятся к фиксируемым контрактам, а не к доказанному обходу работающего защищённого контура. Исправления реализации не выполнялись.\n\n#### A-01 — Замечание\nСерьёзность: P1\nКритерии: AC-01\nПроблема: проверка коллизий исключений теряет glob без литерального префикса: _literal_head(pattern) or pattern подставляет сам glob вместо области, а _exclude_conflicts сравнивает его как строковый путь (checks_contract.py:536–548).\nВоспроизведение: probes.py; заменить excludes fixture политики на один pattern **, **/* либо **/payments/**.\nФакт: validate_policy принимает все три исключения при объявленных src/payments/** и inputs src/payments, tests/test_payments.py.\nВлияние: контракт допускает исключение объявленных входов, вплоть до всего проекта, вопреки R-07; последующий inventory может потерять значимые изменения.\nКритерий исправления: отклонять доказанные пересечения glob-исключений с объявленными входами; для недоказуемого пересечения применять консервативное правило. Добавить негативные тесты glob без литерального префикса, сохранив явно согласованную семантику допустимых селективных исключений.\n\n#### A-02 — Замечание\nСерьёзность: P1\nКритерии: AC-02\nПроблема: новая проверка безусловно считается extension, после чего ветка prev is None пропускает анализ её argv (checks_contract.py:976–983). Новая исполняемая команда не сверяется с ранее одобренными командами.\nВоспроизведение: probes.py; добавить kind=command с новым ID, argv [unapproved-tool, --execute], timeout_seconds=60, не меняя approved_basis и fallback.approved_commands.\nФакт: обе политики проходят validate_policy, classify_policy_change возвращает только extension.\nВлияние: потребитель классификации не отличит разрешённое расширение контроля от добавления новой команды, требующего отдельного решения инженера по R-18. Аналогичный эффект возможен при замене argv через новый ID без удаления старой проверки.\nКритерий исправления: расширение исполняемого allowlist новой проверкой классифицировать как требующее одобрения; разрешать автоматическое расширение только в пределах ранее одобренных команд и бюджета. Проверить новые command/test IDs позитивными и негативными сценариями.\n\n#### A-03 — Замечание\nСерьёзность: P2\nКритерии: AC-01\nПроблема: _validate_tests проверяет уникальность actual IDs, но не expected IDs (checks_contract.py:713–727).\nВоспроизведение: probes.py; дописать первый test_id в tests.expected fixture результата второй раз.\nФакт: validate_result принимает результат с повторным ожидаемым test_id.\nВлияние: нарушено требование AC-01 отклонять дубли ID; контракт ожидаемого набора неоднозначен для сравнения IDs/count в PB-060.\nКритерий исправления: отклонять повторные expected test IDs; добавить постоянный негативный тест. Это проверка формата, а не реализация runner.\n\n#### A-04 — Замечание\nСерьёзность: P2\nКритерии: AC-03\nПроблема: design §7 требует явной политики допустимых expected failure, но схема каталога разрешает только id/description/group/skip; SKIP_FIELDS содержит только allowed/reason. При этом expected_failure уже входит в TEST_OUTCOMES.\nВоспроизведение: изучить CATALOG_ENTRY_FIELDS/SKIP_FIELDS и probes.py; попытаться добавить запись разрешения expected_failure в test_catalog.entries.\nФакт: отдельного правила допуска expected_failure в контракте нет; дополнительное поле отклоняется как неизвестное. skip.allowed не различает skipped и expected_failure, а документация связывает его только со skip.\nВлияние: адаптер PB-060 не сможет выразить согласованную политику допустимых expected failure без изменения уже фиксируемой схемы либо неявного решения о допуске.\nКритерий исправления: определить явный формат и семантику допуска expected_failure (отдельно от skipped/unexpected_success), классификацию расширения допуска как ослабления и fixtures/негативные тесты. Либо согласовать изменение design до приёмки контракта.",
+      "sha256": "sha256:d963ef45fc3ae91cfe7f33d1a83b14a7d80ffc071075c10f55f81c4c4c616a08",
+      "journal_sha256": "sha256:2a8406f5d91c907084e3af1d727b1eddfe754b007836918b04c79befed34be82"
+    },
+    {
+      "id": "EXEC-02",
+      "type": "execution",
+      "title": "Исправление",
+      "fields": {
+        "Время": "2026-11-08T08:30:00+03:00",
+        "Исполнитель": "Devin",
+        "Модель": "SWE-2 High",
+        "Замечания": "A-01, A-02, A-03, A-04",
+        "Изменения": "A-01 — незаякоренный glob больше не теряется: пустой литеральный префикс трактуется как область «корень проекта»; широкое исключение (литерал или хвост **/*) накрывающее вход отклоняется, селективный glob допускается и заякоренным, и незаякоренным — единое правило. A-02 — новая проверка kind=test|command считается extension только если её argv входит в ранее одобренные команды (argv существующих проверок ∪ fallback.approved_commands); новая исполняемая команда — weakening. A-03 — повторные test_id в tests.expected отклоняются. A-04 — в test_catalog.entries добавлено поле expected_failure {allowed, reason?} отдельно от skip; unexpected_success допуска не имеет; расширение допуска — weakening, снятие — extension. Обновлены docstring контракта, fixture (запись expected_failure), архитектура и материалы; добавлены негативные и классификационные тесты всех находок.",
+        "Файлы": "- ai-dev-playbook/scripts/checks_contract.py\n- tests/test_checks_contract.py\n- tests/fixtures/checks_contract/policy.json\n- docs/architecture.md\n- docs/tasks/PB-057-evidence/commands.md"
+      },
+      "findings": [],
+      "raw": "### EXEC-02 — Исправление\nВремя: 2026-11-08T08:30:00+03:00\nИсполнитель: Devin\nМодель: SWE-2 High\nЗамечания: A-01, A-02, A-03, A-04\nИзменения: A-01 — незаякоренный glob больше не теряется: пустой литеральный префикс трактуется как область «корень проекта»; широкое исключение (литерал или хвост **/*) накрывающее вход отклоняется, селективный glob допускается и заякоренным, и незаякоренным — единое правило. A-02 — новая проверка kind=test|command считается extension только если её argv входит в ранее одобренные команды (argv существующих проверок ∪ fallback.approved_commands); новая исполняемая команда — weakening. A-03 — повторные test_id в tests.expected отклоняются. A-04 — в test_catalog.entries добавлено поле expected_failure {allowed, reason?} отдельно от skip; unexpected_success допуска не имеет; расширение допуска — weakening, снятие — extension. Обновлены docstring контракта, fixture (запись expected_failure), архитектура и материалы; добавлены негативные и классификационные тесты всех находок.\nФайлы:\n- ai-dev-playbook/scripts/checks_contract.py\n- tests/test_checks_contract.py\n- tests/fixtures/checks_contract/policy.json\n- docs/architecture.md\n- docs/tasks/PB-057-evidence/commands.md",
+      "sha256": "sha256:abcf8f42ad1d5ecc9a92da870a116416d8a119a80039e7611b1386fa799faac1",
+      "journal_sha256": "sha256:e4333ee20be477419ebe2b193cbd2fc7eff2bf8a27d27259dac7676dae1a9bb6"
+    },
+    {
+      "id": "CHECK-02",
+      "type": "verification",
+      "title": "Проверка",
+      "fields": {
+        "Время": "2026-11-08T08:57:26+03:00",
+        "Исполнитель": "Devin",
+        "Модель": "SWE-2 High",
+        "Результат": "passed",
+        "Критерии": "AC-01, AC-02, AC-03, AC-04",
+        "Команда": "`python3 ai-dev-playbook/scripts/playbook.py verify PB-057`; адресные `python3 -m unittest discover -s tests -p \"test_checks_contract.py\" -v`",
+        "Среда": "macOS, Python 3.14, checkout feature/dependency-aware-verification; временные проекты для CLI и config().",
+        "Факт": "повторный verify 982f8e80b21143ee90c1aa45cc298082 passed, inputs_unchanged=true; 795 тестов (51 адресный, +4 по находкам), unit-tests 1374s. Исправления A-01–A-04 покрыты негативными и классификационными тестами.",
+        "Доказательства": "- [Отчёт verify](../../work/verification/PB-057/982f8e80b21143ee90c1aa45cc298082/report.json)\n- [Команды и ограничения](PB-057-evidence/commands.md)",
+        "Ограничения": "самопроверка исполнителя. Отложенные команды и нереализованные подсистемы — как в CHECK-01. Селективный незаякоренный glob допускается по согласованной семантике (документировано в docstring)."
+      },
+      "findings": [],
+      "raw": "### CHECK-02 — Проверка\nВремя: 2026-11-08T08:57:26+03:00\nИсполнитель: Devin\nМодель: SWE-2 High\nРезультат: passed\nКритерии: AC-01, AC-02, AC-03, AC-04\nКоманда: `python3 ai-dev-playbook/scripts/playbook.py verify PB-057`; адресные `python3 -m unittest discover -s tests -p \"test_checks_contract.py\" -v`\nСреда: macOS, Python 3.14, checkout feature/dependency-aware-verification; временные проекты для CLI и config().\nФакт: повторный verify 982f8e80b21143ee90c1aa45cc298082 passed, inputs_unchanged=true; 795 тестов (51 адресный, +4 по находкам), unit-tests 1374s. Исправления A-01–A-04 покрыты негативными и классификационными тестами.\nДоказательства:\n- [Отчёт verify](../../work/verification/PB-057/982f8e80b21143ee90c1aa45cc298082/report.json)\n- [Команды и ограничения](PB-057-evidence/commands.md)\nОграничения: самопроверка исполнителя. Отложенные команды и нереализованные подсистемы — как в CHECK-01. Селективный незаякоренный glob допускается по согласованной семантике (документировано в docstring).",
+      "sha256": "sha256:81c4ef3350bfd9fcd3687cb4485cf899ab0bca07e65a8f5ca1b81b6cc4f41887",
+      "journal_sha256": "sha256:f7ca998f49fef21517272ddd6950931b12d9b0323405380f8d5b5d8a975cee76"
+    },
+    {
+      "id": "HANDOFF-02",
+      "type": "handoff",
+      "title": "Передача",
+      "fields": {
+        "Время": "2026-11-08T08:57:26+03:00",
+        "Исполнитель": "Devin",
+        "Модель": "SWE-2 High",
+        "Выполнение": "EXEC-02",
+        "Проверки": "CHECK-02",
+        "Состояние": "in_review, ветка feature/dependency-aware-verification, изменения не закоммичены. Следующий шаг — повторный аудит находок A-01–A-04.",
+        "Фокус аудита": "закрытие A-01 (незаякоренный glob = корень, широкое vs селективное), A-02 (allowlist argv для новых проверок), A-03 (дубли expected), A-04 (раздельный допуск expected_failure); негативные тесты воспроизводят сценарии находок."
+      },
+      "findings": [],
+      "raw": "### HANDOFF-02 — Передача\nВремя: 2026-11-08T08:57:26+03:00\nИсполнитель: Devin\nМодель: SWE-2 High\nВыполнение: EXEC-02\nПроверки: CHECK-02\nСостояние: in_review, ветка feature/dependency-aware-verification, изменения не закоммичены. Следующий шаг — повторный аудит находок A-01–A-04.\nФокус аудита: закрытие A-01 (незаякоренный glob = корень, широкое vs селективное), A-02 (allowlist argv для новых проверок), A-03 (дубли expected), A-04 (раздельный допуск expected_failure); негативные тесты воспроизводят сценарии находок.",
+      "sha256": "sha256:9062d0f31457f57f33cccb01e1ac2f60700bd8a62eed9c657d39dee8cb567b45",
+      "journal_sha256": "sha256:d8a324128e885ad8b57ac38f2c622cf24b6584342d12465da449732172955e0b"
+    }
+  ],
+  "latest_handoff": "HANDOFF-02",
+  "latest_audit": "AUDIT-01",
+  "current_verdict": null,
+  "open_findings": [
+    "A-01",
+    "A-02",
+    "A-03",
+    "A-04"
+  ],
+  "criterion_states": {
+    "AC-01": {
+      "checked": false,
+      "check_id": "CHECK-02",
+      "reason": "open_finding",
+      "open_findings": [
+        "A-01",
+        "A-03"
+      ]
+    },
+    "AC-02": {
+      "checked": false,
+      "check_id": "CHECK-02",
+      "reason": "open_finding",
+      "open_findings": [
+        "A-02"
+      ]
+    },
+    "AC-03": {
+      "checked": false,
+      "check_id": "CHECK-02",
+      "reason": "open_finding",
+      "open_findings": [
+        "A-04"
+      ]
+    },
+    "AC-04": {
+      "checked": true,
+      "check_id": "CHECK-02",
+      "reason": "passed",
+      "open_findings": []
+    }
+  },
+  "checkbox_mismatches": [],
+  "rendered_markdown": "# PB-057: Определить форматы модулей, проверок и одобренной политики\n\nID: PB-057\nStatus: in_review\nPriority: P2\nDepends-On: -\nExecutor: Devin\nModel: SWE-2 High\nCreated: 2026-11-07T01:06:09+03:00\nClosed: -\n\n<!-- playbook-meta:external -->\n\n## Задача\n\n### Цель и границы\n\nКонтракт и политика. Валидаторы project/task_workflow, новые схемы/шаблоны, контракт адаптеров и policy; документация. Не выполнять анализ/runner/внешнее развёртывание.\n\n### Контекст\n\n[Спецификация](../specs/dependency-aware-verification.md): R-01–02,07–08,10,14,18–19; сценарии AC-03–06,08,10. [Design](../designs/dependency-aware-verification.md), [ADR-0006](../adr/0006-dependency-aware-verification.md), [план](../plans/dependency-aware-verification.md).\n\nПодготовлено по поручению инженера 2026-11-07. Выполнение пока не разрешено. Перед стартом: принятие технического проекта, завершённые зависимости, актуальный card show/handoff затрагиваемых работ и назначение исполнителя. Исходные чужие изменения сохранять.\n\n### Критерии приёмки\n\n- [ ] AC-01: Зафиксировать версионированные схемы policy/graph/result/receipt и окончательный CLI API, отделив task/project от stale/force; валидировать неизвестные поля, bool/NaN лимиты и дубли ID.\n- [ ] AC-02: Определить одобрение начальной политики и классификацию расширения/ослабления; локальный approved не даёт авторизации. Не включать режим в self-project.\n- [ ] AC-03: Определить контракт discovery/test descriptions/skip и backward compatibility; fixtures форматов и негативные тесты валидатора проверяют контракты.\n- [x] AC-04: Целевые поведенческие проверки и связанные регрессии пройдены; документация и self-manifest актуальны, EXEC/CHECK/HANDOFF содержат реальные доказательства и ограничения; передача зарегистрирована штатным CLI.\n\n### План\n\n1. Уточнить фактические интерфейсы зависимостей и связать изменения с критериями этой карточки.\n2. Реализовать ограниченный объём, добавить постоянные позитивные и негативные проверки критериев AC-01–03; не подменять их структурной проверкой.\n3. Обновить затронутые документы/шаблоны и self-manifest при изменениях комплекта; выполнить адресные проверки, index и check --ready.\n4. Подготовить материалы и пройти действующие preflight/verify/handoff. До явного opt-in использовать прежний контракт; не отключать полный legacy suite ради экономии.\n5. Записать EXEC/CHECK/HANDOFF и передать независимому аудитору; самостоятельно не закрывать.\n\n### Ресурсы\n\nPython и стандартная библиотека для основного CLI; локальные временные проекты и subprocess-счётчики. Новые зависимости защищённого executor обосновать в рамках принятого design. Фактические среда, policy_revision и бюджет фиксируются при старте; доступность отдельной OS/CI identity не предполагается.\n\nМатериалы: `docs/tasks/PB-057-evidence/`; команды воспроизведения и отчёты принадлежат этой карточке. Общие материалы и сквозная матрица — AUDIT-009/PB-064.\n\n## Журнал\n\n### EXEC-01 — Выполнение\nВремя: 2026-11-08T03:13:50+03:00\nИсполнитель: Devin\nМодель: SWE-2 High\nИзменения: новый модуль checks_contract.py — контракт выбора проверок по зависимостям: схемы policy/graph/result/receipt (schema_version 1), контракт адаптера python-unittest (protocol 1, каталог со стабильными ID и обязательными описаниями, допустимые skip), классификация правок политики classify_policy_change (extension/weakening/unchanged; смена policy_id/project_id — ошибка). Строгие валидаторы: неизвестные поля/версии, bool/NaN лимиты, повторные ID и рёбра, ссылки module:|subsystem:|check:, конфликт широких исключений с объявленными входами (селективный glob внутри области допустим). Одобрение — запись approved_basis; поле approved отклоняется как неизвестное и авторизацией не является. CLI: checks plan|run|status с ортогональными --scope task|project и --mode stale|force + --checkpoint, setup preview|apply; операции отвечают контролируемым отказом с владельцами PB-059/060/063. В config() добавлена строгая валидация ссылки project.json → checks_policy (путь, файл, схема политики); self-project режим не включает, task_workflow и report v1/v2 неизменны. Шаблон templates/checks-policy.json, fixtures всех форматов, адресные тесты. self-manifest обновлён adopt.\nФайлы:\n- ai-dev-playbook/scripts/checks_contract.py\n- ai-dev-playbook/scripts/playbook.py\n- ai-dev-playbook/templates/checks-policy.json\n- tests/test_checks_contract.py\n- tests/fixtures/checks_contract/{policy,graph,result,receipt}.json\n- docs/architecture.md\n- docs/code-map.md\n- CHANGELOG.md\n- docs/tasks/PB-057-evidence/commands.md\n- ai-dev-playbook/manifest.json\n- docs/tasks/PB-057.md\n- docs/tasks/index.md\n\n### CHECK-01 — Проверка\nВремя: 2026-11-08T03:52:00+03:00\nИсполнитель: Devin\nМодель: SWE-2 High\nРезультат: passed\nКритерии: AC-01, AC-02, AC-03, AC-04\nКоманда: `python3 ai-dev-playbook/scripts/playbook.py verify PB-057`; адресные `python3 -m unittest discover -s tests -p \"test_checks_contract.py\" -v`\nСреда: macOS, Python 3.14, checkout feature/dependency-aware-verification; временные проекты для CLI и config().\nФакт: финальный verify 961381f50fd94752ab9a1cff7873d155 passed, inputs_unchanged=true; 791 тест (47 новых), unit-tests 1273s. Адресные 47 тестов покрывают схемы, валидаторы, классификацию и отложенный CLI.\nДоказательства:\n- [Отчёт verify](../../work/verification/PB-057/961381f50fd94752ab9a1cff7873d155/report.json)\n- [Команды и ограничения](PB-057-evidence/commands.md)\nОграничения: самопроверка исполнителя. checks plan/run/status и setup preview/apply — синтаксис контракта с контролируемым отказом; анализ, runner, криптография квитанций и доверенный контур не реализованы (PB-058–063). Режим не включён в self-project.\n\n### HANDOFF-01 — Передача\nВремя: 2026-11-08T03:52:00+03:00\nИсполнитель: Devin\nМодель: SWE-2 High\nВыполнение: EXEC-01\nПроверки: CHECK-01\nСостояние: in_review, ветка feature/dependency-aware-verification, изменения не закоммичены. Следующий шаг — независимый аудит; PB-058 стартует только после приёмки.\nФокус аудита: полнота схем policy/graph/result/receipt по spec R-01–02,07–08,10,14,18–19 и design §2–9; классификация extension/weakening и отсутствие авторизации через approved; конфликт-семантика исключений (широкое против селективного glob); ортогональность --scope/--mode; строгость валидаторов (bool/NaN/дубли); обратная совместимость; контролируемые отказы отложенных команд.\n\n\n### AUDIT-01 — Аудит\nВремя: 2026-11-08T08:24:46+03:00\nИсполнитель: Codex\nМодель: GPT-6\nПередача: HANDOFF-01\nРезультат: changes_requested\nКритерии: AC-01, AC-02, AC-03, AC-04\nНезависимо проверено: audit-ready подтвердил свежесть HANDOFF-01 и verify 961381f50fd94752ab9a1cff7873d155 (passed, inputs_unchanged=true). Изучены diff, схемы, fixtures, тесты, spec R-01–02,07–08,10,14,18–19 и design §2–10. Повторены 47 адресных тестов; дополнительные пробы воспроизвели A-01–04. CLI остаётся отложенным, self-project не включает checks_policy.\nДоказательства:\n- [Независимые пробы](../../work/verification/PB-057/audit-01/probes.py)\n- [Результаты проб](../../work/verification/PB-057/audit-01/probes.log)\n- [Адресные тесты](../../work/verification/PB-057/audit-01/targeted-tests.log)\n- [Исходный снимок](../../work/verification/PB-057/audit-01/snapshot.txt)\nОграничения: полный suite независимо не повторялся; его свежесть проверена audit-ready. Анализатор, runner и внешний verifier в PB-057 не реализуются; замечания относятся к фиксируемым контрактам, а не к доказанному обходу работающего защищённого контура. Исправления реализации не выполнялись.\n\n#### A-01 — Замечание\nСерьёзность: P1\nКритерии: AC-01\nПроблема: проверка коллизий исключений теряет glob без литерального префикса: _literal_head(pattern) or pattern подставляет сам glob вместо области, а _exclude_conflicts сравнивает его как строковый путь (checks_contract.py:536–548).\nВоспроизведение: probes.py; заменить excludes fixture политики на один pattern **, **/* либо **/payments/**.\nФакт: validate_policy принимает все три исключения при объявленных src/payments/** и inputs src/payments, tests/test_payments.py.\nВлияние: контракт допускает исключение объявленных входов, вплоть до всего проекта, вопреки R-07; последующий inventory может потерять значимые изменения.\nКритерий исправления: отклонять доказанные пересечения glob-исключений с объявленными входами; для недоказуемого пересечения применять консервативное правило. Добавить негативные тесты glob без литерального префикса, сохранив явно согласованную семантику допустимых селективных исключений.\n\n#### A-02 — Замечание\nСерьёзность: P1\nКритерии: AC-02\nПроблема: новая проверка безусловно считается extension, после чего ветка prev is None пропускает анализ её argv (checks_contract.py:976–983). Новая исполняемая команда не сверяется с ранее одобренными командами.\nВоспроизведение: probes.py; добавить kind=command с новым ID, argv [unapproved-tool, --execute], timeout_seconds=60, не меняя approved_basis и fallback.approved_commands.\nФакт: обе политики проходят validate_policy, classify_policy_change возвращает только extension.\nВлияние: потребитель классификации не отличит разрешённое расширение контроля от добавления новой команды, требующего отдельного решения инженера по R-18. Аналогичный эффект возможен при замене argv через новый ID без удаления старой проверки.\nКритерий исправления: расширение исполняемого allowlist новой проверкой классифицировать как требующее одобрения; разрешать автоматическое расширение только в пределах ранее одобренных команд и бюджета. Проверить новые command/test IDs позитивными и негативными сценариями.\n\n#### A-03 — Замечание\nСерьёзность: P2\nКритерии: AC-01\nПроблема: _validate_tests проверяет уникальность actual IDs, но не expected IDs (checks_contract.py:713–727).\nВоспроизведение: probes.py; дописать первый test_id в tests.expected fixture результата второй раз.\nФакт: validate_result принимает результат с повторным ожидаемым test_id.\nВлияние: нарушено требование AC-01 отклонять дубли ID; контракт ожидаемого набора неоднозначен для сравнения IDs/count в PB-060.\nКритерий исправления: отклонять повторные expected test IDs; добавить постоянный негативный тест. Это проверка формата, а не реализация runner.\n\n#### A-04 — Замечание\nСерьёзность: P2\nКритерии: AC-03\nПроблема: design §7 требует явной политики допустимых expected failure, но схема каталога разрешает только id/description/group/skip; SKIP_FIELDS содержит только allowed/reason. При этом expected_failure уже входит в TEST_OUTCOMES.\nВоспроизведение: изучить CATALOG_ENTRY_FIELDS/SKIP_FIELDS и probes.py; попытаться добавить запись разрешения expected_failure в test_catalog.entries.\nФакт: отдельного правила допуска expected_failure в контракте нет; дополнительное поле отклоняется как неизвестное. skip.allowed не различает skipped и expected_failure, а документация связывает его только со skip.\nВлияние: адаптер PB-060 не сможет выразить согласованную политику допустимых expected failure без изменения уже фиксируемой схемы либо неявного решения о допуске.\nКритерий исправления: определить явный формат и семантику допуска expected_failure (отдельно от skipped/unexpected_success), классификацию расширения допуска как ослабления и fixtures/негативные тесты. Либо согласовать изменение design до приёмки контракта.\n\n### EXEC-02 — Исправление\nВремя: 2026-11-08T08:30:00+03:00\nИсполнитель: Devin\nМодель: SWE-2 High\nЗамечания: A-01, A-02, A-03, A-04\nИзменения: A-01 — незаякоренный glob больше не теряется: пустой литеральный префикс трактуется как область «корень проекта»; широкое исключение (литерал или хвост **/*) накрывающее вход отклоняется, селективный glob допускается и заякоренным, и незаякоренным — единое правило. A-02 — новая проверка kind=test|command считается extension только если её argv входит в ранее одобренные команды (argv существующих проверок ∪ fallback.approved_commands); новая исполняемая команда — weakening. A-03 — повторные test_id в tests.expected отклоняются. A-04 — в test_catalog.entries добавлено поле expected_failure {allowed, reason?} отдельно от skip; unexpected_success допуска не имеет; расширение допуска — weakening, снятие — extension. Обновлены docstring контракта, fixture (запись expected_failure), архитектура и материалы; добавлены негативные и классификационные тесты всех находок.\nФайлы:\n- ai-dev-playbook/scripts/checks_contract.py\n- tests/test_checks_contract.py\n- tests/fixtures/checks_contract/policy.json\n- docs/architecture.md\n- docs/tasks/PB-057-evidence/commands.md\n\n### CHECK-02 — Проверка\nВремя: 2026-11-08T08:57:26+03:00\nИсполнитель: Devin\nМодель: SWE-2 High\nРезультат: passed\nКритерии: AC-01, AC-02, AC-03, AC-04\nКоманда: `python3 ai-dev-playbook/scripts/playbook.py verify PB-057`; адресные `python3 -m unittest discover -s tests -p \"test_checks_contract.py\" -v`\nСреда: macOS, Python 3.14, checkout feature/dependency-aware-verification; временные проекты для CLI и config().\nФакт: повторный verify 982f8e80b21143ee90c1aa45cc298082 passed, inputs_unchanged=true; 795 тестов (51 адресный, +4 по находкам), unit-tests 1374s. Исправления A-01–A-04 покрыты негативными и классификационными тестами.\nДоказательства:\n- [Отчёт verify](../../work/verification/PB-057/982f8e80b21143ee90c1aa45cc298082/report.json)\n- [Команды и ограничения](PB-057-evidence/commands.md)\nОграничения: самопроверка исполнителя. Отложенные команды и нереализованные подсистемы — как в CHECK-01. Селективный незаякоренный glob допускается по согласованной семантике (документировано в docstring).\n\n### HANDOFF-02 — Передача\nВремя: 2026-11-08T08:57:26+03:00\nИсполнитель: Devin\nМодель: SWE-2 High\nВыполнение: EXEC-02\nПроверки: CHECK-02\nСостояние: in_review, ветка feature/dependency-aware-verification, изменения не закоммичены. Следующий шаг — повторный аудит находок A-01–A-04.\nФокус аудита: закрытие A-01 (незаякоренный glob = корень, широкое vs селективное), A-02 (allowlist argv для новых проверок), A-03 (дубли expected), A-04 (раздельный допуск expected_failure); негативные тесты воспроизводят сценарии находок.\n",
+  "handoff_state": "current",
+  "acceptance_state": "not_current",
+  "acceptance_reason": "card format: нет последнего accepted-аудита"
+}

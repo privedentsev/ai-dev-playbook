@@ -1,0 +1,47 @@
+{
+  "at": "2026-11-16T18:11:31+03:00",
+  "verdict": "changes_requested",
+  "findings": {
+    "A-04": "P1",
+    "A-05": "P2"
+  },
+  "checks_tests": {
+    "count": 328,
+    "returncode": 0,
+    "seconds": 189.731
+  },
+  "index": {
+    "returncode": 0,
+    "output": "Индексы уже актуальны.\n"
+  },
+  "check_ready": {
+    "returncode": 0,
+    "output": "OK: структура, ссылки и 84 карточки; каталог документов: 29 документов, 2 legacy. Поведение продукта не проверялось.\n",
+    "meaning": "structure and links, not product behavior"
+  },
+  "git_diff_check": {
+    "returncode": 0,
+    "output": ""
+  },
+  "source_drift": [],
+  "archive_files": 2901,
+  "archive_unchanged": true,
+  "incoming_dirty_drift": [],
+  "lifecycle": {
+    "at": "2026-11-16T18:08:51+03:00",
+    "actor": {
+      "name": "Codex",
+      "model": "GPT-6"
+    },
+    "role": "auditor",
+    "kind": "diagnostic",
+    "result": "cancelled",
+    "handoff_at": null,
+    "session": null,
+    "detail": "Повторный независимый аудит audit-02: changes_requested. Исходные A-01/A-02 на новых seq-записях и подготовка пилота после архивации исправлены, 328 адресных тестов прошли. Новые A-04 P1 — повреждение/удаление последнего failed снимает task-обязательство; A-05 P2 — неоднозначная legacy-история без run_seq выбирает старый passed. Протокол: docs/tasks/AUDIT-009-evidence/audit-02/report.md; исправления: PB-074. result=cancelled/kind=diagnostic — отрицательный диагностический протокол, не принятие и не отмена карточки. AUDIT-009 остаётся in_progress, без HANDOFF/acceptance/close. Условие инженера «если всё хорошо» не выполнено. Архив PB-073 не переоткрывался, продуктовая реализация не менялась."
+  },
+  "audit_status": "in_progress",
+  "closed": false,
+  "fix_task": "PB-074",
+  "fix_status": "draft"
+}

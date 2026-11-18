@@ -1,0 +1,86 @@
+test_altered_earlier_exec_with_subsequent_exec_invalidates_binding_and_blocks_close (test_criterion_checkboxes.CriterionCliTest.test_altered_earlier_exec_with_subsequent_exec_invalidates_binding_and_blocks_close) ... ok
+test_altered_exec_invalidates_existing_binding_and_blocks_close_until_new_verify (test_criterion_checkboxes.CriterionCliTest.test_altered_exec_invalidates_existing_binding_and_blocks_close_until_new_verify) ... ok
+test_close_card_with_relative_link_preserves_historical_checkboxes_and_supports_reopen (test_criterion_checkboxes.CriterionCliTest.test_close_card_with_relative_link_preserves_historical_checkboxes_and_supports_reopen) ... ok
+test_close_card_with_relative_links_in_journal_entries_preserves_historical_bindings_and_supports_second_close (test_criterion_checkboxes.CriterionCliTest.test_close_card_with_relative_links_in_journal_entries_preserves_historical_bindings_and_supports_second_close) ... ok
+test_finding_affects_only_linked_criteria_and_fix_needs_check_and_audit (test_criterion_checkboxes.CriterionCliTest.test_finding_affects_only_linked_criteria_and_fix_needs_check_and_audit) ... ok
+test_latest_failed_or_not_run_overrides_passed (test_criterion_checkboxes.CriterionCliTest.test_latest_failed_or_not_run_overrides_passed) ... ok
+test_legacy_v2_findings_preserved_on_explicit_sync (test_criterion_checkboxes.CriterionCliTest.test_legacy_v2_findings_preserved_on_explicit_sync) ... ok
+test_manual_marker_tamper_does_not_open_acceptance (test_criterion_checkboxes.CriterionCliTest.test_manual_marker_tamper_does_not_open_acceptance) ... ok
+test_preview_read_only_partial_coverage_and_repeat (test_criterion_checkboxes.CriterionCliTest.test_preview_read_only_partial_coverage_and_repeat) ... ok
+test_requirement_or_work_change_without_verify_rejects_check_and_close (test_criterion_checkboxes.CriterionCliTest.test_requirement_or_work_change_without_verify_rejects_check_and_close) ... ok
+test_snapshot_and_handoff_ignore_only_checkbox_rendering (test_criterion_checkboxes.CriterionCliTest.test_snapshot_and_handoff_ignore_only_checkbox_rendering) ... FAIL
+test_stale_inputs_do_not_rebind_existing_check (test_criterion_checkboxes.CriterionCliTest.test_stale_inputs_do_not_rebind_existing_check) ... FAIL
+test_sync_gate_and_final_failure_rollback (test_criterion_checkboxes.CriterionCliTest.test_sync_gate_and_final_failure_rollback) ... FAIL
+test_new_finding_requires_valid_criterion_links (test_criterion_checkboxes.CriterionParserTest.test_new_finding_requires_valid_criterion_links) ... ok
+test_only_real_markers_are_normalized (test_criterion_checkboxes.CriterionParserTest.test_only_real_markers_are_normalized) ... ok
+
+======================================================================
+FAIL: test_snapshot_and_handoff_ignore_only_checkbox_rendering (test_criterion_checkboxes.CriterionCliTest.test_snapshot_and_handoff_ignore_only_checkbox_rendering)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_close_lifecycle.py", line 69, in setUp
+    super().setUp()
+    ~~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_lifecycle.py", line 48, in setUp
+    super().setUp()
+    ~~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_document_cli.py", line 16, in setUp
+    super().setUp()
+    ~~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_documents.py", line 120, in setUp
+    self.install()
+    ~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_cli.py", line 44, in install
+    self.assertEqual(code, 0, err)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+AssertionError: 1 != 0 : ERROR: Незавершённая операция документов (20261025-071600-764faa8a): обычные команды заблокированы. Восстановление: python3 work/lifecycle/20261025-071600-764faa8a/restore.py
+
+
+======================================================================
+FAIL: test_stale_inputs_do_not_rebind_existing_check (test_criterion_checkboxes.CriterionCliTest.test_stale_inputs_do_not_rebind_existing_check)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_close_lifecycle.py", line 69, in setUp
+    super().setUp()
+    ~~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_lifecycle.py", line 48, in setUp
+    super().setUp()
+    ~~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_document_cli.py", line 16, in setUp
+    super().setUp()
+    ~~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_documents.py", line 120, in setUp
+    self.install()
+    ~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_cli.py", line 44, in install
+    self.assertEqual(code, 0, err)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+AssertionError: 1 != 0 : ERROR: Незавершённая операция документов (20261025-071600-764faa8a): обычные команды заблокированы. Восстановление: python3 work/lifecycle/20261025-071600-764faa8a/restore.py
+
+
+======================================================================
+FAIL: test_sync_gate_and_final_failure_rollback (test_criterion_checkboxes.CriterionCliTest.test_sync_gate_and_final_failure_rollback)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_close_lifecycle.py", line 69, in setUp
+    super().setUp()
+    ~~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_lifecycle.py", line 48, in setUp
+    super().setUp()
+    ~~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_document_cli.py", line 16, in setUp
+    super().setUp()
+    ~~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_documents.py", line 120, in setUp
+    self.install()
+    ~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_cli.py", line 44, in install
+    self.assertEqual(code, 0, err)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+AssertionError: 1 != 0 : ERROR: Незавершённая операция документов (20261025-071600-764faa8a): обычные команды заблокированы. Восстановление: python3 work/lifecycle/20261025-071600-764faa8a/restore.py
+
+
+----------------------------------------------------------------------
+Ran 15 tests in 16.833s
+
+FAILED (failures=3)

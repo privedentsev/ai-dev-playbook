@@ -1,0 +1,44 @@
+{
+  "task": "PB-072",
+  "audit": "AUDIT-02",
+  "result": "changes_requested",
+  "at": "2026-11-10T13:23:55+03:00",
+  "actor": "Codex",
+  "model": "GPT-6",
+  "closed_findings": [
+    "A-01",
+    "A-02",
+    "A-04"
+  ],
+  "open_findings": [
+    "A-03",
+    "A-05"
+  ],
+  "tests": {
+    "command": "python3 -m unittest discover -s tests -p test_material_relocation.py -v",
+    "passed": 21
+  },
+  "original_probes": "original collision rejected early; relocation inside own evidence root preview succeeds",
+  "new_probe": "installed CLI accepts occupied archive parent through register/preflight/verify/handoff; close --dry-run fails file/directory collision",
+  "coverage_gap": "test_installed_cli_subprocess uses Path(playbook.__file__) from repository; no permanent subprocess original/copy/runner collision test",
+  "full_verify": {
+    "id": "b7a24c15255b49a3a8c9163864df6fcb",
+    "status": "passed",
+    "inputs_unchanged": true,
+    "execution_id": "EXEC-02",
+    "independently_rerun": false
+  },
+  "changelog": "existing PB-072 entry reviewed; conditional update deferred because acceptance failed",
+  "limitations": [
+    "full suite not repeated",
+    "PB-060 unchanged",
+    "audit-ready initially blocked by open findings; no gate bypass"
+  ],
+  "final_checks": {
+    "index": "passed",
+    "card_sync": "passed",
+    "check_ready": "passed",
+    "verify_preflight": "passed (structure and portability only)",
+    "git_diff_check": "passed"
+  }
+}

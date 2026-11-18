@@ -1,0 +1,9 @@
+{
+  "head": "6311aa96f59db025b4fde3919775e03760193b3a",
+  "branch": "feature/dependency-aware-verification",
+  "python": "3.14.6 (main, Jun 10 2026, 10:03:53) [Clang 21.0.0 (clang-2100.0.123.102)]",
+  "platform": "macOS-27.2.1-x86_64-i386-64bit-Mach-O",
+  "archive_files": 2901,
+  "source_files": 159,
+  "separate_os_identity_proven": false
+}

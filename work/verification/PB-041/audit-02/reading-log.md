@@ -1,0 +1,11 @@
+# Область чтения повторного аудита
+- docs/tasks/PB-041.md: card show --handoff полностью; исходные строки 1–110 и адресный поиск report/journal. Повтор: передача и метаданные нужны для сверки хеша.
+- docs/specs/compact-task-context.md и docs/designs/compact-task-context.md: полный вывод в первой команде, без усечения этой части.
+- ai-dev-playbook/rules/workflow.md: первый вывод усечён; режим и границы прочитаны. docs/tasks/index.md, docs/index.md: индекс карточки и документов.
+- ai-dev-playbook/rules/verification.md: 47–80 полностью; task-card-format.md: 1–110 в общем выводе (часть общего вывода усечена), адресный поиск audit/accept/finding.
+- ai-dev-playbook/scripts/documents.py: 1–180; task_cards.py: 185–230, 280–310; verification.py: 363–400. Остальная реализация не прочитана.
+- tests/test_compact_context.py: запрос 1–310, вывод усечён посередине; начало и регрессии A-01 221–конец прочитаны. Остальные тесты исполнены, но не заявляются прочитанными.
+- work/verification/PB-041/audit-01/probe.py: целиком прочитан и исполнен.
+- work/verification/PB-041/590c907a3d8c4fc699b899944d69b327/report.json: первые 90 строк с усечением вывода; программно прочитан JSON и сопоставлены хеши scripts/tests. Архивные пути в снимке не читались.
+- /tmp/pb041-reaudit-*.log: просмотрены результаты; полные логи сохранены рядом. Полный suite не запускался.
+- MEMORY.md: единственное совпадение PB-041 использовано как подсказка про порядок sync/verify; текущий gate проверен заново.

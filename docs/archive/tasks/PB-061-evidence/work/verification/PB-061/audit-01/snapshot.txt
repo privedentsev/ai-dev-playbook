@@ -1,0 +1,87 @@
+# PB-061: Подтверждать результаты и политику в защищённом контуре
+
+ID: PB-061
+Status: in_review
+Priority: P2
+Depends-On: PB-060
+Executor: Devin
+Model: SWE-2 High
+Created: 2026-11-07T01:07:59+03:00
+Closed: -
+
+<!-- playbook-meta:external -->
+
+## Задача
+
+### Цель и границы
+
+Граница доверия. Доверенный verifier/receipt adapter, deployment contract и тесты изоляции. Не получать доступ к аккаунтам и не настраивать production без отдельного поручения; выбор хостинга не навязывается.
+
+### Контекст
+
+[Спецификация](../specs/dependency-aware-verification.md): R-17–18,20; сценарии AC-07–08,11. [Design](../designs/dependency-aware-verification.md), [ADR-0006](../adr/0006-dependency-aware-verification.md), [план](../plans/dependency-aware-verification.md).
+
+Подготовлено по поручению инженера 2026-11-07. Выполнение пока не разрешено. Перед стартом: принятие технического проекта, завершённые зависимости, актуальный card show/handoff затрагиваемых работ и назначение исполнителя. Исходные чужие изменения сохранять.
+
+### Критерии приёмки
+
+- [x] AC-01: Реализовать verifier protocol и эталонный executor/consumer: одобренная policy, закреплённый runner, независимый пересчёт candidate, изолированный запуск, authenticated receipt. Клиентские результаты не подписываются как собственные.
+- [x] AC-02: Агент и тестовый процесс не имеют доступа записи к policy/history/ключам. Forgery/replay/cross-project/revocation/key replacement/local approved отклоняются; обычное расширение не разрешает новые недоверенные команды.
+- [x] AC-03: Инструкция реального OS/CI развёртывания и capability probe различают local/protected. Проверить реальную границу прав на доступном стенде; без неё зафиксировать ограничение и не объявлять защищённую эксплуатацию принятой.
+- [x] AC-04: Целевые поведенческие проверки и связанные регрессии пройдены; документация и self-manifest актуальны, EXEC/CHECK/HANDOFF содержат реальные доказательства и ограничения; передача зарегистрирована штатным CLI.
+
+### План
+
+1. Уточнить фактические интерфейсы зависимостей и связать изменения с критериями этой карточки.
+2. Реализовать ограниченный объём, добавить постоянные позитивные и негативные проверки критериев AC-01–03; не подменять их структурной проверкой.
+3. Обновить затронутые документы/шаблоны и self-manifest при изменениях комплекта; выполнить адресные проверки, index и check --ready.
+4. Подготовить материалы и пройти действующие preflight/verify/handoff. До явного opt-in использовать прежний контракт; не отключать полный legacy suite ради экономии.
+5. Записать EXEC/CHECK/HANDOFF и передать независимому аудитору; самостоятельно не закрывать.
+
+### Ресурсы
+
+Python и стандартная библиотека для основного CLI; локальные временные проекты и subprocess-счётчики. Новые зависимости защищённого executor обосновать в рамках принятого design. Фактические среда, policy_revision и бюджет фиксируются при старте; доступность отдельной OS/CI identity не предполагается.
+
+Материалы: `docs/tasks/PB-061-evidence/`; команды воспроизведения и отчёты принадлежат этой карточке. Общие материалы и сквозная матрица — AUDIT-009/PB-064.
+
+## Журнал
+
+### EXEC-01 — Выполнение
+Время: 2026-11-10T17:35:00+03:00
+Исполнитель: Devin
+Модель: SWE-2 High
+Изменения: доверенный контур по design §8 и spec R-17–18,20. `checks_trust.py` — verifier home вне project.json (engine/project_id, ключи HMAC, одобренная политика целиком, revocations, append-only журнал, results/receipts/arena): одобрение digest через канал — weakening (включая новый argv) только с явным --reapprove; `scrub_env` и `sandbox_prefix` (подтверждённый на стенде Seatbelt: deny read/write дома и запись вне arena); `probe` честно различает local/protected. `checks_verifier.py` — самостоятельный candidate manifest по байтам, изолированный снимок с повторным хешированием (мутация — отказ), прогон закреплённого runner, receipts run/aggregate, verify (подпись/журнал/project/engine/отзывы/ожидаемые digest), consumer gate с `protected_confirmed` только при доказанной OS identity. Runner получил `env`/`argv_prefix` и возврат `results`; адаптер — `wrap`; исправлена утечка мутации env в binding.environment; `collect` копирует env. CLI `verifier *` в playbook.py. Постоянные тесты tests/test_checks_trust.py — 32 сценария AC-01–03 (forgery/replay/cross-project/revocation/key replacement/editable approved/real sandbox deny). Deploy contract — rules/verification.md; architecture/code-map/CHANGELOG актуальны; self-manifest пересобран.
+Файлы:
+- ai-dev-playbook/scripts/checks_trust.py
+- ai-dev-playbook/scripts/checks_verifier.py
+- ai-dev-playbook/scripts/checks_runner.py
+- ai-dev-playbook/scripts/checks_unittest.py
+- ai-dev-playbook/scripts/playbook.py
+- ai-dev-playbook/rules/verification.md
+- ai-dev-playbook/manifest.json
+- tests/test_checks_trust.py
+- docs/architecture.md
+- docs/code-map.md
+- docs/tasks/PB-061-evidence/commands.md
+- CHANGELOG.md
+
+### CHECK-01 — Проверка
+Время: 2026-11-10T18:05:00+03:00
+Исполнитель: Devin
+Модель: SWE-2 High
+Результат: passed
+Критерии: AC-01, AC-02, AC-03, AC-04
+Команда: `python3 -m unittest discover -s tests -p "test_checks_trust.py" -v` (32 сценария), `python3 -m unittest discover -s tests -p "test_checks_*.py"` (243 теста), полный `playbook.py verify PB-061` (self-check, preflight-regressions, unit-tests — отчёт 41b4049b522e4b0e9a18f8b794cecb07)
+Среда: macOS Darwin 27, Python 3.14.6, sandbox-exec доступен; временные проекты и дом verifier в /tmp; checkout dev.
+Факт: позитивный протокол init→approve→run→verify→gate→aggregate пройден на реальном CLI и в тестах; негативные сценарии forgery/replay/cross-project/revoked key/policy/receipt/unknown key_id/editable approved/клиентский файл отклоняются; реальная граница подпроцесса подтверждена sandbox-exec (deny read/write дома). Полный verify passed.
+Доказательства: [команды и smoke-факты](PB-061-evidence/commands.md), [отчёт verify](../../work/verification/PB-061/41b4049b522e4b0e9a18f8b794cecb07/report.json)
+Ограничения: самопроверка исполнителя. Отдельной OS identity на стенде нет — probe честно возвращает capability=local; защищённая эксплуатация не заявлена (AC-03). Потребление gate в lifecycle/release — PB-062; opt-in self-project — PB-063.
+
+### HANDOFF-01 — Передача
+Время: 2026-11-10T18:05:00+03:00
+Исполнитель: Devin
+Модель: SWE-2 High
+Выполнение: EXEC-01
+Проверки: CHECK-01
+Состояние: in_review; dev; изменения не закоммичены. Реализован доверенный контур PB-061 (verifier home, receipts run/aggregate, verify, consumer gate, probe, CLI verifier *); полный verify passed. Следующий шаг — независимый аудит в отдельной сессии.
+Фокус аудита: независимость candidate digest (агентский не принимается), невозможность подписи клиентских результатов, отклонение forgery/replay/cross-project/отзыва/подмены ключа, запрет новых команд обычным расширением (weakening→--reapprove), реальность sandbox-изоляции подпроцесса, честность local-вердикта без OS identity, фиксация ограничения protected-эксплуатации.

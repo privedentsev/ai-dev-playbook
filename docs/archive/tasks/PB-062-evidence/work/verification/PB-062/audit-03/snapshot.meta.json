@@ -1,0 +1,135 @@
+{
+  "schema_version": 1,
+  "card_format_version": 2,
+  "relations": [
+    {
+      "relation": "based_on",
+      "target": "spec:dependency-aware-verification"
+    },
+    {
+      "relation": "based_on",
+      "target": "design:dependency-aware-verification"
+    },
+    {
+      "relation": "based_on",
+      "target": "plan:dependency-aware-verification"
+    }
+  ],
+  "materials": [
+    {
+      "id": "evidence",
+      "role": "report",
+      "source": "docs/tasks/PB-062-evidence",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-062"
+      ]
+    },
+    {
+      "id": "verify-69f1c89b20a24c79be547ca1cf7b41e1",
+      "role": "report",
+      "source": "work/verification/PB-062/69f1c89b20a24c79be547ca1cf7b41e1",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-062"
+      ]
+    },
+    {
+      "id": "verify-84150d61e6ef44efaf39d7446a34f4a3",
+      "role": "report",
+      "source": "work/verification/PB-062/84150d61e6ef44efaf39d7446a34f4a3",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-062"
+      ]
+    },
+    {
+      "id": "audit-01",
+      "role": "report",
+      "source": "work/verification/PB-062/audit-01",
+      "storage": "local",
+      "immutable": true,
+      "required": true,
+      "used_by": [
+        "PB-062"
+      ]
+    },
+    {
+      "id": "verify-02d82d1a1c7549dc813934603ab26a29",
+      "role": "report",
+      "source": "work/verification/PB-062/02d82d1a1c7549dc813934603ab26a29",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-062"
+      ]
+    },
+    {
+      "id": "audit-02",
+      "role": "report",
+      "source": "work/verification/PB-062/audit-02",
+      "storage": "local",
+      "immutable": true,
+      "required": true,
+      "used_by": [
+        "PB-062"
+      ]
+    },
+    {
+      "id": "verify-f47c0b6e977f473a9802ffcd8ed27ae7",
+      "role": "report",
+      "source": "work/verification/PB-062/f47c0b6e977f473a9802ffcd8ed27ae7",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-062"
+      ]
+    }
+  ],
+  "criterion_evidence": {
+    "CHECK-01": {
+      "check_sha256": "sha256:62b744558677f992455a504024b35c550d77bed86088be1277102f9f9aea16ba",
+      "card_projection": "sha256:336436b5a3379ab4444f7c4445dbdfc5708ae20e5f9f0ae8faca05fe31104695",
+      "report_id": "verify-69f1c89b20a24c79be547ca1cf7b41e1",
+      "report_sha256": "sha256:df1d8f7c1290ea5e36e761ecdc2ae36b5a6d00ef6cad7f1836cc0705f622d090"
+    },
+    "CHECK-02": {
+      "check_sha256": "sha256:c0846ca7a915d640bc43c4c87602378b43a49e55b080ddaa2dafd22b6bc7149e",
+      "card_projection": "sha256:336436b5a3379ab4444f7c4445dbdfc5708ae20e5f9f0ae8faca05fe31104695",
+      "report_id": "verify-02d82d1a1c7549dc813934603ab26a29",
+      "report_sha256": "sha256:b46831bf170fc5a1eb9090c8510801bc4f8fc060490b3b05f263bbce8e346517"
+    },
+    "CHECK-03": {
+      "check_sha256": "sha256:8a14b71119519de0bca2d7241db59915ce8af33c7406d9a3810b0f2e5452e171",
+      "card_projection": "sha256:336436b5a3379ab4444f7c4445dbdfc5708ae20e5f9f0ae8faca05fe31104695",
+      "report_id": "verify-f47c0b6e977f473a9802ffcd8ed27ae7",
+      "report_sha256": "sha256:a39ac9f9cc9f3a4c38083ca7ac7588e59708bceb76d2353a294b7c2bf9b6c04a"
+    }
+  },
+  "handoff": {
+    "at": "2026-11-11T10:48:10+03:00",
+    "actor": {
+      "name": "Devin",
+      "model": "SWE-2 Flash High"
+    },
+    "summary": "HANDOFF-03",
+    "reports": [
+      "verify-f47c0b6e977f473a9802ffcd8ed27ae7"
+    ],
+    "card_projection": "sha256:336436b5a3379ab4444f7c4445dbdfc5708ae20e5f9f0ae8faca05fe31104695",
+    "entry_id": "HANDOFF-03",
+    "journal_sha256": "sha256:9c1021e37bec3e234536e97754928344a02d43ad2592910a4a39e0814f62de3a"
+  },
+  "audit_packages": {
+    "audit-01": "sha256:0515e2920273316ee09441f64a1caeb3673e23a739011559ab90788bd4f8c18d",
+    "audit-02": "sha256:1011ae61207fb42c86dc7861c2c06bbbbf957c7abc26b364c8e1edf4e40c6cb7"
+  }
+}

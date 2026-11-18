@@ -9,6 +9,8 @@ from test_playbook import playbook
 
 
 class WorkflowE2ETest(CloseLifecycleCase):
+    """Сквозные маршруты workflow: итерации, независимые счётчики,
+    маршруты, checkpoint."""
     save_project = lifecycle_fixture.TaskWorkflowLifecycleTest.save_project
     create_v2_task = lifecycle_fixture.TaskWorkflowLifecycleTest.create_v2_task
     card = lifecycle_fixture.TaskWorkflowLifecycleTest.card
@@ -71,6 +73,7 @@ class WorkflowE2ETest(CloseLifecycleCase):
             self.assertEqual(hashlib.sha256(matches[0].read_bytes()).hexdigest(), digest, source)
 
     def test_three_manual_iterations_stale_candidate_then_archive(self):
+        """Три manual-итерации, stale-кандидат и архив"""
         visual = {'id': 'visual', 'kind': 'manual', 'purpose': 'Inspect local spacing',
             'scenario': 'Inspect displayed spacing, focus, readability at narrow and wide sizes.',
             'default_inputs': ['src'], 'applicability': 'always'}
@@ -109,6 +112,7 @@ class WorkflowE2ETest(CloseLifecycleCase):
         self.assertFalse(list((self.root / 'work').glob('count-*')))
 
     def test_independent_counters_add_remove_and_service_cycle(self):
+        """Независимые счётчики: add/remove и сервисный цикл"""
         a, b = self.command('a', ['src/a.txt']), self.command('b', ['src/b.txt'])
         self.setup_task([a, b], [self.check(a, ['src/a.txt']), self.check(b, ['src/b.txt'])])
         self.verify()
@@ -137,6 +141,7 @@ class WorkflowE2ETest(CloseLifecycleCase):
         self.assertEqual((self.root / 'work/count-a').read_text(), '4')
 
     def test_nonquick_routes_with_auditor_and_archive(self):
+        """Не-quick маршруты с аудитором и архивом"""
         entry = self.command('a', ['src'])
         self.setup_task([entry], [self.check(entry, ['src'])], route='small')
         for route in ('small', 'medium', 'large'):
@@ -151,6 +156,7 @@ class WorkflowE2ETest(CloseLifecycleCase):
         self.assertEqual(self.cli('close', 'DEV-1')[0], 0)
 
     def test_checkpoint_runs_regression_separately_from_local_check(self):
+        """Чекпоинт запускает regression отдельно от local check"""
         local = self.command('local', ['src/a.txt'])
         regression = self.command('regression', ['src'])
         regression['applicability'] = {'kind': 'checkpoint', 'checkpoint': 'release'}

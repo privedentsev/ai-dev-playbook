@@ -50,22 +50,27 @@ def tree_fingerprint(root):
 
 
 class MetaParseTest(unittest.TestCase):
+    """Парсер meta-блоков документов: JSON, дубликаты ключей,
+    fence-границы."""
     def parse(self, text):
         errors = []
         meta = documents.parse_meta(text, "doc.md", errors)
         return meta, errors
 
     def test_valid_block(self):
+        """Валидный meta-блок парсится с полями"""
         meta, errors = self.parse(doc_text("a", {"schema_version": 1}))
         self.assertEqual(meta["schema_version"], 1)
         self.assertEqual(errors, [])
 
     def test_no_block(self):
+        """Документ без meta-блока даёт None"""
         meta, errors = self.parse("# Документ\n\nБез метаданных.\n")
         self.assertIsNone(meta)
         self.assertEqual(errors, [])
 
     def test_example_inside_outer_fence_ignored(self):
+        """Пример meta внутри внешнего fence игнорируется"""
         sample = doc_text("Пример", {"schema_version": 1})
         text = f"# Инструкция\n\n````markdown\n{sample}````\n\nТекст.\n"
         meta, errors = self.parse(text)
@@ -73,6 +78,7 @@ class MetaParseTest(unittest.TestCase):
         self.assertEqual(errors, [])
 
     def test_fence_close_with_suffix_is_not_a_close(self):
+        """Закрытие fence с суффиксом не считается закрытием"""
         sample = doc_text("Пример", {"schema_version": 1})
         text = f"# Инструкция\n\n````markdown\n````still-inside\n{sample}````\n"
         meta, errors = self.parse(text)
@@ -80,12 +86,14 @@ class MetaParseTest(unittest.TestCase):
         self.assertEqual(errors, [])
 
     def test_duplicate_json_key_rejected(self):
+        """Дубликат JSON-ключа в meta отклоняется"""
         raw = '{"schema_version": 1, "kind": "spec", "kind": "design"}'
         meta, errors = self.parse(doc_text("a", raw))
         self.assertIsNone(meta)
         self.assertIn("повторный JSON-ключ 'kind'", errors[0])
 
     def test_second_meta_block_rejected(self):
+        """Второй meta-блок в документе отклоняется"""
         text = doc_text("a", {"schema_version": 1}) + "\n" + \
             doc_text("b", {"schema_version": 1})
         meta, errors = self.parse(text)
@@ -93,28 +101,34 @@ class MetaParseTest(unittest.TestCase):
         self.assertIn("повторный маркер", errors[0])
 
     def test_unclosed_block_rejected(self):
+        """Незакрытый meta-блок отклоняется"""
         text = f"# a\n\n{META_START}\n```json\n{{}}\n```\n"
         meta, errors = self.parse(text)
         self.assertIsNone(meta)
         self.assertIn(META_END, errors[0])
 
     def test_end_without_start_rejected(self):
+        """META_END без META_START отклоняется"""
         meta, errors = self.parse(f"# a\n\n{META_END}\n")
         self.assertIsNone(meta)
         self.assertTrue(errors)
 
     def test_invalid_json_rejected(self):
+        """Невалидный JSON в meta отклоняется"""
         meta, errors = self.parse(doc_text("a", "{не json"))
         self.assertIsNone(meta)
         self.assertIn("метаданные", errors[0])
 
     def test_non_object_json_rejected(self):
+        """Не-объектный JSON в meta отклоняется"""
         meta, errors = self.parse(doc_text("a", "[1, 2]"))
         self.assertIsNone(meta)
         self.assertIn("JSON-объектом", errors[0])
 
 
 class CatalogCase(CliCase):
+    """Базовый case коллекций: временный проект с documents-
+    конфигурацией."""
     def setUp(self):
         super().setUp()
         self.install()
@@ -148,10 +162,14 @@ class CatalogCase(CliCase):
 
 
 class CollectionsConfigTest(CatalogCase):
+    """Конфигурация коллекций: схемы, границы корней, пересечения,
+    неизвестные kind."""
     def test_absent_section_means_unconfigured(self):
+        """Отсутствие раздела documents означает unconfigured"""
         self.assertIsNone(self.catalog())
 
     def test_unknown_schema_version_rejected(self):
+        """Неизвестная schema_version конфигурации отклоняется"""
         path = self.root / "ai-dev-playbook" / "project.json"
         project = json.loads(path.read_text(encoding="utf-8"))
         project["documents"] = {"schema_version": 99, "collections": {}}
@@ -160,6 +178,7 @@ class CollectionsConfigTest(CatalogCase):
             self.catalog()
 
     def test_unknown_kind_rejected(self):
+        """Неизвестный kind коллекции отклоняется"""
         self.configure({"memo": {"active": "docs/memos",
                                  "archive": "docs/archive/memos",
                                  "index": "docs/memos/index.md"}})
@@ -167,6 +186,7 @@ class CollectionsConfigTest(CatalogCase):
             self.catalog()
 
     def test_collection_outside_root_rejected(self):
+        """Коллекция вне корня проекта отклоняется"""
         self.configure({"spec": {"active": "../specs",
                                  "archive": "docs/archive/specs",
                                  "index": "docs/specs/index.md"}})
@@ -174,6 +194,7 @@ class CollectionsConfigTest(CatalogCase):
             self.catalog()
 
     def test_collection_outside_docs_rejected(self):
+        """Коллекция вне docs/ отклоняется"""
         self.configure({"spec": {"active": "specs",
                                  "archive": "docs/archive/specs",
                                  "index": "docs/specs/index.md"}})
@@ -181,6 +202,7 @@ class CollectionsConfigTest(CatalogCase):
             self.catalog()
 
     def test_overlapping_collections_rejected(self):
+        """Пересекающиеся коллекции отклоняются"""
         self.configure({"spec": {"active": "docs/specs",
                                  "archive": "docs/archive/specs",
                                  "index": "docs/specs/index.md"},
@@ -191,6 +213,7 @@ class CollectionsConfigTest(CatalogCase):
             self.catalog()
 
     def test_collection_inside_tasks_rejected(self):
+        """Коллекция внутри tasks отклоняется"""
         self.configure({"spec": {"active": "docs/tasks/specs",
                                  "archive": "docs/archive/specs",
                                  "index": "docs/tasks/specs/index.md"}})
@@ -198,6 +221,7 @@ class CollectionsConfigTest(CatalogCase):
             self.catalog()
 
     def test_symlink_in_collection_path_rejected(self):
+        """Symlink в пути коллекции отклоняется"""
         outside = self.root.parent / "outside-specs"
         outside.mkdir(exist_ok=True)
         (self.root / "docs" / "linked").symlink_to(outside,
@@ -210,11 +234,14 @@ class CollectionsConfigTest(CatalogCase):
 
 
 class DocumentValidationTest(CatalogCase):
+    """Валидация документов: обязательные поля, meta-схемы, ID/kind,
+    дубликаты."""
     def setUp(self):
         super().setUp()
         self.configure()
 
     def test_registered_document_in_catalog(self):
+        """Зарегистрированный документ попадает в каталог"""
         write_doc(self.specs, "alpha.md", doc_meta())
         catalog = self.catalog()
         entry = catalog["documents"]["spec:alpha"]
@@ -222,32 +249,39 @@ class DocumentValidationTest(CatalogCase):
         self.assertFalse(entry["archived"])
 
     def test_missing_fields_rejected(self):
+        """Документ без обязательных полей отклоняется"""
         write_doc(self.specs, "alpha.md", {"schema_version": 1})
         self.assert_catalog_error("нет обязательных полей")
 
     def test_unknown_field_rejected(self):
+        """Неизвестное поле meta отклоняется"""
         write_doc(self.specs, "alpha.md", doc_meta(title="Дубль заголовка"))
         self.assert_catalog_error("неизвестные поля")
 
     def test_unknown_meta_schema_rejected_not_legacy(self):
+        """schema_version=99 не считается legacy"""
         write_doc(self.specs, "alpha.md", doc_meta(schema_version=99))
         self.assert_catalog_error("schema_version")
 
     def test_document_id_kind_mismatch_rejected(self):
+        """document_id чужого kind отклоняется"""
         write_doc(self.specs, "alpha.md", doc_meta(document_id="design:alpha"))
         self.assert_catalog_error("document_id")
 
     def test_duplicate_document_id_rejected(self):
+        """Дубликат document_id отклоняется"""
         write_doc(self.specs, "alpha.md", doc_meta())
         write_doc(self.specs, "beta.md", doc_meta())
         self.assert_catalog_error("повторный document_id")
 
     def test_duplicate_document_id_casefold_rejected(self):
+        """Дубликат document_id без учёта регистра отклоняется"""
         write_doc(self.specs, "alpha.md", doc_meta())
         write_doc(self.specs, "beta.md", doc_meta(document_id="SPEC:alpha"))
         self.assert_catalog_error("document_id|регистра")
 
     def test_legacy_listed_not_registered(self):
+        """Legacy-документ без meta listed, но не registered"""
         write_doc(self.specs, "alpha.md", doc_meta())
         write_doc(self.specs, "old-note.md", None)
         catalog = self.catalog()
@@ -256,27 +290,32 @@ class DocumentValidationTest(CatalogCase):
         self.assertNotIn("old-note", catalog["documents"])
 
     def test_invalid_state_for_kind_rejected(self):
+        """Невалидный state для kind отклоняется"""
         write_doc(self.specs, "alpha.md", doc_meta(state="completed"))
         self.assert_catalog_error("state")
 
     def test_updated_before_created_rejected(self):
+        """updated_at раньше created_at отклоняется"""
         write_doc(self.specs, "alpha.md",
                   doc_meta(updated_at="2020-01-01T00:00:00Z"))
         self.assert_catalog_error("updated_at")
 
     def test_relation_target_must_exist(self):
+        """Relation на несуществующий документ отклоняется"""
         write_doc(self.specs, "alpha.md",
                   doc_meta(relations=[{"relation": "based_on",
                                        "target": "spec:missing"}]))
         self.assert_catalog_error("нет такого документа")
 
     def test_relation_to_self_rejected(self):
+        """Relation на самого себя отклоняется"""
         write_doc(self.specs, "alpha.md",
                   doc_meta(relations=[{"relation": "based_on",
                                        "target": "spec:alpha"}]))
         self.assert_catalog_error("сам документ")
 
     def test_replaces_cycle_rejected(self):
+        """Цикл replaces-связей отклоняется"""
         write_doc(self.specs, "alpha.md",
                   doc_meta(relations=[{"relation": "replaces",
                                        "target": "spec:beta"}]))
@@ -287,10 +326,12 @@ class DocumentValidationTest(CatalogCase):
         self.assert_catalog_error("цикл replaces")
 
     def test_unknown_task_reference_rejected(self):
+        """Ссылка на несуществующую задачу отклоняется"""
         write_doc(self.specs, "alpha.md", doc_meta(tasks=["DEV-77"]))
         self.assert_catalog_error("DEV-77")
 
     def test_archive_location_consistency(self):
+        """archive-поле в активном каталоге отклоняется"""
         write_doc(self.specs, "alpha.md",
                   doc_meta(archive={"at": "2026-01-03T00:00:00Z",
                                     "reason": "заменён", "successor": None,
@@ -299,10 +340,12 @@ class DocumentValidationTest(CatalogCase):
         self.assert_catalog_error("archive задан")
 
     def test_archived_doc_in_active_dir_needs_archive_field(self):
+        """Архивный документ в активном каталоге требует archive-поля"""
         write_doc(self.specs_archive, "alpha.md", doc_meta(state="superseded"))
         self.assert_catalog_error("архивном каталоге")
 
     def test_archived_doc_with_terminal_state_accepted(self):
+        """Архивный документ с терминальным state принимается"""
         write_doc(self.specs_archive, "alpha.md",
                   doc_meta(state="superseded",
                            archive={"at": "2026-01-03T00:00:00Z",
@@ -313,6 +356,7 @@ class DocumentValidationTest(CatalogCase):
         self.assertTrue(entry["archived"])
 
     def test_archived_active_state_rejected(self):
+        """Архивный документ с нефинальным state отклоняется"""
         write_doc(self.specs_archive, "alpha.md",
                   doc_meta(state="accepted",
                            archive={"at": "2026-01-03T00:00:00Z",
@@ -322,10 +366,12 @@ class DocumentValidationTest(CatalogCase):
         self.assert_catalog_error("нефинальным state")
 
     def test_meta_block_outside_collections_rejected(self):
+        """Meta-блок вне коллекций отклоняется"""
         write_doc(self.root / "docs", "stray.md", doc_meta())
         self.assert_catalog_error("вне зарегистрированной коллекции")
 
     def test_revision_and_planned_changes_distinct(self):
+        """revision и planned changes — разные сущности"""
         change = {"id": "ch-1", "state": "implemented", "section": "§2",
                   "basis": {"type": "engineer_approval", "who": "инженер",
                             "at": "2026-01-02T00:00:00Z",
@@ -340,6 +386,7 @@ class DocumentValidationTest(CatalogCase):
         self.assertEqual(entry["changes"][0]["state"], "implemented")
 
     def test_change_unknown_task_rejected(self):
+        """Change на несуществующую задачу отклоняется"""
         change = {"id": "ch-1", "state": "draft", "section": "§2",
                   "basis": {"type": "authorized_scope", "who": "Devin",
                             "at": "2026-01-02T00:00:00Z", "detail": "x",
@@ -350,6 +397,7 @@ class DocumentValidationTest(CatalogCase):
 
 
 class TaskMetaTest(CatalogCase):
+    """Meta задач v2: supplement-поля и relations к документам."""
     def setUp(self):
         super().setUp()
         self.configure()
@@ -363,17 +411,20 @@ class TaskMetaTest(CatalogCase):
                         encoding="utf-8")
 
     def test_task_supplement_accepted(self):
+        """Task meta v2 supplement-поля принимаются"""
         self.task_with_meta({"schema_version": 1, "relations": [],
                              "materials": []})
         catalog = self.catalog()
         self.assertIn("DEV-1", catalog["task_meta"])
 
     def test_header_fields_in_meta_rejected(self):
+        """Поля заголовка в meta задачи отклоняются"""
         self.task_with_meta({"schema_version": 1, "document_id": "spec:x",
                              "state": "accepted"})
         self.assert_catalog_error("неизвестные поля")
 
     def test_task_relation_to_document(self):
+        """Relation задачи на документ принимается"""
         write_doc(self.specs, "alpha.md", doc_meta())
         self.task_with_meta({"schema_version": 1,
                              "relations": [{"relation": "based_on",
@@ -383,6 +434,7 @@ class TaskMetaTest(CatalogCase):
         self.assertEqual(incoming[0]["source"], "DEV-1")
 
     def test_task_relation_to_missing_document_rejected(self):
+        """Relation задачи на отсутствующий документ отклоняется"""
         self.task_with_meta({"schema_version": 1,
                              "relations": [{"relation": "based_on",
                                             "target": "spec:none"}]})
@@ -397,11 +449,14 @@ def local_material(material_id="m-1", source="docs/specs/alpha-evidence/r.md",
 
 
 class MaterialsTest(CatalogCase):
+    """Материалы: единственный owner, обязательность, code-пути
+    компонентов."""
     def setUp(self):
         super().setUp()
         self.configure()
 
     def test_single_owner_accepted(self):
+        """Материал с единственным владельцем принимается"""
         evidence = self.specs / "alpha-evidence"
         evidence.mkdir(parents=True)
         (evidence / "r.md").write_text("report\n", encoding="utf-8")
@@ -411,6 +466,7 @@ class MaterialsTest(CatalogCase):
         self.assertEqual(len(catalog["owners"]["spec:alpha"]), 1)
 
     def test_duplicate_ownership_rejected(self):
+        """Двойное владение материалом отклоняется"""
         shared = self.specs / "shared.md"
         shared.parent.mkdir(parents=True, exist_ok=True)
         shared.write_text("x\n", encoding="utf-8")
@@ -422,6 +478,7 @@ class MaterialsTest(CatalogCase):
         self.assert_catalog_error("уже принадлежит")
 
     def test_owner_dirs_overlap_rejected(self):
+        """Пересекающиеся owner-каталоги отклоняются"""
         evidence = self.specs / "alpha-evidence"
         evidence.mkdir(parents=True)
         (evidence / "r.md").write_text("x\n", encoding="utf-8")
@@ -435,16 +492,19 @@ class MaterialsTest(CatalogCase):
         self.assert_catalog_error("пересечение каталогов")
 
     def test_missing_required_material_rejected(self):
+        """Отсутствующий обязательный материал отклоняется"""
         write_doc(self.specs, "alpha.md",
                   doc_meta(materials=[local_material()]))
         self.assert_catalog_error("отсутствует")
 
     def test_missing_optional_material_allowed(self):
+        """Отсутствующий необязательный материал допустим"""
         write_doc(self.specs, "alpha.md",
                   doc_meta(materials=[local_material(required=False)]))
         self.assertIn("spec:alpha", self.catalog()["documents"])
 
     def test_component_code_not_material(self):
+        """Путь компонента кода не может быть материалом"""
         write_doc(self.specs, "alpha.md",
                   doc_meta(materials=[local_material(
                       source="ai-dev-playbook/scripts/playbook.py",
@@ -452,12 +512,14 @@ class MaterialsTest(CatalogCase):
         self.assert_catalog_error("компонента")
 
     def test_unknown_consumer_rejected(self):
+        """used_by с неизвестным потребителем отклоняется"""
         write_doc(self.specs, "alpha.md",
                   doc_meta(materials=[local_material(used_by=["DEV-404"],
                                                      required=False)]))
         self.assert_catalog_error("DEV-404")
 
     def test_external_material_needs_access(self):
+        """Внешний материал требует описания доступа"""
         material = {"id": "m-1", "role": "report",
                     "source": "https://example.com/r.pdf", "storage": "external",
                     "required": False, "immutable": True, "used_by": []}
@@ -465,11 +527,13 @@ class MaterialsTest(CatalogCase):
         self.assert_catalog_error("access")
 
     def test_material_path_escape_rejected(self):
+        """Путь материала за пределы проекта отклоняется"""
         write_doc(self.specs, "alpha.md",
                   doc_meta(materials=[local_material(source="../../etc/x")]))
         self.assert_catalog_error("материал")
 
     def test_untracked_evidence_dir_is_candidate(self):
+        """Неотслеживаемый evidence-каталог — кандидат"""
         (self.specs / "alpha-evidence").mkdir(parents=True)
         write_doc(self.specs, "alpha.md", doc_meta())
         candidates = self.catalog()["candidates"]
@@ -498,6 +562,7 @@ class AuditRegressionTest(CatalogCase):
 
     # A1: найденные пути проверяются до чтения
     def test_symlinked_document_rejected_before_read(self):
+        """A1: symlinked документ отклоняется до чтения"""
         self.specs.mkdir(parents=True, exist_ok=True)
         outside = self._outside("outside.md")
         outside.write_text(
@@ -507,6 +572,7 @@ class AuditRegressionTest(CatalogCase):
         self.assert_catalog_error("символическая ссылка")
 
     def test_symlinked_dir_in_collection_rejected(self):
+        """A2: symlinked каталог в коллекции отклоняется"""
         self.specs.mkdir(parents=True, exist_ok=True)
         outside = self._outside("outside-dir")
         outside.mkdir()
@@ -515,6 +581,7 @@ class AuditRegressionTest(CatalogCase):
         self.assert_catalog_error("символическая ссылка")
 
     def test_symlink_inside_material_dir_rejected(self):
+        """A3: symlink внутри каталога материала отклоняется"""
         evidence = self.specs / "alpha-evidence"
         evidence.mkdir(parents=True)
         (evidence / "tracked.log").write_text("tracked\n", encoding="utf-8")
@@ -528,6 +595,7 @@ class AuditRegressionTest(CatalogCase):
 
     # A2: границы компонентов проверяются в обе стороны, migrations — тоже
     def test_material_containing_component_root_rejected(self):
+        """A4: материал, содержащий корень компонента, отклоняется"""
         self._set_components([{"name": "app", "code": "app/src",
                                "tests": ["app/tests"], "migrations": None}])
         write_doc(self.specs, "alpha.md",
@@ -536,6 +604,7 @@ class AuditRegressionTest(CatalogCase):
         self.assert_catalog_error("компонента")
 
     def test_migrations_dir_rejected_as_material(self):
+        """A4: каталог миграций отклоняется как материал"""
         self._set_components([{"name": "app", "code": "app/src",
                                "tests": ["app/tests"], "migrations": "app/db"}])
         write_doc(self.specs, "alpha.md",
@@ -545,6 +614,7 @@ class AuditRegressionTest(CatalogCase):
 
     # A3: external-материал не может иметь двух владельцев
     def test_external_material_shared_between_owners_rejected(self):
+        """A5: общий внешний материал двух владельцев отклоняется"""
         shared = {"id": "m-1", "role": "report",
                   "source": "https://example.com/proof", "storage": "external",
                   "required": False, "immutable": True, "used_by": [],
@@ -557,6 +627,7 @@ class AuditRegressionTest(CatalogCase):
 
     # A4: полный состав evidence и коллекций — не только *.md
     def test_partially_registered_evidence_listed(self):
+        """A6: частично зарегистрированный evidence перечисляется"""
         evidence = self.specs / "alpha-evidence"
         evidence.mkdir(parents=True)
         (evidence / "tracked.log").write_text("tracked\n", encoding="utf-8")
@@ -575,6 +646,7 @@ class AuditRegressionTest(CatalogCase):
                          "spec:alpha")
 
     def test_nested_non_markdown_file_is_candidate(self):
+        """A6: вложенный не-markdown файл — кандидат"""
         bundle = self.specs / "bundle"
         bundle.mkdir(parents=True)
         (bundle / "x.txt").write_text("data\n", encoding="utf-8")
@@ -585,6 +657,7 @@ class AuditRegressionTest(CatalogCase):
 
     # A5: строка с суффиксом не закрывает fence
     def test_false_fence_close_keeps_example_inside(self):
+        """A6: ложное закрытие fence держит пример внутри"""
         sample = doc_text("Пример", doc_meta(document_id="spec:fake"))
         self.specs.mkdir(parents=True, exist_ok=True)
         (self.specs / "alpha.md").write_text(
@@ -596,16 +669,19 @@ class AuditRegressionTest(CatalogCase):
 
     # A6: адресные ошибки вместо TypeError — документ и поле
     def test_malformed_state_reported_with_document_and_field(self):
+        """A6: malformed state сообщается с документом и полем"""
         write_doc(self.specs, "alpha.md", doc_meta(state=[]))
         self.assert_catalog_error("поле 'state'")
 
     def test_malformed_relation_type_reported(self):
+        """A6: malformed тип relation сообщается"""
         write_doc(self.specs, "alpha.md",
                   doc_meta(relations=[{"relation": ["based_on"],
                                        "target": "spec:alpha"}]))
         self.assert_catalog_error("поле 'relations'")
 
     def test_malformed_change_state_reported(self):
+        """A6: malformed state change сообщается"""
         change = {"id": "ch-1", "state": [], "section": "§1",
                   "basis": {"type": "engineer_approval", "who": "w",
                             "at": "2026-01-01T00:00:00Z", "detail": "d",
@@ -615,23 +691,27 @@ class AuditRegressionTest(CatalogCase):
         self.assert_catalog_error("поле 'changes'")
 
     def test_malformed_material_fields_reported(self):
+        """A6: malformed поля материала сообщаются"""
         material = local_material(required=False)
         material["role"] = {}
         write_doc(self.specs, "alpha.md", doc_meta(materials=[material]))
         self.assert_catalog_error("поле 'materials'")
 
     def test_malformed_used_by_reported(self):
+        """A6: malformed used_by сообщается"""
         material = local_material(required=False, used_by=[["DEV-1"]])
         write_doc(self.specs, "alpha.md", doc_meta(materials=[material]))
         self.assert_catalog_error("used_by")
 
     def test_malformed_material_id_reported(self):
+        """A6: malformed material id сообщается"""
         material = local_material(required=False)
         material["id"] = []
         write_doc(self.specs, "alpha.md", doc_meta(materials=[material]))
         self.assert_catalog_error(r"alpha\.md: поле 'materials'")
 
     def test_malformed_change_id_reported(self):
+        """A6: malformed change id сообщается"""
         change = {"id": {}, "state": "draft", "section": "§1",
                   "basis": {"type": "authorized_scope", "who": "w",
                             "at": "2026-01-01T00:00:00Z", "detail": "d",
@@ -641,6 +721,7 @@ class AuditRegressionTest(CatalogCase):
         self.assert_catalog_error(r"alpha\.md: поле 'changes'")
 
     def test_malformed_external_uri_reported(self):
+        """A6: malformed external URI сообщается"""
         material = {"id": "m-1", "role": "report", "source": "https://[",
                     "storage": "external", "required": False, "immutable": True,
                     "used_by": [], "access": "fixture"}
@@ -648,6 +729,7 @@ class AuditRegressionTest(CatalogCase):
         self.assert_catalog_error(r"alpha\.md: поле 'materials'")
 
     def test_malformed_state_subprocess_diagnostic(self):
+        """A6: malformed state диагностируется в subprocess check"""
         write_doc(self.specs, "alpha.md", doc_meta(state=[]))
         script = self.root / "ai-dev-playbook" / "scripts" / "playbook.py"
         result = subprocess.run(
@@ -661,6 +743,7 @@ class AuditRegressionTest(CatalogCase):
 
 
 class DocumentCommandsTest(CatalogCase):
+    """Команды document: impact, materials, list и legacy-документы."""
     def setUp(self):
         super().setUp()
         self.configure()
@@ -675,6 +758,7 @@ class DocumentCommandsTest(CatalogCase):
         self.add_task("DEV-1", "in_progress")
 
     def test_impact_shows_relations_and_materials(self):
+        """document impact показывает связи и материалы документа"""
         code, out, err = self.cli("document", "impact", "spec:alpha")
         self.assertEqual(code, 0, err)
         self.assertIn("based_on → spec:beta", out)
@@ -682,27 +766,32 @@ class DocumentCommandsTest(CatalogCase):
         self.assertIn("m-1", out)
 
     def test_impact_shows_reverse_relations(self):
+        """document impact показывает обратные связи"""
         code, out, err = self.cli("document", "impact", "spec:beta")
         self.assertEqual(code, 0, err)
         self.assertIn("spec:alpha → based_on", out)
 
     def test_impact_unknown_document_rejected(self):
+        """document impact неизвестного документа отклоняется"""
         code, _, err = self.cli("document", "impact", "spec:none")
         self.assertEqual(code, 1)
         self.assertIn("spec:none", err)
 
     def test_materials_for_document(self):
+        """document materials показывает материалы документа"""
         code, out, err = self.cli("document", "materials", "spec:alpha")
         self.assertEqual(code, 0, err)
         self.assertIn("m-1", out)
         self.assertIn("на месте", out)
 
     def test_materials_for_task_owner(self):
+        """document materials работает для владельца-задачи"""
         code, out, err = self.cli("document", "materials", "DEV-1")
         self.assertEqual(code, 0, err)
         self.assertIn("DEV-1", out)
 
     def test_list_shows_legacy(self):
+        """document list показывает legacy-документы"""
         write_doc(self.specs, "old.md", None)
         code, out, err = self.cli("document", "list")
         self.assertEqual(code, 0, err)
@@ -711,6 +800,7 @@ class DocumentCommandsTest(CatalogCase):
         self.assertIn("old.md", out)
 
     def test_read_only_commands_do_not_change_tree(self):
+        """Read-only document-команды не меняют дерево"""
         before = tree_fingerprint(self.root)
         for argv in (("document", "impact", "spec:alpha"),
                      ("document", "materials", "spec:alpha"),
@@ -720,6 +810,7 @@ class DocumentCommandsTest(CatalogCase):
         self.assertEqual(before, tree_fingerprint(self.root))
 
     def test_commands_require_documents_section(self):
+        """Document-команды требуют раздел documents"""
         path = self.root / "ai-dev-playbook" / "project.json"
         project = json.loads(path.read_text(encoding="utf-8"))
         del project["documents"]
@@ -730,6 +821,7 @@ class DocumentCommandsTest(CatalogCase):
         self.assertIn("documents", err)
 
     def test_check_validates_catalog(self):
+        """check валидирует каталог документов"""
         write_doc(self.specs, "gamma.md", doc_meta(document_id="spec:gamma",
                                                    tasks=["DEV-404"]))
         code, _, err = self.cli("check")

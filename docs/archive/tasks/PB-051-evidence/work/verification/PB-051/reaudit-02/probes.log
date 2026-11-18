@@ -1,0 +1,9 @@
+PASS versions, 38 manifest hashes, release_id, declared transitions
+PASS changelog version, no release date, content and local links
+PASS fresh CLI init 0.1.0
+PASS 0.0.3 fixture preview writes nothing; apply preserves project files/custom config
+RUN: controlled-pass
+passed: /var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/tmpw686l9x_/work/verification/PROBE-51/f32858b5dcd94c2aba5ddc7b09c10067/report.json
+PASS A-02: runner passed; unchanged fresh; edited CHANGELOG stale with sole diff; restored fresh
+PASS planned post-close changelog edit removes only obsolete PB-051 release limitation
+All independent probes passed

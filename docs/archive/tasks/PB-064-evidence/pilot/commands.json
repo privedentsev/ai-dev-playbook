@@ -1,0 +1,382 @@
+[
+  {
+    "label": "00-optin-setup-preview",
+    "argv": [
+      "setup",
+      "preview"
+    ],
+    "returncode": 0,
+    "expected": 0,
+    "seconds": 2.21
+  },
+  {
+    "label": "01-optin-setup-apply",
+    "argv": [
+      "setup",
+      "apply"
+    ],
+    "returncode": 0,
+    "expected": 0,
+    "seconds": 0.631
+  },
+  {
+    "label": "02-optin-initial-plan",
+    "argv": [
+      "checks",
+      "plan",
+      "PB-064"
+    ],
+    "returncode": 0,
+    "expected": 0,
+    "seconds": 4.101
+  },
+  {
+    "label": "10-legacy-preflight",
+    "argv": [
+      "verify",
+      "PB-064",
+      "--preflight"
+    ],
+    "returncode": 0,
+    "expected": 0,
+    "seconds": 82.822
+  },
+  {
+    "label": "11-legacy-initial-verify",
+    "argv": [
+      "verify",
+      "PB-064"
+    ],
+    "returncode": 0,
+    "expected": 0,
+    "seconds": 1870.026
+  },
+  {
+    "label": "12-optin-initial-force",
+    "argv": [
+      "checks",
+      "run",
+      "PB-064",
+      "--scope",
+      "project",
+      "--mode",
+      "force"
+    ],
+    "returncode": 0,
+    "expected": 0,
+    "seconds": 1815.206
+  },
+  {
+    "label": "20-legacy-localized-verify-reuse",
+    "argv": [
+      "verify",
+      "PB-064",
+      "--reuse"
+    ],
+    "returncode": 0,
+    "expected": 0,
+    "seconds": 1862.941
+  },
+  {
+    "label": "21-optin-localized-plan",
+    "argv": [
+      "checks",
+      "plan",
+      "PB-064"
+    ],
+    "returncode": 0,
+    "expected": 0,
+    "seconds": 4.744
+  },
+  {
+    "label": "22-optin-localized-stale-run",
+    "argv": [
+      "checks",
+      "run",
+      "PB-064",
+      "--scope",
+      "task",
+      "--mode",
+      "stale"
+    ],
+    "returncode": 0,
+    "expected": 0,
+    "seconds": 128.32
+  },
+  {
+    "label": "23-optin-transitive-ast-plan",
+    "argv": [
+      "checks",
+      "plan",
+      "PB-064"
+    ],
+    "returncode": 0,
+    "expected": 0,
+    "seconds": 4.714
+  },
+  {
+    "label": "30-legacy-repeat-unchanged-reuse",
+    "argv": [
+      "verify",
+      "PB-064",
+      "--reuse"
+    ],
+    "returncode": 0,
+    "expected": 0,
+    "seconds": 85.882
+  },
+  {
+    "label": "31-optin-repeat-plan",
+    "argv": [
+      "checks",
+      "plan",
+      "PB-064"
+    ],
+    "returncode": 0,
+    "expected": 0,
+    "seconds": 4.994
+  },
+  {
+    "label": "32-optin-release-stale",
+    "argv": [
+      "checks",
+      "run",
+      "PB-064",
+      "--scope",
+      "project",
+      "--checkpoint",
+      "release",
+      "--mode",
+      "stale"
+    ],
+    "returncode": 0,
+    "expected": 0,
+    "seconds": 5.033
+  },
+  {
+    "label": "33-optin-status",
+    "argv": [
+      "checks",
+      "status",
+      "PB-064"
+    ],
+    "returncode": 0,
+    "expected": 0,
+    "seconds": 4.228
+  },
+  {
+    "label": "34-optin-release-ready",
+    "argv": [
+      "checks",
+      "release-ready",
+      "PB-064"
+    ],
+    "returncode": 0,
+    "expected": 0,
+    "seconds": 4.376
+  },
+  {
+    "label": "35-optin-index",
+    "argv": [
+      "index"
+    ],
+    "returncode": 0,
+    "expected": 0,
+    "seconds": 1.915
+  },
+  {
+    "label": "36-optin-handoff-1",
+    "argv": [
+      "lifecycle",
+      "handoff",
+      "PB-064",
+      "--summary",
+      "HANDOFF-01",
+      "--actor",
+      "Devin",
+      "--model",
+      "SWE-2 Flash High"
+    ],
+    "returncode": 0,
+    "expected": 0,
+    "seconds": 245.705
+  },
+  {
+    "label": "37-optin-handoff-idempotent",
+    "argv": [
+      "lifecycle",
+      "handoff",
+      "PB-064",
+      "--summary",
+      "HANDOFF-01",
+      "--actor",
+      "Devin",
+      "--model",
+      "SWE-2 Flash High"
+    ],
+    "returncode": 0,
+    "expected": 0,
+    "seconds": 110.386
+  },
+  {
+    "label": "38-optin-audit-ready",
+    "argv": [
+      "verify",
+      "PB-064",
+      "--audit-ready"
+    ],
+    "returncode": 0,
+    "expected": 0,
+    "seconds": 105.539
+  },
+  {
+    "label": "39-optin-close-refused-without-accept",
+    "argv": [
+      "close",
+      "PB-064",
+      "--dry-run"
+    ],
+    "returncode": 1,
+    "expected": 1,
+    "seconds": 51.234
+  },
+  {
+    "label": "prot-01-apply",
+    "argv": [
+      "setup",
+      "apply"
+    ],
+    "returncode": 0,
+    "expected": 0,
+    "seconds": 0.75
+  },
+  {
+    "label": "prot-02-init-test",
+    "argv": [
+      "verifier",
+      "init",
+      "--home",
+      "/private/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/pb064-self-pilot-ugcaklby/verifier_home_test_kind",
+      "--project-id",
+      "ai-dev-playbook"
+    ],
+    "returncode": 0,
+    "expected": 0,
+    "seconds": 0.483
+  },
+  {
+    "label": "prot-03-approve-test",
+    "argv": [
+      "verifier",
+      "approve",
+      "--home",
+      "/private/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/pb064-self-pilot-ugcaklby/verifier_home_test_kind"
+    ],
+    "returncode": 0,
+    "expected": 0,
+    "seconds": 0.504
+  },
+  {
+    "label": "prot-04-reject-kind-test",
+    "argv": [
+      "verifier",
+      "run",
+      "--home",
+      "/private/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/pb064-self-pilot-ugcaklby/verifier_home_test_kind",
+      "--scope",
+      "project"
+    ],
+    "returncode": 1,
+    "expected": 1,
+    "seconds": 0.491
+  },
+  {
+    "label": "prot-05-init-cmd",
+    "argv": [
+      "verifier",
+      "init",
+      "--home",
+      "/private/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/pb064-self-pilot-ugcaklby/verifier_home_cmd",
+      "--project-id",
+      "ai-dev-playbook"
+    ],
+    "returncode": 0,
+    "expected": 0,
+    "seconds": 0.473
+  },
+  {
+    "label": "prot-06-approve-cmd",
+    "argv": [
+      "verifier",
+      "approve",
+      "--home",
+      "/private/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/pb064-self-pilot-ugcaklby/verifier_home_cmd"
+    ],
+    "returncode": 0,
+    "expected": 0,
+    "seconds": 0.5
+  },
+  {
+    "label": "prot-07-probe",
+    "argv": [
+      "verifier",
+      "probe",
+      "--home",
+      "/private/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/pb064-self-pilot-ugcaklby/verifier_home_cmd"
+    ],
+    "returncode": 0,
+    "expected": 0,
+    "seconds": 0.514
+  },
+  {
+    "label": "prot-08-verifier-run",
+    "argv": [
+      "verifier",
+      "run",
+      "--home",
+      "/private/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/pb064-self-pilot-ugcaklby/verifier_home_cmd",
+      "--scope",
+      "project"
+    ],
+    "returncode": 0,
+    "expected": 0,
+    "seconds": 11.636
+  },
+  {
+    "label": "prot-09-verifier-verify",
+    "argv": [
+      "verifier",
+      "verify",
+      "--home",
+      "/private/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/pb064-self-pilot-ugcaklby/verifier_home_cmd",
+      "--receipt",
+      "/private/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/pb064-self-pilot-ugcaklby/verifier_home_cmd/receipts/rc-4422cbcd47aa4536.json"
+    ],
+    "returncode": 0,
+    "expected": 0,
+    "seconds": 0.482
+  },
+  {
+    "label": "prot-10-verifier-gate",
+    "argv": [
+      "verifier",
+      "gate",
+      "--home",
+      "/private/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/pb064-self-pilot-ugcaklby/verifier_home_cmd"
+    ],
+    "returncode": 0,
+    "expected": 0,
+    "seconds": 1.485
+  },
+  {
+    "label": "prot-11-release-ready-blocked",
+    "argv": [
+      "checks",
+      "release-ready",
+      "PB-064"
+    ],
+    "returncode": 1,
+    "expected": 1,
+    "seconds": 5.146
+  }
+]

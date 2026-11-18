@@ -1,0 +1,99 @@
+{
+  "runs": [
+    {
+      "status": "failed",
+      "seq": 0,
+      "finished_at": "2026-11-17T12:00:00+00:00"
+    },
+    {
+      "status": "failed",
+      "seq": 1,
+      "finished_at": "2026-11-17T10:00:00+00:00"
+    },
+    {
+      "status": "passed",
+      "seq": 2,
+      "finished_at": "2026-11-17T11:00:00+00:00"
+    }
+  ],
+  "before": {
+    "selected": {
+      "payment": {
+        "status": "failed",
+        "seq": 1
+      }
+    },
+    "corrupt": [],
+    "gate_ok": false,
+    "notes": []
+  },
+  "index": {
+    "payment": {
+      "result_id": "e7219813c6be4af3bcc33c29853b4f3a-payment",
+      "run_id": "e7219813c6be4af3bcc33c29853b4f3a",
+      "project_id": "shop",
+      "finished_at": "2026-11-17T10:00:00+00:00",
+      "run_seq": 1,
+      "file": "work/checks/results/e7219813c6be4af3bcc33c29853b4f3a/payment.json",
+      "status": "failed",
+      "order": {
+        "v": 1,
+        "has_seq": true,
+        "pw": {
+          "result_id": "4e2821fe748c4f5c9887b8fedb4305d2-payment",
+          "run_id": "4e2821fe748c4f5c9887b8fedb4305d2",
+          "project_id": "shop",
+          "finished_at": "2026-11-17T11:00:00+00:00",
+          "run_seq": 2,
+          "file": "work/checks/results/4e2821fe748c4f5c9887b8fedb4305d2/payment.json",
+          "status": "passed"
+        },
+        "nw": {
+          "result_id": "e7219813c6be4af3bcc33c29853b4f3a-payment",
+          "run_id": "e7219813c6be4af3bcc33c29853b4f3a",
+          "project_id": "shop",
+          "finished_at": "2026-11-17T10:00:00+00:00",
+          "run_seq": 1,
+          "file": "work/checks/results/e7219813c6be4af3bcc33c29853b4f3a/payment.json",
+          "status": "failed"
+        },
+        "ns": 1,
+        "nf": "2026-11-17T12:00:00+00:00",
+        "lw": null,
+        "lnw": null
+      }
+    }
+  },
+  "after_loss": {
+    "selected": {
+      "payment": {
+        "status": "passed",
+        "seq": 2
+      }
+    },
+    "corrupt": [],
+    "gate_ok": true,
+    "notes": []
+  },
+  "after_rebuild": {
+    "selected": {
+      "payment": {
+        "status": "passed",
+        "seq": 2
+      }
+    },
+    "corrupt": [],
+    "gate_ok": true,
+    "notes": []
+  },
+  "stale": {
+    "passed": 0,
+    "reused": 1,
+    "failed": 0,
+    "timeout": 0,
+    "blocked": 0,
+    "not_run": 0,
+    "not_applicable": 0
+  },
+  "attempts": 3
+}

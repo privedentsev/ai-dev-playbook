@@ -1,0 +1,80 @@
+{
+  "clock": "2026-11-16T03:00:00.000000+00:00",
+  "controlled_run_ids": [
+    "00000000000000000000000000000000",
+    "ffffffffffffffffffffffffffffffff"
+  ],
+  "actual_attempts": 2,
+  "runs_in_execution_order": [
+    {
+      "ok": true,
+      "summary": {
+        "passed": 1,
+        "reused": 0,
+        "failed": 0,
+        "timeout": 0,
+        "blocked": 0,
+        "not_run": 0,
+        "not_applicable": 0
+      }
+    },
+    {
+      "ok": false,
+      "summary": {
+        "passed": 0,
+        "reused": 0,
+        "failed": 1,
+        "timeout": 0,
+        "blocked": 0,
+        "not_run": 0,
+        "not_applicable": 0
+      }
+    }
+  ],
+  "latest_selected": {
+    "payment": {
+      "status": "passed",
+      "result_id": "00000000000000000000000000000000-payment"
+    }
+  },
+  "gate_after_later_failure": {
+    "ok": true,
+    "scope": "project",
+    "checkpoint": null,
+    "task_id": "DEV-1",
+    "trust_mode": "local",
+    "checks": {
+      "payment": {
+        "kind": "command",
+        "explain": [
+          "изменения не доказаны — консервативный набор",
+          "применимость always",
+          "reused 00000000000000000000000000000000-payment от 2026-11-16T03:00:00.000000+00:00",
+          "область project — весь обязательный набор"
+        ],
+        "status": "covered",
+        "result_id": "00000000000000000000000000000000-payment"
+      }
+    },
+    "covered": [
+      "payment"
+    ],
+    "uncovered": [],
+    "manual": [],
+    "blocked": [],
+    "not_applicable": [],
+    "notes": [],
+    "rejections": [],
+    "hashed_bytes": 30,
+    "hashed_files": 3,
+    "budget_reasons": [],
+    "trust": {
+      "mode": "local",
+      "capability": "local",
+      "note": "trust_mode=local: результаты диагностические — локальная история не защищена от владельца проекта; доверенное выполнение требует контура PB-061"
+    },
+    "protected_confirmed": false
+  },
+  "notes": [],
+  "corrupt": []
+}

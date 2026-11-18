@@ -1,0 +1,110 @@
+{
+  "task": "PB-045",
+  "phase": "formal AUDIT-01 of current HANDOFF-01",
+  "at": "2026-10-28T08:37:29.992903+03:00",
+  "actor": "Codex (независимый аудитор)",
+  "model": "GPT-6.1 Sol (High)",
+  "platform": "macOS-27.0.1-x86_64-i386-64bit-Mach-O",
+  "python": "3.14.6 (main, Jun 10 2026, 10:03:53) [Clang 21.0.0 (clang-2100.0.123.102)]",
+  "source_sha256": {
+    "ai-dev-playbook/scripts/project_view.py": "sha256:d34d6cf2c0a33522965a9314f543b9e10b4fbba42af6173d5cd712882716ae29",
+    "ai-dev-playbook/scripts/documents.py": "sha256:c9938a39bb1b7c508115e78957f5aedf968c3026956b88cccc8bbb44b2d52e79",
+    "ai-dev-playbook/scripts/document_links.py": "sha256:5f967d8c7ffaf47279e299c77eb5f1af0a2a9cd942fe89e41d9a1f5bfd889c78",
+    "ai-dev-playbook/scripts/task_cards.py": "sha256:1aec9385306a0c1568cc5403511e764005588c387e4c20a6a6d09f3965142687",
+    "ai-dev-playbook/scripts/playbook.py": "sha256:f701551c2b7858abc38d395c35a32995c22ecb4b3f95b1deb6c2dfdfb0ac8a13",
+    "tests/test_project_view.py": "sha256:3ba9249e2dabacf2852aad8b4b7be1387ffbba128ec31ced8f805d52d63b9615"
+  },
+  "maintainer_tests": {
+    "command": "PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s tests -p test_project_view.py -v",
+    "result": "passed",
+    "tests": 12,
+    "log": "maintainer-tests.log"
+  },
+  "independent_probes": {
+    "file": "probes.py",
+    "command": "PYTHONDONTWRITEBYTECODE=1 python3 pb045_independent_probe.py",
+    "tests": 13,
+    "passed": 5,
+    "failures": 5,
+    "errors": 3,
+    "log": "probes.log"
+  },
+  "findings": [
+    {
+      "id": "A-01",
+      "severity": "P1",
+      "criteria": [
+        "AC-01",
+        "AC-02"
+      ],
+      "title": "Directory-to-file collision creates impossible future descendants and masks broken links"
+    },
+    {
+      "id": "A-02",
+      "severity": "P2",
+      "criteria": [
+        "AC-01"
+      ],
+      "title": "File-to-directory replacement fails during enumeration instead of rejecting early or matching oracle"
+    },
+    {
+      "id": "A-03",
+      "severity": "P1",
+      "criteria": [
+        "AC-02",
+        "AC-04"
+      ],
+      "title": "prepare_payload follows symlink staging roots or ancestors and writes outside intended staging; FutureView resolves ancestor aliases silently"
+    },
+    {
+      "id": "A-04",
+      "severity": "P2",
+      "criteria": [
+        "AC-01",
+        "AC-05"
+      ],
+      "title": "Non-directory ancestor raises ENOTDIR instead of absent path and contextual broken-link error"
+    }
+  ],
+  "limitations": [
+    "Not an audit of PB-046+ engines or recovery/retention/update.",
+    "No full independent suite; full verify belongs to implementer and will be checked after current handoff.",
+    "POSIX/macOS only.",
+    "Original failing probes kept unchanged; followup probes may explicitly permit early collision rejection."
+  ],
+  "result": "changes_requested",
+  "handoff": "HANDOFF-01",
+  "implementation_verify": {
+    "report": "work/verification/PB-045/9acd1892cd334f609ad983239aad0099/report.json",
+    "sha256": "sha256:44d7bac3a34859fef8596cb6d16f58e4265a75759340c00d7e95e78ad0e0359f",
+    "result": "passed",
+    "inputs_unchanged": true
+  },
+  "catalog_probes": {
+    "file": "catalog-probes.py",
+    "tests": 4,
+    "passed": 4,
+    "fixture_hashes_before_after": "same for three read-only negative scenarios"
+  },
+  "post_audit": {
+    "card_status": "in_progress",
+    "audit": "AUDIT-01",
+    "result": "changes_requested",
+    "open_findings": [
+      "A-01",
+      "A-02",
+      "A-03",
+      "A-04"
+    ],
+    "prepare_audit_preview": "passed",
+    "prepare_audit_apply": "passed",
+    "preflight": "passed",
+    "independent_full_suite": "not_run",
+    "acceptance": "not_registered",
+    "close": "not_attempted",
+    "source_implementation": "unchanged by auditor",
+    "note": "Status/index return made prior CHECK evidence stale; final card sync clears stale AC-03 marker. Fresh verify/handoff required after fixes. Auditor formatting refusals retained separately.",
+    "structure": "passed",
+    "diff_check": "passed"
+  }
+}

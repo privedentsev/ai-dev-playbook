@@ -1,0 +1,8 @@
+test_external_to_docs_full_route (__main__.AuditProbes.test_external_to_docs_full_route) ... ok
+test_flag_groups_required (__main__.AuditProbes.test_flag_groups_required) ... ok
+test_nested_symlink_no_write (__main__.AuditProbes.test_nested_symlink_no_write) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 2.028s
+
+OK

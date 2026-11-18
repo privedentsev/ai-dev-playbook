@@ -26,7 +26,10 @@ class DocumentCliCase(CatalogCase):
 
 
 class DocumentCreateTest(DocumentCliCase):
+    """document create: preview без записи, apply, коллизии и
+    валидация slug/типа коллекции."""
     def test_preview_writes_nothing(self):
+        """document create preview не пишет файлов"""
         before = tree_fingerprint(self.root)
         code, out, err = self.cli("document", "create", "spec", "alpha",
                                   "--title", "Alpha spec")
@@ -36,6 +39,7 @@ class DocumentCreateTest(DocumentCliCase):
         self.assertEqual(tree_fingerprint(self.root), before)
 
     def test_apply_creates_document_and_index(self):
+        """document create --apply создаёт документ и обновляет индекс"""
         code, out, err = self.cli("document", "create", "spec", "alpha",
                                   "--title", "Alpha spec", "--apply")
         self.assertEqual(code, 0, err)
@@ -53,6 +57,7 @@ class DocumentCreateTest(DocumentCliCase):
         self.assertTrue((self.root / "work" / "lifecycle").is_dir())
 
     def test_create_collision_refused(self):
+        """create существующего slug отклоняется"""
         code, _, err = self.cli("document", "create", "spec", "alpha", "--apply")
         self.assertEqual(code, 0, err)
         original = (self.specs / "alpha.md").read_bytes()
@@ -62,23 +67,27 @@ class DocumentCreateTest(DocumentCliCase):
         self.assertEqual((self.specs / "alpha.md").read_bytes(), original)
 
     def test_create_slug_of_index_refused(self):
+        """slug «index» отклоняется"""
         code, _, err = self.cli("document", "create", "spec", "index", "--apply")
         self.assertEqual(code, 1)
         self.assertIn("индекс", err)
 
     def test_create_bad_slug_refused(self):
+        """Невалидный slug отклоняется"""
         code, _, err = self.cli("document", "create", "spec", "Not A Slug!",
                                 "--apply")
         self.assertEqual(code, 1)
         self.assertIn("slug", err)
 
     def test_create_unknown_kind_collection_refused(self):
+        """Неизвестная коллекция документов отклоняется"""
         code, _, err = self.cli("document", "create", "adr", "0001-x",
                                 "--apply")
         self.assertEqual(code, 1)
         self.assertIn("adr", err)
 
     def test_create_without_documents_section_refused(self):
+        """create без раздела documents в project.json отклоняется"""
         path = self.root / "ai-dev-playbook" / "project.json"
         project = json.loads(path.read_text(encoding="utf-8"))
         del project["documents"]
@@ -89,6 +98,7 @@ class DocumentCreateTest(DocumentCliCase):
         self.assertIn("documents", err)
 
     def test_create_discussion_initial_state_open(self):
+        """create discussion-документа в начальном состоянии open"""
         self.configure({"discussion": {"active": "docs/discussions",
                                        "archive": "docs/archive/discussions",
                                        "index": "docs/discussions/index.md"}})
@@ -103,6 +113,8 @@ class DocumentCreateTest(DocumentCliCase):
 
 
 class DocumentRegisterTest(DocumentCliCase):
+    """document register: вставка meta с сохранением тела, обновление
+    индекса, отказы."""
     def setUp(self):
         super().setUp()
         self.legacy = self.root / "docs" / "plans" / "legacy-plan.md"
@@ -117,6 +129,7 @@ class DocumentRegisterTest(DocumentCliCase):
         self.meta_json = json.dumps(self.meta, ensure_ascii=False)
 
     def test_preview_keeps_body_and_writes_nothing(self):
+        """register preview сохраняет тело и не пишет"""
         before = tree_fingerprint(self.root)
         code, out, err = self.cli("document", "register",
                                   "docs/plans/legacy-plan.md",
@@ -126,6 +139,7 @@ class DocumentRegisterTest(DocumentCliCase):
         self.assertEqual(tree_fingerprint(self.root), before)
 
     def test_apply_inserts_meta_keeps_body_updates_index(self):
+        """register --apply вставляет meta, сохраняет тело, обновляет индекс"""
         code, _, err = self.cli("document", "register",
                                 "docs/plans/legacy-plan.md",
                                 "--metadata", self.meta_json, "--apply")
@@ -143,6 +157,7 @@ class DocumentRegisterTest(DocumentCliCase):
         self.assertEqual(catalog["legacy"], [])
 
     def test_metadata_from_file(self):
+        """register читает metadata из файла"""
         meta_file = self.root / "docs" / "meta.json"
         meta_file.write_text(self.meta_json, encoding="utf-8")
         code, _, err = self.cli("document", "register",
@@ -152,6 +167,7 @@ class DocumentRegisterTest(DocumentCliCase):
         self.assertIn("plan:legacy-plan", self.catalog()["documents"])
 
     def test_register_twice_refused(self):
+        """Повторный register того же документа отклоняется"""
         code, _, err = self.cli("document", "register",
                                 "docs/plans/legacy-plan.md",
                                 "--metadata", self.meta_json, "--apply")
@@ -163,6 +179,7 @@ class DocumentRegisterTest(DocumentCliCase):
         self.assertIn("метаданные", err)
 
     def test_unknown_schema_version_not_treated_as_legacy(self):
+        """schema_version=99 не считается legacy-документом"""
         bad = dict(self.meta, document_id="plan:other", schema_version=99)
         other = self.root / "docs" / "plans" / "other.md"
         other.write_text("# Другой\n\nТекст.\n", encoding="utf-8")
@@ -174,6 +191,7 @@ class DocumentRegisterTest(DocumentCliCase):
                          other.read_text(encoding="utf-8"))
 
     def test_register_outside_collection_refused(self):
+        """register файла вне коллекции отклоняется"""
         stray = self.root / "docs" / "stray.md"
         stray.write_text("# Посторонний\n\nТекст.\n", encoding="utf-8")
         code, _, err = self.cli("document", "register", "docs/stray.md",
@@ -182,12 +200,14 @@ class DocumentRegisterTest(DocumentCliCase):
         self.assertIn("коллекц", err)
 
     def test_register_collection_index_refused(self):
+        """register index.md коллекции отклоняется"""
         code, _, err = self.cli("document", "register", "docs/plans/index.md",
                                 "--metadata", self.meta_json, "--apply")
         self.assertEqual(code, 1)
         self.assertIn("индекс", err)
 
     def test_register_duplicate_document_id_refused(self):
+        """register с дублирующим document_id отклоняется"""
         code, _, err = self.cli("document", "register",
                                 "docs/plans/legacy-plan.md",
                                 "--metadata", self.meta_json, "--apply")
@@ -201,7 +221,10 @@ class DocumentRegisterTest(DocumentCliCase):
 
 
 class IndexDocumentsTest(DocumentCliCase):
+    """Индексы документов: index --all, идемпотентность, маркеры
+    региона, check."""
     def test_index_all_writes_task_and_document_indexes(self):
+        """index --all пишет индексы задач и документов"""
         self.add_task("DEV-1", "ready")
         code, out, err = self.cli("index", "--all")
         self.assertEqual(code, 0, err)
@@ -210,11 +233,13 @@ class IndexDocumentsTest(DocumentCliCase):
         self.assertIn("DEV-1", index)
 
     def test_index_documents_idempotent(self):
+        """index --documents идемпотентен"""
         code, out, err = self.cli("index", "--documents")
         self.assertEqual(code, 0, err)
         self.assertIn("актуальн", out)
 
     def test_index_without_markers_refused_and_untouched(self):
+        """index без маркеров региона отклоняется, файл не тронут"""
         index = self.specs / "index.md"
         index.write_text("# Ручной индекс\n\nне трогать\n", encoding="utf-8")
         code, _, err = self.cli("index", "--documents")
@@ -224,6 +249,7 @@ class IndexDocumentsTest(DocumentCliCase):
                          "# Ручной индекс\n\nне трогать\n")
 
     def test_index_splices_only_marked_region(self):
+        """index заменяет только помеченный регион"""
         index = self.specs / "index.md"
         index.write_text("# Ручной индекс\n\n<!-- playbook-index:start -->\n"
                          "OLD\n<!-- playbook-index:end -->\n\nХвост.\n",
@@ -236,6 +262,7 @@ class IndexDocumentsTest(DocumentCliCase):
         self.assertNotIn("OLD", text)
 
     def test_check_detects_stale_index_without_fixing(self):
+        """check обнаруживает устаревший индекс без исправления"""
         code, _, err = self.cli("document", "create", "spec", "alpha",
                                 "--apply")
         self.assertEqual(code, 0, err)
@@ -253,6 +280,7 @@ class LegacyInstallTest(CliCase):
     """Установка без раздела documents: прежнее поведение сохранено."""
 
     def test_index_and_check_work_without_documents(self):
+        """index и check работают без раздела documents (legacy)"""
         self.install()
         self.add_task("DEV-1", "ready")
         code, _, err = self.cli("index")

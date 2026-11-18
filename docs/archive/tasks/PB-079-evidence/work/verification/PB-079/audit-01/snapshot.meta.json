@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "card_format_version": 2,
+  "relations": [],
+  "materials": [
+    {
+      "id": "implementation-evidence",
+      "role": "report",
+      "source": "docs/tasks/PB-079-evidence",
+      "storage": "local",
+      "required": true,
+      "immutable": false,
+      "used_by": [
+        "PB-079"
+      ]
+    },
+    {
+      "id": "verify-caac4ffccd94445489fb46f6d49aee03",
+      "role": "report",
+      "source": "work/verification/PB-079/caac4ffccd94445489fb46f6d49aee03",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-079"
+      ]
+    }
+  ],
+  "criterion_evidence": {
+    "CHECK-01": {
+      "check_sha256": "sha256:27264312af26548f67169fb83b3a7bfeba595f6e1d02e2d5561664414ecbfe37",
+      "card_projection": "sha256:ebaf93558c0e3d546184c81468bd53b1bf4ded59272270b11b0a0b3c50a20a65",
+      "report_id": "verify-caac4ffccd94445489fb46f6d49aee03",
+      "report_sha256": "sha256:d3d13fbe114a7aea080d874d9678b8e8bf79c62e3e2512ca87c82bab3026b108"
+    }
+  },
+  "handoff": {
+    "at": "2026-11-17T15:24:14+03:00",
+    "actor": {
+      "name": "Codex",
+      "model": "GPT-6.1 Sol (Low)"
+    },
+    "summary": "HANDOFF-01",
+    "reports": [
+      "verify-caac4ffccd94445489fb46f6d49aee03"
+    ],
+    "card_projection": "sha256:ebaf93558c0e3d546184c81468bd53b1bf4ded59272270b11b0a0b3c50a20a65",
+    "entry_id": "HANDOFF-01",
+    "journal_sha256": "sha256:b03953d691edd6472a50d78252923ab7ced108784e37e7aaed8598b674608cbc"
+  }
+}

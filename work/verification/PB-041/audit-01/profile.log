@@ -1,0 +1,15 @@
+test_context_selection_is_read_only_and_exposes_unhanded_work (test_compact_context.CompactContextTest.test_context_selection_is_read_only_and_exposes_unhanded_work) ... ok
+test_create_preview_pair_and_no_overwrite (test_compact_context.CompactContextTest.test_create_preview_pair_and_no_overwrite) ... ok
+test_explicit_card_snapshot_includes_sidecar_and_old_report_goes_stale (test_compact_context.CompactContextTest.test_explicit_card_snapshot_includes_sidecar_and_old_report_goes_stale) ... ok
+test_full_two_close_cycles_and_immutable_proof (test_compact_context.CompactContextTest.test_full_two_close_cycles_and_immutable_proof) ... ok
+test_installed_cli_creates_pair_and_sigkill_restores_partial_creation (test_compact_context.CompactContextTest.test_installed_cli_creates_pair_and_sigkill_restores_partial_creation) ... ok
+test_lost_corrupt_conflicting_symlink_and_orphan_metadata (test_compact_context.CompactContextTest.test_lost_corrupt_conflicting_symlink_and_orphan_metadata) ... ok
+test_many_iterations_have_small_context_and_full_json_remains_available (test_compact_context.CompactContextTest.test_many_iterations_have_small_context_and_full_json_remains_available) ... ok
+test_metadata_write_failure_restores_pair (test_compact_context.CompactContextTest.test_metadata_write_failure_restores_pair) ... ok
+test_sidecar_is_not_a_material_and_saved_plan_detects_sidecar_change (test_compact_context.CompactContextTest.test_sidecar_is_not_a_material_and_saved_plan_detects_sidecar_change) ... ok
+
+----------------------------------------------------------------------
+Ran 9 tests in 7.760s
+
+OK
+Context sample: full_chars=39508 compact_chars=867

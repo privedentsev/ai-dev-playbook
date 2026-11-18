@@ -1,0 +1,43 @@
+test_plan_prints_selection (test_checks_select.CliPlanTest.test_plan_prints_selection) ... ok
+test_plan_read_only (test_checks_select.CliPlanTest.test_plan_read_only) ... ok
+test_plan_requires_policy_link (test_checks_select.CliPlanTest.test_plan_requires_policy_link) ... ok
+test_plan_requires_task (test_checks_select.CliPlanTest.test_plan_requires_task) ... ok
+test_ast_reads_within_same_budget (test_checks_select.PlanTest.test_ast_reads_within_same_budget) ... ok
+test_bytes_budget_conservative (test_checks_select.PlanTest.test_bytes_budget_conservative) ... ok
+test_content_edit_detected (test_checks_select.PlanTest.test_content_edit_detected) ... ok
+test_corrupt_baseline_conservative (test_checks_select.PlanTest.test_corrupt_baseline_conservative) ... ok
+test_deleted_input_required (test_checks_select.PlanTest.test_deleted_input_required) ... ok
+test_edit_selects_consumer_chain (test_checks_select.PlanTest.test_edit_selects_consumer_chain) ... ok
+test_environment_mismatch_not_reused (test_checks_select.PlanTest.test_environment_mismatch_not_reused) ... ok
+test_first_plan_no_baseline_requires_all (test_checks_select.PlanTest.test_first_plan_no_baseline_requires_all) ... ok
+test_hash_counter_expected_set (test_checks_select.PlanTest.test_hash_counter_expected_set) ... ok
+test_irrelevant_edit_outside_modules (test_checks_select.PlanTest.test_irrelevant_edit_outside_modules) ... ok
+test_newer_failed_hides_older_passed (test_checks_select.PlanTest.test_newer_failed_hides_older_passed) ... ok
+test_read_only_no_writes (test_checks_select.PlanTest.test_read_only_no_writes) ... ok
+test_reuse_valid_result (test_checks_select.PlanTest.test_reuse_valid_result) ... ok
+test_seconds_budget_blocks_before_run (test_checks_select.PlanTest.test_seconds_budget_blocks_before_run) ... ok
+test_stale_input_not_reused (test_checks_select.PlanTest.test_stale_input_not_reused) ... ok
+test_always_and_task_obligations_add (test_checks_select.SelectTest.test_always_and_task_obligations_add) ... ok
+test_change_only_inside_module_no_spill (test_checks_select.SelectTest.test_change_only_inside_module_no_spill) ... ok
+test_checkpoint_not_required_without_flag (test_checks_select.SelectTest.test_checkpoint_not_required_without_flag) ... ok
+test_closure_digest_chain_cycle_change (test_checks_select.SelectTest.test_closure_digest_chain_cycle_change) ... ok
+test_module_change_selects_own_and_consumers (test_checks_select.SelectTest.test_module_change_selects_own_and_consumers) ... ok
+test_obligations_never_narrow (test_checks_select.SelectTest.test_obligations_never_narrow) ... ok
+test_subsystem_consumer_expands (test_checks_select.SelectTest.test_subsystem_consumer_expands) ... ok
+test_transitive_two_edge_chain (test_checks_select.SelectTest.test_transitive_two_edge_chain) ... ok
+test_unattributed_module_scope_blocked (test_checks_select.SelectTest.test_unattributed_module_scope_blocked) ... ok
+test_unattributed_path_blocked_by_scope (test_checks_select.SelectTest.test_unattributed_path_blocked_by_scope) ... ok
+test_unattributed_path_project_scope (test_checks_select.SelectTest.test_unattributed_path_project_scope) ... ok
+test_unknown_module_always_affected (test_checks_select.SelectTest.test_unknown_module_always_affected) ... ok
+test_unknown_project_scope_widens (test_checks_select.SelectTest.test_unknown_project_scope_widens) ... ok
+test_unproven_change_widens (test_checks_select.SelectTest.test_unproven_change_widens) ... ok
+test_when_paths_unmatched_not_required (test_checks_select.SelectTest.test_when_paths_unmatched_not_required) ... ok
+
+----------------------------------------------------------------------
+Ran 34 tests in 2.891s
+
+OK
+Создано 69 файлов в /private/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/tmp9c4toes9; manifest записан. Заполните документы и project.json; setup_status=needs_review.
+Создано 69 файлов в /private/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/tmpp991go14; manifest записан. Заполните документы и project.json; setup_status=needs_review.
+Создано 69 файлов в /private/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/tmpdsy_qf23; manifest записан. Заполните документы и project.json; setup_status=needs_review.
+Создано 69 файлов в /private/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/tmpdjdyikah; manifest записан. Заполните документы и project.json; setup_status=needs_review.

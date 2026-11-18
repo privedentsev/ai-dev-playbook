@@ -1,0 +1,2960 @@
+{
+  "schema_version": 1,
+  "plan_id": "lc-292706947891cbcb",
+  "at": "2026-11-18T09:28:43+03:00",
+  "actor": {
+    "model": "GPT-6.1 Sol (High)",
+    "name": "Codex",
+    "role": "auditor",
+    "session": null
+  },
+  "basis": "По поручению инженера провести повторный AUDIT-009 и закрыть при успешном результате; audit-07, полный verify и AC-01–11 приняты с явной границей local/protocol.",
+  "action": "close_task",
+  "files": [
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/archive-before.json",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/archive-before.json",
+      "sha256": "sha256:c10ccaeebaa63ac417ccb48e9a9a9654f8ad06e62a555d30290d478037592bea",
+      "bytes": 450350
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-01.md",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-01.md",
+      "sha256": "sha256:46ef9b31a94f06d95c9dbd77045e5c103ed6fac8c00be993651931607d550ae8",
+      "bytes": 17324
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-02/archive-before.json",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-02/archive-before.json",
+      "sha256": "sha256:6434732d571698b4023e4949428586e00d02c3c4b5b9de016fcec1c4faca80cf",
+      "bytes": 477784
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-02/candidate-sha256.json",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-02/candidate-sha256.json",
+      "sha256": "sha256:d92f53fbd4a3085753fc37d6bd39b8638eaa1d86a06f14183b8659ce4bb290b8",
+      "bytes": 18801
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-02/checks-tests.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-02/checks-tests.log",
+      "sha256": "sha256:3e36648ab9e11b27646da7604fc3b98a69f322a3f4307699f5c4997e3ca9c092",
+      "bytes": 67226
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-02/commands.json",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-02/commands.json",
+      "sha256": "sha256:e79263c8128b5a6c07c7fd4a084f0226079a8dbf2f0399bcd05ad21a3532db03",
+      "bytes": 2308
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-02/environment.json",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-02/environment.json",
+      "sha256": "sha256:28c9bd5d6344d365b381b7a8461cc9ab4df54618f53064be1cb3ec499994fe74",
+      "bytes": 343
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-02/final-check.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-02/final-check.log",
+      "sha256": "sha256:c77098a6d0a95e8cb8eb1c261f987b16820f0ef8f1671902e304a06775b3f09a",
+      "bytes": 198
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-02/final-diff-check.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-02/final-diff-check.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-02/final-index.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-02/final-index.log",
+      "sha256": "sha256:019159b0d4c5da578d50ebd39364e3e33f3cfd2b14311378b75b1719fddadbed",
+      "bytes": 42
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-02/final-validation.json",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-02/final-validation.json",
+      "sha256": "sha256:ef30450de3e5ec66ee55350dfbc51194cd0e1b1f9b1b2c61aa94ea0e71b8fcee",
+      "bytes": 2266
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-02/incoming-dirty-sha256.json",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-02/incoming-dirty-sha256.json",
+      "sha256": "sha256:da53ce04fca52279b3cac63064f97aada421149fd92f082f234ffae94171205d",
+      "bytes": 301
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-02/pilot-plan.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-02/pilot-plan.log",
+      "sha256": "sha256:94c1f2661d8791634aa9c1bebcb7d4bfe72505972f528dd41689193dad9e8741",
+      "bytes": 3131
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-02/pilot-plan/commands.json",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-02/pilot-plan/commands.json",
+      "sha256": "sha256:da63909e1268708be6b0fafba9e039e68dba531abaa52a9a687b56767f24f600",
+      "bytes": 3746
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-02/pilot-plan/logs/00-optin-setup-preview.stderr.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-02/pilot-plan/logs/00-optin-setup-preview.stderr.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-02/pilot-plan/logs/00-optin-setup-preview.stdout.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-02/pilot-plan/logs/00-optin-setup-preview.stdout.log",
+      "sha256": "sha256:f9145ad3a8de4ae4d0d138bbbe7d143565d83aa3f6a9a61176bcb069f44e5bde",
+      "bytes": 288085
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-02/pilot-plan/logs/01-optin-setup-apply.stderr.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-02/pilot-plan/logs/01-optin-setup-apply.stderr.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-02/pilot-plan/logs/01-optin-setup-apply.stdout.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-02/pilot-plan/logs/01-optin-setup-apply.stdout.log",
+      "sha256": "sha256:06537a11b815870be7002cb4acab7066b9a94310758a273788d6f0704aab388d",
+      "bytes": 269
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-02/pilot-plan/logs/02-optin-initial-plan.stderr.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-02/pilot-plan/logs/02-optin-initial-plan.stderr.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-02/pilot-plan/logs/02-optin-initial-plan.stdout.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-02/pilot-plan/logs/02-optin-initial-plan.stdout.log",
+      "sha256": "sha256:f67252c48fd2e357e96699cbce3f57b350e03a1c14531fdef05812ffa3962579",
+      "bytes": 1706
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-02/pilot-plan/logs/prot-01-apply.stderr.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-02/pilot-plan/logs/prot-01-apply.stderr.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-02/pilot-plan/logs/prot-01-apply.stdout.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-02/pilot-plan/logs/prot-01-apply.stdout.log",
+      "sha256": "sha256:842526058dad8200782e0b7a85aad89c2083a7e04c1115fad1514267fac5cc2e",
+      "bytes": 269
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-02/pilot-plan/logs/prot-02-init-test.stderr.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-02/pilot-plan/logs/prot-02-init-test.stderr.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-02/pilot-plan/logs/prot-02-init-test.stdout.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-02/pilot-plan/logs/prot-02-init-test.stdout.log",
+      "sha256": "sha256:b1f111da9c828029d7df48d2cf6579607bd2b6def443da3e49c5b682d556f3a2",
+      "bytes": 315
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-02/pilot-plan/logs/prot-03-approve-test.stderr.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-02/pilot-plan/logs/prot-03-approve-test.stderr.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-02/pilot-plan/logs/prot-03-approve-test.stdout.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-02/pilot-plan/logs/prot-03-approve-test.stdout.log",
+      "sha256": "sha256:cdd9ba912fd2b562f9338a806962cc30915c99a6b5d3a8f84c22465b59249987",
+      "bytes": 155
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-02/pilot-plan/logs/prot-04-reject-kind-test.stderr.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-02/pilot-plan/logs/prot-04-reject-kind-test.stderr.log",
+      "sha256": "sha256:8fb10c810d981de1fe467b98d8144a22eda123992b318f18277037040523d53f",
+      "bytes": 526
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-02/pilot-plan/logs/prot-04-reject-kind-test.stdout.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-02/pilot-plan/logs/prot-04-reject-kind-test.stdout.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-02/pilot-plan/logs/prot-05-init-cmd.stderr.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-02/pilot-plan/logs/prot-05-init-cmd.stderr.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-02/pilot-plan/logs/prot-05-init-cmd.stdout.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-02/pilot-plan/logs/prot-05-init-cmd.stdout.log",
+      "sha256": "sha256:e04389b630650d0c6d0cb70ceba5cdad7ec2ace810d24898603c378fcb968a77",
+      "bytes": 309
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-02/pilot-plan/logs/prot-06-approve-cmd.stderr.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-02/pilot-plan/logs/prot-06-approve-cmd.stderr.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-02/pilot-plan/logs/prot-06-approve-cmd.stdout.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-02/pilot-plan/logs/prot-06-approve-cmd.stdout.log",
+      "sha256": "sha256:e1e0644debb14e466ba32c865fd8a81643a0bedbdec4e60baeb06a36e0311a7a",
+      "bytes": 155
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-02/pilot-plan/logs/prot-07-probe.stderr.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-02/pilot-plan/logs/prot-07-probe.stderr.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-02/pilot-plan/logs/prot-07-probe.stdout.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-02/pilot-plan/logs/prot-07-probe.stdout.log",
+      "sha256": "sha256:f7f62ae4e8f57dcdcbea0ea5e18d74c4a9b7cf066294608e7d3d09bbc4432ff3",
+      "bytes": 820
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-02/pilot-plan/logs/prot-08-verifier-run.stderr.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-02/pilot-plan/logs/prot-08-verifier-run.stderr.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-02/pilot-plan/logs/prot-08-verifier-run.stdout.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-02/pilot-plan/logs/prot-08-verifier-run.stdout.log",
+      "sha256": "sha256:5c212a9db6a09ae55b2cdba052aa1d8e7a4acde817fb0be5cad03b3ca0d0c313",
+      "bytes": 705
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-02/pilot-plan/logs/prot-09-verifier-verify.stderr.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-02/pilot-plan/logs/prot-09-verifier-verify.stderr.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-02/pilot-plan/logs/prot-09-verifier-verify.stdout.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-02/pilot-plan/logs/prot-09-verifier-verify.stdout.log",
+      "sha256": "sha256:82d260e508d1bce83d263951a8db3e2bf39a11bdbb48b063827687a72df6a03f",
+      "bytes": 45
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-02/pilot-plan/logs/prot-10-verifier-gate.stderr.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-02/pilot-plan/logs/prot-10-verifier-gate.stderr.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-02/pilot-plan/logs/prot-10-verifier-gate.stdout.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-02/pilot-plan/logs/prot-10-verifier-gate.stdout.log",
+      "sha256": "sha256:7f0c14a6bd15b0584f9d0cb0823b2f85f0383ff5851958ac888ed0019e4580cd",
+      "bytes": 983
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-02/pilot-plan/logs/prot-11-release-ready-blocked.stderr.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-02/pilot-plan/logs/prot-11-release-ready-blocked.stderr.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-02/pilot-plan/logs/prot-11-release-ready-blocked.stdout.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-02/pilot-plan/logs/prot-11-release-ready-blocked.stdout.log",
+      "sha256": "sha256:5e5cff7426ae50b322e39be41c1f009e3e3d28c95d290562b42f0ba669719f84",
+      "bytes": 724
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-02/pilot-plan/policy-applied.json",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-02/pilot-plan/policy-applied.json",
+      "sha256": "sha256:656cdcd5b7b88e92429ba330378ef512a4b8df0b413e1eb25604ab0ddaf9663b",
+      "bytes": 287764
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-02/preservation.json",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-02/preservation.json",
+      "sha256": "sha256:f8d9e2c1d1691f3b7e6e1a686bc4a6f69b0cc06e50322bc7bf1a0a204c780fb1",
+      "bytes": 132
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-02/probe-baseline.json",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-02/probe-baseline.json",
+      "sha256": "sha256:60cb920c7ccd5894acdc8f86f84f944c956bfea58527b0bcf6ccb1a1f0146173",
+      "bytes": 1417
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-02/probe-corrupt.json",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-02/probe-corrupt.json",
+      "sha256": "sha256:9f25b0685a899ff9f063171c283cde1b58c9ab5ee78de7bf6a38b3c88e063fb6",
+      "bytes": 8238
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-02/probe-deleted.json",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-02/probe-deleted.json",
+      "sha256": "sha256:b82a67be88108ba2fb6f73fe6316faa409595c2aeeadf7e1bd578ea98bbdb6ed",
+      "bytes": 7391
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-02/probe-equal.json",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-02/probe-equal.json",
+      "sha256": "sha256:9ef222f696b44b9550c907f9acc0a607cf5eb2ae46395ab2b401539ab0a77070",
+      "bytes": 2020
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-02/probe-fixes.json",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-02/probe-fixes.json",
+      "sha256": "sha256:9b7111dd58834d115bd9931ec1cee8b7aca97ab71800621ddd1053257a7160d6",
+      "bytes": 5277
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-02/probe-legacy-equal.json",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-02/probe-legacy-equal.json",
+      "sha256": "sha256:db68a37cd9eac13aeb6a3049aeb2dbcd695e729056fe5ba1feb068ba14831a0b",
+      "bytes": 3383
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-02/probe-spawn.json",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-02/probe-spawn.json",
+      "sha256": "sha256:7ec5b37c95ba5fb605ae0dcd7a1143f3ac138382d90b809b1b1258c18a60b733",
+      "bytes": 5822
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-02/probe_corrupt_obligation.py",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-02/probe_corrupt_obligation.py",
+      "sha256": "sha256:4c6201740569d9c01d75b336871046cc009db2d3b8762ad06f5a1b6032122166",
+      "bytes": 2484
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-02/probe_legacy_equal.py",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-02/probe_legacy_equal.py",
+      "sha256": "sha256:94c71d0a9e42d771615e9f264c66d3dc04b29b6bc6ff379467716cd4aaf239c7",
+      "bytes": 2568
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-02/report.md",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-02/report.md",
+      "sha256": "sha256:6e8bd12ee83a15797e0b1d7e984caf7da8515a2044cd345bceabc11b8034340a",
+      "bytes": 15549
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-03/candidate.json",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-03/candidate.json",
+      "sha256": "sha256:448b55e9ff9b643af5d29b4b2ed2c6491c8df075d323483397626561e10fdf2a",
+      "bytes": 1355
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-03/checks-tests-clean.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-03/checks-tests-clean.log",
+      "sha256": "sha256:0fe6b7ddcfce783a8d5ab87d7cd766560f2fe4093ba3c49bca14bda14af69850",
+      "bytes": 70889
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-03/clock-rollback.json",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-03/clock-rollback.json",
+      "sha256": "sha256:2012efaaa3dd25cafa6a2dea4d2a9350d72464de918f42ecb5eb5ba8ad339fa2",
+      "bytes": 7223
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-03/commands.json",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-03/commands.json",
+      "sha256": "sha256:124ced282acb2020a1a896cebaaa0b8d3b994af15ac9dbf7f47184c4855ad5a9",
+      "bytes": 1894
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-03/contaminated-tests.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-03/contaminated-tests.log",
+      "sha256": "sha256:a0f7318c331936ecc3215f0c030f6853071e9ac7e89b0b856dd69a5f80395845",
+      "bytes": 122173
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-03/corrupt.json",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-03/corrupt.json",
+      "sha256": "sha256:753da212c3b616478f0453a9ad91a9ac386362cb1766141ffe2523ea29b45ba1",
+      "bytes": 8425
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-03/create-PB078.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-03/create-PB078.log",
+      "sha256": "sha256:3c4b2f36efe6c8838431b03bda6d69a3e588c682b257d4823a0f219c174eaa51",
+      "bytes": 92
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-03/delete-initial.stderr",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-03/delete-initial.stderr",
+      "sha256": "sha256:eead118b28243ff3830bdb476c47dce822d450b5e475213c5eb4ab91580ad0cf",
+      "bytes": 1116
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-03/delete.json",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-03/delete.json",
+      "sha256": "sha256:b077788b8b4ed77dc817f27288a4f7c17519a46aabb726a5674abf1abd14fe0b",
+      "bytes": 7395
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-03/diagnostic.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-03/diagnostic.log",
+      "sha256": "sha256:3e7b80db7cfb6add867c64e31ba07f56460393b586158450ed0e8c458f893ac1",
+      "bytes": 77
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-03/environment.json",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-03/environment.json",
+      "sha256": "sha256:92ffd65901c0c86525c0cb0da5b817a34660fa6ed0de7ef4838db032022bff2d",
+      "bytes": 315
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-03/final-check.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-03/final-check.log",
+      "sha256": "sha256:89e86eabb8627ffac791bd03798485d48b4cb82be1493700fb7b7dc7e794a15a",
+      "bytes": 198
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-03/final-index.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-03/final-index.log",
+      "sha256": "sha256:019159b0d4c5da578d50ebd39364e3e33f3cfd2b14311378b75b1719fddadbed",
+      "bytes": 42
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-03/final-preflight.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-03/final-preflight.log",
+      "sha256": "sha256:77fe41f22f344d2357dde590b8efef7c32df843f8e716c733de880c6ec4835de",
+      "bytes": 1395
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-03/final-validation.json",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-03/final-validation.json",
+      "sha256": "sha256:337752a3d209f211b5c55b3fb66d0a907de545381580bb5c158c9c5af55e1f3c",
+      "bytes": 367
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-03/incoming-task-index.txt",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-03/incoming-task-index.txt",
+      "sha256": "sha256:46e9130a4fa5fa0003e8034f07d9c5e26be7079ab3d31256c53b13e8a38f10be",
+      "bytes": 20473
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-03/legacy.json",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-03/legacy.json",
+      "sha256": "sha256:cee00cb1a162b8dfa2c4ca4f697c7496feb49accec3de2e0e69bff53e13e3f02",
+      "bytes": 3294
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-03/pilot-plan.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-03/pilot-plan.log",
+      "sha256": "sha256:760b51ee96bcb32d3e423cb73eb6884c29b2f7299aee1e55442b269f4555bc38",
+      "bytes": 3133
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-03/pilot-plan/commands.json",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-03/pilot-plan/commands.json",
+      "sha256": "sha256:222ca3ffef5e7b0017a56b6bb56470600e39bff4f9e772aeaf8a2931c91305c4",
+      "bytes": 3748
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-03/pilot-plan/logs/00-optin-setup-preview.stderr.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-03/pilot-plan/logs/00-optin-setup-preview.stderr.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-03/pilot-plan/logs/00-optin-setup-preview.stdout.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-03/pilot-plan/logs/00-optin-setup-preview.stdout.log",
+      "sha256": "sha256:b7713af200a61b32c8324a433fe2674367489c0c5ded50d3b8d5b7c3f22d5934",
+      "bytes": 292356
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-03/pilot-plan/logs/01-optin-setup-apply.stderr.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-03/pilot-plan/logs/01-optin-setup-apply.stderr.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-03/pilot-plan/logs/01-optin-setup-apply.stdout.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-03/pilot-plan/logs/01-optin-setup-apply.stdout.log",
+      "sha256": "sha256:22c16f8cbc79c1bc6c46dd548a69c610f4726b656babf9667503b021d3d8b9b8",
+      "bytes": 269
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-03/pilot-plan/logs/02-optin-initial-plan.stderr.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-03/pilot-plan/logs/02-optin-initial-plan.stderr.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-03/pilot-plan/logs/02-optin-initial-plan.stdout.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-03/pilot-plan/logs/02-optin-initial-plan.stdout.log",
+      "sha256": "sha256:35e8c2a078e5917d4759ef6b8ccb0e93ed8f8a6f2663996d021b084694e30cd7",
+      "bytes": 1706
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-03/pilot-plan/logs/prot-01-apply.stderr.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-03/pilot-plan/logs/prot-01-apply.stderr.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-03/pilot-plan/logs/prot-01-apply.stdout.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-03/pilot-plan/logs/prot-01-apply.stdout.log",
+      "sha256": "sha256:06b4ac61f7806460b12f4591fd8c80aa0a94b5cf9e0f32a1d9d7e26384b10164",
+      "bytes": 269
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-03/pilot-plan/logs/prot-02-init-test.stderr.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-03/pilot-plan/logs/prot-02-init-test.stderr.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-03/pilot-plan/logs/prot-02-init-test.stdout.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-03/pilot-plan/logs/prot-02-init-test.stdout.log",
+      "sha256": "sha256:2cd0114ccc6c13b31349df891b79f40f6e56977719e1ed0d1b8831acf60eddae",
+      "bytes": 315
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-03/pilot-plan/logs/prot-03-approve-test.stderr.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-03/pilot-plan/logs/prot-03-approve-test.stderr.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-03/pilot-plan/logs/prot-03-approve-test.stdout.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-03/pilot-plan/logs/prot-03-approve-test.stdout.log",
+      "sha256": "sha256:a21c938b98cf46e421042a9b5de507874bf32d2c19f2834abe80f1c022296593",
+      "bytes": 155
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-03/pilot-plan/logs/prot-04-reject-kind-test.stderr.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-03/pilot-plan/logs/prot-04-reject-kind-test.stderr.log",
+      "sha256": "sha256:8fb10c810d981de1fe467b98d8144a22eda123992b318f18277037040523d53f",
+      "bytes": 526
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-03/pilot-plan/logs/prot-04-reject-kind-test.stdout.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-03/pilot-plan/logs/prot-04-reject-kind-test.stdout.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-03/pilot-plan/logs/prot-05-init-cmd.stderr.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-03/pilot-plan/logs/prot-05-init-cmd.stderr.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-03/pilot-plan/logs/prot-05-init-cmd.stdout.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-03/pilot-plan/logs/prot-05-init-cmd.stdout.log",
+      "sha256": "sha256:cb3674e5e0cf8751a72dfe8eb44d9d00bee6ee9abc6fcc7d70eaa697117be654",
+      "bytes": 309
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-03/pilot-plan/logs/prot-06-approve-cmd.stderr.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-03/pilot-plan/logs/prot-06-approve-cmd.stderr.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-03/pilot-plan/logs/prot-06-approve-cmd.stdout.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-03/pilot-plan/logs/prot-06-approve-cmd.stdout.log",
+      "sha256": "sha256:8e09dd5a5115ec40c6ef866cd68a47a2c58d1ac359c32c4c3dde320e5f3c4d7c",
+      "bytes": 155
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-03/pilot-plan/logs/prot-07-probe.stderr.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-03/pilot-plan/logs/prot-07-probe.stderr.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-03/pilot-plan/logs/prot-07-probe.stdout.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-03/pilot-plan/logs/prot-07-probe.stdout.log",
+      "sha256": "sha256:6fa289ae02641c8834cd9c01695e4839a1a122f72071ac8a6716c8c7c6b407a1",
+      "bytes": 820
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-03/pilot-plan/logs/prot-08-verifier-run.stderr.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-03/pilot-plan/logs/prot-08-verifier-run.stderr.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-03/pilot-plan/logs/prot-08-verifier-run.stdout.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-03/pilot-plan/logs/prot-08-verifier-run.stdout.log",
+      "sha256": "sha256:1577c419f0cb7f06a28f3caa8d668b9fa99baa2acac8b63b860d84bf3d36391d",
+      "bytes": 705
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-03/pilot-plan/logs/prot-09-verifier-verify.stderr.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-03/pilot-plan/logs/prot-09-verifier-verify.stderr.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-03/pilot-plan/logs/prot-09-verifier-verify.stdout.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-03/pilot-plan/logs/prot-09-verifier-verify.stdout.log",
+      "sha256": "sha256:82d260e508d1bce83d263951a8db3e2bf39a11bdbb48b063827687a72df6a03f",
+      "bytes": 45
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-03/pilot-plan/logs/prot-10-verifier-gate.stderr.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-03/pilot-plan/logs/prot-10-verifier-gate.stderr.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-03/pilot-plan/logs/prot-10-verifier-gate.stdout.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-03/pilot-plan/logs/prot-10-verifier-gate.stdout.log",
+      "sha256": "sha256:6d7eae95adbdfee16fd55aebb5b3735bac23407c9e17fda0683930ff22da663e",
+      "bytes": 983
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-03/pilot-plan/logs/prot-11-release-ready-blocked.stderr.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-03/pilot-plan/logs/prot-11-release-ready-blocked.stderr.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-03/pilot-plan/logs/prot-11-release-ready-blocked.stdout.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-03/pilot-plan/logs/prot-11-release-ready-blocked.stdout.log",
+      "sha256": "sha256:5e5cff7426ae50b322e39be41c1f009e3e3d28c95d290562b42f0ba669719f84",
+      "bytes": 724
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-03/pilot-plan/policy-applied.json",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-03/pilot-plan/policy-applied.json",
+      "sha256": "sha256:9d848147962fabae30c918db429f25696f640f9f997a5d41d2505904bb375baa",
+      "bytes": 292083
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-03/prepare-audit.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-03/prepare-audit.log",
+      "sha256": "sha256:311cc7a9173dc37e9242e5728f4705672812118c6d98e757c1185542326570ea",
+      "bytes": 91
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-03/preservation.json",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-03/preservation.json",
+      "sha256": "sha256:a5600a10f9dbf35e37c3a5919064c42e07723b4b7caa28c15d4cc43e514b72c8",
+      "bytes": 171
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-03/preserve-before.json",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-03/preserve-before.json",
+      "sha256": "sha256:cee8e8c81e45a82bb190c496a3f7919f6f4d66848c898d0e0f82cfa40e42d514",
+      "bytes": 488528
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-03/probe_clock_rollback.py",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-03/probe_clock_rollback.py",
+      "sha256": "sha256:b9d321e2431b7942f14e52aabe39e6cd6d42dab1cd36bb0d55dd8fb6ace609ac",
+      "bytes": 2348
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-03/report.md",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-03/report.md",
+      "sha256": "sha256:38c26fbda98626fe25f5360adde5ba988197e7439bb32a88438aeb6e513d625c",
+      "bytes": 8766
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-04/audit-ready.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-04/audit-ready.log",
+      "sha256": "sha256:bdaf78e2a0231a8fb864e322f1ad67c49c2ebf7e453b8e7fe667e45873f18b0c",
+      "bytes": 252
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-04/candidate.json",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-04/candidate.json",
+      "sha256": "sha256:48baa2bfbd093ea60a87e228cc16e62c5bfd89b930ba635a7fea36be08999389",
+      "bytes": 1544
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-04/checks-tests.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-04/checks-tests.log",
+      "sha256": "sha256:e70adec115f5d852cdac4ea6ca35ed25c0d41c72c3605a0550d23a9468bf9c33",
+      "bytes": 73087
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-04/commands.json",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-04/commands.json",
+      "sha256": "sha256:a3a82fa35b693456caafd022304d90f021e0edc00602f431bc141775e20ec8eb",
+      "bytes": 3044
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-04/create-PB079.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-04/create-PB079.log",
+      "sha256": "sha256:ebbd65ba829e222742a9227ae821b2f738a162c6f5e01b0e5557b2956e849d84",
+      "bytes": 92
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-04/diagnostic.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-04/diagnostic.log",
+      "sha256": "sha256:3e7b80db7cfb6add867c64e31ba07f56460393b586158450ed0e8c458f893ac1",
+      "bytes": 77
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-04/final-check.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-04/final-check.log",
+      "sha256": "sha256:57bb2ae11be02da1deebc972848280d32f0f51d573ee3e1fb6c9b1b122b20217",
+      "bytes": 198
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-04/final-index.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-04/final-index.log",
+      "sha256": "sha256:019159b0d4c5da578d50ebd39364e3e33f3cfd2b14311378b75b1719fddadbed",
+      "bytes": 42
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-04/final-preflight.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-04/final-preflight.log",
+      "sha256": "sha256:a242e7e7320562ac21da2d90c59eaf3e7917fa35a59bddbcb6401cb5444d8153",
+      "bytes": 1395
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-04/final-validation.json",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-04/final-validation.json",
+      "sha256": "sha256:49d0c2600d11b1d44dc6fcadc0d4ca7c8749236dfb0c03ce0d47265ef659bf29",
+      "bytes": 476
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-04/healed-control.json",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-04/healed-control.json",
+      "sha256": "sha256:ffb1f881e745b07ec1ae0d99f4bd3f451092e6ef8603bd1bb53959ed1352d6ff",
+      "bytes": 5227
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-04/healed-rebuild.json",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-04/healed-rebuild.json",
+      "sha256": "sha256:cb1330f8d4be74b02c5bdc9ff7b15c45f439e7e89711dd159c8236025e2e5d7f",
+      "bytes": 6535
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-04/incoming-index.txt",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-04/incoming-index.txt",
+      "sha256": "sha256:81852b732dce0cd5887449eb9696ca488cd6bf68b8f6e0667093f4261c53845c",
+      "bytes": 20726
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-04/loss.json",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-04/loss.json",
+      "sha256": "sha256:009b76593d96ac5a29afb8188fec14d345353f3c516ba190af68e5090fdc70e8",
+      "bytes": 3178
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-04/old-corrupt.json",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-04/old-corrupt.json",
+      "sha256": "sha256:1825ee1e6a588b30fa53a359be4ce885eff150725593a20b35a0208bf3e8f638",
+      "bytes": 8425
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-04/old-delete.json",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-04/old-delete.json",
+      "sha256": "sha256:034af4f7f4b3c1781e169eeecc93f5423313ccaf4bef11d78ee495d4c3944aed",
+      "bytes": 7395
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-04/old-legacy.json",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-04/old-legacy.json",
+      "sha256": "sha256:cee00cb1a162b8dfa2c4ca4f697c7496feb49accec3de2e0e69bff53e13e3f02",
+      "bytes": 3294
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-04/old-probe-commands.json",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-04/old-probe-commands.json",
+      "sha256": "sha256:f4613617624f64818211b908646caa193857ddbc7236e8776547821992c00963",
+      "bytes": 531
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-04/overlap.json",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-04/overlap.json",
+      "sha256": "sha256:1e7c69b371788d0d2fa21f8ab7e3e099198270c7df696946b863b2218af04964",
+      "bytes": 3726
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-04/pilot-full.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-04/pilot-full.log",
+      "sha256": "sha256:045cc9a8ce0884e81787c97ddd0e74fe3992243c2626d6bb1e590b9f7ff226ca",
+      "bytes": 239
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-04/pilot-full/commands.json",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-04/pilot-full/commands.json",
+      "sha256": "sha256:00b7aeee48ea13ba9b01976766bea1974e84f32faecf938efcdf0b128922644c",
+      "bytes": 680
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-04/pilot-full/logs/00-optin-setup-preview.stderr.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-04/pilot-full/logs/00-optin-setup-preview.stderr.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-04/pilot-full/logs/00-optin-setup-preview.stdout.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-04/pilot-full/logs/00-optin-setup-preview.stdout.log",
+      "sha256": "sha256:f66da33efc55f57966171125db97511400ca40de55fe4fa6169e6b3c72346814",
+      "bytes": 294975
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-04/pilot-full/logs/01-optin-setup-apply.stderr.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-04/pilot-full/logs/01-optin-setup-apply.stderr.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-04/pilot-full/logs/01-optin-setup-apply.stdout.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-04/pilot-full/logs/01-optin-setup-apply.stdout.log",
+      "sha256": "sha256:71a2ecf7d18844fb6278a7f8039200cc5eaa6da630c33fc076aaa1f9a79f332e",
+      "bytes": 269
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-04/pilot-full/logs/02-optin-initial-plan.stderr.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-04/pilot-full/logs/02-optin-initial-plan.stderr.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-04/pilot-full/logs/02-optin-initial-plan.stdout.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-04/pilot-full/logs/02-optin-initial-plan.stdout.log",
+      "sha256": "sha256:cfa8dd66a4666e5aa2e477ae9bcd0839bd566e370afc731c462b6d49b1b086a0",
+      "bytes": 1706
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-04/pilot-full/logs/10-legacy-preflight.stderr.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-04/pilot-full/logs/10-legacy-preflight.stderr.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-04/pilot-full/logs/10-legacy-preflight.stdout.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-04/pilot-full/logs/10-legacy-preflight.stdout.log",
+      "sha256": "sha256:22bd641f1ce95d7b8357072f3e3361e56029ff53cef4c2be4e2bd64849d14bf3",
+      "bytes": 1449
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-04/pilot-full/policy-applied.json",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-04/pilot-full/policy-applied.json",
+      "sha256": "sha256:ffbd8a7b57a639a5ac430bac8a934b88142383337af360c07439e0b28001058c",
+      "bytes": 294732
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-04/pilot-plan.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-04/pilot-plan.log",
+      "sha256": "sha256:183542540da298ec050fbe1e32da7ceaba4d22bf78e1ead0d3d290c47ebf41fd",
+      "bytes": 3132
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-04/pilot-plan/commands.json",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-04/pilot-plan/commands.json",
+      "sha256": "sha256:d3b4cab0a99aa53c5ca56aa8e0477f410d43a0a09611ee0e8b11b90e825d4090",
+      "bytes": 3747
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-04/pilot-plan/logs/00-optin-setup-preview.stderr.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-04/pilot-plan/logs/00-optin-setup-preview.stderr.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-04/pilot-plan/logs/00-optin-setup-preview.stdout.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-04/pilot-plan/logs/00-optin-setup-preview.stdout.log",
+      "sha256": "sha256:d226ac093a75ba84a32326a8295de410c704395cc350e60ac6407b934d1412e7",
+      "bytes": 294975
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-04/pilot-plan/logs/01-optin-setup-apply.stderr.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-04/pilot-plan/logs/01-optin-setup-apply.stderr.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-04/pilot-plan/logs/01-optin-setup-apply.stdout.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-04/pilot-plan/logs/01-optin-setup-apply.stdout.log",
+      "sha256": "sha256:3fc9bc52dd097d7fc942a72f7622287270e61a6f0a1a6b5dd886447ba88892b9",
+      "bytes": 269
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-04/pilot-plan/logs/02-optin-initial-plan.stderr.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-04/pilot-plan/logs/02-optin-initial-plan.stderr.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-04/pilot-plan/logs/02-optin-initial-plan.stdout.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-04/pilot-plan/logs/02-optin-initial-plan.stdout.log",
+      "sha256": "sha256:cfa8dd66a4666e5aa2e477ae9bcd0839bd566e370afc731c462b6d49b1b086a0",
+      "bytes": 1706
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-04/pilot-plan/logs/prot-01-apply.stderr.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-04/pilot-plan/logs/prot-01-apply.stderr.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-04/pilot-plan/logs/prot-01-apply.stdout.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-04/pilot-plan/logs/prot-01-apply.stdout.log",
+      "sha256": "sha256:45074af0c5ace1cf8134e242ee3ce6b051f23994323f2ac7370bfcb68bef428e",
+      "bytes": 269
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-04/pilot-plan/logs/prot-02-init-test.stderr.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-04/pilot-plan/logs/prot-02-init-test.stderr.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-04/pilot-plan/logs/prot-02-init-test.stdout.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-04/pilot-plan/logs/prot-02-init-test.stdout.log",
+      "sha256": "sha256:351e0c8c4eb43b5e83dae6a4f2c8c52d257da8bfbea9bab01537b528db733e5c",
+      "bytes": 315
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-04/pilot-plan/logs/prot-03-approve-test.stderr.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-04/pilot-plan/logs/prot-03-approve-test.stderr.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-04/pilot-plan/logs/prot-03-approve-test.stdout.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-04/pilot-plan/logs/prot-03-approve-test.stdout.log",
+      "sha256": "sha256:4aaae207f0abb8764829913c0d4054b88ed7761b1f77c0570b1b568039dc05db",
+      "bytes": 155
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-04/pilot-plan/logs/prot-04-reject-kind-test.stderr.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-04/pilot-plan/logs/prot-04-reject-kind-test.stderr.log",
+      "sha256": "sha256:8fb10c810d981de1fe467b98d8144a22eda123992b318f18277037040523d53f",
+      "bytes": 526
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-04/pilot-plan/logs/prot-04-reject-kind-test.stdout.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-04/pilot-plan/logs/prot-04-reject-kind-test.stdout.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-04/pilot-plan/logs/prot-05-init-cmd.stderr.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-04/pilot-plan/logs/prot-05-init-cmd.stderr.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-04/pilot-plan/logs/prot-05-init-cmd.stdout.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-04/pilot-plan/logs/prot-05-init-cmd.stdout.log",
+      "sha256": "sha256:47f2ec8629c957bd43ebd42696cb92a041326baf8335122f28510bc40e626468",
+      "bytes": 309
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-04/pilot-plan/logs/prot-06-approve-cmd.stderr.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-04/pilot-plan/logs/prot-06-approve-cmd.stderr.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-04/pilot-plan/logs/prot-06-approve-cmd.stdout.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-04/pilot-plan/logs/prot-06-approve-cmd.stdout.log",
+      "sha256": "sha256:1b0cebaada61322cca808d9501109ab2cda7f2fa941b34a65b70d2e371ef768a",
+      "bytes": 155
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-04/pilot-plan/logs/prot-07-probe.stderr.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-04/pilot-plan/logs/prot-07-probe.stderr.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-04/pilot-plan/logs/prot-07-probe.stdout.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-04/pilot-plan/logs/prot-07-probe.stdout.log",
+      "sha256": "sha256:26d5d054d4a6b40213f97bc439f5971ea5889354d01997a80ba1d36a5be85303",
+      "bytes": 820
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-04/pilot-plan/logs/prot-08-verifier-run.stderr.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-04/pilot-plan/logs/prot-08-verifier-run.stderr.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-04/pilot-plan/logs/prot-08-verifier-run.stdout.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-04/pilot-plan/logs/prot-08-verifier-run.stdout.log",
+      "sha256": "sha256:95bb40dc37fe0ab8cc69c0fd5054c0f6562580c3044a26f92a3a801634da06bd",
+      "bytes": 705
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-04/pilot-plan/logs/prot-09-verifier-verify.stderr.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-04/pilot-plan/logs/prot-09-verifier-verify.stderr.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-04/pilot-plan/logs/prot-09-verifier-verify.stdout.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-04/pilot-plan/logs/prot-09-verifier-verify.stdout.log",
+      "sha256": "sha256:82d260e508d1bce83d263951a8db3e2bf39a11bdbb48b063827687a72df6a03f",
+      "bytes": 45
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-04/pilot-plan/logs/prot-10-verifier-gate.stderr.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-04/pilot-plan/logs/prot-10-verifier-gate.stderr.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-04/pilot-plan/logs/prot-10-verifier-gate.stdout.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-04/pilot-plan/logs/prot-10-verifier-gate.stdout.log",
+      "sha256": "sha256:e9eb56e4a77f7c7e1e5fa6c74f847c6724215fcc2ff67e996a45517c6e54444b",
+      "bytes": 983
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-04/pilot-plan/logs/prot-11-release-ready-blocked.stderr.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-04/pilot-plan/logs/prot-11-release-ready-blocked.stderr.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-04/pilot-plan/logs/prot-11-release-ready-blocked.stdout.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-04/pilot-plan/logs/prot-11-release-ready-blocked.stdout.log",
+      "sha256": "sha256:5e5cff7426ae50b322e39be41c1f009e3e3d28c95d290562b42f0ba669719f84",
+      "bytes": 724
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-04/pilot-plan/policy-applied.json",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-04/pilot-plan/policy-applied.json",
+      "sha256": "sha256:ffbd8a7b57a639a5ac430bac8a934b88142383337af360c07439e0b28001058c",
+      "bytes": 294732
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-04/pilot-stopped.json",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-04/pilot-stopped.json",
+      "sha256": "sha256:31bfe998d67cbb0f3b0c86387ef26a6ce407feb0799938caf1c3247bb25d7d40",
+      "bytes": 703
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-04/prepare-audit.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-04/prepare-audit.log",
+      "sha256": "sha256:2278ccf9a0d7cce7aa2046498df21bbb7bb5c18f4098d1c19468e3e8c9a28482",
+      "bytes": 91
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-04/preservation.json",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-04/preservation.json",
+      "sha256": "sha256:e116f71882f8773f88b490183a9a0b72f631ea28408769afc39d7e46bb3a3fac",
+      "bytes": 227
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-04/preserve-before.json",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-04/preserve-before.json",
+      "sha256": "sha256:224b604af73a150a1a54e78ff697674a3f47ffc34bd6b0c70cd30ed4cdfe579b",
+      "bytes": 503792
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-04/probe_verifier_gate.py",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-04/probe_verifier_gate.py",
+      "sha256": "sha256:08f35117e3d1cb05fa53740f03e530e90d15830db2624243a14c2945fcd5408d",
+      "bytes": 1633
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-04/report.md",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-04/report.md",
+      "sha256": "sha256:fd653e81f4d574bb1329d610e321f2d75e60f334d05782b77ca165401bdf3d80",
+      "bytes": 10290
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-04/rollback.json",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-04/rollback.json",
+      "sha256": "sha256:de682cd9442dc7452c25b23e6c194447bd2c7d58bdee18e3cb0b8cb99db6ba49",
+      "bytes": 7042
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-04/source-snapshot-match.json",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-04/source-snapshot-match.json",
+      "sha256": "sha256:42631656d76d10daebac31d7498ac21eab0ef318e9459e0f0273fcc937b1e739",
+      "bytes": 159
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/audit-04/verifier-gate.json",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/audit-04/verifier-gate.json",
+      "sha256": "sha256:3176d93b2aefaf9bcbbe2635767cdbc9f79ba12149e58bfff4ee7cfbfe7ffa56",
+      "bytes": 11852
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/candidate-sha256.json",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/candidate-sha256.json",
+      "sha256": "sha256:22b637b43fe88b9127e3eb5c7273d49462b09cc63c8ce6b96695e9c3da423eb2",
+      "bytes": 15973
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/checks-tests-unsandboxed.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/checks-tests-unsandboxed.log",
+      "sha256": "sha256:c5eed75759e63ef2cc5d5de918d47575e7f69ff99a612416ef1a9d73e1ca4d26",
+      "bytes": 64443
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/commands.json",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/commands.json",
+      "sha256": "sha256:9aa932020ad166016c183f00a96fb27111ac72b3b248a0868cbec3b02f61d953",
+      "bytes": 1410
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/dependency-handoffs/PB-057-handoff.txt",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/dependency-handoffs/PB-057-handoff.txt",
+      "sha256": "sha256:16baff524f9efa6e40fff568314d97d5177be0d1f9cfb57e73106b2a189a6619",
+      "bytes": 7824
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/dependency-handoffs/PB-058-handoff.txt",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/dependency-handoffs/PB-058-handoff.txt",
+      "sha256": "sha256:24ebb378bce6372c61710d97d7647d9e7594b59e9648b328f265949196e3c7ab",
+      "bytes": 9353
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/dependency-handoffs/PB-059-handoff.txt",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/dependency-handoffs/PB-059-handoff.txt",
+      "sha256": "sha256:8ded300ab44855344a20095901b2108febed7427a658bc5e1c864ecb69288ddf",
+      "bytes": 16620
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/dependency-handoffs/PB-060-handoff.txt",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/dependency-handoffs/PB-060-handoff.txt",
+      "sha256": "sha256:257b6fd03fba3f8d6e075ea11ee5cc8f18276f912defca70c78cb0ebe8ab07f4",
+      "bytes": 16394
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/dependency-handoffs/PB-061-handoff.txt",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/dependency-handoffs/PB-061-handoff.txt",
+      "sha256": "sha256:e83656a89b1247f2e6f2e1e2ddc8fd07d4441eb51ec4ebbc24536746ce535e1d",
+      "bytes": 18227
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/dependency-handoffs/PB-062-handoff.txt",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/dependency-handoffs/PB-062-handoff.txt",
+      "sha256": "sha256:d4cdca6ba5069b3f2fe1ab3200c62952178b52c07c2d93b53ff1e23ed95c57cc",
+      "bytes": 10815
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/dependency-handoffs/PB-063-handoff.txt",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/dependency-handoffs/PB-063-handoff.txt",
+      "sha256": "sha256:9f2e545e91ae92e213648b231fd3e77dd3f5f9b11b1620cd83ecd97f81fdd786",
+      "bytes": 12736
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/dependency-handoffs/PB-064-handoff.txt",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/dependency-handoffs/PB-064-handoff.txt",
+      "sha256": "sha256:bb1df3d6cdce0e6640405363f1ecd0166ddbfe6c32d4b09c745bbf8de52dcdf9",
+      "bytes": 18785
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/environment.json",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/environment.json",
+      "sha256": "sha256:de257d7870254ae6a376d8a1379c9d8c833b936aad26d7581f341419cf3d3d97",
+      "bytes": 976
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/final-check.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/final-check.log",
+      "sha256": "sha256:288fcfc7a3610d96f3f85eca9dfffa730c28a7b241d196c38cf0ec652309c0e3",
+      "bytes": 198
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/final-index.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/final-index.log",
+      "sha256": "sha256:019159b0d4c5da578d50ebd39364e3e33f3cfd2b14311378b75b1719fddadbed",
+      "bytes": 42
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/final-validation.json",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/final-validation.json",
+      "sha256": "sha256:d978630d4b4035ad6c90c1c78c327da77ac77b1b83c31025517975f7251ea43f",
+      "bytes": 1904
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/pilot-plan.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/pilot-plan.log",
+      "sha256": "sha256:f5cede74f5c9b87a87dacf0ae4b36fc11b28563714762268a956ad61f9c82666",
+      "bytes": 1384
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/preservation.json",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/preservation.json",
+      "sha256": "sha256:12880fea10fdaad18e00f5103aab45e810ff9dd10bef9bbb22ee83a4a3331b7a",
+      "bytes": 254
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/probe_cli_obligations.json",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/probe_cli_obligations.json",
+      "sha256": "sha256:212f8d4ad275bf3491ce9d77256a54fb16864210c5a9da3720cae58dd1757bd3",
+      "bytes": 4238
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/probe_cli_obligations.py",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/probe_cli_obligations.py",
+      "sha256": "sha256:aac500090dfea60ff9418d374be7f7858f5f3127e29dcb10e1f50b8025586224",
+      "bytes": 1866
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/probe_equal_timestamps.json",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/probe_equal_timestamps.json",
+      "sha256": "sha256:d06c334353d003ecb84c78c9668ad70d1f9f02e27b16763dd49f975bcdcf0df0",
+      "bytes": 2109
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/probe_equal_timestamps.py",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/probe_equal_timestamps.py",
+      "sha256": "sha256:60a5bf5685026e8267d77b49259b2f47e465b7582169f262639e236596115b4d",
+      "bytes": 2049
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/probe_failed_baseline.json",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/probe_failed_baseline.json",
+      "sha256": "sha256:00d482230d31fb90fb0fb0ff012920860bd3ddd77c14fe7d29ad1b18d9b29f24",
+      "bytes": 1314
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence/probe_failed_baseline.py",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/probe_failed_baseline.py",
+      "sha256": "sha256:9b31cb055692719a07c8390acc1dfd1f5155380764681147e692c6326a29ff41",
+      "bytes": 1382
+    },
+    {
+      "from": "docs/tasks/AUDIT-009.md",
+      "to": "docs/archive/tasks/AUDIT-009.md",
+      "sha256": "sha256:4175343db6af85da4f4432d2b2d5e61b59fac8d9ce68c4d1e79975522fe84642",
+      "bytes": 44375
+    },
+    {
+      "from": "docs/tasks/AUDIT-009.meta.json",
+      "to": "docs/archive/tasks/AUDIT-009.meta.json",
+      "sha256": "sha256:8d55c19c2ffc83f80c5792130fe3794266f1d34646c76289e1c56b19d503eabe",
+      "bytes": 4858
+    },
+    {
+      "from": "work/verification/AUDIT-009/7138133c57a04bba80bb0f222a964380/preflight-regressions.stderr.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/7138133c57a04bba80bb0f222a964380/preflight-regressions.stderr.log",
+      "sha256": "sha256:53bf323a19aecbf031510d0319ceb8f33f627a83ac46e507821b6f7c66545aa4",
+      "bytes": 1585
+    },
+    {
+      "from": "work/verification/AUDIT-009/7138133c57a04bba80bb0f222a964380/preflight-regressions.stdout.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/7138133c57a04bba80bb0f222a964380/preflight-regressions.stdout.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "work/verification/AUDIT-009/7138133c57a04bba80bb0f222a964380/report.json",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/7138133c57a04bba80bb0f222a964380/report.json",
+      "sha256": "sha256:75fc4436fd80d661398415c92f55dc5fe26aac270a9e0cf21e2820077d25d0f6",
+      "bytes": 1203933
+    },
+    {
+      "from": "work/verification/AUDIT-009/7138133c57a04bba80bb0f222a964380/self-check.stderr.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/7138133c57a04bba80bb0f222a964380/self-check.stderr.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "work/verification/AUDIT-009/7138133c57a04bba80bb0f222a964380/self-check.stdout.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/7138133c57a04bba80bb0f222a964380/self-check.stdout.log",
+      "sha256": "sha256:997530b7a4f88c084469fdd977350c0fbfe82c1cb247b4bde5b4eb86fc7543ed",
+      "bytes": 198
+    },
+    {
+      "from": "work/verification/AUDIT-009/7138133c57a04bba80bb0f222a964380/unit-tests.stderr.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/7138133c57a04bba80bb0f222a964380/unit-tests.stderr.log",
+      "sha256": "sha256:d4a3065f4d392ff1af7467cd60f96ce1f937a1f1f667274a1cec50c6bf686047",
+      "bytes": 235959
+    },
+    {
+      "from": "work/verification/AUDIT-009/7138133c57a04bba80bb0f222a964380/unit-tests.stdout.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/7138133c57a04bba80bb0f222a964380/unit-tests.stdout.log",
+      "sha256": "sha256:f7aa7394181706f40e51f1801d737e67177b8e7396d4d907129d9f2154fc9d3e",
+      "bytes": 2843
+    },
+    {
+      "from": "work/verification/AUDIT-009/84693ca6b4d149da9bad2908c0b2e8b5/preflight-regressions.stderr.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/84693ca6b4d149da9bad2908c0b2e8b5/preflight-regressions.stderr.log",
+      "sha256": "sha256:b689dc4c695069311fa4ec862235e2b885ab05dc7a96c8987b731d9f2bcf52d3",
+      "bytes": 1585
+    },
+    {
+      "from": "work/verification/AUDIT-009/84693ca6b4d149da9bad2908c0b2e8b5/preflight-regressions.stdout.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/84693ca6b4d149da9bad2908c0b2e8b5/preflight-regressions.stdout.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "work/verification/AUDIT-009/84693ca6b4d149da9bad2908c0b2e8b5/report.json",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/84693ca6b4d149da9bad2908c0b2e8b5/report.json",
+      "sha256": "sha256:f20e112af6dcb62eced418228d562e42e52bab7a725167044a1ba014abe6a1a7",
+      "bytes": 1180574
+    },
+    {
+      "from": "work/verification/AUDIT-009/84693ca6b4d149da9bad2908c0b2e8b5/self-check.stderr.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/84693ca6b4d149da9bad2908c0b2e8b5/self-check.stderr.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "work/verification/AUDIT-009/84693ca6b4d149da9bad2908c0b2e8b5/self-check.stdout.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/84693ca6b4d149da9bad2908c0b2e8b5/self-check.stdout.log",
+      "sha256": "sha256:57bb2ae11be02da1deebc972848280d32f0f51d573ee3e1fb6c9b1b122b20217",
+      "bytes": 198
+    },
+    {
+      "from": "work/verification/AUDIT-009/84693ca6b4d149da9bad2908c0b2e8b5/unit-tests.stderr.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/84693ca6b4d149da9bad2908c0b2e8b5/unit-tests.stderr.log",
+      "sha256": "sha256:531450153a116713797e278a63c6cbce36251cf28d536efeadb6e8ffd37fd4c3",
+      "bytes": 235023
+    },
+    {
+      "from": "work/verification/AUDIT-009/84693ca6b4d149da9bad2908c0b2e8b5/unit-tests.stdout.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/84693ca6b4d149da9bad2908c0b2e8b5/unit-tests.stdout.log",
+      "sha256": "sha256:ed34ceab1dd8f2aa267de345c3aa209fa3a57a06f017282648a47c66492d158d",
+      "bytes": 2843
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-01/provenance.json",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-01/provenance.json",
+      "sha256": "sha256:e73d4ab66d27e814eaa3664c121c08542aba7390fcc2877529d9a47f8f524676",
+      "bytes": 489
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-01/provenance.sha256",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-01/provenance.sha256",
+      "sha256": "sha256:de3f470f0ec383a8d41b884d0ae78bd7d89b4288e835e2bc8574409a13f3fa39",
+      "bytes": 72
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-01/snapshot.meta.json",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-01/snapshot.meta.json",
+      "sha256": "sha256:99a86361220b02f6be7a7d6c50302019bb9f49b75f5df3cc353bebd81755d643",
+      "bytes": 384
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-01/snapshot.txt",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-01/snapshot.txt",
+      "sha256": "sha256:2b12ff33fe64e5461c8743ed0f6d167755abeb91a4aa471c6449a28ccc477d07",
+      "bytes": 4360
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-02/provenance.json",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-02/provenance.json",
+      "sha256": "sha256:ab47d908d1452591b23514a8ed29a9accd7709bfb7ac980f64f2bae8154871ee",
+      "bytes": 489
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-02/provenance.sha256",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-02/provenance.sha256",
+      "sha256": "sha256:ab0ac76584e2744627ca2feb4f2a2f291fcf29d176b2bc84987afca287e72294",
+      "bytes": 72
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-02/snapshot.meta.json",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-02/snapshot.meta.json",
+      "sha256": "sha256:2b55e0053f65acb654761c4d1331cc60765dd59d8190a834a769db17eeb62d4e",
+      "bytes": 2029
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-02/snapshot.txt",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-02/snapshot.txt",
+      "sha256": "sha256:9ad101e8a3e22d6ffa590aa385f1d65ed5b35b46d2af68e5e2f016a1b93bfbca",
+      "bytes": 9922
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-03/provenance.json",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-03/provenance.json",
+      "sha256": "sha256:38ce9338df2910ec1ba1527fb13e930fde44a247c32560dbd0283c2a793c1ab5",
+      "bytes": 501
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-03/provenance.sha256",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-03/provenance.sha256",
+      "sha256": "sha256:4c37ec2eeca85afd05d2a2c3d39993f9471ef4e720589e3f2141ec634db8e567",
+      "bytes": 72
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-03/snapshot.meta.json",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-03/snapshot.meta.json",
+      "sha256": "sha256:99abc41820e02ceeb34d7ca424de6415534cb8081a4f8524bf57ec3cb7848de0",
+      "bytes": 2674
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-03/snapshot.txt",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-03/snapshot.txt",
+      "sha256": "sha256:06ff8c77a77b1f32a53615b7828a088766e626373085d3962e375c38ef0c98ea",
+      "bytes": 14870
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-04/provenance.json",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-04/provenance.json",
+      "sha256": "sha256:3be78a0e7aa213375f26ebbc1c646b79795c3ca8b63cf6ee2266973ae58d89b7",
+      "bytes": 501
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-04/provenance.sha256",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-04/provenance.sha256",
+      "sha256": "sha256:b57ea43eff2a9492913b3ee61fd1fd4772a78023c0eda2a530197de46aeeddc3",
+      "bytes": 72
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-04/snapshot.meta.json",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-04/snapshot.meta.json",
+      "sha256": "sha256:cc32ac108a987d296b003b4281e4582b6acdaa0c00ae29240488315286fe2988",
+      "bytes": 2563
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-04/snapshot.txt",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-04/snapshot.txt",
+      "sha256": "sha256:380c95e8ecba44b920f3a086a421db767afcdcc1f8eaa1292c32e46dc83ee529",
+      "bytes": 19091
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-05/audit-ready-initial-lock.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-05/audit-ready-initial-lock.log",
+      "sha256": "sha256:ab2edff0b7dd43b4c2406ee433e71b05cb6837fd7d2e51e8c4d3bd4d506cce8b",
+      "bytes": 139
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-05/audit-ready.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-05/audit-ready.log",
+      "sha256": "sha256:5b81798efecbf207e22cd508edd52f65b3f987de6d5c476e7987484c1ff7e823",
+      "bytes": 252
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-05/bytecode-cache-cli.json",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-05/bytecode-cache-cli.json",
+      "sha256": "sha256:61fa7e7f882c9b6ebc22c2adfc05b149a25ada3b0017903b2f048210e34e6e27",
+      "bytes": 6675
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-05/bytecode-cache-dont-write.json",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-05/bytecode-cache-dont-write.json",
+      "sha256": "sha256:627ceb2a471e3f17eea2367746f52ae1782dc4510d1f0d536f601db5d1c67e88",
+      "bytes": 6679
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-05/bytecode-cache.json",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-05/bytecode-cache.json",
+      "sha256": "sha256:d3fc08a35b2078421772b9e69688eaaa240d8f687f0d3cbf481969aa0d06add0",
+      "bytes": 9378
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-05/candidate.json",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-05/candidate.json",
+      "sha256": "sha256:4d25abf8c052213e680e89ad9765aec5e7a2d275892970d66b1c653b393608e7",
+      "bytes": 1662
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-05/checks-tests.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-05/checks-tests.log",
+      "sha256": "sha256:8cd23f2e810981553c34245adc734895eb8c1cf380218c84074e202d4fc113be",
+      "bytes": 74670
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-05/commands.json",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-05/commands.json",
+      "sha256": "sha256:d823432d7f87c8083e54406ef1a87c968e85d292b439cd06382c2c863c719395",
+      "bytes": 3065
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-05/create-PB080.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-05/create-PB080.log",
+      "sha256": "sha256:1643566242bfe29aacc3b601b083ff51ceceecfa1e25f46ba17b121e7eb0fd98",
+      "bytes": 92
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-05/diagnostic.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-05/diagnostic.log",
+      "sha256": "sha256:3e7b80db7cfb6add867c64e31ba07f56460393b586158450ed0e8c458f893ac1",
+      "bytes": 77
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-05/final-check.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-05/final-check.log",
+      "sha256": "sha256:eaaf144e09dc33ec2fa23340623a3c15544c1af424c1796095411d8158abf72d",
+      "bytes": 198
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-05/final-index.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-05/final-index.log",
+      "sha256": "sha256:019159b0d4c5da578d50ebd39364e3e33f3cfd2b14311378b75b1719fddadbed",
+      "bytes": 42
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-05/final-preflight.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-05/final-preflight.log",
+      "sha256": "sha256:3539a198cb16db355f56cfb439138bef910da79e866c02b7d8a3fd4e789eec57",
+      "bytes": 1395
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-05/final-sync.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-05/final-sync.log",
+      "sha256": "sha256:7082fef0629d1920d7370a1c6a39ac25ffa516e0e30cd2aea7dfe335174327a4",
+      "bytes": 55
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-05/final-validation.json",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-05/final-validation.json",
+      "sha256": "sha256:b93f50f23d55cf1e8b78453c0c093e2c55c12b7851c83f5fe3b667c3162daead",
+      "bytes": 779
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-05/healed-rebuild.json",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-05/healed-rebuild.json",
+      "sha256": "sha256:664598b808ea8668de8210b1a33757b43887195b574118556b7b390f26ee00d7",
+      "bytes": 6535
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-05/incoming-index.txt",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-05/incoming-index.txt",
+      "sha256": "sha256:69b100ef4206922db812f2dcf37cc329c2abd0d52d889ae2c9dd0b527ed9ae8d",
+      "bytes": 20977
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-05/loss.json",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-05/loss.json",
+      "sha256": "sha256:cd665003b86aa7d8f292ac5a3f3c7786f09f4b545bd2d42707d28de2781a4b10",
+      "bytes": 3178
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-05/old-commands.json",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-05/old-commands.json",
+      "sha256": "sha256:760105d5bcb6702dfc778787d5e7308fd86b4a2b7b1b7e66a6d27f429bc7ef1d",
+      "bytes": 564
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-05/old-corrupt.json",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-05/old-corrupt.json",
+      "sha256": "sha256:8ae46381cd3f16979c716a1e02b3a8192315fa39aa7628805a1df3c42af46258",
+      "bytes": 8424
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-05/old-delete.json",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-05/old-delete.json",
+      "sha256": "sha256:3f76d50ed541d7734466da1904d70bfff25343375ddd8510da2c2ed84e1f5b54",
+      "bytes": 7395
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-05/old-legacy.json",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-05/old-legacy.json",
+      "sha256": "sha256:cee00cb1a162b8dfa2c4ca4f697c7496feb49accec3de2e0e69bff53e13e3f02",
+      "bytes": 3294
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-05/pilot-full.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-05/pilot-full.log",
+      "sha256": "sha256:444b03f986a65ac763c051116f36186d23784b80d6326c7be16ebde5066fad64",
+      "bytes": 3278
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-05/pilot-full/commands.json",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-05/pilot-full/commands.json",
+      "sha256": "sha256:864870fbbea6593bcef6f46cbf29a550d0eaf1110fdcae0837a4e432a873a829",
+      "bytes": 7132
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-05/pilot-full/logs/00-optin-setup-preview.stderr.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-05/pilot-full/logs/00-optin-setup-preview.stderr.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-05/pilot-full/logs/00-optin-setup-preview.stdout.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-05/pilot-full/logs/00-optin-setup-preview.stdout.log",
+      "sha256": "sha256:2b6d874204de5c69e44946a2b730c2143723709e456d66ec9cf34dc6fe50909b",
+      "bytes": 297973
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-05/pilot-full/logs/01-optin-setup-apply.stderr.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-05/pilot-full/logs/01-optin-setup-apply.stderr.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-05/pilot-full/logs/01-optin-setup-apply.stdout.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-05/pilot-full/logs/01-optin-setup-apply.stdout.log",
+      "sha256": "sha256:0e3c1de5c39af46a330fb20254ff2d4354d40a51a5ac8f137f52640f0942abf0",
+      "bytes": 269
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-05/pilot-full/logs/02-optin-initial-plan.stderr.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-05/pilot-full/logs/02-optin-initial-plan.stderr.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-05/pilot-full/logs/02-optin-initial-plan.stdout.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-05/pilot-full/logs/02-optin-initial-plan.stdout.log",
+      "sha256": "sha256:e8695e6caa172327f352a77810d6f1102860975f22ca29e785d96468ad767886",
+      "bytes": 1706
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-05/pilot-full/logs/10-legacy-preflight.stderr.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-05/pilot-full/logs/10-legacy-preflight.stderr.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-05/pilot-full/logs/10-legacy-preflight.stdout.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-05/pilot-full/logs/10-legacy-preflight.stdout.log",
+      "sha256": "sha256:17ac893f94f12893c947854ab907651aa7edb647b4455e150888741e1ad001cf",
+      "bytes": 1436
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-05/pilot-full/logs/11-legacy-initial-verify.stderr.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-05/pilot-full/logs/11-legacy-initial-verify.stderr.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-05/pilot-full/logs/11-legacy-initial-verify.stdout.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-05/pilot-full/logs/11-legacy-initial-verify.stdout.log",
+      "sha256": "sha256:9245bdbf1c88e3ff97de002e9158d61ae3ad3115284b8f14c2e9b3b55467a687",
+      "bytes": 475
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-05/pilot-full/logs/12-optin-initial-force.stderr.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-05/pilot-full/logs/12-optin-initial-force.stderr.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-05/pilot-full/logs/12-optin-initial-force.stdout.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-05/pilot-full/logs/12-optin-initial-force.stdout.log",
+      "sha256": "sha256:1acfd205c94f4981a3cf0316fc114eb333235975a3bdbfecd1de40680f4e1152",
+      "bytes": 924
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-05/pilot-full/logs/20-legacy-localized-verify-reuse.stderr.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-05/pilot-full/logs/20-legacy-localized-verify-reuse.stderr.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-05/pilot-full/logs/20-legacy-localized-verify-reuse.stdout.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-05/pilot-full/logs/20-legacy-localized-verify-reuse.stdout.log",
+      "sha256": "sha256:f68ece089c6d7d4078d6232f202239374064849da1681c76107aceaed2c97506",
+      "bytes": 594
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-05/pilot-full/logs/21-optin-localized-plan.stderr.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-05/pilot-full/logs/21-optin-localized-plan.stderr.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-05/pilot-full/logs/21-optin-localized-plan.stdout.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-05/pilot-full/logs/21-optin-localized-plan.stdout.log",
+      "sha256": "sha256:765ea5b87eea4ae7e7bbdca6a59538d0331e3a8e342e79462b775aba9cea789d",
+      "bytes": 1218
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-05/pilot-full/logs/22-optin-localized-stale-run.stderr.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-05/pilot-full/logs/22-optin-localized-stale-run.stderr.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-05/pilot-full/logs/22-optin-localized-stale-run.stdout.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-05/pilot-full/logs/22-optin-localized-stale-run.stdout.log",
+      "sha256": "sha256:5e7760c542eaca17f6da1b5457074155d7fd00268060f411842c983c74ec3ddb",
+      "bytes": 861
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-05/pilot-full/logs/23-optin-transitive-ast-plan.stderr.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-05/pilot-full/logs/23-optin-transitive-ast-plan.stderr.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-05/pilot-full/logs/23-optin-transitive-ast-plan.stdout.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-05/pilot-full/logs/23-optin-transitive-ast-plan.stdout.log",
+      "sha256": "sha256:650eb64b0ac9bdd795f81fac532b532c4512b4a05d6cf567f22c023c2e56e1a4",
+      "bytes": 1606
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-05/pilot-full/logs/30-legacy-repeat-unchanged-reuse.stderr.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-05/pilot-full/logs/30-legacy-repeat-unchanged-reuse.stderr.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-05/pilot-full/logs/30-legacy-repeat-unchanged-reuse.stdout.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-05/pilot-full/logs/30-legacy-repeat-unchanged-reuse.stdout.log",
+      "sha256": "sha256:3395e323b5d918eabadef412846baf3f66ee04a51810dd0c2d94702053891a5a",
+      "bytes": 506
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-05/pilot-full/logs/31-optin-repeat-plan.stderr.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-05/pilot-full/logs/31-optin-repeat-plan.stderr.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-05/pilot-full/logs/31-optin-repeat-plan.stdout.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-05/pilot-full/logs/31-optin-repeat-plan.stdout.log",
+      "sha256": "sha256:57d1d89a342a9c58311cb0534627b93edefef570850e29d4164607ffd5b01612",
+      "bytes": 1160
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-05/pilot-full/logs/32-optin-release-stale.stderr.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-05/pilot-full/logs/32-optin-release-stale.stderr.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-05/pilot-full/logs/32-optin-release-stale.stdout.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-05/pilot-full/logs/32-optin-release-stale.stdout.log",
+      "sha256": "sha256:c01752d19166175c6f2997a6f8f8c6a34dd5e08310f5ea5e596352ffd097b111",
+      "bytes": 1558
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-05/pilot-full/logs/33-optin-status.stderr.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-05/pilot-full/logs/33-optin-status.stderr.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-05/pilot-full/logs/33-optin-status.stdout.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-05/pilot-full/logs/33-optin-status.stdout.log",
+      "sha256": "sha256:dbd0cf88ee5fc3e1906a6cc204480255226118f9fe54ff30b34cdf4993a9ec1f",
+      "bytes": 6995
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-05/pilot-full/logs/34-optin-release-ready.stderr.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-05/pilot-full/logs/34-optin-release-ready.stderr.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-05/pilot-full/logs/34-optin-release-ready.stdout.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-05/pilot-full/logs/34-optin-release-ready.stdout.log",
+      "sha256": "sha256:59435933e79d6318f04d9bc1f952b9c05763f76741c86970b49607dad91cc2ff",
+      "bytes": 719
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-05/pilot-full/logs/35-optin-index.stderr.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-05/pilot-full/logs/35-optin-index.stderr.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-05/pilot-full/logs/35-optin-index.stdout.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-05/pilot-full/logs/35-optin-index.stdout.log",
+      "sha256": "sha256:9d9f58f8eb41f8d3baf6d4ee58e7320985e85202576af63f9763963195cceef7",
+      "bytes": 31
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-05/pilot-full/logs/36-optin-handoff-1.stderr.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-05/pilot-full/logs/36-optin-handoff-1.stderr.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-05/pilot-full/logs/36-optin-handoff-1.stdout.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-05/pilot-full/logs/36-optin-handoff-1.stdout.log",
+      "sha256": "sha256:cecf92f501c728613fd7cfe0d3cb7d28b97012848016f90af60e02d286c9819f",
+      "bytes": 141
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-05/pilot-full/logs/37-optin-handoff-idempotent.stderr.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-05/pilot-full/logs/37-optin-handoff-idempotent.stderr.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-05/pilot-full/logs/37-optin-handoff-idempotent.stdout.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-05/pilot-full/logs/37-optin-handoff-idempotent.stdout.log",
+      "sha256": "sha256:cecf92f501c728613fd7cfe0d3cb7d28b97012848016f90af60e02d286c9819f",
+      "bytes": 141
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-05/pilot-full/logs/38-optin-audit-ready.stderr.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-05/pilot-full/logs/38-optin-audit-ready.stderr.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-05/pilot-full/logs/38-optin-audit-ready.stdout.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-05/pilot-full/logs/38-optin-audit-ready.stdout.log",
+      "sha256": "sha256:43b025da6cc0391f30f19679fc498b11fe0bf9bdaf259da1a99c254c6567bf00",
+      "bytes": 1580
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-05/pilot-full/logs/39-optin-close-refused-without-accept.stderr.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-05/pilot-full/logs/39-optin-close-refused-without-accept.stderr.log",
+      "sha256": "sha256:76f798d40e2104ce06efa0a06fcb615c2f3e30420747e38021ae94d4fe71f6ea",
+      "bytes": 70
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-05/pilot-full/logs/39-optin-close-refused-without-accept.stdout.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-05/pilot-full/logs/39-optin-close-refused-without-accept.stdout.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-05/pilot-full/logs/prot-01-apply.stderr.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-05/pilot-full/logs/prot-01-apply.stderr.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-05/pilot-full/logs/prot-01-apply.stdout.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-05/pilot-full/logs/prot-01-apply.stdout.log",
+      "sha256": "sha256:a2d430ba7ac2cb13173a9574fdc97b0b82f3bfb2c3772d89ae94fa37179a0d5d",
+      "bytes": 269
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-05/pilot-full/logs/prot-02-init-test.stderr.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-05/pilot-full/logs/prot-02-init-test.stderr.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-05/pilot-full/logs/prot-02-init-test.stdout.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-05/pilot-full/logs/prot-02-init-test.stdout.log",
+      "sha256": "sha256:711acf0c8af8c3d2f2b10e59f46c7d3b848f02c8b2701932cc928f806de78156",
+      "bytes": 302
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-05/pilot-full/logs/prot-03-approve-test.stderr.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-05/pilot-full/logs/prot-03-approve-test.stderr.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-05/pilot-full/logs/prot-03-approve-test.stdout.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-05/pilot-full/logs/prot-03-approve-test.stdout.log",
+      "sha256": "sha256:bb13e0543c4e418b69696d12418ed20adf7acd1838a7d85e7646bbbf97089456",
+      "bytes": 155
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-05/pilot-full/logs/prot-04-reject-kind-test.stderr.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-05/pilot-full/logs/prot-04-reject-kind-test.stderr.log",
+      "sha256": "sha256:8fb10c810d981de1fe467b98d8144a22eda123992b318f18277037040523d53f",
+      "bytes": 526
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-05/pilot-full/logs/prot-04-reject-kind-test.stdout.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-05/pilot-full/logs/prot-04-reject-kind-test.stdout.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-05/pilot-full/logs/prot-05-init-cmd.stderr.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-05/pilot-full/logs/prot-05-init-cmd.stderr.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-05/pilot-full/logs/prot-05-init-cmd.stdout.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-05/pilot-full/logs/prot-05-init-cmd.stdout.log",
+      "sha256": "sha256:27b6dd268ffc16b01cca6a131d57daee68250c1df8c5353343f8747f4f7b94d5",
+      "bytes": 296
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-05/pilot-full/logs/prot-06-approve-cmd.stderr.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-05/pilot-full/logs/prot-06-approve-cmd.stderr.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-05/pilot-full/logs/prot-06-approve-cmd.stdout.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-05/pilot-full/logs/prot-06-approve-cmd.stdout.log",
+      "sha256": "sha256:03a60a4451351450e0bb7cd46dfbccca83c5419b28a993e0aef524fce91d2e64",
+      "bytes": 155
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-05/pilot-full/logs/prot-07-probe.stderr.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-05/pilot-full/logs/prot-07-probe.stderr.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-05/pilot-full/logs/prot-07-probe.stdout.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-05/pilot-full/logs/prot-07-probe.stdout.log",
+      "sha256": "sha256:690206e1c1563f97047c7970a7581c6491d544b20913d3d5151731c0b9ce3440",
+      "bytes": 807
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-05/pilot-full/logs/prot-08-verifier-run.stderr.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-05/pilot-full/logs/prot-08-verifier-run.stderr.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-05/pilot-full/logs/prot-08-verifier-run.stdout.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-05/pilot-full/logs/prot-08-verifier-run.stdout.log",
+      "sha256": "sha256:4a5c6dd7ab24ac65937c1b53d24235e957b78f81830904f3672f2d4ab7155a8f",
+      "bytes": 705
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-05/pilot-full/logs/prot-09-verifier-verify.stderr.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-05/pilot-full/logs/prot-09-verifier-verify.stderr.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-05/pilot-full/logs/prot-09-verifier-verify.stdout.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-05/pilot-full/logs/prot-09-verifier-verify.stdout.log",
+      "sha256": "sha256:82d260e508d1bce83d263951a8db3e2bf39a11bdbb48b063827687a72df6a03f",
+      "bytes": 45
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-05/pilot-full/logs/prot-10-verifier-gate.stderr.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-05/pilot-full/logs/prot-10-verifier-gate.stderr.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-05/pilot-full/logs/prot-10-verifier-gate.stdout.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-05/pilot-full/logs/prot-10-verifier-gate.stdout.log",
+      "sha256": "sha256:f40054fc0486bb6c2931fc8cf33335f230cb08ed3d34131d549b65ebe8047332",
+      "bytes": 983
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-05/pilot-full/logs/prot-11-release-ready-blocked.stderr.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-05/pilot-full/logs/prot-11-release-ready-blocked.stderr.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-05/pilot-full/logs/prot-11-release-ready-blocked.stdout.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-05/pilot-full/logs/prot-11-release-ready-blocked.stdout.log",
+      "sha256": "sha256:5e5cff7426ae50b322e39be41c1f009e3e3d28c95d290562b42f0ba669719f84",
+      "bytes": 724
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-05/pilot-full/policy-applied.json",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-05/pilot-full/policy-applied.json",
+      "sha256": "sha256:137ee4a81ad93c654318057e33300d34bb6a3dc3848163174d89f1b7d33b0c9d",
+      "bytes": 297568
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-05/pilot-full/summary.json",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-05/pilot-full/summary.json",
+      "sha256": "sha256:0bfd8d990e85106d7566d84b7a57efaf063def3077cff3f6bbf0e697f64c7ba5",
+      "bytes": 5714
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-05/preservation.json",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-05/preservation.json",
+      "sha256": "sha256:6775fef2ada4e5cb0723187c06d9b9c0d70659f2f0d6b3bea1112e761c59576d",
+      "bytes": 333
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-05/preserve-before.json",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-05/preserve-before.json",
+      "sha256": "sha256:8bc987b3763ed7778319196cd7d01125d176c90ea68a5d2c0be7df8efc53f39b",
+      "bytes": 508983
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-05/probe_bytecode_cache.py",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-05/probe_bytecode_cache.py",
+      "sha256": "sha256:7ecbbfabcf06eea3a1056ef5dbf57f9a412eee4f12fb424f3da62f4e793dd1e1",
+      "bytes": 2849
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-05/probe_bytecode_cache_cli.py",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-05/probe_bytecode_cache_cli.py",
+      "sha256": "sha256:fc34bdb1c9667d4efdfa1e9b308327017e229d5602c643c32fa3e20f420444dc",
+      "bytes": 3751
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-05/probe_verifier_gate.py",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-05/probe_verifier_gate.py",
+      "sha256": "sha256:08f35117e3d1cb05fa53740f03e530e90d15830db2624243a14c2945fcd5408d",
+      "bytes": 1633
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-05/protected-overlap.json",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-05/protected-overlap.json",
+      "sha256": "sha256:31a37d4fb852eb6152aac4dfebd5fccb60920dac551dc1cc7a4ab66cf30ab713",
+      "bytes": 5790
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-05/provenance.json",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-05/provenance.json",
+      "sha256": "sha256:e3416e33d8a683ae1c33764a517261c8833830259e9a6b9baf7495705fb5c6df",
+      "bytes": 501
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-05/provenance.sha256",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-05/provenance.sha256",
+      "sha256": "sha256:08c8c26ed654cda2090d27aedc0129cfc0938b345e8fe5ab706853f671f577bf",
+      "bytes": 72
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-05/register-verify.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-05/register-verify.log",
+      "sha256": "sha256:16617e7b0ace1cb0c4f09f60860828e86ffa603e659176424b8d66fc2befa1fd",
+      "bytes": 102
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-05/report.md",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-05/report.md",
+      "sha256": "sha256:057b7946b5fb6f77096ade19ef54803b9ca092a2aa9ecb2dcbdb053475f4427a",
+      "bytes": 17309
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-05/rollback.json",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-05/rollback.json",
+      "sha256": "sha256:a50acc1918d92cca26cca1874f1ce2511f970165b6350329ff842876ef6a12ee",
+      "bytes": 7042
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-05/session-state.json",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-05/session-state.json",
+      "sha256": "sha256:a23112e75fad08295fb2ed0dc222287085e6cebc7ac3f1f838ea6c8d736e46a6",
+      "bytes": 180
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-05/snapshot.meta.json",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-05/snapshot.meta.json",
+      "sha256": "sha256:d92961b88c72abef6c7241c203668f627e070f24b8af2653b855051ee66a6a67",
+      "bytes": 3032
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-05/snapshot.txt",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-05/snapshot.txt",
+      "sha256": "sha256:cf89775a657e6b2e1d3650965d5b4efcd936947e67e8ccfeba7da929522c64b8",
+      "bytes": 24198
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-05/source-snapshot-match.json",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-05/source-snapshot-match.json",
+      "sha256": "sha256:a3bdd972467754a0e50cdf36128d450d6b2ee7cc21c6eefd75b8a80e6ac3791a",
+      "bytes": 166
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-05/verifier-gate.json",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-05/verifier-gate.json",
+      "sha256": "sha256:e8ed4c4b9df0bf2fe536eac89ec43dc994929acbcad67bb79d0b7f2d5a9aa365",
+      "bytes": 11751
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-05/verify-preflight.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-05/verify-preflight.log",
+      "sha256": "sha256:a242e7e7320562ac21da2d90c59eaf3e7917fa35a59bddbcb6401cb5444d8153",
+      "bytes": 1395
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-05/verify.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-05/verify.log",
+      "sha256": "sha256:0617741a6c075f82d7ee42d1c2f81815c1222734eb401344911be9293c9cfe5f",
+      "bytes": 434
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-06/archive-before.json",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-06/archive-before.json",
+      "sha256": "sha256:83e5b861e364e5daa2452d2c4fa2a5c0fe58c4e50c64e9096d5fa7e1f39fb8a5",
+      "bytes": 512649
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-06/bytecode-dont-write.json",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-06/bytecode-dont-write.json",
+      "sha256": "sha256:37570b34bc3aedae78f3a5ae9e2f6f49cb416e0f4149c2b3a6b6f7958d2af1ff",
+      "bytes": 6663
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-06/bytecode-normal.json",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-06/bytecode-normal.json",
+      "sha256": "sha256:0b78b0a83eaf35370ca372d42a056cc4d0136356f25dcc7544920f5325d63b0a",
+      "bytes": 6659
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-06/candidate.json",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-06/candidate.json",
+      "sha256": "sha256:60a98c1d0ec5b32610691d019928a799c40fee4f77ceb8808378dc7a2b979d1c",
+      "bytes": 20294
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-06/check-ready.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-06/check-ready.log",
+      "sha256": "sha256:997530b7a4f88c084469fdd977350c0fbfe82c1cb247b4bde5b4eb86fc7543ed",
+      "bytes": 198
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-06/checks-tests-overlapped.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-06/checks-tests-overlapped.log",
+      "sha256": "sha256:8df90696a7f15bb64001c8573a2d258c5400e4d33a7b5656c577158173e90fdb",
+      "bytes": 101401
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-06/checks-tests-sandbox-interrupted.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-06/checks-tests-sandbox-interrupted.log",
+      "sha256": "sha256:37f31f55ff5526e1c0ca6cbcd43cedc61320256f3304ed5c4ebedaa43b828d62",
+      "bytes": 11775
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-06/checks-tests.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-06/checks-tests.log",
+      "sha256": "sha256:35f4182960cc92b86270e76d5477aec42d6b5792d7f6836f81bab10495ba050d",
+      "bytes": 75078
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-06/initial-diff.patch",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-06/initial-diff.patch",
+      "sha256": "sha256:36f3dc1e8e43081287f3dfe1271180b82b85ade4319cf664c674e4a151e3970d",
+      "bytes": 9013
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-06/initial-status.txt",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-06/initial-status.txt",
+      "sha256": "sha256:01b15fe670c1958a92123aa43a72ddb7ad593c9cda246f52b6b948e2dd7d9637",
+      "bytes": 521
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-06/interpreter-repeat.json",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-06/interpreter-repeat.json",
+      "sha256": "sha256:f244a25839c495e4aa11689ba06cf0b63f38c97e99242e71ad2085e30021844e",
+      "bytes": 8472
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-06/interpreter.json",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-06/interpreter.json",
+      "sha256": "sha256:53f7c9634b7fe41ec746930f2ac1408cd068e9be784e13abd98007ac6617745c",
+      "bytes": 6218
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-06/old-corrupt.json",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-06/old-corrupt.json",
+      "sha256": "sha256:9f36c21e7aa1a15e5c39b61c21c77d579cdfce956bf03611d84d7f981f421441",
+      "bytes": 8425
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-06/old-delete.json",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-06/old-delete.json",
+      "sha256": "sha256:d524e7c9a510b480a340404092485c874a7be4e2733be4dcdfc2e4ed29dfb37c",
+      "bytes": 7395
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-06/old-legacy.json",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-06/old-legacy.json",
+      "sha256": "sha256:cee00cb1a162b8dfa2c4ca4f697c7496feb49accec3de2e0e69bff53e13e3f02",
+      "bytes": 3294
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-06/pilot-plan-first.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-06/pilot-plan-first.log",
+      "sha256": "sha256:5e9899eb6e5deafe872fd786ed86f43989a2ef317bec5c228c367108b887888d",
+      "bytes": 602
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-06/pilot-plan.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-06/pilot-plan.log",
+      "sha256": "sha256:301f6701b3d82a31f47e8fb2eca4cc5f165376828f7d33fcda9b388f0a08f4a0",
+      "bytes": 3134
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-06/pilot-plan/commands.json",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-06/pilot-plan/commands.json",
+      "sha256": "sha256:e1850653def71f98a2c1944ed12f846a9e9b6c634ac7d15b0e1dea8ea5567194",
+      "bytes": 3749
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-06/pilot-plan/logs/00-optin-setup-preview.stderr.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-06/pilot-plan/logs/00-optin-setup-preview.stderr.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-06/pilot-plan/logs/00-optin-setup-preview.stdout.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-06/pilot-plan/logs/00-optin-setup-preview.stdout.log",
+      "sha256": "sha256:b77374814f5ebb0780c4179212ef788ea3b02bf76e197697d15617e23edc4ac1",
+      "bytes": 298960
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-06/pilot-plan/logs/01-optin-setup-apply.stderr.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-06/pilot-plan/logs/01-optin-setup-apply.stderr.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-06/pilot-plan/logs/01-optin-setup-apply.stdout.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-06/pilot-plan/logs/01-optin-setup-apply.stdout.log",
+      "sha256": "sha256:56f80921a8bc2a521ea0644c65a353adc7ce43ce19d2d87b264ddff14a805a37",
+      "bytes": 269
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-06/pilot-plan/logs/02-optin-initial-plan.stderr.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-06/pilot-plan/logs/02-optin-initial-plan.stderr.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-06/pilot-plan/logs/02-optin-initial-plan.stdout.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-06/pilot-plan/logs/02-optin-initial-plan.stdout.log",
+      "sha256": "sha256:360be2ea5c2fd8b03d46835ce37e6aea2480001dcd5f37acf577a5797000c721",
+      "bytes": 1706
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-06/pilot-plan/logs/prot-01-apply.stderr.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-06/pilot-plan/logs/prot-01-apply.stderr.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-06/pilot-plan/logs/prot-01-apply.stdout.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-06/pilot-plan/logs/prot-01-apply.stdout.log",
+      "sha256": "sha256:c199bb5c7a0bc9245bc047f0fe80883171b1b9e6b5c56e801aafb1b34a27927b",
+      "bytes": 269
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-06/pilot-plan/logs/prot-02-init-test.stderr.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-06/pilot-plan/logs/prot-02-init-test.stderr.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-06/pilot-plan/logs/prot-02-init-test.stdout.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-06/pilot-plan/logs/prot-02-init-test.stdout.log",
+      "sha256": "sha256:a5d6ee668fbdc649a11928b754896c07d1b11ebaaf44bee1bfc4c5d57b944aa9",
+      "bytes": 315
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-06/pilot-plan/logs/prot-03-approve-test.stderr.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-06/pilot-plan/logs/prot-03-approve-test.stderr.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-06/pilot-plan/logs/prot-03-approve-test.stdout.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-06/pilot-plan/logs/prot-03-approve-test.stdout.log",
+      "sha256": "sha256:f8f0e3a31ff44af36fe15a974c5e40373153d90e232d2a2d49e0cb26ba1f7d95",
+      "bytes": 155
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-06/pilot-plan/logs/prot-04-reject-kind-test.stderr.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-06/pilot-plan/logs/prot-04-reject-kind-test.stderr.log",
+      "sha256": "sha256:8fb10c810d981de1fe467b98d8144a22eda123992b318f18277037040523d53f",
+      "bytes": 526
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-06/pilot-plan/logs/prot-04-reject-kind-test.stdout.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-06/pilot-plan/logs/prot-04-reject-kind-test.stdout.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-06/pilot-plan/logs/prot-05-init-cmd.stderr.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-06/pilot-plan/logs/prot-05-init-cmd.stderr.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-06/pilot-plan/logs/prot-05-init-cmd.stdout.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-06/pilot-plan/logs/prot-05-init-cmd.stdout.log",
+      "sha256": "sha256:2c153fe8cd2a8b5751540873f2e56e92266bdbe426d2ae13b99e10ed21aa963c",
+      "bytes": 309
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-06/pilot-plan/logs/prot-06-approve-cmd.stderr.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-06/pilot-plan/logs/prot-06-approve-cmd.stderr.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-06/pilot-plan/logs/prot-06-approve-cmd.stdout.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-06/pilot-plan/logs/prot-06-approve-cmd.stdout.log",
+      "sha256": "sha256:327eab1ccdb9ad98d9ccbf44447b0a9480ebb7009198384472f25c8d4aaa5465",
+      "bytes": 155
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-06/pilot-plan/logs/prot-07-probe.stderr.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-06/pilot-plan/logs/prot-07-probe.stderr.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-06/pilot-plan/logs/prot-07-probe.stdout.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-06/pilot-plan/logs/prot-07-probe.stdout.log",
+      "sha256": "sha256:0fdba253bb6f24977e98681815989fd653eac829c75fba12999045c4a1990044",
+      "bytes": 820
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-06/pilot-plan/logs/prot-08-verifier-run.stderr.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-06/pilot-plan/logs/prot-08-verifier-run.stderr.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-06/pilot-plan/logs/prot-08-verifier-run.stdout.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-06/pilot-plan/logs/prot-08-verifier-run.stdout.log",
+      "sha256": "sha256:d608d13b3ddeb4defd44df4dbd2e207b3a7db2ac0407f808827de4e5a91b4c9a",
+      "bytes": 705
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-06/pilot-plan/logs/prot-09-verifier-verify.stderr.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-06/pilot-plan/logs/prot-09-verifier-verify.stderr.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-06/pilot-plan/logs/prot-09-verifier-verify.stdout.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-06/pilot-plan/logs/prot-09-verifier-verify.stdout.log",
+      "sha256": "sha256:82d260e508d1bce83d263951a8db3e2bf39a11bdbb48b063827687a72df6a03f",
+      "bytes": 45
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-06/pilot-plan/logs/prot-10-verifier-gate.stderr.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-06/pilot-plan/logs/prot-10-verifier-gate.stderr.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-06/pilot-plan/logs/prot-10-verifier-gate.stdout.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-06/pilot-plan/logs/prot-10-verifier-gate.stdout.log",
+      "sha256": "sha256:64d3c00704016a3b46012af75343256f30b43e5e0e0a0b19a1a07eec3c1ac4d0",
+      "bytes": 983
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-06/pilot-plan/logs/prot-11-release-ready-blocked.stderr.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-06/pilot-plan/logs/prot-11-release-ready-blocked.stderr.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-06/pilot-plan/logs/prot-11-release-ready-blocked.stdout.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-06/pilot-plan/logs/prot-11-release-ready-blocked.stdout.log",
+      "sha256": "sha256:5e5cff7426ae50b322e39be41c1f009e3e3d28c95d290562b42f0ba669719f84",
+      "bytes": 724
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-06/pilot-plan/policy-applied.json",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-06/pilot-plan/policy-applied.json",
+      "sha256": "sha256:0004fd4acad1dba9112d31978755c5f1164586013dde50aa0c4636eb3ac34973",
+      "bytes": 298352
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-06/preflight.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-06/preflight.log",
+      "sha256": "sha256:445239851b2c122340c3667f75020c17a69043604054dc2f58997fad42e15a1e",
+      "bytes": 1395
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-06/preservation.json",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-06/preservation.json",
+      "sha256": "sha256:79da4b582d88aa9aa7528c258b430c6b657b949955b48b64032600c0c4f16f00",
+      "bytes": 151
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-06/probe_interpreter.py",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-06/probe_interpreter.py",
+      "sha256": "sha256:cdedf32760e79d98b23569e055fb7542493003c7fdf185f913f0fb1e55e17736",
+      "bytes": 3154
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-06/provenance.json",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-06/provenance.json",
+      "sha256": "sha256:15a4a3762d69c5d2f04948a8da3a1391d4281ef31732a6afb76a695d5616e78f",
+      "bytes": 489
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-06/provenance.sha256",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-06/provenance.sha256",
+      "sha256": "sha256:dc6cb11d4d01f83206695cacde9317dd0a1dd563c7c40ec54d067a430d09d440",
+      "bytes": 72
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-06/report.md",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-06/report.md",
+      "sha256": "sha256:af4d9bf59cc212bddfdb2159e372199490e1b6eeaa85547889b46f0944e27f10",
+      "bytes": 12395
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-06/rollback.json",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-06/rollback.json",
+      "sha256": "sha256:28307b154546721748a8ef4437e1756295a87a4db275ff5ccddada31133e520a",
+      "bytes": 7041
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-06/snapshot.meta.json",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-06/snapshot.meta.json",
+      "sha256": "sha256:d4036fa86e6977ae1ba5f8dd111998f04140d4b8c1547c24b5420d16e9e282e9",
+      "bytes": 3804
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-06/snapshot.txt",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-06/snapshot.txt",
+      "sha256": "sha256:b436e9798be7ab59f0ea8b743661b33a17bcf8969cc603463d93404331bd111b",
+      "bytes": 31256
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-06/verifier-gate-unsandboxed.json",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-06/verifier-gate-unsandboxed.json",
+      "sha256": "sha256:f900ed812a4fe5a69d9741f34320fa723b3dd2700e705286e24d3dff64426be5",
+      "bytes": 11751
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-06/verifier-gate.json",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-06/verifier-gate.json",
+      "sha256": "sha256:c31552c9552dd4b547c8943cb11454c5dc53237f69c9087583b94a1d64688d1f",
+      "bytes": 11829
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-07/archive-plan-request.json",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-07/archive-plan-request.json",
+      "sha256": "sha256:506bcc0d93b0dc2571aa29e56e88dc4893ed6c79b34aeee5401d26db9e512737",
+      "bytes": 925
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-07/audit-ready.json",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-07/audit-ready.json",
+      "sha256": "sha256:2ca4c1b21818eabd02b69771643bb2e47712a846aff4f2cfed0dea059c402983",
+      "bytes": 374
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-07/bytecode-dont-write.json",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-07/bytecode-dont-write.json",
+      "sha256": "sha256:124eacba17b430b148f61c8feba91dbf196586dec68538f75657a7f556092c12",
+      "bytes": 6663
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-07/bytecode-normal.json",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-07/bytecode-normal.json",
+      "sha256": "sha256:62851f595073ad72d931f376b978a5ecc34fd40a48d037067c7aab4a58653ca7",
+      "bytes": 6659
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-07/candidate.json",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-07/candidate.json",
+      "sha256": "sha256:e615d0a1bdc81d36bb21f64f7c6cca6b28d625847cf04203a9b333a9e73483d7",
+      "bytes": 20402
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-07/close-request.json",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-07/close-request.json",
+      "sha256": "sha256:e6cf6440f6aa108571d85c5f409f4ad84f97db8a3618aad96f25542924711f59",
+      "bytes": 20756
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-07/early-smoke.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-07/early-smoke.log",
+      "sha256": "sha256:b4e427622f4939e1f7374f13abf80bd6b54ae6ef42029dea3941536aff85dcc7",
+      "bytes": 1585
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-07/history-before.json",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-07/history-before.json",
+      "sha256": "sha256:f213f5dfe22b5867e073c2d30d15ecbd6e118bb85d2209c362b891b66d02be12",
+      "bytes": 545399
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-07/initial-diff.patch",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-07/initial-diff.patch",
+      "sha256": "sha256:ac8d214bff13f0830bd8376332e949ef99c2b2aadd4878390de36036b1bac9b5",
+      "bytes": 7843
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-07/initial-status.txt",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-07/initial-status.txt",
+      "sha256": "sha256:54a6caf11363c1bd223b9bee6d90a2a8fb948d4a423f1c52361a5c57486286ce",
+      "bytes": 487
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-07/interpreter.json",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-07/interpreter.json",
+      "sha256": "sha256:0868c240d3ba098c527e266969903f5a476cadc917032f47300e6f7959a7d1c2",
+      "bytes": 9506
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-07/launcher.json",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-07/launcher.json",
+      "sha256": "sha256:06c2927168f19b7ead614dc1f3f0cfd59a5bddba00561da3cc8df2ec3e155df0",
+      "bytes": 4592
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-07/old-corrupt.json",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-07/old-corrupt.json",
+      "sha256": "sha256:24c18c3e71fb86c522c7dc88e402d73075afc928ee8228976bdc5ee4e9ca6a28",
+      "bytes": 8425
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-07/old-delete.json",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-07/old-delete.json",
+      "sha256": "sha256:2904d621709a4f70f5dbaad1db6301a344e4c049b545b09370dabe9855c69419",
+      "bytes": 7395
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-07/old-legacy.json",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-07/old-legacy.json",
+      "sha256": "sha256:cee00cb1a162b8dfa2c4ca4f697c7496feb49accec3de2e0e69bff53e13e3f02",
+      "bytes": 3294
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-07/pilot-plan.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-07/pilot-plan.log",
+      "sha256": "sha256:68344d48ccff5b293c60cbdf98b7c9d31059e9ad4cd1ea4d6d2e9843caee9052",
+      "bytes": 3133
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-07/pilot-plan/commands.json",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-07/pilot-plan/commands.json",
+      "sha256": "sha256:b57257da5c9ef374a5038d1dc27de342412d88a4a1ad8234eaef80d51e019666",
+      "bytes": 3748
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-07/pilot-plan/logs/00-optin-setup-preview.stderr.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-07/pilot-plan/logs/00-optin-setup-preview.stderr.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-07/pilot-plan/logs/00-optin-setup-preview.stdout.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-07/pilot-plan/logs/00-optin-setup-preview.stdout.log",
+      "sha256": "sha256:c85c4d001cc270577daa9f75c2066ea83fb5c71978a063d9dc4244517bf50e2e",
+      "bytes": 300118
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-07/pilot-plan/logs/01-optin-setup-apply.stderr.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-07/pilot-plan/logs/01-optin-setup-apply.stderr.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-07/pilot-plan/logs/01-optin-setup-apply.stdout.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-07/pilot-plan/logs/01-optin-setup-apply.stdout.log",
+      "sha256": "sha256:b5bc0b2fcb6695d7b8a88ed4a9e1162085a533083c6a3d7deee0e218be8c861d",
+      "bytes": 269
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-07/pilot-plan/logs/02-optin-initial-plan.stderr.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-07/pilot-plan/logs/02-optin-initial-plan.stderr.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-07/pilot-plan/logs/02-optin-initial-plan.stdout.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-07/pilot-plan/logs/02-optin-initial-plan.stdout.log",
+      "sha256": "sha256:fe96d62e54076d91df5ae8efc0033b2bdca1e3bacf60fe22cd79cc6dc9284a55",
+      "bytes": 1706
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-07/pilot-plan/logs/prot-01-apply.stderr.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-07/pilot-plan/logs/prot-01-apply.stderr.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-07/pilot-plan/logs/prot-01-apply.stdout.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-07/pilot-plan/logs/prot-01-apply.stdout.log",
+      "sha256": "sha256:ca5de3af05f5bd060565d47588eacc41cf11595493083ca979697bdc095e56ae",
+      "bytes": 269
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-07/pilot-plan/logs/prot-02-init-test.stderr.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-07/pilot-plan/logs/prot-02-init-test.stderr.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-07/pilot-plan/logs/prot-02-init-test.stdout.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-07/pilot-plan/logs/prot-02-init-test.stdout.log",
+      "sha256": "sha256:b805fdf28d2fa5b5f4cabcf22b9ed6f7f966b1f691c6ed7fab228b93a05e04eb",
+      "bytes": 315
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-07/pilot-plan/logs/prot-03-approve-test.stderr.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-07/pilot-plan/logs/prot-03-approve-test.stderr.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-07/pilot-plan/logs/prot-03-approve-test.stdout.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-07/pilot-plan/logs/prot-03-approve-test.stdout.log",
+      "sha256": "sha256:8d0683692bdac45cd7f35d6c35daa0b808e77559a6189e76d9b9e56451ce7591",
+      "bytes": 155
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-07/pilot-plan/logs/prot-04-reject-kind-test.stderr.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-07/pilot-plan/logs/prot-04-reject-kind-test.stderr.log",
+      "sha256": "sha256:8fb10c810d981de1fe467b98d8144a22eda123992b318f18277037040523d53f",
+      "bytes": 526
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-07/pilot-plan/logs/prot-04-reject-kind-test.stdout.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-07/pilot-plan/logs/prot-04-reject-kind-test.stdout.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-07/pilot-plan/logs/prot-05-init-cmd.stderr.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-07/pilot-plan/logs/prot-05-init-cmd.stderr.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-07/pilot-plan/logs/prot-05-init-cmd.stdout.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-07/pilot-plan/logs/prot-05-init-cmd.stdout.log",
+      "sha256": "sha256:917d5eb76c11c2fd7c11d897355fa9e1ad3a0b89d00179255a2cd26a2e9f0c77",
+      "bytes": 309
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-07/pilot-plan/logs/prot-06-approve-cmd.stderr.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-07/pilot-plan/logs/prot-06-approve-cmd.stderr.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-07/pilot-plan/logs/prot-06-approve-cmd.stdout.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-07/pilot-plan/logs/prot-06-approve-cmd.stdout.log",
+      "sha256": "sha256:c5df577d51494637645097e2ebd09a8534dadc01943f618a3b9a9e432a3b1412",
+      "bytes": 155
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-07/pilot-plan/logs/prot-07-probe.stderr.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-07/pilot-plan/logs/prot-07-probe.stderr.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-07/pilot-plan/logs/prot-07-probe.stdout.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-07/pilot-plan/logs/prot-07-probe.stdout.log",
+      "sha256": "sha256:b61e720bfd040539b3b83de4cf95bf1bc14fc6ea826a214563ee17cf17791dd1",
+      "bytes": 820
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-07/pilot-plan/logs/prot-08-verifier-run.stderr.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-07/pilot-plan/logs/prot-08-verifier-run.stderr.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-07/pilot-plan/logs/prot-08-verifier-run.stdout.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-07/pilot-plan/logs/prot-08-verifier-run.stdout.log",
+      "sha256": "sha256:12ae95491bc8f78e461de013234a8946ec6e33496fe4beb24223025b7450db61",
+      "bytes": 705
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-07/pilot-plan/logs/prot-09-verifier-verify.stderr.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-07/pilot-plan/logs/prot-09-verifier-verify.stderr.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-07/pilot-plan/logs/prot-09-verifier-verify.stdout.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-07/pilot-plan/logs/prot-09-verifier-verify.stdout.log",
+      "sha256": "sha256:82d260e508d1bce83d263951a8db3e2bf39a11bdbb48b063827687a72df6a03f",
+      "bytes": 45
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-07/pilot-plan/logs/prot-10-verifier-gate.stderr.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-07/pilot-plan/logs/prot-10-verifier-gate.stderr.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-07/pilot-plan/logs/prot-10-verifier-gate.stdout.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-07/pilot-plan/logs/prot-10-verifier-gate.stdout.log",
+      "sha256": "sha256:91ee39fdd00205467c98d86a363ff97ea709fccccb3c9a43f23b70671dbb6892",
+      "bytes": 983
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-07/pilot-plan/logs/prot-11-release-ready-blocked.stderr.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-07/pilot-plan/logs/prot-11-release-ready-blocked.stderr.log",
+      "sha256": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-07/pilot-plan/logs/prot-11-release-ready-blocked.stdout.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-07/pilot-plan/logs/prot-11-release-ready-blocked.stdout.log",
+      "sha256": "sha256:5e5cff7426ae50b322e39be41c1f009e3e3d28c95d290562b42f0ba669719f84",
+      "bytes": 724
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-07/pilot-plan/policy-applied.json",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-07/pilot-plan/policy-applied.json",
+      "sha256": "sha256:75ea0d21632b8422f2c76eff33d6518cf5f4706d4d8056385252760d8b5300a1",
+      "bytes": 299320
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-07/preflight-before-verify.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-07/preflight-before-verify.log",
+      "sha256": "sha256:445239851b2c122340c3667f75020c17a69043604054dc2f58997fad42e15a1e",
+      "bytes": 1395
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-07/preservation-pre-close.json",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-07/preservation-pre-close.json",
+      "sha256": "sha256:4e8ff20384772329bcd962bf51645f64143de284aebef88ac292f558417122b9",
+      "bytes": 100
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-07/probe_runtime_context.py",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-07/probe_runtime_context.py",
+      "sha256": "sha256:d79513c50d1c47565c91ae92f756ab8d357f01685f8dda70dad5998288101fff",
+      "bytes": 3055
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-07/provenance.json",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-07/provenance.json",
+      "sha256": "sha256:3960173eef97676a5a2d4583998d9989dfa9694ddb1a262320c3aab87c79fb2d",
+      "bytes": 489
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-07/provenance.sha256",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-07/provenance.sha256",
+      "sha256": "sha256:f618efc124bfcf5454f6d6abc42894887951bf2017fce8b1b02ef6d82dafe7ef",
+      "bytes": 72
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-07/report.md",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-07/report.md",
+      "sha256": "sha256:abd8bd86bb55c4ac91bcfef6d7b1529fd94819976e68070d45c7377eb7c80abc",
+      "bytes": 8526
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-07/rollback.json",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-07/rollback.json",
+      "sha256": "sha256:864f272db76dbf50a0835d55265bad43b2348e730c3b0dbc59ba4bf46a9a6caa",
+      "bytes": 7042
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-07/runtime-context.json",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-07/runtime-context.json",
+      "sha256": "sha256:493c268f6b2f5a87623fc9cdc074a99e2be56cd8c3a2758b4f7ff7825c5f7400",
+      "bytes": 13911
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-07/snapshot.meta.json",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-07/snapshot.meta.json",
+      "sha256": "sha256:3c3248fc025c263682792b3c86ec8b3d4f52cf676cf5fc36311721243fd97bf7",
+      "bytes": 4008
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-07/snapshot.txt",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-07/snapshot.txt",
+      "sha256": "sha256:2e5887880d250df9ad25e731874384c56958d89106bead7765746cf03a462ee5",
+      "bytes": 36625
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-07/spec-acceptance.json",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-07/spec-acceptance.json",
+      "sha256": "sha256:5d7d345239375fed0f641803ebf168b920294a73459fbbd5d66e118d88bd4d18",
+      "bytes": 477
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-07/spec-payload.txt",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-07/spec-payload.txt",
+      "sha256": "sha256:7f448bf08e70af5d6b23512c1379b8a24b9fdc9d2d9a196a735e058bec9dbf4e",
+      "bytes": 19725
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-07/verifier-gate.json",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-07/verifier-gate.json",
+      "sha256": "sha256:6d04f7669a20d26f9fbbf7df361645b6c14b959fd48a2ce7baa3e2fb996deb01",
+      "bytes": 11751
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-07/verify.log",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-07/verify.log",
+      "sha256": "sha256:c39637be711a1353eef74154c10e2846c53653dbed294a813461fc6a20bfe34c",
+      "bytes": 434
+    }
+  ],
+  "moves": [
+    {
+      "from": "work/verification/AUDIT-009/audit-01",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-01"
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence",
+      "to": "docs/archive/tasks/AUDIT-009-evidence"
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-02",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-02"
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-03",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-03"
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-04",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-04"
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-05",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-05"
+    },
+    {
+      "from": "work/verification/AUDIT-009/84693ca6b4d149da9bad2908c0b2e8b5",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/84693ca6b4d149da9bad2908c0b2e8b5"
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-06",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-06"
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-07",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-07"
+    },
+    {
+      "from": "work/verification/AUDIT-009/7138133c57a04bba80bb0f222a964380",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/7138133c57a04bba80bb0f222a964380"
+    },
+    {
+      "from": "docs/tasks/AUDIT-009.md",
+      "to": "docs/archive/tasks/AUDIT-009.md"
+    },
+    {
+      "from": "docs/tasks/AUDIT-009.meta.json",
+      "to": "docs/archive/tasks/AUDIT-009.meta.json"
+    }
+  ],
+  "materials": [
+    {
+      "id": "audit-01",
+      "role": "report",
+      "storage": "local",
+      "source_old": "work/verification/AUDIT-009/audit-01",
+      "source_new": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-01",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "AUDIT-009"
+      ]
+    },
+    {
+      "id": "independent-audit-01",
+      "role": "report",
+      "storage": "local",
+      "source_old": "docs/tasks/AUDIT-009-evidence",
+      "source_new": "docs/archive/tasks/AUDIT-009-evidence",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "AUDIT-009"
+      ]
+    },
+    {
+      "id": "audit-02",
+      "role": "report",
+      "storage": "local",
+      "source_old": "work/verification/AUDIT-009/audit-02",
+      "source_new": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-02",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "AUDIT-009"
+      ]
+    },
+    {
+      "id": "audit-03",
+      "role": "report",
+      "storage": "local",
+      "source_old": "work/verification/AUDIT-009/audit-03",
+      "source_new": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-03",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "AUDIT-009"
+      ]
+    },
+    {
+      "id": "audit-04",
+      "role": "report",
+      "storage": "local",
+      "source_old": "work/verification/AUDIT-009/audit-04",
+      "source_new": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-04",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "AUDIT-009"
+      ]
+    },
+    {
+      "id": "audit-05",
+      "role": "report",
+      "storage": "local",
+      "source_old": "work/verification/AUDIT-009/audit-05",
+      "source_new": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-05",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "AUDIT-009"
+      ]
+    },
+    {
+      "id": "verify-84693ca6b4d149da9bad2908c0b2e8b5",
+      "role": "report",
+      "storage": "local",
+      "source_old": "work/verification/AUDIT-009/84693ca6b4d149da9bad2908c0b2e8b5",
+      "source_new": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/84693ca6b4d149da9bad2908c0b2e8b5",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "AUDIT-009"
+      ]
+    },
+    {
+      "id": "audit-06",
+      "role": "report",
+      "storage": "local",
+      "source_old": "work/verification/AUDIT-009/audit-06",
+      "source_new": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-06",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "AUDIT-009"
+      ]
+    },
+    {
+      "id": "audit-07",
+      "role": "report",
+      "storage": "local",
+      "source_old": "work/verification/AUDIT-009/audit-07",
+      "source_new": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-07",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "AUDIT-009"
+      ]
+    },
+    {
+      "id": "verify-7138133c57a04bba80bb0f222a964380",
+      "role": "report",
+      "storage": "local",
+      "source_old": "work/verification/AUDIT-009/7138133c57a04bba80bb0f222a964380",
+      "source_new": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/7138133c57a04bba80bb0f222a964380",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "AUDIT-009"
+      ]
+    }
+  ],
+  "external": [],
+  "type": "lifecycle-close",
+  "task": "AUDIT-009",
+  "outcome": "done",
+  "previous_status": "in_review",
+  "reason": null,
+  "acceptance_ref": null,
+  "policy": "managed",
+  "handoff": {
+    "at": "2026-11-18T09:16:00+03:00",
+    "actor": {
+      "name": "Codex",
+      "model": "GPT-6.1 Sol (High)"
+    },
+    "summary": "HANDOFF-01",
+    "reports": [
+      "verify-7138133c57a04bba80bb0f222a964380"
+    ],
+    "card_projection": "sha256:2044594fec69b112a888b9e58df801880e40084d5fb162e0fbf699b4af748dff",
+    "entry_id": "HANDOFF-01",
+    "journal_sha256": "sha256:9919f5fb0baf7fd90a2b058b2261e2e48c1aba1b2b2d90c6cbff1f5255a6817f"
+  },
+  "acceptance": {
+    "at": "2026-11-18T09:20:27+03:00",
+    "actor": {
+      "name": "Codex",
+      "model": "GPT-6.1 Sol (High)"
+    },
+    "role": "auditor",
+    "kind": "acceptance",
+    "result": "accepted",
+    "handoff_at": "2026-11-18T09:16:00+03:00",
+    "session": null,
+    "detail": null,
+    "audit_id": "AUDIT-01",
+    "audit_sha256": "sha256:e889cf5de765d57b0040bdc5ab220a09dcd37645ef0f900f104de500405b6fb1"
+  }
+}

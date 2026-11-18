@@ -1,0 +1,229 @@
+# PB-061: Подтверждать результаты и политику в защищённом контуре
+
+ID: PB-061
+Status: in_review
+Priority: P2
+Depends-On: PB-060
+Executor: Devin
+Model: SWE-2 High
+Created: 2026-11-07T01:07:59+03:00
+Closed: -
+
+<!-- playbook-meta:external -->
+
+## Задача
+
+### Цель и границы
+
+Граница доверия. Доверенный verifier/receipt adapter, deployment contract и тесты изоляции. Не получать доступ к аккаунтам и не настраивать production без отдельного поручения; выбор хостинга не навязывается.
+
+### Контекст
+
+[Спецификация](../specs/dependency-aware-verification.md): R-17–18,20; сценарии AC-07–08,11. [Design](../designs/dependency-aware-verification.md), [ADR-0006](../adr/0006-dependency-aware-verification.md), [план](../plans/dependency-aware-verification.md).
+
+Подготовлено по поручению инженера 2026-11-07. Выполнение пока не разрешено. Перед стартом: принятие технического проекта, завершённые зависимости, актуальный card show/handoff затрагиваемых работ и назначение исполнителя. Исходные чужие изменения сохранять.
+
+### Критерии приёмки
+
+- [ ] AC-01: Реализовать verifier protocol и эталонный executor/consumer: одобренная policy, закреплённый runner, независимый пересчёт candidate, изолированный запуск, authenticated receipt. Клиентские результаты не подписываются как собственные.
+- [ ] AC-02: Агент и тестовый процесс не имеют доступа записи к policy/history/ключам. Forgery/replay/cross-project/revocation/key replacement/local approved отклоняются; обычное расширение не разрешает новые недоверенные команды.
+- [ ] AC-03: Инструкция реального OS/CI развёртывания и capability probe различают local/protected. Проверить реальную границу прав на доступном стенде; без неё зафиксировать ограничение и не объявлять защищённую эксплуатацию принятой.
+- [ ] AC-04: Целевые поведенческие проверки и связанные регрессии пройдены; документация и self-manifest актуальны, EXEC/CHECK/HANDOFF содержат реальные доказательства и ограничения; передача зарегистрирована штатным CLI.
+
+### План
+
+1. Уточнить фактические интерфейсы зависимостей и связать изменения с критериями этой карточки.
+2. Реализовать ограниченный объём, добавить постоянные позитивные и негативные проверки критериев AC-01–03; не подменять их структурной проверкой.
+3. Обновить затронутые документы/шаблоны и self-manifest при изменениях комплекта; выполнить адресные проверки, index и check --ready.
+4. Подготовить материалы и пройти действующие preflight/verify/handoff. До явного opt-in использовать прежний контракт; не отключать полный legacy suite ради экономии.
+5. Записать EXEC/CHECK/HANDOFF и передать независимому аудитору; самостоятельно не закрывать.
+
+### Ресурсы
+
+Python и стандартная библиотека для основного CLI; локальные временные проекты и subprocess-счётчики. Новые зависимости защищённого executor обосновать в рамках принятого design. Фактические среда, policy_revision и бюджет фиксируются при старте; доступность отдельной OS/CI identity не предполагается.
+
+Материалы: `docs/tasks/PB-061-evidence/`; команды воспроизведения и отчёты принадлежат этой карточке. Общие материалы и сквозная матрица — AUDIT-009/PB-064.
+
+## Журнал
+
+### EXEC-01 — Выполнение
+Время: 2026-11-10T17:35:00+03:00
+Исполнитель: Devin
+Модель: SWE-2 High
+Изменения: доверенный контур по design §8 и spec R-17–18,20. `checks_trust.py` — verifier home вне project.json (engine/project_id, ключи HMAC, одобренная политика целиком, revocations, append-only журнал, results/receipts/arena): одобрение digest через канал — weakening (включая новый argv) только с явным --reapprove; `scrub_env` и `sandbox_prefix` (подтверждённый на стенде Seatbelt: deny read/write дома и запись вне arena); `probe` честно различает local/protected. `checks_verifier.py` — самостоятельный candidate manifest по байтам, изолированный снимок с повторным хешированием (мутация — отказ), прогон закреплённого runner, receipts run/aggregate, verify (подпись/журнал/project/engine/отзывы/ожидаемые digest), consumer gate с `protected_confirmed` только при доказанной OS identity. Runner получил `env`/`argv_prefix` и возврат `results`; адаптер — `wrap`; исправлена утечка мутации env в binding.environment; `collect` копирует env. CLI `verifier *` в playbook.py. Постоянные тесты tests/test_checks_trust.py — 32 сценария AC-01–03 (forgery/replay/cross-project/revocation/key replacement/editable approved/real sandbox deny). Deploy contract — rules/verification.md; architecture/code-map/CHANGELOG актуальны; self-manifest пересобран.
+Файлы:
+- ai-dev-playbook/scripts/checks_trust.py
+- ai-dev-playbook/scripts/checks_verifier.py
+- ai-dev-playbook/scripts/checks_runner.py
+- ai-dev-playbook/scripts/checks_unittest.py
+- ai-dev-playbook/scripts/playbook.py
+- ai-dev-playbook/rules/verification.md
+- ai-dev-playbook/manifest.json
+- tests/test_checks_trust.py
+- docs/architecture.md
+- docs/code-map.md
+- docs/tasks/PB-061-evidence/commands.md
+- CHANGELOG.md
+
+### CHECK-01 — Проверка
+Время: 2026-11-10T18:05:00+03:00
+Исполнитель: Devin
+Модель: SWE-2 High
+Результат: passed
+Критерии: AC-01, AC-02, AC-03, AC-04
+Команда: `python3 -m unittest discover -s tests -p "test_checks_trust.py" -v` (32 сценария), `python3 -m unittest discover -s tests -p "test_checks_*.py"` (243 теста), полный `playbook.py verify PB-061` (self-check, preflight-regressions, unit-tests — отчёт 41b4049b522e4b0e9a18f8b794cecb07)
+Среда: macOS Darwin 27, Python 3.14.6, sandbox-exec доступен; временные проекты и дом verifier в /tmp; checkout dev.
+Факт: позитивный протокол init→approve→run→verify→gate→aggregate пройден на реальном CLI и в тестах; негативные сценарии forgery/replay/cross-project/revoked key/policy/receipt/unknown key_id/editable approved/клиентский файл отклоняются; реальная граница подпроцесса подтверждена sandbox-exec (deny read/write дома). Полный verify passed.
+Доказательства: [команды и smoke-факты](PB-061-evidence/commands.md), [отчёт verify](../../work/verification/PB-061/41b4049b522e4b0e9a18f8b794cecb07/report.json)
+Ограничения: самопроверка исполнителя. Отдельной OS identity на стенде нет — probe честно возвращает capability=local; защищённая эксплуатация не заявлена (AC-03). Потребление gate в lifecycle/release — PB-062; opt-in self-project — PB-063.
+
+### HANDOFF-01 — Передача
+Время: 2026-11-10T18:05:00+03:00
+Исполнитель: Devin
+Модель: SWE-2 High
+Выполнение: EXEC-01
+Проверки: CHECK-01
+Состояние: in_review; dev; изменения не закоммичены. Реализован доверенный контур PB-061 (verifier home, receipts run/aggregate, verify, consumer gate, probe, CLI verifier *); полный verify passed. Следующий шаг — независимый аудит в отдельной сессии.
+Фокус аудита: независимость candidate digest (агентский не принимается), невозможность подписи клиентских результатов, отклонение forgery/replay/cross-project/отзыва/подмены ключа, запрет новых команд обычным расширением (weakening→--reapprove), реальность sandbox-изоляции подпроцесса, честность local-вердикта без OS identity, фиксация ограничения protected-эксплуатации.
+
+### AUDIT-01 — Аудит
+Время: 2026-11-10T18:37:04+03:00
+Исполнитель: Codex
+Модель: GPT-6
+Передача: HANDOFF-01
+Результат: changes_requested
+Критерии: AC-01, AC-02, AC-03, AC-04
+Независимо проверено: audit-ready подтвердил свежесть передачи; изучены spec R-17–18,20, design §8, verifier/trust/runner/adapter и тесты. Нативный запуск 32 trust-тестов пройден; связанные test_checks_*.py пройдены. Дополнительные поведенческие пробы выявили A-01–A-04. Карточка возвращена в in_progress; реализация не исправлялась.
+Доказательства: [протокол](../../work/verification/PB-061/audit-01/audit.md), [воспроизведения](../../work/verification/PB-061/audit-01/probes.py), [факты](../../work/verification/PB-061/audit-01/probes.log), [32 теста](../../work/verification/PB-061/audit-01/trust-tests.log), [регрессии](../../work/verification/PB-061/audit-01/related-tests.log).
+Ограничения: отдельная OS/CI identity не предоставлена; protected deployment не принят. В sandbox Codex вложенный sandbox-exec блокируется (3 failures, 2 errors); нативный повтор всех 32 тестов успешен. Полный legacy suite заново не запускался: свежесть отчёта исполнителя проверена через audit-ready, блокирующие дефекты воспроизведены адресно.
+
+#### A-01 — Замечание
+Серьёзность: P1
+Критерии: AC-01, AC-02, AC-04
+Проблема: verifier подписывает отчёт, который может целиком подделать недоверенный тестовый процесс. В checks_unittest.collect читается доступный этому процессу adapter.json; закреплённый путь скрипта не защищает происхождение событий.
+Воспроизведение: запустить probes.py; ветка FORGED_ADAPTER заменяет tests/test_payments.py модулем без тестов, который при discovery берёт --out из sys.argv, пишет ожидаемый/фактический ID из одобренного каталога со статусом passed и завершает процесс os._exit(0).
+Факт: run_ok=true, signature_ok=true, gate_ok=true при отсутствии определённых и выполненных тестов; sandbox-exec реально включён. Приём fabricated report происходит в checks_unittest.py:263–272, его подпись — checks_verifier.run.
+Влияние: агент превращает клиентские выдуманные результаты в собственную authenticated receipt verifier; AC-01 и граница доверия обходятся без доступа к ключу.
+Критерий исправления: исключить доверие к подменяемому тестовым процессом итоговому отчёту; обеспечить доказанное происхождение результатов либо блокировать защищённое подтверждение для такого adapter. Добавить негативный тест discovery→поддельный отчёт→os._exit(0): подписанный passed и положительный gate недопустимы.
+
+#### A-02 — Замечание
+Серьёзность: P1
+Критерии: AC-02, AC-03, AC-04
+Проблема: probe выводит separate/protected из неудачи создания marker только в корне home; не проверяет права на ключи/approved/history, возможность владельца менять права и работоспособность изоляции. Любой OSError считается доказательством отсутствия записи.
+Воспроизведение: probes.py, ветка PROBE: обычный дом под тем же UID вне проекта, успешный прогон, chmod(home, 0555); открыть существующий keys/*.key на запись и вызвать probe/gate.
+Факт: key_writable=true одновременно с capability=protected, agent_can_write=false и protected_confirmed=true. Владелец также свободно возвращает chmod 0755. Ошибочный вывод находится в checks_trust.py:388–408.
+Влияние: локальная среда с подконтрольными агенту ключами объявляется защищённой; нарушен явный запрет R-20.
+Критерий исправления: не выводить OS/CI boundary из одного marker; проверять реальную независимую identity, защиту чувствительных файлов/предков и изоляцию тестового процесса. При недоказанности возвращать local; добавить негативные проверки read-only корня с доступными ключами и ошибок probe, не связанных с правами.
+
+#### A-03 — Замечание
+Серьёзность: P2
+Критерии: AC-01, AC-02, AC-04
+Проблема: checks_runner.execute перезаписывает аргумент env результатом binding_environment на строке 346 и передаёт эту идентичность среды в subprocess на строках 480/484; scrub_env verifier не используется. Ошибка затрагивает и обычный runner.
+Воспроизведение: probes.py, ENV печатает фактическое окружение subprocess; EXTERNAL_EXCEPTION запускает валидную политику с required_environment=['api'] и freshness=always_run.
+Факт: HOME/TMPDIR/PATH отсутствуют вместо значений arena; в env попадает platform. С required_environment процесс падает с TypeError: expected str, bytes or os.PathLike object, not dict, поскольку external:api имеет значение dict.
+Влияние: изоляция окружения не соответствует контракту; проверки с TTL/always_run не запускаются и не получают контролируемого результата.
+Критерий исправления: разделить окружение процесса и binding identity; передавать scrubbed env только защищённому запуску и сохранять прежнее наследование обычного runner. Поведенчески проверить HOME/TMPDIR внутри arena, PATH и запуск с ttl/always_run.
+
+#### A-04 — Замечание
+Серьёзность: P1
+Критерии: AC-01, AC-02, AC-04
+Проблема: verify для aggregate не проверяет доверие к source_receipts; отзыв исходной квитанции не распространяется на подтверждения, переиспользовавшие её результаты.
+Воспроизведение: probes.py, REVOCATION: run→aggregate→revoke исходного receipt; удалить только публичную копию отозванного оригинала из проекта, оставив aggregate; вызвать verify/gate.
+Факт: original_ok=false, aggregate_ok=true, gate_ok=true. checks_verifier.verify:324–338 проверяет лишь текущую квитанцию, не её источники; исходные результаты при aggregate не исполнялись заново.
+Влияние: результаты отозванного запуска продолжают подтверждать кандидата через агрегат; отзыв доверия обходится удалением недоверенной публичной копии.
+Критерий исправления: проверять доверенные источники агрегата и их актуальные отзывы транзитивно либо отслеживать зависимые подтверждения в доверенном журнале; отозванный источник не должен покрывать обязательства через агрегат. Добавить проверку цепочки run→aggregate→aggregate и отзыва источника.
+
+### EXEC-02 — Исправление
+Время: 2026-11-10T19:20:00+03:00
+Исполнитель: Devin
+Модель: SWE-2 High
+Замечания: A-01, A-02, A-03, A-04
+Изменения: все четыре замечания AUDIT-01. A-01: канал отчёта адаптера выведен из-под записи тестового процесса — suite не получает путь отчёта, отчёт уходит строкой с маркером в stdout и подтверждается родителем ack-байтом stdin только у живого процесса; posthumous-строка, дубликат и отсутствие отчёта — crash; `adapter.json` пишет родитель; дочерний код завершается `os._exit`, закрывая подделку через `atexit`. Остаточное self-reported ограничение заявлено в docstring, rules и architecture. A-02: probe больше не выводит protected из одного marker — требуется иная OS identity (st_uid != euid), отказ записи по EACCES/EPERM во всех чувствительных точках (дом, родительский каталог, keys, approved, revocations, journal, активный ключ) и реальный прогон sandbox-профиля; chmod того же uid и любой иной OSError оставляют local. A-03: в checks_runner разделены окружение процесса (`env`) и идентичность среды привязки (`bind_env`) — binding_environment больше не попадает в subprocess env; проверено поведение HOME/TMPDIR внутри arena и запуск с required_environment always_run. A-04: verify рекурсивно проверяет source_receipts aggregate — отзыв исходной квитанции распространяется транзитивно по цепочке run→aggregate→aggregate, циклы отклоняются. Тесты: +7 регрессий AUDIT-01 в tests/test_checks_trust.py (подделка файла/stdout/дубликат отчёта, chmod-probe, env изоляции, транзитивный отзыв); документация актуализирована.
+Файлы:
+- ai-dev-playbook/scripts/checks_unittest.py
+- ai-dev-playbook/scripts/checks_runner.py
+- ai-dev-playbook/scripts/checks_trust.py
+- ai-dev-playbook/scripts/checks_verifier.py
+- tests/test_checks_trust.py
+- ai-dev-playbook/rules/verification.md
+- docs/architecture.md
+- ai-dev-playbook/manifest.json
+
+### CHECK-02 — Проверка
+Время: 2026-11-10T19:55:00+03:00
+Исполнитель: Devin
+Модель: SWE-2 High
+Результат: passed
+Критерии: AC-01, AC-02, AC-03, AC-04
+Команда: `python3 -m unittest discover -s tests -p "test_checks_trust.py"` (39 тестов, включая 7 регрессий AUDIT-01), `python3 -m unittest discover -s tests -p "test_checks_*.py"` (250 тестов), полный `playbook.py verify PB-061` (self-check, preflight-regressions, unit-tests — отчёт 07e20714fa594fe9b36fee0ad743ecb1)
+Среда: macOS Darwin 27, Python 3.14.6, sandbox-exec доступен; временные проекты и дом verifier в /tmp; checkout dev.
+Факт: все четыре замечания AUDIT-01 закрыты поведением: подделка adapter.json и posthumous/дублирующая строка отчёта дают crash, не passed; probe при chmod 0555 того же uid и доступных ключах остаётся local; scrub_env реально доходит до subprocess (HOME/TMPDIR в arena, PATH есть), required_environment always_run не ломает запуск; отзыв исходного receipt инвалидирует aggregate и цепочку aggregate→aggregate, gate отклоняет. Адаптерные события остаются self-reported — ограничение заявлено в коде, rules и architecture.
+Доказательства: [отчёт verify](../../work/verification/PB-061/07e20714fa594fe9b36fee0ad743ecb1/report.json), тесты tests/test_checks_trust.py
+Ограничения: самопроверка исполнителя. Отдельной OS/CI identity на стенде нет — capability=local, защищённая эксплуатация не заявлена. Повторный независимый аудит требуется для закрытия замечаний.
+
+### HANDOFF-02 — Передача
+Время: 2026-11-10T19:55:00+03:00
+Исполнитель: Devin
+Модель: SWE-2 High
+Выполнение: EXEC-02
+Проверки: CHECK-02
+Состояние: in_review; dev; изменения не закоммичены. Замечания AUDIT-01 (A-01–A-04) исправлены: канал отчёта адаптера выведен из-под записи тестового процесса (stdout+ack у живого процесса), probe требует реальную OS identity/права/sandbox, env процесса отделён от binding, отзыв источника транзитивен для aggregate. Полный verify passed. Следующий шаг — повторный независимый аудит.
+Фокус аудита: достаточно ли ack-протокола против подделки отчёта (posthumous/duplicate/отсутствие отклоняются; self-reported события заявлены честно), полнота проверок probe (uid, EACCES/EPERM по всем точкам, реальный sandbox-прогон), отсутствие регрессии наследования env у обычного runner, транзитивность отзыва по цепочке aggregate.
+
+### AUDIT-02 — Аудит
+Время: 2026-11-10T20:58:29+03:00
+Исполнитель: Codex
+Модель: GPT-6
+Передача: HANDOFF-02
+Результат: changes_requested
+Критерии: AC-01, AC-02, AC-03, AC-04
+Закрытые замечания: A-02, A-03, A-04
+Независимо проверено: изучены EXEC-02/CHECK-02/HANDOFF-02 и текущие adapter/runner/trust/verifier. Повторный нативный прогон test_checks_*.py: 250 тестов, OK. A-02: chmod 0555 дома того же UID оставляет local, доступ к ключу не создаёт protected. A-03: HOME/TMPDIR внутри arena и PATH реально передаются subprocess, required_environment=always_run работает; обычный runner наследует контрольную переменную окружения. A-04: отзыв run отклоняет оба aggregate цепочки run→aggregate→aggregate и gate даже после удаления публичных копий источников. A-01 остаётся открытым: модуль без тестов печатает валидный отчёт, читает ack из stdin и делает os._exit(0); run_ok=true, verify_ok=true, gate_ok=true при defined_tests=0/executed_tests=0. Новая находка — A-05. Карточка возвращена в in_progress; реализация не изменялась.
+Доказательства: [протокол](../../work/verification/PB-061/audit-02/audit.md), [независимые пробы](../../work/verification/PB-061/audit-02/probes.py), [факты](../../work/verification/PB-061/audit-02/probes.log), [250 тестов](../../work/verification/PB-061/audit-02/tests.log).
+Ограничения: отдельная OS/CI identity и protected deployment не проверялись. audit-ready отказал на gate вычисляемых критериев из-за открытых находок предыдущего аудита; card show подтверждает current HANDOFF-02, проверка передачи/отчётов в audit-ready пройдена до отказа criterion_view. Полный legacy suite заново не запускался; отчёт CHECK-02 имеет passed/inputs_unchanged=true. Первый запуск 250 тестов пересёкся с незавершённым prepare-audit и дал 13 отказов CLI из-за блокировки операции; после завершения подготовки полный повтор 250/250 успешен. Это не дефект PB-061. Документированное self-reported ограничение не закрывает A-01: защищённое подтверждение для этого adapter по-прежнему не блокируется.
+
+#### A-05 — Замечание
+Серьёзность: P2
+Критерии: AC-03, AC-04
+Проблема: _home_writability передаёт сами существующие каталоги home, home.parent и keys в _writable(append=False); os.open с O_CREAT|O_EXCL проверяет существование пути и получает EEXIST, а не проверяет право создать файл внутри каталога (checks_trust.py:366,382–385).
+Воспроизведение: probes.py, DIRECTORY_WRITABILITY: вызвать _home_writability для валидного дома. Отдельно chmod 0555 существующего каталога и os.open(catalog, O_WRONLY|O_CREAT|O_EXCL, 0600) также возвращает FileExistsError/EEXIST.
+Факт: значения «дом», «родительский каталог», «ключи» равны null. Даже при отсутствии writable_points остаются unknown_points, agent_can_write=None, а protected требует agent_can_write=False. Probe не может положительно подтвердить доступную корректную границу прав через этот путь.
+Влияние: исправление ложного protected сделало проверку каталогов неработающей; capability не различает подтверждённую независимую границу и ошибку её измерения.
+Критерий исправления: проверять создание уникального безопасного marker внутри каждого каталога, удаляя только собственный marker; EACCES/EPERM учитывать как отказ прав, прочие ошибки — как неизвестность. Добавить поведенческие проверки доступного и недоступного для записи каталога; при доступном стенде проверить положительный protected с независимой identity. Отсутствие стенда явно сохранить как ограничение.
+
+### EXEC-03 — Исправление
+Время: 2026-11-10T22:18:00+03:00
+Исполнитель: Devin
+Модель: SWE-2 High
+Замечания: A-01, A-05
+Изменения: A-01 закрыт блокировкой по критерию аудита «либо доказанное происхождение, либо блок защищённого подтверждения». Для `python-unittest` происхождение исходов недоказуемо в принципе — тестовый код исполняется в том же процессе и читает любой канал (файл, stdout, ack из stdin), поэтому ack-протокол принципиально не защищает результат. `checks_verifier.run` теперь отклоняет политику с исполняемыми `kind=test` проверками до исполнения: квитанция не выпускается, gate остаётся непокрытым, подделанный «валидный» отчёт не может стать passed. Подтверждаются только наблюдаемые результаты (command — spawn+exit родителя); локальный `checks run` остаётся диагностическим путём без изменений. Дополнительно `verify` разрешает каждый результат квитанции в хранилище дома по digest и отклоняет `kind=test` — квитанции, выпущенные до блокировки run, тоже не проходят (ретро-отклонение). Тестовые политики run/receipt/gate/aggregate переведены на command-проверки; добавлены регрессии: отказ self-reported политики, три сценария подделки AUDIT-02 (пустой модуль с валидным отчётом и os._exit, posthumous sentinel, дубликат строки) — все дают отказ verifier'а, а не passed, и отклонение verify для подписанной квитанции на kind=test результат. A-05: `_writable(directory=True)` создаёт уникальный `.probe-*` marker внутри каталога и удаляет только его (O_EXCL на самом каталоге давал EEXIST и ничего не проверял); каталоги дом/родитель/keys проверяются marker'ом, существующие файлы — открытием без изменения содержимого; EACCES/EPERM → отказ прав, прочие OSError → «неизвестно» (agent_can_write=None). Поведенческие тесты: marker создаётся и удаляется, chmod 0555 → False, EIO → None, probe доступного дома заполняет writable_points и не оставляет marker'ов; защищённость без отдельной identity не заявляется (capability=local).
+Файлы:
+- ai-dev-playbook/scripts/checks_verifier.py
+- ai-dev-playbook/scripts/checks_trust.py
+- tests/test_checks_trust.py
+- ai-dev-playbook/rules/verification.md
+- docs/architecture.md
+- CHANGELOG.md
+- docs/tasks/PB-061-evidence/commands.md
+- ai-dev-playbook/manifest.json
+
+### CHECK-03 — Проверка
+Время: 2026-11-10T22:47:00+03:00
+Исполнитель: Devin
+Модель: SWE-2 High
+Результат: passed
+Критерии: AC-01, AC-02, AC-03, AC-04
+Команда: `python3 -m unittest tests.test_checks_trust` (44 теста, включая регрессии A-01/AUDIT-02, ретро-отклонение квитанции и A-05), `python3 -m unittest test_checks_contract test_checks_graph test_checks_inventory test_checks_run test_checks_select test_checks_trust` (255 тестов), полный `playbook.py verify PB-061` (self-check, preflight-regressions, unit-tests — отчёт 952f9e47fdaf4ea385f36082df024873)
+Среда: macOS Darwin 27, Python 3.14.6, sandbox-exec доступен; временные проекты и дом verifier в /tmp; checkout dev.
+Факт: A-01 закрыт блокировкой — `verifier run` отклоняет политику с исполняемыми kind=test проверками до исполнения: подделанный валидный отчёт (пустой модуль + os._exit(0), posthumous sentinel, дубликат строки) не может дать квитанцию, gate остаётся непокрытым; `verify` разрешает каждый результат квитанции в хранилище дома и отклоняет kind=test — подписанная квитанция на self-reported результат не проходит и ретроактивно; квитанции выдаются только для наблюдаемых command-результатов. A-05 закрыт — probe создаёт уникальный `.probe-*` marker внутри каждого каталога и удаляет только его; writable/denied/unknown классифицируются по EACCES/EPERM и прочим OSError; probe доступного дома заполняет writable_points без остатков marker'ов. capability=local без отдельной OS identity — ограничение сохранено.
+Доказательства: [отчёт verify](../../work/verification/PB-061/952f9e47fdaf4ea385f36082df024873/report.json), тесты tests/test_checks_trust.py, docs/tasks/PB-061-evidence/commands.md
+Ограничения: самопроверка исполнителя. Отдельной OS/CI identity на стенде нет — protected deployment не заявлен; положительный protected с независимой identity остаётся критерием аудита при доступном стенде. Повторный независимый аудит требуется для закрытия замечаний.
+
+### HANDOFF-03 — Передача
+Время: 2026-11-10T22:47:00+03:00
+Исполнитель: Devin
+Модель: SWE-2 High
+Выполнение: EXEC-03
+Проверки: CHECK-03
+Состояние: in_review; dev; изменения не закоммичены. Замечания AUDIT-02 (A-01, A-05) исправлены: verifier блокирует защищённое подтверждение self-reported адаптера `python-unittest` (квитанции только для наблюдаемых command-результатов, локальный `checks run` — диагностика), probe записи в каталоги переведён на уникальные marker-файлы с классификацией EACCES/EPERM/unknown. Полный verify passed. Следующий шаг — повторный независимый аудит.
+Фокус аудита: достаточно ли блокировки kind=test для A-01 (нет пути выдать passed-квитанцию self-reported результату, включая aggregate и replay старых квитанций), полнота marker-проб A-05 (все каталоги, очистка только своего marker, классификация ошибок), отсутствие регрессии: command-политики проходят run→verify→aggregate→gate, обычный checks run с unittest-проверками работает как диагностика.

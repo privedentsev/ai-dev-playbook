@@ -1,0 +1,21 @@
+test_blocked_after_baseline_reopens_task_obligation (test_checks_e2e.Audit009BaselineFailureE2ETest.test_blocked_after_baseline_reopens_task_obligation)
+blocked-прогон (входы испорчены и возвращены): обязательство ... ok
+test_corrupt_failed_record_keeps_task_obligation (test_checks_e2e.Audit009BaselineFailureE2ETest.test_corrupt_failed_record_keeps_task_obligation)
+A-04 PB-074: `{`-запись failed при актуальном baseline не ... ok
+test_deleted_failed_record_keeps_task_obligation (test_checks_e2e.Audit009BaselineFailureE2ETest.test_deleted_failed_record_keeps_task_obligation)
+A-04 PB-074: удалённый failed при сохранённом индексе — ... ok
+test_failed_after_baseline_reopens_task_obligation (test_checks_e2e.Audit009BaselineFailureE2ETest.test_failed_after_baseline_reopens_task_obligation)
+passed → failed при неизменных входах: task stale снова ... ok
+test_legacy_equal_timestamp_history_stays_closed (test_checks_e2e.Audit009BaselineFailureE2ETest.test_legacy_equal_timestamp_history_stays_closed)
+A-05 PB-074: legacy-записи без run_seq с равным ... ok
+test_manual_obligation_survives_until_confirm (test_checks_e2e.Audit009BaselineFailureE2ETest.test_manual_obligation_survives_until_confirm)
+Ручная проверка без подтверждения держит run и gate ... ok
+test_other_task_sees_failed_obligation_and_reuse_recovers (test_checks_e2e.Audit009BaselineFailureE2ETest.test_other_task_sees_failed_obligation_and_reuse_recovers)
+Запуск другой задачи не скрывает failed: DEV-02 stale тоже ... ok
+test_timeout_after_baseline_reopens_task_obligation (test_checks_e2e.Audit009BaselineFailureE2ETest.test_timeout_after_baseline_reopens_task_obligation)
+timeout-прогон при актуальном baseline: обязательство ... ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 50.767s
+
+OK

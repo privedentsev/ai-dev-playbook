@@ -11,6 +11,8 @@ from test_playbook import playbook
 
 
 class QuickRouteTest(CloseLifecycleCase):
+    """Quick-route задач: preview/create, legacy-отказы, итерации и
+    engineer acceptance."""
     def setUp(self):
         super().setUp()
         self.project_file = self.root / 'ai-dev-playbook/project.json'
@@ -62,6 +64,7 @@ class QuickRouteTest(CloseLifecycleCase):
         self.card.write_text(text)
 
     def test_preview_create_and_incomplete_start(self):
+        """Quick-route preview/create и незавершённый старт"""
         self.prepare()
         self.assertEqual(self.create(apply=False)[0], 0)
         self.assertFalse(self.card.exists())
@@ -77,6 +80,7 @@ class QuickRouteTest(CloseLifecycleCase):
         self.assertEqual(self.card.read_bytes(), before)
 
     def test_legacy_refusal_and_standard_creation_unchanged(self):
+        """Legacy-отказ и стандартное создание неизменны"""
         self.prepare()
         del self.settings['task_workflow']
         self.save_project()
@@ -86,6 +90,7 @@ class QuickRouteTest(CloseLifecycleCase):
         self.assertEqual(json.loads(self.card.with_suffix('.meta.json').read_text())['schema_version'], 1)
 
     def test_bad_plan_and_missing_reason_leave_no_card(self):
+        """Плохой план и отсутствующая причина не оставляют карточку"""
         self.prepare()
         (self.root / 'work/plan.json').write_text('{}')
         self.assertEqual(self.create()[0], 1)
@@ -95,6 +100,7 @@ class QuickRouteTest(CloseLifecycleCase):
         self.assertFalse(self.card.with_suffix('.meta.json').exists())
 
     def test_three_iterations_one_id_then_explicit_engineer_acceptance(self):
+        """Три итерации одного ID, затем явная приёмка инженером"""
         self.prepare()
         self.assertEqual(self.create()[0], 0)
         self.fill()
@@ -118,6 +124,7 @@ class QuickRouteTest(CloseLifecycleCase):
         self.assertEqual((self.root / 'work/count').read_text(), '3')
 
     def test_review_revise_and_raise_same_card_preserve_history(self):
+        """Review/revise/raise одной карточки сохраняют историю"""
         self.prepare()
         self.assertEqual(self.create()[0], 0)
         self.fill()

@@ -1,0 +1,9 @@
+{
+  "sigkill": -9,
+  "restore_card_and_index_bytes": "identical",
+  "foreign_gate": "blocked",
+  "command_executions": {
+    "a": 1
+  },
+  "tampered_log": "accept/close refused"
+}

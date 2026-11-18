@@ -1,0 +1,1 @@
+ERROR: verifier: проверки block-unit-tests, checks-unit-tests, cli-unit-tests, core-unit-tests, verification-unit-tests используют адаптер python-unittest — исходы self-reported, доказанное происхождение недостижимо; verifier подтверждает только наблюдаемые результаты. Требуется command-проверка или адаптер с внешним источником фактов (ограничение PB-061)

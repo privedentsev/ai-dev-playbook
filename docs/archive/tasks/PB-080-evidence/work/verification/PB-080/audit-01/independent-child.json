@@ -1,0 +1,15 @@
+{
+  "observed": {
+    "value": "2",
+    "prefix": "/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/playbook-bytecode-gtmfqm1t",
+    "dont_write": true
+  },
+  "actual": [
+    {
+      "id": "test_payments.T.test_child",
+      "outcome": "failed"
+    }
+  ],
+  "cache_preserved": true,
+  "private_prefix_removed": true
+}

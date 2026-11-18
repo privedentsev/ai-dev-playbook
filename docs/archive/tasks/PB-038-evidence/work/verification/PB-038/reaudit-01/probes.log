@@ -1,0 +1,2 @@
+PASS: all collection indices, anchors, close/index/check/reopen/index/check, immutable reports
+PASS: malformed unrelated index rejected without partial writes

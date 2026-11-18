@@ -1,0 +1,62 @@
+{
+  "schema_version": 2,
+  "run_id": "7bf8335665c748d2bc6e4654effac93a",
+  "task_id": "DEV-1",
+  "route": "quick",
+  "plan_revision": 1,
+  "plan_hash": "sha256:ed0d249da78dc287c7e59ab68549633c27cd1c7b195df7dc51f6adab8e6b664a",
+  "policy_hash": "sha256:c13c84a09d4e44c09e3ffffb006c2d164d630f53f1a06ce198f2bf88a29432a4",
+  "at": "2026-11-06T15:02:29.936248+00:00",
+  "started_at": "2026-11-06T15:02:29.936251+00:00",
+  "finished_at": "2026-11-06T15:02:29.936254+00:00",
+  "cwd": "/private/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/tmp4dxz1jql",
+  "status": "incomplete",
+  "results": [
+    {
+      "check_id": "a",
+      "definition_hash": "sha256:5a6b05dd25e0ce14b5fbca06c573f127bd5b65eb63fffc6d02bf0786966ee39b",
+      "kind": "manual",
+      "scenario_hash": "sha256:c433676b9c010ee10071010b722d8db3f87d965ae5bc8495392777bf49ea14a0",
+      "status": "not_run",
+      "actor": {
+        "name": "Fixture executor",
+        "model": "Synthetic model"
+      },
+      "environment": {
+        "os": "posix",
+        "platform": "macOS-27.0.1-x86_64-i386-64bit-Mach-O",
+        "python": "3.14.6",
+        "architecture": "x86_64",
+        "executable": "/usr/local/opt/python@3.14/bin/python3.14",
+        "environment_sha256": "sha256:68005abbc1a02a2103084def8cadbddff2f0bfe30a4f43499f35aff491ce465e"
+      },
+      "policy_binding": "sha256:c13c84a09d4e44c09e3ffffb006c2d164d630f53f1a06ce198f2bf88a29432a4",
+      "input_snapshot": {
+        "files": {
+          "path:src/a.txt": "sha256:cbb0d9fd3a37024fb81ec10fa78f1221ef510c148453f580b56a4227737e32fd"
+        },
+        "sha256": "sha256:3925acbea82473d3051ffa63dffe6e5d6077cdc188db399bbd598d10a6be530f"
+      },
+      "candidate_snapshot": {
+        "files": {
+          "path:src/a.txt": "sha256:cbb0d9fd3a37024fb81ec10fa78f1221ef510c148453f580b56a4227737e32fd"
+        },
+        "sha256": "sha256:3925acbea82473d3051ffa63dffe6e5d6077cdc188db399bbd598d10a6be530f"
+      },
+      "observation": "Ожидается ручная проверка и подтверждение инженера",
+      "started_at": "2026-11-06T15:02:29.935774+00:00",
+      "finished_at": "2026-11-06T15:02:29.935876+00:00",
+      "duration_seconds": 0.0
+    }
+  ],
+  "coverage": {
+    "total_checks": 1,
+    "passed": [],
+    "failed": [],
+    "not_applicable": [],
+    "not_run": [
+      "a"
+    ],
+    "satisfied": false
+  }
+}

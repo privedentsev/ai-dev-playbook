@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/work/verification/PB-043/independent-audit/probe.py", line 33, in <module>
+    cli('lifecycle','handoff','DEV-1','--summary','stale','--actor','Devin','--model','SWE-2 High',ok=1)
+    ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/work/verification/PB-043/independent-audit/probe.py", line 9, in cli
+    assert p.returncode==ok,(args,p.stdout,p.stderr)
+           ^^^^^^^^^^^^^^^^
+AssertionError: (('lifecycle', 'handoff', 'DEV-1', '--summary', 'stale', '--actor', 'Devin', '--model', 'SWE-2 High'), 'DEV-1: передача на приёмку записана; отчётов: 1. Независимая приёмка: lifecycle accept.\n', '')

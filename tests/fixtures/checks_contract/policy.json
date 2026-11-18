@@ -1,0 +1,88 @@
+{
+  "schema_version": 1,
+  "policy_id": "shop-checks",
+  "revision": 3,
+  "project_id": "shop",
+  "trust_mode": "local",
+  "approved_basis": {
+    "who": "Инженер",
+    "at": "2026-11-07T10:00:00+03:00",
+    "source": "поручение в чате",
+    "detail": "Одобрение ревизии 3 начальной политики"
+  },
+  "subsystems": [
+    {"id": "billing", "title": "Биллинг"},
+    {"id": "catalog", "title": "Каталог"}
+  ],
+  "modules": [
+    {"id": "payments", "title": "Платежи", "subsystem_id": "billing", "paths": ["src/payments/**"]},
+    {"id": "checkout", "title": "Оформление заказа", "subsystem_id": "billing", "paths": ["src/checkout/**"]},
+    {"id": "cart", "title": "Корзина", "subsystem_id": "catalog", "paths": ["src/cart/**"]},
+    {"id": "shared-util", "title": "Общие утилиты", "subsystem_id": "catalog", "paths": ["src/shared/**"], "shared": true}
+  ],
+  "checks": [
+    {
+      "id": "payments-tests",
+      "title": "Тесты платежей",
+      "purpose": "Проверить поведение оплаты и возвратов",
+      "kind": "test",
+      "modules": ["payments"],
+      "adapter": "python-unittest",
+      "argv": ["python3", "-m", "unittest", "tests.test_payments", "-v"],
+      "timeout_seconds": 120,
+      "inputs": ["src/payments", "tests/test_payments.py"],
+      "applicability": {"kind": "when_paths", "paths": ["src/payments/**", "tests/test_payments.py"]}
+    },
+    {
+      "id": "lint",
+      "title": "Линтер",
+      "purpose": "Статический контроль стиля",
+      "kind": "command",
+      "modules": [],
+      "argv": ["python3", "-m", "ruff", "check", "src"],
+      "timeout_seconds": 60,
+      "applicability": "always"
+    },
+    {
+      "id": "ui-review",
+      "title": "Ручной просмотр checkout",
+      "purpose": "Визуальная проверка итоговой суммы",
+      "kind": "manual",
+      "modules": ["checkout"],
+      "scenario": "Открыть страницу checkout и сверить итоговую сумму",
+      "required_environment": ["browser"]
+    }
+  ],
+  "dependencies": [
+    {"consumer": "check:payments-tests", "dependency": "module:payments", "kind": "import", "source": "explicit"},
+    {"consumer": "module:checkout", "dependency": "module:payments", "kind": "api", "source": "analyzer", "analyzer_version": "ast-v1", "evidence": "src/checkout/order.py:12"},
+    {"consumer": "module:checkout", "dependency": "module:cart", "kind": "resource", "source": "observed", "evidence": "run 2026-11-06"}
+  ],
+  "excludes": [
+    {"pattern": "work/**", "reason": "Служебный runtime-каталог", "origin": "template"},
+    {"pattern": "src/**/fixtures.bin", "reason": "генерируемый бинарный fixture", "origin": "manual"}
+  ],
+  "environment": {
+    "toolchain": [{"id": "python", "version": "3.12"}],
+    "external": [
+      {"id": "payment-api", "freshness": {"kind": "ttl", "ttl_seconds": 300}},
+      {"id": "fx-rate", "freshness": {"kind": "always_run"}}
+    ]
+  },
+  "fallback": {
+    "expansion_order": ["module", "subsystem", "project"],
+    "approved_commands": [["python3", "-m", "unittest", "discover", "-s", "tests", "-v"]],
+    "limits": {"max_seconds": 1800, "max_bytes": 104857600},
+    "unknown_scope": "project"
+  },
+  "test_catalog": {
+    "adapter": "python-unittest",
+    "fingerprint": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "entries": [
+      {"id": "tests.test_payments.TestPay.test_charge", "description": "успешная оплата списывает сумму", "group": "payments"},
+      {"id": "tests.test_payments.TestPay.test_slow", "description": "медленный сценарий внешнего API", "group": "payments", "skip": {"allowed": true, "reason": "нестабильный внешний сервис"}},
+      {"id": "tests.test_cart.TestCart.test_add", "description": "добавление позиции в корзину"},
+      {"id": "tests.test_payments.TestPay.test_edge", "description": "граничный случай внешнего API", "group": "payments", "expected_failure": {"allowed": true, "reason": "известный дефект upstream API-42"}}
+    ]
+  }
+}

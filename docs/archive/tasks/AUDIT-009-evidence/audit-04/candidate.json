@@ -1,0 +1,19 @@
+{
+  "head": "1c99fe8226683b704e7f82ae62543f5bdff68451",
+  "python": "3.14.6 (main, Jun 10 2026, 10:03:53) [Clang 21.0.0 (clang-2100.0.123.102)]",
+  "platform": "macOS-27.2.1-x86_64-i386-64bit-Mach-O",
+  "at": "2026-11-17T11:18:12.576291+00:00",
+  "hashes": {
+    "ai-dev-playbook/scripts/checks_inventory.py": "e11900376e72e2e254d39369f01856b8b04873f68f45c33940df65afca6f939a",
+    "ai-dev-playbook/scripts/checks_select.py": "8826ab4c83edc274cc15587c4d4d7557ac539bff316a2cbebcdbc165d4e5f4cc",
+    "ai-dev-playbook/scripts/checks_results.py": "5647da41b4da383d8d8272b80120a38e0fbe4f026391bb031a0927fef64f4581",
+    "ai-dev-playbook/scripts/checks_contract.py": "61f1d4aace9a54e0091ee134cf3da27d63679ba4d96b389afb29e0c3c1dba100",
+    "ai-dev-playbook/scripts/checks_verifier.py": "1430369fb286cab717334d1ca7e103555c0345aab675bb2b52a75b7dda3c5f32",
+    "ai-dev-playbook/scripts/checks_graph.py": "672b2d578a933f29a74013aa92a74ed659137a9e2d667647c34f10ec31abfc08",
+    "ai-dev-playbook/scripts/checks_gate.py": "01d74c8a415d0b027dc99336aa4d8015e6b1c2786b29767f5a8f900a272a745e",
+    "ai-dev-playbook/scripts/checks_unittest.py": "0f1b2d91d94ea80a500f8480fbd7377bcc87c18aeac709c0267c1d0ad70ebb75",
+    "ai-dev-playbook/scripts/checks_trust.py": "e9b8931ed1a0c693db6901ca8fef07c7a7688ec6dd2dc07ddfb7a6b54e450b61",
+    "ai-dev-playbook/scripts/checks_setup.py": "0f67116493300aa3472b26c731d4ca90f082a841dc2e255758b578a4a4f82680",
+    "ai-dev-playbook/scripts/checks_runner.py": "100af8522be35e2f145eab97a8fc425722e1425067a9242bb9271e7d11736f4e"
+  }
+}

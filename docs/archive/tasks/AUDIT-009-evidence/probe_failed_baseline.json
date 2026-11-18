@@ -1,0 +1,56 @@
+{
+  "first_ok": false,
+  "first_summary": {
+    "passed": 0,
+    "reused": 0,
+    "failed": 1,
+    "timeout": 0,
+    "blocked": 0,
+    "not_run": 0,
+    "not_applicable": 0
+  },
+  "gate_after_failure": {
+    "ok": true,
+    "scope": "task",
+    "checkpoint": null,
+    "task_id": "DEV-1",
+    "trust_mode": "local",
+    "checks": {
+      "payment": {
+        "kind": "command",
+        "explain": [
+          "обязательства не затронуты"
+        ],
+        "status": "not_applicable"
+      }
+    },
+    "covered": [],
+    "uncovered": [],
+    "manual": [],
+    "blocked": [],
+    "not_applicable": [
+      "payment"
+    ],
+    "notes": [],
+    "rejections": [],
+    "hashed_bytes": 20,
+    "hashed_files": 2,
+    "budget_reasons": [],
+    "trust": {
+      "mode": "local",
+      "capability": "local",
+      "note": "trust_mode=local: результаты диагностические — локальная история не защищена от владельца проекта; доверенное выполнение требует контура PB-061"
+    },
+    "protected_confirmed": false
+  },
+  "second_ok": true,
+  "second_summary": {
+    "passed": 0,
+    "reused": 0,
+    "failed": 0,
+    "timeout": 0,
+    "blocked": 0,
+    "not_run": 0,
+    "not_applicable": 1
+  }
+}

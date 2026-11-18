@@ -1,0 +1,15 @@
+test_command_execution_allowed_argv_only (test_verification_v2.VerificationV2Test.test_command_execution_allowed_argv_only) ... ok
+test_failed_check_not_bypassed_by_reuse (test_verification_v2.VerificationV2Test.test_failed_check_not_bypassed_by_reuse) ... ok
+test_independent_reuse_of_fresh_results (test_verification_v2.VerificationV2Test.test_independent_reuse_of_fresh_results) ... ok
+test_index_sync_before_snapshot_in_regular_verify (test_verification_v2.VerificationV2Test.test_index_sync_before_snapshot_in_regular_verify) ... ok
+test_later_command_mutates_earlier_input_detected_as_stale (test_verification_v2.VerificationV2Test.test_later_command_mutates_earlier_input_detected_as_stale) ... ok
+test_manual_check_candidate_snapshot_and_not_run_without_confirmation (test_verification_v2.VerificationV2Test.test_manual_check_candidate_snapshot_and_not_run_without_confirmation) ... ok
+test_record_manual_success_and_stale_candidate_rejection (test_verification_v2.VerificationV2Test.test_record_manual_success_and_stale_candidate_rejection) ... ok
+test_stale_during_run_detection (test_verification_v2.VerificationV2Test.test_stale_during_run_detection) ... ok
+test_timeout_handling (test_verification_v2.VerificationV2Test.test_timeout_handling) ... ok
+test_v1_legacy_compatibility (test_verification_v2.VerificationV2Test.test_v1_legacy_compatibility) ... ok
+
+----------------------------------------------------------------------
+Ran 10 tests in 11.827s
+
+OK

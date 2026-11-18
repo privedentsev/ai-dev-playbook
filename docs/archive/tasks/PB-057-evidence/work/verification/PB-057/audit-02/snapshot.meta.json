@@ -1,0 +1,106 @@
+{
+  "schema_version": 1,
+  "card_format_version": 2,
+  "relations": [
+    {
+      "relation": "based_on",
+      "target": "spec:dependency-aware-verification"
+    },
+    {
+      "relation": "based_on",
+      "target": "design:dependency-aware-verification"
+    },
+    {
+      "relation": "based_on",
+      "target": "plan:dependency-aware-verification"
+    }
+  ],
+  "materials": [
+    {
+      "id": "evidence-commands",
+      "role": "report",
+      "source": "docs/tasks/PB-057-evidence/commands.md",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-057"
+      ]
+    },
+    {
+      "id": "verify-961381f50fd94752ab9a1cff7873d155",
+      "role": "report",
+      "source": "work/verification/PB-057/961381f50fd94752ab9a1cff7873d155",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-057"
+      ]
+    },
+    {
+      "id": "audit-01",
+      "role": "report",
+      "source": "work/verification/PB-057/audit-01",
+      "storage": "local",
+      "immutable": true,
+      "required": true,
+      "used_by": [
+        "PB-057"
+      ]
+    },
+    {
+      "id": "verify-8bb581168a204241b1e8f5ef5ec6ba1e",
+      "role": "report",
+      "source": "work/verification/PB-057/8bb581168a204241b1e8f5ef5ec6ba1e",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-057"
+      ]
+    },
+    {
+      "id": "verify-982f8e80b21143ee90c1aa45cc298082",
+      "role": "report",
+      "source": "work/verification/PB-057/982f8e80b21143ee90c1aa45cc298082",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-057"
+      ]
+    }
+  ],
+  "criterion_evidence": {
+    "CHECK-01": {
+      "check_sha256": "sha256:e3101bf0d72444e6e59a4c4479b28d201ca6ae48cbc65fdce931ebd457221731",
+      "card_projection": "sha256:497d0d49cfb5dd51deacdec7488d0984dad70830c97bc52b103ead5f13cd5d26",
+      "report_id": "verify-961381f50fd94752ab9a1cff7873d155",
+      "report_sha256": "sha256:ac71ef2a463760d797089c8b4ec2e42f401e9e54e124d0825a42991f6fcf6ddf"
+    },
+    "CHECK-02": {
+      "check_sha256": "sha256:81c4ef3350bfd9fcd3687cb4485cf899ab0bca07e65a8f5ca1b81b6cc4f41887",
+      "card_projection": "sha256:497d0d49cfb5dd51deacdec7488d0984dad70830c97bc52b103ead5f13cd5d26",
+      "report_id": "verify-8bb581168a204241b1e8f5ef5ec6ba1e",
+      "report_sha256": "sha256:76ea96f21985578998f33f22919c15beca5a93301bdd53b8463dc278f52004c5"
+    }
+  },
+  "handoff": {
+    "at": "2026-11-08T09:22:21+03:00",
+    "actor": {
+      "name": "Devin",
+      "model": "SWE-2 High"
+    },
+    "summary": "HANDOFF-02",
+    "reports": [
+      "verify-8bb581168a204241b1e8f5ef5ec6ba1e"
+    ],
+    "card_projection": "sha256:497d0d49cfb5dd51deacdec7488d0984dad70830c97bc52b103ead5f13cd5d26",
+    "entry_id": "HANDOFF-02",
+    "journal_sha256": "sha256:d8a324128e885ad8b57ac38f2c622cf24b6584342d12465da449732172955e0b"
+  },
+  "audit_packages": {
+    "audit-01": "sha256:b0551deede0e5388c421b7e18c735629742dc731a095c050ca5579e1797793c4"
+  }
+}

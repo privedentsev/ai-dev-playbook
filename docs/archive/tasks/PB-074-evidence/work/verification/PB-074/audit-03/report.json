@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "kind": "audit-report",
+  "task_id": "PB-074",
+  "audit_id": "AUDIT-03",
+  "handoff": "HANDOFF-03",
+  "result": "accepted",
+  "closed_findings": [
+    "A-03"
+  ],
+  "findings": [],
+  "actor": {
+    "name": "Codex",
+    "model": "GPT-6"
+  },
+  "tests": {
+    "count": 344,
+    "passed": true,
+    "seconds": 243.348
+  },
+  "full_legacy_verify_independently_repeated": false,
+  "audit_ready": "passed",
+  "preflight": "passed",
+  "acceptance_registered": true,
+  "close_dry_run": "passed"
+}

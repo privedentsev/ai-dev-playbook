@@ -1,0 +1,5 @@
+PASS adopt refusal: all project/installation files unchanged; work/gate.lock excluded as service lock
+PASS adopt resolved: current version restored
+PASS links: redundant paths, encoding, delimiters, titles, image/refdef bytes retained; affected link rewritten
+PASS joint move: unchanged relative destination retained
+Environment: macOS temporary path canonicalized using resolve(), as required by moves contract.

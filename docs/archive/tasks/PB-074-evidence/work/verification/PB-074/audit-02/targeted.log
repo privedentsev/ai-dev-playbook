@@ -1,0 +1,43 @@
+test_a04_corrupt_failed_empty_diff_keeps_obligation (test_checks_run.Audit009PB74RegressionTest.test_a04_corrupt_failed_empty_diff_keeps_obligation)
+A-04: `{`-запись failed при актуальном baseline не даёт ... ok
+test_a04_corrupt_manual_record_stays_uncovered (test_checks_run.Audit009PB74RegressionTest.test_a04_corrupt_manual_record_stays_uncovered)
+A-04: повреждённая запись ручной проверки не снимает ... ok
+test_a04_corrupt_timeout_record_keeps_obligation (test_checks_run.Audit009PB74RegressionTest.test_a04_corrupt_timeout_record_keeps_obligation)
+A-04: повреждённый timeout-исход — то же открытое ... ok
+test_a04_deleted_failed_empty_diff_keeps_obligation (test_checks_run.Audit009PB74RegressionTest.test_a04_deleted_failed_empty_diff_keeps_obligation)
+A-04: удалённый failed при сохранённом индексе — то же ... ok
+test_a05_legacy_equal_end_to_end (test_checks_run.Audit009PB74RegressionTest.test_a05_legacy_equal_end_to_end)
+A-05: реальные passed → failed, конвертация в legacy без ... ok
+test_a05_legacy_equal_timestamp_never_picks_passed (test_checks_run.Audit009PB74RegressionTest.test_a05_legacy_equal_timestamp_never_picks_passed)
+A-05: два legacy-результата без run_seq при равном ... ok
+test_a05_seq_order_and_unambiguous_legacy_preserved (test_checks_run.Audit009PB74RegressionTest.test_a05_seq_order_and_unambiguous_legacy_preserved)
+A-05: seq-записи упорядочены run_seq; однозначная legacy ... ok
+test_audit01_missing_results_dir_keeps_obligation (test_checks_run.Audit009PB74RegressionTest.test_audit01_missing_results_dir_keeps_obligation)
+Аудит-01 A-01: утрата всего каталога results при ... ok
+test_audit01_plan_corrupt_ids_forbid_reuse (test_checks_run.Audit009PB74RegressionTest.test_audit01_plan_corrupt_ids_forbid_reuse)
+Аудит-01 A-02: plan с corrupt_ids и старым passed в ... ok
+test_blocked_after_baseline_reopens_task_obligation (test_checks_e2e.Audit009BaselineFailureE2ETest.test_blocked_after_baseline_reopens_task_obligation)
+blocked-прогон (входы испорчены и возвращены): обязательство ... ok
+test_corrupt_failed_record_keeps_task_obligation (test_checks_e2e.Audit009BaselineFailureE2ETest.test_corrupt_failed_record_keeps_task_obligation)
+A-04 PB-074: `{`-запись failed при актуальном baseline не ... ok
+test_deleted_failed_record_keeps_task_obligation (test_checks_e2e.Audit009BaselineFailureE2ETest.test_deleted_failed_record_keeps_task_obligation)
+A-04 PB-074: удалённый failed при сохранённом индексе — ... ok
+test_deleted_results_directory_keeps_task_obligation (test_checks_e2e.Audit009BaselineFailureE2ETest.test_deleted_results_directory_keeps_task_obligation)
+Аудит-01 A-01: утрата всего каталога results при ... ok
+test_failed_after_baseline_reopens_task_obligation (test_checks_e2e.Audit009BaselineFailureE2ETest.test_failed_after_baseline_reopens_task_obligation)
+passed → failed при неизменных входах: task stale снова ... ok
+test_legacy_equal_timestamp_history_stays_closed (test_checks_e2e.Audit009BaselineFailureE2ETest.test_legacy_equal_timestamp_history_stays_closed)
+A-05 PB-074: legacy-записи без run_seq с равным ... ok
+test_manual_obligation_survives_until_confirm (test_checks_e2e.Audit009BaselineFailureE2ETest.test_manual_obligation_survives_until_confirm)
+Ручная проверка без подтверждения держит run и gate ... ok
+test_other_task_sees_failed_obligation_and_reuse_recovers (test_checks_e2e.Audit009BaselineFailureE2ETest.test_other_task_sees_failed_obligation_and_reuse_recovers)
+Запуск другой задачи не скрывает failed: DEV-02 stale тоже ... ok
+test_plan_agrees_with_run_on_lost_history (test_checks_e2e.Audit009BaselineFailureE2ETest.test_plan_agrees_with_run_on_lost_history)
+Аудит-01 A-02: checks plan не «переиспользует» результат ... ok
+test_timeout_after_baseline_reopens_task_obligation (test_checks_e2e.Audit009BaselineFailureE2ETest.test_timeout_after_baseline_reopens_task_obligation)
+timeout-прогон при актуальном baseline: обязательство ... ok
+
+----------------------------------------------------------------------
+Ran 19 tests in 75.092s
+
+OK

@@ -1,0 +1,688 @@
+План lc-05ffeec00473cee6 (lifecycle):
+Основание: playbook.py close PB-031
+Исполнитель: cli:privedentsev1 (cli)
+Действия:
+  close_task PB-031: docs/tasks/PB-031.md → docs/archive/tasks/PB-031.md (done)
+Переносы:
+  docs/tasks/PB-031-evidence → docs/archive/tasks/PB-031-evidence
+  docs/tasks/PB-031-evidence/audit-01 → docs/archive/tasks/PB-031-evidence/audit-01
+  docs/tasks/PB-031-evidence/audit-01/probe.log → docs/archive/tasks/PB-031-evidence/audit-01/probe.log
+  docs/tasks/PB-031-evidence/audit-01/probe.py → docs/archive/tasks/PB-031-evidence/audit-01/probe.py
+  docs/tasks/PB-031-evidence/audit-01/unit-tests.log → docs/archive/tasks/PB-031-evidence/audit-01/unit-tests.log
+  docs/tasks/PB-031-evidence/reaudit-01 → docs/archive/tasks/PB-031-evidence/reaudit-01
+  docs/tasks/PB-031-evidence/reaudit-01/probe.log → docs/archive/tasks/PB-031-evidence/reaudit-01/probe.log
+  docs/tasks/PB-031-evidence/reaudit-01/probe.py → docs/archive/tasks/PB-031-evidence/reaudit-01/probe.py
+  docs/tasks/PB-031-evidence/reaudit-01/targeted-tests.log → docs/archive/tasks/PB-031-evidence/reaudit-01/targeted-tests.log
+  docs/tasks/PB-031-evidence/reaudit-01/unit-tests.log → docs/archive/tasks/PB-031-evidence/reaudit-01/unit-tests.log
+  docs/tasks/PB-031-evidence/test_task_workflow_schema.log → docs/archive/tasks/PB-031-evidence/test_task_workflow_schema.log
+  docs/tasks/PB-031-evidence/verify-run → docs/archive/tasks/PB-031-evidence/verify-run
+  docs/tasks/PB-031-evidence/verify-run/report.json → docs/archive/tasks/PB-031-evidence/verify-run/report.json
+  docs/tasks/PB-031-evidence/verify-run/self-check.stderr.log → docs/archive/tasks/PB-031-evidence/verify-run/self-check.stderr.log
+  docs/tasks/PB-031-evidence/verify-run/self-check.stdout.log → docs/archive/tasks/PB-031-evidence/verify-run/self-check.stdout.log
+  docs/tasks/PB-031-evidence/verify-run/unit-tests.stderr.log → docs/archive/tasks/PB-031-evidence/verify-run/unit-tests.stderr.log
+  docs/tasks/PB-031-evidence/verify-run/unit-tests.stdout.log → docs/archive/tasks/PB-031-evidence/verify-run/unit-tests.stdout.log
+  docs/tasks/PB-031.md → docs/archive/tasks/PB-031.md
+  work/verification/PB-031/25e917c29ee54b6a876e355457eb6073 → docs/archive/tasks/PB-031-evidence/work/verification/PB-031/25e917c29ee54b6a876e355457eb6073
+  work/verification/PB-031/25e917c29ee54b6a876e355457eb6073/report.json → docs/archive/tasks/PB-031-evidence/work/verification/PB-031/25e917c29ee54b6a876e355457eb6073/report.json
+  work/verification/PB-031/25e917c29ee54b6a876e355457eb6073/self-check.stderr.log → docs/archive/tasks/PB-031-evidence/work/verification/PB-031/25e917c29ee54b6a876e355457eb6073/self-check.stderr.log
+  work/verification/PB-031/25e917c29ee54b6a876e355457eb6073/self-check.stdout.log → docs/archive/tasks/PB-031-evidence/work/verification/PB-031/25e917c29ee54b6a876e355457eb6073/self-check.stdout.log
+  work/verification/PB-031/25e917c29ee54b6a876e355457eb6073/unit-tests.stderr.log → docs/archive/tasks/PB-031-evidence/work/verification/PB-031/25e917c29ee54b6a876e355457eb6073/unit-tests.stderr.log
+  work/verification/PB-031/25e917c29ee54b6a876e355457eb6073/unit-tests.stdout.log → docs/archive/tasks/PB-031-evidence/work/verification/PB-031/25e917c29ee54b6a876e355457eb6073/unit-tests.stdout.log
+  work/verification/PB-031/667765ae60914590a9d90f0a66ed9452 → docs/archive/tasks/PB-031-evidence/work/verification/PB-031/667765ae60914590a9d90f0a66ed9452
+  work/verification/PB-031/667765ae60914590a9d90f0a66ed9452/report.json → docs/archive/tasks/PB-031-evidence/work/verification/PB-031/667765ae60914590a9d90f0a66ed9452/report.json
+  work/verification/PB-031/667765ae60914590a9d90f0a66ed9452/self-check.stderr.log → docs/archive/tasks/PB-031-evidence/work/verification/PB-031/667765ae60914590a9d90f0a66ed9452/self-check.stderr.log
+  work/verification/PB-031/667765ae60914590a9d90f0a66ed9452/self-check.stdout.log → docs/archive/tasks/PB-031-evidence/work/verification/PB-031/667765ae60914590a9d90f0a66ed9452/self-check.stdout.log
+  work/verification/PB-031/667765ae60914590a9d90f0a66ed9452/unit-tests.stderr.log → docs/archive/tasks/PB-031-evidence/work/verification/PB-031/667765ae60914590a9d90f0a66ed9452/unit-tests.stderr.log
+  work/verification/PB-031/667765ae60914590a9d90f0a66ed9452/unit-tests.stdout.log → docs/archive/tasks/PB-031-evidence/work/verification/PB-031/667765ae60914590a9d90f0a66ed9452/unit-tests.stdout.log
+  work/verification/PB-031/997ef4c8f383423c88b67133319f5188 → docs/archive/tasks/PB-031-evidence/work/verification/PB-031/997ef4c8f383423c88b67133319f5188
+  work/verification/PB-031/997ef4c8f383423c88b67133319f5188/report.json → docs/archive/tasks/PB-031-evidence/work/verification/PB-031/997ef4c8f383423c88b67133319f5188/report.json
+  work/verification/PB-031/997ef4c8f383423c88b67133319f5188/self-check.stderr.log → docs/archive/tasks/PB-031-evidence/work/verification/PB-031/997ef4c8f383423c88b67133319f5188/self-check.stderr.log
+  work/verification/PB-031/997ef4c8f383423c88b67133319f5188/self-check.stdout.log → docs/archive/tasks/PB-031-evidence/work/verification/PB-031/997ef4c8f383423c88b67133319f5188/self-check.stdout.log
+  work/verification/PB-031/997ef4c8f383423c88b67133319f5188/unit-tests.stderr.log → docs/archive/tasks/PB-031-evidence/work/verification/PB-031/997ef4c8f383423c88b67133319f5188/unit-tests.stderr.log
+  work/verification/PB-031/997ef4c8f383423c88b67133319f5188/unit-tests.stdout.log → docs/archive/tasks/PB-031-evidence/work/verification/PB-031/997ef4c8f383423c88b67133319f5188/unit-tests.stdout.log
+  work/verification/PB-031/a01cb14755a444749f0f372c636b995e → docs/archive/tasks/PB-031-evidence/work/verification/PB-031/a01cb14755a444749f0f372c636b995e
+  work/verification/PB-031/a01cb14755a444749f0f372c636b995e/preflight-regressions.stderr.log → docs/archive/tasks/PB-031-evidence/work/verification/PB-031/a01cb14755a444749f0f372c636b995e/preflight-regressions.stderr.log
+  work/verification/PB-031/a01cb14755a444749f0f372c636b995e/preflight-regressions.stdout.log → docs/archive/tasks/PB-031-evidence/work/verification/PB-031/a01cb14755a444749f0f372c636b995e/preflight-regressions.stdout.log
+  work/verification/PB-031/a01cb14755a444749f0f372c636b995e/report.json → docs/archive/tasks/PB-031-evidence/work/verification/PB-031/a01cb14755a444749f0f372c636b995e/report.json
+  work/verification/PB-031/a01cb14755a444749f0f372c636b995e/self-check.stderr.log → docs/archive/tasks/PB-031-evidence/work/verification/PB-031/a01cb14755a444749f0f372c636b995e/self-check.stderr.log
+  work/verification/PB-031/a01cb14755a444749f0f372c636b995e/self-check.stdout.log → docs/archive/tasks/PB-031-evidence/work/verification/PB-031/a01cb14755a444749f0f372c636b995e/self-check.stdout.log
+  work/verification/PB-031/a01cb14755a444749f0f372c636b995e/unit-tests.stderr.log → docs/archive/tasks/PB-031-evidence/work/verification/PB-031/a01cb14755a444749f0f372c636b995e/unit-tests.stderr.log
+  work/verification/PB-031/a01cb14755a444749f0f372c636b995e/unit-tests.stdout.log → docs/archive/tasks/PB-031-evidence/work/verification/PB-031/a01cb14755a444749f0f372c636b995e/unit-tests.stdout.log
+  work/verification/PB-031/a85d901919f240afbd87076c686bf9c6 → docs/archive/tasks/PB-031-evidence/work/verification/PB-031/a85d901919f240afbd87076c686bf9c6
+  work/verification/PB-031/a85d901919f240afbd87076c686bf9c6/report.json → docs/archive/tasks/PB-031-evidence/work/verification/PB-031/a85d901919f240afbd87076c686bf9c6/report.json
+  work/verification/PB-031/a85d901919f240afbd87076c686bf9c6/unit-tests.stderr.log → docs/archive/tasks/PB-031-evidence/work/verification/PB-031/a85d901919f240afbd87076c686bf9c6/unit-tests.stderr.log
+  work/verification/PB-031/a85d901919f240afbd87076c686bf9c6/unit-tests.stdout.log → docs/archive/tasks/PB-031-evidence/work/verification/PB-031/a85d901919f240afbd87076c686bf9c6/unit-tests.stdout.log
+  work/verification/PB-031/audit-20261029 → docs/archive/tasks/PB-031-evidence/work/verification/PB-031/audit-20261029
+  work/verification/PB-031/audit-20261029-02 → docs/archive/tasks/PB-031-evidence/work/verification/PB-031/audit-20261029-02
+  work/verification/PB-031/audit-20261029-02/audit-ready-final.log → docs/archive/tasks/PB-031-evidence/work/verification/PB-031/audit-20261029-02/audit-ready-final.log
+  work/verification/PB-031/audit-20261029-02/audit-ready.log → docs/archive/tasks/PB-031-evidence/work/verification/PB-031/audit-20261029-02/audit-ready.log
+  work/verification/PB-031/audit-20261029-02/close-dry-run.log → docs/archive/tasks/PB-031-evidence/work/verification/PB-031/audit-20261029-02/close-dry-run.log
+  work/verification/PB-031/audit-20261029-02/probe-first-blocked.log → docs/archive/tasks/PB-031-evidence/work/verification/PB-031/audit-20261029-02/probe-first-blocked.log
+  work/verification/PB-031/audit-20261029-02/probe.log → docs/archive/tasks/PB-031-evidence/work/verification/PB-031/audit-20261029-02/probe.log
+  work/verification/PB-031/audit-20261029-02/probe.py → docs/archive/tasks/PB-031-evidence/work/verification/PB-031/audit-20261029-02/probe.py
+  work/verification/PB-031/audit-20261029-02/provenance.json → docs/archive/tasks/PB-031-evidence/work/verification/PB-031/audit-20261029-02/provenance.json
+  work/verification/PB-031/audit-20261029-02/provenance.sha256 → docs/archive/tasks/PB-031-evidence/work/verification/PB-031/audit-20261029-02/provenance.sha256
+  work/verification/PB-031/audit-20261029-02/registry-probes.json → docs/archive/tasks/PB-031-evidence/work/verification/PB-031/audit-20261029-02/registry-probes.json
+  work/verification/PB-031/audit-20261029-02/report.md → docs/archive/tasks/PB-031-evidence/work/verification/PB-031/audit-20261029-02/report.md
+  work/verification/PB-031/audit-20261029-02/snapshot.txt → docs/archive/tasks/PB-031-evidence/work/verification/PB-031/audit-20261029-02/snapshot.txt
+  work/verification/PB-031/audit-20261029-02/targeted-tests.log → docs/archive/tasks/PB-031-evidence/work/verification/PB-031/audit-20261029-02/targeted-tests.log
+  work/verification/PB-031/audit-20261029/check-ready.log → docs/archive/tasks/PB-031-evidence/work/verification/PB-031/audit-20261029/check-ready.log
+  work/verification/PB-031/audit-20261029/freshness.json → docs/archive/tasks/PB-031-evidence/work/verification/PB-031/audit-20261029/freshness.json
+  work/verification/PB-031/audit-20261029/probe.log → docs/archive/tasks/PB-031-evidence/work/verification/PB-031/audit-20261029/probe.log
+  work/verification/PB-031/audit-20261029/probe.py → docs/archive/tasks/PB-031-evidence/work/verification/PB-031/audit-20261029/probe.py
+  work/verification/PB-031/audit-20261029/provenance.json → docs/archive/tasks/PB-031-evidence/work/verification/PB-031/audit-20261029/provenance.json
+  work/verification/PB-031/audit-20261029/provenance.sha256 → docs/archive/tasks/PB-031-evidence/work/verification/PB-031/audit-20261029/provenance.sha256
+  work/verification/PB-031/audit-20261029/readiness.log → docs/archive/tasks/PB-031-evidence/work/verification/PB-031/audit-20261029/readiness.log
+  work/verification/PB-031/audit-20261029/report.md → docs/archive/tasks/PB-031-evidence/work/verification/PB-031/audit-20261029/report.md
+  work/verification/PB-031/audit-20261029/snapshot.txt → docs/archive/tasks/PB-031-evidence/work/verification/PB-031/audit-20261029/snapshot.txt
+  work/verification/PB-031/audit-20261029/targeted-tests.log → docs/archive/tasks/PB-031-evidence/work/verification/PB-031/audit-20261029/targeted-tests.log
+  work/verification/PB-031/audit-reaudit-02 → docs/archive/tasks/PB-031-evidence/work/verification/PB-031/audit-reaudit-02
+  work/verification/PB-031/audit-reaudit-02/close-attempt.log → docs/archive/tasks/PB-031-evidence/work/verification/PB-031/audit-reaudit-02/close-attempt.log
+  work/verification/PB-031/audit-reaudit-02/full-tests-first.log → docs/archive/tasks/PB-031-evidence/work/verification/PB-031/audit-reaudit-02/full-tests-first.log
+  work/verification/PB-031/audit-reaudit-02/pilot-recheck.log → docs/archive/tasks/PB-031-evidence/work/verification/PB-031/audit-reaudit-02/pilot-recheck.log
+  work/verification/PB-031/audit-reaudit-02/probe.log → docs/archive/tasks/PB-031-evidence/work/verification/PB-031/audit-reaudit-02/probe.log
+  work/verification/PB-031/audit-reaudit-02/probe.py → docs/archive/tasks/PB-031-evidence/work/verification/PB-031/audit-reaudit-02/probe.py
+  work/verification/PB-031/audit-reaudit-02/targeted-tests.log → docs/archive/tasks/PB-031-evidence/work/verification/PB-031/audit-reaudit-02/targeted-tests.log
+  work/verification/PB-031/b8ecc26dfd91400da68877ae8b37bebc → docs/archive/tasks/PB-031-evidence/work/verification/PB-031/b8ecc26dfd91400da68877ae8b37bebc
+  work/verification/PB-031/b8ecc26dfd91400da68877ae8b37bebc/report.json → docs/archive/tasks/PB-031-evidence/work/verification/PB-031/b8ecc26dfd91400da68877ae8b37bebc/report.json
+  work/verification/PB-031/b8ecc26dfd91400da68877ae8b37bebc/self-check.stderr.log → docs/archive/tasks/PB-031-evidence/work/verification/PB-031/b8ecc26dfd91400da68877ae8b37bebc/self-check.stderr.log
+  work/verification/PB-031/b8ecc26dfd91400da68877ae8b37bebc/self-check.stdout.log → docs/archive/tasks/PB-031-evidence/work/verification/PB-031/b8ecc26dfd91400da68877ae8b37bebc/self-check.stdout.log
+  work/verification/PB-031/b8ecc26dfd91400da68877ae8b37bebc/unit-tests.stderr.log → docs/archive/tasks/PB-031-evidence/work/verification/PB-031/b8ecc26dfd91400da68877ae8b37bebc/unit-tests.stderr.log
+  work/verification/PB-031/b8ecc26dfd91400da68877ae8b37bebc/unit-tests.stdout.log → docs/archive/tasks/PB-031-evidence/work/verification/PB-031/b8ecc26dfd91400da68877ae8b37bebc/unit-tests.stdout.log
+Удаляются каталоги:
+  docs/tasks/PB-031-evidence
+  docs/tasks/PB-031-evidence/audit-01
+  docs/tasks/PB-031-evidence/reaudit-01
+  docs/tasks/PB-031-evidence/verify-run
+  work/verification/PB-031/25e917c29ee54b6a876e355457eb6073
+  work/verification/PB-031/667765ae60914590a9d90f0a66ed9452
+  work/verification/PB-031/997ef4c8f383423c88b67133319f5188
+  work/verification/PB-031/a01cb14755a444749f0f372c636b995e
+  work/verification/PB-031/a85d901919f240afbd87076c686bf9c6
+  work/verification/PB-031/audit-20261029
+  work/verification/PB-031/audit-20261029-02
+  work/verification/PB-031/audit-reaudit-02
+  work/verification/PB-031/b8ecc26dfd91400da68877ae8b37bebc
+Записей: 78, удалений файлов: 72
+Diff записей (.md):
+  docs/archive/tasks/PB-031-evidence/audit-01/probe.log: prepared stream sha256:52816bffc29a5f1f45b7f53c5bc0cc8af78efb07d600f2d307a29f197f8c35c8
+  docs/archive/tasks/PB-031-evidence/audit-01/probe.py: prepared stream sha256:98df7e22576b0ee8865017fe8d8c907841362a258b842dd4320525386c72c054
+  docs/archive/tasks/PB-031-evidence/audit-01/unit-tests.log: prepared stream sha256:0c7284fb536e779962cd553c721efd515157d512944b0512285d9c4c399ea364
+  docs/archive/tasks/PB-031-evidence/reaudit-01/probe.log: prepared stream sha256:beb03b61e6ff6dbea6ef6634ff99193a2e0d72d38c8890ce3138d30fc71b3a05
+  docs/archive/tasks/PB-031-evidence/reaudit-01/probe.py: prepared stream sha256:441aabbbef60aad5afbe6a40d4aa90463b2b58d53135a57da614a72be4e3ba9d
+  docs/archive/tasks/PB-031-evidence/reaudit-01/targeted-tests.log: prepared stream sha256:36dd21bdc29d42d4d0171005b1d14bac64f0c28032549a1f0f6fdffb2f549b91
+  docs/archive/tasks/PB-031-evidence/reaudit-01/unit-tests.log: prepared stream sha256:8c0755880b96dc99e85fc1682293cf307299546635c8bb278dda37c424273db4
+  docs/archive/tasks/PB-031-evidence/test_task_workflow_schema.log: prepared stream sha256:90182790908b830decc0cfd4c14f78735729c3d59de59437159017f74431de67
+  docs/archive/tasks/PB-031-evidence/verify-run/report.json: prepared stream sha256:d925046493978aa7106cf19e8b9ffbe921e3b0acceba42d5f4c3781b8009f93e
+  docs/archive/tasks/PB-031-evidence/verify-run/self-check.stderr.log: prepared stream sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+  docs/archive/tasks/PB-031-evidence/verify-run/self-check.stdout.log: prepared stream sha256:ad01331321b5398af4c0618e0ad27bee8a4a5903d4720bdfa01831c7c14368c5
+  docs/archive/tasks/PB-031-evidence/verify-run/unit-tests.stderr.log: prepared stream sha256:a4dbe1976d1d5b7ca0337df5852a04896e47b0184f442c9a9baf82d41cd6022d
+  docs/archive/tasks/PB-031-evidence/verify-run/unit-tests.stdout.log: prepared stream sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+  docs/archive/tasks/PB-031-evidence/work/verification/PB-031/25e917c29ee54b6a876e355457eb6073/report.json: prepared stream sha256:d925046493978aa7106cf19e8b9ffbe921e3b0acceba42d5f4c3781b8009f93e
+  docs/archive/tasks/PB-031-evidence/work/verification/PB-031/25e917c29ee54b6a876e355457eb6073/self-check.stderr.log: prepared stream sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+  docs/archive/tasks/PB-031-evidence/work/verification/PB-031/25e917c29ee54b6a876e355457eb6073/self-check.stdout.log: prepared stream sha256:ad01331321b5398af4c0618e0ad27bee8a4a5903d4720bdfa01831c7c14368c5
+  docs/archive/tasks/PB-031-evidence/work/verification/PB-031/25e917c29ee54b6a876e355457eb6073/unit-tests.stderr.log: prepared stream sha256:a4dbe1976d1d5b7ca0337df5852a04896e47b0184f442c9a9baf82d41cd6022d
+  docs/archive/tasks/PB-031-evidence/work/verification/PB-031/25e917c29ee54b6a876e355457eb6073/unit-tests.stdout.log: prepared stream sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+  docs/archive/tasks/PB-031-evidence/work/verification/PB-031/667765ae60914590a9d90f0a66ed9452/report.json: prepared stream sha256:5b6d00969614d70001f8a3ae68cf625562207219ad143c4d7dadd9236c0fc401
+  docs/archive/tasks/PB-031-evidence/work/verification/PB-031/667765ae60914590a9d90f0a66ed9452/self-check.stderr.log: prepared stream sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+  docs/archive/tasks/PB-031-evidence/work/verification/PB-031/667765ae60914590a9d90f0a66ed9452/self-check.stdout.log: prepared stream sha256:ad01331321b5398af4c0618e0ad27bee8a4a5903d4720bdfa01831c7c14368c5
+  docs/archive/tasks/PB-031-evidence/work/verification/PB-031/667765ae60914590a9d90f0a66ed9452/unit-tests.stderr.log: prepared stream sha256:a82e32a8ac8a10e832c71855ca09125eff74b01b7cf0450afaa2bd450f183737
+  docs/archive/tasks/PB-031-evidence/work/verification/PB-031/667765ae60914590a9d90f0a66ed9452/unit-tests.stdout.log: prepared stream sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+  docs/archive/tasks/PB-031-evidence/work/verification/PB-031/997ef4c8f383423c88b67133319f5188/report.json: prepared stream sha256:bf83452103e6b0d4401dab3fb9a8c409a9002f8a10f8a1ed2c18884ae6af48b3
+  docs/archive/tasks/PB-031-evidence/work/verification/PB-031/997ef4c8f383423c88b67133319f5188/self-check.stderr.log: prepared stream sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+  docs/archive/tasks/PB-031-evidence/work/verification/PB-031/997ef4c8f383423c88b67133319f5188/self-check.stdout.log: prepared stream sha256:ad01331321b5398af4c0618e0ad27bee8a4a5903d4720bdfa01831c7c14368c5
+  docs/archive/tasks/PB-031-evidence/work/verification/PB-031/997ef4c8f383423c88b67133319f5188/unit-tests.stderr.log: prepared stream sha256:0448ace89dfceb2307da4e97d9b97dcf9850ab2b104e815b61212860efe83ef8
+  docs/archive/tasks/PB-031-evidence/work/verification/PB-031/997ef4c8f383423c88b67133319f5188/unit-tests.stdout.log: prepared stream sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+  docs/archive/tasks/PB-031-evidence/work/verification/PB-031/a01cb14755a444749f0f372c636b995e/preflight-regressions.stderr.log: prepared stream sha256:2ae8a1ccc13e92c2511208d99305d14c24bd0588855f0f881a2a098bbc5e87af
+  docs/archive/tasks/PB-031-evidence/work/verification/PB-031/a01cb14755a444749f0f372c636b995e/preflight-regressions.stdout.log: prepared stream sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+  docs/archive/tasks/PB-031-evidence/work/verification/PB-031/a01cb14755a444749f0f372c636b995e/report.json: prepared stream sha256:ba0c76f061049de13d5384d7c9c695a3eb595b2f1853e8f69addd22bfd0411fa
+  docs/archive/tasks/PB-031-evidence/work/verification/PB-031/a01cb14755a444749f0f372c636b995e/self-check.stderr.log: prepared stream sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+  docs/archive/tasks/PB-031-evidence/work/verification/PB-031/a01cb14755a444749f0f372c636b995e/self-check.stdout.log: prepared stream sha256:fa39452b5b278a3d56e8837a598c98e35015dee8a8655e5553f6972f055b053e
+  docs/archive/tasks/PB-031-evidence/work/verification/PB-031/a01cb14755a444749f0f372c636b995e/unit-tests.stderr.log: prepared stream sha256:2abd4bc7fc20e3419536dd1275ad9d724385029a18b17ff6145ea3e0d9b97a19
+  docs/archive/tasks/PB-031-evidence/work/verification/PB-031/a01cb14755a444749f0f372c636b995e/unit-tests.stdout.log: prepared stream sha256:33bb46bea56c7e171b8af20752e50348c1b4896e361e2fec684173512ecebb64
+  docs/archive/tasks/PB-031-evidence/work/verification/PB-031/a85d901919f240afbd87076c686bf9c6/report.json: prepared stream sha256:9e4e6b074345066d251934cf390dda5fef440276cf66dbda3a3b42b8b655cd06
+  docs/archive/tasks/PB-031-evidence/work/verification/PB-031/a85d901919f240afbd87076c686bf9c6/unit-tests.stderr.log: prepared stream sha256:2847ead2ef27a41e22086b422331fe29483f8c48e3ad0bbff0f5491b4fff0e3b
+  docs/archive/tasks/PB-031-evidence/work/verification/PB-031/a85d901919f240afbd87076c686bf9c6/unit-tests.stdout.log: prepared stream sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+  docs/archive/tasks/PB-031-evidence/work/verification/PB-031/audit-20261029-02/audit-ready-final.log: prepared stream sha256:2c678324fdae1c363fb31cda72844d66debfdc185436141c9de18188526c3d0d
+  docs/archive/tasks/PB-031-evidence/work/verification/PB-031/audit-20261029-02/audit-ready.log: prepared stream sha256:06c5ae3ad75dca6b7ee53136bc28f50b02e2cdeccc4a3fbd0cfb6573ca1d4bd9
+  docs/archive/tasks/PB-031-evidence/work/verification/PB-031/audit-20261029-02/close-dry-run.log: prepared stream sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+  docs/archive/tasks/PB-031-evidence/work/verification/PB-031/audit-20261029-02/probe-first-blocked.log: prepared stream sha256:555f065587617900b9cdccc954698237248276160c639eae9f18b52d47ab9db0
+  docs/archive/tasks/PB-031-evidence/work/verification/PB-031/audit-20261029-02/probe.log: prepared stream sha256:cb4d0ac15e2de8746935c13a349cdee4c4a7f4802b7f63a048e9bc1970a4d8c6
+  docs/archive/tasks/PB-031-evidence/work/verification/PB-031/audit-20261029-02/probe.py: prepared stream sha256:f6f27b9810ced68d8d357296e273ac170f2fb1fc682761a7709f89c6133ef35f
+  docs/archive/tasks/PB-031-evidence/work/verification/PB-031/audit-20261029-02/provenance.json: prepared stream sha256:636fc67a054e6362b99a645e70e74d0a9d2cf9d6a926e38f645ac5ef2abe83a6
+  docs/archive/tasks/PB-031-evidence/work/verification/PB-031/audit-20261029-02/provenance.sha256: prepared stream sha256:046ec430b253bce23eae4816759fee078d41719785361825dda94e79581078d0
+  docs/archive/tasks/PB-031-evidence/work/verification/PB-031/audit-20261029-02/registry-probes.json: prepared stream sha256:92c197903a7be87c4268cd002663b08f9721ed3c83415462cb9eebcffde68079
+  docs/archive/tasks/PB-031-evidence/work/verification/PB-031/audit-20261029-02/report.md: prepared stream sha256:63bf6296aced8e7e518006257337f1275422cbf6ce553c0061a19c10b7cbe651
+  docs/archive/tasks/PB-031-evidence/work/verification/PB-031/audit-20261029-02/snapshot.txt: prepared stream sha256:2bbc1146e87cd3038dcb4ea5244a4b71e80dbf9ad8e67362b98094a4a40e22c2
+  docs/archive/tasks/PB-031-evidence/work/verification/PB-031/audit-20261029-02/targeted-tests.log: prepared stream sha256:3b671dcfc03ae27ffe121e0fae4fd44d2aafc2a38580e25158be17f19424d0f4
+  docs/archive/tasks/PB-031-evidence/work/verification/PB-031/audit-20261029/check-ready.log: prepared stream sha256:fa39452b5b278a3d56e8837a598c98e35015dee8a8655e5553f6972f055b053e
+  docs/archive/tasks/PB-031-evidence/work/verification/PB-031/audit-20261029/freshness.json: prepared stream sha256:06d3c264c00f162fc659c72b03ad902af18b7de5399d19c864c37a75f77f21db
+  docs/archive/tasks/PB-031-evidence/work/verification/PB-031/audit-20261029/probe.log: prepared stream sha256:925e91ed5ebb289e31ce80d6b20dfe855e5e9e90d23ee95d0887e46870ddae51
+  docs/archive/tasks/PB-031-evidence/work/verification/PB-031/audit-20261029/probe.py: prepared stream sha256:a1d368469729bb8b0d4e25441634a41275ca9a84ae3bec21a429fa3b462b678c
+  docs/archive/tasks/PB-031-evidence/work/verification/PB-031/audit-20261029/provenance.json: prepared stream sha256:686da6a9a614c1b425344e3a7ef6b6bac5ae105cb73c8427bc558ac44eaa9e3c
+  docs/archive/tasks/PB-031-evidence/work/verification/PB-031/audit-20261029/provenance.sha256: prepared stream sha256:35e94c9af0c69e2fb9dd5da65d66bd756898a2d161bbc73a5df7306de00eee10
+  docs/archive/tasks/PB-031-evidence/work/verification/PB-031/audit-20261029/readiness.log: prepared stream sha256:ed72bc093ad711eb737d0dcda979b73d44210c5f90585b184c35012d5f397061
+  docs/archive/tasks/PB-031-evidence/work/verification/PB-031/audit-20261029/report.md: prepared stream sha256:f789149e818f14dd8131914c97738d83b9453f075673937fc177bd2fdfbf7236
+  docs/archive/tasks/PB-031-evidence/work/verification/PB-031/audit-20261029/snapshot.txt: prepared stream sha256:ae289f4232dbe3ed523ab0b2b77506986ac0929f713864947d18c83c3e0570ab
+  docs/archive/tasks/PB-031-evidence/work/verification/PB-031/audit-20261029/targeted-tests.log: prepared stream sha256:a7fcdec436cb2fd251d99875599713c7d97897cf6327a7d4a145e08f31be31c7
+  docs/archive/tasks/PB-031-evidence/work/verification/PB-031/audit-reaudit-02/close-attempt.log: prepared stream sha256:e560d3759f77baced4d063ecd14a4bc5cb8a4c0ae1f916b1a1d23daecc98b6bd
+  docs/archive/tasks/PB-031-evidence/work/verification/PB-031/audit-reaudit-02/full-tests-first.log: prepared stream sha256:86db747ab594b1a23d44c87fe3b956ad72d70a4be6da755eb00606398d19677f
+  docs/archive/tasks/PB-031-evidence/work/verification/PB-031/audit-reaudit-02/pilot-recheck.log: prepared stream sha256:cd819204df33196f310421d8d965453196e948869744f8c77e4593c46a8cab7c
+  docs/archive/tasks/PB-031-evidence/work/verification/PB-031/audit-reaudit-02/probe.log: prepared stream sha256:8d66bc511e1873fbcfc026844776c3614257abac4efd7d0afd758b16adbd3e57
+  docs/archive/tasks/PB-031-evidence/work/verification/PB-031/audit-reaudit-02/probe.py: prepared stream sha256:a1d368469729bb8b0d4e25441634a41275ca9a84ae3bec21a429fa3b462b678c
+  docs/archive/tasks/PB-031-evidence/work/verification/PB-031/audit-reaudit-02/targeted-tests.log: prepared stream sha256:ef05dcfa20c530b2ab506df1052d04e32c1e2aefff36bf78563544245cb83949
+  docs/archive/tasks/PB-031-evidence/work/verification/PB-031/b8ecc26dfd91400da68877ae8b37bebc/report.json: prepared stream sha256:2efa20dca5b0833428fc673f63f2d5875d3b64f5d3321b7e636b8acc76da482b
+  docs/archive/tasks/PB-031-evidence/work/verification/PB-031/b8ecc26dfd91400da68877ae8b37bebc/self-check.stderr.log: prepared stream sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+  docs/archive/tasks/PB-031-evidence/work/verification/PB-031/b8ecc26dfd91400da68877ae8b37bebc/self-check.stdout.log: prepared stream sha256:ad01331321b5398af4c0618e0ad27bee8a4a5903d4720bdfa01831c7c14368c5
+  docs/archive/tasks/PB-031-evidence/work/verification/PB-031/b8ecc26dfd91400da68877ae8b37bebc/unit-tests.stderr.log: prepared stream sha256:65fd884d9129bf88163d4a698deee8d7667f1bff3fbed9f8efe007f429f73bcb
+  docs/archive/tasks/PB-031-evidence/work/verification/PB-031/b8ecc26dfd91400da68877ae8b37bebc/unit-tests.stdout.log: prepared stream sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+--- /dev/null
++++ b/docs/archive/tasks/PB-031.md
+@@ -0,0 +1,445 @@
++# PB-031: Определить и валидировать форматы маршрутов и проверок v2
++
++ID: PB-031
++Status: done
++Priority: P2
++Depends-On: -
++Executor: Antigravity
++Model: Gemini 3.8 Flash (High)
++Created: 2026-10-23T03:34:58+03:00
++Closed: 2026-10-29T05:15:58+03:00
++
++<!-- playbook-meta:start -->
++```json
++{
++  "schema_version": 1,
++  "relations": [
++    {
++      "relation": "based_on",
++      "target": "spec:proportional-workflow"
++    },
++    {
++      "relation": "based_on",
++      "target": "design:proportional-workflow"
++    }
++  ],
++  "materials": [
++    {
++      "id": "verify-b8ecc26dfd91400da68877ae8b37bebc",
++      "role": "report",
++      "source": "docs/archive/tasks/PB-031-evidence/work/verification/PB-031/b8ecc26dfd91400da68877ae8b37bebc",
++      "storage": "local",
++      "required": true,
++      "immutable": true,
++      "used_by": [
++        "PB-031"
++      ]
++    },
++    {
++      "id": "verify-25e917c29ee54b6a876e355457eb6073",
++      "role": "report",
++      "source": "docs/archive/tasks/PB-031-evidence/work/verification/PB-031/25e917c29ee54b6a876e355457eb6073",
++      "storage": "local",
++      "required": true,
++      "immutable": true,
++      "used_by": [
++        "PB-031"
++      ]
++    },
++    {
++      "id": "verify-a85d901919f240afbd87076c686bf9c6",
++      "role": "report",
++      "source": "docs/archive/tasks/PB-031-evidence/work/verification/PB-031/a85d901919f240afbd87076c686bf9c6",
++      "storage": "local",
++      "required": true,
++      "immutable": true,
++      "used_by": [
++        "PB-031"
++      ]
++    },
++    {
++      "id": "verify-997ef4c8f383423c88b67133319f5188",
++      "role": "report",
++      "source": "docs/archive/tasks/PB-031-evidence/work/verification/PB-031/997ef4c8f383423c88b67133319f5188",
++      "storage": "local",
++      "required": true,
++      "immutable": true,
++      "used_by": [
++        "PB-031"
++      ]
++    },
++    {
++      "id": "verify-667765ae60914590a9d90f0a66ed9452",
++      "role": "report",
++      "source": "docs/archive/tasks/PB-031-evidence/work/verification/PB-031/667765ae60914590a9d90f0a66ed9452",
++      "storage": "local",
++      "required": true,
++      "immutable": true,
++      "used_by": [
++        "PB-031"
++      ]
++    },
++    {
++      "id": "audit-reaudit-02",
++      "role": "report",
++      "source": "docs/archive/tasks/PB-031-evidence/work/verification/PB-031/audit-reaudit-02",
++      "storage": "local",
++      "required": true,
++      "immutable": true,
++      "used_by": [
++        "PB-031"
++      ]
++    },
++    {
++      "id": "pb031-evidence",
++      "role": "report",
++      "source": "docs/archive/tasks/PB-031-evidence",
++      "storage": "local",
++      "required": true,
++      "immutable": true,
++      "used_by": [
++        "PB-031"
++      ]
++    },
++    {
++      "id": "audit-20261029",
++      "role": "report",
++      "source": "docs/archive/tasks/PB-031-evidence/work/verification/PB-031/audit-20261029",
++      "storage": "local",
++      "immutable": true,
++      "required": true,
++      "used_by": [
++        "PB-031"
++      ]
++    },
++    {
++      "id": "verify-a01cb14755a444749f0f372c636b995e",
++      "role": "report",
++      "source": "docs/archive/tasks/PB-031-evidence/work/verification/PB-031/a01cb14755a444749f0f372c636b995e",
++      "storage": "local",
++      "required": true,
++      "immutable": true,
++      "used_by": [
++        "PB-031"
++      ]
++    },
++    {
++      "id": "audit-20261029-02",
++      "role": "report",
++      "source": "docs/archive/tasks/PB-031-evidence/work/verification/PB-031/audit-20261029-02",
++      "storage": "local",
++      "immutable": true,
++      "required": true,
++      "used_by": [
++        "PB-031"
++      ]
++    },
++    {
++      "id": "lifecycle-lc-05ffeec00473cee6",
++      "role": "report",
++      "source": "docs/archive/tasks/PB-031-evidence/close-lc-05ffeec00473cee6.json",
++      "storage": "local",
++      "required": true,
++      "immutable": true,
++      "used_by": []
++    }
++  ],
++  "handoff": {
++    "at": "2026-10-29T05:09:36+03:00",
++    "actor": {
++      "name": "Codex",
++      "model": "GPT-6"
++    },
++    "summary": "PB-031-A5: свежий полный verify passed, 619/619 тестов; CHECK/HANDOFF обновлены, передано на повторный независимый аудит",
++    "reports": [
++      "verify-a01cb14755a444749f0f372c636b995e"
++    ],
++    "card_projection": "sha256:f52875468ec739744e7b9e6cf116a8e253e0ec7c1bfc69d4a2821215fc7bdcf6"
++  },
++  "acceptance": {
++    "at": "2026-10-29T05:15:46+03:00",
++    "actor": {
++      "name": "Codex",
++      "model": "GPT-6"
++    },
++    "role": "auditor",
++    "kind": "acceptance",
++    "result": "accepted",
++    "handoff_at": "2026-10-29T05:09:36+03:00",
++    "session": null,
++    "detail": "Независимый повторный аудит PASS: A5 снято, свежая передача a01cb14755a444749f0f372c636b995e; 39 целевых тестов и CLI/loader/registry-пробы PASS. Протокол audit-20261029-02."
++  },
++  "audit_packages": {
++    "audit-20261029": "sha256:686da6a9a614c1b425344e3a7ef6b6bac5ae105cb73c8427bc558ac44eaa9e3c",
++    "audit-20261029-02": "sha256:636fc67a054e6362b99a645e70e74d0a9d2cf9d6a926e38f645ac5ef2abe83a6"
++  },
++  "moves": [
++    {
++      "from": "work/verification/PB-031/b8ecc26dfd91400da68877ae8b37bebc",
++      "to": "docs/archive/tasks/PB-031-evidence/work/verification/PB-031/b8ecc26dfd91400da68877ae8b37bebc"
++    },
++    {
++      "from": "work/verification/PB-031/25e917c29ee54b6a876e355457eb6073",
++      "to": "docs/archive/tasks/PB-031-evidence/work/verification/PB-031/25e917c29ee54b6a876e355457eb6073"
++    },
++    {
++      "from": "work/verification/PB-031/a85d901919f240afbd87076c686bf9c6",
++      "to": "docs/archive/tasks/PB-031-evidence/work/verification/PB-031/a85d901919f240afbd87076c686bf9c6"
++    },
++    {
++      "from": "work/verification/PB-031/997ef4c8f383423c88b67133319f5188",
++      "to": "docs/archive/tasks/PB-031-evidence/work/verification/PB-031/997ef4c8f383423c88b67133319f5188"
++    },
++    {
++      "from": "work/verification/PB-031/667765ae60914590a9d90f0a66ed9452",
++      "to": "docs/archive/tasks/PB-031-evidence/work/verification/PB-031/667765ae60914590a9d90f0a66ed9452"
++    },
++    {
++      "from": "work/verification/PB-031/audit-reaudit-02",
++      "to": "docs/archive/tasks/PB-031-evidence/work/verification/PB-031/audit-reaudit-02"
++    },
++    {
++      "from": "docs/tasks/PB-031-evidence",
++      "to": "docs/archive/tasks/PB-031-evidence"
++    },
++    {
++      "from": "work/verification/PB-031/audit-20261029",
++      "to": "docs/archive/tasks/PB-031-evidence/work/verification/PB-031/audit-20261029"
++    },
++    {
++      "from": "work/verification/PB-031/a01cb14755a444749f0f372c636b995e",
++      "to": "docs/archive/tasks/PB-031-evidence/work/verification/PB-031/a01cb14755a444749f0f372c636b995e"
++    },
++    {
++      "from": "work/verification/PB-031/audit-20261029-02",
++      "to": "docs/archive/tasks/PB-031-evidence/work/verification/PB-031/audit-20261029-02"
++    },
++    {
++      "from": "docs/tasks/PB-031.md",
++      "to": "docs/archive/tasks/PB-031.md"
++    }
++  ]
++}
++```
++<!-- playbook-meta:end -->
++
++## Цель и границы
++
++Зафиксировать точные JSON-поля task_workflow v2, task metadata v2, плана проверок и report v2; реализовать разбор/валидацию и fixtures. Новую механику исполнения не включать. Старые карточки/конфигурации/отчёты v1 продолжают читаться прежним путём.
++
++## Приоритет и зависимости
++
++P2, часть согласованного направления развития. Порядок существующих работ не меняется. Зависимости: -. Карточка создана при планировании, выполнение не разрешено.
++
++## Контекст
++
++- [План](../../plans/proportional-workflow.md).
++- [Спецификация](../../specs/proportional-workflow.md): R-01,04,07–11,25–26; AC-01,04–05,12.
++- [Design](../../designs/proportional-workflow.md).
++- [ADR-0003](../../adr/0003-task-scoped-verification.md).
++
++## Область изменений
++
++playbook.py (config/read_tasks), documents.py, verification.py (schema validation), новые fixtures и тесты форматов. Не реализует runner, переходы и миграцию установки.
++
++## Условия готовности
++
++План/границы согласованы инженером; зависимости завершены; поля/интерфейсы соответствующего этапа однозначны. Исполнитель назначается только при старте. Изменение требований/архитектуры возвращается к соответствующему этапу, не решается скрытым расширением задачи.
++
++## План
++
++1. Согласовать технические поля в рамках принятого design и сохранить fixtures.
++2. Добавить версионную диспетчеризацию и валидаторы без изменения legacy-семантики.
++3. Проверить нормальные/повреждённые схемы и выполнить передачу.
++
++## Приёмка
++
++- [x] Маршрут quick/small/medium/large хранится как metadata обычной карточки, шапка и ID не меняются; неизвестный route отклонён.
++- [x] Опциональный task_workflow и metadata/report v2 имеют строгие поля/версии; отсутствие новой механики сохраняет legacy.
++- [x] План проверок задаёт scope, rationale, IDs, явные inputs и ручной/автоматический вид; дубли, неизвестные команды/поля и неправильные пути отклоняются.
++- [x] Зафиксированы сериализованные fixtures и ожидаемые отказы для следующих задач; старые CLI/валидаторы не принимают новые схемы молча.
++- [ ] Самопроверка и handoff зарегистрированы, независимая приёмка выполнена в отдельной сессии либо инженером перед закрытием.
++
++## Проверки и доказательства
++
++Unit и CLI-проверки schema v1/v2, unknown version, duplicate ID, missing fields, escapes/symlink и сохранение legacy. Предлагаемые тесты: tests/test_task_workflow_schema.py.
++
++Команды основы: целевые `python3 -m unittest discover -s tests -p '<согласованный файл тестов>' -v`, затем настроенный `python3 ai-dev-playbook/scripts/playbook.py verify PB-031` по действующему на этапе контракту. Перед запуском проверить argv/inputs и готовность служебных данных. Проверить `index --all`, `check --ready`, `git diff --check`; после изменения файлов комплекта выполнить `adopt . --force --apply` до финального прогона. Существующий timeout не обходить скрытым изменением runner: заранее согласовать настройку при необходимости.
++
++Материалы: `docs/tasks/PB-031-evidence/` и зарегистрированные verify-прогоны. Неизменяемые отчёты не переписывать. Структурные проверки не являются доказательством поведения CLI.
++
++## Ресурсы
++
++Python 3.10+ и стандартная библиотека, локальные временные проекты без секретов; независимый аудитор отдельной сессией либо инженер. policy_revision — действующая конфигурация на момент старта; бюджет отдельно не согласован. Общие материалы принадлежат AUDIT-007, не архивируются с подзадачей.
++
++## Выполнение и проверки
++
++1. 2026-10-23T08:15:00+03:00; исполнитель: Antigravity; модель: Gemini 3.8 Flash (High).
++   - Выполнен старт задачи PB-031, статус переведён в `in_progress`.
++   - В `ai-dev-playbook/scripts/documents.py`:
++     - Добавлены константы `ROUTES`, `TASK_FIELDS_V1`, `TASK_FIELDS_V2`, `WORKFLOW_FIELDS`, `ROUTE_HISTORY_FIELDS`, `PLAN_FIELDS`, `CHECK_FIELDS`, `DECISION_FIELDS`, `APPLICABILITY_KINDS`.
++     - Реализована версионная диспетчеризация валидации `<!-- playbook-meta -->` (`_validate_task_meta`): v1 сохраняет прежние правила; v2 проверяет структуру `workflow` (`route`, `route_history`, `verification_plan`), план проверок (`scope`, `rationale`, `checks`, `decision`), явные `inputs`, виды проверок (`command`, `manual`), запрещает произвольный argv в карточке, дубликаты ID проверок, выходы из песочницы (`..`), абсолютные пути и пути в `work/`.
++     - `load_catalog` адаптирован для извлечения идентификаторов из реестра проверок `task_workflow.checks` в `project.json` и валидации ссылок карточек на них.
++   - В `ai-dev-playbook/scripts/verification.py`:
++     - Добавлены константы `TASK_WORKFLOW_FIELDS`, `REGISTRY_FIELDS`, `REPORT_V2_FIELDS`, `RESULT_FIELDS`, `COVERAGE_FIELDS`.
++     - Реализован валидатор `validate_task_workflow`: проверяет `schema_version == 2`, поля секции `task_workflow`, реестр проверок `checks` (`id`, `kind`, `command`/`argv`, `manual`/`scenario`, `timeout_seconds`, `default_inputs`, `rationale`), контрольные точки `checkpoints` (ссылки на существующие ID проверок).
++     - Реализован валидатор `validate_report`: поддерживает `schema_version: 1` (legacy) и `report_version: 2` (v2 отчёты с `route`, `coverage`, `results`, обязательными обоснованиями `reason` для `not_applicable`, запретом неизвестных полей).
++     - `load_report` обновлён для валидации формата загружаемых отчётов.
++   - В `ai-dev-playbook/scripts/playbook.py`:
++     - `config(root)` обновлён для валидации секции `task_workflow` через `verification.validate_task_workflow`, если секция присутствует.
++     - `read_tasks(root, paths)` извлекает `workflow.route` из метаданных v2 карточки, валидирует принадлежность `documents.ROUTES` и сохраняет поле `route` в записи задачи; карточки без `workflow` сохраняют `route: None`.
++   - Подготовлены сериализованные фикстуры:
++     - Валидные: `tests/fixtures/task_workflow_v2/valid/` (`project.json`, `task_metadata_v2.json`, `report_v2.json`).
++     - Невалидные: `tests/fixtures/task_workflow_v2/invalid/` (`unknown_route.json`, `unknown_schema_version.json`, `unknown_fields_workflow.json`, `unknown_fields_task_workflow.json`, `duplicate_check_id.json`, `arbitrary_argv.json`, `unknown_registry_id.json`, `escape_path_scope.json`, `escape_path_input.json`, `unknown_report_version.json`, `missing_reason_not_applicable.json`).
++   - Разработан целевой набор тестов `tests/test_task_workflow_schema.py` (35 unit-тестов), проверяющий все AC:
++     - Валидность и отказы на всех фикстурах;
++     - Строгое соблюдение разрешённых полей и версий схем;
++     - Запрет произвольного argv в карточке задачи;
++     - Запрет неразрешённых путей (`..`, абсолютные, `work/`);
++     - Сохранение обратной совместимости legacy-форматов v1;
++     - Неприятие v2 схем старыми валидаторами без silent-пропуска;
++     - Интеграцию извлечения и валидации маршрута в `playbook.py read_tasks`.
++   - В `ai-dev-playbook/project.json` таймаут для проверки `unit-tests` увеличен со 120с до 240с в связи с ростом общего набора тестов (470 тестов).
++   - Выполнена актуализация self-manifest: `python3 ai-dev-playbook/scripts/playbook.py adopt . --force --apply`.
++   - Выполнен полный прогон верификации: `python3 ai-dev-playbook/scripts/playbook.py verify PB-031` (run_id: `b8ecc26dfd91400da68877ae8b37bebc`, статус: `passed`).
++   - Материалы и логи верификации сохранены в `docs/tasks/PB-031-evidence/`.
++2. 2026-10-23T09:00:00+03:00; исполнитель: Antigravity; модель: Gemini 3.8 Flash (High).
++   - Устранены замечания возврата независимого аудита (PB-031-A1, PB-031-A2, PB-031-A3, PB-031-A4):
++     - **PB-031-A1**: В `ai-dev-playbook/scripts/documents.py` добавлена проверка компонентов файловых путей `_check_fs_path` (для строк путей и объектных входов `file`/`directory`), отклоняющая символические ссылки (внутренние, внешние, промежуточные) с сохранением допустимости несуществующих (absent) путей.
++     - **PB-031-A2**: Поле `verification_plan` сделано обязательным для карточек v2 (`TASK_FIELDS_V2`); поле `inputs` сделано обязательным для каждой проверки плана (`CHECK_FIELDS`). Добавлена строгая типизация и валидация объектов входов (`file`/`directory` требуют `path`, `environment` требует непустой список строковых `names`, проекции `task_projection`/`policy_projection` разрешают только `type`). В `ai-dev-playbook/scripts/verification.py` (`validate_task_workflow`) добавлена строгая проверка объектов `default_inputs` с запретом лишних полей.
++     - **PB-031-A3**: В `ai-dev-playbook/scripts/verification.py` (`validate_report`) для v2 закреплено обязательное поле `at` (ISO 8601 с timezone); для каждого результата проверки закреплена обязательность provenance (`actor`, `environment`, `input_snapshot`, `started_at`, `finished_at`), логов и `exit_code` для `kind: command`, а также `scenario_hash`, наблюдения и слепка кандидата для `kind: manual`. В фикстуру `report_v2.json` добавлен `scenario_hash`.
++     - **PB-031-A4**: В `ai-dev-playbook/scripts/documents.py` добавлена проверка наличия `task_workflow` в `project.json` при разборе карточек со `schema_version: 2`; при отсутствии секции карточка v2 отклоняется. При наличии секции проверяется не только существование `registry_id`, но и совместимость по `kind` (command/manual) между планом карточки и реестром.
++   - Добавлены новые негативные фикстуры в `tests/fixtures/task_workflow_v2/invalid/`:
++     - `missing_plan.json`, `missing_inputs.json`, `file_without_path.json`, `invalid_environment_names.json`, `report_without_provenance.json`, `manual_without_scenario_hash.json`, `registry_unknown_input_field.json`, `incompatible_registry_kind.json`.
++   - Набор тестов `tests/test_task_workflow_schema.py` расширен до 37 тестов (добавлен класс `AuditFindingsCoverageTest`), покрывающих все замечания PB-031-A1..A4.
++   - Выполнена актуализация self-manifest: `python3 ai-dev-playbook/scripts/playbook.py adopt . --force --apply`.
++   - Проведён полный прогон всех тестов репозитория (472 теста): PASS.
++   - Выполнен повторный verify: `python3 ai-dev-playbook/scripts/playbook.py verify PB-031` (run_id: `997ef4c8f383423c88b67133319f5188`, статус: `passed`).
++   - Материалы и логи верификации сохранены в `docs/tasks/PB-031-evidence/verify-run/` и `docs/tasks/PB-031-evidence/test_task_workflow_schema.log`.
++3. 2026-10-23T09:25:00+03:00; исполнитель: Antigravity; модель: Gemini 3.8 Flash (High).
++   - Устранены замечания возврата повторного аудита (PB-031-A2, PB-031-A3):
++     - **PB-031-A2**: В `ai-dev-playbook/scripts/documents.py` обеспечена безусловная валидация `verification_plan` и явных входов проверок: значение `verification_plan: null` теперь отклоняется с ошибкой `verification_plan должен быть объектом`, а значение `inputs: null` внутри проверки отклоняется с ошибкой `inputs должен быть списком`.
++     - **PB-031-A3**: В `ai-dev-playbook/scripts/verification.py` реализована строгая валидация снимков (`_validate_snapshot`), проверяющая тип `dict`, наличие `files`/`sha256`, отсутствие лишних полей и строковые типы путей/хешей во `files`. Для выполненных command-проверок закреплены обязательные поля `snapshot_before` и `snapshot_after`. Для actor закреплена проверка строкового имени при передаче объектом (`actor.name`). В фикстуру `tests/fixtures/task_workflow_v2/valid/report_v2.json` добавлены `snapshot_before` и `snapshot_after`.
++   - Добавлены новые негативные фикстуры в `tests/fixtures/task_workflow_v2/invalid/`:
++     - `null_plan.json`, `null_inputs.json`, `no_command_snapshots.json`, `invalid_snapshots_and_actor.json`, `invalid_candidate_snapshot.json`.
++   - Набор тестов `tests/test_task_workflow_schema.py` расширен до 39 тестов (добавлены `test_PB_031_A2_null_plan_and_null_inputs_rejected` и `test_PB_031_A3_report_snapshots_and_actor_strictly_validated`).
++   - Выполнена актуализация self-manifest: `python3 ai-dev-playbook/scripts/playbook.py adopt . --force --apply`.
++   - Проведён полный прогон тестов (474 теста): PASS.
++   - Выполнен повторный verify: `python3 ai-dev-playbook/scripts/playbook.py verify PB-031` (run_id: `667765ae60914590a9d90f0a66ed9452`, статус: `passed`).
++
++Команды воспроизведения:
++```bash
++python3 -m unittest discover -s tests -p 'test_task_workflow_schema.py' -v
++python3 ai-dev-playbook/scripts/playbook.py check --ready
++git diff --check
++python3 ai-dev-playbook/scripts/playbook.py verify PB-031
++```
++
++## Передача
++
++После реализации сохранить команды воспроизведения, отчёты, ограничения и фактическую ветку/состояние входов; зарегистрировать `lifecycle handoff PB-031` и in_review по действующему контракту. Исполнитель не закрывает задачу сам без инженерского поручения. Закрытие — только после независимой приёмки через штатный CLI.
++
++
++## Аудит 2026-10-23T08:42:14+03:00; исполнитель: Codex; модель: GPT-6.
++
++Результат: **возврат на исправление**, независимая приёмка не зарегистрирована. Проверены карточка, спецификация R-04, R-07–11, R-25–26, design §2.1–2.4, валидаторы и сериализованные fixtures. Runner/policy/lifecycle v2 следующих задач не требовались и не оценивались как реализованные.
++
++Воспроизведение: `python3 docs/tasks/PB-031-evidence/audit-01/probe.py`; [исходник](PB-031-evidence/audit-01/probe.py), [результаты](PB-031-evidence/audit-01/probe.log). Пробы каталога используют временную копию проекта; рабочая реализация не менялась.
++
++- **PB-031-A1, P1 — symlink во входах карточки не отклоняется.** `symlink_scope catalog_accepted=True`: корневой `audit-link -> /tmp` принят одновременно в scope и inputs через production `read_tasks` + `load_catalog`. `_validate_path_str` проверяет только строку, файловая проверка этих полей отсутствует. Нарушены граница источников design §2.2 и приёмка escapes/symlink; это пропуск валидации, не доказательство исполнения/чтения внешних файлов. Исправление: проверять каждый компонент путей scope/inputs относительно корня, включая объектные входы; добавить реальные symlink-пробы (внутренний, внешний, родительский компонент), сохранив разрешённые absent-пути.
++- **PB-031-A2, P2 — неполные планы и входы принимаются как валидные.** `missing_plan []`, `missing_inputs []`, `file_without_path []`, `invalid_environment_names []`; реестр принимает `default_inputs=[{"type":"file","unexpected":true}]`. План необязателен для metadata v2, file не требует path, environment.names не проверяется; вложенная схема реестра допускает неизвестные поля. Это противоречит строгому формату и явным inputs (R-04/R-07; design §2.2). Исправление: закрепить обязательные поля и типы для каждого вида входа и плана, единообразно валидировать карточку/реестр, добавить негативные fixtures. Если допустимы специальные состояния без плана, явно описать их контракт и отказ на этапе, где план обязателен.
++- **PB-031-A3, P2 — report v2 допускает результат без происхождения доказательств.** `report_without_provenance True`: command passed с одними check_id/definition_hash/kind/status/exit_code принят без actor, environment, input_snapshot, времени, логов и before/after; у отчёта удалено время. Manual fixture также не содержит scenario_hash. Нарушены R-10 и design §2.4. Исправление: определить обязательность полей по kind/status, валидировать вложенные типы и добавить неполные/повреждённые fixtures. Проверять здесь формат, без преждевременной реализации вычисления coverage из PB-032.
++- **PB-031-A4, P2 — отсутствие task_workflow отключает проверку ссылок v2 на реестр.** `unknown_registry_without_opt_in catalog_accepted=True`: при текущем project.json без task_workflow каталог принимает metadata v2 с registry_id=DOES-NOT-EXIST. `registry_ids=None` означает пропуск проверки. Нарушены явное включение v2 (R-25; design §2.1/§совместимости) и приёмка неизвестных команд. Исправление: отклонять v2 без согласованного включения и неизвестные/несовместимые по kind ссылки; добавить CLI-пробы, а не только вызов валидатора с искусственно переданным set.
++
++Целевой набор: **35/35 PASS**; указанные случаи им не покрыты. `check --ready` до изменения карточки: PASS (структура, не поведение). `git diff --check`: PASS.
++
++Отчёт исполнителя b8ecc26dfd91400da68877ae8b37bebc хранит passed/inputs_unchanged=true. Текущее побайтовое сравнение после появления audit-материалов даёт различия в индексе и материалах доказательств (перечень в probe.log); это не оформлено отдельным дефектом свежести реализации. После исправлений необходимы новый verify и handoff, затем повторный независимый аудит.
++
++Синхронизация индекса: `index` и `index --all` сообщили «Индексы уже актуальны», но `check --ready` обнаружил старый статус PB-031. Производная строка индекса синхронизирована с карточкой вручную; реализация CLI не исправлялась, этот отдельный сбой не приписан PB-031.
++
++Итог независимого полного прогона: **470/470 PASS**, 136.337s, `python3 -m unittest discover -s tests -v`; [лог](PB-031-evidence/audit-01/unit-tests.log). Прогон завершён после записи возврата; это не новый handoff/приёмка. Итоговые `check --ready` и `git diff --check`: PASS. Self-manifest не изменялся: аудит не менял файлы комплекта.
++
++## Повторный аудит 2026-10-23T09:12:35+03:00; исполнитель: Codex; модель: GPT-6.
++
++Результат: **возврат на исправление**. A1 и A4 устранены; A2 и A3 остаются открытыми. Приёмка не зарегистрирована, закрытие не выполнялось. Реализация не изменялась.
++
++Новая передача от 2026-10-23T09:09:48+03:00 проверена **до записи новых материалов аудита**: report `997ef4c8f383423c88b67133319f5188` имеет passed, inputs_unchanged=true; независимое inputs_fresh=true, diff=[]; card_projection совпадает с передачей.
++
++Воспроизведение из корня проекта: `python3 docs/tasks/PB-031-evidence/reaudit-01/probe.py`. [Исходник](PB-031-evidence/reaudit-01/probe.py), [лог](PB-031-evidence/reaudit-01/probe.log). Проверки CLI выполняются во временной копии, команды проверок из v2-реестра не исполняются.
++
++- **PB-031-A1 — устранено.** Три независимые CLI-пробы: внешняя, внутренняя и промежуточная symlink отклонены с адресной ошибкой scope/inputs (exit=1); absent-путь принят (exit=0). Проверка компонентов пути подключена к каталогу.
++- **PB-031-A4 — устранено.** CLI отклоняет metadata v2 без task_workflow и неизвестный registry_id при включённом v2 (exit=1). В коде проверяется соответствие kind карточки и реестра; добавленная негативная fixture проходит целевой набор.
++- **PB-031-A2, P2 — исправлено частично, блокирует приёмку.** Отсутствующие plan/inputs, file без path и неверные environment.names теперь отклоняются. Однако `verification_plan: null` и `checks[0].inputs: null` принимаются без ошибок; обе независимые пробы `check --ready` завершаются exit=0. Причина: `_validate_task_meta` пропускает `_verification_plan` при raw_plan=None, а `_verification_plan` валидирует inputs только при inputs is not None. Проверяется наличие ключа, но не обязательное значение. Влияние: формально валидная v2-карточка остаётся без плана либо явных входов, нарушая R-04/R-07 и приёмку PB-031. Критерий исправления: отклонять null так же, как отсутствие обязательных полей; добавить сериализованные негативные fixtures и CLI-регрессию, сохранив валидный v2/legacy.
++- **PB-031-A3, P2 — исправлено частично, блокирует приёмку.** Отсутствующие at/actor и manual scenario_hash теперь отклоняются. Однако `no_command_snapshots ACCEPT`: валидный command passed принимается без snapshot_before/snapshot_after (оба поля отсутствуют также в valid/report_v2.json). `invalid_snapshots_and_actor ACCEPT`: принимаются input_snapshot={"files":123}, snapshot_before="bad", snapshot_after=false, actor={"name":42}. `invalid_candidate ACCEPT`: manual candidate_snapshot={"files":123} принимается. Влияние: формат не гарантирует пригодных данных для проверки версии и происхождения доказательств (R-10, design §2.4); вычисление свежести/coverage следующих задач здесь не требуется. Критерий исправления: закрепить и валидировать вложенную схему снимков/actor и обязательные command before/after; добавить повреждённые fixtures и проверки через load_report. Не ограничиваться isinstance(value, dict).
++
++Целевой набор: **37/37 PASS** ([лог](PB-031-evidence/reaudit-01/targeted-tests.log)); null и повреждённые вложенные поля им не покрыты. После исправлений нужны свежие verify/handoff и повторная независимая проверка.
++
++`index --all` повторно сообщил «Индексы уже актуальны» при старом статусе PB-031; производная строка индекса синхронизирована вручную, как при первичном аудите. Этот сбой не включён в замечания к реализации PB-031.
++
++Итог независимого полного прогона: **472/472 PASS**, 163.351s, `python3 -m unittest discover -s tests -v`; [лог](PB-031-evidence/reaudit-01/unit-tests.log). Итоговые `check --ready` и `git diff --check`: PASS. Эти результаты не снимают воспроизведённые A2/A3. Файлы комплекта не менялись, self-manifest не перезаписывался.
++
++## Повторный аудит 2026-10-23T09:34:02+03:00; исполнитель: Codex; модель: GPT-6.
++
++Повторная независимая проверка A1–A4: замечания устранены. Новых блокирующих замечаний в границах PB-031 не обнаружено. Проверены исходники форматов, фикстуры, принятые R-04/R-07–11/R-25–26 и design §2.1–2.4. Runner/policy/lifecycle v2 остаются за границами задачи.
++
++До записи материалов проверена передача от 2026-10-23T09:31:51+03:00: report 667765ae60914590a9d90f0a66ed9452 passed, inputs_unchanged=true; независимое inputs_fresh=true, diff=[]; проекция карточки совпадает. Материалы текущего аудита зарегистрированы как audit-reaudit-02 в work/verification/PB-031/audit-reaudit-02 (вне входов verify); CLI перенесёт их при закрытии. Отчёты исполнителя не изменялись.
++
++- **A1: PASS** — внешняя, внутренняя и промежуточная symlink отклонены через настоящий CLI; absent-путь разрешён.
++- **A2: PASS** — отсутствующие и null-план/inputs, file без path и некорректные environment.names отклоняются. Обе null-пробы через `check --ready` завершаются exit=1.
++- **A3: PASS** — load_report принимает валидный v2; отсутствующие before/after, неверные actor.name, files=123, пустой snapshot, строковый/boolean before/after и повреждённый candidate отклоняются. Восемь раздельных loader-мутаций прошли; исходные пробы no_at/no_actor/no_manual_scenario также отклонены.
++- **A4: PASS** — v2 без включения и неизвестный registry_id отклонены через CLI; регрессии несовместимого kind проходят в целевом наборе.
++
++Целевой набор: **39/39 PASS**. Команды воспроизведения: `python3 -m unittest discover -s tests -p test_task_workflow_schema.py -v`; независимый probe.py из зарегистрированного материала запускать из корня проекта. Логи: probe.log, targeted-tests.log; оригинальные пробы прежних аудитов сохранены неизменными. Старый v1 остаётся под регрессионными проверками; аудит не распространяется на ещё не реализованные задачи PB-032–PB-037.
++
++Инженер поручил закрытие при успешном аудите. Финальное решение о приёмке/закрытии фиксируется ниже после полного прогона. Пункт самопроверки в исходном checklist не переписывается: выполнение подтверждается этим протоколом и CLI acceptance, сохраняя содержательную проекцию передачи.
++
++Первый полный прогон: 473 PASS, 1 FAIL — test_self_project_copy_pilot отказал из-за размещённого аудитором материала в work/audits, который не копируется staging CLI. Материал перенесён в поддерживаемый work/verification/PB-031/audit-reaudit-02; реализация PB-031 не менялась. Повторяется только упавший сценарий.
++
++Финальный результат: **PASS, A1–A4 устранены**, приёмка PB-031 разрешена. 39/39 целевых тестов PASS; 473 проверки полного прогона PASS, единственный сбой от размещения аудиторских материалов устранён и повторный test_self_project_copy_pilot PASS (46.704s). Логи full-tests-first.log и pilot-recheck.log сохранены в audit-reaudit-02. Структурные проверки и git diff --check PASS. Свежесть исходного verify после протокола/регистрации материалов подтверждена повторно: (True, []). По явному поручению инженера далее регистрируются acceptance и close; изменение требований и повторный handoff не требовались.
++
++Перед close CLI выявил незарегистрированный каталог прежних доказательств docs/tasks/PB-031-evidence. Каталог зарегистрирован как pb031-evidence (immutable); исходные байты сохранены, передачу/приёмку это не изменяет.
++
++
++Закрытие по поручению инженера: `lifecycle accept ... --result accepted --kind acceptance --role auditor` выполнено. `close PB-031 --dry-run` после регистрации каталога доказательств построил план. Реальный `close PB-031` остановлен staged-проверкой: `ERROR: docs/plans/index.md: битая или внешняя локальная ссылка ../tasks/PB-031.md` (close-attempt.log в audit-reaudit-02). Записи в архив не произошло, исходная карточка осталась in_review, pending отсутствует. Итоговая проверка активного дерева `check --ready` проходит.
++
++Диагностика отдельного дефекта закрытия: lifecycle.py исключает collection indexes из обычных updates; при close_task набор kinds пуст, поэтому индекс плана, ссылающийся на переносимую карточку, не переписывается в staged-дереве. Исправление CLI не входит в аудит PB-031 и не выполнялось. A1–A4 приняты; техническое закрытие остаётся заблокировано до отдельного исправления механизма ссылок. Содержательные требования карточки и immutable-доказательства не менялись.
++
++
++## Повторный аудит 2026-10-29T04:51:02+03:00; исполнитель: Codex; модель: GPT-6.
++
++Результат: **возврат на подготовку свежей передачи**, закрытие и новая приёмка не выполнялись. Историческая приёмка от 2026-10-23 сохранена как история и не подтверждает текущее дерево. Реализация не исправлялась.
++
++- **PB-031-A5, P2 — устаревшие доказательства блокируют закрытие.** `python3 ai-dev-playbook/scripts/playbook.py verify PB-031 --audit-ready` после устранения служебного .DS_Store возвращает exit=1: «нет свежего успешного прогона verify — входы изменились после проверки». Независимый `inputs_fresh` для report 667765ae60914590a9d90f0a66ed9452: false, 889 изменённых входов, включая documents.py, verification.py, playbook.py, lifecycle.py и project.json. Влияние: прежний passed не подтверждает текущую реализацию. Критерий исправления: подготовить окончательные входы, выполнить успешный свежий verify, зарегистрировать CHECK/HANDOFF и передачу; затем повторить --audit-ready и независимый аудит перед закрытием. Аудитор не создаёт передачу от имени исполнителя.
++
++Целевой набор `python3 -m unittest discover -s tests -p test_task_workflow_schema.py -v`: **39/39 PASS**. Полный verify не запускался: ранний контроль уже выявил отсутствие актуальной передачи. Независимые поведенческие пробы и результаты подготовки сохранены в зарегистрированном контейнере `work/verification/PB-031/audit-20261029` (probe.py, probe.log, targeted-tests.log, freshness.json, report.md). Их результат не снимает A5.
++
++Неучтённый `work/verification/PB-031/.DS_Store` сохранён вне проекта в `/private/tmp/PB-031-DS_Store-20261029`; исторические доказательства не изменялись. Changelog не дополнен записью о принятом результате: условие успешного аудита не выполнено.
++
++Уточнение независимых проб: негативные CLI-сценарии отклонены с ожидаемыми адресными ошибками; положительный CLI-контроль absent не подтверждён из-за отсутствующего материала PB-041 во временной копии без work (ограничение исторического probe.py). Положительный loader и отдельные loader-мутации PASS. Итоговые `index`, `check --ready`, `git diff --check`: PASS; структурные результаты не снимают A5.
++
++
++## Выполнение 2026-10-29T04:53:25+03:00; исполнитель: Codex; модель: GPT-6.
++
++По запросу инженера устранение PB-031-A5: подготовлены окончательные входы и статус in_review для свежего полного verify. Изменения реализации не требуются по текущему замечанию. Исторические отчёты и приёмка сохранены; текущая готовность будет подтверждена новым CHECK и CLI-передачей. Независимая повторная приёмка остаётся отдельным этапом.
++
++
++## Проверка 2026-10-29T05:09:03+03:00; исполнитель: Codex; модель: GPT-6.
++
++CHECK: PB-031-A5 — выполнен свежий полный `verify PB-031`, run_id `a01cb14755a444749f0f372c636b995e`, результат passed. Self-check и preflight-regressions PASS; полный набор 619/619 PASS за 801.099s, включая форматы PB-031 и self-project-copy pilot. `git diff --check` PASS. Отчёт и логи: `work/verification/PB-031/a01cb14755a444749f0f372c636b995e/`. Реализация не менялась; свежая проверка выполнена для текущего дерева.
++
++## Передача 2026-10-29T05:09:03+03:00; исполнитель: Codex; модель: GPT-6.
++
++HANDOFF: подготовка по замечанию A5 завершена. Основание — запись выполнения от текущей сессии и CHECK выше; статус in_review. Для независимого аудитора: `verify PB-031 --audit-ready`, оценка актуальных форматов и требований PB-031, повторные поведенческие пробы с учётом ограничений исторического probe.py (временная копия должна содержать необходимые зарегистрированные материалы). Исторические A1–A4 и приёмка сохранены; этот CHECK не заменяет повторную независимую приёмку. После успешного аудита — новая acceptance и проверка закрытия через CLI.
++
++## Аудит 2026-10-29T05:14:00+03:00; исполнитель: Codex; модель: GPT-6.
++
++Результат: **PASS; PB-031-A5 устранено, новых блокирующих замечаний нет**. Независимо проверены требования PB-031, design §2.1–2.4, текущие валидаторы и fixtures. Реализация не изменялась.
++
++- До записи протокола `verify PB-031 --audit-ready`: PASS. Передача от 2026-10-29T05:09:36+03:00 соответствует report a01cb14755a444749f0f372c636b995e; passed, inputs_unchanged=true. Независимый inputs_fresh=true, diff=[]; card_projection совпадает. A5 снято.
++- Целевые тесты аудитора: **39/39 PASS**. В свежем полном отчёте исполнителя проверены exit_code=0 всех трёх команд и итог **619/619 PASS**; полный набор аудитор повторно не запускал.
++- Повторные реальные CLI-пробы во временной полной копии: внешняя/внутренняя/промежуточная symlink отклонены адресными ошибками; absent-путь принят (exit=0). Отключённый v2, неизвестный registry_id, null-план и null-inputs отклонены (exit=1). A1/A2/A4 подтверждены.
++- A3: положительный load_report принят; отсутствие provenance/снимков и повреждённые actor/input/before/after/candidate отклонены. Дополнительно 8/8 проб default_inputs реестра (строка/объект, symlink/absent): PASS.
++- Материалы: зарегистрированный контейнер `work/verification/PB-031/audit-20261029-02` — snapshot/provenance, probe.py, probe.log, targeted-tests.log, registry-probes.json. Воспроизведение: `python3 work/verification/PB-031/audit-20261029-02/probe.py` из корня; целевой unittest из раздела проверок карточки.
++- Первый запуск probe скопировал активную служебную блокировку prepare-audit; исходный отказ сохранён в probe-first-blocked.log. После завершения подготовки повторный запуск PASS. Это ограничение постановки пробы, не дефект реализации.
++
++Аудит ограничен форматами PB-031; runner/policy/lifecycle v2 будущих PB-032–PB-037 не принимаются этим протоколом. Индекс и git diff --check PASS. Далее — контроль переносимости и CLI acceptance. Реальное архивирование текущим запросом отдельно не запрошено; допускается только проверка close --dry-run.
+--- a/docs/archive/tasks/PB-038.md
++++ b/docs/archive/tasks/PB-038.md
+@@ -147,7 +147,7 @@
+ 
+ ## Контекст
+ 
+-- [Протокол PB-031](../../tasks/PB-031.md): приёмка зарегистрирована, закрытие отменено staged-проверкой с `ERROR: docs/plans/index.md: битая или внешняя локальная ссылка ../tasks/PB-031.md`.
++- [Протокол PB-031](PB-031.md): приёмка зарегистрирована, закрытие отменено staged-проверкой с `ERROR: docs/plans/index.md: битая или внешняя локальная ссылка ../tasks/PB-031.md`.
+ - [Индекс планов](../../plans/index.md), [действующий план](../../plans/proportional-workflow.md).
+ - Диагностика: индексы коллекций исключаются из обычных updates; их отдельная обработка выбирает kinds по операциям над документами, поэтому close_task пропускает индекс плана. Дополнительно `_collection_index_write` может вернуть None при неизменном генерируемом содержимом, хотя ссылки требуют переноса.
+ - Ранее план PB-021–PB-029 оставался legacy во время закрытия подзадач; ссылки на задачи появились в его индексе после их закрытия. Этот случай не заменяет регрессию зарегистрированного действующего плана.
+--- a/docs/archive/tasks/PB-040.md
++++ b/docs/archive/tasks/PB-040.md
+@@ -834,7 +834,7 @@
+ 
+ - [Спецификация и согласованный контракт](../../specs/task-card-format.md).
+ - [PB-038](PB-038.md), [PB-039](PB-039.md): различное оформление журнала и незакрытый чекбокс аудита при наличии acceptance. Чекбокс входил в защищённую handoff-проекцию; менять его после передачи означало менять проверяемые требования.
+-- [PB-031](../../tasks/PB-031.md) и [PB-034](../../tasks/PB-034.md): отдельная работа над workflow/verification v2. Версия Markdown независима от этой механики; порядок задач не меняется.
++- [PB-031](PB-031.md) и [PB-034](../../tasks/PB-034.md): отдельная работа над workflow/verification v2. Версия Markdown независима от этой механики; порядок задач не меняется.
+ - Инженер согласовал формат, сохранение старых карточек без миграции и разрешил реализацию. PB-040 переведена на формат 2 как локальный пилот; остальные существующие карточки не мигрируются.
+ 
+ - Дополнение инженера от 2026-10-24: вернуть визуальные чекбоксы критериев как вычисляемое CLI-отображение результатов журнала. Дополнение реализуется в EXEC-02 по отдельному запросу инженера. Для новой итерации карточка возвращалась в in_progress; HANDOFF-01 и CHECK-01 сохранены как история прежнего объёма и не подтверждают новые AC-08–AC-13. После реализации нужны новые проверки и передача.
+--- a/docs/plans/index.md
++++ b/docs/plans/index.md
+@@ -5,7 +5,7 @@
+ 
+ | Документ | Состояние | Обновлён | Задачи |
+ |---|---|---|---|
+-| [Внедрение соразмерных маршрутов, проверок и приёмки](proportional-workflow.md) | draft | 2026-10-23 | [PB-031](../tasks/PB-031.md), [PB-032](../tasks/PB-032.md), [PB-033](../tasks/PB-033.md), [PB-034](../tasks/PB-034.md), [PB-035](../tasks/PB-035.md), [PB-036](../tasks/PB-036.md), [PB-037](../tasks/PB-037.md), [AUDIT-007](../tasks/AUDIT-007.md) |
++| [Внедрение соразмерных маршрутов, проверок и приёмки](proportional-workflow.md) | draft | 2026-10-23 | [PB-031](../archive/tasks/PB-031.md), [PB-032](../tasks/PB-032.md), [PB-033](../tasks/PB-033.md), [PB-034](../tasks/PB-034.md), [PB-035](../tasks/PB-035.md), [PB-036](../tasks/PB-036.md), [PB-037](../tasks/PB-037.md), [AUDIT-007](../tasks/AUDIT-007.md) |
+ | [Переход к выборочным файловым операциям и хранению 15 операций](scoped-file-operations.md) | draft | 2026-10-26 | [PB-045](../archive/tasks/PB-045.md), [PB-046](../tasks/PB-046.md), [PB-047](../tasks/PB-047.md), [PB-048](../tasks/PB-048.md), [PB-049](../tasks/PB-049.md), [PB-050](../tasks/PB-050.md), [AUDIT-008](../tasks/AUDIT-008.md) |
+ 
+ ## Архив
+--- a/docs/plans/proportional-workflow.md
++++ b/docs/plans/proportional-workflow.md
+@@ -55,7 +55,7 @@
+ 
+ | Этап | Карточка | Зависимости | Самостоятельный результат |
+ |---|---|---|---|
+-| 1 | [PB-031](../tasks/PB-031.md) | — | Версионированные форматы, валидация v2 и fixtures, сохранён legacy |
++| 1 | [PB-031](../archive/tasks/PB-031.md) | — | Версионированные форматы, валидация v2 и fixtures, сохранён legacy |
+ | 2 | [PB-032](../tasks/PB-032.md) | PB-031 | Политика обязательности, проекции входов и coverage |
+ | 3 | [PB-033](../tasks/PB-033.md) | PB-032 | Runner v2, ручные результаты, preflight и reuse |
+ | 4 | [PB-034](../tasks/PB-034.md) | PB-033 | Согласованные переходы, передача, приёмка и закрытие |
+--- a/docs/tasks/index.md
++++ b/docs/tasks/index.md
+@@ -11,7 +11,6 @@
+ | AUDIT-007 | [AUDIT-007: Независимо принять соразмерные маршруты и проверки](AUDIT-007.md) | draft | P2 | — | 2026-10-23 03:34 | — | PB-031, PB-032, PB-033, PB-034, PB-035, PB-036, PB-037 |
+ | AUDIT-008 | [AUDIT-008: Независимо принять выборочные операции и ограниченную историю](AUDIT-008.md) | draft | P2 | — | 2026-10-26 17:56 | — | PB-045, PB-046, PB-047, PB-048, PB-049, PB-050 |
+ | PB-008 | [PB-008: Завершить самоприменение проверочного цикла](PB-008.md) | in_review | P2 | Devin / SWE-2 High | unknown | — | — |
+-| PB-031 | [PB-031: Определить и валидировать форматы маршрутов и проверок v2](PB-031.md) | in_review | P2 | Antigravity / Gemini 3.8 Flash (High) | 2026-10-23 03:34 | — | — |
+ | PB-032 | [PB-032: Реализовать политику обязательности, покрытия и свежести](PB-032.md) | draft | P2 | — | 2026-10-23 03:34 | — | PB-031 |
+ | PB-033 | [PB-033: Добавить runner v2, ручные проверки и предварительную проверку](PB-033.md) | draft | P2 | — | 2026-10-23 03:34 | — | PB-032 |
+ | PB-034 | [PB-034: Согласовать передачу, приёмку и закрытие без лишних прогонов](PB-034.md) | draft | P2 | — | 2026-10-23 03:34 | — | PB-033 |
+@@ -29,6 +28,7 @@
+ 
+ | ID | Задача | Статус | Приоритет | Исполнитель | Создана | Закрыта | Зависимости |
+ |---|---|---|---|---|---|---|---|
++| PB-031 | [PB-031: Определить и валидировать форматы маршрутов и проверок v2](../archive/tasks/PB-031.md) | done | P2 | Antigravity / Gemini 3.8 Flash (High) | 2026-10-23 03:34 | 2026-10-29 05:15 | — |
+ | PB-056 | [PB-056: Выявлять причины повторных дорогих проверок до запуска тестов и аудита](../archive/tasks/PB-056.md) | done | P1 | Codex / GPT-6.1 Sol | 2026-10-28 11:50 | 2026-10-28 21:47 | — |
+ | PB-045 | [PB-045: Проверять будущее состояние через выборочный staged](../archive/tasks/PB-045.md) | done | P2 | Codex / GPT-6.1 Sol | 2026-10-26 17:56 | 2026-10-28 08:59 | — |
+ | PB-044 | [PB-044: Перенести исторические материалы закрытых задач и обнаруживать остатки](../archive/tasks/PB-044.md) | done | P2 | Codex / GPT-6.1 Sol | 2026-10-26 13:36 | 2026-10-28 06:11 | — |

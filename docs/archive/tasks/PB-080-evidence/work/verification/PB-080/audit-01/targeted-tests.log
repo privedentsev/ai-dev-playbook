@@ -1,0 +1,506 @@
+test_checks_unittest (unittest.loader._FailedTest.test_checks_unittest) ... ERROR
+test_allowed_skip_accepted (test_checks_run.AdapterTest.test_allowed_skip_accepted)
+Skip из allowlist каталога принимается verdict'ом ... ok
+test_error_outcome_and_description (test_checks_run.AdapterTest.test_error_outcome_and_description)
+error-исход попадает в описание результата проверки ... ok
+test_expected_failure_and_unexpected_success (test_checks_run.AdapterTest.test_expected_failure_and_unexpected_success)
+expectedFailure и unexpected success учитываются verdict'ом ... ok
+test_green_suite_passed (test_checks_run.AdapterTest.test_green_suite_passed)
+Зелёный набор тестов даёт verdict passed ... ok
+test_missing_catalog_id_rejected (test_checks_run.AdapterTest.test_missing_catalog_id_rejected)
+Тест вне каталога политики отклоняется ... ok
+test_parse_argv_forms (test_checks_run.AdapterTest.test_parse_argv_forms)
+parse_argv разбирает формы unittest discover/модулей в selection ... ok
+test_subtest_failure_rejected (test_checks_run.AdapterTest.test_subtest_failure_rejected)
+Падение subTest отклоняется verdict'ом ... ok
+test_timeout_status (test_checks_run.AdapterTest.test_timeout_status)
+Превышение timeout проверки даёт статус timeout ... ok
+test_unexpected_skip_rejected (test_checks_run.AdapterTest.test_unexpected_skip_rejected)
+Неожиданный skip вне allowlist отклоняется ... ok
+test_unfinished_and_crash_rejected (test_checks_run.AdapterTest.test_unfinished_and_crash_rejected)
+unfinished/crash исходы тестов отклоняются ... ok
+test_zero_tests_rejected (test_checks_run.AdapterTest.test_zero_tests_rejected)
+Пустой набор без тестов отклоняется verdict'ом ... ok
+test_a04_corrupt_failed_empty_diff_keeps_obligation (test_checks_run.Audit009PB74RegressionTest.test_a04_corrupt_failed_empty_diff_keeps_obligation)
+A-04: `{`-запись failed при актуальном baseline не даёт ... ok
+test_a04_corrupt_manual_record_stays_uncovered (test_checks_run.Audit009PB74RegressionTest.test_a04_corrupt_manual_record_stays_uncovered)
+A-04: повреждённая запись ручной проверки не снимает ... ok
+test_a04_corrupt_timeout_record_keeps_obligation (test_checks_run.Audit009PB74RegressionTest.test_a04_corrupt_timeout_record_keeps_obligation)
+A-04: повреждённый timeout-исход — то же открытое ... ok
+test_a04_deleted_failed_empty_diff_keeps_obligation (test_checks_run.Audit009PB74RegressionTest.test_a04_deleted_failed_empty_diff_keeps_obligation)
+A-04: удалённый failed при сохранённом индексе — то же ... ok
+test_a05_legacy_equal_end_to_end (test_checks_run.Audit009PB74RegressionTest.test_a05_legacy_equal_end_to_end)
+A-05: реальные passed → failed, конвертация в legacy без ... ok
+test_a05_legacy_equal_timestamp_never_picks_passed (test_checks_run.Audit009PB74RegressionTest.test_a05_legacy_equal_timestamp_never_picks_passed)
+A-05: два legacy-результата без run_seq при равном ... ok
+test_a05_seq_order_and_unambiguous_legacy_preserved (test_checks_run.Audit009PB74RegressionTest.test_a05_seq_order_and_unambiguous_legacy_preserved)
+A-05: seq-записи упорядочены run_seq; однозначная legacy ... ok
+test_audit01_missing_results_dir_keeps_obligation (test_checks_run.Audit009PB74RegressionTest.test_audit01_missing_results_dir_keeps_obligation)
+Аудит-01 A-01: утрата всего каталога results при ... ok
+test_audit01_plan_corrupt_ids_forbid_reuse (test_checks_run.Audit009PB74RegressionTest.test_audit01_plan_corrupt_ids_forbid_reuse)
+Аудит-01 A-02: plan с corrupt_ids и старым passed в ... ok
+test_audit02_legacy_loss_keeps_obligation (test_checks_run.Audit009PB74RegressionTest.test_audit02_legacy_loss_keeps_obligation)
+Аудит-02 A-03: legacy-пара равного времени — утрата failed ... ok
+test_a01_overlapping_runs_keep_late_failure (test_checks_run.Audit009PB78RegressionTest.test_a01_overlapping_runs_keep_late_failure)
+A-01 аудита PB-078: перекрывающиеся прогоны с различными ... ok
+test_a02_loss_without_winner_change_keeps_max (test_checks_run.Audit009PB78RegressionTest.test_a02_loss_without_winner_change_keeps_max)
+A-02 аудита PB-078: утрата nf-источника без смены ... ok
+test_a02_lost_nf_component_keeps_obligation (test_checks_run.Audit009PB78RegressionTest.test_a02_lost_nf_component_keeps_obligation)
+A-02 аудита PB-078: максимум ``finished_at`` среди ... ok
+test_a06_clock_rollback_end_to_end (test_checks_run.Audit009PB78RegressionTest.test_a06_clock_rollback_end_to_end)
+A-06: реальные subprocess-команды со счётчиком, управляемые ... ok
+test_a06_equal_seq_concurrent_is_conservative (test_checks_run.Audit009PB78RegressionTest.test_a06_equal_seq_concurrent_is_conservative)
+A-06: равный run_seq >= 0 — параллельные прогоны с общим ... ok
+test_a06_index_rebuild_and_loss_follow_seq (test_checks_run.Audit009PB78RegressionTest.test_a06_index_rebuild_and_loss_follow_seq)
+A-06: индекс, пересборка и свидетельство утраты используют ... ok
+test_a06_later_seq_beats_rolled_back_clock (test_checks_run.Audit009PB78RegressionTest.test_a06_later_seq_beats_rolled_back_clock)
+A-06: passed seq0 с поздним finished_at против failed seq1 ... ok
+test_a06_legacy_clock_order_preserved (test_checks_run.Audit009PB78RegressionTest.test_a06_legacy_clock_order_preserved)
+A-06: legacy-пара без run_seq упорядочена finished_at — ... ok
+test_a06_legacy_failure_blocks_until_clock_agrees (test_checks_run.Audit009PB78RegressionTest.test_a06_legacy_failure_blocks_until_clock_agrees)
+A-01 аудита PB-078: legacy-запись без run_seq не ... ok
+test_a01_blocked_run_preserves_obligations (test_checks_run.Audit009RegressionTest.test_a01_blocked_run_preserves_obligations)
+A-01: blocked-прогон не теряет обязательства задачи ... ok
+test_a01_failed_run_preserves_obligations (test_checks_run.Audit009RegressionTest.test_a01_failed_run_preserves_obligations)
+A-01: failed-прогон не теряет обязательства задачи ... ok
+test_a01_timeout_run_preserves_obligations (test_checks_run.Audit009RegressionTest.test_a01_timeout_run_preserves_obligations)
+A-01: timeout-прогон не теряет обязательства задачи ... ok
+test_a02_equal_finished_at_latest_is_failed (test_checks_run.Audit009RegressionTest.test_a02_equal_finished_at_latest_is_failed)
+A-02: при равном finished_at поздний failed не скрывается ... ok
+test_a02_equal_timestamps_end_to_end (test_checks_run.Audit009RegressionTest.test_a02_equal_timestamps_end_to_end)
+A-02: два прогона с одним finished_at — поздний failed ... ok
+test_a02_index_and_rebuild_use_run_seq (test_checks_run.Audit009RegressionTest.test_a02_index_and_rebuild_use_run_seq)
+A-02: индекс и его пересборка выбирают позднее исполнение ... ok
+test_a02_legacy_result_without_run_seq_is_older (test_checks_run.Audit009RegressionTest.test_a02_legacy_result_without_run_seq_is_older)
+A-02: записи до введения run_seq при равном finished_at ... ok
+test_a01_ttl_from_original_run (test_checks_run.AuditRegressionTest.test_a01_ttl_from_original_run)
+A-01: TTL внешней зависимости считается от исходного прогона ... ok
+test_a02_reuse_rebinding_race_reruns (test_checks_run.AuditRegressionTest.test_a02_reuse_rebinding_race_reruns)
+A-02: гонка перепривязки при переиспользовании вызывает прогон ... ok
+test_a03_corrupt_latest_failed_blocks_reuse (test_checks_run.AuditRegressionTest.test_a03_corrupt_latest_failed_blocks_reuse)
+A-03: повреждённый поздний failed блокирует переиспользование ... ok
+test_a04_status_counts_only_fresh_coverage (test_checks_run.AuditRegressionTest.test_a04_status_counts_only_fresh_coverage)
+A-04: status учитывает только свежее покрытие ... ok
+test_a05_project_import_in_adapter (test_checks_run.AuditRegressionTest.test_a05_project_import_in_adapter)
+A-05: project-импорт в адаптере unittest обрабатывается ... ok
+test_a06_deleted_latest_failed_blocks_reuse (test_checks_run.AuditRegressionTest.test_a06_deleted_latest_failed_blocks_reuse)
+A-06: удалённый поздний failed блокирует переиспользование ... ok
+test_a07_rebuild_preserves_loss_evidence (test_checks_run.AuditRegressionTest.test_a07_rebuild_preserves_loss_evidence)
+A-07: rebuild индекса сохраняет свидетельства потерь ... ok
+test_a07_unrelated_run_keeps_evidence (test_checks_run.AuditRegressionTest.test_a07_unrelated_run_keeps_evidence)
+A-07: несвязанный прогон сохраняет свидетельства потерь ... ok
+test_run_and_status_end_to_end (test_checks_run.CliRunTest.test_run_and_status_end_to_end)
+checks run и status работают end-to-end через CLI ... ok
+test_run_requires_policy (test_checks_run.CliRunTest.test_run_requires_policy)
+checks run без checks_policy в project.json отклоняется ... ok
+test_run_requires_task (test_checks_run.CliRunTest.test_run_requires_task)
+checks run для несуществующей задачи отклоняется ... ok
+test_run_second_time_reuses (test_checks_run.CliRunTest.test_run_second_time_reuses)
+Повторный checks run переиспользует результаты ... ok
+test_changed_input_forces_rerun (test_checks_run.RunnerTest.test_changed_input_forces_rerun)
+Изменённый вход проверки заставляет её повторить ... ok
+test_corrupt_index_rebuilt (test_checks_run.RunnerTest.test_corrupt_index_rebuilt)
+Повреждённый индекс результатов перестраивается ... ok
+test_corrupt_result_no_false_reuse (test_checks_run.RunnerTest.test_corrupt_result_no_false_reuse)
+Повреждённый результат не даёт ложного переиспользования ... ok
+test_cross_task_reuse_same_project (test_checks_run.RunnerTest.test_cross_task_reuse_same_project)
+Результат одной задачи переиспользуется другой в том же проекте ... ok
+test_external_ttl_and_always_run (test_checks_run.RunnerTest.test_external_ttl_and_always_run)
+TTL и always_run внешних зависимостей соблюдаются runner'ом ... ok
+test_external_version_change_breaks_binding (test_checks_run.RunnerTest.test_external_version_change_breaks_binding)
+Смена версии внешней зависимости ломает binding результата ... ok
+test_first_run_stores_results_and_state (test_checks_run.RunnerTest.test_first_run_stores_results_and_state)
+Первый прогон сохраняет результаты и состояние runner'а ... ok
+test_force_reruns_all (test_checks_run.RunnerTest.test_force_reruns_all)
+force-режим перезапускает все проверки области ... ok
+test_late_failed_not_hidden (test_checks_run.RunnerTest.test_late_failed_not_hidden)
+Поздний failed не скрывается старым passed при переиспользовании ... ok
+test_mutation_during_command_blocked (test_checks_run.RunnerTest.test_mutation_during_command_blocked)
+Мутация входов во время команды проверки блокируется ... ok
+test_other_project_result_not_reused (test_checks_run.RunnerTest.test_other_project_result_not_reused)
+Результат другого проекта не переиспользуется ... ok
+test_project_scope_covers_all (test_checks_run.RunnerTest.test_project_scope_covers_all)
+scope=project покрывает все проверки проекта ... ok
+test_stale_reuses_independent_results (test_checks_run.RunnerTest.test_stale_reuses_independent_results)
+stale-режим переиспользует независимые свежие результаты ... ok
+test_status_reports_coverage_and_trust (test_checks_run.RunnerTest.test_status_reports_coverage_and_trust)
+checks status сообщает покрытие и trust_mode ... ok
+test_task_requirements_change_breaks_reuse (test_checks_run.RunnerTest.test_task_requirements_change_breaks_reuse)
+Изменение task_projection-входа ломает переиспользование ... ok
+test_no_policy_returns_none (test_checks_gate.LifecycleGateTest.test_no_policy_returns_none)
+Без checks_policy lifecycle возвращает None — legacy-контракт ... ok
+test_policy_requires_coverage (test_checks_gate.LifecycleGateTest.test_policy_requires_coverage)
+С checks_policy lifecycle требует покрытия области задачи ... ok
+test_confirm_covers_and_survives_rerun (test_checks_gate.LocalGateTest.test_confirm_covers_and_survives_rerun)
+Confirm ручной проверки покрывает её и переживает повторный прогон ... ok
+test_input_change_uncovers (test_checks_gate.LocalGateTest.test_input_change_uncovers)
+Изменение входа после прогона снимает покрытие проверки ... ok
+test_manual_without_confirm_blocks_ok (test_checks_gate.LocalGateTest.test_manual_without_confirm_blocks_ok)
+Ручная проверка без confirm блокирует ok даже при зелёном прогоне ... ok
+test_release_scope_reuses_cross_task (test_checks_gate.LocalGateTest.test_release_scope_reuses_cross_task)
+AC-02/05: project-область — весь набор; результаты задачи ... ok
+test_uncovered_before_run (test_checks_gate.LocalGateTest.test_uncovered_before_run)
+До прогона область не покрыта — evaluate возвращает ok=false ... ok
+test_forged_receipt_rejected (test_checks_gate.ProtectedGateTest.test_forged_receipt_rejected)
+Поддельная квитанция verifier отклоняется evaluate ... ok
+test_local_results_do_not_cover_protected (test_checks_gate.ProtectedGateTest.test_local_results_do_not_cover_protected)
+Локальные результаты не покрывают protected-политику ... ok
+test_receipt_covers_but_boundary_required (test_checks_gate.ProtectedGateTest.test_receipt_covers_but_boundary_required)
+Квитанция verifier покрывает проверку, но граница обязательна ... FAIL
+test_stale_candidate_receipt_not_evidence (test_checks_gate.ProtectedGateTest.test_stale_candidate_receipt_not_evidence)
+Квитанция прежнего кандидата — история, не отказ и не ... ok
+test_aggregate_cannot_override_later_failure (test_checks_gate.ProtectedLatestOutcomeTest.test_aggregate_cannot_override_later_failure)
+Aggregate подтверждает старый passed-результат, но не ... ERROR
+test_clock_rollback_failed_stays_latest (test_checks_gate.ProtectedLatestOutcomeTest.test_clock_rollback_failed_stays_latest)
+A-06 PB-078: protected — поздний failed с меньшим ... FAIL
+test_later_failed_blocks_earlier_passed (test_checks_gate.ProtectedLatestOutcomeTest.test_later_failed_blocks_earlier_passed)
+Поздний failed блокирует ранний passed в защищённой истории ... FAIL
+test_same_timestamp_aggregate_keeps_failed_latest (test_checks_gate.ProtectedLatestOutcomeTest.test_same_timestamp_aggregate_keeps_failed_latest)
+A-05 аудита PB-062: при равных finished_at порядок задаёт ... ERROR
+test_aggregate_receipt_ttl_expiry_rejected (test_checks_gate.ProtectedTtlTest.test_aggregate_receipt_ttl_expiry_rejected)
+Просроченная aggregate-квитанция не закрывает обязательство ... ERROR
+test_older_expired_aggregate_does_not_block_fresh (test_checks_gate.ProtectedTtlTest.test_older_expired_aggregate_does_not_block_fresh)
+A-04: aggregate подтверждает исходное время исполнения — ... ERROR
+test_older_expired_does_not_block_fresh (test_checks_gate.ProtectedTtlTest.test_older_expired_does_not_block_fresh)
+A-04: просроченная квитанция не блокирует более свежее ... FAIL
+test_run_receipt_ttl_expiry_rejected (test_checks_gate.ProtectedTtlTest.test_run_receipt_ttl_expiry_rejected)
+Просроченная по TTL run-квитанция не закрывает обязательство ... FAIL
+test_plan_prints_selection (test_checks_select.CliPlanTest.test_plan_prints_selection)
+checks plan печатает выбор проверок с кодом 0 ... ok
+test_plan_read_only (test_checks_select.CliPlanTest.test_plan_read_only)
+checks plan не изменяет файлы проекта ... ok
+test_plan_requires_policy_link (test_checks_select.CliPlanTest.test_plan_requires_policy_link)
+checks plan без checks_policy в project.json отклоняется ... ok
+test_plan_requires_task (test_checks_select.CliPlanTest.test_plan_requires_task)
+checks plan без задачи отклоняется ... ok
+test_ast_reads_within_same_budget (test_checks_select.PlanTest.test_ast_reads_within_same_budget)
+AST-чтения учитываются в том же байтовом бюджете ... ok
+test_bytes_budget_conservative (test_checks_select.PlanTest.test_bytes_budget_conservative)
+Малый байтовый бюджет делает план консервативным ... ok
+test_content_edit_detected (test_checks_select.PlanTest.test_content_edit_detected)
+Изменение содержимого файла обнаруживается планом ... ok
+test_corrupt_baseline_conservative (test_checks_select.PlanTest.test_corrupt_baseline_conservative)
+Повреждённый baseline делает план консервативным ... ok
+test_deleted_input_required (test_checks_select.PlanTest.test_deleted_input_required)
+Удалённый вход делает зависимую проверку обязательной ... ok
+test_edit_selects_consumer_chain (test_checks_select.PlanTest.test_edit_selects_consumer_chain)
+Правка файла выбирает цепочку проверок-потребителей ... ok
+test_environment_mismatch_not_reused (test_checks_select.PlanTest.test_environment_mismatch_not_reused)
+Несовпадение среды не переиспользует результат ... ok
+test_first_plan_no_baseline_requires_all (test_checks_select.PlanTest.test_first_plan_no_baseline_requires_all)
+Первый план без baseline требует все проверки ... ok
+test_hash_counter_expected_set (test_checks_select.PlanTest.test_hash_counter_expected_set)
+Счётчик хешей покрывает ровно ожидаемый набор файлов ... ok
+test_irrelevant_edit_outside_modules (test_checks_select.PlanTest.test_irrelevant_edit_outside_modules)
+Правка вне модулей не выбирает проверки ... ok
+test_newer_failed_hides_older_passed (test_checks_select.PlanTest.test_newer_failed_hides_older_passed)
+Более новый failed скрывает старый passed при reuse ... ok
+test_read_only_no_writes (test_checks_select.PlanTest.test_read_only_no_writes)
+Plan не пишет в дерево проекта ... ok
+test_reuse_valid_result (test_checks_select.PlanTest.test_reuse_valid_result)
+Валидный свежий результат переиспользуется в плане ... ok
+test_seconds_budget_blocks_before_run (test_checks_select.PlanTest.test_seconds_budget_blocks_before_run)
+Превышение бюджета секунд блокирует план до запуска ... ok
+test_stale_input_not_reused (test_checks_select.PlanTest.test_stale_input_not_reused)
+Устаревший вход не переиспользует результат ... ok
+test_always_and_task_obligations_add (test_checks_select.SelectTest.test_always_and_task_obligations_add)
+always и обязательства задачи добавляются к выбору ... ok
+test_change_only_inside_module_no_spill (test_checks_select.SelectTest.test_change_only_inside_module_no_spill)
+Изменение внутри модуля не затрагивает чужие проверки ... ok
+test_checkpoint_not_required_without_flag (test_checks_select.SelectTest.test_checkpoint_not_required_without_flag)
+Чекпоинт-проверка не обязательна без явного флага ... ok
+test_closure_digest_chain_cycle_change (test_checks_select.SelectTest.test_closure_digest_chain_cycle_change)
+Изменение в цепочке/цикле closure меняет digest выбора ... ok
+test_module_change_selects_own_and_consumers (test_checks_select.SelectTest.test_module_change_selects_own_and_consumers)
+Изменение модуля выбирает его проверки и проверки потребителей ... ok
+test_obligations_never_narrow (test_checks_select.SelectTest.test_obligations_never_narrow)
+Обязательства никогда не сужают выбор проверок ... ok
+test_subsystem_consumer_expands (test_checks_select.SelectTest.test_subsystem_consumer_expands)
+Потребитель-подсистема расширяет выбор по своим проверкам ... ok
+test_transitive_two_edge_chain (test_checks_select.SelectTest.test_transitive_two_edge_chain)
+Транзитивная цепочка из двух рёбер расширяет выбор ... ok
+test_unattributed_module_scope_blocked (test_checks_select.SelectTest.test_unattributed_module_scope_blocked)
+Неатрибутированный путь блокируется fallback scope=module ... ok
+test_unattributed_path_blocked_by_scope (test_checks_select.SelectTest.test_unattributed_path_blocked_by_scope)
+Неатрибутированный путь блокируется fallback scope=subsystem ... ok
+test_unattributed_path_project_scope (test_checks_select.SelectTest.test_unattributed_path_project_scope)
+Неатрибутированный путь попадает в unattributed при scope=project ... ok
+test_unknown_module_always_affected (test_checks_select.SelectTest.test_unknown_module_always_affected)
+Модуль из unknown-записей всегда считается затронутым ... ok
+test_unknown_project_scope_widens (test_checks_select.SelectTest.test_unknown_project_scope_widens)
+unknown со scope=project расширяет выбор консервативно ... ok
+test_unproven_change_widens (test_checks_select.SelectTest.test_unproven_change_widens)
+Недоказанное изменение расширяет выбор до run всех проверок ... ok
+test_when_paths_unmatched_not_required (test_checks_select.SelectTest.test_when_paths_unmatched_not_required)
+when_paths без совпадения не делает проверку обязательной ... ok
+test_expected_failure_classification (test_checks_contract.ClassifyTest.test_expected_failure_classification)
+A-04: расширение допуска expected_failure — ослабление. ... ok
+test_extension (test_checks_contract.ClassifyTest.test_extension)
+Добавление новой проверки классифицируется как extension ... ok
+test_extension_mixed_with_weakening (test_checks_contract.ClassifyTest.test_extension_mixed_with_weakening)
+Смесь extension и weakening отклоняется ... ok
+test_identity_change_rejected (test_checks_contract.ClassifyTest.test_identity_change_rejected)
+Смена policy_id/project_id отклоняется классификацией ... ok
+test_new_catalog_entry_with_allowance (test_checks_contract.ClassifyTest.test_new_catalog_entry_with_allowance)
+A-06: новый ID сразу с допуском — ослабление. ... ok
+test_new_check_argv_allowlist (test_checks_contract.ClassifyTest.test_new_check_argv_allowlist)
+A-02: новая исполняемая команда требует решения инженера. ... ok
+test_tightening_limits_is_extension (test_checks_contract.ClassifyTest.test_tightening_limits_is_extension)
+Ужесточение timeout классифицируется как extension ... ok
+test_unchanged (test_checks_contract.ClassifyTest.test_unchanged)
+Изменение только revision классифицируется как unchanged ... ok
+test_weakening (test_checks_contract.ClassifyTest.test_weakening)
+Ослабление лимитов/удаление проверок классифицируется как weakening ... ok
+test_backward_compat (test_checks_contract.CliContractTest.test_backward_compat)
+Проект без checks_policy и task_workflow работает как прежде. ... ok
+test_deferred_commands (test_checks_contract.CliContractTest.test_deferred_commands)
+Отложенные команды checks отвечают кодом 1 с пояснением ... ok
+test_policy_link_path_safety (test_checks_contract.CliContractTest.test_policy_link_path_safety)
+checks_policy с выходом за пределы проекта отклоняется ... ok
+test_policy_link_validation (test_checks_contract.CliContractTest.test_policy_link_validation)
+project.json → checks_policy валидирует файл политики. ... ok
+test_scope_mode_axes (test_checks_contract.CliContractTest.test_scope_mode_axes)
+Область и режим — независимые оси; неизвестные значения отклонены. ... ok
+test_edges (test_checks_contract.GraphSchemaTest.test_edges)
+Самоссылка ребра и дубли отклоняются ... ok
+test_known_refs (test_checks_contract.GraphSchemaTest.test_known_refs)
+Graph с known_refs модулей проходит валидацию ссылок ... ok
+test_schema_version (test_checks_contract.GraphSchemaTest.test_schema_version)
+schema_version=2 и boolean версия графа отклоняются ... ok
+test_unknown_fields (test_checks_contract.GraphSchemaTest.test_unknown_fields)
+Неизвестные поля графа и его рёбер отклоняются ... ok
+test_unknown_scope (test_checks_contract.GraphSchemaTest.test_unknown_scope)
+unknown-запись с kind=file и непустым id отклоняется ... ok
+test_valid (test_checks_contract.GraphSchemaTest.test_valid)
+Валидный граф зависимостей проходит validate_graph ... ok
+test_valid_policy (test_checks_contract.PolicyFixtureTest.test_valid_policy)
+Валидная policy-фикстура проходит validate_policy без изменений ... ok
+test_version_constants (test_checks_contract.PolicyFixtureTest.test_version_constants)
+Константы версий схемы policy/graph соответствуют контракту ... ok
+test_approved_basis (test_checks_contract.PolicySchemaTest.test_approved_basis)
+approved_basis без who/at/source/detail и с невалидным at отклоняется ... ok
+test_catalog_expected_failure (test_checks_contract.PolicySchemaTest.test_catalog_expected_failure)
+A-04: явная политика допуска expected_failure отдельно от skip. ... ok
+test_catalog_rules (test_checks_contract.PolicySchemaTest.test_catalog_rules)
+Невалидный adapter и fingerprint формата md5 отклоняются ... ok
+test_checks_rules (test_checks_contract.PolicySchemaTest.test_checks_rules)
+Пустые checks и недопустимый kind отклоняются ... ok
+test_dependencies_rules (test_checks_contract.PolicySchemaTest.test_dependencies_rules)
+Ребро с consumer вне модулей отклоняется ... ok
+test_environment_rules (test_checks_contract.PolicySchemaTest.test_environment_rules)
+external freshness kind=weekly и ttl_seconds=null отклоняются ... ok
+test_excludes_exact_input_match (test_checks_contract.PolicySchemaTest.test_excludes_exact_input_match)
+A-05: glob, совпадающий с явным входом, — коллизия. ... ok
+test_excludes_rules (test_checks_contract.PolicySchemaTest.test_excludes_rules)
+Паттерны excludes без **, точечные и дубли отклоняются ... ok
+test_excludes_unanchored_glob (test_checks_contract.PolicySchemaTest.test_excludes_unanchored_glob)
+A-01: glob без литерального префикса наблюдает корень. ... ok
+test_fallback_rules (test_checks_contract.PolicySchemaTest.test_fallback_rules)
+Невалидный expansion_order и unknown_scope отклоняются ... ok
+test_ids_and_revision (test_checks_contract.PolicySchemaTest.test_ids_and_revision)
+Невалидные policy_id и revision=0 отклоняются ... ok
+test_inputs_and_applicability (test_checks_contract.PolicySchemaTest.test_inputs_and_applicability)
+Входы неизвестного типа и без path отклоняются ... ok
+test_limits_bool_nan (test_checks_contract.PolicySchemaTest.test_limits_bool_nan)
+Bool/NaN/отрицательные лимиты timeout и max в fallback отклоняются ... ok
+test_module_path_overlap (test_checks_contract.PolicySchemaTest.test_module_path_overlap)
+Пересекающиеся path-модули отклоняются ... ok
+test_modules_rules (test_checks_contract.PolicySchemaTest.test_modules_rules)
+Пустые modules, нет subsystem_id и битые paths отклоняются ... ok
+test_required_fields (test_checks_contract.PolicySchemaTest.test_required_fields)
+Отсутствие каждого обязательного поля policy отклоняется ... ok
+test_trust_mode (test_checks_contract.PolicySchemaTest.test_trust_mode)
+trust_mode вне {local, protected} отклоняется ... ok
+test_unknown_fields_rejected (test_checks_contract.PolicySchemaTest.test_unknown_fields_rejected)
+Неизвестные поля policy на любом уровне отклоняются ... ok
+test_unknown_version (test_checks_contract.PolicySchemaTest.test_unknown_version)
+schema_version=2 и строковая версия отклоняются ... ok
+test_aggregate (test_checks_contract.ReceiptSchemaTest.test_aggregate)
+aggregate-subject требует source_receipts и наоборот ... ok
+test_signature (test_checks_contract.ReceiptSchemaTest.test_signature)
+algorithm=rsa и пустая signature value отклоняются ... ok
+test_subject (test_checks_contract.ReceiptSchemaTest.test_subject)
+subject kind=batch и пустой results отклоняются ... ok
+test_valid (test_checks_contract.ReceiptSchemaTest.test_valid)
+Валидная квитанция verifier проходит схему ... ok
+test_version_and_digests (test_checks_contract.ReceiptSchemaTest.test_version_and_digests)
+Строковая schema_version и digest без sha256 отклоняются ... ok
+test_binding_required (test_checks_contract.ResultSchemaTest.test_binding_required)
+Отсутствие полей binding и невалидный policy_digest отклоняются ... ok
+test_kind_specific (test_checks_contract.ResultSchemaTest.test_kind_specific)
+command-результат без command-полей и наоборот отклоняется ... ok
+test_reused (test_checks_contract.ResultSchemaTest.test_reused)
+reused-ссылка на прежний результат валидна по схеме ... ok
+test_status_reason (test_checks_contract.ResultSchemaTest.test_status_reason)
+blocked/not_applicable требуют reason, passed — нет ... ok
+test_tests_contract (test_checks_contract.ResultSchemaTest.test_tests_contract)
+tests=null и нечисловой expected отклоняются ... ok
+test_valid (test_checks_contract.ResultSchemaTest.test_valid)
+Валидный результат проверок проходит схему ... ok
+test_version_and_status (test_checks_contract.ResultSchemaTest.test_version_and_status)
+schema_version=0 и статус green отклоняются ... ok
+
+======================================================================
+ERROR: test_checks_unittest (unittest.loader._FailedTest.test_checks_unittest)
+----------------------------------------------------------------------
+ImportError: Failed to import test module: test_checks_unittest
+Traceback (most recent call last):
+  File "/usr/local/Cellar/python@3.14/3.14.6/Frameworks/Python.framework/Versions/3.14/lib/python3.14/unittest/loader.py", line 137, in loadTestsFromName
+    module = __import__(module_name)
+ModuleNotFoundError: No module named 'test_checks_unittest'
+
+
+======================================================================
+ERROR: test_aggregate_cannot_override_later_failure (test_checks_gate.ProtectedLatestOutcomeTest.test_aggregate_cannot_override_later_failure)
+Aggregate подтверждает старый passed-результат, но не
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_checks_gate.py", line 347, in test_aggregate_cannot_override_later_failure
+    checks_verifier.aggregate(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^
+        self.home, self.proj.root,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^
+        receipt_ids=[outcome["receipt"]["receipt_id"]],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        now="2026-01-01T00:02:00+00:00", emit=lambda s: None)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/ai-dev-playbook/scripts/checks_verifier.py", line 499, in aggregate
+    _raise(confirmed, "агрегирование: ни одна проверка не подтвердилась "
+    ~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                      "на текущем кандидате")
+                      ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/ai-dev-playbook/scripts/checks_verifier.py", line 51, in _raise
+    raise ValueError(message)
+ValueError: агрегирование: ни одна проверка не подтвердилась на текущем кандидате
+
+======================================================================
+ERROR: test_same_timestamp_aggregate_keeps_failed_latest (test_checks_gate.ProtectedLatestOutcomeTest.test_same_timestamp_aggregate_keeps_failed_latest)
+A-05 аудита PB-062: при равных finished_at порядок задаёт
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_checks_gate.py", line 364, in test_same_timestamp_aggregate_keeps_failed_latest
+    checks_verifier.aggregate(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^
+        self.home, self.proj.root,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^
+        receipt_ids=[outcome["receipt"]["receipt_id"]],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        now=stamp, emit=lambda s: None)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/ai-dev-playbook/scripts/checks_verifier.py", line 499, in aggregate
+    _raise(confirmed, "агрегирование: ни одна проверка не подтвердилась "
+    ~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                      "на текущем кандидате")
+                      ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/ai-dev-playbook/scripts/checks_verifier.py", line 51, in _raise
+    raise ValueError(message)
+ValueError: агрегирование: ни одна проверка не подтвердилась на текущем кандидате
+
+======================================================================
+ERROR: test_aggregate_receipt_ttl_expiry_rejected (test_checks_gate.ProtectedTtlTest.test_aggregate_receipt_ttl_expiry_rejected)
+Просроченная aggregate-квитанция не закрывает обязательство
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_checks_gate.py", line 236, in test_aggregate_receipt_ttl_expiry_rejected
+    checks_verifier.aggregate(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^
+        self.home, self.proj.root,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^
+        receipt_ids=[outcome["receipt"]["receipt_id"]],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        emit=lambda s: None)
+        ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/ai-dev-playbook/scripts/checks_verifier.py", line 499, in aggregate
+    _raise(confirmed, "агрегирование: ни одна проверка не подтвердилась "
+    ~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                      "на текущем кандидате")
+                      ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/ai-dev-playbook/scripts/checks_verifier.py", line 51, in _raise
+    raise ValueError(message)
+ValueError: агрегирование: ни одна проверка не подтвердилась на текущем кандидате
+
+======================================================================
+ERROR: test_older_expired_aggregate_does_not_block_fresh (test_checks_gate.ProtectedTtlTest.test_older_expired_aggregate_does_not_block_fresh)
+A-04: aggregate подтверждает исходное время исполнения —
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_checks_gate.py", line 275, in test_older_expired_aggregate_does_not_block_fresh
+    checks_verifier.aggregate(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^
+        self.home, self.proj.root,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^
+        receipt_ids=[outcome["receipt"]["receipt_id"]],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        now="2026-01-01T00:00:30+00:00", emit=lambda s: None)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/ai-dev-playbook/scripts/checks_verifier.py", line 499, in aggregate
+    _raise(confirmed, "агрегирование: ни одна проверка не подтвердилась "
+    ~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                      "на текущем кандидате")
+                      ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/ai-dev-playbook/scripts/checks_verifier.py", line 51, in _raise
+    raise ValueError(message)
+ValueError: агрегирование: ни одна проверка не подтвердилась на текущем кандидате
+
+======================================================================
+FAIL: test_receipt_covers_but_boundary_required (test_checks_gate.ProtectedGateTest.test_receipt_covers_but_boundary_required)
+Квитанция verifier покрывает проверку, но граница обязательна
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_checks_gate.py", line 162, in test_receipt_covers_but_boundary_required
+    self.assertIn("probe", verdict["covered"])
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'probe' not found in []
+
+======================================================================
+FAIL: test_clock_rollback_failed_stays_latest (test_checks_gate.ProtectedLatestOutcomeTest.test_clock_rollback_failed_stays_latest)
+A-06 PB-078: protected — поздний failed с меньшим
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_checks_gate.py", line 386, in test_clock_rollback_failed_stays_latest
+    self.assertIn("probe", verdict["covered"])
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'probe' not found in []
+
+======================================================================
+FAIL: test_later_failed_blocks_earlier_passed (test_checks_gate.ProtectedLatestOutcomeTest.test_later_failed_blocks_earlier_passed)
+Поздний failed блокирует ранний passed в защищённой истории
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_checks_gate.py", line 317, in test_later_failed_blocks_earlier_passed
+    self.assertIn("probe", self.evaluate()["covered"])
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'probe' not found in []
+
+======================================================================
+FAIL: test_older_expired_does_not_block_fresh (test_checks_gate.ProtectedTtlTest.test_older_expired_does_not_block_fresh)
+A-04: просроченная квитанция не блокирует более свежее
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_checks_gate.py", line 256, in test_older_expired_does_not_block_fresh
+    self.assertIn("probe", verdict["covered"])
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'probe' not found in []
+
+======================================================================
+FAIL: test_run_receipt_ttl_expiry_rejected (test_checks_gate.ProtectedTtlTest.test_run_receipt_ttl_expiry_rejected)
+Просроченная по TTL run-квитанция не закрывает обязательство
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_checks_gate.py", line 226, in test_run_receipt_ttl_expiry_rejected
+    self.assertIn("probe", fresh["covered"])
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'probe' not found in []
+
+----------------------------------------------------------------------
+Ran 171 tests in 27.634s
+
+FAILED (failures=5, errors=5)
+Создано 74 файлов в /private/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/tmp83e4tuxf; manifest записан. Заполните документы и project.json; setup_status=needs_review.
+Создано 74 файлов в /private/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/tmpcgwet28c; manifest записан. Заполните документы и project.json; setup_status=needs_review.
+Создано 74 файлов в /private/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/tmpvpjxksqp; manifest записан. Заполните документы и project.json; setup_status=needs_review.
+Создано 74 файлов в /private/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/tmp0jwkr41y; manifest записан. Заполните документы и project.json; setup_status=needs_review.
+Создано 74 файлов в /private/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/tmppl0moudk; manifest записан. Заполните документы и project.json; setup_status=needs_review.
+Создано 74 файлов в /private/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/tmp0pyd_p9z; manifest записан. Заполните документы и project.json; setup_status=needs_review.
+Создано 74 файлов в /private/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/tmpwds74z7v; manifest записан. Заполните документы и project.json; setup_status=needs_review.
+Создано 74 файлов в /private/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/tmp52cjbqtl; manifest записан. Заполните документы и project.json; setup_status=needs_review.

@@ -1,0 +1,149 @@
+# DEV-1: test
+
+ID: DEV-1
+Status: in_review
+Priority: P2
+Depends-On: -
+Executor: Fixture executor
+Model: Synthetic model
+Created: 2026-01-01T00:00:00Z
+Closed: -
+
+<!-- playbook-meta:start -->
+```json
+{
+  "schema_version": 2,
+  "workflow": {
+    "route": "quick",
+    "reason": "Local low risk fixture",
+    "history": [],
+    "baseline": {
+      "source": "docs/tasks/DEV-1-evidence/baseline.json",
+      "sha256": "sha256:313cf0382b92bf7c1823d99b3ef08480b8d3d4b33cf0cbe04913fdb81e7ad760"
+    },
+    "transitions": [
+      {
+        "at": "2026-11-06T15:31:15+03:00",
+        "action": "start",
+        "reason": "Synthetic engineer instruction",
+        "actor": "Fixture executor"
+      }
+    ]
+  },
+  "verification_plan": {
+    "revision": 1,
+    "rationale": "Independent explicit files",
+    "scope": [
+      "src"
+    ],
+    "checks": [
+      {
+        "id": "a",
+        "kind": "manual",
+        "purpose": "Auditor probe a",
+        "registry_id": "a",
+        "inputs": [
+          "src/a.txt"
+        ]
+      }
+    ],
+    "decisions": []
+  },
+  "relations": [],
+  "materials": [
+    {
+      "id": "workflow-baseline",
+      "role": "report",
+      "source": "docs/tasks/DEV-1-evidence/baseline.json",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "DEV-1"
+      ]
+    },
+    {
+      "id": "verify-2f84be85d56a431ea7f1d1e19b9012a2",
+      "role": "report",
+      "source": "work/verification/DEV-1/2f84be85d56a431ea7f1d1e19b9012a2",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "DEV-1"
+      ]
+    },
+    {
+      "id": "verify-795db0a81e374b1693d5b47ce43f9906",
+      "role": "report",
+      "source": "work/verification/DEV-1/795db0a81e374b1693d5b47ce43f9906",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "DEV-1"
+      ]
+    },
+    {
+      "id": "verify-d28ce90d4ee4471391189df2f6be9883",
+      "role": "report",
+      "source": "work/verification/DEV-1/d28ce90d4ee4471391189df2f6be9883",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "DEV-1"
+      ]
+    }
+  ],
+  "moves": [],
+  "handoff": {
+    "at": "2026-11-06T15:31:19+03:00",
+    "actor": {
+      "name": "Fixture executor",
+      "model": "Synthetic model"
+    },
+    "summary": "Auditor synthetic fixture",
+    "reports": [
+      "verify-2f84be85d56a431ea7f1d1e19b9012a2",
+      "verify-795db0a81e374b1693d5b47ce43f9906",
+      "verify-d28ce90d4ee4471391189df2f6be9883"
+    ],
+    "card_projection": "sha256:c2428775294751c0f9f5d09ee7bddb9111caec1a3cac6c333caaf90daa566a25",
+    "result_hash": "sha256:b50820ea097c0a19820606b9ef1a8a62d8f55ea2fbde25973d2ee4c771c57a5e",
+    "coverage": {
+      "checks": {
+        "a": "passed"
+      },
+      "satisfied": true
+    },
+    "evidence_hashes": {
+      "verify-2f84be85d56a431ea7f1d1e19b9012a2": "sha256:e17d3afc7530cc41bf79fce8afc4affb3ad2c27e24257cd7296274c24e118354",
+      "verify-795db0a81e374b1693d5b47ce43f9906": "sha256:4ee65a6465a4ed2daed1240d925eca19cbdd8af0d9dbaa85268d62d81d66ffd8",
+      "verify-d28ce90d4ee4471391189df2f6be9883": "sha256:e81fee072ef7d5f7b64d8afecd8c58df2bf34d2519c37f8b91f48fcdc9ffda32",
+      "workflow-baseline": "sha256:af1146d9568ac11ef4cedd59653f79fb3c5aa89ce5419c853fd1ee29592e7ff8"
+    }
+  },
+  "acceptance": {
+    "at": "2026-11-06T15:31:20+03:00",
+    "actor": {
+      "name": "Fixture engineer",
+      "model": "Synthetic model"
+    },
+    "role": "engineer",
+    "kind": "acceptance",
+    "result": "accepted",
+    "handoff_at": "2026-11-06T15:31:19+03:00",
+    "session": null,
+    "detail": "Synthetic explicit final version acceptance",
+    "result_hash": "sha256:b50820ea097c0a19820606b9ef1a8a62d8f55ea2fbde25973d2ee4c771c57a5e"
+  }
+}
+```
+<!-- playbook-meta:end -->
+
+## Цель и границы
+Проверить изолированный пример.
+
+## Приёмка
+- [ ] Актуальный результат принят.

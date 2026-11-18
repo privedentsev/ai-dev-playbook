@@ -1,0 +1,9 @@
+test_schema_migration_incompatible_cli_rejected (test_cli.MigrationTest.test_schema_migration_incompatible_cli_rejected)
+AUDIT-005-A5: смена схемы без поддержки в целевом CLI отклоняется до записи. ... ok
+test_schema_migration_compatible_cli_applies (test_cli.MigrationTest.test_schema_migration_compatible_cli_applies)
+Артефакт с CLI, принимающим новую схему, применяется; установленный CLI работает. ... ok
+
+----------------------------------------------------------------------
+Ran 2 tests in 2.591s
+
+OK

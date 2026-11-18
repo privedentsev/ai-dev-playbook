@@ -1,0 +1,68 @@
+diff --git a/docs/designs/index.md b/docs/designs/index.md
+index 8a8ae4a..138d304 100644
+--- a/docs/designs/index.md
++++ b/docs/designs/index.md
+@@ -11,6 +11,7 @@
+ | [Ранняя проверка назначений и явный перенос материала](material-archive-safety.md) | draft | 2026-11-10 |
+ | [Маршруты и проверки: форматы, переходы и совместимость](proportional-workflow.md) | accepted | 2026-10-23 |
+ | [Выборочная подготовка файлов, восстановление и хранение операций](scoped-file-operations.md) | draft | 2026-10-26 |
++| [Свежесть проверок и процессного протокола](verification-evidence-separation.md) | draft | 2026-11-16 |
+ | [Design: режимы работы и жизненный цикл документов](workflow-and-document-lifecycle.md) | accepted | 2026-10-26 |
+ 
+ ## Архив
+diff --git a/docs/index.md b/docs/index.md
+index a2130be..6c7a872 100644
+--- a/docs/index.md
++++ b/docs/index.md
+@@ -21,3 +21,5 @@
+ - Варианты аудита плана и исправления без возврата архива: [требования](specs/block-acceptance.md), [design](designs/block-acceptance.md), [ADR-0007](adr/0007-block-acceptance.md), [план PB-065–071 и AUDIT-010](plans/block-acceptance.md). Документы и карточки draft; реализация не начата.
+ 
+ - Защита от коллизий архивирования материалов: [требования](specs/material-archive-safety.md), [design](designs/material-archive-safety.md), [PB-072](tasks/PB-072.md) и материалы реализации. Draft; подготовка разрешена, кодирование не начато.
++
++- Предотвращение процессных ошибок перед тестами и аудитом: [план](plans/verification-process-readiness.md). Дополнения к PB-057–PB-064; draft, реализация не разрешена. Git/worktree используются для параллельных задач без отдельного менеджера агентов.
+diff --git a/docs/plans/index.md b/docs/plans/index.md
+index c285a71..7217c73 100644
+--- a/docs/plans/index.md
++++ b/docs/plans/index.md
+@@ -8,6 +8,7 @@
+ | [План внедрения вариантов аудита и задач исправлений](block-acceptance.md) | draft | 2026-11-07 | [PB-065](../tasks/PB-065.md), [PB-066](../tasks/PB-066.md), [PB-067](../tasks/PB-067.md), [PB-068](../tasks/PB-068.md), [PB-069](../tasks/PB-069.md), [PB-070](../tasks/PB-070.md), [PB-071](../tasks/PB-071.md), [AUDIT-010](../tasks/AUDIT-010.md) |
+ | [План внедрения автоматического выбора проверок](dependency-aware-verification.md) | accepted | 2026-11-11 | [PB-057](../archive/tasks/PB-057.md), [PB-058](../archive/tasks/PB-058.md), [PB-059](../archive/tasks/PB-059.md), [PB-060](../archive/tasks/PB-060.md), [PB-061](../archive/tasks/PB-061.md), [PB-062](../archive/tasks/PB-062.md), [PB-063](../archive/tasks/PB-063.md), [PB-064](../archive/tasks/PB-064.md), [AUDIT-009](../tasks/AUDIT-009.md) |
+ | [Переход к выборочным файловым операциям и хранению 15 операций](scoped-file-operations.md) | draft | 2026-10-26 | [PB-045](../archive/tasks/PB-045.md), [PB-046](../tasks/PB-046.md), [PB-047](../tasks/PB-047.md), [PB-048](../tasks/PB-048.md), [PB-049](../tasks/PB-049.md), [PB-050](../tasks/PB-050.md), [AUDIT-008](../tasks/AUDIT-008.md) |
++| [План предотвращения процессных ошибок перед проверкой и аудитом](verification-process-readiness.md) | draft | 2026-11-11 | — |
+ 
+ ## Архив
+ 
+diff --git a/docs/specs/index.md b/docs/specs/index.md
+index f2e1ab3..a02d71b 100644
+--- a/docs/specs/index.md
++++ b/docs/specs/index.md
+@@ -14,6 +14,7 @@
+ | [Соразмерные маршруты работы, проверки и приёмка](proportional-workflow.md) | accepted | 2026-11-06 |
+ | [Операции playbook без полной копии проекта](scoped-file-operations.md) | draft | 2026-10-26 |
+ | [Формат Markdown-карточек v2](task-card-format.md) | draft | 2026-10-24 |
++| [Разделение свежести тестов и процессного протокола](verification-evidence-separation.md) | draft | 2026-11-16 |
+ | [Режимы работы и жизненный цикл документов](workflow-and-document-lifecycle.md) | accepted | 2026-11-06 |
+ 
+ ## Архив
+diff --git a/docs/tasks/index.md b/docs/tasks/index.md
+index 224fd89..b08bc00 100644
+--- a/docs/tasks/index.md
++++ b/docs/tasks/index.md
+@@ -11,6 +11,7 @@
+ | AUDIT-008 | [AUDIT-008: Независимо принять выборочные операции и ограниченную историю](AUDIT-008.md) | draft | P2 | — | 2026-10-26 17:56 | — | PB-045, PB-046, PB-047, PB-048, PB-049, PB-050 |
+ | AUDIT-009 | [AUDIT-009: Независимо принять автоматический выбор и доверенные результаты проверок](AUDIT-009.md) | in_progress | P2 | Codex / GPT-6 | 2026-11-07 01:09 | — | PB-057, PB-058, PB-059, PB-060, PB-061, PB-062, PB-063, PB-064 |
+ | AUDIT-010 | [AUDIT-010: Независимо принять варианты аудита и исправления без возврата архива](AUDIT-010.md) | draft | P2 | — | 2026-11-07 01:38 | — | PB-065, PB-066, PB-067, PB-068, PB-069, PB-070, PB-071 |
++| AUDIT-011 | [AUDIT-011: Независимо принять разделение свежести проверок и процесса](AUDIT-011.md) | draft | P2 | — | 2026-11-16 19:08 | — | PB-075, PB-076, PB-077 |
+ | PB-008 | [PB-008: Завершить самоприменение проверочного цикла](PB-008.md) | in_review | P2 | Devin / SWE-2 High | unknown | — | — |
+ | PB-041 | [PB-041: Компактное чтение задач и внешние метаданные](PB-041.md) | in_progress | P2 | Antigravity / Gemini 3.8 Flash (High) | 2026-10-25 00:23 | — | — |
+ | PB-046 | [PB-046: Применять документные операции с поздним backup без полной копии](PB-046.md) | in_review | P2 | Antigravity / Gemini 3.8 Flash (High) | 2026-10-26 17:56 | — | PB-045 |
+@@ -26,6 +27,9 @@
+ | PB-070 | [PB-070: Подключить новые маршруты к правилам и совместимому обновлению](PB-070.md) | draft | P2 | — | 2026-11-07 01:37 | — | PB-069 |
+ | PB-071 | [PB-071: Проверить сквозные циклы аудита и исправлений](PB-071.md) | draft | P2 | — | 2026-11-07 01:37 | — | PB-070 |
+ | PB-072 | [PB-072: Предотвращать коллизии архивирования отчётов и безопасно исправлять размещение материалов](PB-072.md) | in_review | P2 | Devin / SWE-2 High | 2026-11-10 08:19 | — | — |
++| PB-075 | [PB-075: Определить раздельные доказательства тестов и процесса](PB-075.md) | draft | P2 | — | 2026-11-16 19:06 | — | PB-074 |
++| PB-076 | [PB-076: Подключить раздельную свежесть к verify и lifecycle](PB-076.md) | draft | P2 | — | 2026-11-16 19:07 | — | PB-075, AUDIT-009 |
++| PB-077 | [PB-077: Внедрить подключение и проверить экономию повторных запусков](PB-077.md) | draft | P2 | — | 2026-11-16 19:07 | — | PB-076 |
+ 
+ ## Архив
+ 

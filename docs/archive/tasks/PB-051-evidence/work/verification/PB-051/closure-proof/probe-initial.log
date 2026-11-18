@@ -1,0 +1,43 @@
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/work/verification/PB-051/closure-proof/packaging.py", line 71, in <module>
+    transcript = close_copy(root)
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/work/verification/PB-051/closure-proof/packaging.py", line 48, in close_copy
+    digest = operation(root)
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/work/verification/PB-051/closure-proof/packaging.py", line 41, in operation
+    result = playbook.file_operations.run_operation(root, spec, playbook.safe_path, playbook.require)
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/ai-dev-playbook/scripts/file_operations.py", line 764, in run_operation
+    return _apply_operation(root, plan, safe_path, require)
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/ai-dev-playbook/scripts/file_operations.py", line 799, in _apply_operation
+    _prepare_staged(root, op_dir, plan, safe_path, require)
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/ai-dev-playbook/scripts/file_operations.py", line 495, in _prepare_staged
+    check(staged)
+    ~~~~~^^^^^^^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/work/verification/PB-051/closure-proof/packaging.py", line 31, in check
+    playbook.check(project, True)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/ai-dev-playbook/scripts/playbook.py", line 864, in check
+    check_links(root, paths, catalog)
+    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/ai-dev-playbook/scripts/playbook.py", line 850, in check_links
+    require(not errors, "\n".join(errors))
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/ai-dev-playbook/scripts/playbook.py", line 60, in require
+    raise ValueError(message)
+ValueError: docs/archive/tasks/AUDIT-005-evidence/report.md: битая или внешняя локальная ссылка ../../archive/tasks/PB-019.md
+docs/archive/tasks/AUDIT-005-evidence/report.md: битая или внешняя локальная ссылка ../../archive/tasks/PB-018.md
+docs/archive/tasks/AUDIT-005-evidence/report.md: битая или внешняя локальная ссылка ../../archive/tasks/PB-018.md
+docs/archive/tasks/AUDIT-005-evidence/report.md: битая или внешняя локальная ссылка ../../archive/tasks/PB-017.md
+docs/archive/tasks/AUDIT-005-evidence/report.md: битая или внешняя локальная ссылка ../../archive/tasks/PB-018.md
+docs/archive/tasks/AUDIT-005-evidence/report.md: битая или внешняя локальная ссылка ../../archive/tasks/PB-018.md
+docs/archive/tasks/AUDIT-005-evidence/report.md: битая или внешняя локальная ссылка ../../archive/tasks/PB-019.md
+docs/archive/tasks/AUDIT-005-evidence/report.md: битая или внешняя локальная ссылка ../../archive/tasks/PB-015.md
+docs/archive/tasks/AUDIT-005-evidence/recheck02-report.md: битая или внешняя локальная ссылка ../../archive/tasks/PB-018.md
+docs/archive/tasks/AUDIT-005-evidence/recheck02-report.md: битая или внешняя локальная ссылка ../../archive/tasks/PB-019.md
+docs/archive/tasks/AUDIT-005-evidence/recheck03-report.md: битая или внешняя локальная ссылка ../../archive/tasks/PB-014.md
+docs/archive/tasks/AUDIT-005-evidence/recheck03-report.md: битая или внешняя локальная ссылка ../../archive/tasks/PB-015.md
+docs/archive/tasks/AUDIT-005-evidence/recheck03-report.md: битая или внешняя локальная ссылка ../../archive/tasks/PB-016.md
+docs/archive/tasks/AUDIT-005-evidence/recheck03-report.md: битая или внешняя локальная ссылка ../../archive/tasks/PB-017.md
+docs/archive/tasks/AUDIT-005-evidence/recheck03-report.md: битая или внешняя локальная ссылка ../../archive/tasks/PB-018.md
+docs/archive/tasks/AUDIT-005-evidence/recheck03-report.md: битая или внешняя локальная ссылка ../../archive/tasks/PB-019.md
+docs/archive/tasks/AUDIT-005-evidence/recheck03-report.md: битая или внешняя локальная ссылка ../../archive/tasks/PB-006.md

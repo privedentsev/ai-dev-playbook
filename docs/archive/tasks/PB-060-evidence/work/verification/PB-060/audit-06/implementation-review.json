@@ -1,0 +1,24 @@
+{
+  "core_files_changed_since_accepted_implementation": [],
+  "card_requirements_unchanged": true,
+  "old_report_hashes": {
+    "docs/tasks/PB-060-evidence/manual-reports/070dadde-report.json": "7b761cc2f8032eed30abc6413e5dd7a984e2caec812dbe290df322711080652c",
+    "work/verification/PB-060/070daddef15143dcbfa2d1c5415df265/report.json": "7b761cc2f8032eed30abc6413e5dd7a984e2caec812dbe290df322711080652c"
+  },
+  "old_acceptance_preserved": {
+    "at": "2026-11-09T21:06:02+03:00",
+    "actor": {
+      "name": "Codex",
+      "model": "GPT-6.1 Sol (Medium)"
+    },
+    "role": "auditor",
+    "kind": "acceptance",
+    "result": "accepted",
+    "handoff_at": "2026-11-09T18:21:18+03:00",
+    "session": null,
+    "detail": null,
+    "audit_id": "AUDIT-05",
+    "audit_sha256": "sha256:03a6a420b97480a2d807d5c5c24377313224c7e990ef530be7ae43620a03c251"
+  },
+  "current_head": "65d3d15f9b509f064e034317352f24fa43e47c19"
+}

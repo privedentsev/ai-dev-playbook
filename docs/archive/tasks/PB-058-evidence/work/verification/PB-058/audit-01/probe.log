@@ -1,0 +1,5 @@
+A explicit-directory {"inputs": ["src/payments", {"type": "directory", "path": "src/payments", "patterns": ["src/payments/*.py"]}], "notes_entry": {"type": "file"}, "diff": {"complete": true, "reason": "", "fresh": true, "added": [], "removed": [], "changed": []}}
+B absent-race {"snapshot": {"type": "absent"}, "exists": true}
+C literal-module checks-snapshot: вход 'src/payments/pay.py' не является каталогом
+D inventory [{'path': 'src/payments/fixtures.bin', 'reason': 'generated', 'origin': 'manual'}]
+D selective-exclude checks-snapshot: исключение конфликтует с обнаруженным входом 'src/payments/fixtures.bin'

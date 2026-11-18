@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "task_id": "PB-057",
+  "audit_id": "AUDIT-01",
+  "actor": "Codex",
+  "model": "GPT-6",
+  "result": "changes_requested",
+  "handoff": "HANDOFF-01",
+  "audit_ready": "passed before audit writes",
+  "targeted_tests": {
+    "count": 47,
+    "result": "passed",
+    "log": "targeted-tests.log"
+  },
+  "full_suite": "not repeated; executor report freshness verified by audit-ready",
+  "findings": [
+    {
+      "id": "A-01",
+      "priority": "P1",
+      "summary": "Glob exclusions without literal prefix bypass collision validation"
+    },
+    {
+      "id": "A-02",
+      "priority": "P1",
+      "summary": "New unapproved argv classified as extension"
+    },
+    {
+      "id": "A-03",
+      "priority": "P2",
+      "summary": "Duplicate expected test IDs accepted"
+    },
+    {
+      "id": "A-04",
+      "priority": "P2",
+      "summary": "Expected failure approval missing from policy contract"
+    }
+  ]
+}

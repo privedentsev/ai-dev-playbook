@@ -1,0 +1,1 @@
+PASS: subprocess CLI; multi-EXEC/CHECK chronological selection; exact entry equality; hash+mtime read-only; one verify; no premature close; stale source rejection

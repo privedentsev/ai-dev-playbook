@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "plan_id": "lc-30fc1d369e023e48",
+  "at": "2026-11-18T09:43:20+03:00",
+  "actor": {
+    "model": "GPT-6.1 Sol (High)",
+    "name": "Codex",
+    "role": "auditor",
+    "session": null
+  },
+  "basis": "По поручению инженера провести повторный AUDIT-009 и закрыть при успешном результате; audit-07, полный verify и AC-01–11 приняты с явной границей local/protocol. Исправление подготовки аудитора: пустое поле scope.tasks опущено; действия и автор сохранены. Исходный запрос audit-07 остаётся неизменным.",
+  "action": "archive_document",
+  "files": [
+    {
+      "from": "docs/plans/dependency-aware-verification.md",
+      "to": "docs/archive/plans/dependency-aware-verification.md",
+      "sha256": "sha256:b1710cd8dc90ced2cda12f779065b53abe8754cfea86e8a10e34441795cef0c3",
+      "bytes": 6977
+    }
+  ],
+  "moves": [
+    {
+      "from": "docs/plans/dependency-aware-verification.md",
+      "to": "docs/archive/plans/dependency-aware-verification.md"
+    }
+  ],
+  "materials": [],
+  "external": [],
+  "type": "lifecycle-archive",
+  "document": "plan:dependency-aware-verification",
+  "reason": "Подзадачи и итоговая совместная приёмка AUDIT-009 завершены; план исполнен. Protected rollout остаётся отдельным поручением.",
+  "successor": null
+}

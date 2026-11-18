@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "run_id": "f32858b5dcd94c2aba5ddc7b09c10067",
+  "task_id": "PROBE-51",
+  "policy_revision": 2,
+  "cwd": "/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/tmpw686l9x_",
+  "started_at": "2026-10-27T06:35:59.003773+00:00",
+  "status": "passed",
+  "inputs": [
+    "AGENTS.md",
+    "CHANGELOG.md",
+    "README.md",
+    "ai-dev-playbook",
+    "ai-dev-playbook/project.json",
+    "ai-dev-playbook/resources.json",
+    "docs",
+    "docs/tasks/PROBE-51.md",
+    "tests"
+  ],
+  "snapshot_before": {
+    "sha256": "73328b8bb2be6376db497a426c1cf3a3d216d4b6c34d030218c7d22745513249",
+    "files": {
+      "AGENTS.md": "0a0b77d5e75d0c15283bfd2f75dc493c0b7b3469fff1d720f388154c4ea4f345",
+      "CHANGELOG.md": "0a0b77d5e75d0c15283bfd2f75dc493c0b7b3469fff1d720f388154c4ea4f345",
+      "README.md": "0a0b77d5e75d0c15283bfd2f75dc493c0b7b3469fff1d720f388154c4ea4f345",
+      "ai-dev-playbook/project.json": "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356",
+      "ai-dev-playbook/resources.json": "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356",
+      "docs/tasks/PROBE-51.md": "d4882aed2cc17fa44443377aa5f3c210e7572eb8f8a73d3ed0aa39b16f177b82"
+    }
+  },
+  "checks": [
+    {
+      "id": "controlled-pass",
+      "argv": [
+        "/usr/local/opt/python@3.14/bin/python3.14",
+        "-c",
+        "print('independent freshness probe')"
+      ],
+      "timeout_seconds": 10,
+      "status": "passed",
+      "started_at": "2026-10-27T06:35:59.004383+00:00",
+      "stdout": "work/verification/PROBE-51/f32858b5dcd94c2aba5ddc7b09c10067/controlled-pass.stdout.log",
+      "stderr": "work/verification/PROBE-51/f32858b5dcd94c2aba5ddc7b09c10067/controlled-pass.stderr.log",
+      "exit_code": 0,
+      "duration_seconds": 0.08,
+      "finished_at": "2026-10-27T06:35:59.084928+00:00"
+    }
+  ],
+  "card_projection": "sha256:7fdf97e2c575a953cc8c16ed982bbb21895b205952f98ef479d3609f685ef839",
+  "execution_id": null,
+  "execution_sha256": null,
+  "snapshot_after": {
+    "sha256": "73328b8bb2be6376db497a426c1cf3a3d216d4b6c34d030218c7d22745513249",
+    "files": {
+      "AGENTS.md": "0a0b77d5e75d0c15283bfd2f75dc493c0b7b3469fff1d720f388154c4ea4f345",
+      "CHANGELOG.md": "0a0b77d5e75d0c15283bfd2f75dc493c0b7b3469fff1d720f388154c4ea4f345",
+      "README.md": "0a0b77d5e75d0c15283bfd2f75dc493c0b7b3469fff1d720f388154c4ea4f345",
+      "ai-dev-playbook/project.json": "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356",
+      "ai-dev-playbook/resources.json": "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356",
+      "docs/tasks/PROBE-51.md": "d4882aed2cc17fa44443377aa5f3c210e7572eb8f8a73d3ed0aa39b16f177b82"
+    }
+  },
+  "inputs_unchanged": true,
+  "finished_at": "2026-10-27T06:35:59.089746+00:00"
+}

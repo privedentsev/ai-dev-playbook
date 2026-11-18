@@ -36,7 +36,7 @@
 
 ## Автоматический выбор проверок и доверенные результаты
 
-Подготовлены [требования](specs/dependency-aware-verification.md), [design](designs/dependency-aware-verification.md), [ADR-0006](adr/0006-dependency-aware-verification.md) и [план PB-057–064 / AUDIT-009](plans/dependency-aware-verification.md). Git-независимые снимки, автоматические зависимости, выбор/reuse, фактический каталог тестов, защищённый executor, релизное покрытие и совместимый opt-in. Технический проект ожидает принятия; кодирование и включение режима не разрешены этой подготовкой. Статусы — в карточках; существующая очередь не изменяется.
+Подготовлены [требования](specs/dependency-aware-verification.md), [design](designs/dependency-aware-verification.md), [ADR-0006](adr/0006-dependency-aware-verification.md) и [план PB-057–064 / AUDIT-009](archive/plans/dependency-aware-verification.md). Git-независимые снимки, автоматические зависимости, выбор/reuse, фактический каталог тестов, защищённый executor, релизное покрытие и совместимый opt-in. Технический проект ожидает принятия; кодирование и включение режима не разрешены этой подготовкой. Статусы — в карточках; существующая очередь не изменяется.
 
 ## Варианты аудита плана и исправления без возврата архива
 

@@ -1,0 +1,14 @@
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/docs/tasks/AUDIT-009-evidence/audit-02/probe_corrupt_obligation.py", line 9, in <module>
+    case=NoGitChecksE2ECase();case.setUp()
+                              ~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_checks_e2e.py", line 81, in setUp
+    self.assertEqual(code, 0, err)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+  File "/usr/local/Cellar/python@3.14/3.14.6/Frameworks/Python.framework/Versions/3.14/lib/python3.14/unittest/case.py", line 925, in assertEqual
+    assertion_func(first, second, msg=msg)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/Cellar/python@3.14/3.14.6/Frameworks/Python.framework/Versions/3.14/lib/python3.14/unittest/case.py", line 918, in _baseAssertEqual
+    raise self.failureException(msg)
+AssertionError: 1 != 0 : ERROR: Незавершённая операция документов (20261117-013732-a3ed8b47): обычные команды заблокированы. Восстановление: python3 work/lifecycle/20261117-013732-a3ed8b47/restore.py
+

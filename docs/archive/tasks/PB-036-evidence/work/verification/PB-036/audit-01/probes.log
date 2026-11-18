@@ -1,0 +1,22 @@
+test_migrate_interruption_and_standalone_restore (__main__.IndependentProbes.test_migrate_interruption_and_standalone_restore) ... ok
+test_multiple_legacy_commands_preserved_and_required (__main__.IndependentProbes.test_multiple_legacy_commands_preserved_and_required) ... ok
+test_actual_declared_transitions_preserve_custom_data_and_legacy (test_workflow_install.WorkflowInstallTest.test_actual_declared_transitions_preserve_custom_data_and_legacy) ... ok
+test_card_migration_preserves_history_and_requires_new_coverage (test_workflow_install.WorkflowInstallTest.test_card_migration_preserves_history_and_requires_new_coverage) ... ok
+test_custom_paths_and_update_conflict_are_preserved (test_workflow_install.WorkflowInstallTest.test_custom_paths_and_update_conflict_are_preserved) ... ok
+test_enable_interruption_blocks_work_and_standalone_restore_recovers (test_workflow_install.WorkflowInstallTest.test_enable_interruption_blocks_work_and_standalone_restore_recovers) ... ok
+test_enable_refuses_old_install_and_concurrent_gate (test_workflow_install.WorkflowInstallTest.test_enable_refuses_old_install_and_concurrent_gate) ... ok
+test_existing_opt_in_preserves_legacy_and_records_operation (test_workflow_install.WorkflowInstallTest.test_existing_opt_in_preserves_legacy_and_records_operation) ... ok
+test_external_card_migration_requires_complete_plan_and_keeps_journal (test_workflow_install.WorkflowInstallTest.test_external_card_migration_requires_complete_plan_and_keeps_journal) ... ok
+test_init_from_artifact_without_project_docs (test_workflow_install.WorkflowInstallTest.test_init_from_artifact_without_project_docs) ... ok
+test_minimum_cli_and_unknown_updates_schema_reject (test_workflow_install.WorkflowInstallTest.test_minimum_cli_and_unknown_updates_schema_reject) ... ok
+test_missing_legacy_checks_and_unknown_schema_reject_without_writes (test_workflow_install.WorkflowInstallTest.test_missing_legacy_checks_and_unknown_schema_reject_without_writes) ... ok
+test_new_init_opt_in_preview_and_validation (test_workflow_install.WorkflowInstallTest.test_new_init_opt_in_preview_and_validation) ... ok
+test_old_cli_rejects_enabled_project_before_verify (test_workflow_install.WorkflowInstallTest.test_old_cli_rejects_enabled_project_before_verify) ... ok
+test_old_cli_rejects_new_artifact_before_writes (test_workflow_install.WorkflowInstallTest.test_old_cli_rejects_new_artifact_before_writes) ... ok
+test_real_update_interruption_corrupt_backup_then_autonomous_restore (test_workflow_install.WorkflowInstallTest.test_real_update_interruption_corrupt_backup_then_autonomous_restore) ... ok
+test_update_preserves_enabled_project_schema (test_workflow_install.WorkflowInstallTest.test_update_preserves_enabled_project_schema) ... ok
+
+----------------------------------------------------------------------
+Ran 17 tests in 17.795s
+
+OK

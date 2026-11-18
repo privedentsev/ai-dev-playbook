@@ -1,0 +1,88 @@
+{
+  "task": "PB-045",
+  "phase": "formal repeated audit of current HANDOFF-02",
+  "at": "2026-10-28T08:57:57.466515+03:00",
+  "actor": "Codex (независимый аудитор)",
+  "model": "GPT-6.1 Sol (High)",
+  "source_sha256": {
+    "ai-dev-playbook/scripts/project_view.py": "sha256:ed5ba7751b464f7b1f86f82f366f10a233a222fe2cb8d38f91768761ed45851f",
+    "ai-dev-playbook/scripts/documents.py": "sha256:c9938a39bb1b7c508115e78957f5aedf968c3026956b88cccc8bbb44b2d52e79",
+    "ai-dev-playbook/scripts/document_links.py": "sha256:892ab8dcbae56156c781e2c040a4a5c774abac9bedfdb955ca4fccb18b031a9d",
+    "ai-dev-playbook/scripts/task_cards.py": "sha256:1aec9385306a0c1568cc5403511e764005588c387e4c20a6a6d09f3965142687",
+    "ai-dev-playbook/scripts/playbook.py": "sha256:f701551c2b7858abc38d395c35a32995c22ecb4b3f95b1deb6c2dfdfb0ac8a13",
+    "tests/test_project_view.py": "sha256:a99a33dc3e6471018f4118f267af1ea1b97fc2da598b090a3b9f910d32fba8c1"
+  },
+  "independent_probes": {
+    "file": "probes.py",
+    "tests": 24,
+    "passed": 24,
+    "failures": 0,
+    "errors": 0,
+    "log": "probes-final.log"
+  },
+  "catalog_probes": {
+    "tests": 4,
+    "passed": 4,
+    "log": "catalog-final.log",
+    "file": "catalog-probes.py"
+  },
+  "fixed_findings": [
+    "A-01",
+    "A-02",
+    "A-03",
+    "A-04"
+  ],
+  "limitations": [
+    "macOS/Python 3.14.6 only.",
+    "Full suite rerun by implementer, independently checked current report and source hashes; independent behavioral probes 24+4 passed.",
+    "Intermediate failed probes and interrupted runner are retained and do not prove success.",
+    "File/directory type changes are explicitly rejected early.",
+    "No independent acceptance of PB-046+ or AUDIT-008."
+  ],
+  "intermediate_followup": {
+    "log": "probes-intermediate.log",
+    "tests": 24,
+    "passed": 22,
+    "failures": 2,
+    "issue": "dotdot staging alias; continuation of open A-03; not a formally registered A-05",
+    "resolved_by": "EXEC-03"
+  },
+  "candidate_result": "A-01–A-04 independently resolved on final source hashes; acceptance CLI follows preflight",
+  "audit": "AUDIT-02",
+  "handoff": "HANDOFF-02",
+  "result": "accepted",
+  "closed_findings": [
+    "A-01",
+    "A-02",
+    "A-03",
+    "A-04"
+  ],
+  "open_findings": [],
+  "implementation_verification": {
+    "final": {
+      "path": "work/verification/PB-045/457d56ea036f47d1b1e01d80cb21433d/report.json",
+      "sha256": "sha256:f831ff5be70268fc1c4ad2d7dceaeb63cda27a49c1fe1a2a34cf5e95bee5cda3",
+      "status": "passed",
+      "inputs_unchanged": true
+    },
+    "interrupted": {
+      "path": "work/verification/PB-045/8e64ba1464704e12ab889f75cd738964/report.json",
+      "sha256": "sha256:f6d8a78d097ec329c57b2794b4752da1406b45fb34631d488e0bb968653ccdb7",
+      "status": "interrupted",
+      "inputs_unchanged": true
+    }
+  },
+  "intermediate_source_sha256": {
+    "ai-dev-playbook/scripts/project_view.py": "sha256:208b910072e7f595e35f4a89ea317d870acf9361b00eebe34c5b6a7393ff0586",
+    "ai-dev-playbook/scripts/documents.py": "sha256:c9938a39bb1b7c508115e78957f5aedf968c3026956b88cccc8bbb44b2d52e79",
+    "ai-dev-playbook/scripts/document_links.py": "sha256:892ab8dcbae56156c781e2c040a4a5c774abac9bedfdb955ca4fccb18b031a9d",
+    "ai-dev-playbook/scripts/task_cards.py": "sha256:1aec9385306a0c1568cc5403511e764005588c387e4c20a6a6d09f3965142687",
+    "ai-dev-playbook/scripts/playbook.py": "sha256:f701551c2b7858abc38d395c35a32995c22ecb4b3f95b1deb6c2dfdfb0ac8a13",
+    "tests/test_project_view.py": "sha256:b09d167176424308b396f1789b9baa663fe00e84ecac5e64fe86904b6bcb0da7"
+  },
+  "prepare_audit": {
+    "preview": "passed",
+    "apply": "passed"
+  },
+  "scope": "PB-045 ProjectView/FutureView and structural validators only; production commands remain on legacy engine; PB-046+ not accepted."
+}

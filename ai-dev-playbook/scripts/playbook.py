@@ -25,6 +25,16 @@ import verification
 import task_cards
 import project_view
 import block_workflow
+import checks_contract
+import checks_gate
+import checks_graph
+import checks_inventory
+import checks_results
+import checks_runner
+import checks_select
+import checks_setup
+import checks_trust
+import checks_verifier
 
 
 CORE = "ai-dev-playbook"
@@ -136,6 +146,19 @@ def config(root):
             "Команда должна быть строкой или null")
     if "verification" in data:
         verification.validate(root, data["verification"], safe_path, require)
+    if checks_contract.PROJECT_LINK_FIELD in data:
+        link = data[checks_contract.PROJECT_LINK_FIELD]
+        require(isinstance(link, str),
+                f"{checks_contract.PROJECT_LINK_FIELD} должен быть "
+                f"относительным путём к документу политики")
+        policy_path = safe_path(root, link)
+        require(policy_path.is_file(),
+                f"{checks_contract.PROJECT_LINK_FIELD}: нет файла {link}")
+        require(not policy_path.is_symlink(),
+                f"{checks_contract.PROJECT_LINK_FIELD}: символическая ссылка")
+        policy_data = json.loads(policy_path.read_text(encoding="utf-8"),
+                                 object_pairs_hook=documents._unique_pairs)
+        checks_contract.validate_policy(policy_data, require)
     if "task_workflow" in data:
         verification.validate_task_workflow(root, data["task_workflow"], safe_path, require)
     if "documents" in data:
@@ -1168,9 +1191,11 @@ def command_gate(root, args):
                  or (action == "plan" and getattr(args, "save", False))))
         or (args.command == "lifecycle"
             and (action in {"apply", "restore", "handoff", "accept", "start", "route", "revise"}
-                 or (action in {"register-material", "prepare-audit"} and args.apply)
+                 or (action in {"register-material", "prepare-audit",
+                                "relocate-material"} and args.apply)
                  or (action == "plan" and getattr(args, "save", False))))
         or (args.command == "policy" and action == "apply")
+        or (args.command == "setup" and action == "apply")
         or (args.command == "block"
             and action in {"create-fix", "accept", "close"}
             and getattr(args, "apply", False)))
@@ -1445,6 +1470,442 @@ def _block_deferred(action, owner):
             "Синтаксис и форматы уже действуют.")
 
 
+def _checks_deferred(command, action, owner):
+    require(False, f"Команда '{command} {action}' зафиксирована контрактом "
+            f"PB-057; операция реализуется {owner}. "
+            "Синтаксис и форматы уже действуют.")
+
+
+def _load_policy(root, data):
+    """Загрузить одобренную checks-политику по ссылке project.json."""
+    require(checks_contract.PROJECT_LINK_FIELD in data,
+            "checks_policy не настроен в project.json — политика "
+            "подключается явной миграцией (PB-063)")
+    policy_path = safe_path(root, data[checks_contract.PROJECT_LINK_FIELD])
+    policy = json.loads(policy_path.read_text(encoding="utf-8"),
+                        object_pairs_hook=documents._unique_pairs)
+    return checks_contract.validate_policy(policy, require)
+
+
+def _checks_policy_linked(staged):
+    """staged/final check: project.json связан с checks-policy.json.
+
+    ``config`` на представлении уже проверяет файл политики и схему;
+    здесь дополнительно требуется сама ссылка.
+    """
+    data, _ = config(staged)
+    require(data.get(checks_contract.PROJECT_LINK_FIELD)
+            == checks_contract.POLICY_FILENAME,
+            "staged: ссылка checks_policy не записана")
+
+
+def setup_apply(root, args, gate):
+    """setup apply: записать одобренную checks-политику и связать проект.
+
+    Политика валидируется контрактом PB-057; ``approved_basis`` без
+    TODO-маркеров — заявленное решение инженера, а не авторизация
+    (граница доверия — внешний verifier). Запись — checks-policy.json
+    и ``checks_policy`` в project.json через восстановимую операцию;
+    legacy-поля project.json и прежний v2-контракт не меняются.
+    """
+    data, _ = config(root)
+    require(checks_contract.PROJECT_LINK_FIELD not in data,
+            f"{checks_contract.PROJECT_LINK_FIELD} уже подключена в "
+            "project.json — изменение политики выполняется правкой "
+            "файла и новой ревизией, а не setup apply")
+    source = getattr(args, "policy", None) or checks_contract.POLICY_FILENAME
+    policy_path = safe_path(root, source)
+    require(policy_path.is_file() and not policy_path.is_symlink(),
+            f"setup apply: нет файла политики {source}")
+    policy = json.loads(policy_path.read_text(encoding="utf-8"),
+                        object_pairs_hook=documents._unique_pairs)
+    checks_contract.validate_policy(policy, require)
+    basis = policy["approved_basis"]
+    for field in ("who", "at", "source", "detail"):
+        require("todo" not in str(basis[field]).lower(),
+                f"setup apply: approved_basis.{field} содержит TODO — "
+                "заполните решение инженера перед применением")
+    linked = dict(data)
+    linked[checks_contract.PROJECT_LINK_FIELD] = checks_contract.POLICY_FILENAME
+    writes = {
+        checks_contract.POLICY_FILENAME:
+            checks_setup.policy_json(policy).encode("utf-8"),
+        f"{CORE}/project.json":
+            (json.dumps(linked, ensure_ascii=False, indent=2) + "\n")
+            .encode("utf-8"),
+    }
+    spec = _write_spec(root, "setup-apply", "setup-apply", writes,
+                       [_checks_policy_linked])
+    if source != checks_contract.POLICY_FILENAME:
+        spec["inputs"].update(file_operations.snapshot_paths(
+            root, [source], safe_path, require))
+    spec["basis"] = (f"checks-политика {policy['policy_id']} "
+                     f"rev {policy['revision']}: {basis['detail']} "
+                     f"({basis['who']}, {basis['at']})")
+    result = _run_operation(root, spec, gate)
+    if result["status"] == "already_completed":
+        print(f"setup apply: операция {result['op_id']} уже завершена — "
+              "повторное применение пропущено.")
+    else:
+        print(f"checks-политика {policy['policy_id']} rev "
+              f"{policy['revision']} подключена "
+              f"({checks_contract.POLICY_FILENAME}); project.json → "
+              f"checks_policy. Операция: {result['op_dir']}. "
+              "trust_mode=local не повышает доверие результатов.")
+
+
+def checks_plan(root, args):
+    """checks plan <TASK>: read-only объяснение набора и стоимости.
+
+    Не пишет файлы и не исполняет discovery/код проекта: inventory,
+    AST-анализ и снимки входов только читают дерево. Хранимое состояние
+    контура (work/checks/) производится позднейшими операциями; его
+    утрата расширяет выбор, а не сужает его.
+    """
+    data, paths = config(root)
+    policy = _load_policy(root, data)
+    records = read_tasks(root, paths)
+    task = records.get(args.task_id)
+    require(task is not None and not task["archived"],
+            f"{args.task_id}: активная карточка не найдена")
+    task_content = documents.read_text(task["path"])
+    meta_errors = []
+    task_meta = documents.parse_meta(
+        task_content, str(task["path"].relative_to(root)),
+        meta_errors) or {}
+    task_digest = verification.verification_policy.fingerprint(
+        verification.verification_policy.task_projection(
+            task_content, task_meta))
+
+    notes = []
+    state_dir = checks_select.STATE_DIR
+    baseline = None
+    snap_path = safe_path(
+        root, f"{state_dir}/{checks_select.SNAPSHOT_FILENAME}")
+    if snap_path.is_file():
+        try:
+            baseline = checks_inventory.load_snapshot(snap_path)
+        except (ValueError, OSError) as error:
+            notes.append(f"baseline-снимок непригоден: {error}")
+    previous = None
+    graph_path = safe_path(
+        root, f"{state_dir}/{checks_graph.GRAPH_FILENAME}")
+    if graph_path.is_file():
+        try:
+            previous = checks_graph.load_graph(graph_path)
+        except (ValueError, OSError) as error:
+            notes.append(f"прежний граф непригоден: {error}")
+    # Та же загрузка истории, что у run/status/gate: повреждённые
+    # записи и свидетельства индекса дают corrupt_ids — план
+    # показывает то же обязательство, что исполнит runner. Читается
+    # всегда: при утрате каталога results свидетельство индекса всё
+    # равно делает историю недоказуемой (A-01 аудита PB-074).
+    results, result_notes, corrupt_ids = \
+        checks_results.load_results(root)
+    notes.extend(result_notes)
+    # Граф строится внутри плана: AST-чтение идёт под общим
+    # бюджетом max_bytes (аудит A-04). Проекции карточки и политики
+    # нужны оценке reuse проверок с task_projection/policy_projection.
+    projections = checks_runner._projections(policy, task_content,
+                                             task_meta)
+    plan = checks_select.plan(root, policy, baseline=baseline,
+                              previous=previous, results=results,
+                              corrupt_ids=corrupt_ids,
+                              task_digest=task_digest,
+                              projections=projections)
+
+    print(f"checks plan {args.task_id}: политика "
+          f"{policy['policy_id']} rev {policy['revision']}, "
+          f"trust={policy['trust_mode']}")
+    if plan["changed"] is None:
+        print(f"Изменения: не доказаны ({plan['change_reason']}) — "
+              f"консервативный набор")
+    else:
+        print(f"Изменения: {len(plan['changed'])} путей")
+        for path in plan["changed"]:
+            print(f"  ~ {path}")
+    if plan["unattributed"]:
+        print(f"Вне модулей: {', '.join(plan['unattributed'])}")
+    print(f"Граф: {plan['graph_edges']} рёбер, "
+          f"unknown-областей: {plan['graph_unknown']}")
+    max_bytes = plan["limits"].get("max_bytes")
+    byte_limit = f" (лимит {max_bytes} Б)" if max_bytes else ""
+    print(f"Оценка: {plan['estimate_seconds']}с лимит "
+          f"{plan['limits']['max_seconds']}с; прочитано "
+          f"{plan['hashed_bytes']} Б / {plan['hashed_files']} "
+          f"файлов{byte_limit}")
+    for check in policy["checks"]:
+        entry = plan["checks"][check["id"]]
+        print(f"  {check['id']}: {entry['status']}")
+        for line in entry["explain"]:
+            print(f"      {line}")
+    for reason in plan["budget_reasons"]:
+        print(f"BLOCKED: {reason}")
+    for note in notes:
+        print(f"Примечание: {note}")
+    print("Итог: " + ", ".join(f"{name}={count}" for name, count
+                               in plan["summary"].items()
+                               if count or name != "not_applicable"))
+
+
+def _checks_task(root, args):
+    """Политика и активная карточка задачи для checks run/status."""
+    data, paths = config(root)
+    policy = _load_policy(root, data)
+    records = read_tasks(root, paths)
+    task = records.get(args.task_id)
+    require(task is not None and not task["archived"],
+            f"{args.task_id}: активная карточка не найдена")
+    task_content = documents.read_text(task["path"])
+    meta_errors = []
+    task_meta = documents.parse_meta(
+        task_content, str(task["path"].relative_to(root)),
+        meta_errors) or {}
+    return policy, task_content, task_meta
+
+
+def checks_run(root, args):
+    """checks run <TASK>: исполнить обязательства области (PB-060).
+
+    Runner пишет append-only результаты в work/checks/ и обновляет
+    baseline/граф контура; локальный режим честно помечает вывод как
+    диагностический. Код выхода 0 — только когда все обязательства
+    области покрыты passed либо переиспользованным успехом.
+    """
+    policy, task_content, task_meta = _checks_task(root, args)
+    outcome = checks_runner.execute(
+        root, policy, task_id=args.task_id, scope=args.scope,
+        mode=args.mode, checkpoint=args.checkpoint,
+        task_content=task_content, task_meta=task_meta)
+    return 0 if outcome["ok"] else 1
+
+
+def checks_status(root, args):
+    """checks status <TASK>: покрытие и ограничения доверия (PB-060)."""
+    policy, task_content, task_meta = _checks_task(root, args)
+    checks_runner.status(
+        root, policy, task_id=args.task_id, task_content=task_content,
+        task_meta=task_meta)
+    return 0
+
+
+def checks_confirm(root, args):
+    """checks confirm <TASK>: подтверждение ручной проверки (PB-062)."""
+    policy, task_content, task_meta = _checks_task(root, args)
+    checks_runner.confirm(
+        root, policy, task_id=args.task_id,
+        task_content=task_content, task_meta=task_meta,
+        check_id=args.check, who=args.who, statement=args.statement,
+        observation=args.observation)
+    return 0
+
+
+def checks_release_ready(root, args):
+    """checks release-ready <TASK>: готовность релиза (PB-062).
+
+    Единый расчёт покрытия области project на контрольной точке
+    release: весь актуальный обязательный набор с cross-task reuse.
+    Код выхода 0 — только при подтверждённом покрытии; при
+    ``trust_mode=protected`` требуется доказанная граница verifier.
+    Коммит и название ветки авторизацией не являются.
+    """
+    policy, task_content, task_meta = _checks_task(root, args)
+    verdict = checks_gate.evaluate(
+        root, policy, task_id=args.task_id, scope="project",
+        checkpoint=args.checkpoint or "release",
+        task_content=task_content, task_meta=task_meta)
+    print(f"checks release-ready {args.task_id}: "
+          f"политика {policy['policy_id']} rev {policy['revision']}, "
+          f"trust={policy['trust_mode']}, "
+          f"checkpoint={args.checkpoint or 'release'}")
+    print("Ограничение: " + (checks_runner.TRUST_NOTE_LOCAL
+                            if policy["trust_mode"] == "local"
+                            else checks_runner.TRUST_NOTE_PROTECTED))
+    for check in policy["checks"]:
+        record = verdict["checks"][check["id"]]
+        if record["status"] == "not_applicable":
+            continue
+        print(f"  {check['id']}: {record['status']}")
+    print(f"Покрытие: {len(verdict['covered'])} покрыто, "
+          f"{len(verdict['uncovered'])} не покрыто, "
+          f"{len(verdict['manual'])} ручных, "
+          f"{len(verdict['blocked'])} заблокировано")
+    for reason in verdict["rejections"]:
+        print(f"  отказ: {reason}")
+    for note in verdict["notes"]:
+        print(f"  примечание: {note}")
+    print("release-ready: " + ("готово" if verdict["ok"]
+                              else "не готово"))
+    return 0 if verdict["ok"] else 1
+
+
+def _verifier_home(args):
+    """Дом verifier от оператора: --home либо PLAYBOOK_VERIFIER_HOME.
+
+    Путь никогда не читается из project.json: редактируемым файлом
+    нельзя подменить ключ и allowlist (R-17, design §8).
+    """
+    home = getattr(args, "home", None) or \
+        os.environ.get(checks_trust.HOME_ENV)
+    require(home, f"Укажите --home или переменную "
+                  f"{checks_trust.HOME_ENV} — расположение verifier "
+                  "home не выводится из project.json")
+    return Path(home)
+
+
+def _verifier_policy(root, args):
+    path = getattr(args, "policy", None) or \
+        checks_verifier._policy_path(root)
+    require(Path(path).is_file(), f"политика не найдена: {path}")
+    policy = json.loads(Path(path).read_text(encoding="utf-8"),
+                        object_pairs_hook=documents._unique_pairs)
+    return checks_contract.validate_policy(policy, require)
+
+
+def verifier_probe(root, args):
+    """verifier probe: фактическая граница прав (local/protected)."""
+    report = checks_trust.probe(root, getattr(args, "home", None))
+    print(f"verifier probe: capability={report['capability']} "
+          f"boundary={report['boundary']} "
+          f"isolation={report['isolation']}")
+    if report["home"]:
+        print(f"  home: {report['home']}"
+              + (f" (project_id={report.get('project_id')})"
+                 if report.get("project_id") else ""))
+    if report["inside_project"] is not None:
+        print(f"  внутри проекта: {report['inside_project']}; "
+              f"запись агента: {report['agent_can_write']}")
+    for note in report["notes"]:
+        print(f"  примечание: {note}")
+    return 0
+
+
+def verifier_init(root, args):
+    """verifier init: создать дом и ключи; действие оператора."""
+    home = _verifier_home(args)
+    project_id = args.project_id
+    if project_id is None:
+        policy = _verifier_policy(root, args)
+        project_id = policy["project_id"]
+    doc = checks_trust.init_home(
+        home, project_id=project_id, actor=args.actor or _actor(),
+        basis_detail=args.basis)
+    print(f"verifier init: дом {home}, project_id={project_id}, "
+          f"engine {doc['engine']['id']}/{doc['engine']['version']}")
+    print("Следующий шаг: verifier approve — одобрение политики через "
+          "независимый канал.")
+
+
+def verifier_approve(root, args):
+    """verifier approve: одобрить digest политики (независимый канал)."""
+    home = _verifier_home(args)
+    store = checks_trust.load_home(home)
+    policy = _verifier_policy(root, args)
+    require(policy["project_id"] == store["doc"]["project_id"],
+            f"политика {policy['project_id']!r} не принадлежит дому "
+            f"{store['doc']['project_id']!r}")
+    classification = checks_trust.approve_policy(
+        store, policy, actor=args.actor or _actor(),
+        reapprove=args.reapprove)
+    digest = verification.verification_policy.fingerprint(policy)
+    print(f"verifier approve: policy {policy['policy_id']} "
+          f"rev {policy['revision']}, digest {digest}, "
+          f"verdict={classification['verdict']}")
+    for change in classification["changes"]:
+        print(f"  {change['classification']}: {change['kind']} "
+              f"{change['ref']} — {change['detail']}")
+    if args.reapprove:
+        print("  применено явное --reapprove (решение инженера)")
+
+
+def verifier_revoke(root, args):
+    """verifier revoke: отозвать ключ, политику или квитанцию."""
+    home = _verifier_home(args)
+    store = checks_trust.load_home(home)
+    checks_trust.revoke(store, key_id=args.key,
+                        policy_digest=args.policy_digest,
+                        receipt_id=args.receipt,
+                        actor=args.actor or _actor())
+    print("verifier revoke: записано — "
+          + ", ".join(f"{name}={value}" for name, value in
+                      (("key", args.key),
+                       ("policy", args.policy_digest),
+                       ("receipt", args.receipt)) if value))
+
+
+def _verifier_task(root, task_id):
+    """Содержимое и метаданные активной карточки для scope=task."""
+    _, paths = config(root)
+    records = read_tasks(root, paths)
+    task = records.get(task_id)
+    require(task is not None and not task["archived"],
+            f"{task_id}: активная карточка не найдена")
+    content = documents.read_text(task["path"])
+    meta_errors = []
+    meta = documents.parse_meta(
+        content, str(task["path"].relative_to(root)), meta_errors) or {}
+    return content, meta
+
+
+def verifier_run(root, args):
+    """verifier run: изолированный доверенный прогон и квитанция."""
+    home = _verifier_home(args)
+    task_content, task_meta = "", {}
+    if args.scope == "task":
+        require(args.task, "scope=task требует --task <ID>")
+        task_content, task_meta = _verifier_task(root, args.task)
+    outcome = checks_verifier.run(
+        root, home, checkpoint=args.checkpoint, scope=args.scope,
+        mode=args.mode, task_id=args.task,
+        task_content=task_content, task_meta=task_meta)
+    return 0 if outcome["outcome"]["ok"] else 1
+
+
+def verifier_verify(root, args):
+    """verifier verify: проверить квитанцию подписью и журналом."""
+    home = _verifier_home(args)
+    require(Path(args.receipt).is_file(),
+            f"квитанция не найдена: {args.receipt}")
+    receipt = json.loads(Path(args.receipt).read_text(encoding="utf-8"),
+                         object_pairs_hook=documents._unique_pairs)
+    result = checks_verifier.verify(
+        home, receipt, expect_candidate=args.candidate_digest,
+        expect_policy=args.policy_digest)
+    status = "accepted" if result["ok"] else "rejected"
+    print(f"verifier verify: {status} kind={result.get('kind', '?')} "
+          f"results={len(result['results'])}")
+    for reason in result["reasons"]:
+        print(f"  отказ: {reason}")
+    return 0 if result["ok"] else 1
+
+
+def verifier_aggregate(root, args):
+    """verifier aggregate: пересчёт входов и агрегированная квитанция."""
+    home = _verifier_home(args)
+    ids = [item.strip() for item in args.receipts.split(",")
+           if item.strip()]
+    require(ids, "aggregate: укажите --receipts <id>[,<id>...]")
+    task_projection = None
+    if args.task:
+        content, meta = _verifier_task(root, args.task)
+        task_projection = verification.verification_policy.\
+            task_projection(content, meta)
+    checks_verifier.aggregate(home, root, receipt_ids=ids,
+                              task_projection=task_projection)
+
+
+def verifier_gate(root, args):
+    """verifier gate: покрытие обязательств валидными квитанциями."""
+    home = _verifier_home(args)
+    projection = None
+    if args.task:
+        content, meta = _verifier_task(root, args.task)
+        projection = verification.verification_policy.task_projection(content, meta)
+    verdict = checks_verifier.gate(root, home, checkpoint=args.checkpoint,
+                                   task_projection=projection)
+    return 0 if verdict["ok"] else 1
+
+
 def card_create(root, args, gate):
     """Create only new cards; never migrate an existing card implicitly."""
     data, paths = config(root)
@@ -1656,7 +2117,21 @@ def dispatch(root, args, gate):
                                       reuse=not getattr(args, "no_reuse", False),
                                       checkpoint=checkpoint)
 
-        # Legacy v1 path
+        # Legacy v1 / checks_policy path
+        if data.get("verification") is None and data.get("checks_policy") and (args.preflight or args.audit_ready):
+            _load_policy(root, data)
+            file_operations.read_only_gate_check(root, safe_path, require,
+                                                  token=gate.token if gate else None)
+            lifecycle.verification_preflight(root, args.task_id, _lifecycle_ctx(gate), safe_path, require)
+            if args.preflight:
+                if not task_index_path.is_file() or task_index_path.read_text(encoding="utf-8") != expected_index:
+                    require(False, "Индекс устарел; выполните index")
+            check(root, True, skip_criteria={args.task_id})
+            if args.audit_ready:
+                lifecycle.audit_preflight(root, args.task_id, _lifecycle_ctx(gate), safe_path, require)
+                print('audit-ready: свежая передача и проверки подтверждены; независимый аудит не выполнен')
+            print('preflight: структура, материалы, блокировки и политика checks проверены; поведение CLI и приёмка не подтверждены')
+            return 0
         settings = verification.validate(root, data.get("verification"), safe_path, require)
         if args.preflight or args.audit_ready or not args.dry_run:
             file_operations.read_only_gate_check(root, safe_path, require,
@@ -1713,6 +2188,39 @@ def dispatch(root, args, gate):
             _block_deferred(args.action, "PB-068")
         else:
             _block_deferred(args.action, "PB-069")
+    elif args.command == "checks":
+        if args.action == "plan":
+            checks_plan(root, args)
+        elif args.action == "run":
+            return checks_run(root, args)
+        elif args.action == "confirm":
+            return checks_confirm(root, args)
+        elif args.action == "release-ready":
+            return checks_release_ready(root, args)
+        else:
+            return checks_status(root, args)
+    elif args.command == "verifier":
+        if args.action == "probe":
+            return verifier_probe(root, args)
+        elif args.action == "init":
+            verifier_init(root, args)
+        elif args.action == "approve":
+            verifier_approve(root, args)
+        elif args.action == "revoke":
+            verifier_revoke(root, args)
+        elif args.action == "run":
+            return verifier_run(root, args)
+        elif args.action == "verify":
+            return verifier_verify(root, args)
+        elif args.action == "aggregate":
+            verifier_aggregate(root, args)
+        else:
+            return verifier_gate(root, args)
+    elif args.command == "setup":
+        if args.action == "preview":
+            checks_setup.preview(root)
+        else:
+            setup_apply(root, args, gate)
     elif args.command == "adopt":
         updating.adopt(root, args.release_dir,
                        updating.parse_resolves(args.resolve, require),
@@ -1748,6 +2256,11 @@ def dispatch(root, args, gate):
                 root, args.task_id, args.source, args.material_id, args.role,
                 args.immutable, args.required, args.apply,
                 args.actor or _actor(), _lifecycle_ctx(gate), safe_path, require)
+        elif args.action == "relocate-material":
+            lifecycle.relocate_material_command(
+                root, args.task_id, args.material_id, args.to, args.reason,
+                args.apply, args.actor, args.model,
+                _lifecycle_ctx(gate), safe_path, require)
         elif args.action in {"start", "route", "revise"}:
             lifecycle.transition_command(root, args.task_id, args.action,
                 args.actor or _actor(), args.model, args.reason,
@@ -1892,6 +2405,18 @@ def main(argv=None):
     flags.add_argument("--optional", dest="required", action="store_false")
     action.add_argument("--apply", action="store_true")
     action.add_argument("--actor")
+    action = actions.add_parser("relocate-material",
+                                help="Перенести один локальный файл-материал "
+                                     "в свободный путь внутри owner-evidence; "
+                                     "preview по умолчанию")
+    action.add_argument("task_id")
+    action.add_argument("--id", dest="material_id", required=True)
+    action.add_argument("--to", required=True,
+                        help="Новый путь файла внутри docs/tasks/<ID>-evidence/")
+    action.add_argument("--reason", required=True)
+    action.add_argument("--actor", required=True)
+    action.add_argument("--model", required=True)
+    action.add_argument("--apply", action="store_true")
     action = actions.add_parser("handoff",
                                 help="Записать передачу карточки на приёмку "
                                      "(отчёты verify → materials)")
@@ -1982,6 +2507,144 @@ def main(argv=None):
         if deferred == "close":
             action.add_argument("--dry-run", action="store_true",
                                 help="Проверить конечный граф без записи")
+    command = sub.add_parser("checks",
+                             help="Выбор и запуск проверок по зависимостям; "
+                                  "контракт PB-057")
+    actions = command.add_subparsers(dest="action", required=True)
+    action = actions.add_parser(
+        "plan", help="Read-only объяснение required/reused/run/blocked "
+                     "и стоимости (PB-059)")
+    action.add_argument("task_id")
+    action = actions.add_parser(
+        "run", help="Выполнить обязательства области; операция "
+                    "реализуется PB-060")
+    action.add_argument("task_id")
+    action.add_argument("--scope", choices=("task", "project"),
+                        default="task",
+                        help="область: фактические изменения задачи "
+                             "(task) либо весь проект (project)")
+    action.add_argument("--mode", choices=("stale", "force"),
+                        default="stale",
+                        help="stale — только обязательства без пригодного "
+                             "результата; force — весь набор области заново")
+    action.add_argument("--checkpoint",
+                        help="контрольная точка обязательности "
+                             "(например, release); потребление — PB-062")
+    action = actions.add_parser(
+        "status", help="Покрытие, фактические проверки и ограничения "
+                       "доверия; операция реализуется PB-060")
+    action.add_argument("task_id")
+    action = actions.add_parser(
+        "confirm", help="Подтвердить ручную проверку (kind=manual) "
+                        "записью в истории результатов (PB-062)")
+    action.add_argument("task_id")
+    action.add_argument("--check", required=True,
+                        help="id ручной проверки из политики")
+    action.add_argument("--who", required=True,
+                        help="кто подтверждает (инженер)")
+    action.add_argument("--statement", required=True,
+                        help="что именно подтверждено")
+    action.add_argument("--observation", required=True,
+                        help="фактическое наблюдение")
+    action = actions.add_parser(
+        "release-ready", help="Готовность релиза: весь актуальный "
+                              "обязательный набор с cross-task reuse "
+                              "(PB-062)")
+    action.add_argument("task_id",
+                        help="карточка релиза/проверки — обычная "
+                             "карточка проекта")
+    action.add_argument("--checkpoint", default="release",
+                        help="контрольная точка обязательности "
+                             "(по умолчанию release)")
+    command = sub.add_parser("verifier",
+                             help="Доверенный контур: verifier, квитанции "
+                                  "и граница прав; контракт PB-061")
+    actions = command.add_subparsers(dest="action", required=True)
+    action = actions.add_parser(
+        "probe", help="Оценить фактическую границу прав "
+                      "(local/protected); read-only")
+    action.add_argument("--home", type=Path,
+                        help="каталог verifier home; иначе "
+                             "PLAYBOOK_VERIFIER_HOME")
+    action = actions.add_parser(
+        "init", help="Создать verifier home и ключи; действие оператора")
+    action.add_argument("--home", type=Path, required=True)
+    action.add_argument("--policy", type=Path,
+                        help="политика для вывода project_id")
+    action.add_argument("--project-id",
+                        help="project_id явно (если политики ещё нет)")
+    action.add_argument("--basis", default="инициализация контура",
+                        help="основание создания дома")
+    action.add_argument("--actor", help="имя оператора (по умолчанию — "
+                                        "текущий исполнитель)")
+    action = actions.add_parser(
+        "approve", help="Одобрить digest политики через независимый "
+                        "канал; weakening требует --reapprove")
+    action.add_argument("--home", type=Path, required=True)
+    action.add_argument("--policy", type=Path,
+                        help="файл политики; по умолчанию — ссылка "
+                             "project.json или ./checks-policy.json")
+    action.add_argument("--reapprove", action="store_true",
+                        help="явное решение инженера при ослаблении "
+                             "политики")
+    action.add_argument("--actor")
+    action = actions.add_parser(
+        "revoke", help="Отозвать ключ, политику или квитанцию")
+    action.add_argument("--home", type=Path, required=True)
+    action.add_argument("--key", help="key_id для отзыва")
+    action.add_argument("--policy-digest", help="sha256:… политики")
+    action.add_argument("--receipt", help="receipt_id для отзыва")
+    action.add_argument("--actor")
+    action = actions.add_parser(
+        "run", help="Изолированный доверенный прогон и квитанция")
+    action.add_argument("--home", type=Path, required=True)
+    action.add_argument("--scope", choices=("task", "project"),
+                        default="project")
+    action.add_argument("--mode", choices=("stale", "force"),
+                        default="stale")
+    action.add_argument("--checkpoint",
+                        help="контрольная точка обязательности")
+    action.add_argument("--task",
+                        help="ID карточки для scope=task")
+    action = actions.add_parser(
+        "verify", help="Проверить квитанцию подписью и журналом")
+    action.add_argument("--home", type=Path, required=True)
+    action.add_argument("--receipt", type=Path, required=True,
+                        help="файл квитанции")
+    action.add_argument("--candidate-digest",
+                        help="ожидаемый sha256:… кандидата")
+    action.add_argument("--policy-digest",
+                        help="ожидаемый sha256:… политики")
+    action = actions.add_parser(
+        "aggregate", help="Пересчёт входов и агрегированная квитанция "
+                          "текущего кандидата")
+    action.add_argument("--home", type=Path, required=True)
+    action.add_argument("--receipts", required=True,
+                        help="исходные receipt_id через запятую")
+    action.add_argument("--task",
+                        help="ID карточки для проверок с входом "
+                             "task_projection")
+    action = actions.add_parser(
+        "gate", help="Покрытие обязательств валидными квитанциями; "
+                    "эталонный consumer")
+    action.add_argument("--home", type=Path, required=True)
+    action.add_argument("--checkpoint",
+                        help="контрольная точка обязательности")
+    action.add_argument("--task", help="ID карточки для task_projection")
+    command = sub.add_parser("setup",
+                             help="Обследование проекта и одобрение "
+                                  "политики проверок; контракт PB-057")
+    actions = command.add_subparsers(dest="action", required=True)
+    actions.add_parser(
+        "preview", help="Обследование проекта и предложение "
+                        "checks-policy.json без записи и исполнения кода")
+    apply_cmd = actions.add_parser(
+        "apply", help="Записать одобренную checks-policy.json и связать "
+                      "project.json через восстановимую операцию")
+    apply_cmd.add_argument(
+        "--policy", metavar="PATH",
+        help="файл с одобренной политикой "
+             "(по умолчанию checks-policy.json)")
     command = sub.add_parser("index", help="Обновить индекс задач")
     command.add_argument("--documents", action="store_true",
                          help="Обновить только индексы коллекций документов")

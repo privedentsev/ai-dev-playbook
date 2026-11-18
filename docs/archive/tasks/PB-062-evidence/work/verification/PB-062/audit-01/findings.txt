@@ -1,0 +1,21 @@
+Independent audit PB-062, Codex / GPT-6, 2026-11-11.
+Read-only audit-ready before prepare-audit: exit 1:
+ERROR: PB-062: критерии не подтверждены свежими проверками; обновите CHECK/handoff
+card show --json: AC-01..04 reason=unbound_or_changed_check.
+criterion_evidence.CHECK-01 references verify-69f1c89b20a24c79be547ca1cf7b41e1,
+while CHECK-01 text reports verify-84150d61e6ef44efaf39d7446a34f4a3.
+
+Targeted test_checks_gate.py: 11/11 PASS outside nested sandbox.
+Initial nested sandbox run: 1 failure because sandbox-exec returned 71; environment limitation.
+TTL probe: python3 work/verification/PB-062/audit-01/probe_ttl.py
+Run from repository root outside nested sandbox.
+Real verifier execution: probe=passed; external api TTL=60 seconds.
+Only OS-boundary probe is mocked (same convention as existing tests).
+Evaluation at 2099-01-01T00:00:00+00:00:
+{"ok": true, "covered": ["probe"], "uncovered": [], "rejections": []}
+Protected receipts bypass external TTL evaluation. _protected_receipts does not
+load executable results for freshness and _protected_verdict restores coverage.
+
+First regression run overlapped prepare-audit and failed 13 fixture installs
+because the active document operation blocks commands. Discard that run;
+repeat after operation completes. No implementation changes made in audit.

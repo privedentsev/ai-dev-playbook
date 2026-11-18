@@ -1,0 +1,158 @@
+{
+  "reason": "Close rejected cross-project relative links in relocated audit reading journal; preserve path labels as plain code. Audit source content unchanged.",
+  "file": "work/verification/PB-042/audit-20261025/reading-log.md",
+  "before_sha256": "bc3dbc6c3faeefe993682b8d104aedb55d438688c07f01c60c1e31fa23f58fed",
+  "after_sha256": "333435520b5597519a0cc75013d3062193e31b705ae5f54556dc13eb062203e4",
+  "changes": [
+    {
+      "line": 18,
+      "before": "| 1 | [ai-dev-playbook/rules/workflow.md](../../../../ai-dev-playbook/rules/workflow.md) | all | Начальное чтение до включения автоматического журнала; содержимое показано в выводе cat |",
+      "after": "| 1 | `ai-dev-playbook/rules/workflow.md` | all | Начальное чтение до включения автоматического журнала; содержимое показано в выводе cat |"
+    },
+    {
+      "line": 19,
+      "before": "| 2 | [docs/tasks/index.md](../../../../docs/tasks/index.md) | all | Начальное чтение до включения автоматического журнала; содержимое показано в выводе cat |",
+      "after": "| 2 | `docs/tasks/index.md` | all | Начальное чтение до включения автоматического журнала; содержимое показано в выводе cat |"
+    },
+    {
+      "line": 20,
+      "before": "| 3 | [docs/index.md](../../../../docs/index.md) | all | Начальное чтение до включения автоматического журнала; содержимое показано в выводе cat |",
+      "after": "| 3 | `docs/index.md` | all | Начальное чтение до включения автоматического журнала; содержимое показано в выводе cat |"
+    },
+    {
+      "line": 21,
+      "before": "| 4 | [ai-dev-playbook/project.json](../../../../ai-dev-playbook/project.json) | all | Начальное чтение до включения автоматического журнала; содержимое показано в выводе cat |",
+      "after": "| 4 | `ai-dev-playbook/project.json` | all | Начальное чтение до включения автоматического журнала; содержимое показано в выводе cat |"
+    },
+    {
+      "line": 22,
+      "before": "| 5 | [ai-dev-playbook/resources.json](../../../../ai-dev-playbook/resources.json) | all | Начальное чтение до включения автоматического журнала; содержимое показано в выводе cat |",
+      "after": "| 5 | `ai-dev-playbook/resources.json` | all | Начальное чтение до включения автоматического журнала; содержимое показано в выводе cat |"
+    },
+    {
+      "line": 24,
+      "before": "| 7 | [docs/tasks/PB-042.md](../../../../docs/tasks/PB-042.md) | card show PB-042 (compact); card show --entry HANDOFF-02; card show --entry HANDOFF-01; card show --entry CHECK-02; card show --entry EXEC-01; card show PB-042 (после аудита) | Цель, критерии, актуальная передача; не полная карточка; Актуальная передача исполнителя; Границы реализации и доказательства проверки; Итоговый статус, актуальная передача и приёмка CLI |",
+      "after": "| 7 | `docs/tasks/PB-042.md` | card show PB-042 (compact); card show --entry HANDOFF-02; card show --entry HANDOFF-01; card show --entry CHECK-02; card show --entry EXEC-01; card show PB-042 (после аудита) | Цель, критерии, актуальная передача; не полная карточка; Актуальная передача исполнителя; Границы реализации и доказательства проверки; Итоговый статус, актуальная передача и приёмка CLI |"
+    },
+    {
+      "line": 25,
+      "before": "| 8 | [AGENTS.md](../../../../AGENTS.md) | all | Локальные инструкции |",
+      "after": "| 8 | `AGENTS.md` | all | Локальные инструкции |"
+    },
+    {
+      "line": 26,
+      "before": "| 9 | [ai-dev-playbook/rules/context.md](../../../../ai-dev-playbook/rules/context.md) | all | Порядок адресного чтения |",
+      "after": "| 9 | `ai-dev-playbook/rules/context.md` | all | Порядок адресного чтения |"
+    },
+    {
+      "line": 27,
+      "before": "| 10 | [tests/test_index_replay.py](../../../../tests/test_index_replay.py) | all | Постоянные регрессии PB-042 |",
+      "after": "| 10 | `tests/test_index_replay.py` | all | Постоянные регрессии PB-042 |"
+    },
+    {
+      "line": 28,
+      "before": "| 11 | [ai-dev-playbook/scripts/playbook.py](../../../../ai-dev-playbook/scripts/playbook.py) | def index_command\\|plan_id\\|_new_index\\|index-; 460:520; 640:735 | Места изменения индекса и идентификатора операции; Формирование общего детерминированного плана; Полная реализация index_command и проверок индекса |",
+      "after": "| 11 | `ai-dev-playbook/scripts/playbook.py` | def index_command\\|plan_id\\|_new_index\\|index-; 460:520; 640:735 | Места изменения индекса и идентификатора операции; Формирование общего детерминированного плана; Полная реализация index_command и проверок индекса |"
+    },
+    {
+      "line": 29,
+      "before": "| 12 | [ai-dev-playbook/scripts/file_operations.py](../../../../ai-dev-playbook/scripts/file_operations.py) | ^class \\|^def \\|already_completed\\|def apply\\|completed\\|lock; 1:70; 180:225; 738:860; 798:856 | Карта движка операций, идемпотентность и блокировка; Контракт движка и служебные пути; Удержание gate и проверка pending; Идемпотентность и стадии операции; Откат при ошибке и поведение при KeyboardInterrupt; повтор из-за обрезанного вывода |",
+      "after": "| 12 | `ai-dev-playbook/scripts/file_operations.py` | ^class \\|^def \\|already_completed\\|def apply\\|completed\\|lock; 1:70; 180:225; 738:860; 798:856 | Карта движка операций, идемпотентность и блокировка; Контракт движка и служебные пути; Удержание gate и проверка pending; Идемпотентность и стадии операции; Откат при ошибке и поведение при KeyboardInterrupt; повтор из-за обрезанного вывода |"
+    },
+    {
+      "line": 30,
+      "before": "| 13 | [ai-dev-playbook/rules/task-card-format.md](../../../../ai-dev-playbook/rules/task-card-format.md) | Аудит\\|audit\\|accepted\\|card add\\|findings\\|вердикт\\|AUDIT; 1:98; 60:91; 1:33 | Как записать независимый аудит; Синтаксис журнала и обязательных полей аудита; Точный образец AUDIT; повтор из-за обрезанного вывода; Заголовок журнала и ограничения порядка записей; восстановление обрезанного участка |",
+      "after": "| 13 | `ai-dev-playbook/rules/task-card-format.md` | Аудит\\|audit\\|accepted\\|card add\\|findings\\|вердикт\\|AUDIT; 1:98; 60:91; 1:33 | Как записать независимый аудит; Синтаксис журнала и обязательных полей аудита; Точный образец AUDIT; повтор из-за обрезанного вывода; Заголовок журнала и ограничения порядка записей; восстановление обрезанного участка |"
+    },
+    {
+      "line": 31,
+      "before": "| 14 | [ai-dev-playbook/rules/verification.md](../../../../ai-dev-playbook/rules/verification.md) | all | Требования к проверкам и актуальности |",
+      "after": "| 14 | `ai-dev-playbook/rules/verification.md` | all | Требования к проверкам и актуальности |"
+    },
+    {
+      "line": 32,
+      "before": "| 15 | [docs/architecture.md](../../../../docs/architecture.md) | index\\|индекс\\|plan_id\\|PB-042 | Утверждения архитектуры про индексацию |",
+      "after": "| 15 | `docs/architecture.md` | index\\|индекс\\|plan_id\\|PB-042 | Утверждения архитектуры про индексацию |"
+    },
+    {
+      "line": 33,
+      "before": "| 16 | [CHANGELOG.md](../../../../CHANGELOG.md) | PB-042\\|index\\|индекс\\|plan_id | Заявленное изменение |",
+      "after": "| 16 | `CHANGELOG.md` | PB-042\\|index\\|индекс\\|plan_id | Заявленное изменение |"
+    },
+    {
+      "line": 34,
+      "before": "| 17 | [tests/test_document_cli.py](../../../../tests/test_document_cli.py) | ^class DocumentCliCase\\|def setUp\\|def cli\\|def tearDown; 1:42 | Поиск инфраструктуры изолированного проекта; Тестовая CLI обвязка |",
+      "after": "| 17 | `tests/test_document_cli.py` | ^class DocumentCliCase\\|def setUp\\|def cli\\|def tearDown; 1:42 | Поиск инфраструктуры изолированного проекта; Тестовая CLI обвязка |"
+    },
+    {
+      "line": 35,
+      "before": "| 18 | [tests/test_file_operations.py](../../../../tests/test_file_operations.py) | ^class \\|^    def test_\\|def make\\|def spec; 26:110 | Покрытие движка повтором, gate и сбоями; Спецификация движка и существующий тест идемпотентности |",
+      "after": "| 18 | `tests/test_file_operations.py` | ^class \\|^    def test_\\|def make\\|def spec; 26:110 | Покрытие движка повтором, gate и сбоями; Спецификация движка и существующий тест идемпотентности |"
+    },
+    {
+      "line": 36,
+      "before": "| 19 | [tests/test_documents.py](../../../../tests/test_documents.py) | ^class CatalogCase\\|^def doc_meta\\|^def tree_fingerprint\\|^def write_doc\\|def setUp; 18:49; 117:148 | Поиск создания временного проекта; Обвязка временного проекта; повтор после обрезки; Создание документа и fingerprint дерева; Настройка временной коллекции |",
+      "after": "| 19 | `tests/test_documents.py` | ^class CatalogCase\\|^def doc_meta\\|^def tree_fingerprint\\|^def write_doc\\|def setUp; 18:49; 117:148 | Поиск создания временного проекта; Обвязка временного проекта; повтор после обрезки; Создание документа и fingerprint дерева; Настройка временной коллекции |"
+    },
+    {
+      "line": 37,
+      "before": "| 20 | [ai-dev-playbook/scripts/lifecycle.py](../../../../ai-dev-playbook/scripts/lifecycle.py) | ^def .*evidence\\|^def .*accept\\|inputs_fresh\\|def .*material; 537:628; 2058:2125 | Свежесть handoff и аудит материалов; Поиск freshness API; повтор после обрезки; Требования к свежей передаче и закрытию; Регистрация независимой приёмки без изменения реализации |",
+      "after": "| 20 | `ai-dev-playbook/scripts/lifecycle.py` | ^def .*evidence\\|^def .*accept\\|inputs_fresh\\|def .*material; 537:628; 2058:2125 | Свежесть handoff и аудит материалов; Поиск freshness API; повтор после обрезки; Требования к свежей передаче и закрытию; Регистрация независимой приёмки без изменения реализации |"
+    },
+    {
+      "line": 38,
+      "before": "| 21 | [ai-dev-playbook/scripts/verification.py](../../../../ai-dev-playbook/scripts/verification.py) | ^def inputs_fresh\\|^def .*snapshot\\|exclude\\|evidence; 350:400 | Границы входов проверки; Поиск snapshot API; повтор после обрезки; Как определяется актуальность входов |",
+      "after": "| 21 | `ai-dev-playbook/scripts/verification.py` | ^def inputs_fresh\\|^def .*snapshot\\|exclude\\|evidence; 350:400 | Границы входов проверки; Поиск snapshot API; повтор после обрезки; Как определяется актуальность входов |"
+    },
+    {
+      "line": 39,
+      "before": "| 22 | [work/verification/PB-042/5f92043fd8fa4a9f85d299c3856aeea4/report.json](../5f92043fd8fa4a9f85d299c3856aeea4/report.json) | JSON fields except snapshot/inputs/checks; scalar result fields + checks id/status/exit_code | Идентичность и результат отчёта передачи; Сводка отчёта; хеши входов обрабатываются программно |",
+      "after": "| 22 | `work/verification/PB-042/5f92043fd8fa4a9f85d299c3856aeea4/report.json` | JSON fields except snapshot/inputs/checks; scalar result fields + checks id/status/exit_code | Идентичность и результат отчёта передачи; Сводка отчёта; хеши входов обрабатываются программно |"
+    },
+    {
+      "line": 40,
+      "before": "| 23 | [tests/test_cli.py](../../../../tests/test_cli.py) | 1:75 | Вызов CLI и временная установка |",
+      "after": "| 23 | `tests/test_cli.py` | 1:75 | Вызов CLI и временная установка |"
+    },
+    {
+      "line": 41,
+      "before": "| 24 | [docs/tasks/PB-042-evidence/before.log](../../../../docs/tasks/PB-042-evidence/before.log) | 1:45 | Доказательство падения регрессии до изменения |",
+      "after": "| 24 | `docs/tasks/PB-042-evidence/before.log` | 1:45 | Доказательство падения регрессии до изменения |"
+    },
+    {
+      "line": 42,
+      "before": "| 25 | [work/verification/PB-042/audit-20261025/independent-probe.log](independent-probe.log) | all | Результаты независимых сценариев |",
+      "after": "| 25 | `work/verification/PB-042/audit-20261025/independent-probe.log` | all | Результаты независимых сценариев |"
+    },
+    {
+      "line": 43,
+      "before": "| 26 | `/private/tmp/pb042-audit-full-suite.log` ([сохранённая копия](full-suite.log)) | 520:550; 470:505; 565:577 | Промежуточный результат полного набора; Уточнение текущего долгого теста полного прогона; Итог полного независимого прогона |",
+      "after": "| 26 | `/private/tmp/pb042-audit-full-suite.log` (`сохранённая копия`) | 520:550; 470:505; 565:577 | Промежуточный результат полного набора; Уточнение текущего долгого теста полного прогона; Итог полного независимого прогона |"
+    },
+    {
+      "line": 44,
+      "before": "| 27 | [work/verification/PB-042/audit-20261025/old-identity-mutation.log](old-identity-mutation.log) | 1:55 | Независимое воспроизведение регрессии с прежним идентификатором |",
+      "after": "| 27 | `work/verification/PB-042/audit-20261025/old-identity-mutation.log` | 1:55 | Независимое воспроизведение регрессии с прежним идентификатором |"
+    },
+    {
+      "line": 45,
+      "before": "| 28 | [tests/test_pb029.py](../../../../tests/test_pb029.py) | def test_self_project_copy_pilot\\|copytree\\|ignore_patterns\\|timeout\\|def _\\|def _copy; 626:705 | Почему полный прогон задержался на пилоте копии проекта; Границы чтения и копирования проектного пилота |",
+      "after": "| 28 | `tests/test_pb029.py` | def test_self_project_copy_pilot\\|copytree\\|ignore_patterns\\|timeout\\|def _\\|def _copy; 626:705 | Почему полный прогон задержался на пилоте копии проекта; Границы чтения и копирования проектного пилота |"
+    },
+    {
+      "line": 46,
+      "before": "| 29 | [work/verification/PB-042/audit-20261025/index-final.log](index-final.log) | all | Результат итогового index |",
+      "after": "| 29 | `work/verification/PB-042/audit-20261025/index-final.log` | all | Результат итогового index |"
+    },
+    {
+      "line": 47,
+      "before": "| 30 | [work/verification/PB-042/audit-20261025/check-final.log](check-final.log) | 1:40 | Результат структурной проверки после приёмки |",
+      "after": "| 30 | `work/verification/PB-042/audit-20261025/check-final.log` | 1:40 | Результат структурной проверки после приёмки |"
+    },
+    {
+      "line": 48,
+      "before": "| 31 | [work/verification/PB-042/audit-20261025/close-preview.log](close-preview.log) | 1:24 | Проверка возможности close без записи и архивирования |",
+      "after": "| 31 | `work/verification/PB-042/audit-20261025/close-preview.log` | 1:24 | Проверка возможности close без записи и архивирования |"
+    }
+  ]
+}

@@ -1,0 +1,457 @@
+# PB-041: Компактное чтение задач и внешние метаданные
+
+ID: PB-041
+Status: in_review
+Priority: P2
+Depends-On: -
+Executor: Antigravity
+Model: Gemini 3.8 Flash (High)
+Created: 2026-10-25T00:23:58+03:00
+Closed: -
+
+<!-- playbook-meta:start -->
+```json
+{
+  "schema_version": 1,
+  "card_format_version": 2,
+  "relations": [
+    {
+      "relation": "based_on",
+      "target": "spec:compact-task-context"
+    },
+    {
+      "relation": "based_on",
+      "target": "design:compact-task-context"
+    }
+  ],
+  "materials": [
+    {
+      "id": "pb041-evidence",
+      "role": "report",
+      "source": "docs/tasks/PB-041-evidence",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-041"
+      ]
+    },
+    {
+      "id": "verify-8df8f0ae45be4486a059ab3e782627a5",
+      "role": "report",
+      "source": "work/verification/PB-041/8df8f0ae45be4486a059ab3e782627a5",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-041"
+      ]
+    },
+    {
+      "id": "verify-167acf7b48c147a790e8a7fa3494dab6",
+      "role": "report",
+      "source": "work/verification/PB-041/167acf7b48c147a790e8a7fa3494dab6",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-041"
+      ]
+    },
+    {
+      "id": "verify-531285e9030b4124a8ff03e762112ea6",
+      "role": "report",
+      "source": "work/verification/PB-041/531285e9030b4124a8ff03e762112ea6",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-041"
+      ]
+    },
+    {
+      "id": "audit-01",
+      "role": "report",
+      "source": "work/verification/PB-041/audit-01",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-041"
+      ]
+    },
+    {
+      "id": "verify-8a3bc14e6d6a446da0c95934a2832c86",
+      "role": "report",
+      "source": "work/verification/PB-041/8a3bc14e6d6a446da0c95934a2832c86",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-041"
+      ]
+    },
+    {
+      "id": "verify-590c907a3d8c4fc699b899944d69b327",
+      "role": "report",
+      "source": "work/verification/PB-041/590c907a3d8c4fc699b899944d69b327",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-041"
+      ]
+    },
+    {
+      "id": "audit-02",
+      "role": "report",
+      "source": "work/verification/PB-041/audit-02",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-041"
+      ]
+    },
+    {
+      "id": "verify-65ca732262a94dda8d46cceb0784f32a",
+      "role": "report",
+      "source": "work/verification/PB-041/65ca732262a94dda8d46cceb0784f32a",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-041"
+      ]
+    },
+    {
+      "id": "verify-af2059786cfb485296596a427eac0b0a",
+      "role": "report",
+      "source": "work/verification/PB-041/af2059786cfb485296596a427eac0b0a",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-041"
+      ]
+    }
+  ],
+  "criterion_evidence": {
+    "CHECK-02": {
+      "check_sha256": "sha256:32af09fb58122a1c89f8b3d344efedc9c2c9dbb5e6990ad9739cd64b848bd752",
+      "card_projection": "sha256:814f2104e60acda5760ea80c75146b14c9baead2cc6e1407da9da171402cebe7",
+      "report_id": "verify-531285e9030b4124a8ff03e762112ea6",
+      "report_sha256": "sha256:8a313ba97945429c694bc41a5da980fee9e97e6763a8bef58829ed98a4dc8269"
+    },
+    "CHECK-04": {
+      "check_sha256": "sha256:7dfbaaa500f4517a7810fcdc24881dde1d40d409587a65d1c07d46b01560da73",
+      "card_projection": "sha256:814f2104e60acda5760ea80c75146b14c9baead2cc6e1407da9da171402cebe7",
+      "report_id": "verify-590c907a3d8c4fc699b899944d69b327",
+      "report_sha256": "sha256:c020d38eff84e7c7f83945d5cf7655fc7c3bdc2a8be8789edf38868a132451ae"
+    },
+    "CHECK-05": {
+      "check_sha256": "sha256:e00abd8e25ec90ef451d7afb74410639cc112c10ae5d2475b495540f160cfe10",
+      "card_projection": "sha256:bdbe954054377efafcf8558164061067fa35fd85fac7a4dcbc6ee58196d747f9",
+      "report_id": "verify-65ca732262a94dda8d46cceb0784f32a",
+      "report_sha256": "sha256:acb12cfd542ca4a0328dacefea6fe2889b338f5aaaacc4e8ff3e2062799e9d49"
+    }
+  },
+  "handoff": {
+    "at": "2026-10-26T09:11:28+03:00",
+    "actor": {
+      "name": "Antigravity",
+      "model": "Gemini 3.8 Flash (High)"
+    },
+    "summary": "HANDOFF-03",
+    "reports": [
+      "verify-65ca732262a94dda8d46cceb0784f32a"
+    ],
+    "card_projection": "sha256:bdbe954054377efafcf8558164061067fa35fd85fac7a4dcbc6ee58196d747f9",
+    "entry_id": "HANDOFF-03",
+    "journal_sha256": "sha256:187f504f55a1ce289a3509e10dd2f4c921b0e9a16822ab8f2e556fbb5e1f8e10"
+  }
+}
+```
+<!-- playbook-meta:end -->
+
+## Задача
+
+### Цель и границы
+
+Внешние метаданные новых карточек и компактное чтение существующим CLI. Схему гарантий не менять; существующие карточки и архив не мигрировать. PB-040 не является зависимостью и не изменяется.
+
+### Контекст
+
+[Требования](../specs/compact-task-context.md), [решение](../designs/compact-task-context.md), [roadmap](../roadmap.md). Инженер разрешил выполнение согласованного объёма в текущей сессии.
+
+### Критерии приёмки
+
+- [ ] AC-01: новые карточки создаются парой Markdown/JSON через восстанавливаемую операцию; шапка и тексты не дублируются.
+- [ ] AC-02: поддержаны inline/legacy/external; повреждение, потеря, orphan, symlink и конфликт источников отклоняются без записи.
+- [ ] AC-03: sync, verify, handoff/accept, close/reopen сохраняют гарантии актуальности, историю и immutable-доказательства, включая повторный цикл.
+- [ ] AC-04: компактный show и выбор записи/находки дают актуальный контекст; full/JSON и fallback доступны, просмотр read-only.
+- [ ] AC-05: установка/обновление, шаблоны, правила и инструкции агентов согласованы; новые записи не пересказывают друг друга.
+- [ ] AC-06: пройдены профильные и совместимые регрессии, сквозные и аварийные пробы; измерен объём компактного вывода, сохранена передача независимому аудитору.
+
+### План
+
+1. Требования и техническое решение; карточка draft → ready → in_progress по разрешению инженера.
+2. Единый адаптер хранения, создание пары и интеграция lifecycle/freshness.
+3. Компактный show и выбор записей; инструкции и шаблоны.
+4. Постоянные поведенческие проверки, установка/обновление, self-manifest, verify и handoff.
+
+### Ресурсы
+
+Python 3.10+, стандартная библиотека; macOS. Ветка dev, исходные изменения сохранены. policy_revision: 2; бюджет не задан. Модель GPT-6 (по данным среды). Commit/push не разрешены.
+
+## Журнал
+
+### EXEC-01 — Выполнение
+
+Время: 2026-10-25T02:46:53+03:00
+Исполнитель: Codex
+Модель: GPT-6
+Изменения:
+- Добавлен адаптер чтения пары Markdown/JSON и разделения записей до планирования существующих восстанавливаемых операций; схема метаданных сохранена.
+- Новая card create создаёт пару и индекс, шаблоны используют внешнее хранение. Lifecycle переносит оба файла и защищает sidecar от регистрации как evidence; verification включает его в снимки с прежними проверками проекции/выполнения.
+- card show выводит компактный контекст, отдельные записи/находки по ID и полный Markdown без служебного блока; полный JSON-контракт сохранён. Актуальность передачи и приёмки показана отдельно.
+- Обновлены общие правила чтения и краткости новых записей, шаблон AGENTS и проектная точка входа. Существующие карточки и архив не менялись; PB-040 не является зависимостью.
+- Подготовлены постоянные пробы парного хранения/переносов, stale plan/freshness, read-only, выбора находок и восстановление после SIGKILL. Независимый аудит не выполнялся.
+Файлы:
+- ai-dev-playbook/scripts/documents.py
+- ai-dev-playbook/scripts/task_cards.py
+- ai-dev-playbook/scripts/playbook.py
+- ai-dev-playbook/scripts/lifecycle.py
+- ai-dev-playbook/scripts/verification.py
+- ai-dev-playbook/templates/task.md
+- ai-dev-playbook/templates/task.meta.json
+- ai-dev-playbook/templates/AGENTS.md
+- ai-dev-playbook/rules/context.md
+- ai-dev-playbook/rules/tasks.md
+- ai-dev-playbook/rules/task-card-format.md
+- ai-dev-playbook/rules/verification.md
+- ai-dev-playbook/rules/workflow.md
+- ai-dev-playbook/README.md
+- AGENTS.md
+- docs/specs/compact-task-context.md
+- docs/designs/compact-task-context.md
+- docs/adr/0004-external-task-metadata.md
+- docs/roadmap.md
+- docs/user-guide/index.md
+- docs/architecture.md
+- docs/code-map.md
+- tests/test_compact_context.py
+- CHANGELOG.md
+
+### CHECK-01 — Проверка
+
+Время: 2026-10-25T02:51:09+03:00
+Исполнитель: Codex
+Модель: GPT-6
+Результат: failed
+Критерии: AC-01, AC-02, AC-03, AC-04, AC-05, AC-06
+Команда: `python3 ai-dev-playbook/scripts/playbook.py verify PB-041`
+Среда: macOS, Python 3.14.6, ветка dev; временные проекты для поведенческих проб.
+Факт:
+- Финальный полный набор: 523 теста, 522 passed, один отказ test_self_project_copy_pilot из-за несоответствия отметок PB-040 журналу/свежести на копии репозитория. Отчёт runner failed; inputs_unchanged=true на момент завершения. Runner пропустил self-check после отказа unit-tests; отдельный check --ready воспроизвёл тот же блокер PB-040.
+- Все 9 новых тестов test_compact_context прошли в полном наборе: создание/preview, read-only и выбор записей, отказы JSON, два цикла close/reopen со ссылками и побайтным сохранением доказательства, откат пары, freshness/stale plan, установленный CLI и реальный SIGKILL с restore.
+- Прежние тесты inline/legacy, lifecycle, установки, обновления и schema v2 прошли. Профильный набор до финального прогона — 43 passed; дополнительный SIGKILL/installed-CLI тест — passed.
+- Синтетические 8 итераций/32 записи: полный вывод 39508 символов, компактный 867. Токены не измерялись; процент для реальных задач не заявляется.
+Доказательства:
+- [Финальный runner](../../work/verification/PB-041/8df8f0ae45be4486a059ab3e782627a5/report.json)
+- [Полный набор](../../work/verification/PB-041/8df8f0ae45be4486a059ab3e782627a5/unit-tests.stderr.log)
+- [Профильные проверки](PB-041-evidence/profile-tests.log), [SIGKILL и установленный CLI](PB-041-evidence/sigkill-installed-cli.log)
+- [Отдельный check --ready](PB-041-evidence/check-ready.log), [замер контекста](PB-041-evidence/context-measurement.json)
+Ограничения:
+- Реализация завершена, но verify не passed. Формальная передача через lifecycle handoff не выполнена, статус остаётся in_progress. Gate не обходился. PB-040 и другие существующие карточки/архив не редактировались; несвежие отметки PB-040 не синхронизировались по прямому ограничению инженера.
+- Следующий шаг: после устранения внешнего блокера состояния проекта повторить verify, добавить новую CHECK и HANDOFF, выполнить lifecycle handoff и передать независимому аудитору. Аудит должен проверить парные операции и прерывания, прежний inline/legacy путь и достаточность компактного контекста.
+
+### CHECK-02 — Проверка
+
+Время: 2026-10-25T07:44:58+03:00
+Исполнитель: Codex
+Модель: GPT-6
+Результат: passed
+Критерии: AC-01, AC-02, AC-03, AC-04, AC-05, AC-06
+Команда: `python3 ai-dev-playbook/scripts/playbook.py verify PB-041`
+Среда: macOS; Python 3.14.6; ветка dev; временные проекты и копия репозитория.
+Факт:
+- Финальный runner 531285e9030b4124a8ff03e762112ea6: 523 теста прошли за 249.253 s, self-check passed, inputs_unchanged=true. Проверка выполнена после подготовки статуса in_review и индекса.
+- Прошли все 9 профильных тестов внешних метаданных/компактного контекста и регрессии inline/legacy, установки/обновления и lifecycle. Пилот на копии всего проекта теперь проходит; блокер CHECK-01 снят после закрытия PB-040 инженером.
+- Предварительный повторный runner 167acf7b48c147a790e8a7fa3494dab6 также passed; реализация EXEC-01 в этой сессии не менялась.
+Доказательства:
+- [Финальный runner](../../work/verification/PB-041/531285e9030b4124a8ff03e762112ea6/report.json)
+- [523 теста](../../work/verification/PB-041/531285e9030b4124a8ff03e762112ea6/unit-tests.stderr.log)
+- [Self-check](../../work/verification/PB-041/531285e9030b4124a8ff03e762112ea6/self-check.stdout.log)
+Ограничения: самопроверка исполнителя; независимый аудит ещё не проводился. CHECK-01 и прежние отчёты сохранены как история. Синтетический замер контекста не является измерением токенов на реальных задачах.
+
+### HANDOFF-01 — Передача
+
+Время: 2026-10-25T07:44:58+03:00
+Исполнитель: Codex
+Модель: GPT-6
+Выполнение: EXEC-01
+Проверки: CHECK-02
+Состояние: реализация готова к независимому аудиту; ветка dev, commit/push не выполнялись; существующие карточки и архив в этой сессии не изменялись. Объём и изменённые файлы — EXEC-01; результаты — CHECK-02.
+Фокус аудита:
+- Сверить spec:compact-task-context и design; независимо проверить чтение/запись пары Markdown/JSON, конфликты источников, потерю/повреждение/подмену sidecar и защиту от его регистрации как evidence.
+- Воспроизвести tests/test_compact_context.py: два цикла close/reopen с относительными ссылками и immutable-доказательствами, stale plan/freshness, rollback и реальный SIGKILL/restore; проверить прежний inline/legacy путь на временном проекте.
+- Проверить достаточность краткого card show для продолжения работы и аудита, отдельную актуальность handoff/acceptance, адресный выбор записи/находки, read-only и full/JSON/fallback. Новые шаблоны и общий порядок чтения должны работать у разных агентов.
+- Проверить свежесть финального runner и сохранность старых доказательств. Независимую приёмку оформить новым AUDIT; самопроверка не является acceptance. Закрытие этой карточки требует отдельного разрешения инженера.
+
+### AUDIT-01 — Аудит
+
+Время: 2026-10-25T07:48:07+03:00
+Исполнитель: Codex
+Модель: GPT-6
+Передача: HANDOFF-01
+Результат: changes_requested
+Критерии: AC-01, AC-02, AC-03, AC-04, AC-05, AC-06
+Независимо проверено: чтение реализации адаптера и compact show; повтор 9 профильных тестов (включая два close/reopen, immutable evidence, stale plan, rollback и SIGKILL/restore); отдельная CLI-проба маркеров с inline-контролем. Исходная передача current; check --ready прошёл до записи аудита.
+Доказательства:
+- [Профильные проверки](../../work/verification/PB-041/audit-01/profile.log)
+- [Независимая проба](../../work/verification/PB-041/audit-01/probe.py)
+- [Результат пробы](../../work/verification/PB-041/audit-01/probe.log)
+Ограничения: полный набор 523 тестов повторно не запускался; найденный дефект блокирует приёмку. Код не исправлялся. Карточка возвращена в in_progress; после исправления нужны verify, новая передача и повторный аудит.
+
+#### A-01 — Замечание
+Серьёзность: P2
+Критерии: AC-02, AC-04
+Проблема: documents.read_text находит настоящий внешний маркер с учётом fenced-блоков, но вставляет JSON через text.replace(..., 1) в первое текстовое вхождение, включая пример или часть заголовка.
+Воспроизведение: запустить python3 work/verification/PB-041/audit-01/probe.py. В валидную внешнюю карточку перед настоящим маркером добавляется fenced-пример того же маркера; контрольная inline-карточка содержит тот же пример.
+Факт: inline-контроль читается (exit 0), пример сохранён. Внешняя карточка возвращает exit 1 / ERROR: 'DEV-1'; parse_meta гидратированного текста возвращает None. Упоминание маркера в заголовке также ломает чтение (неверная шапка). Дерево при show не изменяется.
+Влияние: допустимый Markdown-пример меняет интерпретацию служебного состояния; компактный и полный просмотр недоступны. Нарушены единое чтение и сохранность fenced-примеров.
+Критерий исправления: вставлять JSON по позиции настоящего структурного маркера, а не первого вхождения строки; добавить регрессию для fenced-примера и inline-упоминания до маркера, проверить show/full/JSON, sync и сохранность текста/метаданных.
+
+### EXEC-02 — Исправление
+
+Время: 2026-10-25T07:51:46+03:00
+Исполнитель: Codex
+Модель: GPT-6
+Замечания: A-01
+Изменения:
+- Подтверждена исходная проба аудитора; введена единая позиционная вставка hydrate_card на основе структурного external_meta_position. Текстовые упоминания больше не выбирают место вставки.
+- Тот же дефект исправлен в card create: название может содержать текст маркера, не меняя структуру шапки. Заголовки внутри fenced-примеров исключены из проверки положения настоящего маркера.
+- Добавлены регрессии класса случаев, а не только исходного примера: несколько видов fences, заголовок, roundtrip, show/full/JSON/entry, sync, создание и ошибочные маркеры. Код прочитан на остальные места вставки; два производственных text.replace заменены общим методом.
+Файлы:
+- ai-dev-playbook/scripts/documents.py
+- ai-dev-playbook/scripts/playbook.py
+- tests/test_compact_context.py
+- docs/designs/compact-task-context.md
+- CHANGELOG.md
+
+### CHECK-03 — Проверка
+
+Время: 2026-10-25T08:02:45+03:00
+Исполнитель: Codex
+Модель: GPT-6
+Результат: failed
+Критерии: AC-01, AC-02, AC-03, AC-04, AC-05, AC-06
+Команда: `python3 ai-dev-playbook/scripts/playbook.py verify PB-041`
+Среда: macOS; Python 3.14.6; временные проекты и копия репозитория.
+Факт: первый общий прогон исправления — 524 из 525 тестов passed. Пилот остановился на устаревшем индексе: повторный index ошибочно сообщил об актуальности при возврате к ранее индексированному статусу. Дефект независимо воспроизведён на временном проекте и вынесен в PB-042; индекс восстановлен существующей восстанавливаемой операцией при создании новой draft-карточки. Код индекса в PB-041 не менялся.
+Доказательства:
+- [Первый общий runner](../../work/verification/PB-041/8a3bc14e6d6a446da0c95934a2832c86/report.json)
+- [Проба индекса](PB-041-evidence/fix-01/index-replay-probe.py), [результат](PB-041-evidence/fix-01/index-replay.log)
+Ограничения: исторический неуспешный прогон; не подтверждает готовность передачи. Отдельная задача: [PB-042](../archive/tasks/PB-042.md).
+
+### CHECK-04 — Проверка
+
+Время: 2026-10-25T08:02:45+03:00
+Исполнитель: Codex
+Модель: GPT-6
+Результат: passed
+Критерии: AC-01, AC-02, AC-03, AC-04, AC-05, AC-06
+Команда: `python3 ai-dev-playbook/scripts/playbook.py verify PB-041`; профильный набор `PYTHONPATH=tests python3 -m unittest test_compact_context test_task_cards test_criterion_checkboxes test_material_registration`; проба `python3 work/verification/PB-041/audit-01/probe.py`.
+Среда: macOS, Python 3.14.6, ветка dev; временные проекты и копия всего репозитория.
+Факт:
+- Финальный runner 590c907a3d8c4fc699b899944d69b327: 525 тестов passed за 278.827 s, self-check passed, inputs_unchanged=true. Прогон выполнен на подготовленном статусе in_review и актуальном индексе.
+- 46 профильных тестов passed. Добавлены две регрессии с матрицей вариантов: backtick/tilde/вложенный fence, заголовок с упоминанием маркера, roundtrip, show/full/JSON/entry, sync и повторный sync, создание и некорректные маркеры. Исходная независимая проба аудитора после исправления проходит, пример сохраняется, просмотр read-only.
+- Проверены оба производственных места вставки JSON; чтение и создание используют один позиционный метод. Неизменённые JSON-поля и текст карточки сохраняются; вычисляемые галочки и привязки меняются только штатным sync.
+Доказательства:
+- [Финальный runner](../../work/verification/PB-041/590c907a3d8c4fc699b899944d69b327/report.json), [525 тестов](../../work/verification/PB-041/590c907a3d8c4fc699b899944d69b327/unit-tests.stderr.log)
+- [46 профильных тестов](PB-041-evidence/fix-01/profile-tests.log)
+- [Проба до исправления](PB-041-evidence/fix-01/audit-probe-before.log), [после](PB-041-evidence/fix-01/audit-probe-after.log), [область самопроверки](PB-041-evidence/fix-01/scope.md)
+Ограничения: самопроверка исполнителя; A-01 остаётся открытым до подтверждения устранения независимым аудитором. Зафиксированный отдельно дефект индекса PB-042 не исправлялся и не является зависимостью PB-041.
+
+### HANDOFF-02 — Передача
+
+Время: 2026-10-25T08:02:45+03:00
+Исполнитель: Codex
+Модель: GPT-6
+Выполнение: EXEC-01, EXEC-02
+Проверки: CHECK-04
+Состояние: исправление A-01 и весь результат готовы к повторному независимому аудиту; статус in_review, ветка dev, commit/push не выполнялись. Изменения — EXEC-02; доказательства и ограничения — CHECK-04. A-01 исполнителем не закрывалось.
+Фокус аудита:
+- Повторить исходную пробу audit-01/probe.py; проверить структурную позицию вставки в read_text и card create. Fenced-примеры, заголовки внутри них и упоминание в названии не должны выбирать место вставки или исчезать.
+- Воспроизвести новые тесты test_marker_examples_roundtrip_views_and_sync_preserve_card и test_create_title_marker_and_duplicate_real_markers, проверить сохранность JSON/Markdown и read-only. Отдельно проверить отказ при двух настоящих маркерах и отсутствии настоящего маркера при наличии примера.
+- Проверить свежесть CHECK-04, прежние гарантии парных операций и достаточность компактного контекста. После подтверждения исправления закрыть A-01 новым AUDIT, затем зарегистрировать независимую приёмку; эта передача не является acceptance.
+
+
+### AUDIT-02 — Аудит
+
+Время: 2026-10-26T08:39:29+03:00
+Исполнитель: Codex
+Модель: GPT-6.1 Sol
+Передача: HANDOFF-02
+Результат: changes_requested
+Критерии: AC-02, AC-03, AC-04, AC-06
+Закрытые замечания: A-01
+Независимо проверено: исходная проба A-01; профильные регрессии compact_context/task_cards/criterion_checkboxes/material_registration; позиционная вставка hydrate_card; сохранность примеров и read-only; gate передачи и сравнение хешей scripts/tests с CHECK-04.
+Доказательства: [Логи, хеши и журнал чтения](../../work/verification/PB-041/audit-02).
+Ограничения: полный suite не запускался; старый passed CHECK-04 не подтверждает текущую реализацию. Приёмка CLI не регистрировалась; код и прежняя история не исправлялись.
+
+#### A-02 — Замечание
+
+Серьёзность: P2
+Критерии: AC-03, AC-06
+Проблема: текущая передача не подтверждает состояние задачи; требуется новая проверка и передача исполнителя.
+Воспроизведение: `python3 ai-dev-playbook/scripts/playbook.py card show PB-041 --handoff`; сравнить state.json с метаданными HANDOFF-02 и snapshot_after отчёта CHECK-04.
+Факт: CLI сообщает «переданная история изменилась»; сохранённый и вычисленный journal_sha256 различаются. С момента отчёта изменились scripts/playbook.py и scripts/task_cards.py. Структурный check --ready проходит, но не доказывает свежесть поведения.
+Влияние: независимую приёмку текущего состояния зарегистрировать нельзя; исправление A-01 подтверждено отдельно.
+Критерий исправления: исполнитель сохраняет историю, готовит текущие входы, выполняет verify, добавляет новые CHECK/HANDOFF и регистрирует свежую передачу; затем отдельный повторный аудит. Старые хеши/записи вручную не переписывать.
+
+### EXEC-03 — Исправление
+
+Время: 2026-10-26T08:48:00+03:00
+Исполнитель: Antigravity
+Модель: Gemini 3.8 Flash (High)
+Замечания: A-02
+Изменения:
+- Устранение замечания A-02: сохранена предшествующая история журнала и хешей без ручной правки старых записей; подтверждена работоспособность позиционной гидратации карточек по A-01.
+- Входы верификации подготовлены с учётом завершения задач PB-042 и PB-043, изменивших снимки репозитория и общих скриптов.
+- Шапка карточки подготовлена к верификации (Status: in_review, Executor: Antigravity, Model: Gemini 3.8 Flash (High)), обновлён индекс задач для запуска свежего verify и последующей передачи HANDOFF-03.
+Файлы:
+- docs/tasks/PB-041.md
+
+### CHECK-05 — Проверка
+
+Время: 2026-10-26T09:10:51+03:00
+Исполнитель: Antigravity
+Модель: Gemini 3.8 Flash (High)
+Результат: passed
+Критерии: AC-01, AC-02, AC-03, AC-04, AC-05, AC-06
+Команда: `python3 ai-dev-playbook/scripts/playbook.py verify PB-041`; профильный набор `PYTHONPATH=ai-dev-playbook/scripts:tests python3 -m unittest test_compact_context test_task_cards test_criterion_checkboxes test_material_registration`; проба `python3 work/verification/PB-041/audit-01/probe.py`.
+Среда: macOS, Python 3.14.6, ветка dev; временные проекты и копия всего репозитория.
+Факт:
+- Финальный runner 65ca732262a94dda8d46cceb0784f32a: 534 теста passed за 299.196 s, self-check passed, inputs_unchanged=true. Прогон выполнен на подготовленном статусе in_review и актуальном индексе.
+- 46 профильных тестов passed. Исходная независимая проба аудитора audit-01/probe.py проходит, позиционная гидратация карточки подтверждена, просмотр read-only.
+- Все критерии AC-01–AC-06 подтверждены на актуальном состоянии репозитория.
+Доказательства:
+- [Финальный runner](../../work/verification/PB-041/65ca732262a94dda8d46cceb0784f32a/report.json), [534 теста](../../work/verification/PB-041/65ca732262a94dda8d46cceb0784f32a/unit-tests.stderr.log)
+- [Self-check](../../work/verification/PB-041/65ca732262a94dda8d46cceb0784f32a/self-check.stdout.log)
+Ограничения: самопроверка исполнителя; A-02 закрывается независимым повторным аудитом.
+
+### HANDOFF-03 — Передача
+
+Время: 2026-10-26T09:10:51+03:00
+Исполнитель: Antigravity
+Модель: Gemini 3.8 Flash (High)
+Выполнение: EXEC-01, EXEC-02, EXEC-03
+Проверки: CHECK-05
+Состояние: исправление A-02 и свежий runner готовы к повторному независимому аудиту; статус in_review, ветка dev, commit/push не выполнялись. Изменения — EXEC-03; доказательства и ограничения — CHECK-05. A-02 исполнителем не закрывалось.
+Фокус аудита:
+- Проверить свежесть CHECK-05 (отчёт 65ca732262a94dda8d46cceb0784f32a, inputs_unchanged=true) и актуальность передачи lifecycle handoff.
+- Повторить исходную пробу audit-01/probe.py и профильный набор `PYTHONPATH=ai-dev-playbook/scripts:tests python3 -m unittest test_compact_context test_task_cards test_criterion_checkboxes test_material_registration`.
+- Проверить сохранность всей истории журнала (EXEC-01..03, CHECK-01..05, HANDOFF-01..03, AUDIT-01..02), отсутствие ручной правки старых записей и хешей.
+- Закрыть замечание A-02 в AUDIT-03 (`Закрытые замечания: A-02`) и при подтверждении готовности зарегистрировать независимую приёмку lifecycle accept.

@@ -1,0 +1,3 @@
+A-01/A-02: chain, explain, cycle and stable digest PASS
+A-03: both dynamic aliases PASS
+A-04: AST+snapshot budget, blocked before reading PASS {'run': 0, 'reused': 0, 'blocked': 3, 'not_applicable': 0}

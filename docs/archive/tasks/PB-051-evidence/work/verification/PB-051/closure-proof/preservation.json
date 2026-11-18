@@ -1,0 +1,10 @@
+{
+  "historical_files": 58,
+  "all_hashes_preserved": true,
+  "source_verify_fresh": true,
+  "snapshot_move": {
+    "from": "work/verification/PB-051/audit-20261027/card-original.md",
+    "to": "work/verification/PB-051/audit-20261027/card-original.txt",
+    "sha256": "5e5131b8405a2ac2d457c7ed9707e09e2bdd816c644d9713d3f59f80dcfb9403"
+  }
+}

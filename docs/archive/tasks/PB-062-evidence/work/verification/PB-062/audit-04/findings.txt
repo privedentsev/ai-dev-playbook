@@ -1,0 +1,15 @@
+AUDIT-04 PB-062 / Codex GPT-6
+273 related checks tests PASS (21.423s).
+Actual verifier passed then failed with same timestamp and same candidate:
+before aggregate ok=false, after aggregate of old passed ok=false.
+Only OS-boundary probe mocked; original runs/results/receipts authentic.
+CHECK-04 and verify-ddec203142ea47bf8b2c62ceaeb4c45e hashes match;
+card projection and EXEC-04 hash match; report passed/inputs_unchanged.
+Pre-audit audit-ready exit=1 due earlier open findings A-03/A-05.
+Both findings closed by AUDIT-04; no new findings.
+Full suite not independently repeated. Protected deployment not asserted.
+
+Final: lifecycle accept accepted/acceptance registered for AUDIT-04;
+index current; check --ready PASS; verify --audit-ready PASS
+(including preflight portability); close --dry-run PASS; git diff --check PASS.
+No actual close, commit, push or release performed.

@@ -1,0 +1,9 @@
+PB-059 AUDIT-03: accepted. A-01..A-06 closed.
+173 checks tests passed; independent probes passed.
+After AUDIT-03 and card sync: audit-ready exit 0, fresh handoff/checks confirmed.
+index: already current. check --ready: exit 0 (81 cards, 26 documents, 2 legacy).
+lifecycle accept --result accepted --kind acceptance --role auditor: exit 0.
+card show --json: acceptance_state=current, handoff_state=current, open_findings=[], AC-01..AC-04 passed.
+close PB-059 --dry-run: exit 0; staged archive and material/link migration checked. No close applied.
+Actual close requires engineer command per rules/task-card-format.md.
+No implementation changes or Git operations performed.

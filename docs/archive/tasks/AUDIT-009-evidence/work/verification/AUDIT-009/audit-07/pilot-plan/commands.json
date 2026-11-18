@@ -1,0 +1,172 @@
+[
+  {
+    "label": "00-optin-setup-preview",
+    "argv": [
+      "setup",
+      "preview"
+    ],
+    "returncode": 0,
+    "expected": 0,
+    "seconds": 2.349
+  },
+  {
+    "label": "01-optin-setup-apply",
+    "argv": [
+      "setup",
+      "apply"
+    ],
+    "returncode": 0,
+    "expected": 0,
+    "seconds": 0.626
+  },
+  {
+    "label": "02-optin-initial-plan",
+    "argv": [
+      "checks",
+      "plan",
+      "PILOT-01"
+    ],
+    "returncode": 0,
+    "expected": 0,
+    "seconds": 4.863
+  },
+  {
+    "label": "prot-01-apply",
+    "argv": [
+      "setup",
+      "apply"
+    ],
+    "returncode": 0,
+    "expected": 0,
+    "seconds": 0.723
+  },
+  {
+    "label": "prot-02-init-test",
+    "argv": [
+      "verifier",
+      "init",
+      "--home",
+      "/private/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/pb073-self-pilot-7_s_as3g/verifier_home_test_kind",
+      "--project-id",
+      "ai-dev-playbook"
+    ],
+    "returncode": 0,
+    "expected": 0,
+    "seconds": 0.483
+  },
+  {
+    "label": "prot-03-approve-test",
+    "argv": [
+      "verifier",
+      "approve",
+      "--home",
+      "/private/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/pb073-self-pilot-7_s_as3g/verifier_home_test_kind"
+    ],
+    "returncode": 0,
+    "expected": 0,
+    "seconds": 0.512
+  },
+  {
+    "label": "prot-04-reject-kind-test",
+    "argv": [
+      "verifier",
+      "run",
+      "--home",
+      "/private/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/pb073-self-pilot-7_s_as3g/verifier_home_test_kind",
+      "--scope",
+      "project"
+    ],
+    "returncode": 1,
+    "expected": 1,
+    "seconds": 0.475
+  },
+  {
+    "label": "prot-05-init-cmd",
+    "argv": [
+      "verifier",
+      "init",
+      "--home",
+      "/private/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/pb073-self-pilot-7_s_as3g/verifier_home_cmd",
+      "--project-id",
+      "ai-dev-playbook"
+    ],
+    "returncode": 0,
+    "expected": 0,
+    "seconds": 0.457
+  },
+  {
+    "label": "prot-06-approve-cmd",
+    "argv": [
+      "verifier",
+      "approve",
+      "--home",
+      "/private/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/pb073-self-pilot-7_s_as3g/verifier_home_cmd"
+    ],
+    "returncode": 0,
+    "expected": 0,
+    "seconds": 0.484
+  },
+  {
+    "label": "prot-07-probe",
+    "argv": [
+      "verifier",
+      "probe",
+      "--home",
+      "/private/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/pb073-self-pilot-7_s_as3g/verifier_home_cmd"
+    ],
+    "returncode": 0,
+    "expected": 0,
+    "seconds": 0.489
+  },
+  {
+    "label": "prot-08-verifier-run",
+    "argv": [
+      "verifier",
+      "run",
+      "--home",
+      "/private/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/pb073-self-pilot-7_s_as3g/verifier_home_cmd",
+      "--scope",
+      "project"
+    ],
+    "returncode": 0,
+    "expected": 0,
+    "seconds": 12.28
+  },
+  {
+    "label": "prot-09-verifier-verify",
+    "argv": [
+      "verifier",
+      "verify",
+      "--home",
+      "/private/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/pb073-self-pilot-7_s_as3g/verifier_home_cmd",
+      "--receipt",
+      "/private/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/pb073-self-pilot-7_s_as3g/verifier_home_cmd/receipts/rc-d8d75ae116bf4c12.json"
+    ],
+    "returncode": 0,
+    "expected": 0,
+    "seconds": 0.467
+  },
+  {
+    "label": "prot-10-verifier-gate",
+    "argv": [
+      "verifier",
+      "gate",
+      "--home",
+      "/private/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/pb073-self-pilot-7_s_as3g/verifier_home_cmd"
+    ],
+    "returncode": 0,
+    "expected": 0,
+    "seconds": 1.802
+  },
+  {
+    "label": "prot-11-release-ready-blocked",
+    "argv": [
+      "checks",
+      "release-ready",
+      "PILOT-01"
+    ],
+    "returncode": 1,
+    "expected": 1,
+    "seconds": 6.231
+  }
+]

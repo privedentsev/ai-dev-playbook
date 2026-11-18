@@ -1,0 +1,372 @@
+{
+  "schema_version": 1,
+  "card_format_version": 2,
+  "relations": [
+    {
+      "relation": "based_on",
+      "target": "spec:dependency-aware-verification"
+    },
+    {
+      "relation": "based_on",
+      "target": "design:dependency-aware-verification"
+    },
+    {
+      "relation": "based_on",
+      "target": "plan:dependency-aware-verification"
+    }
+  ],
+  "materials": [
+    {
+      "id": "commands",
+      "role": "other",
+      "source": "docs/archive/tasks/PB-060-evidence/commands.md",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-060"
+      ]
+    },
+    {
+      "id": "verify-070dadde",
+      "role": "report",
+      "source": "docs/archive/tasks/PB-060-evidence/manual-reports/070dadde-report.json",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-060"
+      ]
+    },
+    {
+      "id": "verify-070daddef15143dcbfa2d1c5415df265",
+      "role": "report",
+      "source": "docs/archive/tasks/PB-060-evidence/work/verification/PB-060/070daddef15143dcbfa2d1c5415df265",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-060"
+      ]
+    },
+    {
+      "id": "verify-de89c6750de24714b6ba404412fe1e5a",
+      "role": "report",
+      "source": "docs/archive/tasks/PB-060-evidence/work/verification/PB-060/de89c6750de24714b6ba404412fe1e5a",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-060"
+      ]
+    },
+    {
+      "id": "verify-ef39a246c3a9422eb40ef86264b62162",
+      "role": "report",
+      "source": "docs/archive/tasks/PB-060-evidence/work/verification/PB-060/ef39a246c3a9422eb40ef86264b62162",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-060"
+      ]
+    },
+    {
+      "id": "audit-01",
+      "role": "report",
+      "source": "docs/archive/tasks/PB-060-evidence/work/verification/PB-060/audit-01",
+      "storage": "local",
+      "immutable": true,
+      "required": true,
+      "used_by": [
+        "PB-060"
+      ]
+    },
+    {
+      "id": "verify-9b07349d893b496d8f5cbf25cf6a9275",
+      "role": "report",
+      "source": "docs/archive/tasks/PB-060-evidence/work/verification/PB-060/9b07349d893b496d8f5cbf25cf6a9275",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-060"
+      ]
+    },
+    {
+      "id": "audit-02",
+      "role": "report",
+      "source": "docs/archive/tasks/PB-060-evidence/work/verification/PB-060/audit-02",
+      "storage": "local",
+      "immutable": true,
+      "required": true,
+      "used_by": [
+        "PB-060"
+      ]
+    },
+    {
+      "id": "verify-e34ae30fb60f48b9935b69f4606654c3",
+      "role": "report",
+      "source": "docs/archive/tasks/PB-060-evidence/work/verification/PB-060/e34ae30fb60f48b9935b69f4606654c3",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-060"
+      ]
+    },
+    {
+      "id": "audit-03",
+      "role": "report",
+      "source": "docs/archive/tasks/PB-060-evidence/work/verification/PB-060/audit-03",
+      "storage": "local",
+      "immutable": true,
+      "required": true,
+      "used_by": [
+        "PB-060"
+      ]
+    },
+    {
+      "id": "verify-26da595e36ab4cae88c23e0dda85c67a",
+      "role": "report",
+      "source": "docs/archive/tasks/PB-060-evidence/work/verification/PB-060/26da595e36ab4cae88c23e0dda85c67a",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-060"
+      ]
+    },
+    {
+      "id": "audit-04",
+      "role": "report",
+      "source": "docs/archive/tasks/PB-060-evidence/work/verification/PB-060/audit-04",
+      "storage": "local",
+      "immutable": true,
+      "required": true,
+      "used_by": [
+        "PB-060"
+      ]
+    },
+    {
+      "id": "verify-2178c13bab1141c98a0c5f45c40b1cbc",
+      "role": "report",
+      "source": "docs/archive/tasks/PB-060-evidence/work/verification/PB-060/2178c13bab1141c98a0c5f45c40b1cbc",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-060"
+      ]
+    },
+    {
+      "id": "audit-05",
+      "role": "report",
+      "source": "docs/archive/tasks/PB-060-evidence/work/verification/PB-060/audit-05",
+      "storage": "local",
+      "immutable": true,
+      "required": true,
+      "used_by": [
+        "PB-060"
+      ]
+    },
+    {
+      "id": "relocate-lc-e7298caefc6fd7fa",
+      "role": "report",
+      "source": "docs/archive/tasks/PB-060-evidence/relocate-lc-e7298caefc6fd7fa.json",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": []
+    },
+    {
+      "id": "audit-06",
+      "role": "report",
+      "source": "docs/archive/tasks/PB-060-evidence/work/verification/PB-060/audit-06",
+      "storage": "local",
+      "immutable": true,
+      "required": true,
+      "used_by": [
+        "PB-060"
+      ]
+    },
+    {
+      "id": "verify-1d76a6da3b8341c49b3daa6471fae8a7",
+      "role": "report",
+      "source": "docs/archive/tasks/PB-060-evidence/work/verification/PB-060/1d76a6da3b8341c49b3daa6471fae8a7",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-060"
+      ]
+    },
+    {
+      "id": "lifecycle-lc-12331746d3a3faa4",
+      "role": "report",
+      "source": "docs/archive/tasks/PB-060-evidence/close-lc-12331746d3a3faa4.json",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": []
+    }
+  ],
+  "handoff": {
+    "at": "2026-11-10T16:42:29+03:00",
+    "actor": {
+      "name": "Codex",
+      "model": "GPT-6.1 Sol (Medium)"
+    },
+    "summary": "HANDOFF-06",
+    "reports": [
+      "verify-1d76a6da3b8341c49b3daa6471fae8a7",
+      "verify-2178c13bab1141c98a0c5f45c40b1cbc"
+    ],
+    "card_projection": "sha256:324414234948a63e7305ecccf15b91c11be78b0d33e9bbc5e2a76c9967006e26",
+    "entry_id": "HANDOFF-06",
+    "journal_sha256": "sha256:b859731664b49429ef9d680047ff57cbb8f3dffbb38e9e62331c9f7230fe9bd9"
+  },
+  "criterion_evidence": {
+    "CHECK-01": {
+      "check_sha256": "sha256:0bbbe4d18e506be092aff4dda7f970e4552be79a13a09fd5c89a122d9a06586d",
+      "card_projection": "sha256:324414234948a63e7305ecccf15b91c11be78b0d33e9bbc5e2a76c9967006e26",
+      "report_id": "verify-ef39a246c3a9422eb40ef86264b62162",
+      "report_sha256": "sha256:23978aaf40f6a6d50ee6678e6131d54149aaa8dd08040bcba8e8fc448af6445b"
+    },
+    "CHECK-02": {
+      "check_sha256": "sha256:7296bafa38e29ab9a736da83b7852bd422bda7c5bdd504101f65b43c7c4e75e1",
+      "card_projection": "sha256:324414234948a63e7305ecccf15b91c11be78b0d33e9bbc5e2a76c9967006e26",
+      "report_id": "verify-9b07349d893b496d8f5cbf25cf6a9275",
+      "report_sha256": "sha256:df1c09de91a48b90c0927ab743630e45bbfbeba87cbbf5d2a65be7645e540760"
+    },
+    "CHECK-03": {
+      "check_sha256": "sha256:6e753f5ca62237512da8ea858109bfc667ba9994d73a35db9f76f096a3d27285",
+      "card_projection": "sha256:324414234948a63e7305ecccf15b91c11be78b0d33e9bbc5e2a76c9967006e26",
+      "report_id": "verify-e34ae30fb60f48b9935b69f4606654c3",
+      "report_sha256": "sha256:db83b04263a3698406e7c47a7807983bd478d0f69465de9da1a61ab1a5f5b8d8"
+    },
+    "CHECK-04": {
+      "check_sha256": "sha256:6e27370e59713955d0bce6ac2739b21be9fa2a666a9ee39cf73142e0cdca62e7",
+      "card_projection": "sha256:324414234948a63e7305ecccf15b91c11be78b0d33e9bbc5e2a76c9967006e26",
+      "report_id": "verify-26da595e36ab4cae88c23e0dda85c67a",
+      "report_sha256": "sha256:56f4592c7b907f6d11af8a91212f8ec826430bf805c77b0a2fba675f94bddb3c"
+    },
+    "CHECK-05": {
+      "check_sha256": "sha256:0d6a5582a6b06b22f5be8f58508e2e4872f49e478e35877e0d806ef34fa15948",
+      "card_projection": "sha256:324414234948a63e7305ecccf15b91c11be78b0d33e9bbc5e2a76c9967006e26",
+      "report_id": "verify-2178c13bab1141c98a0c5f45c40b1cbc",
+      "report_sha256": "sha256:93dcfa7e5e158d800455952898311944e97ee9b73b694064472f67c19cf5126d"
+    },
+    "CHECK-06": {
+      "check_sha256": "sha256:35b24cf130df673c4975ca4c431d20e2ff3d916bd670615aa43bdb72153a4740",
+      "card_projection": "sha256:324414234948a63e7305ecccf15b91c11be78b0d33e9bbc5e2a76c9967006e26",
+      "report_id": "verify-1d76a6da3b8341c49b3daa6471fae8a7",
+      "report_sha256": "sha256:1b767b81ca5880765aad3b3a6e36714bd0f27e5008b75c7798c740dd454895d3"
+    }
+  },
+  "audit_packages": {
+    "audit-01": "sha256:84f865959dbc3b775675959db119e1cbb9a08e0f1b14823d73c459da7ea096a9",
+    "audit-02": "sha256:d7547df143ff3242d272ac29fa90b51cc95e4840d369ec6c9fc12cd61d48ded0",
+    "audit-03": "sha256:4929d79ff90d4b28aeae4a92a723fb751aae796c43d81537d74594b6c8c37ea8",
+    "audit-04": "sha256:d61da4951d552e6501342578f02f79015c83231005233e5a972ebd27bda63550",
+    "audit-05": "sha256:0b61c0434d665bd2556bd8259f51a9e1ab8b8a2272b4794c807ab71309dcf8f6",
+    "audit-06": "sha256:ce94f1f2c947e7d5cf44a7c15ad1be95f68b1cee4103bc167a39f5b2a88b5b59"
+  },
+  "acceptance": {
+    "at": "2026-11-10T16:47:12+03:00",
+    "actor": {
+      "name": "Codex",
+      "model": "GPT-6.1 Sol (Medium)"
+    },
+    "role": "auditor",
+    "kind": "acceptance",
+    "result": "accepted",
+    "handoff_at": "2026-11-10T16:42:29+03:00",
+    "session": null,
+    "detail": null,
+    "audit_id": "AUDIT-06",
+    "audit_sha256": "sha256:e7c86d8f26442db21fe39039b736796debc628a61ac84723188c5564223ff12b"
+  },
+  "moves": [
+    {
+      "from": "docs/tasks/PB-060-evidence/work/verification/PB-060/070daddef15143dcbfa2d1c5415df265/report.json",
+      "to": "docs/tasks/PB-060-evidence/manual-reports/070dadde-report.json"
+    },
+    {
+      "from": "docs/tasks/PB-060-evidence/commands.md",
+      "to": "docs/archive/tasks/PB-060-evidence/commands.md"
+    },
+    {
+      "from": "docs/tasks/PB-060-evidence/manual-reports/070dadde-report.json",
+      "to": "docs/archive/tasks/PB-060-evidence/manual-reports/070dadde-report.json"
+    },
+    {
+      "from": "work/verification/PB-060/070daddef15143dcbfa2d1c5415df265",
+      "to": "docs/archive/tasks/PB-060-evidence/work/verification/PB-060/070daddef15143dcbfa2d1c5415df265"
+    },
+    {
+      "from": "work/verification/PB-060/de89c6750de24714b6ba404412fe1e5a",
+      "to": "docs/archive/tasks/PB-060-evidence/work/verification/PB-060/de89c6750de24714b6ba404412fe1e5a"
+    },
+    {
+      "from": "work/verification/PB-060/ef39a246c3a9422eb40ef86264b62162",
+      "to": "docs/archive/tasks/PB-060-evidence/work/verification/PB-060/ef39a246c3a9422eb40ef86264b62162"
+    },
+    {
+      "from": "work/verification/PB-060/audit-01",
+      "to": "docs/archive/tasks/PB-060-evidence/work/verification/PB-060/audit-01"
+    },
+    {
+      "from": "work/verification/PB-060/9b07349d893b496d8f5cbf25cf6a9275",
+      "to": "docs/archive/tasks/PB-060-evidence/work/verification/PB-060/9b07349d893b496d8f5cbf25cf6a9275"
+    },
+    {
+      "from": "work/verification/PB-060/audit-02",
+      "to": "docs/archive/tasks/PB-060-evidence/work/verification/PB-060/audit-02"
+    },
+    {
+      "from": "work/verification/PB-060/e34ae30fb60f48b9935b69f4606654c3",
+      "to": "docs/archive/tasks/PB-060-evidence/work/verification/PB-060/e34ae30fb60f48b9935b69f4606654c3"
+    },
+    {
+      "from": "work/verification/PB-060/audit-03",
+      "to": "docs/archive/tasks/PB-060-evidence/work/verification/PB-060/audit-03"
+    },
+    {
+      "from": "work/verification/PB-060/26da595e36ab4cae88c23e0dda85c67a",
+      "to": "docs/archive/tasks/PB-060-evidence/work/verification/PB-060/26da595e36ab4cae88c23e0dda85c67a"
+    },
+    {
+      "from": "work/verification/PB-060/audit-04",
+      "to": "docs/archive/tasks/PB-060-evidence/work/verification/PB-060/audit-04"
+    },
+    {
+      "from": "work/verification/PB-060/2178c13bab1141c98a0c5f45c40b1cbc",
+      "to": "docs/archive/tasks/PB-060-evidence/work/verification/PB-060/2178c13bab1141c98a0c5f45c40b1cbc"
+    },
+    {
+      "from": "work/verification/PB-060/audit-05",
+      "to": "docs/archive/tasks/PB-060-evidence/work/verification/PB-060/audit-05"
+    },
+    {
+      "from": "docs/tasks/PB-060-evidence/relocate-lc-e7298caefc6fd7fa.json",
+      "to": "docs/archive/tasks/PB-060-evidence/relocate-lc-e7298caefc6fd7fa.json"
+    },
+    {
+      "from": "work/verification/PB-060/audit-06",
+      "to": "docs/archive/tasks/PB-060-evidence/work/verification/PB-060/audit-06"
+    },
+    {
+      "from": "work/verification/PB-060/1d76a6da3b8341c49b3daa6471fae8a7",
+      "to": "docs/archive/tasks/PB-060-evidence/work/verification/PB-060/1d76a6da3b8341c49b3daa6471fae8a7"
+    },
+    {
+      "from": "docs/tasks/PB-060.md",
+      "to": "docs/archive/tasks/PB-060.md"
+    },
+    {
+      "from": "docs/tasks/PB-060.meta.json",
+      "to": "docs/archive/tasks/PB-060.meta.json"
+    }
+  ]
+}

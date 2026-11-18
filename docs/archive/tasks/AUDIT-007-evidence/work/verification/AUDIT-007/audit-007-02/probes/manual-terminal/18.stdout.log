@@ -1,0 +1,350 @@
+План lc-cff70ef0682d6cab (lifecycle):
+Основание: playbook.py close DEV-1
+Исполнитель: cli:privedentsev1 (cli)
+Действия:
+  close_task DEV-1: docs/tasks/DEV-1.md → docs/archive/tasks/DEV-1.md (done)
+Переносы:
+  docs/tasks/DEV-1-evidence/baseline.json → docs/archive/tasks/DEV-1-evidence/baseline.json
+  docs/tasks/DEV-1.md → docs/archive/tasks/DEV-1.md
+  work/verification/DEV-1/126d143db73d42a19fec1bb86650a6bd → docs/archive/tasks/DEV-1-evidence/work/verification/DEV-1/126d143db73d42a19fec1bb86650a6bd
+  work/verification/DEV-1/126d143db73d42a19fec1bb86650a6bd/report.json → docs/archive/tasks/DEV-1-evidence/work/verification/DEV-1/126d143db73d42a19fec1bb86650a6bd/report.json
+  work/verification/DEV-1/17418082097c4b6883d90f24d89f3309 → docs/archive/tasks/DEV-1-evidence/work/verification/DEV-1/17418082097c4b6883d90f24d89f3309
+  work/verification/DEV-1/17418082097c4b6883d90f24d89f3309/report.json → docs/archive/tasks/DEV-1-evidence/work/verification/DEV-1/17418082097c4b6883d90f24d89f3309/report.json
+  work/verification/DEV-1/2e24a21de2524aaa8f69074b99c65632 → docs/archive/tasks/DEV-1-evidence/work/verification/DEV-1/2e24a21de2524aaa8f69074b99c65632
+  work/verification/DEV-1/2e24a21de2524aaa8f69074b99c65632/report.json → docs/archive/tasks/DEV-1-evidence/work/verification/DEV-1/2e24a21de2524aaa8f69074b99c65632/report.json
+  work/verification/DEV-1/6cb9daa3d8b14fba850c00758844ef89 → docs/archive/tasks/DEV-1-evidence/work/verification/DEV-1/6cb9daa3d8b14fba850c00758844ef89
+  work/verification/DEV-1/6cb9daa3d8b14fba850c00758844ef89/report.json → docs/archive/tasks/DEV-1-evidence/work/verification/DEV-1/6cb9daa3d8b14fba850c00758844ef89/report.json
+  work/verification/DEV-1/7bf8335665c748d2bc6e4654effac93a → docs/archive/tasks/DEV-1-evidence/work/verification/DEV-1/7bf8335665c748d2bc6e4654effac93a
+  work/verification/DEV-1/7bf8335665c748d2bc6e4654effac93a/report.json → docs/archive/tasks/DEV-1-evidence/work/verification/DEV-1/7bf8335665c748d2bc6e4654effac93a/report.json
+  work/verification/DEV-1/7eeca6d1c7b145b0b60f7caec0e46f71 → docs/archive/tasks/DEV-1-evidence/work/verification/DEV-1/7eeca6d1c7b145b0b60f7caec0e46f71
+  work/verification/DEV-1/7eeca6d1c7b145b0b60f7caec0e46f71/report.json → docs/archive/tasks/DEV-1-evidence/work/verification/DEV-1/7eeca6d1c7b145b0b60f7caec0e46f71/report.json
+  work/verification/DEV-1/ad0721918d074e0c812f689866231aea → docs/archive/tasks/DEV-1-evidence/work/verification/DEV-1/ad0721918d074e0c812f689866231aea
+  work/verification/DEV-1/ad0721918d074e0c812f689866231aea/report.json → docs/archive/tasks/DEV-1-evidence/work/verification/DEV-1/ad0721918d074e0c812f689866231aea/report.json
+  work/verification/DEV-1/f5e82aafb97c4747b69600511ce16b28 → docs/archive/tasks/DEV-1-evidence/work/verification/DEV-1/f5e82aafb97c4747b69600511ce16b28
+  work/verification/DEV-1/f5e82aafb97c4747b69600511ce16b28/report.json → docs/archive/tasks/DEV-1-evidence/work/verification/DEV-1/f5e82aafb97c4747b69600511ce16b28/report.json
+  work/verification/DEV-1/f6433102e3ce481582ba8cddef6ae44b → docs/archive/tasks/DEV-1-evidence/work/verification/DEV-1/f6433102e3ce481582ba8cddef6ae44b
+  work/verification/DEV-1/f6433102e3ce481582ba8cddef6ae44b/report.json → docs/archive/tasks/DEV-1-evidence/work/verification/DEV-1/f6433102e3ce481582ba8cddef6ae44b/report.json
+Удаляются каталоги:
+  docs/tasks/DEV-1-evidence
+  work/verification/DEV-1/126d143db73d42a19fec1bb86650a6bd
+  work/verification/DEV-1/17418082097c4b6883d90f24d89f3309
+  work/verification/DEV-1/2e24a21de2524aaa8f69074b99c65632
+  work/verification/DEV-1/6cb9daa3d8b14fba850c00758844ef89
+  work/verification/DEV-1/7bf8335665c748d2bc6e4654effac93a
+  work/verification/DEV-1/7eeca6d1c7b145b0b60f7caec0e46f71
+  work/verification/DEV-1/ad0721918d074e0c812f689866231aea
+  work/verification/DEV-1/f5e82aafb97c4747b69600511ce16b28
+  work/verification/DEV-1/f6433102e3ce481582ba8cddef6ae44b
+Записей: 13, удалений файлов: 11
+Diff записей (.md):
+  docs/archive/tasks/DEV-1-evidence/baseline.json: prepared stream sha256:7b96c4ade9507f6cd7dd7aa331b673a20a09ee35f748f3657db270c5a8008b2e
+  docs/archive/tasks/DEV-1-evidence/work/verification/DEV-1/126d143db73d42a19fec1bb86650a6bd/report.json: prepared stream sha256:1f57d7299206fb188040f06ed7130b93cbe527b46454173257eec7456104d844
+  docs/archive/tasks/DEV-1-evidence/work/verification/DEV-1/17418082097c4b6883d90f24d89f3309/report.json: prepared stream sha256:24fd99f28d18dcfce0eebba1bd6b2c184fd11de37399c7c9c8cf17de1d31bef7
+  docs/archive/tasks/DEV-1-evidence/work/verification/DEV-1/2e24a21de2524aaa8f69074b99c65632/report.json: prepared stream sha256:784938004eb32747a7bee067faa5422d7d2d36f18286f7a812906ee4cec3ef98
+  docs/archive/tasks/DEV-1-evidence/work/verification/DEV-1/6cb9daa3d8b14fba850c00758844ef89/report.json: prepared stream sha256:616bd5f1d34f19ceced1465fd8ed048ea92a8002c00a8e345ac872e59366af1d
+  docs/archive/tasks/DEV-1-evidence/work/verification/DEV-1/7bf8335665c748d2bc6e4654effac93a/report.json: prepared stream sha256:e4ad14f6c69b6d782513c8576329a1b07545cb0d36f1f251dd62e53e45201f1d
+  docs/archive/tasks/DEV-1-evidence/work/verification/DEV-1/7eeca6d1c7b145b0b60f7caec0e46f71/report.json: prepared stream sha256:49e4a7bd6f9ffe6c95d6b18c7045d93cb78b5cabc32276cafea743ce149ea856
+  docs/archive/tasks/DEV-1-evidence/work/verification/DEV-1/ad0721918d074e0c812f689866231aea/report.json: prepared stream sha256:8b27422ae05a1af567d5baa650b8307752d2724b120546313e7ebc991f218fa7
+  docs/archive/tasks/DEV-1-evidence/work/verification/DEV-1/f5e82aafb97c4747b69600511ce16b28/report.json: prepared stream sha256:d6f7c9f1dbb1dab603c367a7d3e02ec8ab4a9c72edf848c12074ef5b951f9940
+  docs/archive/tasks/DEV-1-evidence/work/verification/DEV-1/f6433102e3ce481582ba8cddef6ae44b/report.json: prepared stream sha256:b09449915eeaa0d85efc9829dcaafcab001ca868f6a8842aabab12cf2db6c54b
+--- /dev/null
++++ b/docs/archive/tasks/DEV-1.md
+@@ -0,0 +1,281 @@
++# DEV-1: test
++
++ID: DEV-1
++Status: done
++Priority: P2
++Depends-On: -
++Executor: Fixture executor
++Model: Synthetic model
++Created: 2026-01-01T00:00:00Z
++Closed: 2026-11-06T18:02:37+03:00
++
++<!-- playbook-meta:start -->
++```json
++{
++  "schema_version": 2,
++  "workflow": {
++    "route": "quick",
++    "reason": "Local low risk fixture",
++    "history": [],
++    "baseline": {
++      "source": "docs/archive/tasks/DEV-1-evidence/baseline.json",
++      "sha256": "sha256:7b96c4ade9507f6cd7dd7aa331b673a20a09ee35f748f3657db270c5a8008b2e"
++    },
++    "transitions": [
++      {
++        "at": "2026-11-06T18:02:24+03:00",
++        "action": "start",
++        "reason": "Synthetic engineer instruction",
++        "actor": "Fixture executor"
++      }
++    ]
++  },
++  "verification_plan": {
++    "revision": 1,
++    "rationale": "Independent explicit files",
++    "scope": [
++      "src"
++    ],
++    "checks": [
++      {
++        "id": "a",
++        "kind": "manual",
++        "purpose": "Auditor probe a",
++        "registry_id": "a",
++        "inputs": [
++          "src/a.txt"
++        ]
++      }
++    ],
++    "decisions": []
++  },
++  "relations": [],
++  "materials": [
++    {
++      "id": "workflow-baseline",
++      "role": "report",
++      "source": "docs/archive/tasks/DEV-1-evidence/baseline.json",
++      "storage": "local",
++      "required": true,
++      "immutable": true,
++      "used_by": [
++        "DEV-1"
++      ]
++    },
++    {
++      "id": "verify-126d143db73d42a19fec1bb86650a6bd",
++      "role": "report",
++      "source": "docs/archive/tasks/DEV-1-evidence/work/verification/DEV-1/126d143db73d42a19fec1bb86650a6bd",
++      "storage": "local",
++      "required": true,
++      "immutable": true,
++      "used_by": [
++        "DEV-1"
++      ]
++    },
++    {
++      "id": "verify-17418082097c4b6883d90f24d89f3309",
++      "role": "report",
++      "source": "docs/archive/tasks/DEV-1-evidence/work/verification/DEV-1/17418082097c4b6883d90f24d89f3309",
++      "storage": "local",
++      "required": true,
++      "immutable": true,
++      "used_by": [
++        "DEV-1"
++      ]
++    },
++    {
++      "id": "verify-2e24a21de2524aaa8f69074b99c65632",
++      "role": "report",
++      "source": "docs/archive/tasks/DEV-1-evidence/work/verification/DEV-1/2e24a21de2524aaa8f69074b99c65632",
++      "storage": "local",
++      "required": true,
++      "immutable": true,
++      "used_by": [
++        "DEV-1"
++      ]
++    },
++    {
++      "id": "verify-6cb9daa3d8b14fba850c00758844ef89",
++      "role": "report",
++      "source": "docs/archive/tasks/DEV-1-evidence/work/verification/DEV-1/6cb9daa3d8b14fba850c00758844ef89",
++      "storage": "local",
++      "required": true,
++      "immutable": true,
++      "used_by": [
++        "DEV-1"
++      ]
++    },
++    {
++      "id": "verify-7bf8335665c748d2bc6e4654effac93a",
++      "role": "report",
++      "source": "docs/archive/tasks/DEV-1-evidence/work/verification/DEV-1/7bf8335665c748d2bc6e4654effac93a",
++      "storage": "local",
++      "required": true,
++      "immutable": true,
++      "used_by": [
++        "DEV-1"
++      ]
++    },
++    {
++      "id": "verify-7eeca6d1c7b145b0b60f7caec0e46f71",
++      "role": "report",
++      "source": "docs/archive/tasks/DEV-1-evidence/work/verification/DEV-1/7eeca6d1c7b145b0b60f7caec0e46f71",
++      "storage": "local",
++      "required": true,
++      "immutable": true,
++      "used_by": [
++        "DEV-1"
++      ]
++    },
++    {
++      "id": "verify-ad0721918d074e0c812f689866231aea",
++      "role": "report",
++      "source": "docs/archive/tasks/DEV-1-evidence/work/verification/DEV-1/ad0721918d074e0c812f689866231aea",
++      "storage": "local",
++      "required": true,
++      "immutable": true,
++      "used_by": [
++        "DEV-1"
++      ]
++    },
++    {
++      "id": "verify-f5e82aafb97c4747b69600511ce16b28",
++      "role": "report",
++      "source": "docs/archive/tasks/DEV-1-evidence/work/verification/DEV-1/f5e82aafb97c4747b69600511ce16b28",
++      "storage": "local",
++      "required": true,
++      "immutable": true,
++      "used_by": [
++        "DEV-1"
++      ]
++    },
++    {
++      "id": "verify-f6433102e3ce481582ba8cddef6ae44b",
++      "role": "report",
++      "source": "docs/archive/tasks/DEV-1-evidence/work/verification/DEV-1/f6433102e3ce481582ba8cddef6ae44b",
++      "storage": "local",
++      "required": true,
++      "immutable": true,
++      "used_by": [
++        "DEV-1"
++      ]
++    },
++    {
++      "id": "lifecycle-lc-cff70ef0682d6cab",
++      "role": "report",
++      "source": "docs/archive/tasks/DEV-1-evidence/close-lc-cff70ef0682d6cab.json",
++      "storage": "local",
++      "required": true,
++      "immutable": true,
++      "used_by": []
++    }
++  ],
++  "moves": [
++    {
++      "from": "docs/tasks/DEV-1-evidence/baseline.json",
++      "to": "docs/archive/tasks/DEV-1-evidence/baseline.json"
++    },
++    {
++      "from": "work/verification/DEV-1/126d143db73d42a19fec1bb86650a6bd",
++      "to": "docs/archive/tasks/DEV-1-evidence/work/verification/DEV-1/126d143db73d42a19fec1bb86650a6bd"
++    },
++    {
++      "from": "work/verification/DEV-1/17418082097c4b6883d90f24d89f3309",
++      "to": "docs/archive/tasks/DEV-1-evidence/work/verification/DEV-1/17418082097c4b6883d90f24d89f3309"
++    },
++    {
++      "from": "work/verification/DEV-1/2e24a21de2524aaa8f69074b99c65632",
++      "to": "docs/archive/tasks/DEV-1-evidence/work/verification/DEV-1/2e24a21de2524aaa8f69074b99c65632"
++    },
++    {
++      "from": "work/verification/DEV-1/6cb9daa3d8b14fba850c00758844ef89",
++      "to": "docs/archive/tasks/DEV-1-evidence/work/verification/DEV-1/6cb9daa3d8b14fba850c00758844ef89"
++    },
++    {
++      "from": "work/verification/DEV-1/7bf8335665c748d2bc6e4654effac93a",
++      "to": "docs/archive/tasks/DEV-1-evidence/work/verification/DEV-1/7bf8335665c748d2bc6e4654effac93a"
++    },
++    {
++      "from": "work/verification/DEV-1/7eeca6d1c7b145b0b60f7caec0e46f71",
++      "to": "docs/archive/tasks/DEV-1-evidence/work/verification/DEV-1/7eeca6d1c7b145b0b60f7caec0e46f71"
++    },
++    {
++      "from": "work/verification/DEV-1/ad0721918d074e0c812f689866231aea",
++      "to": "docs/archive/tasks/DEV-1-evidence/work/verification/DEV-1/ad0721918d074e0c812f689866231aea"
++    },
++    {
++      "from": "work/verification/DEV-1/f5e82aafb97c4747b69600511ce16b28",
++      "to": "docs/archive/tasks/DEV-1-evidence/work/verification/DEV-1/f5e82aafb97c4747b69600511ce16b28"
++    },
++    {
++      "from": "work/verification/DEV-1/f6433102e3ce481582ba8cddef6ae44b",
++      "to": "docs/archive/tasks/DEV-1-evidence/work/verification/DEV-1/f6433102e3ce481582ba8cddef6ae44b"
++    },
++    {
++      "from": "docs/tasks/DEV-1.md",
++      "to": "docs/archive/tasks/DEV-1.md"
++    }
++  ],
++  "handoff": {
++    "at": "2026-11-06T18:02:33+03:00",
++    "actor": {
++      "name": "Fixture executor",
++      "model": "Synthetic model"
++    },
++    "summary": "Auditor synthetic fixture",
++    "reports": [
++      "verify-126d143db73d42a19fec1bb86650a6bd",
++      "verify-17418082097c4b6883d90f24d89f3309",
++      "verify-2e24a21de2524aaa8f69074b99c65632",
++      "verify-6cb9daa3d8b14fba850c00758844ef89",
++      "verify-7bf8335665c748d2bc6e4654effac93a",
++      "verify-7eeca6d1c7b145b0b60f7caec0e46f71",
++      "verify-ad0721918d074e0c812f689866231aea",
++      "verify-f5e82aafb97c4747b69600511ce16b28",
++      "verify-f6433102e3ce481582ba8cddef6ae44b"
++    ],
++    "card_projection": "sha256:c2428775294751c0f9f5d09ee7bddb9111caec1a3cac6c333caaf90daa566a25",
++    "result_hash": "sha256:47399ed8949bddf52d1ec38407d7625b9f839127a91b03dfa90ce073b30280bf",
++    "coverage": {
++      "checks": {
++        "a": "passed"
++      },
++      "satisfied": true
++    },
++    "evidence_hashes": {
++      "verify-126d143db73d42a19fec1bb86650a6bd": "sha256:e7d5f4ab7813fca16c25cb301e7263ffb632558d85a2a1c45ed9328e568d466d",
++      "verify-17418082097c4b6883d90f24d89f3309": "sha256:1141ea1cff44f26ee3b22496ff042ec0e163bdd3465e948ca33fba109ac0018a",
++      "verify-2e24a21de2524aaa8f69074b99c65632": "sha256:7b1b2038beb3156f35b02586d4da04b731c3d89cda53268644b0e0834f276c22",
++      "verify-6cb9daa3d8b14fba850c00758844ef89": "sha256:a9a7c0b148d54598c65f4f103755132ab44d4348ba96c9edfafad6506734cb07",
++      "verify-7bf8335665c748d2bc6e4654effac93a": "sha256:cdaec2a850799de4dab7ba897ad75ab720c35f470d7c34ade9b9892def06ea32",
++      "verify-7eeca6d1c7b145b0b60f7caec0e46f71": "sha256:42c1dc3b399f29d7413c1cc292f0399d951c3e88b7a50062f529acd13f6b4ef6",
++      "verify-ad0721918d074e0c812f689866231aea": "sha256:cc7092f45132568ef3f3aa743e22f633eaae21fbea8161bcc1a883e920e60a11",
++      "verify-f5e82aafb97c4747b69600511ce16b28": "sha256:fc9103c2c7edc9783dde28595efd5b8b53a9c71f85276fe2471ef5741ab0aaa7",
++      "verify-f6433102e3ce481582ba8cddef6ae44b": "sha256:eebc2c77935244c9761013f45ba38acaf1e14920b895a787625fced23660dce8",
++      "workflow-baseline": "sha256:5bfcad619495f6dd380093e9a24f0d936d2efb527567f5a39a7ee3f59a86dc7f"
++    }
++  },
++  "acceptance": {
++    "at": "2026-11-06T18:02:35+03:00",
++    "actor": {
++      "name": "Fixture engineer",
++      "model": "Synthetic model"
++    },
++    "role": "engineer",
++    "kind": "acceptance",
++    "result": "accepted",
++    "handoff_at": "2026-11-06T18:02:33+03:00",
++    "session": null,
++    "detail": "Synthetic explicit final version acceptance",
++    "result_hash": "sha256:47399ed8949bddf52d1ec38407d7625b9f839127a91b03dfa90ce073b30280bf"
++  }
++}
++```
++<!-- playbook-meta:end -->
++
++## Цель и границы
++Проверить изолированный пример.
++
++## Приёмка
++- [ ] Актуальный результат принят.
+--- a/docs/tasks/index.md
++++ b/docs/tasks/index.md
+@@ -6,11 +6,11 @@
+ 
+ | ID | Задача | Статус | Приоритет | Исполнитель | Создана | Закрыта | Зависимости |
+ |---|---|---|---|---|---|---|---|
+-| DEV-1 | [DEV-1: test](DEV-1.md) | in_review | P2 | Fixture executor / Synthetic model | 2026-01-01 00:00 | — | — |
++
++Активных карточек пока нет.
+ 
+ ## Архив
+ 
+ | ID | Задача | Статус | Приоритет | Исполнитель | Создана | Закрыта | Зависимости |
+ |---|---|---|---|---|---|---|---|
+-
+-Архивных карточек пока нет.
++| DEV-1 | [DEV-1: test](../archive/tasks/DEV-1.md) | done | P2 | Fixture executor / Synthetic model | 2026-01-01 00:00 | 2026-11-06 18:02 | — |

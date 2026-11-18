@@ -1,0 +1,37 @@
+[
+  {
+    "command": "python3 -m unittest discover -s tests -p 'test_checks_*.py' -v",
+    "returncode": 0,
+    "tests": 316,
+    "seconds": 171.442,
+    "log": "checks-tests-unsandboxed.log",
+    "execution": "outside outer sandbox; no source lifecycle transaction running"
+  },
+  {
+    "command": "python3 docs/tasks/AUDIT-009-evidence/probe_cli_obligations.py .",
+    "returncode": 0,
+    "result": "counterexample confirmed; actual CLI failed -> not_applicable -> success; one attempt"
+  },
+  {
+    "command": "python3 docs/tasks/AUDIT-009-evidence/probe_failed_baseline.py .",
+    "returncode": 0,
+    "result": "counterexample confirmed with direct runner/gate"
+  },
+  {
+    "command": "python3 docs/tasks/AUDIT-009-evidence/probe_equal_timestamps.py .",
+    "returncode": 0,
+    "result": "counterexample confirmed; controlled equal clock and run IDs, real child processes"
+  },
+  {
+    "command": "python3 docs/archive/tasks/PB-064-evidence/self_pilot.py . /tmp/audit009-pilot-plan --plan-only",
+    "returncode": 1,
+    "log": "pilot-plan.log",
+    "result": "FileNotFoundError: copy_a_legacy/docs/tasks/PB-064.md"
+  },
+  {
+    "command": "python3 ai-dev-playbook/scripts/playbook.py verify AUDIT-009 --audit-ready",
+    "returncode": 1,
+    "result": "draft: requires active ready/in_progress/in_review; after starting audit: requires in_review; no handoff exists",
+    "test_execution": false
+  }
+]

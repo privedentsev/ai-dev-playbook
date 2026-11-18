@@ -1,0 +1,279 @@
+{
+  "fixture": "Real verifier subprocess commands and signed receipts; external flag changes command outcome without changing candidate. No file loss, no receipt edits, no mocks. Same-user trusted home: capability local.",
+  "runs": [
+    {
+      "receipt": {
+        "schema_version": 1,
+        "receipt_id": "rc-8c0061d349ca4068",
+        "project_id": "shop",
+        "candidate_digest": "sha256:76c0dbf3a27cd9da065306cfb9f693b36214f632736e1f686872bc9280ceeb0a",
+        "policy_digest": "sha256:96007c29d8c5c3bf006d8aa748c6ecafb60d1412afcfd59ede3f54045d6d2a24",
+        "policy_revision": 1,
+        "engine": {
+          "id": "playbook-verifier",
+          "version": "1"
+        },
+        "issuer": "verifier:k-17290006cf9348e8",
+        "issued_at": "2026-11-17T10:00:00+00:00",
+        "subject": {
+          "kind": "run",
+          "results": [
+            {
+              "check_id": "probe",
+              "result_digest": "sha256:a4ff38f6edb367db3dd9a2bfac6a7ff56c3f3a4c0a194f2915fac4dd4549837b",
+              "status": "passed"
+            }
+          ]
+        },
+        "signature": {
+          "algorithm": "hmac-sha256",
+          "key_id": "k-17290006cf9348e8",
+          "value": "1f145030109adce08ea8439b4f4e9677b60c3062d53a6964a8e5a3a023968053"
+        }
+      },
+      "receipt_verified": true,
+      "candidate_digest": "sha256:76c0dbf3a27cd9da065306cfb9f693b36214f632736e1f686872bc9280ceeb0a",
+      "results": [
+        {
+          "schema_version": 1,
+          "result_id": "fc62f0e796b64905bff6f736cf52e711-probe",
+          "project_id": "shop",
+          "check_id": "probe",
+          "kind": "command",
+          "binding": {
+            "policy_digest": "sha256:96007c29d8c5c3bf006d8aa748c6ecafb60d1412afcfd59ede3f54045d6d2a24",
+            "definition_digest": "sha256:1290dbb7b310834e8232d2da16bb1190edf117d43267e59108677bfab01338ae",
+            "adapter": {
+              "id": "argv-command",
+              "version": "1"
+            },
+            "runner": {
+              "id": "playbook-runner",
+              "version": "1"
+            },
+            "input_digest": "sha256:9bec8f45c0b66448089b8df0b0e12f85864e9761f1066434a4992fcaa6679129",
+            "dependency_closure_digest": "sha256:02c408068fb0d0a982749d0bf1d83240efe89d8c586ea1cef80026254840335b",
+            "environment": {
+              "platform": "darwin"
+            }
+          },
+          "status": "passed",
+          "started_at": "2026-11-17T10:00:00+00:00",
+          "finished_at": "2026-11-17T10:00:00+00:00",
+          "duration_seconds": 0.087,
+          "evidence": {
+            "stdout_log": "work/checks/runs/fc62f0e796b64905bff6f736cf52e711/probe.stdout.log",
+            "stderr_log": "work/checks/runs/fc62f0e796b64905bff6f736cf52e711/probe.stderr.log",
+            "run_id": "fc62f0e796b64905bff6f736cf52e711",
+            "run_seq": 0
+          },
+          "command": {
+            "exit_code": 0,
+            "stdout_log": "work/checks/runs/fc62f0e796b64905bff6f736cf52e711/probe.stdout.log",
+            "stderr_log": "work/checks/runs/fc62f0e796b64905bff6f736cf52e711/probe.stderr.log"
+          }
+        }
+      ]
+    },
+    {
+      "receipt": {
+        "schema_version": 1,
+        "receipt_id": "rc-b0d226e5eab8452d",
+        "project_id": "shop",
+        "candidate_digest": "sha256:76c0dbf3a27cd9da065306cfb9f693b36214f632736e1f686872bc9280ceeb0a",
+        "policy_digest": "sha256:96007c29d8c5c3bf006d8aa748c6ecafb60d1412afcfd59ede3f54045d6d2a24",
+        "policy_revision": 1,
+        "engine": {
+          "id": "playbook-verifier",
+          "version": "1"
+        },
+        "issuer": "verifier:k-17290006cf9348e8",
+        "issued_at": "2026-11-17T10:01:00+00:00",
+        "subject": {
+          "kind": "run",
+          "results": [
+            {
+              "check_id": "probe",
+              "result_digest": "sha256:66482fa8e9cd93903329121fa9d2c0639e047ea6583f6b1ae17926cb986b00b2",
+              "status": "failed"
+            }
+          ]
+        },
+        "signature": {
+          "algorithm": "hmac-sha256",
+          "key_id": "k-17290006cf9348e8",
+          "value": "edb87779e1a12f3cabe95d5c2b496cf529dc94f82809b43a51db768243eafd37"
+        }
+      },
+      "receipt_verified": true,
+      "candidate_digest": "sha256:76c0dbf3a27cd9da065306cfb9f693b36214f632736e1f686872bc9280ceeb0a",
+      "results": [
+        {
+          "schema_version": 1,
+          "result_id": "74e8167880764ab7b56ce8c3fe51133d-probe",
+          "project_id": "shop",
+          "check_id": "probe",
+          "kind": "command",
+          "binding": {
+            "policy_digest": "sha256:96007c29d8c5c3bf006d8aa748c6ecafb60d1412afcfd59ede3f54045d6d2a24",
+            "definition_digest": "sha256:1290dbb7b310834e8232d2da16bb1190edf117d43267e59108677bfab01338ae",
+            "adapter": {
+              "id": "argv-command",
+              "version": "1"
+            },
+            "runner": {
+              "id": "playbook-runner",
+              "version": "1"
+            },
+            "input_digest": "sha256:9bec8f45c0b66448089b8df0b0e12f85864e9761f1066434a4992fcaa6679129",
+            "dependency_closure_digest": "sha256:02c408068fb0d0a982749d0bf1d83240efe89d8c586ea1cef80026254840335b",
+            "environment": {
+              "platform": "darwin"
+            }
+          },
+          "status": "failed",
+          "started_at": "2026-11-17T10:01:00+00:00",
+          "finished_at": "2026-11-17T10:01:00+00:00",
+          "duration_seconds": 0.082,
+          "evidence": {
+            "stdout_log": "work/checks/runs/74e8167880764ab7b56ce8c3fe51133d/probe.stdout.log",
+            "stderr_log": "work/checks/runs/74e8167880764ab7b56ce8c3fe51133d/probe.stderr.log",
+            "run_id": "74e8167880764ab7b56ce8c3fe51133d",
+            "run_seq": 0
+          },
+          "command": {
+            "exit_code": 1,
+            "stdout_log": "work/checks/runs/74e8167880764ab7b56ce8c3fe51133d/probe.stdout.log",
+            "stderr_log": "work/checks/runs/74e8167880764ab7b56ce8c3fe51133d/probe.stderr.log"
+          },
+          "reason": "команда завершилась кодом 1"
+        }
+      ]
+    }
+  ],
+  "task_gate": {
+    "ok": false,
+    "scope": "task",
+    "checkpoint": null,
+    "task_id": "DEV-1",
+    "trust_mode": "protected",
+    "checks": {
+      "probe": {
+        "kind": "command",
+        "explain": [
+          "применимость always",
+          "запуск: результатов нет"
+        ],
+        "status": "uncovered"
+      }
+    },
+    "covered": [],
+    "uncovered": [
+      "probe"
+    ],
+    "manual": [],
+    "blocked": [],
+    "not_applicable": [],
+    "notes": [
+      "probe: последний доверенный исход failed (rc-b0d226e5eab8452d) — старые passed не покрывают"
+    ],
+    "rejections": [],
+    "hashed_bytes": 2884,
+    "hashed_files": 14,
+    "budget_reasons": [],
+    "trust": {
+      "mode": "protected",
+      "capability": "local",
+      "boundary": "none",
+      "notes": [
+        "дом принадлежит текущей OS identity — владелец может вернуть права записи; отдельной границы нет",
+        "запись доступна: approved.json, journal.jsonl, revocations.json, дом, ключ k-17290006cf9348e8, ключи, родительский каталог",
+        "отдельная OS/CI identity не доказана — защищённая эксплуатация не заявляется"
+      ]
+    },
+    "protected_confirmed": false,
+    "candidate_digest": "sha256:76c0dbf3a27cd9da065306cfb9f693b36214f632736e1f686872bc9280ceeb0a"
+  },
+  "project_gate": {
+    "ok": false,
+    "scope": "project",
+    "checkpoint": null,
+    "task_id": "DEV-1",
+    "trust_mode": "protected",
+    "checks": {
+      "probe": {
+        "kind": "command",
+        "explain": [
+          "применимость always",
+          "запуск: результатов нет",
+          "область project — весь обязательный набор"
+        ],
+        "status": "uncovered"
+      }
+    },
+    "covered": [],
+    "uncovered": [
+      "probe"
+    ],
+    "manual": [],
+    "blocked": [],
+    "not_applicable": [],
+    "notes": [
+      "probe: последний доверенный исход failed (rc-b0d226e5eab8452d) — старые passed не покрывают"
+    ],
+    "rejections": [],
+    "hashed_bytes": 2884,
+    "hashed_files": 14,
+    "budget_reasons": [],
+    "trust": {
+      "mode": "protected",
+      "capability": "local",
+      "boundary": "none",
+      "notes": [
+        "дом принадлежит текущей OS identity — владелец может вернуть права записи; отдельной границы нет",
+        "запись доступна: approved.json, journal.jsonl, revocations.json, дом, ключ k-17290006cf9348e8, ключи, родительский каталог",
+        "отдельная OS/CI identity не доказана — защищённая эксплуатация не заявляется"
+      ]
+    },
+    "protected_confirmed": false,
+    "candidate_digest": "sha256:76c0dbf3a27cd9da065306cfb9f693b36214f632736e1f686872bc9280ceeb0a"
+  },
+  "verifier_gate": {
+    "ok": false,
+    "capability": "local",
+    "protected_confirmed": false,
+    "obligated": 1,
+    "covered": 0,
+    "uncovered": [
+      "probe"
+    ],
+    "manual": [],
+    "receipts": [
+      "rc-8c0061d349ca4068",
+      "rc-b0d226e5eab8452d"
+    ],
+    "rejections": [],
+    "notes": [
+      "дом принадлежит текущей OS identity — владелец может вернуть права записи; отдельной границы нет",
+      "запись доступна: approved.json, journal.jsonl, revocations.json, дом, ключ k-17290006cf9348e8, ключи, родительский каталог",
+      "отдельная OS/CI identity не доказана — защищённая эксплуатация не заявляется",
+      "probe: последний доверенный исход failed (rc-b0d226e5eab8452d) — старые passed не покрывают"
+    ],
+    "candidate_digest": "sha256:76c0dbf3a27cd9da065306cfb9f693b36214f632736e1f686872bc9280ceeb0a"
+  },
+  "cli": {
+    "argv": [
+      "/usr/local/opt/python@3.14/bin/python3.14",
+      "/Users/privedentsev1/Dev/ai-dev-playbook/ai-dev-playbook/scripts/playbook.py",
+      "--root",
+      "/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/tmpfu3v6ato/proj",
+      "verifier",
+      "gate",
+      "--home",
+      "/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/tmpmhzifmb6/vh"
+    ],
+    "rc": 1,
+    "stdout": "verifier gate: capability=local isolation=sandbox-exec candidate=sha256:76c0dbf3a27cd9da065306cfb9f693b36214f632736e1f686872bc9280ceeb0a\n  обязательств 1, покрыто 0, квитанций 2\n  не покрыто: probe\n  примечание: дом принадлежит текущей OS identity — владелец может вернуть права записи; отдельной границы нет\n  примечание: запись доступна: approved.json, journal.jsonl, revocations.json, дом, ключ k-17290006cf9348e8, ключи, родительский каталог\n  примечание: отдельная OS/CI identity не доказана — защищённая эксплуатация не заявляется\n  примечание: probe: последний доверенный исход failed (rc-b0d226e5eab8452d) — старые passed не покрывают\n",
+    "stderr": ""
+  }
+}

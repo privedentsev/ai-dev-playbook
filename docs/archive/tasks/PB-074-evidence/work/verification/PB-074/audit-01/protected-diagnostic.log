@@ -1,0 +1,25 @@
+test_ac07_input_race_post_run_drift_arena_isolation_and_receipt_tamper (test_checks_e2e.TrustBoundaryLifecycleAndMigrationE2ETest.test_ac07_input_race_post_run_drift_arena_isolation_and_receipt_tamper)
+AC-07: мутация входа во время и после запуска блокирует passed; изолированный кандидат и подмена квитанции проверяются. ... FAIL
+
+======================================================================
+FAIL: test_ac07_input_race_post_run_drift_arena_isolation_and_receipt_tamper (test_checks_e2e.TrustBoundaryLifecycleAndMigrationE2ETest.test_ac07_input_race_post_run_drift_arena_isolation_and_receipt_tamper)
+AC-07: мутация входа во время и после запуска блокирует passed; изолированный кандидат и подмена квитанции проверяются.
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_checks_e2e.py", line 1168, in test_ac07_input_race_post_run_drift_arena_isolation_and_receipt_tamper
+    self.assertEqual(self.cli("verifier", "run", "--home", str(home), "--scope", "project")[0], 0)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 1 != 0
+
+----------------------------------------------------------------------
+Ran 1 test in 4.584s
+
+FAILED (failures=1)
+VERIFIER RUN: (1, 'verifier run: candidate sha256:f499e79bbea6103d6e269fc77c076067726f5d4a3ed68231d0c6c7f3f4748ba0 (77 файлов), arena f499e79bbea6103d-0a2f1423, sandbox=да\nchecks run verifier-0a2f1423: политика protected-policy rev 1, scope=project mode=staleОграничение: trust_mode=protected: локальные результаты не являются доверенными квитанциями; подтверждение — внешний verifier (PB-061)  cmd-verify: RUN command  cmd-verify: failed — команда завершилась кодом 71Итог: failed=1; непокрытых обязательств: 1\nverifier: receipt rc-8ef48bb0347c4c11 → work/checks/receipts/; ok=False\n', '')
+/private/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/pb064-e2e-t7a_u3o1/project/work/checks/runs/92511d85836a482fb5fef85be72a331f/cmd-verify.stdout.log 
+/private/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/pb064-e2e-t7a_u3o1/project/work/checks/runs/92511d85836a482fb5fef85be72a331f/cmd-verify.stderr.log 
+/private/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/pb064-e2e-t7a_u3o1/project/work/checks/runs/398038fd6e3a47e4a389e126402355b3/cmd-verify.stdout.log 
+/private/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/pb064-e2e-t7a_u3o1/project/work/checks/runs/398038fd6e3a47e4a389e126402355b3/cmd-verify.stderr.log 
+/private/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/pb064-e2e-t7a_u3o1/verifier-home/arena/f499e79bbea6103d-0a2f1423/work/checks/runs/2bc673a179c64d8f908e7dec16ce3d52/cmd-verify.stdout.log 
+/private/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/pb064-e2e-t7a_u3o1/verifier-home/arena/f499e79bbea6103d-0a2f1423/work/checks/runs/2bc673a179c64d8f908e7dec16ce3d52/cmd-verify.stderr.log sandbox-exec: sandbox_apply: Operation not permitted
+

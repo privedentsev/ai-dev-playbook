@@ -1,0 +1,229 @@
+test_ac03_excluded_logs_card_projection_binary_inputs_and_unknown_file (test_checks_e2e.InputsExclusionsFallbackBudgetE2ETest.test_ac03_excluded_logs_card_projection_binary_inputs_and_unknown_file)
+AC-03: лог не запускает тесты, карточка разделяет структуру и критерии, PNG/архив учитываются, неизвестный файл не теряется. ... ok
+test_ac04_subsystem_boundary_eight_reused_two_run_and_budget_stop (test_checks_e2e.InputsExclusionsFallbackBudgetE2ETest.test_ac04_subsystem_boundary_eight_reused_two_run_and_budget_stop)
+AC-04: подсистема расширяет набор в доказанных границах (8 reused, 2 run), при недоказанной независимости reuse запрещён, бюджет блокирует запуск. ... ok
+test_ac05_release_cross_task_stale_force_invalidation_and_late_failed (test_checks_e2e.ReleaseModesFreshnessAndAdapterE2ETest.test_ac05_release_cross_task_stale_force_invalidation_and_late_failed)
+AC-05: релиз собирает обязательства разных задач, stale сохраняет свежие, force запускает всё, смена среды/TTL/команды/фикстуры и поздний failed блокируют reuse. ... ok
+test_ac06_adapter_negatives_descriptions_reused_time_and_label_rename (test_checks_e2e.ReleaseModesFreshnessAndAdapterE2ETest.test_ac06_adapter_negatives_descriptions_reused_time_and_label_rename)
+AC-06: exit 0 с 0 тестов, пропавший ID, лишний skip, дубликат и порча отчёта отклоняются; описания и исходное время reused сохраняются. ... ok
+test_ac01_no_git_manual_edits_payments_and_discounts_counters (test_checks_e2e.ShopGraphE2ETest.test_ac01_no_git_manual_edits_payments_and_discounts_counters)
+AC-01: без .git правка оплаты запускает оплату и checkout при reuse корзины, правка discounts запускает все три. ... ok
+test_ac02_import_cycle_and_dynamic_import_expand_conservatively (test_checks_e2e.ShopGraphE2ETest.test_ac02_import_cycle_and_dynamic_import_expand_conservatively)
+AC-02: циклы импортов не зацикливаются, а dynamic import помечается unknown и исключает ложный пропуск. ... ok
+test_ac02_same_mtime_size_add_delete_rename_and_missing_baseline (test_checks_e2e.ShopGraphE2ETest.test_ac02_same_mtime_size_add_delete_rename_and_missing_baseline)
+AC-02: равные mtime/size при других байтах, add/delete/rename файла и импорта и потеря baseline исключают ложный reuse. ... ok
+test_ac07_input_race_post_run_drift_arena_isolation_and_receipt_tamper (test_checks_e2e.TrustBoundaryLifecycleAndMigrationE2ETest.test_ac07_input_race_post_run_drift_arena_isolation_and_receipt_tamper)
+AC-07: мутация входа во время и после запуска блокирует passed; изолированный кандидат и подмена квитанции проверяются. ... ok
+test_ac08_and_card_ac03_bypass_attempts_and_local_vs_protected_boundary (test_checks_e2e.TrustBoundaryLifecycleAndMigrationE2ETest.test_ac08_and_card_ac03_bypass_attempts_and_local_vs_protected_boundary)
+AC-08 и AC-03 карточки: обходы доверенного gate отклоняются, границы local и protected проверяются раздельно. ... ok
+test_ac09_manual_and_task_criteria_unified_gate_and_archive_provenance (test_checks_e2e.TrustBoundaryLifecycleAndMigrationE2ETest.test_ac09_manual_and_task_criteria_unified_gate_and_archive_provenance)
+AC-09: старый suite не закрывает новое требование и ручную проверку; handoff/accept/release-ready едины, архив сохраняет provenance. ... ok
+test_ac10_legacy_intact_preview_readonly_unsupported_and_restore (test_checks_e2e.TrustBoundaryLifecycleAndMigrationE2ETest.test_ac10_legacy_intact_preview_readonly_unsupported_and_restore)
+AC-10: legacy без checks_policy неизменен, preview не исполняет код, неподдержанные версии и прерывание безопасны. ... ok
+test_allowed_skip_accepted (test_checks_run.AdapterTest.test_allowed_skip_accepted)
+Skip из allowlist каталога принимается verdict'ом ... ok
+test_error_outcome_and_description (test_checks_run.AdapterTest.test_error_outcome_and_description)
+error-исход попадает в описание результата проверки ... ok
+test_expected_failure_and_unexpected_success (test_checks_run.AdapterTest.test_expected_failure_and_unexpected_success)
+expectedFailure и unexpected success учитываются verdict'ом ... ok
+test_green_suite_passed (test_checks_run.AdapterTest.test_green_suite_passed)
+Зелёный набор тестов даёт verdict passed ... ok
+test_missing_catalog_id_rejected (test_checks_run.AdapterTest.test_missing_catalog_id_rejected)
+Тест вне каталога политики отклоняется ... ok
+test_parse_argv_forms (test_checks_run.AdapterTest.test_parse_argv_forms)
+parse_argv разбирает формы unittest discover/модулей в selection ... ok
+test_subtest_failure_rejected (test_checks_run.AdapterTest.test_subtest_failure_rejected)
+Падение subTest отклоняется verdict'ом ... ok
+test_timeout_status (test_checks_run.AdapterTest.test_timeout_status)
+Превышение timeout проверки даёт статус timeout ... ok
+test_unexpected_skip_rejected (test_checks_run.AdapterTest.test_unexpected_skip_rejected)
+Неожиданный skip вне allowlist отклоняется ... ok
+test_unfinished_and_crash_rejected (test_checks_run.AdapterTest.test_unfinished_and_crash_rejected)
+unfinished/crash исходы тестов отклоняются ... ok
+test_zero_tests_rejected (test_checks_run.AdapterTest.test_zero_tests_rejected)
+Пустой набор без тестов отклоняется verdict'ом ... ok
+test_a01_ttl_from_original_run (test_checks_run.AuditRegressionTest.test_a01_ttl_from_original_run)
+A-01: TTL внешней зависимости считается от исходного прогона ... ok
+test_a02_reuse_rebinding_race_reruns (test_checks_run.AuditRegressionTest.test_a02_reuse_rebinding_race_reruns)
+A-02: гонка перепривязки при переиспользовании вызывает прогон ... ok
+test_a03_corrupt_latest_failed_blocks_reuse (test_checks_run.AuditRegressionTest.test_a03_corrupt_latest_failed_blocks_reuse)
+A-03: повреждённый поздний failed блокирует переиспользование ... ok
+test_a04_status_counts_only_fresh_coverage (test_checks_run.AuditRegressionTest.test_a04_status_counts_only_fresh_coverage)
+A-04: status учитывает только свежее покрытие ... ok
+test_a05_project_import_in_adapter (test_checks_run.AuditRegressionTest.test_a05_project_import_in_adapter)
+A-05: project-импорт в адаптере unittest обрабатывается ... ok
+test_a06_deleted_latest_failed_blocks_reuse (test_checks_run.AuditRegressionTest.test_a06_deleted_latest_failed_blocks_reuse)
+A-06: удалённый поздний failed блокирует переиспользование ... ok
+test_a07_rebuild_preserves_loss_evidence (test_checks_run.AuditRegressionTest.test_a07_rebuild_preserves_loss_evidence)
+A-07: rebuild индекса сохраняет свидетельства потерь ... ok
+test_a07_unrelated_run_keeps_evidence (test_checks_run.AuditRegressionTest.test_a07_unrelated_run_keeps_evidence)
+A-07: несвязанный прогон сохраняет свидетельства потерь ... ok
+test_run_and_status_end_to_end (test_checks_run.CliRunTest.test_run_and_status_end_to_end)
+checks run и status работают end-to-end через CLI ... ok
+test_run_requires_policy (test_checks_run.CliRunTest.test_run_requires_policy)
+checks run без checks_policy в project.json отклоняется ... ok
+test_run_requires_task (test_checks_run.CliRunTest.test_run_requires_task)
+checks run для несуществующей задачи отклоняется ... ok
+test_run_second_time_reuses (test_checks_run.CliRunTest.test_run_second_time_reuses)
+Повторный checks run переиспользует результаты ... ok
+test_changed_input_forces_rerun (test_checks_run.RunnerTest.test_changed_input_forces_rerun)
+Изменённый вход проверки заставляет её повторить ... ok
+test_corrupt_index_rebuilt (test_checks_run.RunnerTest.test_corrupt_index_rebuilt)
+Повреждённый индекс результатов перестраивается ... ok
+test_corrupt_result_no_false_reuse (test_checks_run.RunnerTest.test_corrupt_result_no_false_reuse)
+Повреждённый результат не даёт ложного переиспользования ... ok
+test_cross_task_reuse_same_project (test_checks_run.RunnerTest.test_cross_task_reuse_same_project)
+Результат одной задачи переиспользуется другой в том же проекте ... ok
+test_external_ttl_and_always_run (test_checks_run.RunnerTest.test_external_ttl_and_always_run)
+TTL и always_run внешних зависимостей соблюдаются runner'ом ... ok
+test_external_version_change_breaks_binding (test_checks_run.RunnerTest.test_external_version_change_breaks_binding)
+Смена версии внешней зависимости ломает binding результата ... ok
+test_first_run_stores_results_and_state (test_checks_run.RunnerTest.test_first_run_stores_results_and_state)
+Первый прогон сохраняет результаты и состояние runner'а ... ok
+test_force_reruns_all (test_checks_run.RunnerTest.test_force_reruns_all)
+force-режим перезапускает все проверки области ... ok
+test_late_failed_not_hidden (test_checks_run.RunnerTest.test_late_failed_not_hidden)
+Поздний failed не скрывается старым passed при переиспользовании ... ok
+test_mutation_during_command_blocked (test_checks_run.RunnerTest.test_mutation_during_command_blocked)
+Мутация входов во время команды проверки блокируется ... ok
+test_other_project_result_not_reused (test_checks_run.RunnerTest.test_other_project_result_not_reused)
+Результат другого проекта не переиспользуется ... ok
+test_project_scope_covers_all (test_checks_run.RunnerTest.test_project_scope_covers_all)
+scope=project покрывает все проверки проекта ... ok
+test_stale_reuses_independent_results (test_checks_run.RunnerTest.test_stale_reuses_independent_results)
+stale-режим переиспользует независимые свежие результаты ... ok
+test_status_reports_coverage_and_trust (test_checks_run.RunnerTest.test_status_reports_coverage_and_trust)
+checks status сообщает покрытие и trust_mode ... ok
+test_task_requirements_change_breaks_reuse (test_checks_run.RunnerTest.test_task_requirements_change_breaks_reuse)
+Изменение task_projection-входа ломает переиспользование ... ok
+test_extension_without_argv_is_routine (test_checks_trust.ApproveTest.test_extension_without_argv_is_routine)
+Расширение policy без новых argv — routine-одобрение ... ok
+test_initial_and_require (test_checks_trust.ApproveTest.test_initial_and_require)
+Политика до одобрения отклоняется require_approved ... ok
+test_new_argv_is_weakening (test_checks_trust.ApproveTest.test_new_argv_is_weakening)
+Обычное расширение не разрешает новые недоверенные команды. ... ok
+test_removed_check_is_weakening (test_checks_trust.ApproveTest.test_removed_check_is_weakening)
+Удаление проверки классифицируется как weakening ... ok
+test_revoked_policy_digest_refused (test_checks_trust.ApproveTest.test_revoked_policy_digest_refused)
+Отозванный policy_digest отклоняется verifier'ом ... ok
+test_aggregate_source_revocation_transitive (test_checks_trust.AuditFixesTest.test_aggregate_source_revocation_transitive)
+Отзыв исходной квитанции транзитивно отклоняет aggregate ... ok
+test_duplicate_report_lines_rejected (test_checks_trust.AuditFixesTest.test_duplicate_report_lines_rejected)
+Подделка поверх настоящего отчёта — квитанция не выдаётся. ... ok
+test_external_always_run_does_not_break_env (test_checks_trust.AuditFixesTest.test_external_always_run_does_not_break_env)
+required_environment с dict-значением не ломает subprocess (A-03). ... ok
+test_forged_report_file_rejected (test_checks_trust.AuditFixesTest.test_forged_report_file_rejected)
+Поддельный adapter.json + os._exit — квитанция не выдаётся. ... ok
+test_forged_stdout_sentinel_posthumous (test_checks_trust.AuditFixesTest.test_forged_stdout_sentinel_posthumous)
+Строка отчёта, за которой процесс умер — квитанция не выдаётся. ... ok
+test_legacy_self_reported_receipt_rejected (test_checks_trust.AuditFixesTest.test_legacy_self_reported_receipt_rejected)
+Квитанция на kind=test результат отклоняется verify (A-01). ... ok
+test_probe_readonly_root_stays_local (test_checks_trust.AuditFixesTest.test_probe_readonly_root_stays_local)
+chmod 0555 на доме того же uid не даёт protected (A-02). ... ok
+test_scrubbed_env_reaches_subprocess (test_checks_trust.AuditFixesTest.test_scrubbed_env_reaches_subprocess)
+HOME/TMPDIR внутри arena, PATH есть; binding env не подменяет. ... ok
+test_self_reported_policy_refused (test_checks_trust.AuditFixesTest.test_self_reported_policy_refused)
+Политика с test-проверками не получает квитанцию (A-01/AUDIT-02). ... ok
+test_covered_by_run_receipt (test_checks_trust.GateTest.test_covered_by_run_receipt)
+Run-квитанция покрывает область protected-gate ... ok
+test_forged_file_in_project_rejected (test_checks_trust.GateTest.test_forged_file_in_project_rejected)
+Поддельный receipt-файл в проекте отклоняется gate ... ok
+test_no_receipts_uncovered (test_checks_trust.GateTest.test_no_receipts_uncovered)
+Без квитанций protected-gate не покрывает область ... ok
+test_init_and_binding (test_checks_trust.HomeTest.test_init_and_binding)
+init_home создаёт доверенный дом и привязку проекта ... ok
+test_probe_inside_project_is_local (test_checks_trust.HomeTest.test_probe_inside_project_is_local)
+Дом внутри проекта даёт capability=local ... ok
+test_probe_same_uid_is_honest_local (test_checks_trust.HomeTest.test_probe_same_uid_is_honest_local)
+Дом той же OS identity честно даёт local без protected ... ok
+test_probe_without_home_is_local (test_checks_trust.HomeTest.test_probe_without_home_is_local)
+Probe без дома возвращает capability=local ... ok
+test_env_scrubbed_for_test_process (test_checks_trust.IsolationTest.test_env_scrubbed_for_test_process)
+Переменные доверенной стороны не доходят до подпроцесса. ... ok
+test_sandbox_denies_home_access (test_checks_trust.IsolationTest.test_sandbox_denies_home_access)
+Реальная граница на стенде: запись/чтение дома запрещены. ... ok
+test_denied_dir_returns_false (test_checks_trust.ProbeWritabilityTest.test_denied_dir_returns_false)
+Запрещённый каталог возвращает false при probe записи ... ok
+test_probe_reports_writable_home_points (test_checks_trust.ProbeWritabilityTest.test_probe_reports_writable_home_points)
+Доступный для записи дом: writable_points заполнены, ... ok
+test_unknown_error_returns_none (test_checks_trust.ProbeWritabilityTest.test_unknown_error_returns_none)
+Неизвестная ошибка записи возвращает none — граница не доказана ... ok
+test_writable_dir_marker_created_and_removed (test_checks_trust.ProbeWritabilityTest.test_writable_dir_marker_created_and_removed)
+Записываемый каталог: marker создаётся и удаляется ... ok
+test_aggregate_confirms_unchanged (test_checks_trust.ReceiptVerifyTest.test_aggregate_confirms_unchanged)
+Aggregate-квитанция подтверждает неизменные результаты ... ok
+test_aggregate_skips_changed_inputs (test_checks_trust.ReceiptVerifyTest.test_aggregate_skips_changed_inputs)
+Aggregate пропускает проверки с изменившимися входами ... ok
+test_attacker_signature_rejected (test_checks_trust.ReceiptVerifyTest.test_attacker_signature_rejected)
+Подпись атакующего ключа отклоняется ... ok
+test_cross_project_rejected (test_checks_trust.ReceiptVerifyTest.test_cross_project_rejected)
+Квитанция чужого проекта не принимается этим домом. ... ok
+test_foreign_home_receipt_rejected (test_checks_trust.ReceiptVerifyTest.test_foreign_home_receipt_rejected)
+Квитанция другого дома того же проекта — журнал/ключ иные. ... ok
+test_forged_field_rejected (test_checks_trust.ReceiptVerifyTest.test_forged_field_rejected)
+Изменённое поле квитанции отклоняется verify ... ok
+test_replay_for_other_candidate_rejected (test_checks_trust.ReceiptVerifyTest.test_replay_for_other_candidate_rejected)
+Replay квитанции на другой candidate отклоняется ... ok
+test_revoked_key_rejected (test_checks_trust.ReceiptVerifyTest.test_revoked_key_rejected)
+Отозванный ключ отклоняет свои квитанции ... ok
+test_revoked_policy_rejected (test_checks_trust.ReceiptVerifyTest.test_revoked_policy_rejected)
+Отозванная политика отклоняет свои квитанции ... ok
+test_revoked_receipt_rejected (test_checks_trust.ReceiptVerifyTest.test_revoked_receipt_rejected)
+Отозванная квитанция отклоняется verify ... ok
+test_unknown_key_replacement_rejected (test_checks_trust.ReceiptVerifyTest.test_unknown_key_replacement_rejected)
+Замена key_id на неизвестный ключ отклоняется ... ok
+test_client_results_never_signed (test_checks_trust.VerifierRunTest.test_client_results_never_signed)
+Файл, подброшенный агентом, не становится квитанцией. ... ok
+test_editable_approved_is_not_authorization (test_checks_trust.VerifierRunTest.test_editable_approved_is_not_authorization)
+approved_basis в файле проекта не заменяет одобрение дома. ... ok
+test_policy_edit_after_approval_refused (test_checks_trust.VerifierRunTest.test_policy_edit_after_approval_refused)
+Правка policy после одобрения отклоняется ... ok
+test_run_issues_valid_receipt (test_checks_trust.VerifierRunTest.test_run_issues_valid_receipt)
+verifier_run выдаёт валидную квитанцию на кандидате ... ok
+test_snapshot_substitution_detected (test_checks_trust.VerifierRunTest.test_snapshot_substitution_detected)
+AC-07: изменение после прогона — replay отклонён. ... ok
+test_unapproved_policy_refused (test_checks_trust.VerifierRunTest.test_unapproved_policy_refused)
+Неподтверждённая policy отклоняется verifier'ом ... ok
+test_ac02_discussion_lifecycle_and_transition_to_spec (test_pb029.Pb029EndToEndRoutesTest.test_ac02_discussion_lifecycle_and_transition_to_spec)
+AC-02: Обсуждения без файлов по умолчанию; CLI create создаёт discussion и index; ... ok
+test_ac07_feature_deprecation_and_adr_archival_e2e (test_pb029.Pb029EndToEndRoutesTest.test_ac07_feature_deprecation_and_adr_archival_e2e)
+AC-07: Частичное удаление (SMS) обновляет общую спецификацию и design; ... ok
+test_ac10_ac11_lifecycle_controls_and_missing_evidence (test_pb029.Pb029EndToEndRoutesTest.test_ac10_ac11_lifecycle_controls_and_missing_evidence)
+AC-10, AC-11: Потерянное обязательное доказательство блокирует закрытие; ... ok
+test_large_block_route_e2e (test_pb029.Pb029EndToEndRoutesTest.test_large_block_route_e2e)
+AC-05, AC-06, AC-08: Большая задача (блок подзадач + общий аудит); ... ok
+test_link_and_archive_immutability_e2e (test_pb029.Pb029EndToEndRoutesTest.test_link_and_archive_immutability_e2e)
+AC-08, AC-09: Перемещение в архив сохраняет целостность ссылок; ... ok
+test_medium_task_route_e2e (test_pb029.Pb029EndToEndRoutesTest.test_medium_task_route_e2e)
+AC-04, AC-07: Средняя задача (feature) с отдельной спецификацией; ... ok
+test_self_project_copy_pilot (test_pb029.Pb029EndToEndRoutesTest.test_self_project_copy_pilot)
+AC-12: Копия собственного проекта ai-dev-playbook со всеми незакоммиченными ... ok
+test_small_task_route_e2e (test_pb029.Pb029EndToEndRoutesTest.test_small_task_route_e2e)
+AC-03: Маленькая задача (баг) в одной карточке, без отдельного spec/plan; ... ok
+
+----------------------------------------------------------------------
+Ran 101 tests in 990.094s
+
+OK
+Создано 73 файлов в /private/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/tmp1r2rim2v; manifest записан. Заполните документы и project.json; setup_status=needs_review.
+Создано 73 файлов в /private/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/tmp1jgfymfp; manifest записан. Заполните документы и project.json; setup_status=needs_review.
+Создано 73 файлов в /private/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/tmpc7w2q9jo; manifest записан. Заполните документы и project.json; setup_status=needs_review.
+Создано 73 файлов в /private/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/tmpf1eo21ew; manifest записан. Заполните документы и project.json; setup_status=needs_review.
+PB-065: чекбоксы уже актуальны.
+PB-041: чекбоксы уже актуальны.
+PB-071: чекбоксы уже актуальны.
+PB-070: чекбоксы уже актуальны.
+PB-064: чекбоксы синхронизированы.
+PB-050: чекбоксы уже актуальны.
+AUDIT-010: чекбоксы уже актуальны.
+PB-069: чекбоксы уже актуальны.
+PB-049: чекбоксы уже актуальны.
+PB-048: чекбоксы уже актуальны.
+PB-068: чекбоксы уже актуальны.
+AUDIT-008: чекбоксы уже актуальны.
+PB-047: чекбоксы уже актуальны.
+PB-067: чекбоксы уже актуальны.
+PB-066: чекбоксы уже актуальны.
+AUDIT-009: чекбоксы уже актуальны.
+PB-072: чекбоксы уже актуальны.
+PB-046: чекбоксы уже актуальны.

@@ -1,0 +1,218 @@
+# PB-062: Подключить выбор проверок к задачам и готовности релиза
+
+ID: PB-062
+Status: in_review
+Priority: P2
+Depends-On: PB-061
+Executor: Devin
+Model: SWE-2 Flash High
+Created: 2026-11-07T01:08:27+03:00
+Closed: -
+
+<!-- playbook-meta:external -->
+
+## Задача
+
+### Цель и границы
+
+Жизненный цикл и релиз. playbook.py/lifecycle.py, CLI modes/checkpoint и consumer gate, правила жизненного цикла. Не публиковать релиз и не создавать автоматические коммиты.
+
+### Контекст
+
+[Спецификация](../specs/dependency-aware-verification.md): R-08,12,16–18,20; сценарии AC-05,08–09. [Design](../designs/dependency-aware-verification.md), [ADR-0006](../adr/0006-dependency-aware-verification.md), [план](../plans/dependency-aware-verification.md).
+
+Подготовлено по поручению инженера 2026-11-07. Выполнение пока не разрешено. Перед стартом: принятие технического проекта, завершённые зависимости, актуальный card show/handoff затрагиваемых работ и назначение исполнителя. Исходные чужие изменения сохранять.
+
+### Критерии приёмки
+
+- [ ] AC-01: Handoff/accept/release-ready используют один selector+coverage; текущие байты сверяются с проверенным candidate. В protected режиме local/поддельные отчёты не закрывают обязательства.
+- [ ] AC-02: Release требует весь актуальный набор с cross-task reuse, force запускает всё; commit не триггер авторизации. Самостоятельная проверка/релиз владеют обычной карточкой, запуск в текущей задаче не создаёт новую.
+- [ ] AC-03: Manual и новые сценарии приёмки не заменяются старым suite; stale передачи, перенос evidence, concurrent edits, restore и запреты внешнего release проверены.
+- [x] AC-04: Целевые поведенческие проверки и связанные регрессии пройдены; документация и self-manifest актуальны, EXEC/CHECK/HANDOFF содержат реальные доказательства и ограничения; передача зарегистрирована штатным CLI.
+
+### План
+
+1. Уточнить фактические интерфейсы зависимостей и связать изменения с критериями этой карточки.
+2. Реализовать ограниченный объём, добавить постоянные позитивные и негативные проверки критериев AC-01–03; не подменять их структурной проверкой.
+3. Обновить затронутые документы/шаблоны и self-manifest при изменениях комплекта; выполнить адресные проверки, index и check --ready.
+4. Подготовить материалы и пройти действующие preflight/verify/handoff. До явного opt-in использовать прежний контракт; не отключать полный legacy suite ради экономии.
+5. Записать EXEC/CHECK/HANDOFF и передать независимому аудитору; самостоятельно не закрывать.
+
+### Ресурсы
+
+Python и стандартная библиотека для основного CLI; локальные временные проекты и subprocess-счётчики. Новые зависимости защищённого executor обосновать в рамках принятого design. Фактические среда, policy_revision и бюджет фиксируются при старте; доступность отдельной OS/CI identity не предполагается.
+
+Материалы: `docs/tasks/PB-062-evidence/`; команды воспроизведения и отчёты принадлежат этой карточке. Общие материалы и сквозная матрица — AUDIT-009/PB-064.
+
+## Журнал
+
+### EXEC-01 — Выполнение
+Время: 2026-11-11T07:35:00+03:00
+Исполнитель: Devin
+Модель: SWE-2 Flash High
+Изменения: единый selector+coverage для lifecycle по design и spec R-08,12,16–18,20. `checks_gate.py` — read-only `evaluate` областей task/project: тот же `checks_select.plan` и свежесть, что `checks run --mode stale`/`checks status`; protected-вердикт только по квитанциям verifier'а текущего кандидата (candidate/policy digest, отзывы, task_requirements_digest для task_projection-входов), `ok` требует `capability=protected`. `checks_runner.confirm` — append-only подтверждение kind=manual с полной привязкой; `checks_select.evidence_latest` — `not_run` runner'а не маскирует подтверждение. `lifecycle.py` — `_checks_gate` в handoff/accept/close-evidence обеих схем карточек при объявленной `checks_policy`; без политики прежний контракт verify-отчётов; v2-контекст разворачивается до физического корня (ProjectView). CLI `checks confirm` и `checks release-ready` (read-only, exit 0 только при ok). Постоянные тесты tests/test_checks_gate.py — 11 сценариев AC-01–03 (local/protected покрытие, forgery, stale candidate, cross-task reuse, manual confirm, legacy без policy). Документация: rules/verification.md (раздел PB-062), architecture.md, code-map.md, CHANGELOG.md; self-manifest пересобран; evidence — docs/tasks/PB-062-evidence/commands.md.
+Файлы:
+- ai-dev-playbook/scripts/checks_gate.py
+- ai-dev-playbook/scripts/checks_runner.py
+- ai-dev-playbook/scripts/checks_select.py
+- ai-dev-playbook/scripts/lifecycle.py
+- ai-dev-playbook/scripts/playbook.py
+- ai-dev-playbook/rules/verification.md
+- ai-dev-playbook/manifest.json
+- tests/test_checks_gate.py
+- docs/architecture.md
+- docs/code-map.md
+- docs/tasks/PB-062-evidence/commands.md
+- CHANGELOG.md
+
+### CHECK-01 — Проверка
+Время: 2026-11-11T08:05:00+03:00
+Исполнитель: Devin
+Модель: SWE-2 Flash High
+Результат: passed
+Критерии: AC-01, AC-02, AC-03, AC-04
+Команда: `python3 -m unittest discover -s tests -p "test_checks_gate.py" -v` (11 сценариев PB-062), `python3 -m unittest discover -s tests -p "test_checks_*.py"` (266 тестов), `python3 -m unittest test_lifecycle test_workflow_e2e` (38 тестов), полный `python3 -m unittest discover -s tests -p "test_*.py"` (1035 тестов), `playbook.py index`, `playbook.py check --ready`, `playbook.py adopt . --force --apply`, полный `playbook.py verify PB-062` (self-check, preflight-regressions, unit-tests — отчёт 84150d61e6ef44efaf39d7446a34f4a3, inputs_unchanged)
+Среда: macOS Darwin 27, Python 3.14.6; временные проекты-фикстуры в /tmp; checkout dev.
+Факт: единый `checks_gate.evaluate` подключён к handoff/accept/close-evidence обеих схем карточек и `checks release-ready`; local-режим покрывается свежими результатами, protected — только квитанциями текущего кандидата при доказанной границе; manual подтверждается `checks confirm`, `not_run` не маскирует; release-ready требует весь набор project-области с cross-task reuse; без `checks_policy` поведение legacy сохранено (11 новых + 1035 регрессионных тестов зелёные).
+Доказательства: [команды и ограничения](PB-062-evidence/commands.md), [отчёт verify](../../work/verification/PB-062/84150d61e6ef44efaf39d7446a34f4a3/report.json)
+Ограничения: самопроверка исполнителя. Стенд без отдельной OS identity — `verifier probe` capability=local; protected-вердикт покрыт тестом с подменой probe, защищённая эксплуатация не заявлена (ограничение PB-061 сохраняется). `checks_policy` в self-project не подключена (PB-063) — поведение проверено на временных фикстурах. Изменения не закоммичены.
+
+### HANDOFF-01 — Передача
+Время: 2026-11-11T08:05:00+03:00
+Исполнитель: Devin
+Модель: SWE-2 Flash High
+Выполнение: EXEC-01
+Проверки: CHECK-01
+Состояние: in_review; dev; изменения не закоммичены. Реализован lifecycle-gate PB-062 (checks_gate.evaluate, checks confirm, checks release-ready, подключение к handoff/accept/close legacy+v2); полный verify passed. Следующий шаг — независимый аудит в отдельной сессии.
+Фокус аудита: единый selector+coverage на handoff/accept/release-ready; сверка текущих байтов с кандидатом доказательств; отказ local/поддельных/stale/replay-квитанций в protected; обязательность всего набора при release и cross-task reuse по привязкам; force-полный перезапуск; отсутствие авторизации по commit/имени ветки и автосоздания карточек; сохранение legacy-контракта без checks_policy; маскировка manual-подтверждения not_run; ViewPath→физический корень в v2.
+
+### AUDIT-01 — Аудит
+Время: 2026-11-11T09:18:46+03:00
+Исполнитель: Codex
+Модель: GPT-6
+Передача: HANDOFF-01
+Результат: changes_requested
+Критерии: AC-01, AC-02, AC-03, AC-04
+Независимо проверено: требования и diff реализации; audit-ready и JSON состояния критериев; 11 целевых тестов; 266 связанных регрессионных тестов; отдельная поведенческая TTL-проба с настоящей квитанцией verifier.
+Доказательства: [протокол](../../work/verification/PB-062/audit-01/findings.txt), [TTL-проба](../../work/verification/PB-062/audit-01/probe_ttl.py), [регрессии](../../work/verification/PB-062/audit-01/checks.log).
+Ограничения: audit-ready отклонил передачу до подготовки контейнера; приёмка и полный verify не выполнялись. Protected OS boundary в TTL-пробе подменена, как в целевом тесте; реальная отдельная identity не заявляется. Первые запуски затронули ограничения вложенного sandbox и активную операцию prepare-audit; повторные прогоны выполнены после устранения этих условий. Реализация не исправлялась.
+
+#### A-01 — Замечание
+Серьёзность: P1
+Критерии: AC-01, AC-02, AC-03
+Проблема: protected-gate принимает квитанцию после истечения TTL внешней зависимости. `_protected_receipts` проверяет подпись и candidate, но не свежесть исходного executable-result; `_protected_verdict` возвращает ему covered.
+Воспроизведение: из корня выполнить `python3 work/verification/PB-062/audit-01/probe_ttl.py` вне вложенного sandbox; политика требует api с TTL 60 секунд, реальный verifier выдаёт passed, evaluate вызывается с now=2099-01-01 и подменой только probe OS-границы.
+Факт: ok=true, covered=[probe], uncovered=[], rejections=[].
+Влияние: handoff/accept/release-ready могут признать просроченное внешнее доказательство пригодным; нарушена свежесть актуального набора по AC-05 спецификации.
+Критерий исправления: protected consumer проверяет TTL/always_run и значимые привязки доверенного исходного результата по общему контракту свежести; просроченный результат не покрывает обязательство. Добавлены поведенческие регрессии для run и aggregate receipts.
+
+#### A-02 — Замечание
+Серьёзность: P2
+Критерии: AC-04
+Проблема: CHECK-01 не совпадает с зарегистрированной привязкой criterion_evidence; передача не готова к аудиту.
+Воспроизведение: `playbook.py verify PB-062 --audit-ready` и `playbook.py card show PB-062 --json` на переданном состоянии до аудиторских правок.
+Факт: audit-ready exit=1; у AC-01–04 reason=unbound_or_changed_check. CHECK-01 привязан к verify-69f1c89b20a24c79be547ca1cf7b41e1, а текст CHECK сообщает отчёт 84150d61e6ef44efaf39d7446a34f4a3.
+Влияние: passed в журнале не подтверждает критерии через штатный gate; независимая приёмка невозможна.
+Критерий исправления: после исправлений добавить новые EXEC/CHECK/HANDOFF, зарегистрировать свежую передачу; audit-ready завершается успешно, критерии подтверждены CLI без переписывания прежней истории.
+
+### EXEC-02 — Исправление
+Время: 2026-11-11T09:24:00+03:00
+Исполнитель: Devin
+Модель: SWE-2 Flash High
+Замечания: A-01, A-02
+Изменения: A-01 — `_protected_receipts` в checks_gate.py теперь загружает доверенный результат каждой покрываемой проверки и применяет `checks_runner._external_freshness` (ttl/always_run по `finished_at`/`reused.issued_at`) — просроченное внешнее доказательство не закрывает обязательство ни для run-, ни для aggregate-квитанций; статус результата в доме перепроверяется (`passed`). A-02 — процессный: после исправления добавляются EXEC-02/CHECK-02/HANDOFF-02 со свежей передачей; статус in_review и индекс подготовлены до verify, чтобы не устаревал отчёт. Поведенческие регрессии tests/test_checks_gate.py::ProtectedTtlTest (run+aggregate, TTL 60с, now=2099). Документация: rules/verification.md, architecture.md, commands.md; self-manifest пересобран.
+Файлы:
+- ai-dev-playbook/scripts/checks_gate.py
+- tests/test_checks_gate.py
+- ai-dev-playbook/rules/verification.md
+- ai-dev-playbook/manifest.json
+- docs/architecture.md
+- docs/tasks/PB-062-evidence/commands.md
+
+### CHECK-02 — Проверка
+Время: 2026-11-11T09:52:00+03:00
+Исполнитель: Devin
+Модель: SWE-2 Flash High
+Результат: passed
+Критерии: AC-01, AC-02, AC-03, AC-04
+Команда: `python3 -m unittest discover -s tests -p "test_checks_gate.py" -v` (13 сценариев), `python3 -m unittest discover -s tests -p "test_checks_*.py"` (268 тестов), полный `playbook.py verify PB-062` (self-check, preflight-regressions, unit-tests — отчёт 02d82d1a1c7549dc813934603ab26a29, inputs_unchanged)
+Среда: macOS Darwin 27, Python 3.14.6; временные проекты-фикстуры в /tmp; checkout dev.
+Факт: A-01 исправлено — protected-consumer применяет общий контракт внешней свежести (ttl/always_run) к доверенному результату каждой квитанции; регрессии ProtectedTtlTest подтверждают отказ просроченного run- и aggregate-доказательства и покрытие свежего. A-02 — статус in_review и индекс подготовлены до verify; CHECK-02/HANDOFF-02 ссылаются на отчёт 02d82d1a, передача регистрируется заново штатным CLI.
+Доказательства: [команды и ограничения](PB-062-evidence/commands.md), [отчёт verify](../../work/verification/PB-062/02d82d1a1c7549dc813934603ab26a29/report.json), [протокол аудита](../../work/verification/PB-062/audit-01/findings.txt)
+Ограничения: самопроверка исполнителя. Стенд без отдельной OS identity — capability=local; protected-вердикт покрыт тестом с подменой probe. `checks_policy` в self-project не подключена (PB-063). Изменения не закоммичены.
+
+### HANDOFF-02 — Передача
+Время: 2026-11-11T09:52:00+03:00
+Исполнитель: Devin
+Модель: SWE-2 Flash High
+Выполнение: EXEC-02
+Проверки: CHECK-02
+Состояние: in_review; dev; изменения не закоммичены. Исправлены A-01 (TTL/always_run свежесть доверенных результатов в protected-gate, регрессии run+aggregate) и A-02 (свежая CHECK/HANDOFF-передача с консистентной привязкой); полный verify passed. Следующий шаг — повторный независимый аудит.
+Фокус аудита: `_protected_receipts` применяет `_external_freshness` ко всем покрываемым проверкам включая aggregate; отказ именно по свежести (не по подлинности) не ломает покрытие свежих квитанций; статус документа в доме перепроверяется; CHECK-02 привязан к отчёту 02d82d1a и audit-ready завершается успешно.
+
+### AUDIT-02 — Аудит
+Время: 2026-11-11T10:09:32+03:00
+Исполнитель: Codex
+Модель: GPT-6
+Передача: HANDOFF-02
+Результат: changes_requested
+Критерии: AC-01, AC-02, AC-03, AC-04
+Закрытые замечания: A-01, A-02
+Независимо проверено: исправления EXEC-02; TTL run/aggregate в 268 связанных checks-тестах; независимая проба настоящих verifier run/receipts: expired-only, expired+fresh в двух порядках имён, passed→failed на одинаковом candidate; хеш CHECK-02, хеш отчёта 02d82d1a, проекция требований и EXEC-02 совпадают со служебными привязками. Исходная причина A-01 устранена: expired-only теперь uncovered; причина A-02 устранена новой консистентной привязкой CHECK-02.
+Доказательства: [протокол](../../work/verification/PB-062/audit-02/findings.txt), [поведенческая проба](../../work/verification/PB-062/audit-02/probe.py), [вывод пробы](../../work/verification/PB-062/audit-02/probe.log), [268 тестов](../../work/verification/PB-062/audit-02/checks.log).
+Ограничения: до аудиторских правок audit-ready exit=1: прошлые A-01/A-02 ещё открыты, criterion_states отдаёт приоритет open_finding; это отдельное процессное препятствие, а не прежнее несовпадение CHECK. Полный verify повторно не запускался; приёмка не зарегистрирована. Проба подменяет только OS-boundary probe, защищённое развёртывание не заявляется. Код реализации не изменялся.
+
+#### A-03 — Замечание
+Серьёзность: P1
+Критерии: AC-01, AC-02
+Проблема: protected consumer игнорирует поздний failed/timeout и сохраняет покрытие более ранним passed. `_protected_receipts` отбрасывает непрошедшие результаты до выбора актуального результата и не использует доверенную последовательность истории.
+Воспроизведение: из корня выполнить `python3 work/verification/PB-062/audit-02/probe.py` вне вложенного sandbox; раздел passed_then_failed выполняет одобренную command-проверку, читающую внешний временный флаг: сначала 0, затем 1. Подписанные квитанции настоящие, candidate_digest обоих прогонов одинаков.
+Факт: outcomes первого прогона passed, второго failed; same_candidate=True; итоговый gate ok=True, covered=[probe], rejections=[].
+Влияние: handoff/accept/release-ready признают готовность после фактического падения обязательной проверки; нарушены AC-05 спецификации и раздел 6 design о последнем результате и доверенной истории.
+Критерий исправления: текущий исход обязательства определяется по защищённой последовательности/истории verifier; поздний failed/timeout блокирует старый passed. Удаление или переименование проектной копии квитанции не возвращает старое покрытие. Поведенческие регрессии проверяют отрицательный исход и последующее успешное восстановление.
+
+#### A-04 — Замечание
+Серьёзность: P2
+Критерии: AC-01, AC-02, AC-03
+Проблема: просроченная квитанция добавляется в глобальные rejections даже при наличии свежего успешного доказательства, а пропуск уже covered делает результат зависимым от лексикографического порядка имён файлов.
+Воспроизведение: та же probe.py, раздел old_then_fresh/fresh_then_old: настоящий passed-run с TTL 60 секунд в 00:00, второй passed-run в 00:02, evaluate в 00:02:01. Копии названы 000-old.json/999-new.json; затем только старая копия переименована в zzz-old.json.
+Факт: до переименования covered=[probe], uncovered=[], ok=False из-за истёкшего TTL старой квитанции; после переименования без изменения содержимого ok=True, rejections=[].
+Влияние: новый успешный прогон не гарантирует восстановление готовности; случайный receipt ID влияет на результат handoff/accept/release-ready.
+Критерий исправления: выбор актуального пригодного доказательства и причины непокрытия не зависят от имён/порядка файлов; старая просроченная квитанция не блокирует более свежий успешный результат для того же обязательства. Поддельные и отозванные доказательства сохраняют предусмотренные отказы; добавлены регрессии обоих порядков и aggregate.
+
+### EXEC-03 — Исправление
+Время: 2026-11-11T10:18:00+03:00
+Исполнитель: Devin
+Модель: SWE-2 Flash High
+Замечания: A-03, A-04
+Изменения: `_protected_receipts` переписан на доверенную историю verifier'а. Источник — квитанции доверенного дома (`verifier home/receipts`), а не проектные копии `work/checks/receipts`: их имена, порядок и наличие на вердикт не влияют, удаление/переименование копии не возвращает и не отменяет покрытие; квитанции прежнего кандидата/политики — история и пропускаются. Для каждой проверки актуальный исход — доверенный результат с максимальным `finished_at` среди валидных квитанций (aggregate подтверждает исходное время исполнения): поздний failed/timeout блокирует старый passed, просроченная по ttl квитанция отклоняется только когда она актуальная. Отказы сохранены для поддельных/отозванных/невалидных квитанций текущей эпохи. Поведенческие регрессии tests/test_checks_gate.py: ProtectedLatestOutcomeTest (passed→failed→passed на одном кандидате, aggregate не отменяет поздний failed, удаление копий не воскрешает покрытие) и ProtectedTtlTest (expired+fresh в обоих порядках имён, aggregate-вариант). Аудитская проба work/verification/PB-062/audit-02/probe.py: passed_then_failed_gate ok=False, old_then_fresh/fresh_then_old ok=True. Документация: rules/verification.md, architecture.md, code-map.md, CHANGELOG.md, commands.md; self-manifest пересобран.
+Файлы:
+- ai-dev-playbook/scripts/checks_gate.py
+- tests/test_checks_gate.py
+- ai-dev-playbook/rules/verification.md
+- ai-dev-playbook/manifest.json
+- docs/architecture.md
+- docs/code-map.md
+- CHANGELOG.md
+- docs/tasks/PB-062-evidence/commands.md
+
+### CHECK-03 — Проверка
+Время: 2026-11-11T10:47:00+03:00
+Исполнитель: Devin
+Модель: SWE-2 Flash High
+Результат: passed
+Критерии: AC-01, AC-02, AC-03, AC-04
+Команда: `python3 -m unittest discover -s tests -p "test_checks_gate.py" -v` (17 сценариев), `python3 -m unittest test_checks_contract test_checks_graph test_checks_inventory test_checks_run test_checks_select test_checks_trust test_checks_gate test_lifecycle` (306 тестов), аудитская проба `work/verification/PB-062/audit-02/probe.py`, полный `playbook.py verify PB-062` (self-check, preflight-regressions, unit-tests — отчёт f47c0b6e977f473a9802ffcd8ed27ae7, inputs_unchanged)
+Среда: macOS Darwin 27, Python 3.14.6; временные проекты-фикстуры в /tmp; checkout dev.
+Факт: A-03 исправлено — `_protected_receipts` определяет актуальный исход по доверенной истории verifier'а (результат с максимальным `finished_at` среди валидных квитанций текущего кандидата): passed→failed на одном кандидате даёт uncovered, aggregate не отменяет поздний failed, новый passed восстанавливает покрытие; проба passed_then_failed_gate ok=False/uncovered. A-04 исправлено — источник квитанций перенесён в доверенный дом, проектные копии не читаются: old_then_fresh и fresh_then_old дают одинаковый ok=True без ttl-отказа, expired_only по-прежнему uncovered+отказ; удаления/переименования копий вердикт не меняют. Поддельные и отозванные квитанции текущей эпохи — отказы; квитанции прежнего кандидата — история.
+Доказательства: [команды и ограничения](PB-062-evidence/commands.md), [отчёт verify](../../work/verification/PB-062/f47c0b6e977f473a9802ffcd8ed27ae7/report.json), [протокол аудита](../../work/verification/PB-062/audit-02/findings.txt)
+Ограничения: самопроверка исполнителя. Стенд без отдельной OS identity — capability=local; protected-вердикт покрыт тестом с подменой probe. `checks_policy` в self-project не подключена (PB-063). Изменения не закоммичены.
+
+### HANDOFF-03 — Передача
+Время: 2026-11-11T10:47:00+03:00
+Исполнитель: Devin
+Модель: SWE-2 Flash High
+Выполнение: EXEC-03
+Проверки: CHECK-03
+Состояние: in_review; dev; изменения не закоммичены. Исправлены A-03 (актуальный исход по доверенной истории verifier — поздний failed блокирует старый passed, aggregate не переопределяет) и A-04 (источник — квитанции дома, проектные копии не влияют; просроченная квитанция отклоняется только когда актуальная); полный verify passed. Следующий шаг — повторный независимый аудит.
+Фокус аудита: `_protected_receipts` читает квитанции из `verifier home/receipts`, а не из `work/checks/receipts`; выбор актуального исхода — max(finished_at, journal seq, result_digest), детерминирован и не зависит от имён файлов; aggregate-исход наследует finished_at исходного результата; отказ по свежести применяется только к актуальному исходу; квитанции чужого кандидата/политики пропускаются без отказа; CHECK-03 привязан к отчёту f47c0b6e.

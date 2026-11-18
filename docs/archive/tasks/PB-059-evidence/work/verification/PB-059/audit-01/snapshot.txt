@@ -1,0 +1,89 @@
+# PB-059: Построить карту зависимостей и объяснимый выбор проверок
+
+ID: PB-059
+Status: in_review
+Priority: P2
+Depends-On: PB-058
+Executor: Devin
+Model: SWE-2 High
+Created: 2026-11-07T01:07:04+03:00
+Closed: -
+
+<!-- playbook-meta:external -->
+
+## Задача
+
+### Цель и границы
+
+Граф и выбор. Модуль графа, Python analyzer, чистый selector/explain и бюджет; интеграция required_checks. Не ослаблять registry applicability legacy/v2.
+
+### Контекст
+
+[Спецификация](../specs/dependency-aware-verification.md): R-03–04,08–10; сценарии AC-01–04. [Design](../designs/dependency-aware-verification.md), [ADR-0006](../adr/0006-dependency-aware-verification.md), [план](../plans/dependency-aware-verification.md).
+
+Подготовлено по поручению инженера 2026-11-07. Выполнение пока не разрешено. Перед стартом: принятие технического проекта, завершённые зависимости, актуальный card show/handoff затрагиваемых работ и назначение исполнителя. Исходные чужие изменения сохранять.
+
+### Критерии приёмки
+
+- [x] AC-01: Python AST и explicit/observed связи строят provenance-граф; reverse transitive closure, циклы, объединение старых/новых рёбер и удаления проверены. Dynamic import/unsupported не трактуются как независимость.
+- [x] AC-02: Алгоритм module → subsystem → project расширяется только до доказанной границы и выдаёт explain цепочку; обязательства задачи дополняют вычисленный набор.
+- [x] AC-03: План read-only, не исполняет discovery или найденный код; бюджет/неизвестная оценка блокируют дорогой fallback до запуска. Счётчики в fixtures подтверждают ожидаемый набор.
+- [x] AC-04: Целевые поведенческие проверки и связанные регрессии пройдены; документация и self-manifest актуальны, EXEC/CHECK/HANDOFF содержат реальные доказательства и ограничения; передача зарегистрирована штатным CLI.
+
+### План
+
+1. Уточнить фактические интерфейсы зависимостей и связать изменения с критериями этой карточки.
+2. Реализовать ограниченный объём, добавить постоянные позитивные и негативные проверки критериев AC-01–03; не подменять их структурной проверкой.
+3. Обновить затронутые документы/шаблоны и self-manifest при изменениях комплекта; выполнить адресные проверки, index и check --ready.
+4. Подготовить материалы и пройти действующие preflight/verify/handoff. До явного opt-in использовать прежний контракт; не отключать полный legacy suite ради экономии.
+5. Записать EXEC/CHECK/HANDOFF и передать независимому аудитору; самостоятельно не закрывать.
+
+### Ресурсы
+
+Python и стандартная библиотека для основного CLI; локальные временные проекты и subprocess-счётчики. Новые зависимости защищённого executor обосновать в рамках принятого design. Фактические среда, policy_revision и бюджет фиксируются при старте; доступность отдельной OS/CI identity не предполагается.
+
+Материалы: `docs/tasks/PB-059-evidence/`; команды воспроизведения и отчёты принадлежат этой карточке. Общие материалы и сквозная матрица — AUDIT-009/PB-064.
+
+## Журнал
+
+### EXEC-01 — Выполнение
+
+Время: 2026-11-08T19:40:00+03:00
+Исполнитель: Devin
+Модель: SWE-2 High
+Изменения: новые модули checks_graph.py и checks_select.py по design §5 и spec R-03–04,08–10. `build_graph` собирает checks-graph.json: объявленные explicit/observed ребра политики + Python AST-анализатор ast-v1 (прямые/относительные/from-импорты, разрешение по проектным файлам через корень, предков и верхнеуровневые каталоги; flat- и src-layout без исполнения кода). `union_graph` объединяет прежний и новый снимки — удалённые файлы/импорты не теряют потребителей, одинаковый ключ обновляет доказательство. Динамический импорт (`__import__`, `importlib` с нелитеральным аргументом и алиасы), импорт вне модулей и неразбираемый файл — unknown с областью module/project. `select_checks` помечает затронутые модули, проходит обратное транзитивное замыкание (циклы через visited) с рефами subsystem: и расширяет набор только до доказанной границы; неприписанные пути при unknown_scope<project блокируют весь набор до решения инженера. Обязательства applicability/task_projection/policy_projection дополняют вычисленный набор и не сужают его; отсутствующая applicability — не обязательство (вычисленный набор не размывается). `compute_change` снимает universe-входы (модули + объявленные + unknown_paths поштучно) и diff'ит с baseline work/checks/snapshot.json; `evaluate_reuse` сравнивает binding (digests, adapter/runner, среда, поздний failed); `fallback.limits` рубит чтение по max_bytes и сумму таймаутов по max_seconds — превышение даёт blocked, не passed. `checks plan <TASK>` в playbook.py — read-only объяснение с цепочками и стоимостью; на self-project контролируемый отказ (политика не подключена). CLI-обвязка: загрузка политики/карточки/baseline/графа/результатов из work/checks/, повреждённые артефакты — примечание и консервативный набор.
+Файлы:
+- ai-dev-playbook/scripts/checks_graph.py
+- ai-dev-playbook/scripts/checks_select.py
+- ai-dev-playbook/scripts/playbook.py
+- tests/test_checks_graph.py
+- tests/test_checks_select.py
+- tests/test_checks_contract.py
+- docs/architecture.md
+- docs/code-map.md
+- CHANGELOG.md
+
+### CHECK-01 — Проверка
+
+Время: 2026-11-08T20:15:00+03:00
+Исполнитель: Devin
+Модель: SWE-2 High
+Результат: passed
+Критерии: AC-01, AC-02, AC-03, AC-04
+Команда: `python3 ai-dev-playbook/scripts/playbook.py verify PB-059`; адресные `python3 -m unittest discover -s tests -p "test_checks_graph.py" -v` и `-p "test_checks_select.py" -v`
+Среда: macOS, Python 3.14, checkout feature/dependency-aware-verification; изолированные tempfile-проекты, установленный комплект для CLI, счётчики хеширования через внедряемый hash_fn.
+Факт: verify c8868c8fda5f4dacaba02b5cf45c03ca passed, inputs_unchanged=true; 912 тестов (+53 адресных: 22 graph, 31 select), unit-tests прошли. AC-01: provenance-рёбра explicit/observed/analyzer, union старых/новых, удаления, циклы, dynamic/неразбираемый/вне-модулей — unknown. AC-02: расширение только до доказанной границы (module→subsystem→project, unattributed→blocked при узком unknown_scope), explain-цепочки, обязательства дополняют набор. AC-03: план read-only (diff дерева до/после пуст), max_bytes рубит чтение → консервативный набор, max_seconds блокирует run до запуска, счётчик подтверждает однократное хеширование.
+Доказательства:
+- [Отчёт verify](../../work/verification/PB-059/c8868c8fda5f4dacaba02b5cf45c03ca/report.json)
+- [Команды и ограничения](PB-059-evidence/commands.md)
+Ограничения: самопроверка исполнителя. Хранение baseline/графа/результатов, checks run/status и формат истории — PB-060; подключение политики и self-project — PB-063; доверенный контур — PB-061. Семантика unknown-областей и константа RUNNER — решения этой карточки в рамках design, не отдельно утверждённые.
+
+### HANDOFF-01 — Передача
+
+Время: 2026-11-08T20:15:00+03:00
+Исполнитель: Devin
+Модель: SWE-2 High
+Выполнение: EXEC-01
+Проверки: CHECK-01
+Состояние: in_review, ветка feature/dependency-aware-verification, изменения не закоммичены. Следующий шаг — независимый аудит.
+Фокус аудита: семантика unknown-областей (module/subsystem/project — затронут любым изменением), трактовка отсутствующей applicability как необязательства, покрытие unknown_paths файловыми входами universe-снимка, корректность reuse-binding (digests, среда, поздний failed), блокировка по бюджетам до запуска, read-only гарантия checks plan.

@@ -1,0 +1,13 @@
+PB-059 independent audit: changes_requested; A-01..A-04 (P1).
+Initial verify PB-059 --audit-ready: exit 0, current handoff confirmed.
+python3 -m unittest discover -s tests -p test_checks_graph.py -v: 22 passed.
+python3 -m unittest discover -s tests -p test_checks_select.py -v: 31 passed after prepare-audit completed.
+python3 -m unittest discover -s tests -p test_checks_contract.py -v: 53 passed.
+reproduce.py: all four defect probes reproduced; see reproduce.log.
+card sync PB-059 --apply: exit 0; AC-01..AC-04 unchecked.
+index: exit 0; in_progress reflected in index.
+check --ready: exit 0; structure/links valid (81 cards, 26 documents, 2 legacy).
+verify PB-059 --preflight: exit 0; materials, locks, commands and limits checked.
+git diff --check: exit 0.
+Warning: exact auditor model unavailable; GPT-6 (не подтверждено) recorded and engineer asked.
+Full suite was not rerun. No implementation fixes or Git commits made.

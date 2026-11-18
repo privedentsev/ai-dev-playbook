@@ -55,6 +55,8 @@ def valid(mode="final"):
 
 
 class PolicySchemaTest(unittest.TestCase):
+    """Схема политики блоков: версии, обязательные поля, идентификаторы,
+    режимы и члены."""
     def check(self, payload, fragment=None):
         errors = []
         bw.validate_policy(payload, "p", errors)
@@ -65,6 +67,7 @@ class PolicySchemaTest(unittest.TestCase):
                             f"{fragment!r} not in {errors}")
 
     def test_valid_modes(self):
+        """Политики per_task и final с допустимыми рёбрами проходят схему"""
         self.check(policy("per_task"))
         self.check(policy("final", edges=edges(("DEV-1", "DEV-2"))))
         self.check(policy("mixed",
@@ -73,19 +76,23 @@ class PolicySchemaTest(unittest.TestCase):
                           edges=edges(("DEV-1", "DEV-2"))))
 
     def test_unknown_version_rejected(self):
+        """schema_version=2 и строковая версия отклоняются как неизвестная версия"""
         self.check(policy(schema_version=2), "неизвестная версия")
         self.check(policy(schema_version="1"), "неизвестная версия")
 
     def test_unknown_fields_rejected(self):
+        """Неизвестные поля политики отклоняются"""
         self.check(policy(rogue=1), "неизвестные поля")
 
     def test_ids_revision_mode(self):
+        """Невалидные policy_id, revision и mode отклоняются"""
         self.check(policy(policy_id="BAD"), "policy_id")
         self.check(policy(revision=0), "revision")
         self.check(policy(revision="1"), "revision")
         self.check(policy(mode="bulk"), "mode")
 
     def test_basis_required(self):
+        """Политика без approved_basis отклоняется"""
         bad = policy()
         del bad["approved_basis"]
         self.check(bad, "approved_basis")
@@ -95,12 +102,14 @@ class PolicySchemaTest(unittest.TestCase):
                                           "source": "y"}), "at")
 
     def test_members_rules(self):
+        """Пустой и повторяющийся members отклоняются"""
         self.check(policy(members=[]), "members")
         self.check(policy(members=["DEV-1", "DEV-1"]), "повтор")
         self.check(policy(members=["dev-1"]), "некорректный ID")
         self.check(policy(audit="DEV-1"), "final_audit не входит")
 
     def test_checkpoints_partition_for_mixed(self):
+        """mixed-режим требует полного непересекающегося покрытия чекпоинтами"""
         self.check(policy("mixed"), "mixed требует")
         self.check(policy("mixed",
                           checkpoints=[{"id": "c", "tasks": ["DEV-1"]}]),
@@ -118,6 +127,7 @@ class PolicySchemaTest(unittest.TestCase):
                    "недопустимы при mode")
 
     def test_edges_rules(self):
+        """Рёбра недопустимы при per_task и ссылаются только на members"""
         self.check(policy("per_task", edges=edges(("DEV-1", "DEV-2"))),
                    "недопустимы при per_task")
         self.check(policy("final", edges=edges(("DEV-1", "DEV-3"))),
@@ -136,6 +146,8 @@ class PolicySchemaTest(unittest.TestCase):
 
 
 class CardBlockTest(unittest.TestCase):
+    """Карточки блоков: допустимые ссылки на подзадачи и аудит,
+    ошибки ссылок."""
     def block(self, **extra):
         data = {"schema_version": 1, "document": "plan:block-x",
                 "policy_id": "block-x", "revision": 1}
@@ -152,6 +164,7 @@ class CardBlockTest(unittest.TestCase):
                             f"{fragment!r} not in {errors}")
 
     def test_valid_refs(self):
+        """Блок с допустимыми ссылками на подзадачи и аудит проходит"""
         self.check(self.block())
         self.check(self.block(role="member"))
         self.check(self.block(role="final_audit"))
@@ -160,6 +173,7 @@ class CardBlockTest(unittest.TestCase):
                                    "findings": ["F-01"]}))
 
     def test_ref_errors(self):
+        """Ошибки ссылок блока: версия, формат document и прочие отказы"""
         self.check(self.block(schema_version=9), "неизвестная версия")
         self.check(self.block(document="spec:x"), "plan:<slug>")
         self.check(self.block(revision=0), "revision")
@@ -211,6 +225,7 @@ class GraphTest(unittest.TestCase):
         return result
 
     def test_members_must_ref(self):
+        """Член политики без ref в карточке отклоняется графом"""
         pol = valid()
         records = self.records({"DEV-1": ("draft", ()),
                                 "DEV-2": ("draft", ()),
@@ -218,6 +233,7 @@ class GraphTest(unittest.TestCase):
         self.run_graph(self.pols(pol), {}, records, "не имеет ссылки block")
 
     def test_happy_membership(self):
+        """Корректное членство карточек в блоке проходит валидацию графа"""
         pol = valid()
         records = self.records({"DEV-1": ("draft", ()),
                                 "DEV-2": ("draft", ()),
@@ -226,6 +242,7 @@ class GraphTest(unittest.TestCase):
                        + [pol["final_audit"]]), records)
 
     def test_ref_revision_stale(self):
+        """Устаревшая revision ссылки отклоняется графом"""
         pol = valid()
         records = self.records({"DEV-1": ("draft", ()),
                                 "DEV-2": ("draft", ()),
@@ -235,6 +252,7 @@ class GraphTest(unittest.TestCase):
         self.run_graph(self.pols(pol), blocks, records, "устарела")
 
     def test_repeated_membership(self):
+        """Повторное членство карточки в графе отклоняется"""
         pol = valid()
         other = dict(valid())
         other = {"policy": {**valid(), "policy_id": "block-y"},
@@ -248,6 +266,7 @@ class GraphTest(unittest.TestCase):
                        records, "повторное членство")
 
     def test_dep_edge_contradiction(self):
+        """Ребро зависимости, противоречащее членству, отклоняется"""
         pol = valid()
         records = self.records({"DEV-1": ("draft", ()),
                                 "DEV-2": ("draft", ("DEV-1",)),
@@ -257,6 +276,7 @@ class GraphTest(unittest.TestCase):
                        records, "Depends-On и implementation_edge")
 
     def test_audit_dep_cycle_rejected(self):
+        """Цикл зависимостей через AUDIT-карточку отклоняется"""
         pol = valid()
         records = self.records({"DEV-1": ("draft", ()),
                                 "DEV-2": ("draft", ()),
@@ -266,6 +286,7 @@ class GraphTest(unittest.TestCase):
                        records, "AUDIT ↔ members")
 
     def test_per_task_audit_dep_allowed(self):
+        """При per_task зависимость AUDIT от задачи допустима"""
         pol = valid("per_task")
         records = self.records({"DEV-1": ("draft", ()),
                                 "DEV-2": ("draft", ("DEV-1",)),
@@ -275,6 +296,7 @@ class GraphTest(unittest.TestCase):
                        records)
 
     def test_combined_cycle_rejected(self):
+        """Комбинированный цикл dependency+audit отклоняется"""
         pol = valid()
         records = self.records({"DEV-1": ("draft", ()),
                                 "DEV-2": ("draft", ()),
@@ -287,6 +309,7 @@ class GraphTest(unittest.TestCase):
                        records, "цикл")
 
     def test_fix_no_strict_edges(self):
+        """FIX-карточки не образуют строгих рёбер графа"""
         pol = valid()
         records = self.records({"DEV-1": ("draft", ()),
                                 "DEV-2": ("draft", ()),
@@ -301,6 +324,7 @@ class GraphTest(unittest.TestCase):
         self.run_graph(self.pols(pol), blocks, records, "у исправления нет")
 
     def test_unknown_card_in_policy(self):
+        """Карточка вне индекса, указанная в политике, отклоняется"""
         pol = valid()
         records = self.records({"DEV-1": ("draft", ()),
                                 "DEV-2": ("draft", ()),
@@ -312,6 +336,8 @@ class GraphTest(unittest.TestCase):
 
 
 class EvaluateTest(unittest.TestCase):
+    """Оценка готовности блоков: legacy-зависимости, финальные цепочки
+    по handoff, семантика приёмки и чекпоинты."""
     def task(self, ident, deps=(), block=None):
         return {"id": ident, "status": "in_progress", "deps": list(deps),
                 "block": block}
@@ -321,6 +347,7 @@ class EvaluateTest(unittest.TestCase):
                 for ident, s in statuses.items()}
 
     def test_legacy_strict_deps(self):
+        """Оценка готовности учитывает legacy-строгие зависимости задач"""
         task = self.task("DEV-2", deps=["DEV-1"])
         records = self.records({"DEV-1": "in_progress", "DEV-2": "draft"})
         verdict = bw.evaluate("check", task, None, records, {})
@@ -334,6 +361,7 @@ class EvaluateTest(unittest.TestCase):
         self.assertIn(bw.DEPENDENCY_CANCELLED, verdict["reason_codes"])
 
     def test_final_chain_by_handoffs(self):
+        """Финальная цепочка готовности строится по handoff-записям"""
         pol = valid()
         records = self.records({"DEV-1": "in_review", "DEV-2": "draft"})
         task = self.task("DEV-2")
@@ -352,6 +380,7 @@ class EvaluateTest(unittest.TestCase):
                       verdict["reason_codes"])
 
     def test_member_audit_accept_close_final(self):
+        """Член блока проходит audit→accept→close→final последовательно"""
         pol = valid()
         records = self.records({"DEV-1": "in_review"})
         task = self.task("DEV-1")
@@ -371,6 +400,7 @@ class EvaluateTest(unittest.TestCase):
         self.assertIn(bw.CANDIDATE_STALE, close["reason_codes"])
 
     def test_mixed_checkpoint_gate(self):
+        """mixed-режим оценивает готовность по чекпоинтам"""
         pol = valid("mixed")
         pol["checkpoints"] = [{"id": "cp1", "tasks": ["DEV-1"]},
                               {"id": "cp2", "tasks": ["DEV-2"]}]
@@ -387,6 +417,7 @@ class EvaluateTest(unittest.TestCase):
                       verdict["consumed_receipts"])
 
     def test_audit_card_readiness(self):
+        """AUDIT-карточка получает собственную оценку готовности"""
         pol = valid()
         records = self.records({"DEV-1": "in_review", "DEV-2": "in_review",
                                 "AUDIT-1": "ready"})
@@ -415,6 +446,7 @@ class EvaluateTest(unittest.TestCase):
                                     evidence)["allowed"])
 
     def test_per_task_semantics(self):
+        """per_task-режим оценивает задачи независимо"""
         pol = valid("per_task")
         records = self.records({"DEV-1": "in_review"})
         task = self.task("DEV-1")
@@ -430,6 +462,7 @@ class EvaluateTest(unittest.TestCase):
                                     evidence)["allowed"])
 
     def test_fix_card_readiness(self):
+        """FIX-карточка оценивается по правилам исправлений"""
         pol = valid()
         records = self.records({"FIX-1": "in_review"})
         task = self.task("FIX-1",
@@ -446,6 +479,7 @@ class EvaluateTest(unittest.TestCase):
                                     evidence)["allowed"])
 
     def test_stale_ref_and_outsider(self):
+        """Устаревшие ссылки и карточки вне блока отклоняются при оценке"""
         pol = valid()
         records = self.records({"DEV-9": "draft", "DEV-1": "in_progress"})
         verdict = bw.evaluate("check", self.task("DEV-9"), pol, records, {})
@@ -456,6 +490,7 @@ class EvaluateTest(unittest.TestCase):
         self.assertIn(bw.POLICY_STALE, verdict["reason_codes"])
 
     def test_revise_allowed(self):
+        """Ревизия карточки разрешена в рамках оценки готовности"""
         pol = valid()
         records = self.records({"DEV-2": "in_review"})
         self.assertTrue(bw.evaluate("revise", self.task("DEV-2"), pol,
@@ -465,7 +500,9 @@ class EvaluateTest(unittest.TestCase):
 
 
 class BlockStatusTest(unittest.TestCase):
+    """Статусы блоков: прогрессия состояний приёмки."""
     def test_progression(self):
+        """Статусы блока прогрессируют по приёмке состояний"""
         pol = valid()
         records = {"DEV-1": {"status": "in_progress", "deps": [],
                              "archived": False},
@@ -493,6 +530,8 @@ class BlockStatusTest(unittest.TestCase):
 
 
 class FormatValidatorsTest(unittest.TestCase):
+    """Валидаторы форматов review-package, findings-report и
+    block-receipt."""
     def check(self, fn, payload, fragment=None):
         errors = []
         fn(payload, "doc", errors)
@@ -506,6 +545,7 @@ class FormatValidatorsTest(unittest.TestCase):
         return {"document": "plan:x", "policy_id": "x", "revision": 1}
 
     def test_review_package(self):
+        """Валидный review-package проходит validate_review_package"""
         pkg = {"schema_version": 1, "package_id": "pkg-1",
                "block": self.block_ref(),
                "policy_sha256": "sha256:" + "a" * 64,
@@ -527,6 +567,7 @@ class FormatValidatorsTest(unittest.TestCase):
                    {**pkg, "candidate_sha256": "bad"}, "sha256")
 
     def test_findings_report(self):
+        """Валидный findings-report проходит validate_findings_report"""
         rep = {"schema_version": 1, "report_id": "rep-1", "iteration": 1,
                "block": self.block_ref(),
                "author": {"name": "Auditor", "model": "M"},
@@ -549,6 +590,7 @@ class FormatValidatorsTest(unittest.TestCase):
         self.check(bw.validate_findings_report, bad, "severity")
 
     def test_block_receipt(self):
+        """Валидный block-receipt проходит validate_block_receipt"""
         receipt = {"schema_version": 1, "receipt_id": "rc-1",
                    "block": self.block_ref(),
                    "package": {"id": "pkg-1", "sha256": "sha256:" + "a" * 64},
@@ -607,6 +649,7 @@ class CatalogIntegrationTest(CloseLifecycleCase):
         return meta
 
     def test_capability_gates_fields(self):
+        """Capability-комплект ограничивает поля project.json для блоков"""
         path = self.root / "ai-dev-playbook" / "project.json"
         project = json.loads(path.read_text(encoding="utf-8"))
         project["documents"].pop("capabilities")
@@ -622,6 +665,7 @@ class CatalogIntegrationTest(CloseLifecycleCase):
             self.catalog()
 
     def test_member_without_ref_rejected(self):
+        """Член блока без ref отклоняется при построении плана"""
         self.plan_with_policy()
         managed_card(self.tasks_dir(), "DEV-1", "draft")
         managed_card(self.tasks_dir(), "DEV-2", "draft")
@@ -630,6 +674,7 @@ class CatalogIntegrationTest(CloseLifecycleCase):
             self.catalog()
 
     def test_policy_preview_and_apply(self):
+        """План с политикой: preview и apply регистрируют блок"""
         self.plan_with_policy()
         for ident in ("DEV-1", "DEV-2", "AUDIT-1"):
             managed_card(self.tasks_dir(), ident, "draft",
@@ -662,6 +707,7 @@ class CatalogIntegrationTest(CloseLifecycleCase):
         self.assertIn("новой ревизии", err)
 
     def test_block_status_and_deferred(self):
+        """Block status и отложенные состояния корректны на проекте"""
         self.plan_with_policy()
         for ident in ("DEV-1", "DEV-2", "AUDIT-1"):
             managed_card(self.tasks_dir(), ident, "draft",
@@ -709,7 +755,9 @@ class CatalogIntegrationTest(CloseLifecycleCase):
 
 
 class FormatsContractTest(unittest.TestCase):
+    """Контрактные константы версий форматов приёмки."""
     def test_version_constants(self):
+        """Константы версий форматов приёмки соответствуют контракту"""
         self.assertEqual(bw.POLICY_SCHEMA_VERSION, 1)
         self.assertEqual(bw.REVIEW_PACKAGE_VERSION, 1)
         self.assertEqual(bw.FINDINGS_REPORT_VERSION, 1)

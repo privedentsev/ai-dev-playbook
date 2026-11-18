@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "task_id": "PB-057",
+  "audit_id": "AUDIT-03",
+  "handoff": "HANDOFF-03",
+  "actor": "Codex",
+  "model": "GPT-6",
+  "result": "accepted",
+  "closed_findings": [
+    "A-05",
+    "A-06"
+  ],
+  "new_findings": [],
+  "targeted_tests": {
+    "count": 53,
+    "result": "passed"
+  },
+  "independent_probes": "passed",
+  "full_suite": "not independently repeated; executor report a56652de064b47f1829ad2f1e8592a06",
+  "initial_audit_ready": "refused before closing A-05/A-06; see audit-ready-initial.log",
+  "cli_acceptance": "current; AUDIT-03 bound to HANDOFF-03",
+  "audit_ready": "passed after recording finding closures and syncing criteria",
+  "preflight": "passed as part of --audit-ready",
+  "check_ready": "passed",
+  "index": "already current",
+  "snapshot_portability": "repeat prepare-audit passed",
+  "close_dry_run": "passed; real close not requested",
+  "open_findings": []
+}

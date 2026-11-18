@@ -1,0 +1,603 @@
+test_audit_package_and_accept_repeat_do_not_repeat_expensive_check (test_task_workflow_lifecycle.TaskWorkflowLifecycleTest.test_audit_package_and_accept_repeat_do_not_repeat_expensive_check) ... FAIL
+test_changed_paths_from_real_baseline_add_project_obligations (test_task_workflow_lifecycle.TaskWorkflowLifecycleTest.test_changed_paths_from_real_baseline_add_project_obligations) ... FAIL
+test_changed_read_material_requires_its_check_again (test_task_workflow_lifecycle.TaskWorkflowLifecycleTest.test_changed_read_material_requires_its_check_again) ... FAIL
+test_conflict_after_preparation_refuses_and_keeps_external_edit (test_task_workflow_lifecycle.TaskWorkflowLifecycleTest.test_conflict_after_preparation_refuses_and_keeps_external_edit) ... FAIL
+test_damaged_latest_run_requires_replacement_and_preserves_history (test_task_workflow_lifecycle.TaskWorkflowLifecycleTest.test_damaged_latest_run_requires_replacement_and_preserves_history) ... FAIL
+test_external_metadata_pair_start_handoff_and_archive (test_task_workflow_lifecycle.TaskWorkflowLifecycleTest.test_external_metadata_pair_start_handoff_and_archive) ... FAIL
+test_first_start_captures_existing_dirty_git_bytes (test_task_workflow_lifecycle.TaskWorkflowLifecycleTest.test_first_start_captures_existing_dirty_git_bytes) ... FAIL
+test_handoff_with_no_or_failed_results_refuses (test_task_workflow_lifecycle.TaskWorkflowLifecycleTest.test_handoff_with_no_or_failed_results_refuses) ... FAIL
+test_immutable_material_file_directory_swap_cannot_preserve_receipt (test_task_workflow_lifecycle.TaskWorkflowLifecycleTest.test_immutable_material_file_directory_swap_cannot_preserve_receipt) ... FAIL
+test_latest_failure_cannot_be_hidden_by_explicit_old_report (test_task_workflow_lifecycle.TaskWorkflowLifecycleTest.test_latest_failure_cannot_be_hidden_by_explicit_old_report) ... FAIL
+test_log_bytes_and_baseline_corruption_reject_receipt (test_task_workflow_lifecycle.TaskWorkflowLifecycleTest.test_log_bytes_and_baseline_corruption_reject_receipt) ... FAIL
+test_manual_only_path_closes_without_command_run (test_task_workflow_lifecycle.TaskWorkflowLifecycleTest.test_manual_only_path_closes_without_command_run) ... FAIL
+test_markdown_v2_journal_coverage_and_close (test_task_workflow_lifecycle.TaskWorkflowLifecycleTest.test_markdown_v2_journal_coverage_and_close) ... FAIL
+test_new_unknown_proof_requires_new_handoff (test_task_workflow_lifecycle.TaskWorkflowLifecycleTest.test_new_unknown_proof_requires_new_handoff) ... FAIL
+test_pending_and_foreign_lock_prevent_handoff (test_task_workflow_lifecycle.TaskWorkflowLifecycleTest.test_pending_and_foreign_lock_prevent_handoff) ... FAIL
+test_real_sigkill_staged_and_mid_write_restore_and_repeat (test_task_workflow_lifecycle.TaskWorkflowLifecycleTest.test_real_sigkill_staged_and_mid_write_restore_and_repeat) ... FAIL
+test_revise_preserves_history_and_stale_acceptance_is_blocked (test_task_workflow_lifecycle.TaskWorkflowLifecycleTest.test_revise_preserves_history_and_stale_acceptance_is_blocked) ... FAIL
+test_route_requires_approval_and_keeps_failures (test_task_workflow_lifecycle.TaskWorkflowLifecycleTest.test_route_requires_approval_and_keeps_failures) ... FAIL
+test_service_cycle_does_not_rerun_and_preserves_immutable_bytes (test_task_workflow_lifecycle.TaskWorkflowLifecycleTest.test_service_cycle_does_not_rerun_and_preserves_immutable_bytes) ... FAIL
+test_stale_source_plan_policy_and_report_reject_acceptance (test_task_workflow_lifecycle.TaskWorkflowLifecycleTest.test_stale_source_plan_policy_and_report_reject_acceptance) ... FAIL
+test_start_missing_goal_or_dependency_refuses_without_writes (test_task_workflow_lifecycle.TaskWorkflowLifecycleTest.test_start_missing_goal_or_dependency_refuses_without_writes) ... FAIL
+test_start_no_git_dirty_git_and_idempotence (test_task_workflow_lifecycle.TaskWorkflowLifecycleTest.test_start_no_git_dirty_git_and_idempotence) ... FAIL
+test_start_service_writes_do_not_make_docs_obligation_applicable (test_task_workflow_lifecycle.TaskWorkflowLifecycleTest.test_start_service_writes_do_not_make_docs_obligation_applicable) ... FAIL
+
+======================================================================
+FAIL: test_audit_package_and_accept_repeat_do_not_repeat_expensive_check (test_task_workflow_lifecycle.TaskWorkflowLifecycleTest.test_audit_package_and_accept_repeat_do_not_repeat_expensive_check)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_task_workflow_lifecycle.py", line 22, in setUp
+    super().setUp()
+    ~~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_close_lifecycle.py", line 69, in setUp
+    super().setUp()
+    ~~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_lifecycle.py", line 48, in setUp
+    super().setUp()
+    ~~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_document_cli.py", line 16, in setUp
+    super().setUp()
+    ~~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_documents.py", line 120, in setUp
+    self.install()
+    ~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_cli.py", line 44, in install
+    self.assertEqual(code, 0, err)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+AssertionError: 1 != 0 : ERROR: Незавершённая операция документов (20261105-185625-b8dd1e3d): обычные команды заблокированы. Восстановление: python3 work/lifecycle/20261105-185625-b8dd1e3d/restore.py
+
+
+======================================================================
+FAIL: test_changed_paths_from_real_baseline_add_project_obligations (test_task_workflow_lifecycle.TaskWorkflowLifecycleTest.test_changed_paths_from_real_baseline_add_project_obligations)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_task_workflow_lifecycle.py", line 22, in setUp
+    super().setUp()
+    ~~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_close_lifecycle.py", line 69, in setUp
+    super().setUp()
+    ~~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_lifecycle.py", line 48, in setUp
+    super().setUp()
+    ~~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_document_cli.py", line 16, in setUp
+    super().setUp()
+    ~~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_documents.py", line 120, in setUp
+    self.install()
+    ~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_cli.py", line 44, in install
+    self.assertEqual(code, 0, err)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+AssertionError: 1 != 0 : ERROR: Незавершённая операция документов (20261105-185625-b8dd1e3d): обычные команды заблокированы. Восстановление: python3 work/lifecycle/20261105-185625-b8dd1e3d/restore.py
+
+
+======================================================================
+FAIL: test_changed_read_material_requires_its_check_again (test_task_workflow_lifecycle.TaskWorkflowLifecycleTest.test_changed_read_material_requires_its_check_again)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_task_workflow_lifecycle.py", line 22, in setUp
+    super().setUp()
+    ~~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_close_lifecycle.py", line 69, in setUp
+    super().setUp()
+    ~~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_lifecycle.py", line 48, in setUp
+    super().setUp()
+    ~~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_document_cli.py", line 16, in setUp
+    super().setUp()
+    ~~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_documents.py", line 120, in setUp
+    self.install()
+    ~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_cli.py", line 44, in install
+    self.assertEqual(code, 0, err)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+AssertionError: 1 != 0 : ERROR: Незавершённая операция документов (20261105-185625-b8dd1e3d): обычные команды заблокированы. Восстановление: python3 work/lifecycle/20261105-185625-b8dd1e3d/restore.py
+
+
+======================================================================
+FAIL: test_conflict_after_preparation_refuses_and_keeps_external_edit (test_task_workflow_lifecycle.TaskWorkflowLifecycleTest.test_conflict_after_preparation_refuses_and_keeps_external_edit)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_task_workflow_lifecycle.py", line 22, in setUp
+    super().setUp()
+    ~~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_close_lifecycle.py", line 69, in setUp
+    super().setUp()
+    ~~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_lifecycle.py", line 48, in setUp
+    super().setUp()
+    ~~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_document_cli.py", line 16, in setUp
+    super().setUp()
+    ~~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_documents.py", line 120, in setUp
+    self.install()
+    ~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_cli.py", line 44, in install
+    self.assertEqual(code, 0, err)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+AssertionError: 1 != 0 : ERROR: Незавершённая операция документов (20261105-185625-b8dd1e3d): обычные команды заблокированы. Восстановление: python3 work/lifecycle/20261105-185625-b8dd1e3d/restore.py
+
+
+======================================================================
+FAIL: test_damaged_latest_run_requires_replacement_and_preserves_history (test_task_workflow_lifecycle.TaskWorkflowLifecycleTest.test_damaged_latest_run_requires_replacement_and_preserves_history)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_task_workflow_lifecycle.py", line 22, in setUp
+    super().setUp()
+    ~~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_close_lifecycle.py", line 69, in setUp
+    super().setUp()
+    ~~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_lifecycle.py", line 48, in setUp
+    super().setUp()
+    ~~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_document_cli.py", line 16, in setUp
+    super().setUp()
+    ~~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_documents.py", line 120, in setUp
+    self.install()
+    ~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_cli.py", line 44, in install
+    self.assertEqual(code, 0, err)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+AssertionError: 1 != 0 : ERROR: Незавершённая операция документов (20261105-185625-b8dd1e3d): обычные команды заблокированы. Восстановление: python3 work/lifecycle/20261105-185625-b8dd1e3d/restore.py
+
+
+======================================================================
+FAIL: test_external_metadata_pair_start_handoff_and_archive (test_task_workflow_lifecycle.TaskWorkflowLifecycleTest.test_external_metadata_pair_start_handoff_and_archive)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_task_workflow_lifecycle.py", line 22, in setUp
+    super().setUp()
+    ~~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_close_lifecycle.py", line 69, in setUp
+    super().setUp()
+    ~~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_lifecycle.py", line 48, in setUp
+    super().setUp()
+    ~~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_document_cli.py", line 16, in setUp
+    super().setUp()
+    ~~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_documents.py", line 120, in setUp
+    self.install()
+    ~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_cli.py", line 44, in install
+    self.assertEqual(code, 0, err)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+AssertionError: 1 != 0 : ERROR: Незавершённая операция документов (20261105-185625-b8dd1e3d): обычные команды заблокированы. Восстановление: python3 work/lifecycle/20261105-185625-b8dd1e3d/restore.py
+
+
+======================================================================
+FAIL: test_first_start_captures_existing_dirty_git_bytes (test_task_workflow_lifecycle.TaskWorkflowLifecycleTest.test_first_start_captures_existing_dirty_git_bytes)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_task_workflow_lifecycle.py", line 22, in setUp
+    super().setUp()
+    ~~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_close_lifecycle.py", line 69, in setUp
+    super().setUp()
+    ~~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_lifecycle.py", line 48, in setUp
+    super().setUp()
+    ~~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_document_cli.py", line 16, in setUp
+    super().setUp()
+    ~~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_documents.py", line 120, in setUp
+    self.install()
+    ~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_cli.py", line 44, in install
+    self.assertEqual(code, 0, err)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+AssertionError: 1 != 0 : ERROR: Незавершённая операция документов (20261105-185625-b8dd1e3d): обычные команды заблокированы. Восстановление: python3 work/lifecycle/20261105-185625-b8dd1e3d/restore.py
+
+
+======================================================================
+FAIL: test_handoff_with_no_or_failed_results_refuses (test_task_workflow_lifecycle.TaskWorkflowLifecycleTest.test_handoff_with_no_or_failed_results_refuses)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_task_workflow_lifecycle.py", line 22, in setUp
+    super().setUp()
+    ~~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_close_lifecycle.py", line 69, in setUp
+    super().setUp()
+    ~~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_lifecycle.py", line 48, in setUp
+    super().setUp()
+    ~~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_document_cli.py", line 16, in setUp
+    super().setUp()
+    ~~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_documents.py", line 120, in setUp
+    self.install()
+    ~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_cli.py", line 44, in install
+    self.assertEqual(code, 0, err)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+AssertionError: 1 != 0 : ERROR: Незавершённая операция документов (20261105-185625-b8dd1e3d): обычные команды заблокированы. Восстановление: python3 work/lifecycle/20261105-185625-b8dd1e3d/restore.py
+
+
+======================================================================
+FAIL: test_immutable_material_file_directory_swap_cannot_preserve_receipt (test_task_workflow_lifecycle.TaskWorkflowLifecycleTest.test_immutable_material_file_directory_swap_cannot_preserve_receipt)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_task_workflow_lifecycle.py", line 22, in setUp
+    super().setUp()
+    ~~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_close_lifecycle.py", line 69, in setUp
+    super().setUp()
+    ~~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_lifecycle.py", line 48, in setUp
+    super().setUp()
+    ~~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_document_cli.py", line 16, in setUp
+    super().setUp()
+    ~~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_documents.py", line 120, in setUp
+    self.install()
+    ~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_cli.py", line 44, in install
+    self.assertEqual(code, 0, err)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+AssertionError: 1 != 0 : ERROR: Незавершённая операция документов (20261105-185625-b8dd1e3d): обычные команды заблокированы. Восстановление: python3 work/lifecycle/20261105-185625-b8dd1e3d/restore.py
+
+
+======================================================================
+FAIL: test_latest_failure_cannot_be_hidden_by_explicit_old_report (test_task_workflow_lifecycle.TaskWorkflowLifecycleTest.test_latest_failure_cannot_be_hidden_by_explicit_old_report)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_task_workflow_lifecycle.py", line 22, in setUp
+    super().setUp()
+    ~~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_close_lifecycle.py", line 69, in setUp
+    super().setUp()
+    ~~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_lifecycle.py", line 48, in setUp
+    super().setUp()
+    ~~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_document_cli.py", line 16, in setUp
+    super().setUp()
+    ~~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_documents.py", line 120, in setUp
+    self.install()
+    ~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_cli.py", line 44, in install
+    self.assertEqual(code, 0, err)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+AssertionError: 1 != 0 : ERROR: Незавершённая операция документов (20261105-185625-b8dd1e3d): обычные команды заблокированы. Восстановление: python3 work/lifecycle/20261105-185625-b8dd1e3d/restore.py
+
+
+======================================================================
+FAIL: test_log_bytes_and_baseline_corruption_reject_receipt (test_task_workflow_lifecycle.TaskWorkflowLifecycleTest.test_log_bytes_and_baseline_corruption_reject_receipt)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_task_workflow_lifecycle.py", line 22, in setUp
+    super().setUp()
+    ~~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_close_lifecycle.py", line 69, in setUp
+    super().setUp()
+    ~~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_lifecycle.py", line 48, in setUp
+    super().setUp()
+    ~~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_document_cli.py", line 16, in setUp
+    super().setUp()
+    ~~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_documents.py", line 120, in setUp
+    self.install()
+    ~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_cli.py", line 44, in install
+    self.assertEqual(code, 0, err)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+AssertionError: 1 != 0 : ERROR: Незавершённая операция документов (20261105-185625-b8dd1e3d): обычные команды заблокированы. Восстановление: python3 work/lifecycle/20261105-185625-b8dd1e3d/restore.py
+
+
+======================================================================
+FAIL: test_manual_only_path_closes_without_command_run (test_task_workflow_lifecycle.TaskWorkflowLifecycleTest.test_manual_only_path_closes_without_command_run)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_task_workflow_lifecycle.py", line 22, in setUp
+    super().setUp()
+    ~~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_close_lifecycle.py", line 69, in setUp
+    super().setUp()
+    ~~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_lifecycle.py", line 48, in setUp
+    super().setUp()
+    ~~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_document_cli.py", line 16, in setUp
+    super().setUp()
+    ~~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_documents.py", line 120, in setUp
+    self.install()
+    ~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_cli.py", line 44, in install
+    self.assertEqual(code, 0, err)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+AssertionError: 1 != 0 : ERROR: Незавершённая операция документов (20261105-185625-b8dd1e3d): обычные команды заблокированы. Восстановление: python3 work/lifecycle/20261105-185625-b8dd1e3d/restore.py
+
+
+======================================================================
+FAIL: test_markdown_v2_journal_coverage_and_close (test_task_workflow_lifecycle.TaskWorkflowLifecycleTest.test_markdown_v2_journal_coverage_and_close)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_task_workflow_lifecycle.py", line 22, in setUp
+    super().setUp()
+    ~~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_close_lifecycle.py", line 69, in setUp
+    super().setUp()
+    ~~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_lifecycle.py", line 48, in setUp
+    super().setUp()
+    ~~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_document_cli.py", line 16, in setUp
+    super().setUp()
+    ~~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_documents.py", line 120, in setUp
+    self.install()
+    ~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_cli.py", line 44, in install
+    self.assertEqual(code, 0, err)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+AssertionError: 1 != 0 : ERROR: Незавершённая операция документов (20261105-185625-b8dd1e3d): обычные команды заблокированы. Восстановление: python3 work/lifecycle/20261105-185625-b8dd1e3d/restore.py
+
+
+======================================================================
+FAIL: test_new_unknown_proof_requires_new_handoff (test_task_workflow_lifecycle.TaskWorkflowLifecycleTest.test_new_unknown_proof_requires_new_handoff)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_task_workflow_lifecycle.py", line 22, in setUp
+    super().setUp()
+    ~~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_close_lifecycle.py", line 69, in setUp
+    super().setUp()
+    ~~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_lifecycle.py", line 48, in setUp
+    super().setUp()
+    ~~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_document_cli.py", line 16, in setUp
+    super().setUp()
+    ~~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_documents.py", line 120, in setUp
+    self.install()
+    ~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_cli.py", line 44, in install
+    self.assertEqual(code, 0, err)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+AssertionError: 1 != 0 : ERROR: Незавершённая операция документов (20261105-185625-b8dd1e3d): обычные команды заблокированы. Восстановление: python3 work/lifecycle/20261105-185625-b8dd1e3d/restore.py
+
+
+======================================================================
+FAIL: test_pending_and_foreign_lock_prevent_handoff (test_task_workflow_lifecycle.TaskWorkflowLifecycleTest.test_pending_and_foreign_lock_prevent_handoff)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_task_workflow_lifecycle.py", line 22, in setUp
+    super().setUp()
+    ~~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_close_lifecycle.py", line 69, in setUp
+    super().setUp()
+    ~~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_lifecycle.py", line 48, in setUp
+    super().setUp()
+    ~~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_document_cli.py", line 16, in setUp
+    super().setUp()
+    ~~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_documents.py", line 120, in setUp
+    self.install()
+    ~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_cli.py", line 44, in install
+    self.assertEqual(code, 0, err)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+AssertionError: 1 != 0 : ERROR: Незавершённая операция документов (20261105-185625-b8dd1e3d): обычные команды заблокированы. Восстановление: python3 work/lifecycle/20261105-185625-b8dd1e3d/restore.py
+
+
+======================================================================
+FAIL: test_real_sigkill_staged_and_mid_write_restore_and_repeat (test_task_workflow_lifecycle.TaskWorkflowLifecycleTest.test_real_sigkill_staged_and_mid_write_restore_and_repeat)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_task_workflow_lifecycle.py", line 22, in setUp
+    super().setUp()
+    ~~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_close_lifecycle.py", line 69, in setUp
+    super().setUp()
+    ~~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_lifecycle.py", line 48, in setUp
+    super().setUp()
+    ~~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_document_cli.py", line 16, in setUp
+    super().setUp()
+    ~~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_documents.py", line 120, in setUp
+    self.install()
+    ~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_cli.py", line 44, in install
+    self.assertEqual(code, 0, err)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+AssertionError: 1 != 0 : ERROR: Незавершённая операция документов (20261105-185625-b8dd1e3d): обычные команды заблокированы. Восстановление: python3 work/lifecycle/20261105-185625-b8dd1e3d/restore.py
+
+
+======================================================================
+FAIL: test_revise_preserves_history_and_stale_acceptance_is_blocked (test_task_workflow_lifecycle.TaskWorkflowLifecycleTest.test_revise_preserves_history_and_stale_acceptance_is_blocked)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_task_workflow_lifecycle.py", line 22, in setUp
+    super().setUp()
+    ~~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_close_lifecycle.py", line 69, in setUp
+    super().setUp()
+    ~~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_lifecycle.py", line 48, in setUp
+    super().setUp()
+    ~~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_document_cli.py", line 16, in setUp
+    super().setUp()
+    ~~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_documents.py", line 120, in setUp
+    self.install()
+    ~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_cli.py", line 44, in install
+    self.assertEqual(code, 0, err)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+AssertionError: 1 != 0 : ERROR: Незавершённая операция документов (20261105-185625-b8dd1e3d): обычные команды заблокированы. Восстановление: python3 work/lifecycle/20261105-185625-b8dd1e3d/restore.py
+
+
+======================================================================
+FAIL: test_route_requires_approval_and_keeps_failures (test_task_workflow_lifecycle.TaskWorkflowLifecycleTest.test_route_requires_approval_and_keeps_failures)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_task_workflow_lifecycle.py", line 22, in setUp
+    super().setUp()
+    ~~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_close_lifecycle.py", line 69, in setUp
+    super().setUp()
+    ~~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_lifecycle.py", line 48, in setUp
+    super().setUp()
+    ~~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_document_cli.py", line 16, in setUp
+    super().setUp()
+    ~~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_documents.py", line 120, in setUp
+    self.install()
+    ~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_cli.py", line 44, in install
+    self.assertEqual(code, 0, err)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+AssertionError: 1 != 0 : ERROR: Незавершённая операция документов (20261105-185625-b8dd1e3d): обычные команды заблокированы. Восстановление: python3 work/lifecycle/20261105-185625-b8dd1e3d/restore.py
+
+
+======================================================================
+FAIL: test_service_cycle_does_not_rerun_and_preserves_immutable_bytes (test_task_workflow_lifecycle.TaskWorkflowLifecycleTest.test_service_cycle_does_not_rerun_and_preserves_immutable_bytes)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_task_workflow_lifecycle.py", line 22, in setUp
+    super().setUp()
+    ~~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_close_lifecycle.py", line 69, in setUp
+    super().setUp()
+    ~~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_lifecycle.py", line 48, in setUp
+    super().setUp()
+    ~~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_document_cli.py", line 16, in setUp
+    super().setUp()
+    ~~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_documents.py", line 120, in setUp
+    self.install()
+    ~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_cli.py", line 44, in install
+    self.assertEqual(code, 0, err)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+AssertionError: 1 != 0 : ERROR: Незавершённая операция документов (20261105-185625-b8dd1e3d): обычные команды заблокированы. Восстановление: python3 work/lifecycle/20261105-185625-b8dd1e3d/restore.py
+
+
+======================================================================
+FAIL: test_stale_source_plan_policy_and_report_reject_acceptance (test_task_workflow_lifecycle.TaskWorkflowLifecycleTest.test_stale_source_plan_policy_and_report_reject_acceptance)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_task_workflow_lifecycle.py", line 22, in setUp
+    super().setUp()
+    ~~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_close_lifecycle.py", line 69, in setUp
+    super().setUp()
+    ~~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_lifecycle.py", line 48, in setUp
+    super().setUp()
+    ~~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_document_cli.py", line 16, in setUp
+    super().setUp()
+    ~~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_documents.py", line 120, in setUp
+    self.install()
+    ~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_cli.py", line 44, in install
+    self.assertEqual(code, 0, err)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+AssertionError: 1 != 0 : ERROR: Незавершённая операция документов (20261105-185625-b8dd1e3d): обычные команды заблокированы. Восстановление: python3 work/lifecycle/20261105-185625-b8dd1e3d/restore.py
+
+
+======================================================================
+FAIL: test_start_missing_goal_or_dependency_refuses_without_writes (test_task_workflow_lifecycle.TaskWorkflowLifecycleTest.test_start_missing_goal_or_dependency_refuses_without_writes)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_task_workflow_lifecycle.py", line 22, in setUp
+    super().setUp()
+    ~~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_close_lifecycle.py", line 69, in setUp
+    super().setUp()
+    ~~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_lifecycle.py", line 48, in setUp
+    super().setUp()
+    ~~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_document_cli.py", line 16, in setUp
+    super().setUp()
+    ~~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_documents.py", line 120, in setUp
+    self.install()
+    ~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_cli.py", line 44, in install
+    self.assertEqual(code, 0, err)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+AssertionError: 1 != 0 : ERROR: Незавершённая операция документов (20261105-185625-b8dd1e3d): обычные команды заблокированы. Восстановление: python3 work/lifecycle/20261105-185625-b8dd1e3d/restore.py
+
+
+======================================================================
+FAIL: test_start_no_git_dirty_git_and_idempotence (test_task_workflow_lifecycle.TaskWorkflowLifecycleTest.test_start_no_git_dirty_git_and_idempotence)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_task_workflow_lifecycle.py", line 22, in setUp
+    super().setUp()
+    ~~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_close_lifecycle.py", line 69, in setUp
+    super().setUp()
+    ~~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_lifecycle.py", line 48, in setUp
+    super().setUp()
+    ~~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_document_cli.py", line 16, in setUp
+    super().setUp()
+    ~~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_documents.py", line 120, in setUp
+    self.install()
+    ~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_cli.py", line 44, in install
+    self.assertEqual(code, 0, err)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+AssertionError: 1 != 0 : ERROR: Незавершённая операция документов (20261105-185625-b8dd1e3d): обычные команды заблокированы. Восстановление: python3 work/lifecycle/20261105-185625-b8dd1e3d/restore.py
+
+
+======================================================================
+FAIL: test_start_service_writes_do_not_make_docs_obligation_applicable (test_task_workflow_lifecycle.TaskWorkflowLifecycleTest.test_start_service_writes_do_not_make_docs_obligation_applicable)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_task_workflow_lifecycle.py", line 22, in setUp
+    super().setUp()
+    ~~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_close_lifecycle.py", line 69, in setUp
+    super().setUp()
+    ~~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_lifecycle.py", line 48, in setUp
+    super().setUp()
+    ~~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_document_cli.py", line 16, in setUp
+    super().setUp()
+    ~~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_documents.py", line 120, in setUp
+    self.install()
+    ~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_cli.py", line 44, in install
+    self.assertEqual(code, 0, err)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+AssertionError: 1 != 0 : ERROR: Незавершённая операция документов (20261105-185625-b8dd1e3d): обычные команды заблокированы. Восстановление: python3 work/lifecycle/20261105-185625-b8dd1e3d/restore.py
+
+
+----------------------------------------------------------------------
+Ran 23 tests in 0.143s
+
+FAILED (failures=23)

@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "plan_id": "lc-292706947891cbcb",
+  "at": "2026-11-18T09:28:43+03:00",
+  "actor": {
+    "model": "GPT-6.1 Sol (High)",
+    "name": "Codex",
+    "role": "auditor",
+    "session": null
+  },
+  "basis": "По поручению инженера провести повторный AUDIT-009 и закрыть при успешном результате; audit-07, полный verify и AC-01–11 приняты с явной границей local/protocol.",
+  "action": "promote_change",
+  "files": [],
+  "moves": [],
+  "materials": [],
+  "external": [],
+  "type": "lifecycle-promote",
+  "document": "spec:dependency-aware-verification",
+  "change": "dependency-aware-verification",
+  "revision_from": 1,
+  "revision_to": 2,
+  "acceptance": "work/verification/AUDIT-009/audit-07/spec-acceptance.json",
+  "acceptance_record": {
+    "schema_version": 1,
+    "document": "spec:dependency-aware-verification",
+    "change": "dependency-aware-verification",
+    "revision": 1,
+    "result": "accepted",
+    "kind": "acceptance",
+    "actor": {
+      "name": "Codex",
+      "role": "auditor"
+    },
+    "at": "2026-11-18T09:13:55+03:00",
+    "document_sha256": "sha256:7c067125708d16774f8e5f4095638a5389480c52c7ec3247832b2e3f804c953b",
+    "payload_sha256": "sha256:7f448bf08e70af5d6b23512c1379b8a24b9fdc9d2d9a196a735e058bec9dbf4e"
+  },
+  "payload_sha256": "sha256:7f448bf08e70af5d6b23512c1379b8a24b9fdc9d2d9a196a735e058bec9dbf4e"
+}

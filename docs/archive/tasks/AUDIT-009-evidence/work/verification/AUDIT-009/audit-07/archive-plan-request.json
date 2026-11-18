@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "actor": {
+    "name": "Codex",
+    "role": "auditor",
+    "model": "GPT-6.1 Sol (High)",
+    "session": null
+  },
+  "basis": "По поручению инженера провести повторный AUDIT-009 и закрыть при успешном результате; audit-07, полный verify и AC-01–11 приняты с явной границей local/protocol.",
+  "scope": {
+    "documents": [
+      "plan:dependency-aware-verification"
+    ],
+    "tasks": []
+  },
+  "actions": [
+    {
+      "action": "archive_document",
+      "document": "plan:dependency-aware-verification",
+      "reason": "Подзадачи и итоговая совместная приёмка AUDIT-009 завершены; план исполнен. Protected rollout остаётся отдельным поручением.",
+      "successor": null,
+      "confirmed_materials": []
+    }
+  ]
+}

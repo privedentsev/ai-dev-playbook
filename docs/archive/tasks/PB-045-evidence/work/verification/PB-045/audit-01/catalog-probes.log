@@ -1,0 +1,9 @@
+test_catalog_read_set_catches_new_document_after_scan (__main__.CatalogProbe.test_catalog_read_set_catches_new_document_after_scan) ... ok
+test_deleted_card_with_retained_sidecar_rejected_without_live_write (__main__.CatalogProbe.test_deleted_card_with_retained_sidecar_rejected_without_live_write) ... ok
+test_future_removed_target_is_reported_from_new_document (__main__.CatalogProbe.test_future_removed_target_is_reported_from_new_document) ... ok
+test_new_document_with_invalid_relation_is_not_hidden (__main__.CatalogProbe.test_new_document_with_invalid_relation_is_not_hidden) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 1.509s
+
+OK

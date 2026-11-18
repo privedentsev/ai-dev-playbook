@@ -1,0 +1,7 @@
+A-01 {"complete": true, "reason": "", "fresh": false, "added": [], "removed": [], "changed": ["src/payments/notes.md"]}
+A-02 REJECTED checks-snapshot: вход a-missing изменился во время снимка
+A-03 {"path:src/payments/pay.py": {"type": "file", "sha256": "sha256:cba06b5736faf67e54b07b561eae94395e774c517a7d910a54369e1263ccfbd4"}}
+A-04 {"path:src/payments": {"type": "directory", "members": {"notes.md": {"type": "file"}, "pay.py": {"type": "file", "sha256": "sha256:cba06b5736faf67e54b07b561eae94395e774c517a7d910a54369e1263ccfbd4"}}}}
+excluded-subtree-race {"path:src/payments": {"type": "directory", "members": {"fixtures.bin": {"type": "file"}, "notes.md": {"type": "file"}, "pay.py": {"type": "file", "sha256": "sha256:cba06b5736faf67e54b07b561eae94395e774c517a7d910a54369e1263ccfbd4"}}}}
+excluded-subtree-after-race REJECTED checks-snapshot: исключение конфликтует с обнаруженным входом 'src/payments/gen'
+ancestor-overwrite-race {"path:missing/x": {"type": "absent"}, "path:src/payments": {"type": "directory", "members": {"fixtures.bin": {"type": "file", "sha256": "sha256:252f10c83610ebca1a059c0bae8255eba2f95be4d1d7bcfa89d7248a82d9f111"}, "gen": {"type": "dir"}, "gen/out.py": {"type": "file", "sha256": "sha256:3e7ef6bcdf24c03ba46c0e0511c2bcbacaddfd2ff4b843cf23e5af119a8a5981"}, "notes.md": {"type": "file", "sha256": "sha256:11507a0e2f5e69d5dfa40a62a1bd7b6ee57e6bcd85c67c9b8431b36fff21c437"}, "pay.py": {"type": "file", "sha256": "sha256:cba06b5736faf67e54b07b561eae94395e774c517a7d910a54369e1263ccfbd4"}}}, "path:missing/y": {"type": "absent"}}

@@ -1,0 +1,31 @@
+[
+  {
+    "argv": [
+      "python3",
+      "docs/tasks/AUDIT-009-evidence/audit-02/probe_corrupt_obligation.py",
+      ".",
+      "corrupt"
+    ],
+    "rc": 0,
+    "output": "old-corrupt.json"
+  },
+  {
+    "argv": [
+      "python3",
+      "docs/tasks/AUDIT-009-evidence/audit-02/probe_corrupt_obligation.py",
+      ".",
+      "delete"
+    ],
+    "rc": 0,
+    "output": "old-delete.json"
+  },
+  {
+    "argv": [
+      "python3",
+      "docs/tasks/AUDIT-009-evidence/audit-02/probe_legacy_equal.py",
+      "."
+    ],
+    "rc": 0,
+    "output": "old-legacy.json"
+  }
+]

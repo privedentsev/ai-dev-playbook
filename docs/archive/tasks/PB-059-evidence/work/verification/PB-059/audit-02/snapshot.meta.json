@@ -1,0 +1,89 @@
+{
+  "schema_version": 1,
+  "card_format_version": 2,
+  "relations": [
+    {
+      "relation": "based_on",
+      "target": "spec:dependency-aware-verification"
+    },
+    {
+      "relation": "based_on",
+      "target": "design:dependency-aware-verification"
+    },
+    {
+      "relation": "based_on",
+      "target": "plan:dependency-aware-verification"
+    }
+  ],
+  "materials": [
+    {
+      "id": "commands",
+      "role": "report",
+      "source": "docs/tasks/PB-059-evidence/commands.md",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-059"
+      ]
+    },
+    {
+      "id": "verify-c8868c8fda5f4dacaba02b5cf45c03ca",
+      "role": "report",
+      "source": "work/verification/PB-059/c8868c8fda5f4dacaba02b5cf45c03ca",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-059"
+      ]
+    },
+    {
+      "id": "audit-01",
+      "role": "report",
+      "source": "work/verification/PB-059/audit-01",
+      "storage": "local",
+      "immutable": true,
+      "required": true,
+      "used_by": [
+        "PB-059"
+      ]
+    },
+    {
+      "id": "verify-ca1cb5c4934e474b82e7316c671f809a",
+      "role": "report",
+      "source": "work/verification/PB-059/ca1cb5c4934e474b82e7316c671f809a",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-059"
+      ]
+    }
+  ],
+  "criterion_evidence": {
+    "CHECK-01": {
+      "check_sha256": "sha256:987f3ad4aca2a621867e7d62e7db345e676c70c0ceba567b9a09585d53adfe65",
+      "card_projection": "sha256:aed53219081b5d6fdcf6544d25c74cae9692d72a950cef57c6fa8b5510064906",
+      "report_id": "verify-c8868c8fda5f4dacaba02b5cf45c03ca",
+      "report_sha256": "sha256:f0b8e004c04707ffa6fc1843792084f86d0468a6362c72caa8db7336fc7d8977"
+    }
+  },
+  "handoff": {
+    "at": "2026-11-08T19:11:35+03:00",
+    "actor": {
+      "name": "Devin",
+      "model": "SWE-2 High"
+    },
+    "summary": "HANDOFF-02",
+    "reports": [
+      "verify-ca1cb5c4934e474b82e7316c671f809a"
+    ],
+    "card_projection": "sha256:aed53219081b5d6fdcf6544d25c74cae9692d72a950cef57c6fa8b5510064906",
+    "entry_id": "HANDOFF-02",
+    "journal_sha256": "sha256:7928a165e3d75c4ce2079a97dbef2732c80856310de24d358dad808dce595c23"
+  },
+  "audit_packages": {
+    "audit-01": "sha256:4dd4d48e05a8423e7b09ee5863e7eca6a97ff0633bd5776fd6c1b5e2f824541e"
+  }
+}

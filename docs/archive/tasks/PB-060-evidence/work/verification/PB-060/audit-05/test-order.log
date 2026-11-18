@@ -1,0 +1,57 @@
+UUID ORDER: ascending TEST: test_a03_corrupt_latest_failed_blocks_reuse
+test_a03_corrupt_latest_failed_blocks_reuse (test_checks_run.AuditRegressionTest.test_a03_corrupt_latest_failed_blocks_reuse) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 0.181s
+
+OK
+UUID ORDER: ascending TEST: test_a06_deleted_latest_failed_blocks_reuse
+test_a06_deleted_latest_failed_blocks_reuse (test_checks_run.AuditRegressionTest.test_a06_deleted_latest_failed_blocks_reuse) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 0.177s
+
+OK
+UUID ORDER: ascending TEST: test_a07_rebuild_preserves_loss_evidence
+test_a07_rebuild_preserves_loss_evidence (test_checks_run.AuditRegressionTest.test_a07_rebuild_preserves_loss_evidence) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 0.188s
+
+OK
+UUID ORDER: ascending TEST: test_a07_unrelated_run_keeps_evidence
+test_a07_unrelated_run_keeps_evidence (test_checks_run.AuditRegressionTest.test_a07_unrelated_run_keeps_evidence) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 0.211s
+
+OK
+UUID ORDER: descending TEST: test_a03_corrupt_latest_failed_blocks_reuse
+test_a03_corrupt_latest_failed_blocks_reuse (test_checks_run.AuditRegressionTest.test_a03_corrupt_latest_failed_blocks_reuse) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 0.181s
+
+OK
+UUID ORDER: descending TEST: test_a06_deleted_latest_failed_blocks_reuse
+test_a06_deleted_latest_failed_blocks_reuse (test_checks_run.AuditRegressionTest.test_a06_deleted_latest_failed_blocks_reuse) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 0.181s
+
+OK
+UUID ORDER: descending TEST: test_a07_rebuild_preserves_loss_evidence
+test_a07_rebuild_preserves_loss_evidence (test_checks_run.AuditRegressionTest.test_a07_rebuild_preserves_loss_evidence) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 0.185s
+
+OK
+UUID ORDER: descending TEST: test_a07_unrelated_run_keeps_evidence
+test_a07_unrelated_run_keeps_evidence (test_checks_run.AuditRegressionTest.test_a07_unrelated_run_keeps_evidence) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 0.219s
+
+OK
+ALL 8 CASES PASSED: True

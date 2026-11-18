@@ -1,0 +1,16 @@
+{
+  "at": "2026-10-28T06:05:57.405518+03:00",
+  "environment": {
+    "python": "3.14.6 (main, Jun 10 2026, 10:03:53) [Clang 21.0.0 (clang-2100.0.123.102)]",
+    "platform": "macOS-27.0.1-x86_64-i386-64bit-Mach-O"
+  },
+  "inputs": {
+    "ai-dev-playbook/scripts/documents.py": "sha256:fcced9a2f669a16014d392dfeeba4a076ed71f823007407907b8f37349cf92a5",
+    "ai-dev-playbook/scripts/lifecycle.py": "sha256:725b5a58533e7847fc3b9acf49d0518295a79818b68a139c65510f26508edb1b",
+    "ai-dev-playbook/scripts/document_links.py": "sha256:b6f64bfe5b04a637687f57be831f7e67b5c32bb6549127326b5441894531fd11",
+    "tests/test_material_repair.py": "sha256:6e05d3f7dbab07afd3f0c8bab97375244257bcaf733cfaf3c7e5a61aa2b1ef04",
+    "tests/test_document_links.py": "sha256:e7757c776ac2db484b0ee78c919166fe7a7a366182a7a758509e4cdcd294d56b",
+    "ai-dev-playbook/project.json": "sha256:78b40f27ef8f6d39bfa49ca9e65a57f1aebc73416ed8b527f38a46d33a9ea7fb",
+    "docs/tasks/PB-044-evidence/baseline.json": "sha256:1f686be9c5129bb950c4650d4444df34a20135991439418f8400b3a19393e81a"
+  }
+}

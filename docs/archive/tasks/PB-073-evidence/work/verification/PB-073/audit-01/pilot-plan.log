@@ -1,0 +1,33 @@
+[00-optin-setup-preview] setup preview -> rc=0 (2.322s)
+[01-optin-setup-apply] setup apply -> rc=0 (0.683s)
+[02-optin-initial-plan] checks plan PILOT-01 -> rc=0 (4.839s)
+[prot-01-apply] setup apply -> rc=0 (0.781s)
+[prot-02-init-test] verifier init --home /private/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/pb073-self-pilot-d6zzs30l/verifier_home_test_kind --project-id ai-dev-playbook -> rc=0 (0.477s)
+[prot-03-approve-test] verifier approve --home /private/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/pb073-self-pilot-d6zzs30l/verifier_home_test_kind -> rc=0 (0.506s)
+[prot-04-reject-kind-test] verifier run --home /private/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/pb073-self-pilot-d6zzs30l/verifier_home_test_kind --scope project -> rc=1 (0.497s)
+[prot-05-init-cmd] verifier init --home /private/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/pb073-self-pilot-d6zzs30l/verifier_home_cmd --project-id ai-dev-playbook -> rc=0 (0.49s)
+[prot-06-approve-cmd] verifier approve --home /private/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/pb073-self-pilot-d6zzs30l/verifier_home_cmd -> rc=0 (0.503s)
+[prot-07-probe] verifier probe --home /private/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/pb073-self-pilot-d6zzs30l/verifier_home_cmd -> rc=0 (0.52s)
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/docs/tasks/PB-073-evidence/self_pilot.py", line 916, in <module>
+    sys.exit(main())
+             ~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/docs/tasks/PB-073-evidence/self_pilot.py", line 684, in main
+    boundary = check_protected_boundary(source, tmp_base, logs_dir, run_cmd)
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/docs/tasks/PB-073-evidence/self_pilot.py", line 577, in check_protected_boundary
+    run_cmd(probe_copy, "prot-08-verifier-run",
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            ["verifier", "run", "--home", str(vhome_cmd), "--scope", "project"], expected=0)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/docs/tasks/PB-073-evidence/self_pilot.py", line 651, in run_cmd
+    raise RuntimeError(
+    ...<2 lines>...
+    )
+RuntimeError: [prot-08-verifier-run] ['verifier', 'run', '--home', '/private/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/pb073-self-pilot-d6zzs30l/verifier_home_cmd', '--scope', 'project'] -> 1 (expected 0)
+STDOUT:
+verifier run: candidate sha256:2f574cda71eddc609609c05f9cd4930534bf9d22362e17c260c2d2a8e697a724 (3101 файлов), arena 2f574cda71eddc60-c20b254a, sandbox=да
+checks run verifier-c20b254a: политика ai-dev-playbook-self-pilot rev 2, scope=project mode=staleОграничение: trust_mode=protected: локальные результаты не являются доверенными квитанциями; подтверждение — внешний verifier (PB-061)  preflight-regressions: RUN command  preflight-regressions: failed — команда завершилась кодом 71Итог: failed=1; непокрытых обязательств: 1
+verifier: receipt rc-0d40e6e1ab40450a → work/checks/receipts/; ok=False
+
+STDERR:
+

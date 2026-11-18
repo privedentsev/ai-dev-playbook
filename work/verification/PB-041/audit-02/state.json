@@ -1,0 +1,9 @@
+{
+  "stored_journal_sha256": "sha256:502a22321f864cc393d869b237fc63a7166dc8a72776a20666fcf16bee6ecb50",
+  "current_journal_sha256": "sha256:9419c307efba5d84592e193da42063223e62278c5bb4cd0964654a9d3929726b",
+  "old_report_status": "passed",
+  "changed_code_test_inputs": [
+    "ai-dev-playbook/scripts/playbook.py",
+    "ai-dev-playbook/scripts/task_cards.py"
+  ]
+}

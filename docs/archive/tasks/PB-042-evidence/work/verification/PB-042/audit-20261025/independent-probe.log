@@ -1,0 +1,10 @@
+{"scenario": "subprocess cycles + full-tree no-op", "result": "PASS", "options": [], "transitions": 5}
+{"scenario": "subprocess cycles + full-tree no-op", "result": "PASS", "options": ["--documents"], "transitions": 5}
+{"scenario": "subprocess cycles + full-tree no-op", "result": "PASS", "options": ["--all"], "transitions": 5}
+{"scenario": "recreate deleted index with historical content", "result": "PASS", "path": "docs/tasks/index.md"}
+{"scenario": "recreate deleted index with historical content", "result": "PASS", "path": "docs/specs/index.md"}
+{"scenario": "shared gate refuses three CLI variants from foreign process", "result": "PASS"}
+{"scenario": "SIGKILL after first write -> pending refusal -> standalone restore -> retry", "result": "PASS"}
+{"scenario": "same saved plan remains already_completed and preserves later edits", "result": "PASS"}
+{"scenario": "permanent regression detects old identity mutation", "result": "PASS", "tests": 3, "failures": 3, "errors": 1}
+{"result": "PASS", "scenarios": 9}

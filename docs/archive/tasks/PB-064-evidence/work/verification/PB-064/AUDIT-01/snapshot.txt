@@ -1,0 +1,96 @@
+# PB-064: Проверить сквозные сценарии и выполнить пилот выбора проверок
+
+ID: PB-064
+Status: in_progress
+Priority: P2
+Depends-On: PB-063
+Executor: Devin
+Model: SWE-2 Flash High
+Created: 2026-11-07T01:09:23+03:00
+Closed: -
+
+<!-- playbook-meta:external -->
+
+## Задача
+
+### Цель и границы
+
+Сквозной пилот. E2E tests, изолированный self-pilot и материалы измерений/эксплуатации; без обязательного пилота в стороннем реальном продукте.
+
+### Контекст
+
+[Спецификация](../specs/dependency-aware-verification.md): R-01–20; сценарии AC-01–11. [Design](../designs/dependency-aware-verification.md), [ADR-0006](../adr/0006-dependency-aware-verification.md), [план](../plans/dependency-aware-verification.md).
+
+Подготовлено по поручению инженера 2026-11-07. Условия старта проверены 2026-11-14 по поручению инженера начать выполнение: технический проект (spec/design/ADR-0006/plan) принят (`accepted`), зависимости PB-057–PB-063 завершены (`done`) и прочитаны через `card show --handoff`, назначен исполнитель (`Devin / SWE-2 Flash High`), ветка `feature/dependency-aware-verification`, `resources.json` (`policy_revision: 2`, бюджеты `null`, отдельная OS/CI identity на стенде не предполагается). Исходные чужие незакоммиченные изменения сохраняются; self-config в основном проекте не включается.
+
+### Критерии приёмки
+
+- [x] AC-01: Исполнить всю матрицу AC-01–11 на воспроизводимых временных проектах без Git: cart/payment/discounts, fallback, исключения, ручные изменения, режимы release/stale/force и негативные попытки обхода.
+- [x] AC-02: На временной копии self-project выполнить opt-in и сравнить количество команд, хешируемые файлы/байты и время с исходным полным набором. Не заявлять экономию в процентах без измерений и одинакового сценария.
+- [x] AC-03: Проверить local/protected границы отдельно; передать отчёт с воспроизведением и непокрытыми ограничениями. Не включать режим в основном проекте и не проводить независимый аудит своей работы.
+- [x] AC-04: Целевые поведенческие проверки и связанные регрессии пройдены; документация и self-manifest актуальны, EXEC/CHECK/HANDOFF содержат реальные доказательства и ограничения; передача зарегистрирована штатным CLI.
+
+### План
+
+1. Уточнить фактические интерфейсы зависимостей и связать изменения с критериями этой карточки.
+2. Реализовать ограниченный объём, добавить постоянные позитивные и негативные проверки критериев AC-01–03; не подменять их структурной проверкой.
+3. Обновить затронутые документы/шаблоны и self-manifest при изменениях комплекта; выполнить адресные проверки, index и check --ready.
+4. Подготовить материалы и пройти действующие preflight/verify/handoff. До явного opt-in использовать прежний контракт; не отключать полный legacy suite ради экономии.
+5. Записать EXEC/CHECK/HANDOFF и передать независимому аудитору; самостоятельно не закрывать.
+
+### Ресурсы
+
+Python и стандартная библиотека для основного CLI; локальные временные проекты и subprocess-счётчики. Новые зависимости защищённого executor обосновать в рамках принятого design. Фактические среда, policy_revision и бюджет фиксируются при старте; доступность отдельной OS/CI identity не предполагается.
+
+Материалы: `docs/tasks/PB-064-evidence/`; команды воспроизведения и отчёты принадлежат этой карточке. Общие материалы и сквозная матрица — AUDIT-009/PB-064.
+
+## Журнал
+
+### EXEC-01 — Выполнение
+Время: 2026-11-15T00:37:00+03:00
+Исполнитель: Devin
+Модель: SWE-2 Flash High
+Изменения: сквозная E2E-матрица AC-01–11 на временных проектах без Git с реальными CLI/subprocess-счётчиками (`tests/test_checks_e2e.py`, 11 сценариев); self-pilot `docs/tasks/PB-064-evidence/self_pilot.py` — две чистые копии без `.git`/`work/`, opt-in через `setup preview`/`setup apply` только на копии, трёхшаговый сценарий (полный baseline → локальная правка `tests/test_checks_setup.py` → транзитивная правка `checks_setup.py` → повтор без изменений + release/handoff/audit-ready/close-refusal) и отдельный контур `verifier` для границ local/protected. По ходу пилота исправлены дефекты: `checks_plan` не передавал проекции карточки/политики в `checks_select.plan` (падение «отсутствует проекция task_projection» при существующих результатах — исправлено в `playbook.py`, регрессия в AC-09); `self_pilot.py` — лимит `max_seconds` 3600→7200 и очистка чужих `test*`/`checks_*` модулей `sys.modules` между копиями. Ранее в рамках задачи: транзитивное замыкание зависимостей в inventory/selector/runner/trust/verifier, неизменяемый `checks-coverage-report` в lifecycle handoff, единый coverage-gate для handoff/accept/release-ready, правки sandbox-профиля `checks_trust.py`. Self-project остаётся на legacy-контракте (`checks_policy` отсутствует — проверено отпечатком в пилоте).
+Файлы:
+- tests/test_checks_e2e.py
+- tests/test_checks_run.py
+- tests/test_checks_trust.py
+- tests/test_pb029.py
+- ai-dev-playbook/scripts/checks_gate.py
+- ai-dev-playbook/scripts/checks_inventory.py
+- ai-dev-playbook/scripts/checks_runner.py
+- ai-dev-playbook/scripts/checks_select.py
+- ai-dev-playbook/scripts/checks_trust.py
+- ai-dev-playbook/scripts/checks_verifier.py
+- ai-dev-playbook/scripts/lifecycle.py
+- ai-dev-playbook/scripts/playbook.py
+- ai-dev-playbook/manifest.json
+- docs/tasks/PB-064-evidence/matrix.md
+- docs/tasks/PB-064-evidence/self_pilot.py
+- docs/tasks/PB-064-evidence/pilot/
+- docs/code-map.md
+- docs/index.md
+- docs/plans/index.md
+- docs/tasks/index.md
+- CHANGELOG.md
+
+### CHECK-01 — Проверка
+Время: 2026-11-15T00:37:00+03:00
+Исполнитель: Devin
+Модель: SWE-2 Flash High
+Результат: passed
+Критерии: AC-01, AC-02, AC-03, AC-04
+Команда: `python3 -m unittest tests.test_checks_e2e -v` (11 сценариев AC-01–11, OK), `python3 -m unittest tests.test_checks_e2e.TrustBoundaryLifecycleAndMigrationE2ETest.test_ac09_...` после правки plan (OK), `python3 docs/tasks/PB-064-evidence/self_pilot.py . /tmp/pb064-pilot-plan --plan-only` (PLAN-ONLY OK: каталог 1082/1076 ID, границы local/protected), `python3 docs/tasks/PB-064-evidence/self_pilot.py . /tmp/pb064-pilot-final` (SELF-PILOT COMPLETED SUCCESSFULLY: все 24 команды rc по ожиданию), `playbook.py index`, `playbook.py check --ready`, `playbook.py verify PB-064 --preflight`, `playbook.py verify PB-064` (self-check, preflight-regressions, unit-tests — отчёт 69dee117bdfe4f608d98b65c39d3fa26, passed), `playbook.py adopt . --force --apply` (manifest актуален)
+Среда: macOS Darwin 27.2.1 x86_64, Python 3.14.6; временные проекты-фикстуры без Git; две копии репозитория во временном каталоге; opt-in политика `ai-dev-playbook-self-pilot` rev 1/2 только на копиях; `sandbox-exec` присутствует, отдельной OS/CI identity нет.
+Факт: E2E-матрица AC-01–11 зелёная на реальных CLI-вызовах с subprocess-счётчиками. Self-pilot на идентичных копиях без `.git`/`work/`: baseline — legacy verify 3 команды/1870.0с против opt-in 7 команд/1815.2с; локальная правка `tests/test_checks_setup.py` — legacy `--reuse` всё равно исполнил все 3 команды/1862.9с, opt-in исполнил 1 проверку (`checks-unit-tests`, 124.0с) + reuse `self-check`, всего 133.1с; транзитивная правка `checks_setup.py` — консервативный выбор всех 7 проверок; повтор без изменений — 0 команд у обоих (legacy 85.9с, opt-in 5.0с), `release-ready` 7/7 covered, handoff с `checks-coverage-report` идемпотентен, `audit-ready` пройден, `close --dry-run` отказан без accepted-аудита. Границы: `verifier run` отклонил `kind=test` (rc=1), command-only прогон выдал валидную квитанцию `rc-4422cbcd47aa4536` (verify+gate ok, capability=local), `release-ready` под protected rev 2 отказан без отдельной OS identity (R-20). Проценты экономии не заявляются — только счётчики.
+Доказательства: [матрица AC-01–11](PB-064-evidence/matrix.md), [отчёт пилота](PB-064-evidence/pilot/pilot-report.md), [summary.json](PB-064-evidence/pilot/summary.json), [commands.json](PB-064-evidence/pilot/commands.json), [логи команд](PB-064-evidence/pilot/logs/), [отчёт verify](../../work/verification/PB-064/69dee117bdfe4f608d98b65c39d3fa26/report.json)
+Ограничения: самопроверка исполнителя — независимый аудит не выполнялся. `trust_mode=local`: результаты диагностические; `protected_confirmed` не заявляется (нет отдельной OS/CI identity). Verifier arena без `work/` не исполняет `self-check` — protected-демонстрация rev 2 использует command-only подмножество. Политика opt-in собрана вручную в скрипте; self-project её не принимает. Замеры однопроходные на одной машине. Флаг `handoff_idempotent` в summary.json=false — несовпадение формулировки stdout; фактическая идемпотентность подтверждена логами (отчётов: 1 → 1). Изменения не закоммичены.
+
+### HANDOFF-01 — Передача
+Время: 2026-11-15T00:45:00+03:00
+Исполнитель: Devin
+Модель: SWE-2 Flash High
+Выполнение: EXEC-01
+Проверки: CHECK-01
+Состояние: in_review; feature/dependency-aware-verification; изменения не закоммичены. Реализована сквозная E2E-матрица AC-01–11 (tests/test_checks_e2e.py), self-pilot на изолированных копиях без Git (legacy vs opt-in: команды/файлы/байты/время; локальная правка → 1 проверка вместо полного suite), отдельная проверка границ local/protected через verifier (kind=test отклонён, command-only квитанция rc-4422cbcd47aa4536 валидна, release-ready под protected отказан без OS identity). Основной проект остаётся на legacy-контракте: checks_policy отсутствует. Полный verify PB-064 passed. Следующий шаг — независимый аудит AUDIT-009 в отдельной сессии.
+Фокус аудита: реальность E2E-покрытия AC-01–11 (реальные CLI/subprocess, а не структурные проверки); корректность измерений пилота и честность отсутствия процентных заявлений; разделение local/protected (диагностическое покрытие vs protected_confirmed); транзитивное замыкание зависимостей и консервативный fallback; фикс checks_plan projections и регрессия в AC-09; идемпотентность handoff/coverage-report и единый gate для handoff/accept/release-ready; отсутствие opt-in в self-project и сохранение чужих незакоммиченных изменений; актуальность manifest/документации.

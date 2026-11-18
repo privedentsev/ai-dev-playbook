@@ -13,6 +13,8 @@ docs = playbook.documents
 
 
 class CompactContextTest(CloseLifecycleCase):
+    """Компактный контекст карточек: пары preview/apply, выбор
+    контекста, восстановление после сбоев."""
     def setup_external(self, journal=True):
         body = BODY.replace('- AC-01:', '- [ ] AC-01:')
         body = body.replace('Локальный проект.', '[Config](../../ai-dev-playbook/project.json).')
@@ -34,6 +36,7 @@ class CompactContextTest(CloseLifecycleCase):
         self.path.write_text(self.path.read_text() + value)
 
     def test_create_preview_pair_and_no_overwrite(self):
+        """card create preview/apply создаёт пару без перезаписи"""
         before = tree_fingerprint(self.root)
         result = self.cli('card', 'create', 'DEV-2', '--title', 'Пример')
         self.assertEqual(result[0], 0, result)
@@ -50,6 +53,7 @@ class CompactContextTest(CloseLifecycleCase):
         self.assertEqual(before, tree_fingerprint(self.root))
 
     def test_context_selection_is_read_only_and_exposes_unhanded_work(self):
+        """Выбор контекста read-only и показывает не переданную работу"""
         self.setup_external()
         self.append(record('AUDIT', **{'Результат': 'changes_requested'}) + finding(1))
         self.append(record('EXEC', 2, title='Исправление', **{'Замечания': 'A-01'}))
@@ -71,6 +75,7 @@ class CompactContextTest(CloseLifecycleCase):
         self.assertEqual(before, tree_fingerprint(self.root))
 
     def test_lost_corrupt_conflicting_symlink_and_orphan_metadata(self):
+        """Потерянные/повреждённые/конфликтные/symlink/orphan метаданные обрабатываются"""
         self.setup_external(False)
         sidecar = docs.meta_path(self.path)
         original = sidecar.read_bytes()
@@ -91,6 +96,7 @@ class CompactContextTest(CloseLifecycleCase):
         self.assertEqual(self.cli('check')[0], 1)
 
     def test_full_two_close_cycles_and_immutable_proof(self):
+        """Два цикла close с полной историей и immutable-доказательством"""
         self.setup_external()
         proof = self.tasks_dir() / 'DEV-1-evidence' / 'proof.txt'
         proof.parent.mkdir(); proof.write_bytes(b'original proof\n')
@@ -123,6 +129,7 @@ class CompactContextTest(CloseLifecycleCase):
                     **{'Выполнение': 'EXEC-02', 'Проверки': 'CHECK-02'}))
 
     def test_metadata_write_failure_restores_pair(self):
+        """Сбой записи метаданных восстанавливает пару карточки"""
         self.setup_external(False)
         sidecar = docs.meta_path(self.path)
         before = (self.path.read_bytes(), sidecar.read_bytes())
@@ -143,6 +150,7 @@ class CompactContextTest(CloseLifecycleCase):
         self.assertEqual((self.path.read_bytes(), sidecar.read_bytes()), before)
 
     def test_explicit_card_snapshot_includes_sidecar_and_old_report_goes_stale(self):
+        """Snapshot карточки включает sidecar, старый отчёт устаревает"""
         self.setup_external()
         rel = str(self.path.relative_to(self.root))
         snapshot = playbook.verification.snapshot(self.root, [rel], playbook.safe_path, playbook.require)
@@ -152,6 +160,7 @@ class CompactContextTest(CloseLifecycleCase):
         self.assertEqual(self.handoff()[0], 1)
 
     def test_many_iterations_have_small_context_and_full_json_remains_available(self):
+        """Много итераций: компактный контекст мал, полный JSON доступен"""
         self.setup_external(False)
         paragraph = 'Подробное описание выполненной работы. ' * 35
         for number in range(1, 9):
@@ -168,6 +177,7 @@ class CompactContextTest(CloseLifecycleCase):
         print('Context sample: full_chars=%d compact_chars=%d' % (len(full[1]), len(compact[1])))
 
     def test_sidecar_is_not_a_material_and_saved_plan_detects_sidecar_change(self):
+        """Sidecar не материал; сохранённый план видит его изменение"""
         self.setup_external()
         sidecar = docs.meta_path(self.path)
         result = self.cli('lifecycle', 'register-material', 'DEV-1', str(sidecar.relative_to(self.root)),
@@ -186,6 +196,7 @@ class CompactContextTest(CloseLifecycleCase):
         self.assertEqual(before, tree_fingerprint(self.root))
 
     def test_installed_cli_creates_pair_and_sigkill_restores_partial_creation(self):
+        """SIGKILL при создании пары восстанавливает частичное создание"""
         import subprocess
         import sys
         installed = self.root / 'ai-dev-playbook/scripts/playbook.py'
@@ -219,6 +230,7 @@ playbook.main(['--root', str(root), 'card', 'create', 'DEV-3', '--title', 'Inter
         self.assertEqual(self.cli('card', 'show', 'DEV-2')[0], 0)
 
     def test_marker_examples_roundtrip_views_and_sync_preserve_card(self):
+        """Маркерные примеры: roundtrip views и sync сохраняют карточку"""
         self.setup_external()
         original = self.path.read_text()
         original_meta = docs.meta_path(self.path).read_bytes()
@@ -264,6 +276,7 @@ playbook.main(['--root', str(root), 'card', 'create', 'DEV-3', '--title', 'Inter
                 self.assertEqual(before, tree_fingerprint(self.root))
 
     def test_create_title_marker_and_duplicate_real_markers(self):
+        """Заголовок с маркером и дубли реальных маркеров при create"""
         title = 'Example ' + docs.EXTERNAL_META
         result = self.cli('card', 'create', 'DEV-2', '--title', title, '--apply')
         self.assertEqual(result[0], 0, result)

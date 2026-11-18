@@ -1,0 +1,27 @@
+PB-054 — второй предварительный независимый проход
+Дата: 2026-10-28
+Проверяющий: GPT-6 Luna
+Область: prepare-audit (повтор, целостность provenance/snapshot, внешний sidecar) и verify --reuse (требования/EXEC/команды/policy, corrupt report, newer failed).
+Реализацию не менял. Это не финальный verify, не проверка HANDOFF и не acceptance.
+
+Найдено
+
+P2 — prepare-audit принимает изменённую provenance.json как прежний валидный пакет.
+
+Воспроизведение на временном проекте: выполнить `lifecycle prepare-audit DEV-1 --id audit-01 --apply`, изменить в `work/verification/DEV-1/audit-01/provenance.json` поле `actor` и, например, `task_id`, не трогая snapshot.txt, затем повторить ту же команду. Команда успешно сообщает «аудит уже подготовлен; байты не менялись». Повтор проверяет `files` и snapshot hashes, но игнорирует top-level поля provenance, включая атрибуцию и идентичность задачи. Для внешней карточки та же проба с `snapshot.meta.json` прошла аналогично.
+
+Критерий исправления: повтор должен обнаруживать изменение любой значимой части provenance (как минимум schema_version, task_id, audit_id, actor, at и file source/hash записи) и отказывать с указанием повреждённого пакета. Контроль должен опираться на независимо сохранённую исходную целостность provenance, чтобы нельзя было подменить сразу provenance и затем принять повтор.
+
+Проверено
+
+- `PYTHONPATH=tests python3 -m unittest test_audit_material_safety test_material_registration` — 22 теста прошли.
+- Изменение snapshot.txt и snapshot.meta.json после подготовки вызывает отказ повторного prepare-audit.
+- Коллизия каталога audit id без соответствующего материала вызывает отказ; базовый повтор без правок проходит идемпотентно.
+- Внешний card sidecar копируется как snapshot.meta.json; исходные байты snapshot.txt и sidecar и SHA-256 sidecar совпадают с pre-image до регистрации нового материала; повтор проходит.
+- Временные CLI-пробы reuse: изменение содержимого требования, EXEC, timeout команды и policy_revision во всех случаях вызвало объяснимый новый полный запуск (счётчик вырос с 1 до 2).
+- Добавленные тесты corrupt checks string/null и newer failed report прошли в адресном наборе; corrupt report теперь вызывает новый запуск, newer failed не скрывается предыдущим passed.
+- Полный suite не запускался по инструкции.
+
+Ограничение
+
+Проверены только запрошенные сценарии второго прохода. Финальные verify/HANDOFF и независимая приёмка ещё не готовы.

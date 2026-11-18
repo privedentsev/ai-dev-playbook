@@ -1,0 +1,4 @@
+('lifecycle', 'register-material', 'DEV-1', 'docs/tasks/loose/note.txt', '--id', 'note', '--role', 'report', '--required', '--immutable', '--apply') 1  ERROR: docs/archive/tasks/loose: символическая ссылка
+
+('verify', 'DEV-1', '--preflight') 1  ERROR: docs/archive/tasks/loose: символическая ссылка
+

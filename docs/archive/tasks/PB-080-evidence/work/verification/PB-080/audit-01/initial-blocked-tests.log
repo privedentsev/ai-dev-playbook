@@ -1,0 +1,18 @@
+test_stale_force_release_and_cross_task (test_checks_bytecode.BytecodeCliTest.test_stale_force_release_and_cross_task) ... FAIL
+test_old_adapter_identity_requires_execution_then_reuse (test_checks_bytecode.BytecodeContextTest.test_old_adapter_identity_requires_execution_then_reuse) ... ok
+test_source_and_test_caches_matrix (test_checks_bytecode.BytecodeContextTest.test_source_and_test_caches_matrix) ... ok
+
+======================================================================
+FAIL: test_stale_force_release_and_cross_task (test_checks_bytecode.BytecodeCliTest.test_stale_force_release_and_cross_task)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_checks_e2e.py", line 81, in setUp
+    self.assertEqual(code, 0, err)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+AssertionError: 1 != 0 : ERROR: Незавершённая операция документов (20261117-223134-e0625798): обычные команды заблокированы. Восстановление: python3 work/lifecycle/20261117-223134-e0625798/restore.py
+
+
+----------------------------------------------------------------------
+Ran 3 tests in 19.328s
+
+FAILED (failures=1)

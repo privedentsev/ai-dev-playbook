@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "task_id": "AUDIT-007",
+  "audit_id": "audit-007-02",
+  "at": "2026-11-06T18:00:55+03:00",
+  "actor": "Codex",
+  "files": {
+    "snapshot.txt": {
+      "source": "docs/tasks/AUDIT-007.md",
+      "sha256": "sha256:4fb9d183c3ed3e14233659050def54bdc6a3e50c3c07b832e74d397ffdbeb4fc"
+    }
+  }
+}

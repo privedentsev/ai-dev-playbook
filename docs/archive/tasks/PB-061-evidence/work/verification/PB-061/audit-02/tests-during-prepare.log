@@ -1,0 +1,195 @@
+.........FFFFF................................................................................................................................................ERROR: Незавершённая операция документов (20261110-205633-a31360a8): обычные команды заблокированы. Восстановление: python3 work/lifecycle/20261110-205633-a31360a8/restore.py
+FERROR: Незавершённая операция документов (20261110-205633-a31360a8): обычные команды заблокированы. Восстановление: python3 work/lifecycle/20261110-205633-a31360a8/restore.py
+FERROR: Незавершённая операция документов (20261110-205633-a31360a8): обычные команды заблокированы. Восстановление: python3 work/lifecycle/20261110-205633-a31360a8/restore.py
+FERROR: Незавершённая операция документов (20261110-205633-a31360a8): обычные команды заблокированы. Восстановление: python3 work/lifecycle/20261110-205633-a31360a8/restore.py
+F...............ERROR: Незавершённая операция документов (20261110-205633-a31360a8): обычные команды заблокированы. Восстановление: python3 work/lifecycle/20261110-205633-a31360a8/restore.py
+FERROR: Незавершённая операция документов (20261110-205633-a31360a8): обычные команды заблокированы. Восстановление: python3 work/lifecycle/20261110-205633-a31360a8/restore.py
+FERROR: Незавершённая операция документов (20261110-205633-a31360a8): обычные команды заблокированы. Восстановление: python3 work/lifecycle/20261110-205633-a31360a8/restore.py
+FERROR: Незавершённая операция документов (20261110-205633-a31360a8): обычные команды заблокированы. Восстановление: python3 work/lifecycle/20261110-205633-a31360a8/restore.py
+F.....................................................................
+======================================================================
+FAIL: test_backward_compat (test_checks_contract.CliContractTest.test_backward_compat)
+Проект без checks_policy и task_workflow работает как прежде.
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_lifecycle.py", line 48, in setUp
+    super().setUp()
+    ~~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_document_cli.py", line 16, in setUp
+    super().setUp()
+    ~~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_documents.py", line 120, in setUp
+    self.install()
+    ~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_cli.py", line 44, in install
+    self.assertEqual(code, 0, err)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+AssertionError: 1 != 0 : ERROR: Незавершённая операция документов (20261110-205633-a31360a8): обычные команды заблокированы. Восстановление: python3 work/lifecycle/20261110-205633-a31360a8/restore.py
+
+
+======================================================================
+FAIL: test_deferred_commands (test_checks_contract.CliContractTest.test_deferred_commands)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_lifecycle.py", line 48, in setUp
+    super().setUp()
+    ~~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_document_cli.py", line 16, in setUp
+    super().setUp()
+    ~~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_documents.py", line 120, in setUp
+    self.install()
+    ~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_cli.py", line 44, in install
+    self.assertEqual(code, 0, err)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+AssertionError: 1 != 0 : ERROR: Незавершённая операция документов (20261110-205633-a31360a8): обычные команды заблокированы. Восстановление: python3 work/lifecycle/20261110-205633-a31360a8/restore.py
+
+
+======================================================================
+FAIL: test_policy_link_path_safety (test_checks_contract.CliContractTest.test_policy_link_path_safety)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_lifecycle.py", line 48, in setUp
+    super().setUp()
+    ~~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_document_cli.py", line 16, in setUp
+    super().setUp()
+    ~~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_documents.py", line 120, in setUp
+    self.install()
+    ~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_cli.py", line 44, in install
+    self.assertEqual(code, 0, err)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+AssertionError: 1 != 0 : ERROR: Незавершённая операция документов (20261110-205633-a31360a8): обычные команды заблокированы. Восстановление: python3 work/lifecycle/20261110-205633-a31360a8/restore.py
+
+
+======================================================================
+FAIL: test_policy_link_validation (test_checks_contract.CliContractTest.test_policy_link_validation)
+project.json → checks_policy валидирует файл политики.
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_lifecycle.py", line 48, in setUp
+    super().setUp()
+    ~~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_document_cli.py", line 16, in setUp
+    super().setUp()
+    ~~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_documents.py", line 120, in setUp
+    self.install()
+    ~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_cli.py", line 44, in install
+    self.assertEqual(code, 0, err)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+AssertionError: 1 != 0 : ERROR: Незавершённая операция документов (20261110-205633-a31360a8): обычные команды заблокированы. Восстановление: python3 work/lifecycle/20261110-205633-a31360a8/restore.py
+
+
+======================================================================
+FAIL: test_scope_mode_axes (test_checks_contract.CliContractTest.test_scope_mode_axes)
+Область и режим — независимые оси; неизвестные значения отклонены.
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_lifecycle.py", line 48, in setUp
+    super().setUp()
+    ~~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_document_cli.py", line 16, in setUp
+    super().setUp()
+    ~~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_documents.py", line 120, in setUp
+    self.install()
+    ~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_cli.py", line 44, in install
+    self.assertEqual(code, 0, err)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+AssertionError: 1 != 0 : ERROR: Незавершённая операция документов (20261110-205633-a31360a8): обычные команды заблокированы. Восстановление: python3 work/lifecycle/20261110-205633-a31360a8/restore.py
+
+
+======================================================================
+FAIL: test_run_and_status_end_to_end (test_checks_run.CliRunTest.test_run_and_status_end_to_end)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_checks_run.py", line 603, in setUp
+    self.assertEqual(code, 0)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^
+AssertionError: 1 != 0
+
+======================================================================
+FAIL: test_run_requires_policy (test_checks_run.CliRunTest.test_run_requires_policy)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_checks_run.py", line 603, in setUp
+    self.assertEqual(code, 0)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^
+AssertionError: 1 != 0
+
+======================================================================
+FAIL: test_run_requires_task (test_checks_run.CliRunTest.test_run_requires_task)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_checks_run.py", line 603, in setUp
+    self.assertEqual(code, 0)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^
+AssertionError: 1 != 0
+
+======================================================================
+FAIL: test_run_second_time_reuses (test_checks_run.CliRunTest.test_run_second_time_reuses)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_checks_run.py", line 603, in setUp
+    self.assertEqual(code, 0)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^
+AssertionError: 1 != 0
+
+======================================================================
+FAIL: test_plan_prints_selection (test_checks_select.CliPlanTest.test_plan_prints_selection)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_checks_select.py", line 524, in setUp
+    self._install()
+    ~~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_checks_select.py", line 528, in _install
+    self.assertEqual(code, 0)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^
+AssertionError: 1 != 0
+
+======================================================================
+FAIL: test_plan_read_only (test_checks_select.CliPlanTest.test_plan_read_only)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_checks_select.py", line 524, in setUp
+    self._install()
+    ~~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_checks_select.py", line 528, in _install
+    self.assertEqual(code, 0)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^
+AssertionError: 1 != 0
+
+======================================================================
+FAIL: test_plan_requires_policy_link (test_checks_select.CliPlanTest.test_plan_requires_policy_link)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_checks_select.py", line 524, in setUp
+    self._install()
+    ~~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_checks_select.py", line 528, in _install
+    self.assertEqual(code, 0)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^
+AssertionError: 1 != 0
+
+======================================================================
+FAIL: test_plan_requires_task (test_checks_select.CliPlanTest.test_plan_requires_task)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_checks_select.py", line 524, in setUp
+    self._install()
+    ~~~~~~~~~~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/tests/test_checks_select.py", line 528, in _install
+    self.assertEqual(code, 0)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^
+AssertionError: 1 != 0
+
+----------------------------------------------------------------------
+Ran 250 tests in 18.818s
+
+FAILED (failures=13)

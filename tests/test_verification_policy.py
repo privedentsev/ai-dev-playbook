@@ -9,35 +9,44 @@ import verification_policy as p
 
 
 class PolicyTests(unittest.TestCase):
+    """Политика верификации: scope, глобы и сегменты, baseline,
+    неизвестные области."""
     def app(self, patterns, scope=('docs',), baseline=None, current=None):
         return p.applicability({'kind': 'when_paths', 'paths': patterns},
                                scope=list(scope), baseline=baseline, current=current)
 
     def test_baseline_unknown_is_required(self):
+        """baseline unknown → проверка обязательна"""
         self.assertTrue(self.app(['src/**'])['required'])
 
     def test_missing_scope_is_required(self):
+        """Отсутствие scope → проверка обязательна"""
         self.assertTrue(self.app(['src/**'], scope=(), baseline={}, current={})['required'])
 
     def test_narrow_unrelated_scope(self):
+        """Узкий несвязанный scope → проверка не обязательна"""
         self.assertFalse(self.app(['src/**/*.py'], baseline={}, current={})['required'])
 
     def test_broad_scope_and_wildcard_prefix(self):
+        """Широкий scope и wildcard-префикс → обязательна"""
         for scope, pattern in [('src', 'src/deep/*.py'), ('src/deep', 'src/**'),
                                ('src', '**/*.py'), ('src/deep', 'src/*/nested/*.py')]:
             with self.subTest(scope=scope, pattern=pattern):
                 self.assertTrue(self.app([pattern], [scope], {}, {})['required'])
 
     def test_added_deleted_changed_and_zero_segment_glob(self):
+        """Added/deleted/changed и zero-segment glob"""
         for before, after in [({}, {'src/a.py': 'x'}), ({'src/a.py': 'x'}, {}),
                               ({'src/deep/a.py': 'x'}, {'src/deep/a.py': 'y'})]:
             self.assertTrue(self.app(['src/**/*.py'], baseline=before, current=after)['required'])
 
     def test_star_does_not_cross_slash(self):
+        """* не пересекает / в glob"""
         self.assertFalse(self.app(['src/*.py'], baseline={},
                                   current={'src/deep/a.py': 'x'})['required'])
 
     def test_always_and_explicit_checkpoint(self):
+        """applicability always и explicit checkpoint"""
         args = dict(scope=[], baseline=None, current=None)
         self.assertTrue(p.applicability(**args)['required'])
         self.assertFalse(p.applicability('checkpoint', **args)['required'])
@@ -47,6 +56,7 @@ class PolicyTests(unittest.TestCase):
                                         checkpoint='merge', **args)['required'])
 
     def test_project_obligation_cannot_be_omitted_or_weakened(self):
+        """Project-обязательство нельзя опустить или ослабить"""
         settings = {'registry': [{'id': 'unit', 'applicability': 'always'}]}
         plan = {'scope': ['docs'], 'checks': []}
         self.assertFalse(p.required_checks(settings, plan, baseline={}, current={})['ready'])
@@ -60,6 +70,7 @@ class PolicyTests(unittest.TestCase):
         self.assertFalse(resolved['ready'])
 
     def test_coverage_every_id_and_status(self):
+        """coverage требует каждый id и корректный статус"""
         required = {k: {'required': True} for k in ('a', 'b')}
         for status in ('failed', 'timeout', 'not_run', 'not_applicable'):
             self.assertFalse(p.coverage(required, {'a': {'status': 'passed'},
@@ -68,6 +79,7 @@ class PolicyTests(unittest.TestCase):
         self.assertTrue(p.coverage(required, {k: {'status': 'passed'} for k in required})['satisfied'])
 
     def test_failed_exclusion_requires_engineer_history(self):
+        """failed-исключение требует истории инженера"""
         decision = dict(check_id='a', at='now', actor='executor',
                         decision='not_applicable', reason='outside scope')
         self.assertFalse(p.exclusion_allowed('a', [decision], {'a'}))
@@ -76,6 +88,7 @@ class PolicyTests(unittest.TestCase):
         self.assertEqual(decision['decision'], 'not_applicable')
 
     def test_task_projection_preserves_requirements_and_metadata(self):
+        """task_projection сохраняет требования и метаданные"""
         text = '# Task\nStatus: draft\nCreated: yesterday\n\n## Goal\nDo it\n'
         meta = dict(schema_version=2, verification_plan={'revision': 1},
                     workflow={'route': 'small', 'history': []}, handoff={'id': 'old'})
@@ -90,6 +103,7 @@ class PolicyTests(unittest.TestCase):
         self.assertNotEqual(original, p.task_projection(text.replace('Do it', 'New requirement'), meta))
 
     def test_independent_policy_definition(self):
+        """policy_projection независим от определения"""
         policy = {'schema_version': 2, 'registry': [{'id': 'a', 'argv': ['a']}, {'id': 'b', 'argv': ['b']}]}
         original = p.policy_projection(policy, ['a'])
         policy['registry'][1]['argv'] = ['new']
@@ -100,6 +114,7 @@ class PolicyTests(unittest.TestCase):
             p.policy_projection(policy, ['unknown'])
 
     def test_absent_create_delete_directory_membership(self):
+        """Absent/create/delete и членство каталогов в snapshot"""
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp).resolve()
             (root / 'src').mkdir()
@@ -114,6 +129,7 @@ class PolicyTests(unittest.TestCase):
             self.assertFalse(p.compare_snapshots(before, p.snapshot(root, inputs))['fresh'])
 
     def test_path_rejections(self):
+        """Невалидные пути отклоняются snapshot"""
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp).resolve()
             (root / 'file').write_text('x')
@@ -130,6 +146,7 @@ class PolicyTests(unittest.TestCase):
                 p.snapshot(root, [{'type': 'file', 'path': 'file'}] * 2)
 
     def test_environment_and_unknown_snapshots(self):
+        """Environment и unknown snapshots сравниваются"""
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp).resolve()
             with self.assertRaises(ValueError):
@@ -185,12 +202,15 @@ class PolicyTests(unittest.TestCase):
                     self.assertFalse(p.reusable(dict(consistent, **{field: unknown}), **args))
 
     def test_command_reuse_binds_input_before_and_after(self):
+        """command reuse привязывает вход до и после"""
         self.assert_reuse_snapshot_binding('command')
 
     def test_manual_reuse_binds_input_and_presented_candidate(self):
+        """manual reuse привязывает вход и кандидата"""
         self.assert_reuse_snapshot_binding('manual')
 
     def test_reuse_bindings_and_race(self):
+        """Reuse bindings и race-детекция"""
         snap = {'files': {'src': 'hash'}}
         result = dict(kind='command', status='passed', definition_hash='def', policy_hash='policy',
                       environment={'python': '3'}, input_snapshot=snap, exit_code=0,

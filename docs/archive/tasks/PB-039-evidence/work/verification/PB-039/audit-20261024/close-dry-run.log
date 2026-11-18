@@ -1,0 +1,222 @@
+План lc-377ff148593270bf (lifecycle):
+Основание: playbook.py close PB-039
+Исполнитель: cli:privedentsev1 (cli)
+Действия:
+  close_task PB-039: docs/tasks/PB-039.md → docs/archive/tasks/PB-039.md (done)
+Переносы:
+  docs/tasks/PB-039-evidence → docs/archive/tasks/PB-039-evidence
+  docs/tasks/PB-039-evidence/close-regressions.log → docs/archive/tasks/PB-039-evidence/close-regressions.log
+  docs/tasks/PB-039-evidence/material-registration.log → docs/archive/tasks/PB-039-evidence/material-registration.log
+  docs/tasks/PB-039.md → docs/archive/tasks/PB-039.md
+  work/verification/PB-039/6ce4b7f232374b668e40256b71e95558 → docs/archive/tasks/PB-039-evidence/work/verification/PB-039/6ce4b7f232374b668e40256b71e95558
+  work/verification/PB-039/6ce4b7f232374b668e40256b71e95558/report.json → docs/archive/tasks/PB-039-evidence/work/verification/PB-039/6ce4b7f232374b668e40256b71e95558/report.json
+  work/verification/PB-039/6ce4b7f232374b668e40256b71e95558/self-check.stderr.log → docs/archive/tasks/PB-039-evidence/work/verification/PB-039/6ce4b7f232374b668e40256b71e95558/self-check.stderr.log
+  work/verification/PB-039/6ce4b7f232374b668e40256b71e95558/self-check.stdout.log → docs/archive/tasks/PB-039-evidence/work/verification/PB-039/6ce4b7f232374b668e40256b71e95558/self-check.stdout.log
+  work/verification/PB-039/6ce4b7f232374b668e40256b71e95558/unit-tests.stderr.log → docs/archive/tasks/PB-039-evidence/work/verification/PB-039/6ce4b7f232374b668e40256b71e95558/unit-tests.stderr.log
+  work/verification/PB-039/6ce4b7f232374b668e40256b71e95558/unit-tests.stdout.log → docs/archive/tasks/PB-039-evidence/work/verification/PB-039/6ce4b7f232374b668e40256b71e95558/unit-tests.stdout.log
+  work/verification/PB-039/audit-20261024 → docs/archive/tasks/PB-039-evidence/work/verification/PB-039/audit-20261024
+  work/verification/PB-039/audit-20261024/close-dry-run.log → docs/archive/tasks/PB-039-evidence/work/verification/PB-039/audit-20261024/close-dry-run.log
+  work/verification/PB-039/audit-20261024/probes-first.log → docs/archive/tasks/PB-039-evidence/work/verification/PB-039/audit-20261024/probes-first.log
+  work/verification/PB-039/audit-20261024/probes.log → docs/archive/tasks/PB-039-evidence/work/verification/PB-039/audit-20261024/probes.log
+  work/verification/PB-039/audit-20261024/probes.py → docs/archive/tasks/PB-039-evidence/work/verification/PB-039/audit-20261024/probes.py
+  work/verification/PB-039/audit-20261024/registration.log → docs/archive/tasks/PB-039-evidence/work/verification/PB-039/audit-20261024/registration.log
+Удаляются каталоги:
+  docs/tasks/PB-039-evidence
+  work/verification/PB-039/6ce4b7f232374b668e40256b71e95558
+  work/verification/PB-039/audit-20261024
+Записей: 15, удалений файлов: 13
+Diff записей (.md):
+--- /dev/null
++++ b/docs/archive/tasks/PB-039.md
+@@ -0,0 +1,175 @@
++# PB-039: Проверять и регистрировать материалы до передачи на аудит
++
++ID: PB-039
++Status: done
++Priority: P2
++Depends-On: -
++Executor: Codex
++Model: GPT-6.1 Sol
++Created: 2026-10-24T10:16:40+03:00
++Closed: 2026-10-24T10:33:09+03:00
++
++<!-- playbook-meta:start -->
++```json
++{
++  "schema_version": 1,
++  "relations": [],
++  "materials": [
++    {
++      "id": "pb039-evidence",
++      "role": "report",
++      "source": "docs/archive/tasks/PB-039-evidence",
++      "storage": "local",
++      "required": true,
++      "immutable": true,
++      "used_by": [
++        "PB-039"
++      ]
++    },
++    {
++      "id": "verify-6ce4b7f232374b668e40256b71e95558",
++      "role": "report",
++      "source": "docs/archive/tasks/PB-039-evidence/work/verification/PB-039/6ce4b7f232374b668e40256b71e95558",
++      "storage": "local",
++      "required": true,
++      "immutable": true,
++      "used_by": [
++        "PB-039"
++      ]
++    },
++    {
++      "id": "pb039-independent-audit",
++      "role": "report",
++      "source": "docs/archive/tasks/PB-039-evidence/work/verification/PB-039/audit-20261024",
++      "storage": "local",
++      "required": true,
++      "immutable": true,
++      "used_by": [
++        "PB-039"
++      ]
++    },
++    {
++      "id": "lifecycle-lc-377ff148593270bf",
++      "role": "report",
++      "source": "docs/archive/tasks/PB-039-evidence/close-lc-377ff148593270bf.json",
++      "storage": "local",
++      "required": true,
++      "immutable": true,
++      "used_by": []
++    }
++  ],
++  "handoff": {
++    "at": "2026-10-24T10:26:13+03:00",
++    "actor": {
++      "name": "Codex",
++      "model": "GPT-6.1 Sol"
++    },
++    "summary": "Ранняя проверка материалов handoff и явная регистрация через CLI; 488 тестов и self-check пройдены. Нужен отдельный независимый аудит.",
++    "reports": [
++      "verify-6ce4b7f232374b668e40256b71e95558"
++    ],
++    "card_projection": "sha256:f988cbfc6dadbf61f6b47ca8bccdd7d7c8783162d9ede0b66f6b9099d00107c6"
++  },
++  "acceptance": {
++    "at": "2026-10-24T10:33:08+03:00",
++    "actor": {
++      "name": "Codex",
++      "model": "GPT-6"
++    },
++    "role": "auditor",
++    "kind": "acceptance",
++    "result": "accepted",
++    "handoff_at": "2026-10-24T10:26:13+03:00",
++    "session": null,
++    "detail": "Независимый аудит: 9 тестов регистрации, 38 регрессий, 3 дополнительных сценария; свежесть handoff подтверждена; замечаний нет."
++  },
++  "moves": [
++    {
++      "from": "docs/tasks/PB-039-evidence",
++      "to": "docs/archive/tasks/PB-039-evidence"
++    },
++    {
++      "from": "work/verification/PB-039/6ce4b7f232374b668e40256b71e95558",
++      "to": "docs/archive/tasks/PB-039-evidence/work/verification/PB-039/6ce4b7f232374b668e40256b71e95558"
++    },
++    {
++      "from": "work/verification/PB-039/audit-20261024",
++      "to": "docs/archive/tasks/PB-039-evidence/work/verification/PB-039/audit-20261024"
++    },
++    {
++      "from": "docs/tasks/PB-039.md",
++      "to": "docs/archive/tasks/PB-039.md"
++    }
++  ]
++}
++```
++<!-- playbook-meta:end -->
++
++## Цель и границы
++
++По явному запросу инженера создать задачу и реализовать согласованную механику после PB-038: обнаруживать неучтённые материалы до передачи, регистрировать их через CLI и проверять полный маршрут закрытия при аудите. Локальное расширение существующего контракта материалов; правила владения, переносимости и независимой приёмки сохраняются. Автоматического присвоения найденных каталогов нет; внешние материалы и регистрация материалов документов этой командой не охватываются.
++
++## Контекст и требования
++
++- [PB-038](PB-038.md): при закрытии обнаружены незарегистрированные доказательства.
++- `lifecycle handoff` проверяет материалы после добавления отчётов verify в проектируемые метаданные, до записи карточки. При отказе указывает пути и команду регистрации.
++- `lifecycle register-material <ID> <source> --id <id> --role <role> --immutable|--mutable --required|--optional [--apply]`: локальный существующий файл/каталог относительно корня проекта; свойства задаются явно. По умолчанию только предпросмотр. Повтор идентичной регистрации безопасен, подмена ID/пути и пересечения владения запрещены.
++- Используются действующие ограничения путей, symlink, служебных областей и защищённых файлов. Отказ не меняет карточку/материалы. Запись через общий gate и восстанавливаемый engine.
++- После аудита до приёмки проверяется `close <ID> --dry-run`; отсутствие приёмки до её регистрации — ожидаемый отдельный gate. Окончательный dry-run проводится после accept, до реального закрытия.
++
++## План
++
++1. Добавить общую проверку проектируемых материалов и CLI регистрации.
++2. Подключить проверку к handoff, добавить CLI-регрессии успешных и ошибочных сценариев.
++3. Обновить правила/руководство, self-manifest; выполнить verify и handoff.
++
++## Приёмка
++
++- [x] Handoff отклоняет незарегистрированные доказательства до записи, с подсказкой; штатные verify-отчёты автоматически регистрируются как прежде.
++- [x] Preview регистрации не пишет; apply добавляет материал, повтор безопасен; принадлежность и флаги заданы явно.
++- [x] Отказы: нет файла, вне проекта, symlink, служебный work, защищённые файлы, повторный ID с иным содержимым, пересечения владельцев.
++- [x] Сквозной временный проект проходит register → verify → handoff → accept → close dry-run → close → check; immutable-байты сохранены.
++- [x] Правила содержат порядок регистрации перед verify/handoff и полного dry-run при аудите.
++- [ ] Независимый аудит в отдельной сессии и приёмка до закрытия.
++
++## Ресурсы
++
++Python 3.10+, стандартная библиотека, временные проекты. Ветка dev; существующие изменения не сбрасываются. policy_revision: 2; бюджет не задан. Запрос разрешает реализацию; commit/push/закрытие не разрешены.
++
++## Выполнение и проверки
++
++2026-10-24; исполнитель: Codex; модель: GPT-6.1 Sol.
++
++- Реализованы `lifecycle register-material` (preview/apply, явные флаги, безопасный повтор) и ранняя проверка handoff через проектируемый каталог. Схема и проверки владения/путей общие с сохранёнными метаданными; запись через gate и staged/final checks восстанавливаемого engine.
++- Handoff сохраняет автоматическую регистрацию runner-отчётов; уже зарегистрированные журналы без report.json не считаются прогонами verify. Явный --report продолжает требовать настоящий отчёт.
++- 9 новых CLI-тестов в `tests/test_material_registration.py`: ранний отказ без записи, preview полного дерева, apply/повтор, коллизии и пути, частичный учёт файлов, чужой владелец, gate, откат final-check, mutable/optional, журналы аудитора и сквозное закрытие с неизменностью байтов. [Прогон](PB-039-evidence/material-registration.log) — OK.
++- 38 тестов `test_close_lifecycle.py` — OK: [журнал](PB-039-evidence/close-regressions.log).
++- Первый общий прогон (484 теста) выявил устаревший индекс в копии проекта: карточка была создана до синхронизации индекса. Индекс обновлён. При параллельной регистрации материалов несколько setup временных проектов увидели pending исходного репозитория; повтор 9 тестов без параллельной мутации прошёл. Эти прогоны не использованы как финальное доказательство.
++- Обновлены правила tasks/verification, шаблон карточки, руководство, архитектура, карта кода и CHANGELOG. Self-manifest актуализируется до финального verify.
++- Финальный `playbook.py verify PB-039`: **488 тестов — OK (166.729 s)**, self-check — passed, `inputs_unchanged: true`. Прогон: `work/verification/PB-039/6ce4b7f232374b668e40256b71e95558/`. Отчёт регистрируется в передаче; независимый аудит не выполнялся.
++
++## Передача
++
++Реализация передаётся независимому аудитору в `in_review`. Ветка dev, commit не выполнялся; рабочее дерево содержит прежние изменения других задач.
++
++Воспроизведение:
++
++```bash
++python3 -m unittest discover -s tests -p 'test_material_registration.py' -v
++python3 -m unittest discover -s tests -p 'test_close_lifecycle.py' -v
++python3 ai-dev-playbook/scripts/playbook.py check --ready
++```
++
++Проверить свежесть report из handoff и проекцию карточки. После независимой приёмки — `lifecycle accept PB-039`, затем `close PB-039 --dry-run`; реальное закрытие только по указанию инженера. Локальные доказательства задачи зарегистрированы как immutable, runner-отчёты регистрируются handoff.
++
++## Аудит 2026-10-24T10:33:08+03:00; исполнитель: Codex; модель: GPT-6.
++
++Результат: PASS в проверенном объёме; замечаний не обнаружено. Независимая сессия аудитора; реализация и постоянные тесты не изменялись.
++
++- Изучены требования, CLI регистрации, проектируемый каталог, проверки путей/владения, запись через gate/engine и handoff; документы сверены с реализацией.
++- Перед аудитом проекция карточки совпала с handoff; `inputs_fresh` отчёта `6ce4b7f232374b668e40256b71e95558` вернул `(True, [])`. Общие 488 тестов заново не запускались: проверен свежий отчёт исполнителя.
++- Независимо выполнены 9 тестов регистрации (OK) и 38 регрессий close/lifecycle (OK).
++- Дополнительные 3 сценария (OK): материал вне docs проходит preview → register → verify → handoff → accept → dry-run → close → check с сохранением всех 256 байтов; вложенный symlink отклоняется без изменения дерева; отсутствие явных флагов отклоняется argparse с кодом 2 без записи. Первоначальная ошибка собственного probe — перехватывался возврат вместо SystemExit; исправлен только probe аудитора, исходный журнал сохранён.
++- До accept `close PB-039 --dry-run` ожидаемо отказал: нет записи приёмки. После записи приёмки выполняется итоговый dry-run.
++- [Сценарии](PB-039-evidence/work/verification/PB-039/audit-20261024/probes.py), [результат](PB-039-evidence/work/verification/PB-039/audit-20261024/probes.log), [9 тестов](PB-039-evidence/work/verification/PB-039/audit-20261024/registration.log). Материалы аудитора зарегистрированы отдельно как immutable.
++- Поле приёмки в содержательной части карточки не переписывалось: оно защищено проекцией handoff. Независимый аудит подтверждён этим протоколом и записью acceptance. Реальное закрытие — только по явной команде инженера.
+--- a/docs/tasks/index.md
++++ b/docs/tasks/index.md
+@@ -17,12 +17,12 @@
+ | PB-035 | [PB-035: Внедрить быстрый маршрут, итерации и пользовательские правила](PB-035.md) | draft | P2 | — | 2026-10-23 03:34 | — | PB-034 |
+ | PB-036 | [PB-036: Подключить v2 к установке и безопасному обновлению](PB-036.md) | draft | P2 | — | 2026-10-23 03:34 | — | PB-035 |
+ | PB-037 | [PB-037: Проверить сквозные маршруты и выполнить пилот v2](PB-037.md) | draft | P2 | — | 2026-10-23 03:34 | — | PB-036 |
+-| PB-039 | [PB-039: Проверять и регистрировать материалы до передачи на аудит](PB-039.md) | in_review | P2 | Codex / GPT-6.1 Sol | 2026-10-24 10:16 | — | — |
+ 
+ ## Архив
+ 
+ | ID | Задача | Статус | Приоритет | Исполнитель | Создана | Закрыта | Зависимости |
+ |---|---|---|---|---|---|---|---|
++| PB-039 | [PB-039: Проверять и регистрировать материалы до передачи на аудит](../archive/tasks/PB-039.md) | done | P2 | Codex / GPT-6.1 Sol | 2026-10-24 10:16 | 2026-10-24 10:33 | — |
+ | PB-038 | [PB-038: Сохранять ссылки индексов документов при close/reopen задач](../archive/tasks/PB-038.md) | done | P1 | Antigravity / Gemini 3.8 Flash (High) | 2026-10-23 10:25 | 2026-10-23 12:33 | — |
+ | PB-030 | [PB-030: Создать руководство пользователя о режимах работы](../archive/tasks/PB-030.md) | done | P2 | Codex / GPT-6.1 Sol | 2026-10-23 01:51 | 2026-10-23 02:23 | — |
+ | AUDIT-006 | [AUDIT-006: Независимо принять режимы и жизненный цикл документов](../archive/tasks/AUDIT-006.md) | done | P2 | Codex / GPT-6 Astra | 2026-10-01 03:05 | 2026-10-22 13:36 | PB-021, PB-022, PB-023, PB-024, PB-025, PB-026, PB-027, PB-028, PB-029 |

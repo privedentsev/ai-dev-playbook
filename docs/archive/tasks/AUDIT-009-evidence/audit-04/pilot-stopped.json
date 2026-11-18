@@ -1,0 +1,15 @@
+{
+  "reason": "Confirmed A-07 blocks acceptance; long full pilot stopped without claiming completion.",
+  "processes": [
+    {
+      "pid": 34919,
+      "ppid": 72650,
+      "command": "/usr/local/Cellar/python@3.14/3.14.6/Frameworks/Python.framework/Versions/3.14/Resources/Python.app/Contents/MacOS/Python docs/archive/tasks/PB-073-evidence/self_pilot.py /tmp/audit009-20261117-repeat/source-snapshot /tmp/audit009-20261117-repeat/pilot-full"
+    },
+    {
+      "pid": 36192,
+      "ppid": 34919,
+      "command": "/usr/local/Cellar/python@3.14/3.14.6/Frameworks/Python.framework/Versions/3.14/Resources/Python.app/Contents/MacOS/Python ai-dev-playbook/scripts/playbook.py verify PILOT-01"
+    }
+  ]
+}

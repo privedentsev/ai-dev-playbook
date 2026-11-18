@@ -1,0 +1,2 @@
+PASS: actual recoverable packaging -> dry-run -> actual close -> full structural/link check on temporary copy
+PASS: immutable snapshot bytes preserved in final archive

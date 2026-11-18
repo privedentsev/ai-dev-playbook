@@ -1,0 +1,8 @@
+test_deleted_latest_failed (__main__.Probes.test_deleted_latest_failed) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 0.322s
+
+OK
+INDEX before loss: {'result_id': '9a64882fe1294d0997d1ee743ad4334a-payments-tests', 'run_id': '9a64882fe1294d0997d1ee743ad4334a', 'finished_at': '2026-11-09T10:00:10+03:00', 'status': 'failed'}
+DELETED FAILED: {'payments-tests': 'passed'} {'payments-tests': 'failed'} {'payments-tests': 'reused'}

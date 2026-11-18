@@ -1,0 +1,27 @@
+PB-054 — третий предварительный независимый проход
+Дата: 2026-10-28
+Проверяющий: GPT-6 Luna
+Область: provenance ledger и schema compatibility; отделение audit report от runner report; TMPDIR внутри проекта.
+Исходники не менял. Это предварительная проверка, не финальный verify/HANDOFF и не acceptance.
+
+Результат
+
+В проверенной области воспроизводимых дефектов не найдено.
+
+- Изменённые actor/task_id/at в provenance.json не проходят повторный prepare-audit. Попытка заменить одновременно provenance.json и provenance.sha256 также отклоняется по независимому audit_packages digest из task metadata; preflight сообщает отказ. Тест проверяет, что повреждённый provenance не перезаписывается.
+- Изменение snapshot.txt и snapshot.meta.json отклоняется повтором. Подготовка внешней task card sidecar сохраняет исходные байты snapshot.txt и sidecar и SHA-256 sidecar; повтор проходит, несмотря на обновление исходной карточки регистрацией нового пакета.
+- Legacy task metadata schema v1 принимается как без audit_packages, так и с пустым полем. Task metadata schema v2 аналогично принимает оба варианта. Валидная v2 fixture принимается; тест FixturesLoadTest прошёл.
+- Audit report.json внутри зарегистрированного audit package не используется как verify runner report при reuse/handoff. Проверен адресным тестом.
+- Каталог с одним provenance.sha256, но без metadata binding, не скрывает новый failed runner report: reuse увидел failed и выполнил новый прогон.
+- Preview при TMPDIR внутри проекта завершается отказом до изменений дерева.
+
+Проверки
+
+- Адресный unittest запуск по 9 тестам (prepare provenance, idempotency/archive, audit report classification, TMPDIR, failed/corrupt runner report, legacy/v2 fixtures) — 9/9 прошли.
+- Дополнительные временные CLI/schema пробы: 4 сочетания v1/v2 metadata совместимости и marker-only newer failed report прошли ожидаемо.
+- Первый запуск адресных тестов попал на активную операцию prepare-audit в общем checkout и отказал по pending/gate. Pending не трогал. После сообщения владельца о завершении операции повторный запуск прошёл 9/9.
+- Полный suite не запускался.
+
+Ограничение
+
+Подтверждена только перечисленная область. Финальные verify/HANDOFF ещё не готовы.

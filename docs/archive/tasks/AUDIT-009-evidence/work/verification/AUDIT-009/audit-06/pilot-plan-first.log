@@ -1,0 +1,7 @@
+Traceback (most recent call last):
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/docs/archive/tasks/PB-073-evidence/self_pilot.py", line 916, in <module>
+    sys.exit(main())
+             ~~~~^^
+  File "/Users/privedentsev1/Dev/ai-dev-playbook/docs/archive/tasks/PB-073-evidence/self_pilot.py", line 616, in main
+    raise RuntimeError("Выходной каталог внутри репозитория допускается только в PB-073-evidence")
+RuntimeError: Выходной каталог внутри репозитория допускается только в PB-073-evidence

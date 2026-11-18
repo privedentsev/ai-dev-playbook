@@ -1,0 +1,8 @@
+Audit-ready before audit preparation: PASS; current handoff and successful full verify confirmed.
+Targeted policy suite: 16 tests PASS.
+Independent probe: schema-valid command/manual incorrectly reusable across actual/current snapshot mismatch.
+Index --all: PASS; PB-032 now in_progress.
+First preflight was invoked while index --all was still running and correctly refused due to its pending document operation 20261029-055044-4a1286b0. This was an audit orchestration error, not a PB-032 defect. Index completed successfully; no restore required.
+Sequential repeat verify PB-032 --preflight: PASS; structure, links, materials, locks, commands and limits checked.
+Git diff --check: PASS.
+Full suite was not rerun by auditor; existing current 635-test report retained.

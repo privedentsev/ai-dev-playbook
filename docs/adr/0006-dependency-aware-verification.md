@@ -6,9 +6,9 @@
   "schema_version": 1,
   "document_id": "adr:0006-dependency-aware-verification",
   "kind": "adr",
-  "state": "draft",
+  "state": "accepted",
   "created_at": "2026-11-07T01:04:58+03:00",
-  "updated_at": "2026-11-07T01:10:30+03:00",
+  "updated_at": "2026-11-11T06:35:54+03:00",
   "current_revision": 1,
   "relations": [
     {
@@ -61,4 +61,4 @@
 
 ## Статус и связи
 
-ADR — draft, решение предложено, не объявлено принятым. Развивает [ADR-0003](0003-task-scoped-verification.md), не заменяет его и не меняет принятый текст. Реализация: [design](../designs/dependency-aware-verification.md), [план PB-057–064 и AUDIT-009](../plans/dependency-aware-verification.md). Поручение инженера 2026-11-07 разрешает подготовку, но не кодирование и не развёртывание.
+ADR — draft, решение предложено, не объявлено принятым. Развивает [ADR-0003](0003-task-scoped-verification.md), не заменяет его и не меняет принятый текст. Реализация: [design](../designs/dependency-aware-verification.md), [план PB-057–064 и AUDIT-009](../archive/plans/dependency-aware-verification.md). Поручение инженера 2026-11-07 разрешает подготовку, но не кодирование и не развёртывание.

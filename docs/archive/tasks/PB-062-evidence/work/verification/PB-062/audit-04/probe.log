@@ -1,0 +1,3 @@
+real_outcomes {'probe': 'passed'} {'probe': 'failed'} same_candidate True
+before_aggregate {"ok": false, "covered": [], "uncovered": ["probe"], "notes": ["probe: последний доверенный исход failed (rc-555ebc5219cc46bc) — старые passed не покрывают"], "rejections": []}
+after_aggregate {"ok": false, "covered": [], "uncovered": ["probe"], "notes": ["probe: последний доверенный исход failed (rc-555ebc5219cc46bc) — старые passed не покрывают"], "rejections": []}

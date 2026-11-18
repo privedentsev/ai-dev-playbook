@@ -1,0 +1,124 @@
+{
+  "schema_version": 1,
+  "card_format_version": 2,
+  "relations": [
+    {
+      "relation": "based_on",
+      "target": "spec:dependency-aware-verification"
+    },
+    {
+      "relation": "based_on",
+      "target": "design:dependency-aware-verification"
+    },
+    {
+      "relation": "based_on",
+      "target": "plan:dependency-aware-verification"
+    }
+  ],
+  "materials": [
+    {
+      "id": "commands",
+      "role": "report",
+      "source": "docs/tasks/PB-058-evidence/commands.md",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-058"
+      ]
+    },
+    {
+      "id": "verify-399585ec3a234c47b9811cb725956982",
+      "role": "report",
+      "source": "work/verification/PB-058/399585ec3a234c47b9811cb725956982",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-058"
+      ]
+    },
+    {
+      "id": "audit-01",
+      "role": "report",
+      "source": "work/verification/PB-058/audit-01",
+      "storage": "local",
+      "immutable": true,
+      "required": true,
+      "used_by": [
+        "PB-058"
+      ]
+    },
+    {
+      "id": "verify-c236c2c0ff8f43198d29d126ab702688",
+      "role": "report",
+      "source": "work/verification/PB-058/c236c2c0ff8f43198d29d126ab702688",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-058"
+      ]
+    },
+    {
+      "id": "audit-02",
+      "role": "report",
+      "source": "work/verification/PB-058/audit-02",
+      "storage": "local",
+      "immutable": true,
+      "required": true,
+      "used_by": [
+        "PB-058"
+      ]
+    },
+    {
+      "id": "verify-870b11ada4e54dd8836474a06b630e43",
+      "role": "report",
+      "source": "work/verification/PB-058/870b11ada4e54dd8836474a06b630e43",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-058"
+      ]
+    }
+  ],
+  "criterion_evidence": {
+    "CHECK-01": {
+      "check_sha256": "sha256:49ed061f4841a6fd0f39300bf19ac306c49db11e45bcc2ddd84415b8a208fb1d",
+      "card_projection": "sha256:d4ddeb122ec8dd66c92685bc0d5f133d805b3430000dfaefae87bedf654d967a",
+      "report_id": "verify-399585ec3a234c47b9811cb725956982",
+      "report_sha256": "sha256:09db7728a5e539bb6afef79691999e742de8f8dadc036ff2718898f13b7607df"
+    },
+    "CHECK-02": {
+      "check_sha256": "sha256:b182e10668087e0eebde4550af374b7fa8a3090e9cf001b4f24f0156816f8ba2",
+      "card_projection": "sha256:d4ddeb122ec8dd66c92685bc0d5f133d805b3430000dfaefae87bedf654d967a",
+      "report_id": "verify-c236c2c0ff8f43198d29d126ab702688",
+      "report_sha256": "sha256:940c0a06eb5ea6a4e2d16f16b77cc7b80d1e1db0f30a1acac6247091be6d8706"
+    },
+    "CHECK-03": {
+      "check_sha256": "sha256:bc89334479cf44d9f0a212c959686578e57eebd952863486e77d47d444a31de2",
+      "card_projection": "sha256:d4ddeb122ec8dd66c92685bc0d5f133d805b3430000dfaefae87bedf654d967a",
+      "report_id": "verify-870b11ada4e54dd8836474a06b630e43",
+      "report_sha256": "sha256:cf43904d0f901ee9130927489e0e516a5b8dc5b4c4360cbd0d289e269b1e0753"
+    }
+  },
+  "handoff": {
+    "at": "2026-11-08T15:35:20+03:00",
+    "actor": {
+      "name": "Devin",
+      "model": "SWE-2 High"
+    },
+    "summary": "HANDOFF-03",
+    "reports": [
+      "verify-870b11ada4e54dd8836474a06b630e43"
+    ],
+    "card_projection": "sha256:d4ddeb122ec8dd66c92685bc0d5f133d805b3430000dfaefae87bedf654d967a",
+    "entry_id": "HANDOFF-03",
+    "journal_sha256": "sha256:edcc5b6204405af6be5ee1b3142c48f571becc080d925cb0e6880ce919ef9d45"
+  },
+  "audit_packages": {
+    "audit-01": "sha256:1ea520d5da69ca795c63eabc53e34175419bab8606545f294011b887bb34f033",
+    "audit-02": "sha256:972524954e57e9a6884853cec81fc752fafd90493858833ac55530add284231c"
+  }
+}

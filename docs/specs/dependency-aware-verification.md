@@ -6,10 +6,10 @@
   "schema_version": 1,
   "document_id": "spec:dependency-aware-verification",
   "kind": "spec",
-  "state": "draft",
+  "state": "accepted",
   "created_at": "2026-11-07T01:03:30+03:00",
-  "updated_at": "2026-11-07T01:10:30+03:00",
-  "current_revision": 1,
+  "updated_at": "2026-11-18T09:28:43+03:00",
+  "current_revision": 2,
   "relations": [
     {
       "relation": "based_on",
@@ -30,7 +30,7 @@
   "changes": [
     {
       "id": "dependency-aware-verification",
-      "state": "draft",
+      "state": "accepted",
       "section": "Планируемые требования",
       "basis": {
         "type": "authorized_scope",
@@ -50,10 +50,29 @@
         "PB-064",
         "AUDIT-009"
       ],
-      "acceptance": null
+      "acceptance": "docs/specs/dependency-aware-verification-evidence/promote-lc-292706947891cbcb.json"
     }
   ],
-  "materials": [],
+  "materials": [
+    {
+      "id": "revision-1",
+      "role": "other",
+      "source": "docs/specs/dependency-aware-verification-evidence/revision-1.md",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": []
+    },
+    {
+      "id": "lifecycle-lc-292706947891cbcb",
+      "role": "report",
+      "source": "docs/specs/dependency-aware-verification-evidence/promote-lc-292706947891cbcb.json",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": []
+    }
+  ],
   "archive": null
 }
 ```
@@ -61,19 +80,19 @@
 
 ## Статус и основание
 
-Подготовлено 2026-11-07 по поручению инженера «подготовим все необходимое для реализации этой задачи так, как обсудили». Сохранены договорённости обсуждения; документы и карточки — проект реализации, не действующая политика. Технические решения и границы первого выпуска требуют принятия перед стартом. Кодирование, включение режима, commit/push/release этим поручением не разрешены.
+Требования подготовлены 2026-11-07; реализация PB-057–064 и исправлений PB-073/PB-074/PB-078/PB-079/PB-080/PB-081 прошла индивидуальную приёмку. Совместный результат принят в [AUDIT-009](../archive/tasks/AUDIT-009.md). Реализованный opt-in и его ограничения описаны в [правилах проверок](../../ai-dev-playbook/rules/verification.md); изменение принято по итогам независимого аудита блока. Подключение self-project или внешнего protected-развёртывания требует отдельного поручения.
 
 Цель: автономный выбор необходимых проверок с проверяемыми результатами вместо решения агента «этого достаточно». Обычные задачи проверяют затронутый функционал; релиз требует весь обязательный набор актуальных успешных результатов, а не обязательно новый полный прогон.
 
-[Design](../designs/dependency-aware-verification.md), [ADR-0006](../adr/0006-dependency-aware-verification.md), [план](../plans/dependency-aware-verification.md).
+[Design](../designs/dependency-aware-verification.md), [ADR-0006](../adr/0006-dependency-aware-verification.md), [план](../archive/plans/dependency-aware-verification.md).
 
 ## Действующее поведение и отличие
 
-Проверено по текущим verification.py, verification_policy.py и project.json. V2 уже содержит registry, applicability always/when_paths/checkpoint, default_inputs, снимки, coverage, выборочное reuse и lifecycle gates. Снимки применимости уже независимы от Git. Существующий v2 требует task-план, ссылающийся на обязательные registry IDs; он не строит автоматически граф модулей и семантическое покрытие тестами. Поиск reusable v2 ограничен задачей. Command-results проверяют запуск процесса, но не универсальный достоверный список тестов. Локальные метаданные не аутентифицируют инженера и не защищены от владельца файлов.
+Прежний verification v2 сохраняет registry, applicability always/when_paths/checkpoint, default_inputs, снимки, coverage, выборочное reuse и lifecycle gates. Новый opt-in checks_policy добавляет inventory/граф, автоматический выбор и reuse между задачами. Локальный python-unittest сверяет каталог IDs и outcomes и исполняет одобренный поддерживаемый Python; protected kind=test заблокирован из-за self-reported событий. Command-results подтверждают свой постконтракт, а не универсальный список тестов. Локальные метаданные не аутентифицируют инженера и не защищены от владельца файлов.
 
 Self-project всё ещё использует legacy: self-check, preflight-regressions и полный unittest discover; task_workflow не включён. Новый контракт нельзя применять к этим задачам до явной миграции. Прежние принятия PB-031–037 не переоткрываются этой подготовкой.
 
-## Планируемые требования
+## Требования
 
 | ID | Требование |
 |---|---|
@@ -124,4 +143,4 @@ Self-project всё ещё использует legacy: self-check, preflight-re
 
 При реализации обновляются verification/workflow/tasks, конфигурационные шаблоны, архитектура и code-map, руководство, install/update-контракт и CI-интеграция. Требования развивают [proportional-workflow](proportional-workflow.md); принятый ADR-0003 не переписывается. Текущие правила и self-config при этой подготовке не меняются.
 
-Сначала принять технический проект и разрешить PB-057. Первый этап фиксирует версии схем и CLI-контракт; конкретный бюджет и размещение доверенного контура задаются при подключении. Внешний rollout не является скрытой зависимостью локальной подготовки.
+Итоговая совместная приёмка зарегистрирована в AUDIT-009. Конкретный бюджет и размещение доверенного контура задаются при подключении. Внешний rollout остаётся отдельным шагом; локальные и протокольные проверки не доказывают отдельную OS/CI identity.

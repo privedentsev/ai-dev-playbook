@@ -1,0 +1,389 @@
+План lc-e5f09e68af88a10c (lifecycle):
+Основание: playbook.py close PB-034
+Исполнитель: cli:privedentsev1 (cli)
+Действия:
+  close_task PB-034: docs/tasks/PB-034.md → docs/archive/tasks/PB-034.md (done)
+Переносы:
+  docs/tasks/PB-034-evidence → docs/archive/tasks/PB-034-evidence
+  docs/tasks/PB-034-evidence/final-probes.log → docs/archive/tasks/PB-034-evidence/final-probes.log
+  docs/tasks/PB-034-evidence/implementation.md → docs/archive/tasks/PB-034-evidence/implementation.md
+  docs/tasks/PB-034-evidence/legacy-close.log → docs/archive/tasks/PB-034-evidence/legacy-close.log
+  docs/tasks/PB-034-evidence/material-type.log → docs/archive/tasks/PB-034-evidence/material-type.log
+  docs/tasks/PB-034-evidence/policy.log → docs/archive/tasks/PB-034-evidence/policy.log
+  docs/tasks/PB-034-evidence/preflight-fixtures.log → docs/archive/tasks/PB-034-evidence/preflight-fixtures.log
+  docs/tasks/PB-034-evidence/readiness-final.log → docs/archive/tasks/PB-034-evidence/readiness-final.log
+  docs/tasks/PB-034-evidence/recheck-plan.md → docs/archive/tasks/PB-034-evidence/recheck-plan.md
+  docs/tasks/PB-034-evidence/runner-final.log → docs/archive/tasks/PB-034-evidence/runner-final.log
+  docs/tasks/PB-034-evidence/targeted-final.log → docs/archive/tasks/PB-034-evidence/targeted-final.log
+  docs/tasks/PB-034-evidence/targeted-lifecycle.log → docs/archive/tasks/PB-034-evidence/targeted-lifecycle.log
+  docs/tasks/PB-034.md → docs/archive/tasks/PB-034.md
+  work/verification/PB-034/28a701efac404bd7993d04cba4aa9173 → docs/archive/tasks/PB-034-evidence/work/verification/PB-034/28a701efac404bd7993d04cba4aa9173
+  work/verification/PB-034/28a701efac404bd7993d04cba4aa9173/preflight-regressions.stderr.log → docs/archive/tasks/PB-034-evidence/work/verification/PB-034/28a701efac404bd7993d04cba4aa9173/preflight-regressions.stderr.log
+  work/verification/PB-034/28a701efac404bd7993d04cba4aa9173/preflight-regressions.stdout.log → docs/archive/tasks/PB-034-evidence/work/verification/PB-034/28a701efac404bd7993d04cba4aa9173/preflight-regressions.stdout.log
+  work/verification/PB-034/28a701efac404bd7993d04cba4aa9173/report.json → docs/archive/tasks/PB-034-evidence/work/verification/PB-034/28a701efac404bd7993d04cba4aa9173/report.json
+  work/verification/PB-034/28a701efac404bd7993d04cba4aa9173/self-check.stderr.log → docs/archive/tasks/PB-034-evidence/work/verification/PB-034/28a701efac404bd7993d04cba4aa9173/self-check.stderr.log
+  work/verification/PB-034/28a701efac404bd7993d04cba4aa9173/self-check.stdout.log → docs/archive/tasks/PB-034-evidence/work/verification/PB-034/28a701efac404bd7993d04cba4aa9173/self-check.stdout.log
+  work/verification/PB-034/28a701efac404bd7993d04cba4aa9173/unit-tests.stderr.log → docs/archive/tasks/PB-034-evidence/work/verification/PB-034/28a701efac404bd7993d04cba4aa9173/unit-tests.stderr.log
+  work/verification/PB-034/28a701efac404bd7993d04cba4aa9173/unit-tests.stdout.log → docs/archive/tasks/PB-034-evidence/work/verification/PB-034/28a701efac404bd7993d04cba4aa9173/unit-tests.stdout.log
+  work/verification/PB-034/8111f3a084ab436bb1e2cb11b5a10ae7 → docs/archive/tasks/PB-034-evidence/work/verification/PB-034/8111f3a084ab436bb1e2cb11b5a10ae7
+  work/verification/PB-034/8111f3a084ab436bb1e2cb11b5a10ae7/preflight-regressions.stderr.log → docs/archive/tasks/PB-034-evidence/work/verification/PB-034/8111f3a084ab436bb1e2cb11b5a10ae7/preflight-regressions.stderr.log
+  work/verification/PB-034/8111f3a084ab436bb1e2cb11b5a10ae7/preflight-regressions.stdout.log → docs/archive/tasks/PB-034-evidence/work/verification/PB-034/8111f3a084ab436bb1e2cb11b5a10ae7/preflight-regressions.stdout.log
+  work/verification/PB-034/8111f3a084ab436bb1e2cb11b5a10ae7/report.json → docs/archive/tasks/PB-034-evidence/work/verification/PB-034/8111f3a084ab436bb1e2cb11b5a10ae7/report.json
+  work/verification/PB-034/8111f3a084ab436bb1e2cb11b5a10ae7/self-check.stderr.log → docs/archive/tasks/PB-034-evidence/work/verification/PB-034/8111f3a084ab436bb1e2cb11b5a10ae7/self-check.stderr.log
+  work/verification/PB-034/8111f3a084ab436bb1e2cb11b5a10ae7/self-check.stdout.log → docs/archive/tasks/PB-034-evidence/work/verification/PB-034/8111f3a084ab436bb1e2cb11b5a10ae7/self-check.stdout.log
+  work/verification/PB-034/8111f3a084ab436bb1e2cb11b5a10ae7/unit-tests.stderr.log → docs/archive/tasks/PB-034-evidence/work/verification/PB-034/8111f3a084ab436bb1e2cb11b5a10ae7/unit-tests.stderr.log
+  work/verification/PB-034/8111f3a084ab436bb1e2cb11b5a10ae7/unit-tests.stdout.log → docs/archive/tasks/PB-034-evidence/work/verification/PB-034/8111f3a084ab436bb1e2cb11b5a10ae7/unit-tests.stdout.log
+  work/verification/PB-034/audit-01 → docs/archive/tasks/PB-034-evidence/work/verification/PB-034/audit-01
+  work/verification/PB-034/audit-01/audit.txt → docs/archive/tasks/PB-034-evidence/work/verification/PB-034/audit-01/audit.txt
+  work/verification/PB-034/audit-01/close-preview.log → docs/archive/tasks/PB-034-evidence/work/verification/PB-034/audit-01/close-preview.log
+  work/verification/PB-034/audit-01/independent-probes.log → docs/archive/tasks/PB-034-evidence/work/verification/PB-034/audit-01/independent-probes.log
+  work/verification/PB-034/audit-01/lifecycle.log → docs/archive/tasks/PB-034-evidence/work/verification/PB-034/audit-01/lifecycle.log
+  work/verification/PB-034/audit-01/preflight.log → docs/archive/tasks/PB-034-evidence/work/verification/PB-034/audit-01/preflight.log
+  work/verification/PB-034/audit-01/probes.py → docs/archive/tasks/PB-034-evidence/work/verification/PB-034/audit-01/probes.py
+  work/verification/PB-034/audit-01/provenance.json → docs/archive/tasks/PB-034-evidence/work/verification/PB-034/audit-01/provenance.json
+  work/verification/PB-034/audit-01/provenance.sha256 → docs/archive/tasks/PB-034-evidence/work/verification/PB-034/audit-01/provenance.sha256
+  work/verification/PB-034/audit-01/setup-blocked.log → docs/archive/tasks/PB-034-evidence/work/verification/PB-034/audit-01/setup-blocked.log
+  work/verification/PB-034/audit-01/snapshot.txt → docs/archive/tasks/PB-034-evidence/work/verification/PB-034/audit-01/snapshot.txt
+Удаляются каталоги:
+  docs/tasks/PB-034-evidence
+  work/verification/PB-034/28a701efac404bd7993d04cba4aa9173
+  work/verification/PB-034/8111f3a084ab436bb1e2cb11b5a10ae7
+  work/verification/PB-034/audit-01
+Записей: 41, удалений файлов: 36
+Diff записей (.md):
+  docs/archive/tasks/PB-034-evidence/final-probes.log: prepared stream sha256:5370887f555fcdaa404e98b921a581ef54e6e3fb8f5cfacd278361c9b1e6fd73
+  docs/archive/tasks/PB-034-evidence/implementation.md: prepared stream sha256:9fd80931650b263f55fb06541c0f0421e5529b32a1bf626de3f71f1d87c59663
+  docs/archive/tasks/PB-034-evidence/legacy-close.log: prepared stream sha256:3d41f714c52b7983068f1f9e5b0ba4fdedf3b522fc4f1e8790ad640366e22c96
+  docs/archive/tasks/PB-034-evidence/material-type.log: prepared stream sha256:44a03c5eb1e1a3e60ee08afe925a3d751a49655dead8b08f5b1eaed4b1cac904
+  docs/archive/tasks/PB-034-evidence/policy.log: prepared stream sha256:0396f9331c17a18914e3e697c3dd220eaddbbf8b7e5728b0a9203162faf52244
+  docs/archive/tasks/PB-034-evidence/preflight-fixtures.log: prepared stream sha256:99443c9faba0683fb20569691adabab93fac2ec003854aa29f7606860afcfd2f
+  docs/archive/tasks/PB-034-evidence/readiness-final.log: prepared stream sha256:e17e7cfee7ae62f8d5d113132067c8a09349f08101656831d0d5f8d5b682aea4
+  docs/archive/tasks/PB-034-evidence/recheck-plan.md: prepared stream sha256:0aecf3ca48495905b96bc7c152ba2beb97777b9a511f266f4aacfb9f6e372113
+  docs/archive/tasks/PB-034-evidence/runner-final.log: prepared stream sha256:deacdfc4d1990ca0bc7f72461626ca2593d1b0fd8621e4ec3b3084376460d350
+  docs/archive/tasks/PB-034-evidence/targeted-final.log: prepared stream sha256:42f64c339e9449bc27fddf43b07f49404802a33235c43fa418a446d8f0a70ad7
+  docs/archive/tasks/PB-034-evidence/targeted-lifecycle.log: prepared stream sha256:9b9af9731b3ec7226044b0b5b682036211e6ec1a014135eef0f5f2d55f19ae73
+  docs/archive/tasks/PB-034-evidence/work/verification/PB-034/28a701efac404bd7993d04cba4aa9173/preflight-regressions.stderr.log: prepared stream sha256:43e82afdb5eb44b6252dc5784962d4d861cbe1d33eaf7681d850d25450259397
+  docs/archive/tasks/PB-034-evidence/work/verification/PB-034/28a701efac404bd7993d04cba4aa9173/preflight-regressions.stdout.log: prepared stream sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+  docs/archive/tasks/PB-034-evidence/work/verification/PB-034/28a701efac404bd7993d04cba4aa9173/report.json: prepared stream sha256:e9aabdd85184de66e70d14373c3a5276cb616d2835ef6fdf283b549df636a954
+  docs/archive/tasks/PB-034-evidence/work/verification/PB-034/28a701efac404bd7993d04cba4aa9173/self-check.stderr.log: prepared stream sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+  docs/archive/tasks/PB-034-evidence/work/verification/PB-034/28a701efac404bd7993d04cba4aa9173/self-check.stdout.log: prepared stream sha256:fa39452b5b278a3d56e8837a598c98e35015dee8a8655e5553f6972f055b053e
+  docs/archive/tasks/PB-034-evidence/work/verification/PB-034/28a701efac404bd7993d04cba4aa9173/unit-tests.stderr.log: prepared stream sha256:74fdfb9fbac124df06685129d6bb18f6085332f2b73c0492a390a0c4c54b4014
+  docs/archive/tasks/PB-034-evidence/work/verification/PB-034/28a701efac404bd7993d04cba4aa9173/unit-tests.stdout.log: prepared stream sha256:33bb46bea56c7e171b8af20752e50348c1b4896e361e2fec684173512ecebb64
+  docs/archive/tasks/PB-034-evidence/work/verification/PB-034/8111f3a084ab436bb1e2cb11b5a10ae7/preflight-regressions.stderr.log: prepared stream sha256:c515cbc33a1e29b290eb01d54aa6521168211aefde81735de098e640540ba798
+  docs/archive/tasks/PB-034-evidence/work/verification/PB-034/8111f3a084ab436bb1e2cb11b5a10ae7/preflight-regressions.stdout.log: prepared stream sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+  docs/archive/tasks/PB-034-evidence/work/verification/PB-034/8111f3a084ab436bb1e2cb11b5a10ae7/report.json: prepared stream sha256:8d543a64a1dd8b39dd2d33e0c51c8c087aa5abec652bc90939e0f3cd3ff6f65f
+  docs/archive/tasks/PB-034-evidence/work/verification/PB-034/8111f3a084ab436bb1e2cb11b5a10ae7/self-check.stderr.log: prepared stream sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+  docs/archive/tasks/PB-034-evidence/work/verification/PB-034/8111f3a084ab436bb1e2cb11b5a10ae7/self-check.stdout.log: prepared stream sha256:fa39452b5b278a3d56e8837a598c98e35015dee8a8655e5553f6972f055b053e
+  docs/archive/tasks/PB-034-evidence/work/verification/PB-034/8111f3a084ab436bb1e2cb11b5a10ae7/unit-tests.stderr.log: prepared stream sha256:1e14b4d4a59b3f58b7c31e42fd31ad24ff91a9f044f198e3c0a9d516d090685f
+  docs/archive/tasks/PB-034-evidence/work/verification/PB-034/8111f3a084ab436bb1e2cb11b5a10ae7/unit-tests.stdout.log: prepared stream sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+  docs/archive/tasks/PB-034-evidence/work/verification/PB-034/audit-01/audit.txt: prepared stream sha256:75b951f6e69c8c8752be596bbeda5d12912160ac4aeef6b67afa9f824fd41672
+  docs/archive/tasks/PB-034-evidence/work/verification/PB-034/audit-01/close-preview.log: prepared stream sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+  docs/archive/tasks/PB-034-evidence/work/verification/PB-034/audit-01/independent-probes.log: prepared stream sha256:69e6499b15f70f602afb7e5d1a94a0e71883a190c369f0081c3f01d22fb21771
+  docs/archive/tasks/PB-034-evidence/work/verification/PB-034/audit-01/lifecycle.log: prepared stream sha256:b4cfdc86396a4f48fcb3adbbba157e131ff3f4539b1677ebc749cf7b46c35b13
+  docs/archive/tasks/PB-034-evidence/work/verification/PB-034/audit-01/preflight.log: prepared stream sha256:d7c1c821df59f5b3fb6dbbfcc22ad98846d02f7f526cc42bf44fc471b636033f
+  docs/archive/tasks/PB-034-evidence/work/verification/PB-034/audit-01/probes.py: prepared stream sha256:71b800f2d1c2d19271989a39cd43841e50df48ab86e3b37a831381992139d52c
+  docs/archive/tasks/PB-034-evidence/work/verification/PB-034/audit-01/provenance.json: prepared stream sha256:84ecbba2f57860e9447e47c458b7e3d8269e161fbe5a9ae2965c8e3d15d6ae42
+  docs/archive/tasks/PB-034-evidence/work/verification/PB-034/audit-01/provenance.sha256: prepared stream sha256:136916fbb1b7f24fb2a14c6a535a2819d87feb728302c729c2931e1dcc39cbe9
+  docs/archive/tasks/PB-034-evidence/work/verification/PB-034/audit-01/setup-blocked.log: prepared stream sha256:f6a82567061f8c9c6e8dee8564f2d788e8e2c0c851a5b038f9ca69675960c966
+  docs/archive/tasks/PB-034-evidence/work/verification/PB-034/audit-01/snapshot.txt: prepared stream sha256:303157eb785c9be49c4db45e8c13c1ce1da526a6ba13b4df0bfaa779e9512c51
+--- /dev/null
++++ b/docs/archive/tasks/PB-034.md
+@@ -0,0 +1,247 @@
++# PB-034: Согласовать передачу, приёмку и закрытие без лишних прогонов
++
++ID: PB-034
++Status: done
++Priority: P2
++Depends-On: PB-033
++Executor: Codex
++Model: GPT-6
++Created: 2026-10-23T03:34:58+03:00
++Closed: 2026-11-05T19:00:26+03:00
++
++<!-- playbook-meta:start -->
++```json
++{
++  "schema_version": 1,
++  "relations": [
++    {
++      "relation": "based_on",
++      "target": "spec:proportional-workflow"
++    },
++    {
++      "relation": "based_on",
++      "target": "design:proportional-workflow"
++    }
++  ],
++  "materials": [
++    {
++      "id": "implementation-evidence",
++      "role": "report",
++      "source": "docs/archive/tasks/PB-034-evidence",
++      "storage": "local",
++      "required": true,
++      "immutable": true,
++      "used_by": [
++        "PB-034"
++      ]
++    },
++    {
++      "id": "verify-28a701efac404bd7993d04cba4aa9173",
++      "role": "report",
++      "source": "docs/archive/tasks/PB-034-evidence/work/verification/PB-034/28a701efac404bd7993d04cba4aa9173",
++      "storage": "local",
++      "required": true,
++      "immutable": true,
++      "used_by": [
++        "PB-034"
++      ]
++    },
++    {
++      "id": "verify-8111f3a084ab436bb1e2cb11b5a10ae7",
++      "role": "report",
++      "source": "docs/archive/tasks/PB-034-evidence/work/verification/PB-034/8111f3a084ab436bb1e2cb11b5a10ae7",
++      "storage": "local",
++      "required": true,
++      "immutable": true,
++      "used_by": [
++        "PB-034"
++      ]
++    },
++    {
++      "id": "audit-01",
++      "role": "report",
++      "source": "docs/archive/tasks/PB-034-evidence/work/verification/PB-034/audit-01",
++      "storage": "local",
++      "immutable": true,
++      "required": true,
++      "used_by": [
++        "PB-034"
++      ]
++    },
++    {
++      "id": "lifecycle-lc-e5f09e68af88a10c",
++      "role": "report",
++      "source": "docs/archive/tasks/PB-034-evidence/close-lc-e5f09e68af88a10c.json",
++      "storage": "local",
++      "required": true,
++      "immutable": true,
++      "used_by": []
++    }
++  ],
++  "handoff": {
++    "at": "2026-11-05T18:53:40+03:00",
++    "actor": {
++      "name": "Codex",
++      "model": "GPT-6"
++    },
++    "summary": "PB-034 реализована; свежий полный verify passed; передача на независимый аудит",
++    "reports": [
++      "verify-28a701efac404bd7993d04cba4aa9173"
++    ],
++    "card_projection": "sha256:dbb1849d8f9511ecc2c990a83433f3c73a401ddad8831dcc8e2bc92c0d8caa14"
++  },
++  "audit_packages": {
++    "audit-01": "sha256:84ecbba2f57860e9447e47c458b7e3d8269e161fbe5a9ae2965c8e3d15d6ae42"
++  },
++  "acceptance": {
++    "at": "2026-11-05T19:00:12+03:00",
++    "actor": {
++      "name": "Codex",
++      "model": "GPT-6"
++    },
++    "role": "auditor",
++    "kind": "acceptance",
++    "result": "accepted",
++    "handoff_at": "2026-11-05T18:53:40+03:00",
++    "session": null,
++    "detail": "Независимый аудит: замечаний нет; свежий полный verify 678 тестов, 23 lifecycle-сценария и 4 независимые пробы passed; протокол audit-01."
++  },
++  "moves": [
++    {
++      "from": "docs/tasks/PB-034-evidence",
++      "to": "docs/archive/tasks/PB-034-evidence"
++    },
++    {
++      "from": "work/verification/PB-034/28a701efac404bd7993d04cba4aa9173",
++      "to": "docs/archive/tasks/PB-034-evidence/work/verification/PB-034/28a701efac404bd7993d04cba4aa9173"
++    },
++    {
++      "from": "work/verification/PB-034/8111f3a084ab436bb1e2cb11b5a10ae7",
++      "to": "docs/archive/tasks/PB-034-evidence/work/verification/PB-034/8111f3a084ab436bb1e2cb11b5a10ae7"
++    },
++    {
++      "from": "work/verification/PB-034/audit-01",
++      "to": "docs/archive/tasks/PB-034-evidence/work/verification/PB-034/audit-01"
++    },
++    {
++      "from": "docs/tasks/PB-034.md",
++      "to": "docs/archive/tasks/PB-034.md"
++    }
++  ]
++}
++```
++<!-- playbook-meta:end -->
++
++## Цель и границы
++
++Встроить start/route/revise и согласованный handoff в текущий lifecycle engine; закрытие v2 проверяет покрытие и актуальность. Начало работы фиксирует baseline. Восстановление/блокировки сохраняются.
++
++## Приоритет и зависимости
++
++P2, часть согласованного направления развития. Порядок существующих работ не меняется. Зависимости: PB-033. Выполнение разрешено инженером 2026-10-29: «начни задачу 034». Зависимость PB-033 завершена.
++
++## Контекст
++
++- [План](../../plans/proportional-workflow.md).
++- [Спецификация](../../specs/proportional-workflow.md): R-03–05,14–23; AC-02–03,07–11.
++- [Design](../../designs/proportional-workflow.md).
++- [ADR-0003](../../adr/0003-task-scoped-verification.md).
++
++## Область изменений
++
++lifecycle.py, playbook.py, метаданные истории/материалов и интеграционные тесты. file_operations переиспользуется; изменение его контракта требует отдельного обоснования.
++
++## Условия готовности
++
++План/границы согласованы инженером; зависимости завершены; поля/интерфейсы соответствующего этапа однозначны. Исполнитель назначается только при старте. Изменение требований/архитектуры возвращается к соответствующему этапу, не решается скрытым расширением задачи.
++
++## План
++
++1. Добавить команды переходов на существующем движке.
++2. Подключить v2 coverage/проекции к handoff/accept/close, сохранить v1.
++3. Выполнить негативные, конкурентные и fault-injection сценарии.
++
++## Приёмка
++
++- [x] start/route/revise проверяют допустимость и зависимости, меняют карточку/индекс восстанавливаемо; baseline работает с dirty Git и без Git.
++- [x] handoff учитывает известные текущие/исторические прогоны и материалы, согласованно фиксирует in_review, индекс, результат и coverage.
++- [x] acceptance привязана к конкретной передаче/версии. Новая содержательная правка снимает актуальность; промежуточный просмотр не является acceptance.
++- [x] close требует все актуальные обязательные результаты и приёмку нужной роли; быстрый маршрут — инженер. Служебные переходы не требуют повторных тестов реализации.
++- [x] SIGKILL, повтор, гонки, повреждённые материалы и restore не теряют данные и не создают ложную приёмку; immutable байты сохраняются.
++- [ ] Самопроверка и handoff зарегистрированы, независимая приёмка выполнена в отдельной сессии либо инженером перед закрытием.
++
++## Проверки и доказательства
++
++CLI end-to-end с input hashes, счётчиком дорогого теста, переходами и переносом; SIGKILL staged/mid-write, повтор restore, чужая правка и lock contention. Предлагаемые tests/test_task_workflow_lifecycle.py; existing test_close_lifecycle/test_file_operations regression.
++
++Команды основы: целевые `python3 -m unittest discover -s tests -p '<согласованный файл тестов>' -v`, затем настроенный `python3 ai-dev-playbook/scripts/playbook.py verify PB-034` по действующему на этапе контракту. Перед запуском проверить argv/inputs и готовность служебных данных. Проверить `index --all`, `check --ready`, `git diff --check`; после изменения файлов комплекта выполнить `adopt . --force --apply` до финального прогона. Существующий timeout не обходить скрытым изменением runner: заранее согласовать настройку при необходимости.
++
++Материалы: `docs/tasks/PB-034-evidence/` и зарегистрированные verify-прогоны. Неизменяемые отчёты не переписывать. Структурные проверки не являются доказательством поведения CLI.
++
++## Ресурсы
++
++Python 3.10+ и стандартная библиотека, локальные временные проекты без секретов; независимый аудитор отдельной сессией либо инженер. policy_revision — действующая конфигурация на момент старта; бюджет отдельно не согласован. Общие материалы принадлежат AUDIT-007, не архивируются с подзадачей.
++
++## Выполнение и проверки
++
++Карточка подготовлена Codex / GPT-6.1 Sol на этапе планирования.
++
++## Выполнение 2026-10-29; исполнитель: Codex; модель: GPT-6.
++
++Начат PB-034 по поручению инженера. Ветка dev, исходное дерево содержит незакоммиченные изменения PB-031–033, PB-044–046, PB-055–056; они сохраняются. Ресурсы: локальный Python 3, standard library; независимая приёмка после передачи — отдельной сессией либо инженером.
++
++План: переиспользовать verification_policy и runner v2; добавить восстанавливаемые start/route/revise и атомарный handoff; связать acceptance/close с покрытием и отпечатком передачи. Legacy v1 оставить прежним. Постоянные CLI-тесты: dirty/no Git baseline, отрицательное/устаревшее покрытие, роли, счётчик прогонов, прерывания/restore/конкуренция/immutable. Проверки: целевой lifecycle + существующие close/file_operations/runner, затем index/check/manifest/preflight и настроенный полный verify. Бюджет не задан; текущие timeout не изменяются.
++
++## Передача
++
++После реализации сохранить команды воспроизведения, отчёты, ограничения и фактическую ветку/состояние входов; зарегистрировать `lifecycle handoff PB-034` и in_review по действующему контракту. Исполнитель не закрывает задачу сам без инженерского поручения. Закрытие — только после независимой приёмки через штатный CLI.
++
++## Уточнение после PB-051–053
++
++[PB-054](PB-054.md) вводит безопасную подготовку аудита и проверку конечного staged-дерева в close --dry-run. Встроить эти общие механизмы в v2; не дублировать правила путей, снимков и материалов. После добавления протокола проверять переносимость/ссылки/байты до приёмки и заново перед close. Содержательная правка возвращает затронутые проверки; одна упаковка доказательства требует связанных проверок упаковки, если независимость реализации доказана. Статус/индекс/протокол не дают повода исключать docs целиком.
++
++Дополнительная приёмка: служебный цикл с новым безопасно размещённым аудитом сохраняет счётчик дорогой проверки; изменение читаемого материала повторяет связанную проверку. Ранняя проверка не подменяет acceptance; внешний конфликт после preview отказывает до записи, recovery остаётся рабочим.
++
++## Выполнение и проверки
++
++### Результат реализации; исполнитель: Codex; модель: GPT-6.
++
++Реализованы переходы start/route/revise, baseline по содержимому, покрытие v2 в handoff/accept/close, атомарные карточка/внешний JSON/индекс и типизированные хеши материалов. Общие gate/lock/staged/read-set/backup/restore переиспользуются. Сохранены v1, ручные проверки и журнал Markdown v2. Технический контракт обновлён в tasks/verification, architecture/code-map и CHANGELOG; self-manifest актуализирован.
++
++Материалы: [реализация и воспроизведение](PB-034-evidence/implementation.md), [адресные CLI-сценарии](PB-034-evidence/targeted-final.log), [legacy close](PB-034-evidence/legacy-close.log), [политика](PB-034-evidence/policy.log), [тип материала](PB-034-evidence/material-type.log). Статус/индекс готовятся до финального verify; готовность к аудиту подтвердит только свежая CLI-передача. Полный результат проверки будет дописан после прогона.
++
++Ограничения: self-project остаётся на v1; PB-035/036 не выполнялись; достаточность scope оценивается принимающим, CLI не удостоверяет личность инженера. Исходные незакоммиченные изменения других задач сохранены. Независимая приёмка и закрытие этой сессией не выполняются.
++
++## Выполнение и проверки
++
++### CHECK-01 — 2026-10-29T20:17:21+03:00; исполнитель: Codex; модель: GPT-6.
++
++Адресно: 21 lifecycle-сценарий + 2 финальные пробы passed; legacy close — 38, policy — 18; отдельная подмена типа материала — 1. Полный [verify 8111f3a084ab436bb1e2cb11b5a10ae7](PB-034-evidence/work/verification/PB-034/8111f3a084ab436bb1e2cb11b5a10ae7/report.json) не пройден: self-check/preflight-regressions passed, unit-tests timeout 900.022 с; до остановки 653 passed и 2 FAIL, inputs_unchanged=true. Исходный отчёт и логи сохранены.
++
++Две ошибки — прежние фикстуры preflight: пустая несвязанная baseline.json и невалидный выдуманный failed-report. Их нельзя считать доказательствами после привязки baseline/строгой проверки отчётов. Фикстуры заменены реальным start и реальным failed-прогоном, смысл отрицательной проверки сохранён. [Все 7 preflight-тестов passed](PB-034-evidence/preflight-fixtures.log). Исходники реализации после полного прогона не менялись; исправлен tests/test_verification_preflight.py.
++
++Полного успешного verify и CLI-передачи пока нет; текущий статус in_progress. Для нового полного прогона предлагается согласовать unit-tests timeout 900 → 1200 секунд; [обоснование и точное изменение](PB-034-evidence/recheck-plan.md). После согласования: настройка → in_review/индекс → preflight → полный verify → CHECK/HANDOFF. Требование карточки о согласовании timeout сохранено.
++
++### CHECK-02 — 2026-10-29T20:19:34+03:00; исполнитель: Codex; модель: GPT-6.
++
++После исправления фикстур отдельно проверен остаток runner/readiness: [runner v2 — 11 passed](PB-034-evidence/runner-final.log), [readiness — 11 passed](PB-034-evidence/readiness-final.log). index --all, check --ready и git diff --check прошли. Настройки timeout пока не менялись; ожидается решение инженера о 900 → 1200 для нового полного verify. Эти адресные проверки не подменяют полного успешного отчёта и не открывают handoff/accept/close.
++
++## Выполнение и проверки
++
++Продолжение 2026-11-05; исполнитель: Codex; модель: GPT-6. Инженер поручил доделать задачу после предложения увеличить timeout: разрешение применено к unit-tests 900 → 1200 секунд. Состав команд и inputs сохранён. Подготовлены in_review и новый полный verify; прежние failed-доказательства сохранены.
++
++## Выполнение и проверки
++
++### CHECK-03 — 2026-11-05; исполнитель: Codex; модель: GPT-6.
++
++Полный verify passed, inputs_unchanged=true: [отчёт](PB-034-evidence/work/verification/PB-034/28a701efac404bd7993d04cba4aa9173/report.json). Все настроенные команды прошли, включая полный unittest-набор. Прежний failed-отчёт сохранён.
++
++## Передача
++
++Передаётся PB-034: start/route/revise, baseline, coverage и привязка приёмки/закрытия к версии результата. Ветка dev, исходные незакоммиченные изменения сохранены. Воспроизведение и фокус аудита — PB-034-evidence/implementation.md; актуальный полный отчёт — CHECK-03. Следующий этап: независимый аудит в отдельной сессии либо инженером; особенно проверить coverage, свежесть, роли и SIGKILL/restore. Приёмка и закрытие исполнителем не выполнялись.
++
++## Аудит 2026-11-05T18:59:41+03:00; исполнитель: Codex; модель: GPT-6.
++
++Результат: accepted. Замечаний не обнаружено. Проверены требования/код/документы, актуальность передачи и полного verify (678 tests OK); независимо повторены 23 lifecycle-сценария и 4 дополнительные пробы дрейфа/ролей. Заключительный критерий независимой приёмки выполнен этой отдельной сессией; исходная отметка приёмки сохранена как часть переданных требований legacy-карточки.
++
++[Протокол и ограничения](PB-034-evidence/work/verification/PB-034/audit-01/audit.txt), [lifecycle](PB-034-evidence/work/verification/PB-034/audit-01/lifecycle.log), [независимые пробы](PB-034-evidence/work/verification/PB-034/audit-01/independent-probes.log). Первичный отказ из-за выполнявшейся prepare-audit сохранён в зарегистрированном контейнере; повтор успешен. Дальше: preflight, CLI acceptance, close --dry-run и закрытие.
+--- a/docs/archive/tasks/PB-040.md
++++ b/docs/archive/tasks/PB-040.md
+@@ -834,7 +834,7 @@
+ 
+ - [Спецификация и согласованный контракт](../../specs/task-card-format.md).
+ - [PB-038](PB-038.md), [PB-039](PB-039.md): различное оформление журнала и незакрытый чекбокс аудита при наличии acceptance. Чекбокс входил в защищённую handoff-проекцию; менять его после передачи означало менять проверяемые требования.
+-- [PB-031](PB-031.md) и [PB-034](../../tasks/PB-034.md): отдельная работа над workflow/verification v2. Версия Markdown независима от этой механики; порядок задач не меняется.
++- [PB-031](PB-031.md) и [PB-034](PB-034.md): отдельная работа над workflow/verification v2. Версия Markdown независима от этой механики; порядок задач не меняется.
+ - Инженер согласовал формат, сохранение старых карточек без миграции и разрешил реализацию. PB-040 переведена на формат 2 как локальный пилот; остальные существующие карточки не мигрируются.
+ 
+ - Дополнение инженера от 2026-10-24: вернуть визуальные чекбоксы критериев как вычисляемое CLI-отображение результатов журнала. Дополнение реализуется в EXEC-02 по отдельному запросу инженера. Для новой итерации карточка возвращалась в in_progress; HANDOFF-01 и CHECK-01 сохранены как история прежнего объёма и не подтверждают новые AC-08–AC-13. После реализации нужны новые проверки и передача.
+--- a/docs/plans/index.md
++++ b/docs/plans/index.md
+@@ -5,7 +5,7 @@
+ 
+ | Документ | Состояние | Обновлён | Задачи |
+ |---|---|---|---|
+-| [Внедрение соразмерных маршрутов, проверок и приёмки](proportional-workflow.md) | draft | 2026-10-23 | [PB-031](../archive/tasks/PB-031.md), [PB-032](../archive/tasks/PB-032.md), [PB-033](../archive/tasks/PB-033.md), [PB-034](../tasks/PB-034.md), [PB-035](../tasks/PB-035.md), [PB-036](../tasks/PB-036.md), [PB-037](../tasks/PB-037.md), [AUDIT-007](../tasks/AUDIT-007.md) |
++| [Внедрение соразмерных маршрутов, проверок и приёмки](proportional-workflow.md) | draft | 2026-10-23 | [PB-031](../archive/tasks/PB-031.md), [PB-032](../archive/tasks/PB-032.md), [PB-033](../archive/tasks/PB-033.md), [PB-034](../archive/tasks/PB-034.md), [PB-035](../tasks/PB-035.md), [PB-036](../tasks/PB-036.md), [PB-037](../tasks/PB-037.md), [AUDIT-007](../tasks/AUDIT-007.md) |
+ | [Переход к выборочным файловым операциям и хранению 15 операций](scoped-file-operations.md) | draft | 2026-10-26 | [PB-045](../archive/tasks/PB-045.md), [PB-046](../tasks/PB-046.md), [PB-047](../tasks/PB-047.md), [PB-048](../tasks/PB-048.md), [PB-049](../tasks/PB-049.md), [PB-050](../tasks/PB-050.md), [AUDIT-008](../tasks/AUDIT-008.md) |
+ 
+ ## Архив
+--- a/docs/plans/proportional-workflow.md
++++ b/docs/plans/proportional-workflow.md
+@@ -58,7 +58,7 @@
+ | 1 | [PB-031](../archive/tasks/PB-031.md) | — | Версионированные форматы, валидация v2 и fixtures, сохранён legacy |
+ | 2 | [PB-032](../archive/tasks/PB-032.md) | PB-031 | Политика обязательности, проекции входов и coverage |
+ | 3 | [PB-033](../archive/tasks/PB-033.md) | PB-032 | Runner v2, ручные результаты, preflight и reuse |
+-| 4 | [PB-034](../tasks/PB-034.md) | PB-033 | Согласованные переходы, передача, приёмка и закрытие |
++| 4 | [PB-034](../archive/tasks/PB-034.md) | PB-033 | Согласованные переходы, передача, приёмка и закрытие |
+ | 5 | [PB-035](../tasks/PB-035.md) | PB-034 | Быстрый маршрут, итерации и пользовательские правила/шаблоны |
+ | 6 | [PB-036](../tasks/PB-036.md) | PB-035 | Init/update, явное включение v2 и совместимость установок |
+ | 7 | [PB-037](../tasks/PB-037.md) | PB-036 | Сквозной пилот, self-application и доказательства эффекта |
+--- a/docs/tasks/index.md
++++ b/docs/tasks/index.md
+@@ -11,7 +11,6 @@
+ | AUDIT-007 | [AUDIT-007: Независимо принять соразмерные маршруты и проверки](AUDIT-007.md) | draft | P2 | — | 2026-10-23 03:34 | — | PB-031, PB-032, PB-033, PB-034, PB-035, PB-036, PB-037 |
+ | AUDIT-008 | [AUDIT-008: Независимо принять выборочные операции и ограниченную историю](AUDIT-008.md) | draft | P2 | — | 2026-10-26 17:56 | — | PB-045, PB-046, PB-047, PB-048, PB-049, PB-050 |
+ | PB-008 | [PB-008: Завершить самоприменение проверочного цикла](PB-008.md) | in_review | P2 | Devin / SWE-2 High | unknown | — | — |
+-| PB-034 | [PB-034: Согласовать передачу, приёмку и закрытие без лишних прогонов](PB-034.md) | in_review | P2 | Codex / GPT-6 | 2026-10-23 03:34 | — | PB-033 |
+ | PB-035 | [PB-035: Внедрить быстрый маршрут, итерации и пользовательские правила](PB-035.md) | draft | P2 | — | 2026-10-23 03:34 | — | PB-034 |
+ | PB-036 | [PB-036: Подключить v2 к установке и безопасному обновлению](PB-036.md) | draft | P2 | — | 2026-10-23 03:34 | — | PB-035 |
+ | PB-037 | [PB-037: Проверить сквозные маршруты и выполнить пилот v2](PB-037.md) | draft | P2 | — | 2026-10-23 03:34 | — | PB-036 |
+@@ -26,6 +25,7 @@
+ 
+ | ID | Задача | Статус | Приоритет | Исполнитель | Создана | Закрыта | Зависимости |
+ |---|---|---|---|---|---|---|---|
++| PB-034 | [PB-034: Согласовать передачу, приёмку и закрытие без лишних прогонов](../archive/tasks/PB-034.md) | done | P2 | Codex / GPT-6 | 2026-10-23 03:34 | 2026-11-05 19:00 | PB-033 |
+ | PB-033 | [PB-033: Добавить runner v2, ручные проверки и предварительную проверку](../archive/tasks/PB-033.md) | done | P2 | Antigravity / Gemini 3.8 Flash (High) | 2026-10-23 03:34 | 2026-10-29 19:30 | PB-032 |
+ | PB-032 | [PB-032: Реализовать политику обязательности, покрытия и свежести](../archive/tasks/PB-032.md) | done | P2 | Codex / GPT-6 | 2026-10-23 03:34 | 2026-10-29 06:17 | PB-031 |
+ | PB-031 | [PB-031: Определить и валидировать форматы маршрутов и проверок v2](../archive/tasks/PB-031.md) | done | P2 | Antigravity / Gemini 3.8 Flash (High) | 2026-10-23 03:34 | 2026-10-29 05:19 | — |

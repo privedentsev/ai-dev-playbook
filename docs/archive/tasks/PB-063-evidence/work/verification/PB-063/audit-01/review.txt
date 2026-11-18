@@ -1,0 +1,9 @@
+PB-063: независимый аудит HANDOFF-01
+13 setup-тестов прошли. audit-ready: current.
+Независимая проба: Base(unittest.TestCase).test_ok и Child(Base).
+Предсказано: test_a.Base.test_ok
+Фактически: test_a.Base.test_ok, test_a.Child.test_ok
+unknowns: все списки/словари пусты.
+Переданный setup-preview-self.txt: 75 fallback descriptions «unittest-метод».
+Вердикт changes_requested; подробные A-01/A-02 сохранены в карточке.
+Повторный test_checks_contract.py после prepare-audit: 53 теста, OK.

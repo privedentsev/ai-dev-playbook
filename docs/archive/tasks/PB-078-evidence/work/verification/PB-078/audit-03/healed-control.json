@@ -1,0 +1,195 @@
+{
+  "runs": [
+    {
+      "status": "failed",
+      "seq": 0,
+      "finished_at": "2026-11-17T12:00:00+00:00"
+    },
+    {
+      "status": "failed",
+      "seq": 1,
+      "finished_at": "2026-11-17T10:00:00+00:00"
+    },
+    {
+      "status": "passed",
+      "seq": 2,
+      "finished_at": "2026-11-17T11:00:00+00:00"
+    }
+  ],
+  "before": {
+    "selected": {
+      "payment": {
+        "status": "failed",
+        "seq": 1
+      }
+    },
+    "corrupt": [],
+    "gate_ok": false,
+    "notes": []
+  },
+  "index": {
+    "payment": {
+      "result_id": "2657ccafa2af45b68a95163eb58fe6e8-payment",
+      "run_id": "2657ccafa2af45b68a95163eb58fe6e8",
+      "project_id": "shop",
+      "finished_at": "2026-11-17T10:00:00+00:00",
+      "run_seq": 1,
+      "file": "work/checks/results/2657ccafa2af45b68a95163eb58fe6e8/payment.json",
+      "status": "failed",
+      "order": {
+        "v": 1,
+        "has_seq": true,
+        "pw": {
+          "result_id": "f4c995cbfa18480c89f9131abd66452c-payment",
+          "run_id": "f4c995cbfa18480c89f9131abd66452c",
+          "project_id": "shop",
+          "finished_at": "2026-11-17T11:00:00+00:00",
+          "run_seq": 2,
+          "file": "work/checks/results/f4c995cbfa18480c89f9131abd66452c/payment.json",
+          "status": "passed"
+        },
+        "nw": {
+          "result_id": "2657ccafa2af45b68a95163eb58fe6e8-payment",
+          "run_id": "2657ccafa2af45b68a95163eb58fe6e8",
+          "project_id": "shop",
+          "finished_at": "2026-11-17T10:00:00+00:00",
+          "run_seq": 1,
+          "file": "work/checks/results/2657ccafa2af45b68a95163eb58fe6e8/payment.json",
+          "status": "failed"
+        },
+        "ns": 1,
+        "nf": "2026-11-17T12:00:00+00:00",
+        "lw": null,
+        "lnw": null
+      }
+    }
+  },
+  "after_loss": {
+    "selected": {
+      "payment": {
+        "status": "failed",
+        "seq": 1
+      }
+    },
+    "corrupt": [],
+    "gate_ok": false,
+    "notes": []
+  },
+  "after_rebuild": {
+    "selected": {
+      "payment": {
+        "status": "failed",
+        "seq": 1
+      }
+    },
+    "corrupt": [],
+    "gate_ok": false,
+    "notes": []
+  },
+  "healed": {
+    "selected": {
+      "payment": {
+        "status": "passed",
+        "seq": 3
+      }
+    },
+    "corrupt": [],
+    "gate_ok": true,
+    "notes": []
+  },
+  "before_rebuild": {
+    "payment": {
+      "result_id": "2cd6a1b6e8d34984899fa05c72cb7371-payment",
+      "run_id": "2cd6a1b6e8d34984899fa05c72cb7371",
+      "project_id": "shop",
+      "finished_at": "2026-11-17T12:00:01+00:00",
+      "run_seq": 3,
+      "file": "work/checks/results/2cd6a1b6e8d34984899fa05c72cb7371/payment.json",
+      "status": "passed",
+      "order": {
+        "v": 1,
+        "has_seq": true,
+        "pw": {
+          "result_id": "2cd6a1b6e8d34984899fa05c72cb7371-payment",
+          "run_id": "2cd6a1b6e8d34984899fa05c72cb7371",
+          "project_id": "shop",
+          "finished_at": "2026-11-17T12:00:01+00:00",
+          "run_seq": 3,
+          "file": "work/checks/results/2cd6a1b6e8d34984899fa05c72cb7371/payment.json",
+          "status": "passed"
+        },
+        "nw": {
+          "result_id": "2657ccafa2af45b68a95163eb58fe6e8-payment",
+          "run_id": "2657ccafa2af45b68a95163eb58fe6e8",
+          "project_id": "shop",
+          "finished_at": "2026-11-17T10:00:00+00:00",
+          "run_seq": 1,
+          "file": "work/checks/results/2657ccafa2af45b68a95163eb58fe6e8/payment.json",
+          "status": "failed"
+        },
+        "ns": 1,
+        "nf": "2026-11-17T12:00:00+00:00",
+        "lw": null,
+        "lnw": null
+      }
+    }
+  },
+  "after_index": {
+    "payment": {
+      "result_id": "2cd6a1b6e8d34984899fa05c72cb7371-payment",
+      "run_id": "2cd6a1b6e8d34984899fa05c72cb7371",
+      "project_id": "shop",
+      "finished_at": "2026-11-17T12:00:01+00:00",
+      "run_seq": 3,
+      "file": "work/checks/results/2cd6a1b6e8d34984899fa05c72cb7371/payment.json",
+      "status": "passed",
+      "order": {
+        "v": 1,
+        "has_seq": true,
+        "pw": {
+          "result_id": "2cd6a1b6e8d34984899fa05c72cb7371-payment",
+          "run_id": "2cd6a1b6e8d34984899fa05c72cb7371",
+          "project_id": "shop",
+          "finished_at": "2026-11-17T12:00:01+00:00",
+          "run_seq": 3,
+          "file": "work/checks/results/2cd6a1b6e8d34984899fa05c72cb7371/payment.json",
+          "status": "passed"
+        },
+        "nw": {
+          "result_id": "2657ccafa2af45b68a95163eb58fe6e8-payment",
+          "run_id": "2657ccafa2af45b68a95163eb58fe6e8",
+          "project_id": "shop",
+          "finished_at": "2026-11-17T10:00:00+00:00",
+          "run_seq": 1,
+          "file": "work/checks/results/2657ccafa2af45b68a95163eb58fe6e8/payment.json",
+          "status": "failed"
+        },
+        "ns": 1,
+        "nf": "2026-11-17T12:00:00+00:00",
+        "lw": null,
+        "lnw": null
+      }
+    }
+  },
+  "final": {
+    "selected": {
+      "payment": {
+        "status": "failed",
+        "seq": 1
+      }
+    },
+    "corrupt": [],
+    "gate_ok": false,
+    "notes": []
+  },
+  "stale": {
+    "passed": 1,
+    "reused": 0,
+    "failed": 0,
+    "timeout": 0,
+    "blocked": 0,
+    "not_run": 0,
+    "not_applicable": 0
+  },
+  "attempts": 5
+}

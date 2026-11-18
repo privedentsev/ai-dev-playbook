@@ -11,6 +11,8 @@ scoped = fops.scoped_operations
 
 
 class ScopedEngineTest(EngineCase):
+    """Scoped engine: staging только payloads, детекция drift и
+    backup, перепроверки read-set."""
     def after_backup(self, action):
         original = fops._write_backup
 
@@ -21,6 +23,7 @@ class ScopedEngineTest(EngineCase):
         return patch.object(fops, '_write_backup', hook)
 
     def test_only_planned_payloads_staged_and_no_tree_copy(self):
+        """Staging только payloads, без копии дерева"""
         for rel in ('src/app.py', 'media/movie', 'node_modules/package/code'):
             path = self.root / rel
             path.parent.mkdir(parents=True, exist_ok=True)
@@ -40,6 +43,7 @@ class ScopedEngineTest(EngineCase):
             self.assertEqual((self.root / rel).read_bytes(), b'unrelated')
 
     def test_unknown_callback_has_no_clone_fallback_or_backup(self):
+        """Неизвестный callback без clone-fallback/backup"""
         def unsupported(view):
             Path(view)
         with patch('shutil.copytree', side_effect=AssertionError('fallback')):
@@ -50,6 +54,7 @@ class ScopedEngineTest(EngineCase):
         self.assertIsNone(fops.pending_info(self.root))
 
     def test_collection_addition_during_backup_is_detected(self):
+        """Добавление в коллекцию во время backup обнаруживается"""
         def check(view):
             list((view / 'docs').iterdir())
         with self.after_backup(lambda root, _: (root / 'docs/foreign.md').write_bytes(b'external')):
@@ -60,6 +65,7 @@ class ScopedEngineTest(EngineCase):
         self.assertIsNone(fops.pending_info(self.root))
 
     def test_read_bytes_and_source_modes_rechecked_after_backup(self):
+        """read_bytes и режимы источников перепроверяются после backup"""
         dependency = self.root / 'dependency'
         dependency.write_bytes(b'before')
         def check(view):
@@ -71,6 +77,7 @@ class ScopedEngineTest(EngineCase):
         self.assertEqual(dependency.read_bytes(), b'after')
 
     def test_original_drift_during_backup_preserves_external_change(self):
+        """Дрейф оригинала при backup сохраняет внешнее изменение"""
         with self.after_backup(lambda root, _: (root / 'docs/a.md').write_bytes(b'EXTERNAL')):
             with self.assertRaisesRegex(ValueError, 'Входы изменились'):
                 self.apply(self.spec())
@@ -79,6 +86,7 @@ class ScopedEngineTest(EngineCase):
         self.assertFalse((self.root / 'docs/new/x.md').exists())
 
     def test_staged_corruption_is_rejected_before_first_write(self):
+        """Повреждение staged отклоняется до первой записи"""
         with self.after_backup(lambda _, op: (op / 'staged/docs/a.md').write_bytes(b'CORRUPT')):
             with self.assertRaisesRegex(ValueError, 'Итоговое состояние'):
                 self.apply(self.spec())
@@ -86,6 +94,7 @@ class ScopedEngineTest(EngineCase):
         self.assertFalse((self.root / 'docs/new/x.md').exists())
 
     def test_backup_corruption_is_rejected_before_first_write(self):
+        """Повреждение backup отклоняется до первой записи"""
         with self.after_backup(lambda _, op: (op / 'backup/docs/a.md').write_bytes(b'CORRUPT')):
             with self.assertRaisesRegex(ValueError, 'повреждена'):
                 self.apply(self.spec())
@@ -93,6 +102,7 @@ class ScopedEngineTest(EngineCase):
         self.assertIsNone(fops.pending_info(self.root))
 
     def test_payload_source_bytes_are_part_of_read_set(self):
+        """Байты источника payload — часть read-set"""
         source = self.root / 'source'
         source.write_bytes(b'old source')
         writes = {'docs/copied': scoped.Payload(source)}
@@ -104,6 +114,7 @@ class ScopedEngineTest(EngineCase):
         self.assertEqual(source.read_bytes(), b'new source')
 
     def test_large_payload_never_uses_read_bytes(self):
+        """Большой payload не использует read_bytes"""
         source = self.root / 'large'
         with source.open('wb') as outgoing:
             for _ in range(12):
@@ -121,6 +132,7 @@ class ScopedEngineTest(EngineCase):
         self.assertFalse((self.root / result['op_dir'] / 'staged').exists())
 
     def test_cleanup_failure_does_not_rollback_completed_write(self):
+        """Сбой очистки не откатывает завершённую запись"""
         original = scoped.shutil.rmtree
         def fail_staged(path, *args, **kwargs):
             if Path(path).name == 'staged':
@@ -136,6 +148,7 @@ class ScopedEngineTest(EngineCase):
         self.assertEqual(receipt['result'], 'completed')
 
     def test_restore_rechecks_original_digest_during_atomic_copy(self):
+        """Restore перепроверяет digest оригинала при atomic copy"""
         op = self._interrupted_op()
         original = fops._atomic_write
         def corrupt_after_validation(target, content, op_id):
@@ -150,6 +163,7 @@ class ScopedEngineTest(EngineCase):
         self.assertTrue((op / 'backup_index.json').exists())
 
     def test_repeated_restore_preserves_distinct_external_versions(self):
+        """Повторный restore сохраняет разные внешние версии"""
         self._interrupted_op()
         (self.root / 'docs/a.md').write_bytes(b'FOREIGN-ONE')
         with patch.object(fops, '_neutralize_receipt', side_effect=KeyboardInterrupt):

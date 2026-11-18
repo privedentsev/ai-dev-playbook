@@ -1,0 +1,4 @@
+OK: структура, ссылки и 1 карточки; каталог документов: 0 документов, 0 legacy. Поведение продукта не проверялось.
+RUN: a (изменились входы: src/a.txt)
+REUSE: b: свежий результат переиспользован
+passed: /private/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/tmp3ogp1wla/work/verification/DEV-1/c4b636944382420ba5d988290aeb43b8/report.json

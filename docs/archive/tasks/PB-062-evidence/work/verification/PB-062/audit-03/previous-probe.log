@@ -1,0 +1,7 @@
+expired_only {'ok': False, 'covered': [], 'uncovered': ['probe'], 'rejections': ['rc-7f1906bc19614352: probe — внешний api: ttl 60с истёк']}
+runs {'probe': 'passed'} {'probe': 'passed'}
+old_then_fresh {'ok': True, 'covered': ['probe'], 'uncovered': [], 'rejections': []}
+fresh_then_old {'ok': True, 'covered': ['probe'], 'uncovered': [], 'rejections': []}
+passed_then_failed_runs {'probe': 'passed'} {'probe': 'failed'}
+same_candidate True
+passed_then_failed_gate {'ok': False, 'covered': [], 'uncovered': ['probe'], 'rejections': []}

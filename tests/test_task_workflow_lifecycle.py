@@ -14,6 +14,8 @@ from test_playbook import playbook
 
 
 class TaskWorkflowLifecycleTest(CloseLifecycleCase):
+    """Lifecycle workflow v2: start/route/revise, service-cycle,
+    stale-отказы и покрытие."""
     save_project = runner_fixture.VerificationV2Test.save_project
     add_registry_check = runner_fixture.VerificationV2Test.add_registry_check
     create_v2_task = runner_fixture.VerificationV2Test.create_v2_task
@@ -64,6 +66,7 @@ class TaskWorkflowLifecycleTest(CloseLifecycleCase):
         return result
 
     def test_start_no_git_dirty_git_and_idempotence(self):
+        """start без Git, с dirty Git и идемпотентность"""
         for git in (False, True):
             if git:
                 self.assertEqual(subprocess.run(['git', 'init', '-q', str(self.root)]).returncode, 0)
@@ -80,6 +83,7 @@ class TaskWorkflowLifecycleTest(CloseLifecycleCase):
         self.assertIn('| in_progress |', (self.root / 'docs/tasks/index.md').read_text())
 
     def test_service_cycle_does_not_rerun_and_preserves_immutable_bytes(self):
+        """Сервисный цикл не перезапускает и сохраняет immutable-байты"""
         self.start_verify_handoff()
         before = {p: p.read_bytes() for p in (self.root / 'work/verification/DEV-1').glob('*/report.json')}
         first = self.meta()['handoff']
@@ -96,6 +100,7 @@ class TaskWorkflowLifecycleTest(CloseLifecycleCase):
             self.assertEqual(next(archive.rglob(path.parent.name + '/report.json')).read_bytes(), content)
 
     def test_revise_preserves_history_and_stale_acceptance_is_blocked(self):
+        """revise сохраняет историю, stale-приёмка блокируется"""
         self.start_verify_handoff()
         self.engineer_accept()
         old = copy.deepcopy(self.meta())
@@ -113,6 +118,7 @@ class TaskWorkflowLifecycleTest(CloseLifecycleCase):
         self.assertEqual((self.root / 'work/count').read_text(), '2')
 
     def test_stale_source_plan_policy_and_report_reject_acceptance(self):
+        """Устаревшие source/plan/policy/report отклоняют приёмку"""
         self.start_verify_handoff()
         source = self.root / 'src/value.txt'
         source.write_text('changed')
@@ -123,6 +129,7 @@ class TaskWorkflowLifecycleTest(CloseLifecycleCase):
         self.assertEqual(self.engineer_accept(ok=False)[0], 1)
 
     def test_route_requires_approval_and_keeps_failures(self):
+        """route требует одобрения и сохраняет отказы"""
         self.trans('start')
         self.trans('route', '--to', 'large')
         self.assertEqual(self.trans('route', '--to', 'quick', ok=False)[0], 1)
@@ -130,12 +137,14 @@ class TaskWorkflowLifecycleTest(CloseLifecycleCase):
         self.assertEqual(len(self.meta()['workflow']['history']), 2)
 
     def test_start_missing_goal_or_dependency_refuses_without_writes(self):
+        """start без цели/зависимости отклоняется без записи"""
         self.card.write_text(self.card.read_text().replace('## Цель и границы', '## Unclear'))
         before = self.card.read_bytes()
         self.assertEqual(self.trans('start', ok=False)[0], 1)
         self.assertEqual(self.card.read_bytes(), before)
 
     def test_handoff_with_no_or_failed_results_refuses(self):
+        """handoff без результатов или с failed отклоняется"""
         self.trans('start')
         self.assertEqual(self.handoff()[0], 1)
         self.settings['task_workflow']['registry'][0]['argv'] = [sys.executable, '-c', 'raise SystemExit(1)']
@@ -145,6 +154,7 @@ class TaskWorkflowLifecycleTest(CloseLifecycleCase):
         self.assertIn('Status: in_progress', self.card.read_text())
 
     def test_conflict_after_preparation_refuses_and_keeps_external_edit(self):
+        """Конфликт после подготовки отклоняется, внешняя правка сохранена"""
         original = playbook.lifecycle._write_card_meta
         def inject(root, *args, **kwargs):
             (self.root / 'src/value.txt').write_text('external edit')
@@ -156,6 +166,7 @@ class TaskWorkflowLifecycleTest(CloseLifecycleCase):
         self.assertEqual((self.root / 'src/value.txt').read_text(), 'external edit')
 
     def test_latest_failure_cannot_be_hidden_by_explicit_old_report(self):
+        """Поздний failure не скрывается явным старым отчётом"""
         self.trans('start')
         self.verify()
         report = next((self.root / 'work/verification/DEV-1').glob('*/report.json'))
@@ -165,6 +176,7 @@ class TaskWorkflowLifecycleTest(CloseLifecycleCase):
         self.assertEqual(self.handoff('--report', str(report.relative_to(self.root)))[0], 1)
 
     def test_audit_package_and_accept_repeat_do_not_repeat_expensive_check(self):
+        """Audit package и повторный accept не повторяют дорогую проверку"""
         self.start_verify_handoff()
         self.assertEqual(self.cli('lifecycle', 'prepare-audit', 'DEV-1', '--id', 'audit-01', '--apply')[0], 0)
         package = self.root / 'work/verification/DEV-1/audit-01'
@@ -177,6 +189,7 @@ class TaskWorkflowLifecycleTest(CloseLifecycleCase):
         self.assertEqual((self.root / 'work/count').read_text(), '1')
 
     def test_log_bytes_and_baseline_corruption_reject_receipt(self):
+        """Повреждение байтов лога и baseline отклоняет receipt"""
         self.start_verify_handoff()
         log = next((self.root / 'work/verification/DEV-1').rglob('*.stdout.log'))
         log.write_text('changed')
@@ -186,6 +199,7 @@ class TaskWorkflowLifecycleTest(CloseLifecycleCase):
         self.assertEqual(self.cli('verify', 'DEV-1', '--preflight')[0], 1)
 
     def test_changed_paths_from_real_baseline_add_project_obligations(self):
+        """Изменённые пути от baseline добавляют project-обязательства"""
         self.add_registry_check({'id': 'backend', 'kind': 'command', 'purpose': 'Backend',
             'argv': [sys.executable, '-c', 'pass'], 'timeout_seconds': 30,
             'default_inputs': ['backend'], 'applicability': {'kind': 'when_paths', 'paths': ['backend/**']}})
@@ -198,6 +212,7 @@ class TaskWorkflowLifecycleTest(CloseLifecycleCase):
         self.assertIn('backend', result[1] + result[2])
 
     def test_pending_and_foreign_lock_prevent_handoff(self):
+        """Pending и чужой lock предотвращают handoff"""
         self.trans('start')
         self.verify()
         lock = playbook.file_operations._operation_lock(self.root, playbook.safe_path)
@@ -210,6 +225,7 @@ class TaskWorkflowLifecycleTest(CloseLifecycleCase):
         self.assertNotIn('"result_hash"', self.card.read_text())
 
     def test_real_sigkill_staged_and_mid_write_restore_and_repeat(self):
+        """Реальный SIGKILL staged/mid-write → restore и повтор"""
         self.trans('start')
         self.verify()
         before = self.card.read_bytes()
@@ -254,6 +270,7 @@ playbook.main(['--root', ROOT, 'lifecycle', 'handoff', 'DEV-1', '--summary', 're
         self.assertEqual((self.root / 'work/count').read_text(), '1')
 
     def test_markdown_v2_journal_coverage_and_close(self):
+        """Markdown v2: покрытие журнала и close"""
         import test_task_cards as journal
         meta = self.meta()
         meta['card_format_version'] = 2
@@ -270,6 +287,7 @@ playbook.main(['--root', ROOT, 'lifecycle', 'handoff', 'DEV-1', '--summary', 're
         self.assertEqual(result[0], 0, result)
 
     def test_manual_only_path_closes_without_command_run(self):
+        """Manual-only путь закрывается без запуска команд"""
         self.settings['task_workflow']['registry'] = [{
             'id': 'visual', 'kind': 'manual', 'purpose': 'Visual check',
             'scenario': 'Inspect the current displayed result.', 'default_inputs': ['src'],
@@ -298,6 +316,7 @@ playbook.main(['--root', ROOT, 'lifecycle', 'handoff', 'DEV-1', '--summary', 're
         self.assertFalse((self.root / 'work/count').exists())
 
     def test_external_metadata_pair_start_handoff_and_archive(self):
+        """External metadata пара: start/handoff/archive"""
         content = self.card.read_text()
         meta = self.meta()
         meta['card_format_version'] = 1
@@ -313,6 +332,7 @@ playbook.main(['--root', ROOT, 'lifecycle', 'handoff', 'DEV-1', '--summary', 're
         self.assertTrue((self.root / 'docs/archive/tasks/DEV-1.meta.json').is_file())
 
     def test_changed_read_material_requires_its_check_again(self):
+        """Изменённый read-материал требует повторной проверки"""
         source = self.root / 'docs/tasks/DEV-1-evidence/read.txt'
         source.parent.mkdir()
         source.write_text('input material')
@@ -331,6 +351,7 @@ playbook.main(['--root', ROOT, 'lifecycle', 'handoff', 'DEV-1', '--summary', 're
         self.assertEqual((self.root / 'work/count').read_text(), '2')
 
     def test_damaged_latest_run_requires_replacement_and_preserves_history(self):
+        """Повреждённый поздний прогон требует замены, история сохранена"""
         self.trans('start')
         self.verify()
         first = next((self.root / 'work/verification/DEV-1').glob('*/report.json'))
@@ -347,6 +368,7 @@ playbook.main(['--root', ROOT, 'lifecycle', 'handoff', 'DEV-1', '--summary', 're
         self.assertEqual((self.root / 'work/count').read_text(), '2')
 
     def test_immutable_material_file_directory_swap_cannot_preserve_receipt(self):
+        """Swap файл↔каталог immutable-материала не сохраняет receipt"""
         material = self.root / 'docs/tasks/DEV-1-evidence/empty'
         material.mkdir(parents=True)
         result = self.cli('lifecycle', 'register-material', 'DEV-1', str(material.relative_to(self.root)),
@@ -358,6 +380,7 @@ playbook.main(['--root', ROOT, 'lifecycle', 'handoff', 'DEV-1', '--summary', 're
         self.assertEqual(self.engineer_accept(ok=False)[0], 1)
 
     def test_start_service_writes_do_not_make_docs_obligation_applicable(self):
+        """Сервисные записи start не делают docs-обязательство применимым"""
         self.add_registry_check({'id': 'docs', 'kind': 'command', 'purpose': 'Documentation',
             'argv': [sys.executable, '-c', 'pass'], 'timeout_seconds': 30,
             'default_inputs': ['docs'], 'applicability': {'kind': 'when_paths', 'paths': ['docs/**']}})
@@ -375,6 +398,7 @@ playbook.main(['--root', ROOT, 'lifecycle', 'handoff', 'DEV-1', '--summary', 're
         self.assertIn('docs', result[1] + result[2])
 
     def test_new_unknown_proof_requires_new_handoff(self):
+        """Новый unknown-proof требует нового handoff"""
         self.start_verify_handoff()
         proof = self.root / 'docs/tasks/DEV-1-evidence/additional.txt'
         proof.write_text('Additional evidence')
@@ -387,6 +411,7 @@ playbook.main(['--root', ROOT, 'lifecycle', 'handoff', 'DEV-1', '--summary', 're
         self.assertEqual((self.root / 'work/count').read_text(), '1')
 
     def test_first_start_captures_existing_dirty_git_bytes(self):
+        """Первый start захватывает существующие dirty Git-байты"""
         import hashlib
         self.assertEqual(subprocess.run(['git', 'init', '-q', str(self.root)]).returncode, 0)
         self.assertEqual(subprocess.run(['git', '-C', str(self.root), 'add', 'src/value.txt']).returncode, 0)

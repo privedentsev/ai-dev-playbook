@@ -1,0 +1,136 @@
+{
+  "no_git": true,
+  "failed_rc": 1,
+  "stale_rc": 1,
+  "gate": {
+    "ok": false,
+    "scope": "task",
+    "checkpoint": null,
+    "task_id": "DEV-01",
+    "trust_mode": "local",
+    "checks": {
+      "payment": {
+        "kind": "command",
+        "explain": [
+          "обязательства не затронуты",
+          "обязательство не покрыто: последний результат blocked — требуется новое успешное доказательство",
+          "запуск: последний результат blocked"
+        ],
+        "status": "uncovered"
+      }
+    },
+    "covered": [],
+    "uncovered": [
+      "payment"
+    ],
+    "manual": [],
+    "blocked": [],
+    "not_applicable": [],
+    "notes": [],
+    "rejections": [],
+    "hashed_bytes": 2636950,
+    "hashed_files": 101,
+    "budget_reasons": [],
+    "trust": {
+      "mode": "local",
+      "capability": "local",
+      "note": "trust_mode=local: результаты диагностические — локальная история не защищена от владельца проекта; доверенное выполнение требует контура PB-061"
+    },
+    "protected_confirmed": false
+  },
+  "latest": {
+    "payment": {
+      "schema_version": 1,
+      "result_id": "e30a02fb2c254f18b38db4df3259aa39-payment",
+      "project_id": "shop",
+      "check_id": "payment",
+      "kind": "command",
+      "binding": {
+        "policy_digest": "sha256:678eb3522e0aeac3130fc4501aa487c08f57e2cd4970335acf616e7ccce5b416",
+        "definition_digest": "sha256:95aedb17128ede25efbf6249705e26ccc225846877b560c9272e6fca64f3262f",
+        "adapter": {
+          "id": "argv-command",
+          "version": "1"
+        },
+        "runner": {
+          "id": "playbook-runner",
+          "version": "1"
+        },
+        "input_digest": "sha256:570dd3c71d984fb5723016fc24de14ab8b1cf19132c9d5fd0c7a818ef1f9ecb9",
+        "dependency_closure_digest": "sha256:cfb2a2c7946390255716b4b3616539e795d33e41b5bf2ac4b677ef09236b626e",
+        "environment": {
+          "platform": "darwin"
+        }
+      },
+      "status": "blocked",
+      "started_at": "2026-11-16T14:56:28.068033+00:00",
+      "finished_at": "2026-11-16T14:56:28.080561+00:00",
+      "duration_seconds": 0.012,
+      "evidence": {
+        "stdout_log": "work/checks/runs/e30a02fb2c254f18b38db4df3259aa39/payment.stdout.log",
+        "stderr_log": "work/checks/runs/e30a02fb2c254f18b38db4df3259aa39/payment.stderr.log",
+        "run_id": "e30a02fb2c254f18b38db4df3259aa39",
+        "run_seq": 2
+      },
+      "command": {
+        "exit_code": null,
+        "stdout_log": "work/checks/runs/e30a02fb2c254f18b38db4df3259aa39/payment.stdout.log",
+        "stderr_log": "work/checks/runs/e30a02fb2c254f18b38db4df3259aa39/payment.stderr.log"
+      },
+      "reason": "запуск невозможен: [Errno 2] No such file or directory: '/private/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/pb064-e2e-dvof9e7r/tool'"
+    }
+  },
+  "commands": [
+    {
+      "argv": [
+        "setup",
+        "apply"
+      ],
+      "rc": 0,
+      "stdout": "checks-политика shop-checks rev 1 подключена (checks-policy.json); project.json → checks_policy. Операция: work/lifecycle/20261116-175624-4ebf2cd3. trust_mode=local не повышает доверие результатов.\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "checks",
+        "run",
+        "DEV-01",
+        "--scope",
+        "project",
+        "--mode",
+        "force"
+      ],
+      "rc": 0,
+      "stdout": "checks run DEV-01: политика shop-checks rev 1, scope=project mode=force\nОграничение: trust_mode=local: результаты диагностические — локальная история не защищена от владельца проекта; доверенное выполнение требует контура PB-061\n  payment: RUN command\n  payment: passed (0.689с)\nИтог: passed=1; непокрытых обязательств: 0\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "checks",
+        "run",
+        "DEV-01",
+        "--scope",
+        "project",
+        "--mode",
+        "force"
+      ],
+      "rc": 1,
+      "stdout": "checks run DEV-01: политика shop-checks rev 1, scope=project mode=force\nОграничение: trust_mode=local: результаты диагностические — локальная история не защищена от владельца проекта; доверенное выполнение требует контура PB-061\n  payment: RUN command\n  payment: blocked — запуск невозможен: [Errno 2] No such file or directory: '/private/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/pb064-e2e-dvof9e7r/tool'\nИтог: blocked=1; непокрытых обязательств: 1\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "checks",
+        "run",
+        "DEV-01",
+        "--scope",
+        "task",
+        "--mode",
+        "stale"
+      ],
+      "rc": 1,
+      "stdout": "checks run DEV-01: политика shop-checks rev 1, scope=task mode=stale\nОграничение: trust_mode=local: результаты диагностические — локальная история не защищена от владельца проекта; доверенное выполнение требует контура PB-061\n  payment: RUN command\n  payment: blocked — запуск невозможен: [Errno 2] No such file or directory: '/private/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/pb064-e2e-dvof9e7r/tool'\nИтог: blocked=1; непокрытых обязательств: 1\n",
+      "stderr": ""
+    }
+  ]
+}

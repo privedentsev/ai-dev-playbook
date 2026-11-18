@@ -1,0 +1,92 @@
+# PB-060: Учитывать выполненные тесты и переиспользовать актуальные результаты
+
+ID: PB-060
+Status: in_review
+Priority: P2
+Depends-On: PB-059
+Executor: Devin
+Model: SWE-2 High
+Created: 2026-11-07T01:07:32+03:00
+Closed: -
+
+<!-- playbook-meta:external -->
+
+## Задача
+
+### Цель и границы
+
+Runner и результаты. verification.py, cache/result index, unittest adapter, отчёты и постоянные негативные тесты. Подпись локальной записи не выдавать за доверенное выполнение.
+
+### Контекст
+
+[Спецификация](../specs/dependency-aware-verification.md): R-11–15; сценарии AC-04–07. [Design](../designs/dependency-aware-verification.md), [ADR-0006](../adr/0006-dependency-aware-verification.md), [план](../plans/dependency-aware-verification.md).
+
+Подготовлено по поручению инженера 2026-11-07. Выполнение пока не разрешено. Перед стартом: принятие технического проекта, завершённые зависимости, актуальный card show/handoff затрагиваемых работ и назначение исполнителя. Исходные чужие изменения сохранять.
+
+### Критерии приёмки
+
+- [x] AC-01: Unittest адаптер сравнивает expected/actual IDs, count и outcomes/subtests; exit 0/zero, unexpected skip, missing/duplicate IDs и crash не проходят. Понятные descriptions выводятся с IDs; command/manual отличимы.
+- [x] AC-02: Freshness учитывает входы, closure, адаптер, команду, политику, среду и внешнюю TTL/version. Независимые результаты reused; поздний failed не скрывается; история/индекс восстанавливаемы без ложного reuse.
+- [x] AC-03: Cross-task reuse изолирован по project/trust; task requirements не теряются. Force выполняет все выбранные проверки; stale только без пригодного успеха; snapshot/race/corrupt history проверены.
+- [x] AC-04: Целевые поведенческие проверки и связанные регрессии пройдены; документация и self-manifest актуальны, EXEC/CHECK/HANDOFF содержат реальные доказательства и ограничения; передача зарегистрирована штатным CLI.
+
+### План
+
+1. Уточнить фактические интерфейсы зависимостей и связать изменения с критериями этой карточки.
+2. Реализовать ограниченный объём, добавить постоянные позитивные и негативные проверки критериев AC-01–03; не подменять их структурной проверкой.
+3. Обновить затронутые документы/шаблоны и self-manifest при изменениях комплекта; выполнить адресные проверки, index и check --ready.
+4. Подготовить материалы и пройти действующие preflight/verify/handoff. До явного opt-in использовать прежний контракт; не отключать полный legacy suite ради экономии.
+5. Записать EXEC/CHECK/HANDOFF и передать независимому аудитору; самостоятельно не закрывать.
+
+### Ресурсы
+
+Python и стандартная библиотека для основного CLI; локальные временные проекты и subprocess-счётчики. Новые зависимости защищённого executor обосновать в рамках принятого design. Фактические среда, policy_revision и бюджет фиксируются при старте; доступность отдельной OS/CI identity не предполагается.
+
+Материалы: `docs/tasks/PB-060-evidence/`; команды воспроизведения и отчёты принадлежат этой карточке. Общие материалы и сквозная матрица — AUDIT-009/PB-064.
+
+## Журнал
+
+### EXEC-01 — Выполнение
+
+Время: 2026-11-09T09:33:00+03:00
+Исполнитель: Devin
+Модель: SWE-2 High
+Изменения: runner и результаты по design §6–7 и spec R-11–15. `checks_unittest.py` — адаптер protocol 1: отображает одобренный argv на выбор unittest (`-m unittest discover|имена`; `-k` и чужие команды отклоняются), исполняет suite в подпроцессе и пишет JSON-отчёт expected/actual через события TestResult, включая провальные subtests; `verdict` отклоняет нулевой набор, тест вне каталога, пропавший ID закреплённой группы, повторный/неожиданный/незавершённый ID, skip и expected_failure вне допусков, unexpected_success, crash и несогласованный отчёт. `checks_results.py` — append-only `work/checks/results/<run_id>/<check_id>.json` и производный `results-index.json`; повреждённые записи пропускаются, индекс пересобирается из проверенных записей, последний по finished_at решает. `checks_runner.py` — `checks run` (scope task/project × mode stale/force, checkpoint) и `checks status`: результаты схемы 1 с полным binding (policy/definition/closure/input/environment digests, adapter/runner, task_requirements_digest при входе task_projection), reuse — отдельной строкой с указателем на исходный результат; внешняя свежесть always_run/ttl/version, снимок входов до/после команды — мутация даёт blocked (локальный режим честно слабее изоляции PB-061); manual — not_run; код выхода 0 только при полном покрытии. checks_select дополнен `binding_environment` (внешние факты required_environment в привязке) и прокидкой projections/environment в evaluate_reuse/plan — проверки с входами projection/environment теперь доказуемо свежи. Компромиссы: `group` записи каталога привязана к id проверки или модуля; adapter-identity у command — argv-command; заблокированные результаты пишутся с нулевым input_digest как явно недоказанные.
+Файлы:
+- ai-dev-playbook/scripts/checks_unittest.py
+- ai-dev-playbook/scripts/checks_results.py
+- ai-dev-playbook/scripts/checks_runner.py
+- ai-dev-playbook/scripts/checks_select.py
+- ai-dev-playbook/scripts/playbook.py
+- ai-dev-playbook/manifest.json
+- tests/test_checks_run.py
+- tests/test_checks_contract.py
+- docs/architecture.md
+- docs/code-map.md
+- docs/tasks/PB-060-evidence/commands.md
+- CHANGELOG.md
+
+### CHECK-01 — Проверка
+
+Время: 2026-11-09T10:41:00+03:00
+Исполнитель: Devin
+Модель: SWE-2 High
+Результат: passed
+Критерии: AC-01, AC-02, AC-03, AC-04
+Команда: `python3 ai-dev-playbook/scripts/playbook.py verify PB-060`; адресные `python3 -m unittest discover -s tests -p "test_checks_run.py" -v` и `-p "test_checks_select.py" -v`
+Среда: macOS, Python 3.14, checkout feature/dependency-aware-verification; изолированные tempfile-проекты, реальный subprocess адаптера и unittest, счётчик запусков через подмену collect.
+Факт: verify ef39a246c3a9422eb40ef86264b62162 passed, inputs_unchanged=true; 947 тестов (+30 адресных, +1 правка контрактного теста отложенных команд), unit-tests прошли. Первый прогон 070dadde тоже passed; повтор потребовался из-за ручной копии отчёта в evidence после verify (порядок исправлен — отчёт привязывает штатный handoff). AC-01: expected/actual ID, count и outcomes/subtests сверяются; нулевой набор, пропавший/повторный/лишний ID, неожиданный skip, expected_failure вне допуска, unexpected_success, crash и timeout не проходят; descriptions выводятся с IDs; command/manual отличимы. AC-02: freshness по входам, замыканию графа, определению, адаптеру/runner, политике, среде и внешним ttl/always_run/version; независимые результаты reused; поздний failed не скрывается; повреждённые запись и индекс восстанавливаются без ложного reuse. AC-03: cross-task reuse в пределах project_id, чужой project_id и смена task requirements режут reuse; force исполняет весь набор, stale — только без пригодного успеха; мутация входов во время команды — blocked; `checks run|status` через playbook.main на установленном проекте.
+Доказательства:
+- [Отчёт verify](PB-060-evidence/work/verification/PB-060/070daddef15143dcbfa2d1c5415df265/report.json)
+- [Команды и ограничения](PB-060-evidence/commands.md)
+Ограничения: самопроверка исполнителя. trust_mode=local — результаты диагностические, подпись локальной записи не является доверенным выполнением (PB-061); self-project не подключён (PB-063). Мутация входов проверена командой, пишущей в собственный вход, не реальным параллельным writer; `-k`-фильтрация unittest отклоняется.
+
+### HANDOFF-01 — Передача
+
+Время: 2026-11-09T10:41:00+03:00
+Исполнитель: Devin
+Модель: SWE-2 High
+Выполнение: EXEC-01
+Проверки: CHECK-01
+Состояние: in_review, ветка feature/dependency-aware-verification, изменения не закоммичены. Индекс и записи завершены до verify; свежесть входов на момент передачи сохранена. Следующий шаг — независимый аудит.
+Фокус аудита: audit-ready на отчёте 070dadde без дрейфа входов; адаптер — сверка IDs/count/outcomes/subtests и отказ нулевого набора/дублей/skip вне допуска/crash; reuse — поздний failed, внешняя свежесть, изоляция по project_id и task requirements; честность local-режима (мутация входов → blocked, trust-ограничение в выводе).

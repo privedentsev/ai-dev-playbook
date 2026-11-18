@@ -1,0 +1,11 @@
+{
+  "status": "passed",
+  "inputs_unchanged": true,
+  "freshness": [
+    true,
+    []
+  ],
+  "projection_matches": true,
+  "execution_matches": true,
+  "handoff_receipt": "valid"
+}

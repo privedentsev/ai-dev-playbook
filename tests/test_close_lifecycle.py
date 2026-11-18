@@ -113,7 +113,9 @@ class CloseLifecycleCase(LifecycleCase):
 
 
 class CombinedClosureTest(CloseLifecycleCase):
+    """Совмещённые операции close и archive плана в одном запросе."""
     def test_combined_close_and_plan_archive(self):
+        """Совмещённые close и archive плана в одном запросе"""
         self.managed_task()
         self.add_plan("block", tasks=["DEV-1"])
         self.assertEqual(self.cli('index', '--all')[0], 0)
@@ -130,6 +132,7 @@ class CombinedClosureTest(CloseLifecycleCase):
         self.assertTrue((self.root / "docs/archive/plans/block.md").is_file())
 
     def test_combined_close_refuses_without_acceptance(self):
+        """Совмещённый close без приёмки отклоняется"""
         self.managed_task()
         self.add_plan("block", tasks=["DEV-1"])
         self.assertEqual(self.cli('index', '--all')[0], 0)
@@ -146,6 +149,7 @@ class CombinedClosureTest(CloseLifecycleCase):
         self.assertTrue((self.root / "docs/plans/block.md").is_file())
 
     def test_combined_close_refuses_unfinished_task_outside_scope(self):
+        """Совмещённый close отклоняет незавершённую задачу вне scope"""
         self.managed_task()
         self.managed_task("DEV-2")
         self.add_plan("block", tasks=["DEV-1", "DEV-2"])
@@ -165,7 +169,10 @@ class CombinedClosureTest(CloseLifecycleCase):
 
 
 class HandoffAcceptTest(CloseLifecycleCase):
+    """handoff/accept: регистрация прогонов и проекций, отказы без
+    verify и handoff."""
     def test_handoff_registers_runs_and_projection(self):
+        """handoff регистрирует прогоны verify и проекцию задачи"""
         self.managed_task()
         self.verify()
         code, out, err = self.handoff()
@@ -184,12 +191,14 @@ class HandoffAcceptTest(CloseLifecycleCase):
         self.assertEqual(handoff["card_projection"], projection)
 
     def test_handoff_without_verify_refused(self):
+        """handoff без свежего verify отклоняется"""
         self.managed_task()
         code, _, err = self.handoff()
         self.assertEqual(code, 1)
         self.assertIn("verify", err)
 
     def test_handoff_legacy_card_refused(self):
+        """handoff legacy-карточки в managed-проекте отклоняется"""
         write_card(self.tasks_dir(), "DEV-1", "in_review")
         code, _, err = self.cli("index")
         self.assertEqual(code, 0, err)
@@ -199,12 +208,14 @@ class HandoffAcceptTest(CloseLifecycleCase):
         self.assertIn("метаданных", err)
 
     def test_accept_without_handoff_refused(self):
+        """accept без handoff отклоняется"""
         self.managed_task()
         code, _, err = self.accept("--result", "accepted")
         self.assertEqual(code, 1)
         self.assertIn("передачи", err)
 
     def test_accept_records_result_and_link(self):
+        """accept записывает результат и ссылку приёмки"""
         self.managed_task()
         self.verify()
         self.assertEqual(self.handoff()[0], 0)
@@ -221,6 +232,8 @@ class HandoffAcceptTest(CloseLifecycleCase):
 
 
 class ManagedCloseTest(CloseLifecycleCase):
+    """close управляемых карточек: обязательны handoff и accept,
+    свежесть входов и карточки."""
     def prepare_done(self, ident="DEV-1", **kwargs):
         self.managed_task(ident, **kwargs)
         self.verify(ident)
@@ -229,6 +242,7 @@ class ManagedCloseTest(CloseLifecycleCase):
             self.accept("--result", "accepted", ident=ident)[0], 0)
 
     def test_close_done_managed_card(self):
+        """close done управляемой карточки после handoff и accept"""
         self.prepare_done()
         code, out, err = self.cli("close", "DEV-1")
         self.assertEqual(code, 0, err + out)
@@ -254,6 +268,7 @@ class ManagedCloseTest(CloseLifecycleCase):
         self.assertEqual(len(moved), 1)
 
     def test_close_done_without_handoff_refused(self):
+        """close done без handoff отклоняется"""
         self.managed_task()
         code, _, err = self.cli("close", "DEV-1")
         self.assertEqual(code, 1)
@@ -261,6 +276,7 @@ class ManagedCloseTest(CloseLifecycleCase):
         self.assertTrue((self.tasks_dir() / "DEV-1.md").exists())
 
     def test_close_done_without_acceptance_refused(self):
+        """close done без приёмки отклоняется"""
         self.managed_task()
         self.verify()
         self.assertEqual(self.handoff()[0], 0)
@@ -269,6 +285,7 @@ class ManagedCloseTest(CloseLifecycleCase):
         self.assertIn("приёмки", err)
 
     def test_close_done_card_changed_after_handoff_refused(self):
+        """Изменение карточки после handoff блокирует close"""
         self.prepare_done(body="## Цель\n\nИсходная цель.\n")
         card = self.tasks_dir() / "DEV-1.md"
         card.write_text(card.read_text(encoding="utf-8")
@@ -279,6 +296,7 @@ class ManagedCloseTest(CloseLifecycleCase):
         self.assertIn("изменилась после передачи", err)
 
     def test_close_done_stale_inputs_refused(self):
+        """Устаревшие входы блокируют close done"""
         self.prepare_done()
         # Вход verify (docs/) изменился после прогона — отчёт несвежий.
         (self.root / "docs" / "notes.md").write_text("заметка\n",
@@ -288,12 +306,14 @@ class ManagedCloseTest(CloseLifecycleCase):
         self.assertIn("свежего успешного прогона", err)
 
     def test_close_done_in_progress_refused(self):
+        """close done из in_progress отклоняется"""
         self.managed_task(status="in_progress")
         code, _, err = self.cli("close", "DEV-1")
         self.assertEqual(code, 1)
         self.assertIn("in_review", err)
 
     def test_close_cancelled_with_acceptance(self):
+        """close cancelled с зафиксированной приёмкой"""
         self.managed_task(status="in_progress")
         self.assertEqual(
             self.accept("--result", "cancelled", "--kind", "acceptance")[0],
@@ -305,6 +325,7 @@ class ManagedCloseTest(CloseLifecycleCase):
         self.assertIn("Status: cancelled", text)
 
     def test_close_cancelled_without_reason_refused(self):
+        """close cancelled без причины отклоняется"""
         self.managed_task(status="in_progress")
         self.assertEqual(
             self.accept("--result", "cancelled", "--kind", "acceptance")[0],
@@ -314,6 +335,7 @@ class ManagedCloseTest(CloseLifecycleCase):
         self.assertIn("--reason", err)
 
     def test_close_cancelled_without_acceptance_refused(self):
+        """close cancelled без приёмки отклоняется"""
         self.managed_task(status="in_progress")
         code, _, err = self.cli("close", "DEV-1", "--status", "cancelled",
                                 "--reason", "неактуально")
@@ -321,6 +343,7 @@ class ManagedCloseTest(CloseLifecycleCase):
         self.assertIn("cancelled", err)
 
     def test_diagnostic_acceptance_not_enough(self):
+        """Диагностическая приёмка не достаточна для close"""
         self.managed_task()
         self.verify()
         self.assertEqual(self.handoff()[0], 0)
@@ -332,6 +355,7 @@ class ManagedCloseTest(CloseLifecycleCase):
         self.assertIn("diagnostic", err)
 
     def test_close_dry_run_writes_nothing(self):
+        """close --dry-run не пишет изменений"""
         self.prepare_done()
         before = self.project_fingerprint()
         code, out, err = self.cli("close", "DEV-1", "--dry-run")
@@ -357,6 +381,8 @@ class ManagedCloseTest(CloseLifecycleCase):
 
 
 class ReopenTest(CloseLifecycleCase):
+    """reopen: возврат карточки, снятие приёмки, блокировки активных и
+    зависимых задач."""
     def archived_done(self, ident="DEV-1", deps="-", managed=True):
         """Закрытая done-карточка в архиве (напрямую, минуя операции)."""
         write_card(self.archive_dir(), ident, "done", deps=deps,
@@ -372,6 +398,7 @@ class ReopenTest(CloseLifecycleCase):
         self.assertEqual(code, 0, err)
 
     def test_reopen_returns_card_and_clears_acceptance(self):
+        """reopen возвращает карточку и снимает приёмку"""
         self.archived_done()
         code, out, err = self.apply_request(task_request(
             "DEV-1", action="reopen", status="in_progress",
@@ -398,6 +425,7 @@ class ReopenTest(CloseLifecycleCase):
         self.assertIn("(DEV-1.md)", index.split("## Архив")[0])
 
     def test_reopen_blocks_dependents(self):
+        """reopen блокирует зависимые задачи"""
         self.archived_done("DEV-1")
         self.archived_done("DEV-2", deps="DEV-1")
         code, out, err = self.apply_request(task_request(
@@ -408,6 +436,7 @@ class ReopenTest(CloseLifecycleCase):
         # нарушен, т.к. DEV-1 не зависит от DEV-2.
 
     def test_reopen_with_done_dependent_refused(self):
+        """reopen при done-зависимой отклоняется"""
         self.archived_done("DEV-1")
         self.archived_done("DEV-2", deps="DEV-1")
         before = self.project_fingerprint()
@@ -421,6 +450,7 @@ class ReopenTest(CloseLifecycleCase):
         self.assertEqual(self.project_fingerprint(), before)
 
     def test_reopen_active_dependent_blocked(self):
+        """Активная зависимая блокирует reopen"""
         self.archived_done("DEV-1")
         write_card(self.tasks_dir(), "DEV-2", "in_progress", deps="DEV-1",
                    executor="Devin", model="SWE-2 High")
@@ -436,6 +466,7 @@ class ReopenTest(CloseLifecycleCase):
         self.assertIn("## Блокировка", dep_text)
 
     def test_reopen_combined_with_dependent(self):
+        """Совмещённый reopen зависимой карточки"""
         self.archived_done("DEV-1")
         self.archived_done("DEV-2", deps="DEV-1")
         payload = task_request("DEV-1", action="reopen",
@@ -454,6 +485,7 @@ class ReopenTest(CloseLifecycleCase):
                       .read_text(encoding="utf-8"))
 
     def test_reopen_active_card_refused(self):
+        """reopen активной карточки отклоняется"""
         write_card(self.tasks_dir(), "DEV-1", "in_progress")
         code, _, err = self.cli("index")
         self.assertEqual(code, 0, err)
@@ -465,6 +497,7 @@ class ReopenTest(CloseLifecycleCase):
         self.assertIn("не в архиве", err)
 
     def test_reopen_legacy_card(self):
+        """reopen legacy-карточки в архиве"""
         self.archived_done(managed=False)
         evidence = self.archive_dir() / "DEV-1-evidence"
         evidence.mkdir()
@@ -478,6 +511,8 @@ class ReopenTest(CloseLifecycleCase):
 
 
 class PromoteChangeTest(CloseLifecycleCase):
+    """promote изменений: ревизии и bump, квитанции приёмки, отказы
+    по состояниям."""
     def spec_with_change(self, state="implemented"):
         basis = {"type": "engineer_approval", "who": "engineer",
                  "at": "2026-01-02T00:00:00Z", "detail": "утверждено",
@@ -489,6 +524,7 @@ class PromoteChangeTest(CloseLifecycleCase):
                       body="Прежняя редакция текста.\n")
 
     def test_promote_writes_revision_and_bumps(self):
+        """promote изменений пишет ревизию и bump"""
         self.spec_with_change()
         request = promote_request("spec:alpha", "chg-1")
         promotion_receipt(self.root, self.specs / "alpha.md", request["actions"][0])
@@ -515,6 +551,7 @@ class PromoteChangeTest(CloseLifecycleCase):
                          (1, 2))
 
     def test_promotion_rejects_missing_wrong_and_stale_acceptance(self):
+        """promote отклоняет отсутствующую, чужую и устаревшую приёмку"""
         self.spec_with_change()
         req = promote_request("spec:alpha", "chg-1")
         original = (self.specs / "alpha.md").read_bytes()
@@ -534,6 +571,7 @@ class PromoteChangeTest(CloseLifecycleCase):
                 self.assertEqual((self.specs / "alpha.md").read_bytes(), original)
 
     def test_receipt_changed_after_plan_refuses_apply(self):
+        """Изменённая после плана квитанция отклоняет apply"""
         self.spec_with_change()
         req = promote_request("spec:alpha", "chg-1")
         path = promotion_receipt(self.root, self.specs / "alpha.md", req["actions"][0])
@@ -544,6 +582,7 @@ class PromoteChangeTest(CloseLifecycleCase):
         self.assertEqual(self.meta_of(self.specs / "alpha.md")["current_revision"], 1)
 
     def test_promote_not_implemented_refused(self):
+        """promote нереализованного изменения отклоняется"""
         self.spec_with_change(state="approved")
         code, _, err = self.cli(
             "lifecycle", "plan",
@@ -552,6 +591,7 @@ class PromoteChangeTest(CloseLifecycleCase):
         self.assertIn("implemented", err)
 
     def test_promote_unknown_change_refused(self):
+        """promote неизвестного изменения отклоняется"""
         self.add_spec("alpha", state="accepted")
         code, _, err = self.cli(
             "lifecycle", "plan",
@@ -560,6 +600,7 @@ class PromoteChangeTest(CloseLifecycleCase):
         self.assertIn("chg-9", err)
 
     def test_promote_archived_refused(self):
+        """promote архивированного изменения отклоняется"""
         self.spec_with_change()
         # Архивирование требует финальное состояние коллекции.
         card = self.specs / "alpha.md"
@@ -593,6 +634,8 @@ class PromoteChangeTest(CloseLifecycleCase):
 
 
 class CollectionIndexRetentionTest(CloseLifecycleCase):
+    """Удержание индексов коллекций при close/reopen и проверках
+    планов."""
     def setup_done_with_plan(self, ident="DEV-1", plan_slug="block"):
         self.managed_task(ident)
         self.add_plan(plan_slug, state="draft", tasks=[ident])
@@ -604,6 +647,7 @@ class CollectionIndexRetentionTest(CloseLifecycleCase):
             self.accept("--result", "accepted", ident=ident)[0], 0)
 
     def test_close_task_updates_active_plan_index_and_dry_run(self):
+        """close задачи обновляет индекс активного плана, dry-run безопасен"""
         self.setup_done_with_plan("DEV-1")
 
         plan_index = self.root / "docs" / "plans" / "index.md"
@@ -642,6 +686,7 @@ class CollectionIndexRetentionTest(CloseLifecycleCase):
         self.assertNotIn("[DEV-1](../tasks/DEV-1.md)", plan_index.read_text(encoding="utf-8"))
 
     def test_reopen_restores_plan_index_and_blocks_active_dependent(self):
+        """reopen восстанавливает индекс плана и блокирует активную зависимую"""
         self.setup_done_with_plan("DEV-1")
         self.assertEqual(self.cli("close", "DEV-1")[0], 0)
 
@@ -683,6 +728,7 @@ class CollectionIndexRetentionTest(CloseLifecycleCase):
         self.assertIn("[DEV-1](../tasks/DEV-1.md)", plan_index.read_text(encoding="utf-8"))
 
     def test_manual_links_across_collections_including_none_generator(self):
+        """Ручные ссылки через коллекции, включая none-генератор"""
         self.managed_task("DEV-1")
         self.add_spec("alpha", state="draft")
         self.assertEqual(self.cli("index", "--all")[0], 0)
@@ -729,6 +775,7 @@ class CollectionIndexRetentionTest(CloseLifecycleCase):
         self.assertEqual(adr_index.read_text(encoding="utf-8"), adr_before)
 
     def test_stale_plan_rejects_modified_collection_index(self):
+        """Устаревший план отклоняет изменённый индекс коллекции"""
         self.setup_done_with_plan("DEV-1")
 
         # 1. Изменение индекса на диске после verify/plan делает входы несвежими
@@ -764,6 +811,7 @@ class CollectionIndexRetentionTest(CloseLifecycleCase):
         self.assertFalse((self.archive_dir() / "DEV-1.md").exists())
 
     def test_staged_check_failure_restores_preimage(self):
+        """Сбой staged-проверки восстанавливает пред-образ"""
         self.setup_done_with_plan("DEV-1")
         _, plan_rel = self.save_plan(task_request("DEV-1"))
 

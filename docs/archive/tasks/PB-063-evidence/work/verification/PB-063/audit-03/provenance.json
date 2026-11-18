@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "task_id": "PB-063",
+  "audit_id": "audit-03",
+  "at": "2026-11-14T02:17:16+03:00",
+  "actor": "cli:privedentsev1",
+  "files": {
+    "snapshot.txt": {
+      "source": "docs/tasks/PB-063.md",
+      "sha256": "sha256:262f806283af4d3812e9a30535113312b05902825954b0d82e3319c28ba5ded8"
+    },
+    "snapshot.meta.json": {
+      "source": "docs/tasks/PB-063.meta.json",
+      "sha256": "sha256:b3fe5ab560344dcd8d551a99325a1e17f6e3671536a2931cd9832b370b910db1"
+    }
+  }
+}

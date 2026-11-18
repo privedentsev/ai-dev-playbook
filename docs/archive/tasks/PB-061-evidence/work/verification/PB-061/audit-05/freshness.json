@@ -1,0 +1,20 @@
+{
+  "report_id": "f23706d1d192477eba0a72343324d903",
+  "status": "passed",
+  "fresh": true,
+  "changed": [],
+  "report_execution": [
+    "EXEC-04",
+    "sha256:059f2288ae99a60d526c150d9983bea8b39c1c4784b5c0c307293c7a34d24ba0"
+  ],
+  "current_execution": [
+    "EXEC-04",
+    "sha256:059f2288ae99a60d526c150d9983bea8b39c1c4784b5c0c307293c7a34d24ba0"
+  ],
+  "execution_matches": true,
+  "full_suite": {
+    "tests": 1024,
+    "independently_rerun": false
+  },
+  "capability": "local"
+}

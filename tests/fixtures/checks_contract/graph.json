@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "project_id": "shop",
+  "policy_digest": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+  "created_at": "2026-11-07T11:00:00+03:00",
+  "analyzer_version": "ast-v1",
+  "edges": [
+    {"consumer": "module:checkout", "dependency": "module:payments", "kind": "import", "source": "analyzer", "analyzer_version": "ast-v1", "evidence": "src/checkout/order.py:3"},
+    {"consumer": "module:cart", "dependency": "module:shared-util", "kind": "import", "source": "explicit"}
+  ],
+  "unknown": [
+    {"scope": {"kind": "module", "id": "checkout"}, "reason": "динамический импорт importlib в plugins.py"},
+    {"scope": {"kind": "project"}, "reason": "неизвестная область динамической загрузки"}
+  ]
+}

@@ -1,0 +1,3 @@
+Before prepare-audit: verify PB-072 --audit-ready
+Exit 1: критерии не подтверждены свежими проверками; обновите CHECK/handoff
+HANDOFF-03 current. Open A-03/A-05 keep affected criteria unchecked until auditor closure; the accepted audit and lifecycle accept will close them and synchronize criteria. No tests or acceptance were claimed by this command.

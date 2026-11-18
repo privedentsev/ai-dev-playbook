@@ -1,0 +1,276 @@
+{
+  "fixture": "Unmodified adapter and real subprocesses, no mock or pyc editing. First real run generates the normal cache. Source then changes at equal size/mtime; control removes only this temporary-project cache. Normal Python cache-writing env for all three executions.",
+  "cache_files": [
+    "src/payments/__pycache__/pay.cpython-314.pyc"
+  ],
+  "same_size": true,
+  "same_mtime_ns": true,
+  "old_sha256": "585c93666fcb046b7b264d3fa73202aa2a38254ae82a4b3ba19e873c2d5a9886",
+  "new_sha256": "69ef4f409b530264b0da21ad4054978ada08895c93631a0da1957e2a10b592b5",
+  "source_after_edit": "value = 2\n",
+  "first": {
+    "ok": true,
+    "summary": {
+      "passed": 1,
+      "reused": 0,
+      "failed": 0,
+      "timeout": 0,
+      "blocked": 0,
+      "not_run": 0,
+      "not_applicable": 0
+    },
+    "results": [
+      {
+        "schema_version": 1,
+        "result_id": "bd6a1c296ecb440aa89c5d19c048cbc7-payments-tests",
+        "project_id": "shop",
+        "check_id": "payments-tests",
+        "kind": "test",
+        "binding": {
+          "policy_digest": "sha256:f27e9ab2d64d2d76b305a31c33253dd03df7fdf7878bea400e00cecdb53acbe0",
+          "definition_digest": "sha256:3d4e19bc2cb8ab57de2c7f3b3acd4181e311a36d50c92f6e05fc1a006144e757",
+          "adapter": {
+            "id": "python-unittest",
+            "version": "1"
+          },
+          "runner": {
+            "id": "playbook-runner",
+            "version": "1"
+          },
+          "input_digest": "sha256:0bd937a30659e55d4628c5a5ae7636189a9d4518a9bf5564f6be69b9b79c19ed",
+          "dependency_closure_digest": "sha256:763e8b7da1ee6ea32c1d08ea98364405c38ce3fe2d16f145bf995f2f13498655",
+          "environment": {
+            "platform": "darwin"
+          }
+        },
+        "status": "passed",
+        "started_at": "2026-11-17T17:13:34.985048+00:00",
+        "finished_at": "2026-11-17T17:13:35.111486+00:00",
+        "duration_seconds": 0.126,
+        "evidence": {
+          "stdout_log": "work/checks/runs/bd6a1c296ecb440aa89c5d19c048cbc7/payments-tests.stdout.log",
+          "stderr_log": "work/checks/runs/bd6a1c296ecb440aa89c5d19c048cbc7/payments-tests.stderr.log",
+          "adapter_report": "work/checks/runs/bd6a1c296ecb440aa89c5d19c048cbc7/payments-tests.adapter.json",
+          "run_id": "bd6a1c296ecb440aa89c5d19c048cbc7",
+          "run_seq": 0
+        },
+        "tests": {
+          "expected": [
+            "test_payments.TestPay.test_ok"
+          ],
+          "actual": [
+            {
+              "id": "test_payments.TestPay.test_ok",
+              "outcome": "passed"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "second": {
+    "ok": true,
+    "summary": {
+      "passed": 1,
+      "reused": 0,
+      "failed": 0,
+      "timeout": 0,
+      "blocked": 0,
+      "not_run": 0,
+      "not_applicable": 0
+    },
+    "results": [
+      {
+        "schema_version": 1,
+        "result_id": "53aa303c0cda4719bbc9c80b3125ebaa-payments-tests",
+        "project_id": "shop",
+        "check_id": "payments-tests",
+        "kind": "test",
+        "binding": {
+          "policy_digest": "sha256:f27e9ab2d64d2d76b305a31c33253dd03df7fdf7878bea400e00cecdb53acbe0",
+          "definition_digest": "sha256:3d4e19bc2cb8ab57de2c7f3b3acd4181e311a36d50c92f6e05fc1a006144e757",
+          "adapter": {
+            "id": "python-unittest",
+            "version": "1"
+          },
+          "runner": {
+            "id": "playbook-runner",
+            "version": "1"
+          },
+          "input_digest": "sha256:2b051d84181b95addb016a4d640be06bb07b9a100d1b65170c85a402615cd93c",
+          "dependency_closure_digest": "sha256:763e8b7da1ee6ea32c1d08ea98364405c38ce3fe2d16f145bf995f2f13498655",
+          "environment": {
+            "platform": "darwin"
+          }
+        },
+        "status": "passed",
+        "started_at": "2026-11-17T17:13:35.125718+00:00",
+        "finished_at": "2026-11-17T17:13:35.251141+00:00",
+        "duration_seconds": 0.125,
+        "evidence": {
+          "stdout_log": "work/checks/runs/53aa303c0cda4719bbc9c80b3125ebaa/payments-tests.stdout.log",
+          "stderr_log": "work/checks/runs/53aa303c0cda4719bbc9c80b3125ebaa/payments-tests.stderr.log",
+          "adapter_report": "work/checks/runs/53aa303c0cda4719bbc9c80b3125ebaa/payments-tests.adapter.json",
+          "run_id": "53aa303c0cda4719bbc9c80b3125ebaa",
+          "run_seq": 1
+        },
+        "tests": {
+          "expected": [
+            "test_payments.TestPay.test_ok"
+          ],
+          "actual": [
+            {
+              "id": "test_payments.TestPay.test_ok",
+              "outcome": "passed"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "gate_after_second": {
+    "ok": true,
+    "scope": "project",
+    "checkpoint": null,
+    "task_id": "DEV-1",
+    "trust_mode": "local",
+    "checks": {
+      "payments-tests": {
+        "kind": "test",
+        "explain": [
+          "изменения не доказаны — консервативный набор",
+          "применимость always",
+          "reused 53aa303c0cda4719bbc9c80b3125ebaa-payments-tests от 2026-11-17T17:13:35.251141+00:00",
+          "область project — весь обязательный набор"
+        ],
+        "status": "covered",
+        "result_id": "53aa303c0cda4719bbc9c80b3125ebaa-payments-tests"
+      }
+    },
+    "covered": [
+      "payments-tests"
+    ],
+    "uncovered": [],
+    "manual": [],
+    "blocked": [],
+    "not_applicable": [],
+    "notes": [],
+    "rejections": [],
+    "hashed_bytes": 2230,
+    "hashed_files": 17,
+    "budget_reasons": [],
+    "trust": {
+      "mode": "local",
+      "capability": "local",
+      "note": "trust_mode=local: результаты диагностические — локальная история не защищена от владельца проекта; доверенное выполнение требует контура PB-061"
+    },
+    "protected_confirmed": false
+  },
+  "observed_before_control": [
+    1,
+    1
+  ],
+  "control": {
+    "ok": false,
+    "summary": {
+      "passed": 0,
+      "reused": 0,
+      "failed": 1,
+      "timeout": 0,
+      "blocked": 0,
+      "not_run": 0,
+      "not_applicable": 0
+    },
+    "results": [
+      {
+        "schema_version": 1,
+        "result_id": "d62d0ec240e641a9b0f295833c46ea4e-payments-tests",
+        "project_id": "shop",
+        "check_id": "payments-tests",
+        "kind": "test",
+        "binding": {
+          "policy_digest": "sha256:f27e9ab2d64d2d76b305a31c33253dd03df7fdf7878bea400e00cecdb53acbe0",
+          "definition_digest": "sha256:3d4e19bc2cb8ab57de2c7f3b3acd4181e311a36d50c92f6e05fc1a006144e757",
+          "adapter": {
+            "id": "python-unittest",
+            "version": "1"
+          },
+          "runner": {
+            "id": "playbook-runner",
+            "version": "1"
+          },
+          "input_digest": "sha256:2b051d84181b95addb016a4d640be06bb07b9a100d1b65170c85a402615cd93c",
+          "dependency_closure_digest": "sha256:763e8b7da1ee6ea32c1d08ea98364405c38ce3fe2d16f145bf995f2f13498655",
+          "environment": {
+            "platform": "darwin"
+          }
+        },
+        "status": "failed",
+        "started_at": "2026-11-17T17:13:35.275415+00:00",
+        "finished_at": "2026-11-17T17:13:35.395755+00:00",
+        "duration_seconds": 0.12,
+        "evidence": {
+          "stdout_log": "work/checks/runs/d62d0ec240e641a9b0f295833c46ea4e/payments-tests.stdout.log",
+          "stderr_log": "work/checks/runs/d62d0ec240e641a9b0f295833c46ea4e/payments-tests.stderr.log",
+          "adapter_report": "work/checks/runs/d62d0ec240e641a9b0f295833c46ea4e/payments-tests.adapter.json",
+          "run_id": "d62d0ec240e641a9b0f295833c46ea4e",
+          "run_seq": 2
+        },
+        "tests": {
+          "expected": [
+            "test_payments.TestPay.test_ok"
+          ],
+          "actual": [
+            {
+              "id": "test_payments.TestPay.test_ok",
+              "outcome": "failed"
+            }
+          ]
+        },
+        "reason": "тест failed: test_payments.TestPay.test_ok — оплата"
+      }
+    ]
+  },
+  "gate_after_control": {
+    "ok": false,
+    "scope": "project",
+    "checkpoint": null,
+    "task_id": "DEV-1",
+    "trust_mode": "local",
+    "checks": {
+      "payments-tests": {
+        "kind": "test",
+        "explain": [
+          "изменения не доказаны — консервативный набор",
+          "применимость always",
+          "запуск: последний результат failed",
+          "область project — весь обязательный набор"
+        ],
+        "status": "uncovered"
+      }
+    },
+    "covered": [],
+    "uncovered": [
+      "payments-tests"
+    ],
+    "manual": [],
+    "blocked": [],
+    "not_applicable": [],
+    "notes": [],
+    "rejections": [],
+    "hashed_bytes": 1637,
+    "hashed_files": 13,
+    "budget_reasons": [],
+    "trust": {
+      "mode": "local",
+      "capability": "local",
+      "note": "trust_mode=local: результаты диагностические — локальная история не защищена от владельца проекта; доверенное выполнение требует контура PB-061"
+    },
+    "protected_confirmed": false
+  },
+  "observed_all": [
+    1,
+    1,
+    2
+  ]
+}

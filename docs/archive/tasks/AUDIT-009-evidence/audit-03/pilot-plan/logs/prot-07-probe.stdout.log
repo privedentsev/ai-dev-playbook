@@ -1,0 +1,6 @@
+verifier probe: capability=local boundary=none isolation=sandbox-exec
+  home: /private/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/pb073-self-pilot-1bzi6yp4/verifier_home_cmd (project_id=ai-dev-playbook)
+  внутри проекта: False; запись агента: True
+  примечание: дом принадлежит текущей OS identity — владелец может вернуть права записи; отдельной границы нет
+  примечание: запись доступна: approved.json, journal.jsonl, revocations.json, дом, ключ k-9dc6efd97dcb43f3, ключи, родительский каталог
+  примечание: отдельная OS/CI identity не доказана — защищённая эксплуатация не заявляется

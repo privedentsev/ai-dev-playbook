@@ -1,0 +1,4 @@
+OK: структура, ссылки и 1 карточки; каталог документов: 0 документов, 0 legacy. Поведение продукта не проверялось.
+RUN: a (требуется новый запуск)
+MANUAL: a: зафиксирован candidate_snapshot; статус: not_run (ожидается подтверждение)
+incomplete: /private/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/tmpz3aybqpr/work/verification/DEV-1/795db0a81e374b1693d5b47ce43f9906/report.json

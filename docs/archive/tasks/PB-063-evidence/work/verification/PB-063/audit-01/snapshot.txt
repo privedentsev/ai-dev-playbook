@@ -1,0 +1,91 @@
+# PB-063: Внедрить настройку проекта и совместимое обновление
+
+ID: PB-063
+Status: in_review
+Priority: P2
+Depends-On: PB-062
+Executor: Devin
+Model: SWE-2 Flash High
+Created: 2026-11-07T01:08:55+03:00
+Closed: -
+
+<!-- playbook-meta:external -->
+
+## Задача
+
+### Цель и границы
+
+Настройка и миграция. setup/install/update/шаблоны, описания тестов и документация. Согласовать совместную работу с PB-046–050 по фактическому состоянию; не менять их контракты скрытно.
+
+### Контекст
+
+[Спецификация](../specs/dependency-aware-verification.md): R-02,06–07,14,18–20; сценарии AC-03,06,10. [Design](../designs/dependency-aware-verification.md), [ADR-0006](../adr/0006-dependency-aware-verification.md), [план](../plans/dependency-aware-verification.md).
+
+Подготовлено по поручению инженера 2026-11-07. Условия старта проверены 2026-11-12: технический проект (spec/design/ADR/plan) принят, зависимость PB-062 завершена и принята аудитом, исполнитель назначен (Devin / SWE-2 Flash High). Чужие изменения сохранены; self-config не включён — `checks_policy` в self-project отсутствует, механизм проверен на временных проектах (явное решение о self-config — после пилота, PB-064/AUDIT-009).
+
+### Критерии приёмки
+
+- [x] AC-01: Setup preview предлагает модули/checks/exclusions/unknown без записи и исполнения импортов; apply использует одобренную policy и существующий recovery. Новые файлы наследуют безопасные правила.
+- [x] AC-02: Opt-in installation/update строго версионированы; legacy и прежний v2 сохраняются, старые результаты не становятся protected, обязательные checks не исчезают. Прерывание/restore/unsupported версии покрыты.
+- [x] AC-03: Обновить правила, руководство, карту/архитектуру и переносимые шаблоны; descriptions существующих тестов добавить без ненужной смены IDs. Self-config включать только явно и после пилота/разрешения.
+- [x] AC-04: Целевые поведенческие проверки и связанные регрессии пройдены; документация и self-manifest актуальны, EXEC/CHECK/HANDOFF содержат реальные доказательства и ограничения; передача зарегистрирована штатным CLI.
+
+### План
+
+1. Уточнить фактические интерфейсы зависимостей и связать изменения с критериями этой карточки.
+2. Реализовать ограниченный объём, добавить постоянные позитивные и негативные проверки критериев AC-01–03; не подменять их структурной проверкой.
+3. Обновить затронутые документы/шаблоны и self-manifest при изменениях комплекта; выполнить адресные проверки, index и check --ready.
+4. Подготовить материалы и пройти действующие preflight/verify/handoff. До явного opt-in использовать прежний контракт; не отключать полный legacy suite ради экономии.
+5. Записать EXEC/CHECK/HANDOFF и передать независимому аудитору; самостоятельно не закрывать.
+
+### Ресурсы
+
+Python и стандартная библиотека для основного CLI; локальные временные проекты и subprocess-счётчики. Новые зависимости защищённого executor обосновать в рамках принятого design. Фактические среда, policy_revision и бюджет фиксируются при старте; доступность отдельной OS/CI identity не предполагается.
+
+Материалы: `docs/tasks/PB-063-evidence/`; команды воспроизведения и отчёты принадлежат этой карточке. Общие материалы и сквозная матрица — AUDIT-009/PB-064.
+
+## Журнал
+
+### EXEC-01 — Выполнение
+Время: 2026-11-12T04:30:00+03:00
+Исполнитель: Devin
+Модель: SWE-2 Flash High
+Изменения: `setup preview`/`setup apply` вместо deferred-заглушки PB-063. Новый `checks_setup.py` — read-only обследование дерева без Git: обход каталогов (без импорта/исполнения кода, симлинки и ошибки — в problems), классификация верхнеуровневых областей в модули, статический AST-разбор `*.py` (unittest TestCase-методы → предсказанные ID каталога, `load_tests` и ошибки разбора → unknowns), группы `unittest discover` по цепочкам `__init__.py`, предложения excludes для скрытых/env-каталогов, рёбра зависимостей `module:` из импортов (ambiguous/unresolved перечислены). Черновик `checks-policy.json` схемы 1 с TODO-маркерами в `approved_basis` — предложение, не одобрение. `setup apply` — только заполненная политика: `validate_policy` контракта PB-057, отказ при TODO в `approved_basis`, повторном подключении и `schema_version` project.json вне {1,2}; запись `checks-policy.json` + `checks_policy` в project.json одной восстановимой file_operations-операцией (`_write_spec`/`_run_operation`, staged+final `_checks_policy_linked`, snapshot входов включая источник `--policy`); legacy-поля и workflow v2 сохраняются, `config()` продолжает строго валидировать связь. CLI: gate считает `setup apply` мутирующей, preview — read-only; help обновлён. Тесты `tests/test_checks_setup.py` — 13 поведенческих сценариев AC-01–03 на временных проектах с установленным комплектом (preview не пишет и не исполняет sentinel-код, ID каталога совпадают с фактическим discover, apply/recovery/идемпотентность/наследование модулей новыми файлами, сохранение v2 и отказов). Обновлены `test_checks_contract.py` (setup больше не deferred), rules/verification.md, user-guide/modes.md, architecture.md, code-map.md, CHANGELOG.md; self-manifest пересобран; evidence — docs/tasks/PB-063-evidence/commands.md и setup-preview-self.txt.
+Файлы:
+- ai-dev-playbook/scripts/checks_setup.py
+- ai-dev-playbook/scripts/playbook.py
+- ai-dev-playbook/rules/verification.md
+- ai-dev-playbook/manifest.json
+- tests/test_checks_setup.py
+- tests/test_checks_contract.py
+- docs/architecture.md
+- docs/code-map.md
+- docs/user-guide/modes.md
+- docs/plans/verification-process-readiness.md
+- docs/index.md
+- docs/plans/index.md
+- docs/tasks/index.md
+- docs/tasks/PB-063-evidence/commands.md
+- docs/tasks/PB-063-evidence/setup-preview-self.txt
+- CHANGELOG.md
+
+### CHECK-01 — Проверка
+Время: 2026-11-12T05:35:00+03:00
+Исполнитель: Devin
+Модель: SWE-2 Flash High
+Результат: passed
+Критерии: AC-01, AC-02, AC-03, AC-04
+Команда: `python3 -m unittest discover -s tests -p "test_checks_setup.py" -v` (13 сценариев PB-063), `python3 -m unittest discover -s tests -p "test_checks_*.py"`, `python3 -m unittest test_file_operations test_cli`, `python3 -m unittest test_verification_smoke`, `python3 -m unittest discover -s tests -v` (1055 тестов), `playbook.py index`, `playbook.py check --ready`, `playbook.py adopt . --force --apply`, `playbook.py setup preview` (self-project, read-only), полный `playbook.py verify PB-063` (self-check, preflight-regressions, unit-tests — отчёт afdf4881515f4fca9ddb11c60d8e04a0, inputs_unchanged)
+Среда: macOS Darwin 27, Python 3.14.6; временные проекты-фикстуры в /tmp; checkout feature/dependency-aware-verification.
+Факт: `setup preview` — read-only обследование без записи и исполнения кода проекта: модули/checks/excludes/unknowns, предсказанный каталог unittest совпадает с фактическим discover, load_tests/ошибки разбора/неоднозначные и неразрешённые импорты перечислены в unknowns, сгенерированный черновик проходит validate_policy и помечен TODO. `setup apply` — только одобренная политика (отказ при TODO в approved_basis, повторном подключении, schema_version вне {1,2}): checks-policy.json + checks_policy в project.json одной восстановимой file_operations-операцией со staged/final проверками связи; прерывание → pending → restore возвращает пред-образ; schema_version 1/2 и task_workflow сохраняются; новые файлы под путями модулей наследуют владельца в inventory. Документация и шаблоны обновлены, описания тестов не менялись, ID сохранены; self-config не включён (checks_policy в self-project отсутствует — проверено config/project.json). 13 новых + 1055 регрессионных тестов зелёные.
+Доказательства: [команды и ограничения](PB-063-evidence/commands.md), [вывод preview self-project](PB-063-evidence/setup-preview-self.txt), [отчёт verify](../../work/verification/PB-063/afdf4881515f4fca9ddb11c60d8e04a0/report.json)
+Ограничения: самопроверка исполнителя. Стенд без отдельной OS/CI identity — trust_mode сгенерированной политики local, защищённая эксплуатация не заявляется (ограничение PB-061/PB-062 сохраняется). Поведение apply проверено на временных проектах с установленным комплектом; на self-project apply не выполнялся. Статическое предсказание каталога не видит load_tests-протокол, унаследованные TestCase через промежуточные базы и тесты, импортированные в модуль — первая сверка `checks run` является штатной точкой доработки черновика. Изменения не закоммичены.
+
+### HANDOFF-01 — Передача
+Время: 2026-11-12T05:35:00+03:00
+Исполнитель: Devin
+Модель: SWE-2 Flash High
+Выполнение: EXEC-01
+Проверки: CHECK-01
+Состояние: in_review; feature/dependency-aware-verification; изменения не закоммичены. Реализован setup preview/apply PB-063 (checks_setup.py, восстановимая операция записи политики и связи project.json, 13 поведенческих тестов, документация и self-manifest); полный verify passed. Следующий шаг — независимый аудит в отдельной сессии.
+Фокус аудита: read-only граница preview (обход без импорта/исполнения, problems/unknowns вместо скрытых пропусков); корректность предсказания unittest ID и цепочек __init__.py; apply — отказ без заполненного approved_basis и при повторном подключении, сохранение schema_version/task_workflow, идемпотентность already_completed, snapshot входов и restore после прерывания; наследование безопасных правил новыми файлами; отсутствие скрытого opt-in legacy/v2 и сохранение прежнего контракта без checks_policy; версии/unsupported отказы; покрытие AC-01–04 тестами test_checks_setup.py и регрессиями; актуальность документации и manifest; отсутствие заявлений protected при trust_mode=local.

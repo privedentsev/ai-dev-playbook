@@ -1,0 +1,117 @@
+{
+  "clock": "2026-11-16T03:00:00.000000+00:00",
+  "controlled_run_ids": [
+    "ffffffffffffffffffffffffffffffff",
+    "00000000000000000000000000000000"
+  ],
+  "format": "legacy evidence without run_seq, derived index rebuilt",
+  "gate_before_legacy_conversion": {
+    "ok": false,
+    "scope": "project",
+    "checkpoint": null,
+    "task_id": "DEV-1",
+    "trust_mode": "local",
+    "checks": {
+      "payment": {
+        "kind": "command",
+        "explain": [
+          "изменения не доказаны — консервативный набор",
+          "применимость always",
+          "запуск: последний результат failed",
+          "область project — весь обязательный набор"
+        ],
+        "status": "uncovered"
+      }
+    },
+    "covered": [],
+    "uncovered": [
+      "payment"
+    ],
+    "manual": [],
+    "blocked": [],
+    "not_applicable": [],
+    "notes": [],
+    "rejections": [],
+    "hashed_bytes": 20,
+    "hashed_files": 2,
+    "budget_reasons": [],
+    "trust": {
+      "mode": "local",
+      "capability": "local",
+      "note": "trust_mode=local: результаты диагностические — локальная история не защищена от владельца проекта; доверенное выполнение требует контура PB-061"
+    },
+    "protected_confirmed": false
+  },
+  "actual_attempts": 2,
+  "runs_in_execution_order": [
+    {
+      "ok": true,
+      "summary": {
+        "passed": 1,
+        "reused": 0,
+        "failed": 0,
+        "timeout": 0,
+        "blocked": 0,
+        "not_run": 0,
+        "not_applicable": 0
+      }
+    },
+    {
+      "ok": false,
+      "summary": {
+        "passed": 0,
+        "reused": 0,
+        "failed": 1,
+        "timeout": 0,
+        "blocked": 0,
+        "not_run": 0,
+        "not_applicable": 0
+      }
+    }
+  ],
+  "latest_selected": {
+    "payment": {
+      "status": "failed",
+      "result_id": "00000000000000000000000000000000-payment"
+    }
+  },
+  "gate_after_later_failure": {
+    "ok": false,
+    "scope": "project",
+    "checkpoint": null,
+    "task_id": "DEV-1",
+    "trust_mode": "local",
+    "checks": {
+      "payment": {
+        "kind": "command",
+        "explain": [
+          "изменения не доказаны — консервативный набор",
+          "применимость always",
+          "запуск: последний результат failed",
+          "область project — весь обязательный набор"
+        ],
+        "status": "uncovered"
+      }
+    },
+    "covered": [],
+    "uncovered": [
+      "payment"
+    ],
+    "manual": [],
+    "blocked": [],
+    "not_applicable": [],
+    "notes": [],
+    "rejections": [],
+    "hashed_bytes": 20,
+    "hashed_files": 2,
+    "budget_reasons": [],
+    "trust": {
+      "mode": "local",
+      "capability": "local",
+      "note": "trust_mode=local: результаты диагностические — локальная история не защищена от владельца проекта; доверенное выполнение требует контура PB-061"
+    },
+    "protected_confirmed": false
+  },
+  "notes": [],
+  "corrupt": []
+}

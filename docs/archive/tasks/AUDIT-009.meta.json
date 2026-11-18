@@ -1,0 +1,235 @@
+{
+  "schema_version": 1,
+  "card_format_version": 2,
+  "relations": [
+    {
+      "relation": "based_on",
+      "target": "spec:dependency-aware-verification"
+    },
+    {
+      "relation": "based_on",
+      "target": "design:dependency-aware-verification"
+    },
+    {
+      "relation": "based_on",
+      "target": "plan:dependency-aware-verification"
+    }
+  ],
+  "materials": [
+    {
+      "id": "audit-01",
+      "role": "report",
+      "source": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-01",
+      "storage": "local",
+      "immutable": true,
+      "required": true,
+      "used_by": [
+        "AUDIT-009"
+      ]
+    },
+    {
+      "id": "independent-audit-01",
+      "role": "report",
+      "source": "docs/archive/tasks/AUDIT-009-evidence",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "AUDIT-009"
+      ]
+    },
+    {
+      "id": "audit-02",
+      "role": "report",
+      "source": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-02",
+      "storage": "local",
+      "immutable": true,
+      "required": true,
+      "used_by": [
+        "AUDIT-009"
+      ]
+    },
+    {
+      "id": "audit-03",
+      "role": "report",
+      "source": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-03",
+      "storage": "local",
+      "immutable": true,
+      "required": true,
+      "used_by": [
+        "AUDIT-009"
+      ]
+    },
+    {
+      "id": "audit-04",
+      "role": "report",
+      "source": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-04",
+      "storage": "local",
+      "immutable": true,
+      "required": true,
+      "used_by": [
+        "AUDIT-009"
+      ]
+    },
+    {
+      "id": "audit-05",
+      "role": "report",
+      "source": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-05",
+      "storage": "local",
+      "immutable": true,
+      "required": true,
+      "used_by": [
+        "AUDIT-009"
+      ]
+    },
+    {
+      "id": "verify-84693ca6b4d149da9bad2908c0b2e8b5",
+      "role": "report",
+      "source": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/84693ca6b4d149da9bad2908c0b2e8b5",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "AUDIT-009"
+      ]
+    },
+    {
+      "id": "audit-06",
+      "role": "report",
+      "source": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-06",
+      "storage": "local",
+      "immutable": true,
+      "required": true,
+      "used_by": [
+        "AUDIT-009"
+      ]
+    },
+    {
+      "id": "audit-07",
+      "role": "report",
+      "source": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-07",
+      "storage": "local",
+      "immutable": true,
+      "required": true,
+      "used_by": [
+        "AUDIT-009"
+      ]
+    },
+    {
+      "id": "verify-7138133c57a04bba80bb0f222a964380",
+      "role": "report",
+      "source": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/7138133c57a04bba80bb0f222a964380",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "AUDIT-009"
+      ]
+    },
+    {
+      "id": "lifecycle-lc-292706947891cbcb",
+      "role": "report",
+      "source": "docs/archive/tasks/AUDIT-009-evidence/close-lc-292706947891cbcb.json",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": []
+    }
+  ],
+  "audit_packages": {
+    "audit-01": "sha256:e73d4ab66d27e814eaa3664c121c08542aba7390fcc2877529d9a47f8f524676",
+    "audit-02": "sha256:ab47d908d1452591b23514a8ed29a9accd7709bfb7ac980f64f2bae8154871ee",
+    "audit-03": "sha256:38ce9338df2910ec1ba1527fb13e930fde44a247c32560dbd0283c2a793c1ab5",
+    "audit-04": "sha256:3be78a0e7aa213375f26ebbc1c646b79795c3ca8b63cf6ee2266973ae58d89b7",
+    "audit-05": "sha256:e3416e33d8a683ae1c33764a517261c8833830259e9a6b9baf7495705fb5c6df",
+    "audit-06": "sha256:15a4a3762d69c5d2f04948a8da3a1391d4281ef31732a6afb76a695d5616e78f",
+    "audit-07": "sha256:3960173eef97676a5a2d4583998d9989dfa9694ddb1a262320c3aab87c79fb2d"
+  },
+  "acceptance": {
+    "at": "2026-11-18T09:20:27+03:00",
+    "actor": {
+      "name": "Codex",
+      "model": "GPT-6.1 Sol (High)"
+    },
+    "role": "auditor",
+    "kind": "acceptance",
+    "result": "accepted",
+    "handoff_at": "2026-11-18T09:16:00+03:00",
+    "session": null,
+    "detail": null,
+    "audit_id": "AUDIT-01",
+    "audit_sha256": "sha256:a596d8ddae046eaf2f780d862e78562d011a98a763b62c14602ed3d9d0727a52"
+  },
+  "criterion_evidence": {
+    "CHECK-07": {
+      "check_sha256": "sha256:b5345e31f449c4d1605c56a1cba8a0e4641cd7b2da6e21dcfb925ba5fa14ef26",
+      "card_projection": "sha256:2044594fec69b112a888b9e58df801880e40084d5fb162e0fbf699b4af748dff",
+      "report_id": "verify-7138133c57a04bba80bb0f222a964380",
+      "report_sha256": "sha256:75fc4436fd80d661398415c92f55dc5fe26aac270a9e0cf21e2820077d25d0f6"
+    }
+  },
+  "handoff": {
+    "at": "2026-11-18T09:16:00+03:00",
+    "actor": {
+      "name": "Codex",
+      "model": "GPT-6.1 Sol (High)"
+    },
+    "summary": "HANDOFF-01",
+    "reports": [
+      "verify-7138133c57a04bba80bb0f222a964380"
+    ],
+    "card_projection": "sha256:2044594fec69b112a888b9e58df801880e40084d5fb162e0fbf699b4af748dff",
+    "entry_id": "HANDOFF-01",
+    "journal_sha256": "sha256:a59e9e62aa3ac8d0318cfd2bc6b67d3f37a4794ab10de13545bc7df7348d7161"
+  },
+  "moves": [
+    {
+      "from": "work/verification/AUDIT-009/audit-01",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-01"
+    },
+    {
+      "from": "docs/tasks/AUDIT-009-evidence",
+      "to": "docs/archive/tasks/AUDIT-009-evidence"
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-02",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-02"
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-03",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-03"
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-04",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-04"
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-05",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-05"
+    },
+    {
+      "from": "work/verification/AUDIT-009/84693ca6b4d149da9bad2908c0b2e8b5",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/84693ca6b4d149da9bad2908c0b2e8b5"
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-06",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-06"
+    },
+    {
+      "from": "work/verification/AUDIT-009/audit-07",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/audit-07"
+    },
+    {
+      "from": "work/verification/AUDIT-009/7138133c57a04bba80bb0f222a964380",
+      "to": "docs/archive/tasks/AUDIT-009-evidence/work/verification/AUDIT-009/7138133c57a04bba80bb0f222a964380"
+    },
+    {
+      "from": "docs/tasks/AUDIT-009.md",
+      "to": "docs/archive/tasks/AUDIT-009.md"
+    },
+    {
+      "from": "docs/tasks/AUDIT-009.meta.json",
+      "to": "docs/archive/tasks/AUDIT-009.meta.json"
+    }
+  ]
+}

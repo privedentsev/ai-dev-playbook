@@ -1,0 +1,172 @@
+[
+  {
+    "label": "00-optin-setup-preview",
+    "argv": [
+      "setup",
+      "preview"
+    ],
+    "returncode": 0,
+    "expected": 0,
+    "seconds": 2.378
+  },
+  {
+    "label": "01-optin-setup-apply",
+    "argv": [
+      "setup",
+      "apply"
+    ],
+    "returncode": 0,
+    "expected": 0,
+    "seconds": 0.626
+  },
+  {
+    "label": "02-optin-initial-plan",
+    "argv": [
+      "checks",
+      "plan",
+      "PILOT-01"
+    ],
+    "returncode": 0,
+    "expected": 0,
+    "seconds": 4.822
+  },
+  {
+    "label": "prot-01-apply",
+    "argv": [
+      "setup",
+      "apply"
+    ],
+    "returncode": 0,
+    "expected": 0,
+    "seconds": 0.735
+  },
+  {
+    "label": "prot-02-init-test",
+    "argv": [
+      "verifier",
+      "init",
+      "--home",
+      "/private/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/pb073-self-pilot-wf4vj_ex/verifier_home_test_kind",
+      "--project-id",
+      "ai-dev-playbook"
+    ],
+    "returncode": 0,
+    "expected": 0,
+    "seconds": 0.457
+  },
+  {
+    "label": "prot-03-approve-test",
+    "argv": [
+      "verifier",
+      "approve",
+      "--home",
+      "/private/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/pb073-self-pilot-wf4vj_ex/verifier_home_test_kind"
+    ],
+    "returncode": 0,
+    "expected": 0,
+    "seconds": 0.495
+  },
+  {
+    "label": "prot-04-reject-kind-test",
+    "argv": [
+      "verifier",
+      "run",
+      "--home",
+      "/private/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/pb073-self-pilot-wf4vj_ex/verifier_home_test_kind",
+      "--scope",
+      "project"
+    ],
+    "returncode": 1,
+    "expected": 1,
+    "seconds": 0.474
+  },
+  {
+    "label": "prot-05-init-cmd",
+    "argv": [
+      "verifier",
+      "init",
+      "--home",
+      "/private/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/pb073-self-pilot-wf4vj_ex/verifier_home_cmd",
+      "--project-id",
+      "ai-dev-playbook"
+    ],
+    "returncode": 0,
+    "expected": 0,
+    "seconds": 0.465
+  },
+  {
+    "label": "prot-06-approve-cmd",
+    "argv": [
+      "verifier",
+      "approve",
+      "--home",
+      "/private/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/pb073-self-pilot-wf4vj_ex/verifier_home_cmd"
+    ],
+    "returncode": 0,
+    "expected": 0,
+    "seconds": 0.487
+  },
+  {
+    "label": "prot-07-probe",
+    "argv": [
+      "verifier",
+      "probe",
+      "--home",
+      "/private/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/pb073-self-pilot-wf4vj_ex/verifier_home_cmd"
+    ],
+    "returncode": 0,
+    "expected": 0,
+    "seconds": 0.492
+  },
+  {
+    "label": "prot-08-verifier-run",
+    "argv": [
+      "verifier",
+      "run",
+      "--home",
+      "/private/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/pb073-self-pilot-wf4vj_ex/verifier_home_cmd",
+      "--scope",
+      "project"
+    ],
+    "returncode": 0,
+    "expected": 0,
+    "seconds": 12.359
+  },
+  {
+    "label": "prot-09-verifier-verify",
+    "argv": [
+      "verifier",
+      "verify",
+      "--home",
+      "/private/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/pb073-self-pilot-wf4vj_ex/verifier_home_cmd",
+      "--receipt",
+      "/private/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/pb073-self-pilot-wf4vj_ex/verifier_home_cmd/receipts/rc-3b3daa8ed8284c2b.json"
+    ],
+    "returncode": 0,
+    "expected": 0,
+    "seconds": 0.473
+  },
+  {
+    "label": "prot-10-verifier-gate",
+    "argv": [
+      "verifier",
+      "gate",
+      "--home",
+      "/private/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/pb073-self-pilot-wf4vj_ex/verifier_home_cmd"
+    ],
+    "returncode": 0,
+    "expected": 0,
+    "seconds": 1.739
+  },
+  {
+    "label": "prot-11-release-ready-blocked",
+    "argv": [
+      "checks",
+      "release-ready",
+      "PILOT-01"
+    ],
+    "returncode": 1,
+    "expected": 1,
+    "seconds": 6.283
+  }
+]

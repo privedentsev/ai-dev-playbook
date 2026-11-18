@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "kind": "checks-input-snapshot",
+  "project_id": "shop",
+  "policy_digest": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+  "created_at": "2026-11-08T12:00:00+03:00",
+  "entries": {
+    "path:src/payments": {
+      "type": "directory",
+      "members": {
+        "pay.py": {"type": "file", "sha256": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"},
+        "sub": {"type": "dir"}
+      }
+    },
+    "path:missing.txt": {"type": "absent"},
+    "task_projection": {"type": "projection", "digest": "sha256:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"},
+    "environment:CI": {"type": "value", "digest": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"}
+  }
+}

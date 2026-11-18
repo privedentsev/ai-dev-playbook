@@ -1,0 +1,39 @@
+test_apply_moves_document_materials_and_rewrites_links (test_lifecycle.ArchiveApplyTest.test_apply_moves_document_materials_and_rewrites_links) ... ok
+test_apply_twice_is_already_completed (test_lifecycle.ArchiveApplyTest.test_apply_twice_is_already_completed) ... ok
+test_apply_two_documents_in_one_request (test_lifecycle.ArchiveApplyTest.test_apply_two_documents_in_one_request) ... ok
+test_archive_plan_document_with_done_tasks (test_lifecycle.ArchiveApplyTest.test_archive_plan_document_with_done_tasks) ... ok
+test_plan_preview_writes_nothing (test_lifecycle.ArchiveApplyTest.test_plan_preview_writes_nothing) ... ok
+test_already_archived_refused (test_lifecycle.ArchiveRefusalTest.test_already_archived_refused) ... ok
+test_bad_request_shapes_refused (test_lifecycle.ArchiveRefusalTest.test_bad_request_shapes_refused) ... ok
+test_close_task_unknown_task_refused (test_lifecycle.ArchiveRefusalTest.test_close_task_unknown_task_refused) ... ok
+test_destination_collision_refused (test_lifecycle.ArchiveRefusalTest.test_destination_collision_refused) ... ok
+test_legacy_document_refused (test_lifecycle.ArchiveRefusalTest.test_legacy_document_refused) ... ok
+test_missing_material_refused (test_lifecycle.ArchiveRefusalTest.test_missing_material_refused) ... ok
+test_no_documents_section_refused (test_lifecycle.ArchiveRefusalTest.test_no_documents_section_refused) ... ok
+test_non_final_state_refused (test_lifecycle.ArchiveRefusalTest.test_non_final_state_refused) ... ok
+test_plan_document_with_open_tasks_refused (test_lifecycle.ArchiveRefusalTest.test_plan_document_with_open_tasks_refused) ... ok
+test_scope_mismatch_refused (test_lifecycle.ArchiveRefusalTest.test_scope_mismatch_refused) ... ok
+test_scope_tasks_mismatch_refused (test_lifecycle.ArchiveRefusalTest.test_scope_tasks_mismatch_refused) ... ok
+test_successor_missing_refused (test_lifecycle.ArchiveRefusalTest.test_successor_missing_refused) ... ok
+test_successor_within_same_operation_refused (test_lifecycle.ArchiveRefusalTest.test_successor_within_same_operation_refused) ... ok
+test_unaccounted_evidence_refused (test_lifecycle.ArchiveRefusalTest.test_unaccounted_evidence_refused) ... ok
+test_unconfirmed_external_required_refused (test_lifecycle.ArchiveRefusalTest.test_unconfirmed_external_required_refused) ... ok
+test_unknown_action_refused (test_lifecycle.ArchiveRefusalTest.test_unknown_action_refused) ... ok
+test_unknown_confirmed_material_refused (test_lifecycle.ArchiveRefusalTest.test_unknown_confirmed_material_refused) ... ok
+test_wikilink_conflict_refused (test_lifecycle.ArchiveRefusalTest.test_wikilink_conflict_refused) ... ok
+test_work_area_material_refused (test_lifecycle.ArchiveRefusalTest.test_work_area_material_refused) ... ok
+test_apply_failure_restores_preimage (test_lifecycle.InterruptRestoreTest.test_apply_failure_restores_preimage) ... ok
+test_crash_mid_apply_then_restore (test_lifecycle.InterruptRestoreTest.test_crash_mid_apply_then_restore) ... ok
+test_restore_without_pending_refused (test_lifecycle.InterruptRestoreTest.test_restore_without_pending_refused) ... ok
+test_catalog_change_after_plan_refused (test_lifecycle.StalePlanTest.test_catalog_change_after_plan_refused) ... ok
+test_input_change_after_plan_refused (test_lifecycle.StalePlanTest.test_input_change_after_plan_refused) ... ok
+test_new_evidence_file_after_plan_refused (test_lifecycle.StalePlanTest.test_new_evidence_file_after_plan_refused) ... ok
+test_plan_from_other_root_refused (test_lifecycle.StalePlanTest.test_plan_from_other_root_refused) ... ok
+test_tampered_plan_refused (test_lifecycle.StalePlanTest.test_tampered_plan_refused) ... ok
+test_tampered_request_in_plan_refused (test_lifecycle.StalePlanTest.test_tampered_request_in_plan_refused) ... ok
+test_status_lists_saved_plans (test_lifecycle.StatusTest.test_status_lists_saved_plans) ... ok
+
+----------------------------------------------------------------------
+Ran 34 tests in 8.595s
+
+OK

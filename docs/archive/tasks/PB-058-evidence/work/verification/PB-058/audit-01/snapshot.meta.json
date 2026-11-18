@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "card_format_version": 2,
+  "relations": [
+    {
+      "relation": "based_on",
+      "target": "spec:dependency-aware-verification"
+    },
+    {
+      "relation": "based_on",
+      "target": "design:dependency-aware-verification"
+    },
+    {
+      "relation": "based_on",
+      "target": "plan:dependency-aware-verification"
+    }
+  ],
+  "materials": [
+    {
+      "id": "commands",
+      "role": "report",
+      "source": "docs/tasks/PB-058-evidence/commands.md",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-058"
+      ]
+    },
+    {
+      "id": "verify-399585ec3a234c47b9811cb725956982",
+      "role": "report",
+      "source": "work/verification/PB-058/399585ec3a234c47b9811cb725956982",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-058"
+      ]
+    }
+  ],
+  "criterion_evidence": {
+    "CHECK-01": {
+      "check_sha256": "sha256:49ed061f4841a6fd0f39300bf19ac306c49db11e45bcc2ddd84415b8a208fb1d",
+      "card_projection": "sha256:d4ddeb122ec8dd66c92685bc0d5f133d805b3430000dfaefae87bedf654d967a",
+      "report_id": "verify-399585ec3a234c47b9811cb725956982",
+      "report_sha256": "sha256:09db7728a5e539bb6afef79691999e742de8f8dadc036ff2718898f13b7607df"
+    }
+  },
+  "handoff": {
+    "at": "2026-11-08T12:43:53+03:00",
+    "actor": {
+      "name": "Devin",
+      "model": "SWE-2 High"
+    },
+    "summary": "HANDOFF-01",
+    "reports": [
+      "verify-399585ec3a234c47b9811cb725956982"
+    ],
+    "card_projection": "sha256:d4ddeb122ec8dd66c92685bc0d5f133d805b3430000dfaefae87bedf654d967a",
+    "entry_id": "HANDOFF-01",
+    "journal_sha256": "sha256:640f39fd6c37804c62b7fe3141739a9d7650051b2de13002303729498a44d5b8"
+  }
+}

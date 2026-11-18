@@ -1,0 +1,3 @@
+verifier run: candidate sha256:0c63559c3bb71d001b86d49359829b383e95117f4b31f9d94390671604f7fd97 (2861 файлов), arena 0c63559c3bb71d00-b266e0dc, sandbox=да
+checks run verifier-b266e0dc: политика ai-dev-playbook-self-pilot rev 2, scope=project mode=staleОграничение: trust_mode=protected: локальные результаты не являются доверенными квитанциями; подтверждение — внешний verifier (PB-061)  preflight-regressions: RUN command  preflight-regressions: passed (4.488с)Итог: passed=1; непокрытых обязательств: 0
+verifier: receipt rc-4422cbcd47aa4536 → work/checks/receipts/; ok=True

@@ -1,0 +1,24 @@
+test_corrupt_latest_failed (__main__.Probes.test_corrupt_latest_failed) ... ok
+test_project_import (__main__.Probes.test_project_import) ... ok
+test_reuse_rebinding (__main__.Probes.test_reuse_rebinding) ... ok
+test_status_stale (__main__.Probes.test_status_stale) ... ok
+test_ttl (__main__.Probes.test_ttl) ... ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 1.819s
+
+OK
+CORRUPT failed after passed: {'payments-tests': 'passed'} {'payments-tests': 'failed'} {'payments-tests': 'passed'}
+PROJECT IMPORT original argv exit: 0 adapter: {'payments-tests': 'passed'} checks run DEV-1: политика shop-checks rev 1, scope=task mode=stale
+Ограничение: trust_mode=local: результаты диагностические — локальная история не защищена от владельца проекта; доверенное выполнение требует контура PB-061
+  payments-tests: RUN test
+  payments-tests: passed (0.138с)
+Итог: passed=1; непокрытых обязательств: 0
+
+REUSE input changes after plan: {'payments-tests': 'failed'} {'payments-tests': 'failed'}
+STALE STATUS: {'covered': 0, 'obligated': 1} checks status DEV-1: политика shop-checks rev 1
+Ограничение: trust_mode=local: результаты диагностические — локальная история не защищена от владельца проекта; доверенное выполнение требует контура PB-061
+  payments-tests: run; последний результат passed 73384452cd8a46c9b977c9e879394b28-payments-tests от 2026-11-09T10:00:00+03:00; тестов: 1
+Покрытие обязательств области задачи: 0/1
+
+TTL 60s at t=0,50,100,150: [{"payments-tests": "passed"}, {"payments-tests": "reused"}, {"payments-tests": "passed"}, {"payments-tests": "reused"}]

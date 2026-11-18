@@ -9,6 +9,8 @@ from test_documents import tree_fingerprint
 
 
 class VerificationReadinessTest(fixture.CloseLifecycleCase):
+    """Готовность к проверкам: блоки до команд, TMPDIR внутри проекта,
+    pending-маркеры."""
     def setUp(self):
         super().setUp()
         self.managed_task()
@@ -35,31 +37,37 @@ class VerificationReadinessTest(fixture.CloseLifecycleCase):
             self.assertFalse(list((self.root / 'work/verification').glob('*/*/report.json')))
 
     def test_missing_command_blocks_before_any_command(self):
+        """Отсутствующая команда блокирует до запуска"""
         self.settings['verification']['checks'].append({
             'id': 'missing', 'argv': ['pb056-nonexistent-executable'], 'timeout_seconds': 30})
         self.save_settings()
         self.assert_early_failure('исполняемый файл недоступен')
 
     def test_stale_task_index_blocks_before_tests(self):
+        """Устаревший индекс задач блокирует до тестов"""
         index = self.root / 'docs/tasks/index.md'
         index.write_text(index.read_text().replace('in_review', 'in_progress'))
         self.assert_early_failure('индекс задач')
 
     def test_missing_component_blocks_before_tests(self):
+        """Отсутствующий компонент блокирует до тестов"""
         self.settings['components'][0]['tests'] = ['absent-tests']
         self.save_settings()
         self.assert_early_failure('Нет каталога компонента')
 
     def test_version_mismatch_blocks_before_tests(self):
+        """Несовпадение версии блокирует до тестов"""
         self.settings['playbook_version'] = '99.0.0'
         self.save_settings()
         self.assert_early_failure('Версия внедрения')
 
     def test_temporary_directory_inside_project_rejected_before_tests(self):
+        """TMPDIR внутри проекта отклоняется до тестов"""
         with patch.object(fixture.playbook.verification.tempfile, 'gettempdir', return_value=str(self.root)):
             self.assert_early_failure('TMPDIR')
 
     def test_pending_markers_fail_read_only_even_without_lock(self):
+        """Pending-маркеры fail read-only даже без lock"""
         for rel in ('work/lifecycle/pending.json', 'work/update/pending.json'):
             with self.subTest(rel=rel):
                 path = self.root / rel
@@ -69,6 +77,7 @@ class VerificationReadinessTest(fixture.CloseLifecycleCase):
                 path.unlink()
 
     def test_live_gate_is_probed_without_changing_holder(self):
+        """Живой gate опрашивается без изменения держателя"""
         with patch.dict(os.environ):
             os.environ.pop(fixture.fops.GATE_ENV, None)
             with fixture.fops.acquire_gate(self.root, fixture.playbook.safe_path,
@@ -85,6 +94,7 @@ class VerificationReadinessTest(fixture.CloseLifecycleCase):
         return path
 
     def test_measured_duration_rejects_insufficient_timeout_without_writing(self):
+        """Измеренная длительность отклоняет недостаточный timeout без записи"""
         self.history()
         before = tree_fingerprint(self.root)
         result = self.cli('verify', 'DEV-1', '--preflight')
@@ -99,6 +109,7 @@ class VerificationReadinessTest(fixture.CloseLifecycleCase):
         self.assertEqual(self.cli('verify', 'DEV-1', '--preflight')[0], 0)
 
     def test_failed_corrupt_foreign_and_other_commands_do_not_block_retry(self):
+        """Failed/corrupt/foreign/чужие команды не блокируют retry"""
         for status, argv in (('failed', None), ('passed', ['other-command'])):
             self.history(status=status, argv=argv)
             self.assertEqual(self.cli('verify', 'DEV-1', '--preflight')[0], 0)
@@ -111,6 +122,7 @@ class VerificationReadinessTest(fixture.CloseLifecycleCase):
         self.assertEqual(self.cli('verify', 'DEV-1', '--preflight')[0], 0)
 
     def test_audit_ready_requires_handoff_and_detects_stale_inputs_without_tests(self):
+        """--audit-ready требует handoff и видит stale входы без тестов"""
         result = self.cli('verify', 'DEV-1', '--audit-ready')
         self.assertEqual(result[0], 1, result)
         self.assertIn('нет записи передачи', result[2])
@@ -131,6 +143,7 @@ class VerificationReadinessTest(fixture.CloseLifecycleCase):
         self.assertEqual(before, tree_fingerprint(self.root))
 
     def test_legacy_without_documents_also_checks_index(self):
+        """Legacy без documents тоже проверяет индекс"""
         self.settings.pop('documents')
         self.save_settings()
         card = self.root / 'docs/tasks/DEV-1.md'

@@ -1,0 +1,4 @@
+[00-optin-setup-preview] setup preview -> rc=0 (2.489s)
+[01-optin-setup-apply] setup apply -> rc=0 (0.653s)
+[02-optin-initial-plan] checks plan PILOT-01 -> rc=0 (4.776s)
+[10-legacy-preflight] verify PILOT-01 --preflight -> rc=0 (108.606s)

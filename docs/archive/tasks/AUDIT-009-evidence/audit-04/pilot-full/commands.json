@@ -1,0 +1,44 @@
+[
+  {
+    "label": "00-optin-setup-preview",
+    "argv": [
+      "setup",
+      "preview"
+    ],
+    "returncode": 0,
+    "expected": 0,
+    "seconds": 2.489
+  },
+  {
+    "label": "01-optin-setup-apply",
+    "argv": [
+      "setup",
+      "apply"
+    ],
+    "returncode": 0,
+    "expected": 0,
+    "seconds": 0.653
+  },
+  {
+    "label": "02-optin-initial-plan",
+    "argv": [
+      "checks",
+      "plan",
+      "PILOT-01"
+    ],
+    "returncode": 0,
+    "expected": 0,
+    "seconds": 4.776
+  },
+  {
+    "label": "10-legacy-preflight",
+    "argv": [
+      "verify",
+      "PILOT-01",
+      "--preflight"
+    ],
+    "returncode": 0,
+    "expected": 0,
+    "seconds": 108.606
+  }
+]

@@ -1,0 +1,66 @@
+{
+  "schema_version": 2,
+  "run_id": "e4c002dbb2c24081b165ef5f962022fd",
+  "task_id": "DEV-1",
+  "route": "quick",
+  "plan_revision": 1,
+  "plan_hash": "sha256:3ca6d14601990edd33a084d4fef167f6a02986a346a952c3f8b8372e53ec6b41",
+  "policy_hash": "sha256:79df83ebbf95ac651d5556eee0daef31ad6089e4f0404efa462d41bd6c26a00d",
+  "at": "2026-11-06T12:31:14.328221+00:00",
+  "started_at": "2026-11-06T12:31:14.328226+00:00",
+  "finished_at": "2026-11-06T12:31:14.328229+00:00",
+  "cwd": "/private/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/tmpw_6a9nr7",
+  "status": "failed",
+  "results": [
+    {
+      "check_id": "a",
+      "definition_hash": "sha256:2c1338ad105154129ce7b9d660c8258551400ff1a57360823e645368bc07d7a8",
+      "kind": "command",
+      "status": "failed",
+      "actor": {
+        "name": "Fixture executor",
+        "model": "Synthetic model"
+      },
+      "environment": {
+        "os": "posix",
+        "platform": "macOS-27.0.1-x86_64-i386-64bit-Mach-O",
+        "python": "3.14.6",
+        "architecture": "x86_64",
+        "executable": "/usr/local/opt/python@3.14/bin/python3.14",
+        "environment_sha256": "sha256:f95c9b2dc861016b06231a15511b914c9dde81531e0dc6d439a05ae6fccae369"
+      },
+      "policy_binding": "sha256:79df83ebbf95ac651d5556eee0daef31ad6089e4f0404efa462d41bd6c26a00d",
+      "input_snapshot": {
+        "files": {
+          "path:src/a.txt": "sha256:cbe3e66524cb62b29edb3e6dda742af5a20de7ceff3c0ba1818cf57c454b542c"
+        }
+      },
+      "started_at": "2026-11-06T12:31:14.230909+00:00",
+      "finished_at": "2026-11-06T12:31:14.326590+00:00",
+      "duration_seconds": 0.096,
+      "exit_code": 9,
+      "stdout_log": "work/verification/DEV-1/e4c002dbb2c24081b165ef5f962022fd/a.stdout.log",
+      "stderr_log": "work/verification/DEV-1/e4c002dbb2c24081b165ef5f962022fd/a.stderr.log",
+      "snapshot_before": {
+        "files": {
+          "path:src/a.txt": "sha256:cbe3e66524cb62b29edb3e6dda742af5a20de7ceff3c0ba1818cf57c454b542c"
+        }
+      },
+      "snapshot_after": {
+        "files": {
+          "path:src/a.txt": "sha256:cbe3e66524cb62b29edb3e6dda742af5a20de7ceff3c0ba1818cf57c454b542c"
+        }
+      }
+    }
+  ],
+  "coverage": {
+    "total_checks": 1,
+    "passed": [],
+    "failed": [
+      "a"
+    ],
+    "not_applicable": [],
+    "not_run": [],
+    "satisfied": false
+  }
+}

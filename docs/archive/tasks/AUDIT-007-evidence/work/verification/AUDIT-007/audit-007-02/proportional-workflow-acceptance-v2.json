@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "document": "spec:proportional-workflow",
+  "change": "proportional-workflow",
+  "revision": 1,
+  "result": "accepted",
+  "kind": "acceptance",
+  "actor": {
+    "name": "Codex",
+    "role": "auditor",
+    "model": "GPT-6.1"
+  },
+  "at": "2026-11-06T18:27:52+03:00",
+  "document_sha256": "sha256:a3d3158acffe9c88a560633c132efdc9eb0e2d296cad2c78c7b2da69ef5f1ad2",
+  "payload_sha256": "sha256:88325e71f2bfa82a01fda7116e42b353036c3765e70d2f20134c428ced4cabfb"
+}

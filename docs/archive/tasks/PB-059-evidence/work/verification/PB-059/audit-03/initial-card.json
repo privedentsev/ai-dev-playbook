@@ -1,0 +1,412 @@
+{
+  "status": "supported",
+  "card_format_version": 2,
+  "markdown_path": "docs/tasks/PB-059.md",
+  "header": {
+    "title": "PB-059: Построить карту зависимостей и объяснимый выбор проверок",
+    "id": "PB-059",
+    "status": "in_review",
+    "priority": "P2",
+    "depends_on": "PB-058",
+    "executor": "Devin",
+    "model": "SWE-2 High",
+    "created": "2026-11-07T01:07:04+03:00",
+    "closed": "-"
+  },
+  "task": {
+    "Цель и границы": "Граф и выбор. Модуль графа, Python analyzer, чистый selector/explain и бюджет; интеграция required_checks. Не ослаблять registry applicability legacy/v2.",
+    "Контекст": "[Спецификация](../specs/dependency-aware-verification.md): R-03–04,08–10; сценарии AC-01–04. [Design](../designs/dependency-aware-verification.md), [ADR-0006](../adr/0006-dependency-aware-verification.md), [план](../plans/dependency-aware-verification.md).\n\nПодготовлено по поручению инженера 2026-11-07. Выполнение пока не разрешено. Перед стартом: принятие технического проекта, завершённые зависимости, актуальный card show/handoff затрагиваемых работ и назначение исполнителя. Исходные чужие изменения сохранять.",
+    "Критерии приёмки": "- [ ] AC-01: Python AST и explicit/observed связи строят provenance-граф; reverse transitive closure, циклы, объединение старых/новых рёбер и удаления проверены. Dynamic import/unsupported не трактуются как независимость.\n- [ ] AC-02: Алгоритм module → subsystem → project расширяется только до доказанной границы и выдаёт explain цепочку; обязательства задачи дополняют вычисленный набор.\n- [ ] AC-03: План read-only, не исполняет discovery или найденный код; бюджет/неизвестная оценка блокируют дорогой fallback до запуска. Счётчики в fixtures подтверждают ожидаемый набор.\n- [ ] AC-04: Целевые поведенческие проверки и связанные регрессии пройдены; документация и self-manifest актуальны, EXEC/CHECK/HANDOFF содержат реальные доказательства и ограничения; передача зарегистрирована штатным CLI.",
+    "План": "1. Уточнить фактические интерфейсы зависимостей и связать изменения с критериями этой карточки.\n2. Реализовать ограниченный объём, добавить постоянные позитивные и негативные проверки критериев AC-01–03; не подменять их структурной проверкой.\n3. Обновить затронутые документы/шаблоны и self-manifest при изменениях комплекта; выполнить адресные проверки, index и check --ready.\n4. Подготовить материалы и пройти действующие preflight/verify/handoff. До явного opt-in использовать прежний контракт; не отключать полный legacy suite ради экономии.\n5. Записать EXEC/CHECK/HANDOFF и передать независимому аудитору; самостоятельно не закрывать.",
+    "Ресурсы": "Python и стандартная библиотека для основного CLI; локальные временные проекты и subprocess-счётчики. Новые зависимости защищённого executor обосновать в рамках принятого design. Фактические среда, policy_revision и бюджет фиксируются при старте; доступность отдельной OS/CI identity не предполагается.\n\nМатериалы: `docs/tasks/PB-059-evidence/`; команды воспроизведения и отчёты принадлежат этой карточке. Общие материалы и сквозная матрица — AUDIT-009/PB-064."
+  },
+  "criteria": {
+    "AC-01": "Python AST и explicit/observed связи строят provenance-граф; reverse transitive closure, циклы, объединение старых/новых рёбер и удаления проверены. Dynamic import/unsupported не трактуются как независимость.",
+    "AC-02": "Алгоритм module → subsystem → project расширяется только до доказанной границы и выдаёт explain цепочку; обязательства задачи дополняют вычисленный набор.",
+    "AC-03": "План read-only, не исполняет discovery или найденный код; бюджет/неизвестная оценка блокируют дорогой fallback до запуска. Счётчики в fixtures подтверждают ожидаемый набор.",
+    "AC-04": "Целевые поведенческие проверки и связанные регрессии пройдены; документация и self-manifest актуальны, EXEC/CHECK/HANDOFF содержат реальные доказательства и ограничения; передача зарегистрирована штатным CLI."
+  },
+  "criterion_markers": {
+    "AC-01": false,
+    "AC-02": false,
+    "AC-03": false,
+    "AC-04": false
+  },
+  "entries": [
+    {
+      "id": "EXEC-01",
+      "type": "execution",
+      "title": "Выполнение",
+      "fields": {
+        "Время": "2026-11-08T19:40:00+03:00",
+        "Исполнитель": "Devin",
+        "Модель": "SWE-2 High",
+        "Изменения": "новые модули checks_graph.py и checks_select.py по design §5 и spec R-03–04,08–10. `build_graph` собирает checks-graph.json: объявленные explicit/observed ребра политики + Python AST-анализатор ast-v1 (прямые/относительные/from-импорты, разрешение по проектным файлам через корень, предков и верхнеуровневые каталоги; flat- и src-layout без исполнения кода). `union_graph` объединяет прежний и новый снимки — удалённые файлы/импорты не теряют потребителей, одинаковый ключ обновляет доказательство. Динамический импорт (`__import__`, `importlib` с нелитеральным аргументом и алиасы), импорт вне модулей и неразбираемый файл — unknown с областью module/project. `select_checks` помечает затронутые модули, проходит обратное транзитивное замыкание (циклы через visited) с рефами subsystem: и расширяет набор только до доказанной границы; неприписанные пути при unknown_scope<project блокируют весь набор до решения инженера. Обязательства applicability/task_projection/policy_projection дополняют вычисленный набор и не сужают его; отсутствующая applicability — не обязательство (вычисленный набор не размывается). `compute_change` снимает universe-входы (модули + объявленные + unknown_paths поштучно) и diff'ит с baseline work/checks/snapshot.json; `evaluate_reuse` сравнивает binding (digests, adapter/runner, среда, поздний failed); `fallback.limits` рубит чтение по max_bytes и сумму таймаутов по max_seconds — превышение даёт blocked, не passed. `checks plan <TASK>` в playbook.py — read-only объяснение с цепочками и стоимостью; на self-project контролируемый отказ (политика не подключена). CLI-обвязка: загрузка политики/карточки/baseline/графа/результатов из work/checks/, повреждённые артефакты — примечание и консервативный набор.",
+        "Файлы": "- ai-dev-playbook/scripts/checks_graph.py\n- ai-dev-playbook/scripts/checks_select.py\n- ai-dev-playbook/scripts/playbook.py\n- tests/test_checks_graph.py\n- tests/test_checks_select.py\n- tests/test_checks_contract.py\n- docs/architecture.md\n- docs/code-map.md\n- CHANGELOG.md"
+      },
+      "findings": [],
+      "raw": "### EXEC-01 — Выполнение\n\nВремя: 2026-11-08T19:40:00+03:00\nИсполнитель: Devin\nМодель: SWE-2 High\nИзменения: новые модули checks_graph.py и checks_select.py по design §5 и spec R-03–04,08–10. `build_graph` собирает checks-graph.json: объявленные explicit/observed ребра политики + Python AST-анализатор ast-v1 (прямые/относительные/from-импорты, разрешение по проектным файлам через корень, предков и верхнеуровневые каталоги; flat- и src-layout без исполнения кода). `union_graph` объединяет прежний и новый снимки — удалённые файлы/импорты не теряют потребителей, одинаковый ключ обновляет доказательство. Динамический импорт (`__import__`, `importlib` с нелитеральным аргументом и алиасы), импорт вне модулей и неразбираемый файл — unknown с областью module/project. `select_checks` помечает затронутые модули, проходит обратное транзитивное замыкание (циклы через visited) с рефами subsystem: и расширяет набор только до доказанной границы; неприписанные пути при unknown_scope<project блокируют весь набор до решения инженера. Обязательства applicability/task_projection/policy_projection дополняют вычисленный набор и не сужают его; отсутствующая applicability — не обязательство (вычисленный набор не размывается). `compute_change` снимает universe-входы (модули + объявленные + unknown_paths поштучно) и diff'ит с baseline work/checks/snapshot.json; `evaluate_reuse` сравнивает binding (digests, adapter/runner, среда, поздний failed); `fallback.limits` рубит чтение по max_bytes и сумму таймаутов по max_seconds — превышение даёт blocked, не passed. `checks plan <TASK>` в playbook.py — read-only объяснение с цепочками и стоимостью; на self-project контролируемый отказ (политика не подключена). CLI-обвязка: загрузка политики/карточки/baseline/графа/результатов из work/checks/, повреждённые артефакты — примечание и консервативный набор.\nФайлы:\n- ai-dev-playbook/scripts/checks_graph.py\n- ai-dev-playbook/scripts/checks_select.py\n- ai-dev-playbook/scripts/playbook.py\n- tests/test_checks_graph.py\n- tests/test_checks_select.py\n- tests/test_checks_contract.py\n- docs/architecture.md\n- docs/code-map.md\n- CHANGELOG.md",
+      "sha256": "sha256:329151f234e18161cd66603b790054a72588a4dc61243bbd5fbff1eca98578f3",
+      "journal_sha256": "sha256:269a1f27ef67db7918147887e03bd1c9689220b1faf269616fd14a2347fadd84"
+    },
+    {
+      "id": "CHECK-01",
+      "type": "verification",
+      "title": "Проверка",
+      "fields": {
+        "Время": "2026-11-08T20:15:00+03:00",
+        "Исполнитель": "Devin",
+        "Модель": "SWE-2 High",
+        "Результат": "passed",
+        "Критерии": "AC-01, AC-02, AC-03, AC-04",
+        "Команда": "`python3 ai-dev-playbook/scripts/playbook.py verify PB-059`; адресные `python3 -m unittest discover -s tests -p \"test_checks_graph.py\" -v` и `-p \"test_checks_select.py\" -v`",
+        "Среда": "macOS, Python 3.14, checkout feature/dependency-aware-verification; изолированные tempfile-проекты, установленный комплект для CLI, счётчики хеширования через внедряемый hash_fn.",
+        "Факт": "verify c8868c8fda5f4dacaba02b5cf45c03ca passed, inputs_unchanged=true; 912 тестов (+53 адресных: 22 graph, 31 select), unit-tests прошли. AC-01: provenance-рёбра explicit/observed/analyzer, union старых/новых, удаления, циклы, dynamic/неразбираемый/вне-модулей — unknown. AC-02: расширение только до доказанной границы (module→subsystem→project, unattributed→blocked при узком unknown_scope), explain-цепочки, обязательства дополняют набор. AC-03: план read-only (diff дерева до/после пуст), max_bytes рубит чтение → консервативный набор, max_seconds блокирует run до запуска, счётчик подтверждает однократное хеширование.",
+        "Доказательства": "- [Отчёт verify](../../work/verification/PB-059/c8868c8fda5f4dacaba02b5cf45c03ca/report.json)\n- [Команды и ограничения](PB-059-evidence/commands.md)",
+        "Ограничения": "самопроверка исполнителя. Хранение baseline/графа/результатов, checks run/status и формат истории — PB-060; подключение политики и self-project — PB-063; доверенный контур — PB-061. Семантика unknown-областей и константа RUNNER — решения этой карточки в рамках design, не отдельно утверждённые."
+      },
+      "findings": [],
+      "raw": "### CHECK-01 — Проверка\n\nВремя: 2026-11-08T20:15:00+03:00\nИсполнитель: Devin\nМодель: SWE-2 High\nРезультат: passed\nКритерии: AC-01, AC-02, AC-03, AC-04\nКоманда: `python3 ai-dev-playbook/scripts/playbook.py verify PB-059`; адресные `python3 -m unittest discover -s tests -p \"test_checks_graph.py\" -v` и `-p \"test_checks_select.py\" -v`\nСреда: macOS, Python 3.14, checkout feature/dependency-aware-verification; изолированные tempfile-проекты, установленный комплект для CLI, счётчики хеширования через внедряемый hash_fn.\nФакт: verify c8868c8fda5f4dacaba02b5cf45c03ca passed, inputs_unchanged=true; 912 тестов (+53 адресных: 22 graph, 31 select), unit-tests прошли. AC-01: provenance-рёбра explicit/observed/analyzer, union старых/новых, удаления, циклы, dynamic/неразбираемый/вне-модулей — unknown. AC-02: расширение только до доказанной границы (module→subsystem→project, unattributed→blocked при узком unknown_scope), explain-цепочки, обязательства дополняют набор. AC-03: план read-only (diff дерева до/после пуст), max_bytes рубит чтение → консервативный набор, max_seconds блокирует run до запуска, счётчик подтверждает однократное хеширование.\nДоказательства:\n- [Отчёт verify](../../work/verification/PB-059/c8868c8fda5f4dacaba02b5cf45c03ca/report.json)\n- [Команды и ограничения](PB-059-evidence/commands.md)\nОграничения: самопроверка исполнителя. Хранение baseline/графа/результатов, checks run/status и формат истории — PB-060; подключение политики и self-project — PB-063; доверенный контур — PB-061. Семантика unknown-областей и константа RUNNER — решения этой карточки в рамках design, не отдельно утверждённые.",
+      "sha256": "sha256:987f3ad4aca2a621867e7d62e7db345e676c70c0ceba567b9a09585d53adfe65",
+      "journal_sha256": "sha256:492b63d7812259447db9706acd9ad3d9b6b795cfd7ec3829bfc49ec9519acbfe"
+    },
+    {
+      "id": "HANDOFF-01",
+      "type": "handoff",
+      "title": "Передача",
+      "fields": {
+        "Время": "2026-11-08T20:15:00+03:00",
+        "Исполнитель": "Devin",
+        "Модель": "SWE-2 High",
+        "Выполнение": "EXEC-01",
+        "Проверки": "CHECK-01",
+        "Состояние": "in_review, ветка feature/dependency-aware-verification, изменения не закоммичены. Следующий шаг — независимый аудит.",
+        "Фокус аудита": "семантика unknown-областей (module/subsystem/project — затронут любым изменением), трактовка отсутствующей applicability как необязательства, покрытие unknown_paths файловыми входами universe-снимка, корректность reuse-binding (digests, среда, поздний failed), блокировка по бюджетам до запуска, read-only гарантия checks plan."
+      },
+      "findings": [],
+      "raw": "### HANDOFF-01 — Передача\n\nВремя: 2026-11-08T20:15:00+03:00\nИсполнитель: Devin\nМодель: SWE-2 High\nВыполнение: EXEC-01\nПроверки: CHECK-01\nСостояние: in_review, ветка feature/dependency-aware-verification, изменения не закоммичены. Следующий шаг — независимый аудит.\nФокус аудита: семантика unknown-областей (module/subsystem/project — затронут любым изменением), трактовка отсутствующей applicability как необязательства, покрытие unknown_paths файловыми входами universe-снимка, корректность reuse-binding (digests, среда, поздний failed), блокировка по бюджетам до запуска, read-only гарантия checks plan.",
+      "sha256": "sha256:df6970d031e1e3f56ebe0ee9c58d9b368a6518fef2316b004f46a39a6d96ae07",
+      "journal_sha256": "sha256:61c00a0360fa1ed7b3cf591bdd78c0661ad43792504b0f6fddbf6de9be48315c"
+    },
+    {
+      "id": "AUDIT-01",
+      "type": "audit",
+      "title": "Аудит",
+      "fields": {
+        "Время": "2026-11-08T18:24:49+03:00",
+        "Исполнитель": "Codex",
+        "Модель": "GPT-6.1 Sol (Medium)",
+        "Передача": "HANDOFF-01",
+        "Результат": "changes_requested",
+        "Критерии": "AC-01, AC-02, AC-03, AC-04",
+        "Независимо проверено": "исходная передача прошла verify PB-059 --audit-ready; просмотрены требования R-03–04,08–10, design §5–6, реализация графа, selector и CLI. Адресные наборы: 22 graph, 31 select, 53 contract — passed. Четыре дополнительные пробы воспроизводят дефекты ниже.",
+        "Доказательства": "- [Воспроизводимые пробы](../../work/verification/PB-059/audit-01/reproduce.py)\n- [Результаты проб](../../work/verification/PB-059/audit-01/reproduce.log)\n- [Graph tests](../../work/verification/PB-059/audit-01/graph-tests.log)\n- [Select tests](../../work/verification/PB-059/audit-01/select-tests.log)\n- [Contract tests](../../work/verification/PB-059/audit-01/contract-tests.log)",
+        "Ограничения": "полный suite повторно не запускался; исходная передача ссылалась на свежий успешный verify с 912 тестами. Первичный запуск select совпал с незавершённым prepare-audit и получил четыре отказа установки по pending gate; после завершения операции все 31 тест повторно прошли. Эти служебные отказы не считаются дефектами PB-059. Код реализации не исправлялся. Точная модель GPT-6.1 Sol (Medium) подтверждена инженером после аудита. Требуются исправления, новые проверки и новая CLI-передача."
+      },
+      "findings": [
+        {
+          "id": "A-01",
+          "audit_id": "AUDIT-01",
+          "fields": {
+            "Серьёзность": "P1",
+            "Критерии": "AC-01, AC-02, AC-04",
+            "Проблема": "checks_select.py:259 добавляет consumer в reached до push(consumer) на строке 274. push видит уже посещённый ref и не помещает его в очередь; обход обрывается после первого ребра.",
+            "Воспроизведение": "первая проба reproduce.py: checkout → payments, cart → checkout; изменён src/payments/pay.py.",
+            "Факт": "payments-tests и checkout-tests имеют run, но cart-tests — not_applicable.",
+            "Влияние": "изменённая зависимость не вызывает проверки транзитивного потребителя, нарушая R-04 и design §5.",
+            "Критерий исправления": "обходить все достигнутые refs; постоянные тесты selector на цепь минимум из двух рёбер, связи check/subsystem и цикл подтверждают полный набор и explain."
+          },
+          "criteria": [
+            "AC-01",
+            "AC-02",
+            "AC-04"
+          ],
+          "criteria_inferred": false
+        },
+        {
+          "id": "A-02",
+          "audit_id": "AUDIT-01",
+          "fields": {
+            "Серьёзность": "P1",
+            "Критерии": "AC-02, AC-04",
+            "Проблема": "closure_digest вызывает set(used), но _key возвращает list (checks_select.py:362,365–366).",
+            "Воспроизведение": "вторая проба reproduce.py вызывает closure_digest для checkout-tests с ребром checkout → payments.",
+            "Факт": "TypeError: cannot use 'list' as a set element (unhashable type: 'list').",
+            "Влияние": "построение binding и оценка reuse для зависимых проверок завершаются исключением вместо объяснимого плана.",
+            "Критерий исправления": "использовать хешируемый ключ; проверить стабильный digest для непустого, циклического и изменённого замыкания, а также plan с существующим результатом зависимой проверки."
+          },
+          "criteria": [
+            "AC-02",
+            "AC-04"
+          ],
+          "criteria_inferred": false
+        },
+        {
+          "id": "A-03",
+          "audit_id": "AUDIT-01",
+          "fields": {
+            "Серьёзность": "P1",
+            "Критерии": "AC-01, AC-02, AC-04",
+            "Проблема": "checks_graph.py:124–126 пересекает локальный alias с исходными именами importlib, поэтому load не регистрируется; alias модуля importlib также не учитывается.",
+            "Воспроизведение": "третья проба reproduce.py: from importlib import import_module as load; load(chosen), а также import importlib as il; il.import_module(chosen).",
+            "Факт": "в обоих случаях targets пуст и dynamic пуст.",
+            "Влияние": "неизвестная зависимость считается отсутствием влияния; изменение динамически загружаемого модуля может исключить тесты потребителя.",
+            "Критерий исправления": "учитывать aliases исходных функций/модулей либо консервативно фиксировать unknown; добавить позитивные и негативные тесты analyze_python/build_graph/selector на оба варианта."
+          },
+          "criteria": [
+            "AC-01",
+            "AC-02",
+            "AC-04"
+          ],
+          "criteria_inferred": false
+        },
+        {
+          "id": "A-04",
+          "audit_id": "AUDIT-01",
+          "fields": {
+            "Серьёзность": "P1",
+            "Критерии": "AC-03, AC-04",
+            "Проблема": "compute_change выставляет bytes_exceeded, но plan учитывает при блокировке только selection.blocked и max_seconds; флаг байтов возвращается информационно.",
+            "Воспроизведение": "четвёртая проба reproduce.py: max_bytes=1, файл src/payments/pay.py длиннее одного байта, достаточный max_seconds.",
+            "Факт": "bytes_exceeded=true, budget_blocked=false, budget_reasons=[], run=3, blocked=0.",
+            "Влияние": "превышение одобренного ресурсного бюджета приводит к широкому запуску вместо blocked/решения инженера, вопреки R-10. Дополнительно CLI вызывает AST-чтение build_graph до бюджетируемого snapshot, поэтому ограничение не охватывает весь анализ.",
+            "Критерий исправления": "превышение max_bytes блокирует затронутые обязательства и явно объясняется; бюджет чтения учитывает AST и snapshot; тесты проверяют blocked и счётчики фактического чтения."
+          },
+          "criteria": [
+            "AC-03",
+            "AC-04"
+          ],
+          "criteria_inferred": false
+        }
+      ],
+      "raw": "### AUDIT-01 — Аудит\n\nВремя: 2026-11-08T18:24:49+03:00\nИсполнитель: Codex\nМодель: GPT-6.1 Sol (Medium)\nПередача: HANDOFF-01\nРезультат: changes_requested\nКритерии: AC-01, AC-02, AC-03, AC-04\nНезависимо проверено: исходная передача прошла verify PB-059 --audit-ready; просмотрены требования R-03–04,08–10, design §5–6, реализация графа, selector и CLI. Адресные наборы: 22 graph, 31 select, 53 contract — passed. Четыре дополнительные пробы воспроизводят дефекты ниже.\nДоказательства:\n- [Воспроизводимые пробы](../../work/verification/PB-059/audit-01/reproduce.py)\n- [Результаты проб](../../work/verification/PB-059/audit-01/reproduce.log)\n- [Graph tests](../../work/verification/PB-059/audit-01/graph-tests.log)\n- [Select tests](../../work/verification/PB-059/audit-01/select-tests.log)\n- [Contract tests](../../work/verification/PB-059/audit-01/contract-tests.log)\nОграничения: полный suite повторно не запускался; исходная передача ссылалась на свежий успешный verify с 912 тестами. Первичный запуск select совпал с незавершённым prepare-audit и получил четыре отказа установки по pending gate; после завершения операции все 31 тест повторно прошли. Эти служебные отказы не считаются дефектами PB-059. Код реализации не исправлялся. Точная модель GPT-6.1 Sol (Medium) подтверждена инженером после аудита. Требуются исправления, новые проверки и новая CLI-передача.\n\n#### A-01 — Замечание\n\nСерьёзность: P1\nКритерии: AC-01, AC-02, AC-04\nПроблема: checks_select.py:259 добавляет consumer в reached до push(consumer) на строке 274. push видит уже посещённый ref и не помещает его в очередь; обход обрывается после первого ребра.\nВоспроизведение: первая проба reproduce.py: checkout → payments, cart → checkout; изменён src/payments/pay.py.\nФакт: payments-tests и checkout-tests имеют run, но cart-tests — not_applicable.\nВлияние: изменённая зависимость не вызывает проверки транзитивного потребителя, нарушая R-04 и design §5.\nКритерий исправления: обходить все достигнутые refs; постоянные тесты selector на цепь минимум из двух рёбер, связи check/subsystem и цикл подтверждают полный набор и explain.\n\n#### A-02 — Замечание\n\nСерьёзность: P1\nКритерии: AC-02, AC-04\nПроблема: closure_digest вызывает set(used), но _key возвращает list (checks_select.py:362,365–366).\nВоспроизведение: вторая проба reproduce.py вызывает closure_digest для checkout-tests с ребром checkout → payments.\nФакт: TypeError: cannot use 'list' as a set element (unhashable type: 'list').\nВлияние: построение binding и оценка reuse для зависимых проверок завершаются исключением вместо объяснимого плана.\nКритерий исправления: использовать хешируемый ключ; проверить стабильный digest для непустого, циклического и изменённого замыкания, а также plan с существующим результатом зависимой проверки.\n\n#### A-03 — Замечание\n\nСерьёзность: P1\nКритерии: AC-01, AC-02, AC-04\nПроблема: checks_graph.py:124–126 пересекает локальный alias с исходными именами importlib, поэтому load не регистрируется; alias модуля importlib также не учитывается.\nВоспроизведение: третья проба reproduce.py: from importlib import import_module as load; load(chosen), а также import importlib as il; il.import_module(chosen).\nФакт: в обоих случаях targets пуст и dynamic пуст.\nВлияние: неизвестная зависимость считается отсутствием влияния; изменение динамически загружаемого модуля может исключить тесты потребителя.\nКритерий исправления: учитывать aliases исходных функций/модулей либо консервативно фиксировать unknown; добавить позитивные и негативные тесты analyze_python/build_graph/selector на оба варианта.\n\n#### A-04 — Замечание\n\nСерьёзность: P1\nКритерии: AC-03, AC-04\nПроблема: compute_change выставляет bytes_exceeded, но plan учитывает при блокировке только selection.blocked и max_seconds; флаг байтов возвращается информационно.\nВоспроизведение: четвёртая проба reproduce.py: max_bytes=1, файл src/payments/pay.py длиннее одного байта, достаточный max_seconds.\nФакт: bytes_exceeded=true, budget_blocked=false, budget_reasons=[], run=3, blocked=0.\nВлияние: превышение одобренного ресурсного бюджета приводит к широкому запуску вместо blocked/решения инженера, вопреки R-10. Дополнительно CLI вызывает AST-чтение build_graph до бюджетируемого snapshot, поэтому ограничение не охватывает весь анализ.\nКритерий исправления: превышение max_bytes блокирует затронутые обязательства и явно объясняется; бюджет чтения учитывает AST и snapshot; тесты проверяют blocked и счётчики фактического чтения.",
+      "sha256": "sha256:0887d01e85d1ecc2466e0ebce2d40e42e18e748b03f7209d578151ced63ac161",
+      "journal_sha256": "sha256:305e0b3c966f60cf1315cfe165ebcfe586c4d933cfc361481d72812941b602d9"
+    },
+    {
+      "id": "EXEC-02",
+      "type": "execution",
+      "title": "Исправление",
+      "fields": {
+        "Время": "2026-11-08T20:50:00+03:00",
+        "Исполнитель": "Devin",
+        "Модель": "SWE-2 High",
+        "Замечания": "A-01, A-02, A-03, A-04",
+        "Изменения": "A-01 — обрыв обратного замыкания: consumer помечался reached до push и не ставился в очередь; убрано досрочное reached.add, chains читается через .get — обход длиннее первого ребра восстановлен. A-02 — closure_digest: _key возвращал list, set() падал на unhashable; ключ переведён на tuple, digest стабилен для цепей/циклов. A-03 — алиасы importlib: from importlib import import_module as load регистрирует локальное имя по исходному имени функции; import importlib as il отслеживается через local_importlib и атрибут import_module. A-04 — bytes_exceeded в plan блокирует все run-обязательства с объяснением до решения инженера (не расширение запуска); граф строится внутри plan по previous и AST-чтение идёт под общим max_bytes через _counting_reader; CLI больше не читает исходники вне бюджета.",
+        "Файлы": "- ai-dev-playbook/scripts/checks_graph.py\n- ai-dev-playbook/scripts/checks_select.py\n- ai-dev-playbook/scripts/playbook.py\n- tests/test_checks_graph.py\n- tests/test_checks_select.py"
+      },
+      "findings": [],
+      "raw": "### EXEC-02 — Исправление\n\nВремя: 2026-11-08T20:50:00+03:00\nИсполнитель: Devin\nМодель: SWE-2 High\nЗамечания: A-01, A-02, A-03, A-04\nИзменения: A-01 — обрыв обратного замыкания: consumer помечался reached до push и не ставился в очередь; убрано досрочное reached.add, chains читается через .get — обход длиннее первого ребра восстановлен. A-02 — closure_digest: _key возвращал list, set() падал на unhashable; ключ переведён на tuple, digest стабилен для цепей/циклов. A-03 — алиасы importlib: from importlib import import_module as load регистрирует локальное имя по исходному имени функции; import importlib as il отслеживается через local_importlib и атрибут import_module. A-04 — bytes_exceeded в plan блокирует все run-обязательства с объяснением до решения инженера (не расширение запуска); граф строится внутри plan по previous и AST-чтение идёт под общим max_bytes через _counting_reader; CLI больше не читает исходники вне бюджета.\nФайлы:\n- ai-dev-playbook/scripts/checks_graph.py\n- ai-dev-playbook/scripts/checks_select.py\n- ai-dev-playbook/scripts/playbook.py\n- tests/test_checks_graph.py\n- tests/test_checks_select.py",
+      "sha256": "sha256:dcedefa18217853f5cf5b4dcbd5b1c289f48bcb30c782639bed80c375b8d51fb",
+      "journal_sha256": "sha256:5186f30de8c8a7bff510c0edc05f7b3cc93321841120252b08e084ce6ec50ddb"
+    },
+    {
+      "id": "CHECK-02",
+      "type": "verification",
+      "title": "Проверка",
+      "fields": {
+        "Время": "2026-11-08T21:30:00+03:00",
+        "Исполнитель": "Devin",
+        "Модель": "SWE-2 High",
+        "Результат": "passed",
+        "Критерии": "AC-01, AC-02, AC-03, AC-04",
+        "Команда": "`python3 ai-dev-playbook/scripts/playbook.py verify PB-059`; адресные `python3 -m unittest discover -s tests -p \"test_checks_graph.py\"` и `-p \"test_checks_select.py\"`",
+        "Среда": "macOS, Python 3.14, checkout feature/dependency-aware-verification; изолированные tempfile-проекты и установленный комплект для CLI.",
+        "Факт": "verify ca1cb5c4934e474b82e7316c671f809a passed, inputs_unchanged=true; 917 тестов (+5 регрессионных на A-01..A-04), unit-tests прошли. A-01: цепь checkout→payments→cart достигает транзитивного потребителя с explain. A-02: closure_digest стабилен для цепи/цикла и меняется с графом. A-03: alias-динамика фиксируется unknown (from-import-as и module-as). A-04: bytes_exceeded блокирует обязательства и AST-чтение под общим бюджетом.",
+        "Доказательства": "- [Отчёт verify](../../work/verification/PB-059/ca1cb5c4934e474b82e7316c671f809a/report.json)\n- [Команды и ограничения](PB-059-evidence/commands.md)",
+        "Ограничения": "самопроверка исполнителя. Пробы аудита воспроизведены регрессионными тестами; полный suite обновлён целиком."
+      },
+      "findings": [],
+      "raw": "### CHECK-02 — Проверка\n\nВремя: 2026-11-08T21:30:00+03:00\nИсполнитель: Devin\nМодель: SWE-2 High\nРезультат: passed\nКритерии: AC-01, AC-02, AC-03, AC-04\nКоманда: `python3 ai-dev-playbook/scripts/playbook.py verify PB-059`; адресные `python3 -m unittest discover -s tests -p \"test_checks_graph.py\"` и `-p \"test_checks_select.py\"`\nСреда: macOS, Python 3.14, checkout feature/dependency-aware-verification; изолированные tempfile-проекты и установленный комплект для CLI.\nФакт: verify ca1cb5c4934e474b82e7316c671f809a passed, inputs_unchanged=true; 917 тестов (+5 регрессионных на A-01..A-04), unit-tests прошли. A-01: цепь checkout→payments→cart достигает транзитивного потребителя с explain. A-02: closure_digest стабилен для цепи/цикла и меняется с графом. A-03: alias-динамика фиксируется unknown (from-import-as и module-as). A-04: bytes_exceeded блокирует обязательства и AST-чтение под общим бюджетом.\nДоказательства:\n- [Отчёт verify](../../work/verification/PB-059/ca1cb5c4934e474b82e7316c671f809a/report.json)\n- [Команды и ограничения](PB-059-evidence/commands.md)\nОграничения: самопроверка исполнителя. Пробы аудита воспроизведены регрессионными тестами; полный suite обновлён целиком.",
+      "sha256": "sha256:9219d4f6d001fea8faba9b2494b3e5c75c4e45b7ef85a136aba824bd321b5499",
+      "journal_sha256": "sha256:677a8181fd4df81101e052ae536bb982b20c9573d5ff3d0e543c2ad47af00a36"
+    },
+    {
+      "id": "HANDOFF-02",
+      "type": "handoff",
+      "title": "Передача",
+      "fields": {
+        "Время": "2026-11-08T21:30:00+03:00",
+        "Исполнитель": "Devin",
+        "Модель": "SWE-2 High",
+        "Выполнение": "EXEC-01, EXEC-02",
+        "Проверки": "CHECK-01, CHECK-02",
+        "Состояние": "in_review, ветка feature/dependency-aware-verification, изменения не закоммичены. Правки AUDIT-01 внесены, регрессионные тесты и свежий verify добавлены. Следующий шаг — повторный независимый аудит.",
+        "Фокус аудита": "повторные пробы A-01..A-04 из reproduce.py; полнота обхода замыкания, digest-стабильность, alias-покрытие, единый бюджет чтения AST+snapshot и blocked-семантика."
+      },
+      "findings": [],
+      "raw": "### HANDOFF-02 — Передача\n\nВремя: 2026-11-08T21:30:00+03:00\nИсполнитель: Devin\nМодель: SWE-2 High\nВыполнение: EXEC-01, EXEC-02\nПроверки: CHECK-01, CHECK-02\nСостояние: in_review, ветка feature/dependency-aware-verification, изменения не закоммичены. Правки AUDIT-01 внесены, регрессионные тесты и свежий verify добавлены. Следующий шаг — повторный независимый аудит.\nФокус аудита: повторные пробы A-01..A-04 из reproduce.py; полнота обхода замыкания, digest-стабильность, alias-покрытие, единый бюджет чтения AST+snapshot и blocked-семантика.",
+      "sha256": "sha256:bd78aae3527a50f3b3a32d051390f1cec8b0992acc7cbdd4989c7caeb02c0118",
+      "journal_sha256": "sha256:969d6a6e9ad75d4b32562b74d090da71b4d2e653c3a5ea2a46ca84d93bbefd29"
+    },
+    {
+      "id": "AUDIT-02",
+      "type": "audit",
+      "title": "Аудит",
+      "fields": {
+        "Время": "2026-11-08T20:26:42+03:00",
+        "Исполнитель": "Codex",
+        "Модель": "GPT-6.1 Sol (Medium)",
+        "Передача": "HANDOFF-02",
+        "Результат": "changes_requested",
+        "Критерии": "AC-01, AC-02, AC-03, AC-04",
+        "Независимо проверено": "ранний audit-ready отказал из-за несвежих входов; inputs_fresh локализовал изменение docs/tasks/index.md. В диагностическом порядке проверены исправления A-01–A-04: 24 graph и 34 select теста passed; независимые пробы подтверждают транзитивную цепь и explain, стабильный digest циклического графа, оба alias динамического импорта, блокировку AST+snapshot по max_bytes до чтения. Приёмка не регистрировалась. A-01–A-04 технически исправлены по проверенным сценариям, но формальное закрытие невозможно до исправления связей EXEC и свежей передачи.",
+        "Доказательства": "- [Независимые пробы](../../work/verification/PB-059/audit-02/reproduce.py)\n- [Результаты проб](../../work/verification/PB-059/audit-02/reproduce.log)\n- [Graph tests](../../work/verification/PB-059/audit-02/graph-tests.log)\n- [Select tests](../../work/verification/PB-059/audit-02/select-tests.log)\n- [Готовность и проба закрытия](../../work/verification/PB-059/audit-02/readiness.txt)",
+        "Ограничения": "полный suite и внешние контуры не запускались повторно; исходная HANDOFF-02 не прошла audit-ready. Изменения реализации и истории исполнителя аудитором не исправлялись. Поле Закрытые замечания намеренно не добавлено: parser требует явных ссылок из записи исправления. Следующий шаг исполнителя: оформить исправления и ссылки на находки в EXEC; подготовить окончательные статус/индекс/manifest; выполнить verify, новые CHECK/HANDOFF и CLI-передачу; затем проверить audit-ready и передать повторному аудитору. Повторный verify после сбоя подготовки запускать только после устранения причин."
+      },
+      "findings": [
+        {
+          "id": "A-05",
+          "audit_id": "AUDIT-02",
+          "fields": {
+            "Серьёзность": "P1",
+            "Критерии": "AC-04",
+            "Проблема": "HANDOFF-02 не соответствует текущим входам полного verify ca1cb5c4934e474b82e7316c671f809a: изменён docs/tasks/index.md.",
+            "Воспроизведение": "verify PB-059 --audit-ready; verification.inputs_fresh для указанного отчёта с исключением собственной карточки.",
+            "Факт": "audit-ready завершился с кодом 1; inputs_fresh вернул False и единственный путь docs/tasks/index.md.",
+            "Влияние": "нет актуального доказательства для принятия текущего состояния, несмотря на успешные адресные пробы исправлений.",
+            "Критерий исправления": "сначала завершить подготовку записи исправления и индекса, затем выполнить verify и новую CHECK/HANDOFF с CLI-передачей; audit-ready проходит без изменения входов после проверки."
+          },
+          "criteria": [
+            "AC-04"
+          ],
+          "criteria_inferred": false
+        },
+        {
+          "id": "A-06",
+          "audit_id": "AUDIT-02",
+          "fields": {
+            "Серьёзность": "P2",
+            "Критерии": "AC-04",
+            "Проблема": "EXEC-02 описывает исправления A-01–A-04 свободным текстом, но не содержит структурного поля Замечания; заголовок оставлен Выполнение вместо Исправление.",
+            "Воспроизведение": "в памяти добавить к текущей карточке accepted AUDIT с Закрытые замечания: A-01, A-02, A-03, A-04 и вызвать task_cards.parse.",
+            "Факт": "parser отклоняет закрытие: card format: AUDIT-02: закрытие без исправления/повторное закрытие.",
+            "Влияние": "технически исправленные находки невозможно закрыть штатным аудитом; текст EXEC не заменяет структурные связи формата карточки.",
+            "Критерий исправления": "зарегистрировать запись Исправление с явным полем Замечания для соответствующих A-ID, включая исправления подготовки передачи; после изменения EXEC нужны актуальные проверки и новая передача. Не менять принятую историю AUDIT-01."
+          },
+          "criteria": [
+            "AC-04"
+          ],
+          "criteria_inferred": false
+        }
+      ],
+      "raw": "### AUDIT-02 — Аудит\n\nВремя: 2026-11-08T20:26:42+03:00\nИсполнитель: Codex\nМодель: GPT-6.1 Sol (Medium)\nПередача: HANDOFF-02\nРезультат: changes_requested\nКритерии: AC-01, AC-02, AC-03, AC-04\nНезависимо проверено: ранний audit-ready отказал из-за несвежих входов; inputs_fresh локализовал изменение docs/tasks/index.md. В диагностическом порядке проверены исправления A-01–A-04: 24 graph и 34 select теста passed; независимые пробы подтверждают транзитивную цепь и explain, стабильный digest циклического графа, оба alias динамического импорта, блокировку AST+snapshot по max_bytes до чтения. Приёмка не регистрировалась. A-01–A-04 технически исправлены по проверенным сценариям, но формальное закрытие невозможно до исправления связей EXEC и свежей передачи.\nДоказательства:\n- [Независимые пробы](../../work/verification/PB-059/audit-02/reproduce.py)\n- [Результаты проб](../../work/verification/PB-059/audit-02/reproduce.log)\n- [Graph tests](../../work/verification/PB-059/audit-02/graph-tests.log)\n- [Select tests](../../work/verification/PB-059/audit-02/select-tests.log)\n- [Готовность и проба закрытия](../../work/verification/PB-059/audit-02/readiness.txt)\nОграничения: полный suite и внешние контуры не запускались повторно; исходная HANDOFF-02 не прошла audit-ready. Изменения реализации и истории исполнителя аудитором не исправлялись. Поле Закрытые замечания намеренно не добавлено: parser требует явных ссылок из записи исправления. Следующий шаг исполнителя: оформить исправления и ссылки на находки в EXEC; подготовить окончательные статус/индекс/manifest; выполнить verify, новые CHECK/HANDOFF и CLI-передачу; затем проверить audit-ready и передать повторному аудитору. Повторный verify после сбоя подготовки запускать только после устранения причин.\n\n#### A-05 — Замечание\n\nСерьёзность: P1\nКритерии: AC-04\nПроблема: HANDOFF-02 не соответствует текущим входам полного verify ca1cb5c4934e474b82e7316c671f809a: изменён docs/tasks/index.md.\nВоспроизведение: verify PB-059 --audit-ready; verification.inputs_fresh для указанного отчёта с исключением собственной карточки.\nФакт: audit-ready завершился с кодом 1; inputs_fresh вернул False и единственный путь docs/tasks/index.md.\nВлияние: нет актуального доказательства для принятия текущего состояния, несмотря на успешные адресные пробы исправлений.\nКритерий исправления: сначала завершить подготовку записи исправления и индекса, затем выполнить verify и новую CHECK/HANDOFF с CLI-передачей; audit-ready проходит без изменения входов после проверки.\n\n#### A-06 — Замечание\n\nСерьёзность: P2\nКритерии: AC-04\nПроблема: EXEC-02 описывает исправления A-01–A-04 свободным текстом, но не содержит структурного поля Замечания; заголовок оставлен Выполнение вместо Исправление.\nВоспроизведение: в памяти добавить к текущей карточке accepted AUDIT с Закрытые замечания: A-01, A-02, A-03, A-04 и вызвать task_cards.parse.\nФакт: parser отклоняет закрытие: card format: AUDIT-02: закрытие без исправления/повторное закрытие.\nВлияние: технически исправленные находки невозможно закрыть штатным аудитом; текст EXEC не заменяет структурные связи формата карточки.\nКритерий исправления: зарегистрировать запись Исправление с явным полем Замечания для соответствующих A-ID, включая исправления подготовки передачи; после изменения EXEC нужны актуальные проверки и новая передача. Не менять принятую историю AUDIT-01.",
+      "sha256": "sha256:041374edfea4e90502db62410c5190b7bcdf9d5e67b9f5ebf4d0e5b4ff68264e",
+      "journal_sha256": "sha256:fdf8d205f867723a61bce99d60515076e3c377228fde794a8ff1e825158403f1"
+    },
+    {
+      "id": "EXEC-03",
+      "type": "execution",
+      "title": "Исправление",
+      "fields": {
+        "Время": "2026-11-08T22:10:00+03:00",
+        "Исполнитель": "Devin",
+        "Модель": "SWE-2 High",
+        "Замечания": "A-05, A-06",
+        "Изменения": "A-05 — порядок передачи исправлен: запись исправления, статус и индекс завершаются до запуска verify; CHECK/HANDOFF и CLI-передача следуют за свежим прогоном без изменения входов. A-06 — EXEC-02 переоформлен записью Исправление со структурным полем Замечания со ссылками A-01..A-04; настоящая запись закрывает A-05/A-06. История AUDIT-01/02 не менялась.",
+        "Файлы": "- docs/tasks/PB-059.md"
+      },
+      "findings": [],
+      "raw": "### EXEC-03 — Исправление\n\nВремя: 2026-11-08T22:10:00+03:00\nИсполнитель: Devin\nМодель: SWE-2 High\nЗамечания: A-05, A-06\nИзменения: A-05 — порядок передачи исправлен: запись исправления, статус и индекс завершаются до запуска verify; CHECK/HANDOFF и CLI-передача следуют за свежим прогоном без изменения входов. A-06 — EXEC-02 переоформлен записью Исправление со структурным полем Замечания со ссылками A-01..A-04; настоящая запись закрывает A-05/A-06. История AUDIT-01/02 не менялась.\nФайлы:\n- docs/tasks/PB-059.md",
+      "sha256": "sha256:01ad6adde0534af132a555b2b727960608cdce95591a87910e1bc0335dcf161e",
+      "journal_sha256": "sha256:d413070c7239f377acaf19bcf1ad3a0002fdde139c2edf55cb3b862dc7a0b886"
+    },
+    {
+      "id": "CHECK-03",
+      "type": "verification",
+      "title": "Проверка",
+      "fields": {
+        "Время": "2026-11-08T23:20:00+03:00",
+        "Исполнитель": "Devin",
+        "Модель": "SWE-2 High",
+        "Результат": "passed",
+        "Критерии": "AC-01, AC-02, AC-03, AC-04",
+        "Команда": "`python3 ai-dev-playbook/scripts/playbook.py verify PB-059`",
+        "Среда": "macOS, Python 3.14, checkout feature/dependency-aware-verification.",
+        "Факт": "verify 2e2e700a88484661badf45733c5b78fd passed, inputs_unchanged=true; unit-tests прошли (917 тестов). Прогон выполнен после завершения записей исправления и индекса — входы на момент передачи не менялись. Журнал парсится task_cards: EXEC-02 закрывает A-01..A-04 ссылками, EXEC-03 закрывает A-05, A-06.",
+        "Доказательства": "- [Отчёт verify](../../work/verification/PB-059/2e2e700a88484661badf45733c5b78fd/report.json)\n- [Команды и ограничения](PB-059-evidence/commands.md)",
+        "Ограничения": "самопроверка исполнителя; свежесть входов проверяется аудитором через --audit-ready."
+      },
+      "findings": [],
+      "raw": "### CHECK-03 — Проверка\n\nВремя: 2026-11-08T23:20:00+03:00\nИсполнитель: Devin\nМодель: SWE-2 High\nРезультат: passed\nКритерии: AC-01, AC-02, AC-03, AC-04\nКоманда: `python3 ai-dev-playbook/scripts/playbook.py verify PB-059`\nСреда: macOS, Python 3.14, checkout feature/dependency-aware-verification.\nФакт: verify 2e2e700a88484661badf45733c5b78fd passed, inputs_unchanged=true; unit-tests прошли (917 тестов). Прогон выполнен после завершения записей исправления и индекса — входы на момент передачи не менялись. Журнал парсится task_cards: EXEC-02 закрывает A-01..A-04 ссылками, EXEC-03 закрывает A-05, A-06.\nДоказательства:\n- [Отчёт verify](../../work/verification/PB-059/2e2e700a88484661badf45733c5b78fd/report.json)\n- [Команды и ограничения](PB-059-evidence/commands.md)\nОграничения: самопроверка исполнителя; свежесть входов проверяется аудитором через --audit-ready.",
+      "sha256": "sha256:9346e46b02412535ab83686e205a730b40e93086f84f540f8ebac9a4830c0b0d",
+      "journal_sha256": "sha256:881348b493881c73c7edd57a72d02a2d5ba9a66de8b3730217b346d65c331fe0"
+    },
+    {
+      "id": "HANDOFF-03",
+      "type": "handoff",
+      "title": "Передача",
+      "fields": {
+        "Время": "2026-11-08T23:20:00+03:00",
+        "Исполнитель": "Devin",
+        "Модель": "SWE-2 High",
+        "Выполнение": "EXEC-01, EXEC-02, EXEC-03",
+        "Проверки": "CHECK-01, CHECK-02, CHECK-03",
+        "Состояние": "in_review, ветка feature/dependency-aware-verification, изменения не закоммичены. Индекс и записи исправлений завершены до verify; свежесть входов на момент передачи сохранена. Следующий шаг — повторный независимый аудит.",
+        "Фокус аудита": "audit-ready на отчёте 2e2e700a без дрейфа входов; закрытие A-01..A-06 ссылками Исправление→Замечания; повторные пробы AUDIT-01/02."
+      },
+      "findings": [],
+      "raw": "### HANDOFF-03 — Передача\n\nВремя: 2026-11-08T23:20:00+03:00\nИсполнитель: Devin\nМодель: SWE-2 High\nВыполнение: EXEC-01, EXEC-02, EXEC-03\nПроверки: CHECK-01, CHECK-02, CHECK-03\nСостояние: in_review, ветка feature/dependency-aware-verification, изменения не закоммичены. Индекс и записи исправлений завершены до verify; свежесть входов на момент передачи сохранена. Следующий шаг — повторный независимый аудит.\nФокус аудита: audit-ready на отчёте 2e2e700a без дрейфа входов; закрытие A-01..A-06 ссылками Исправление→Замечания; повторные пробы AUDIT-01/02.",
+      "sha256": "sha256:24f4b5afdb343abdab1c887e6abe269772ef6b039a23b33aa732277be608c3f1",
+      "journal_sha256": "sha256:667728d9a039d0fa5ba580b9c72f6863c065a9eb64990dfb685b3a91c667c0ad"
+    }
+  ],
+  "latest_handoff": "HANDOFF-03",
+  "latest_audit": "AUDIT-02",
+  "current_verdict": null,
+  "open_findings": [
+    "A-01",
+    "A-02",
+    "A-03",
+    "A-04",
+    "A-05",
+    "A-06"
+  ],
+  "criterion_states": {
+    "AC-01": {
+      "checked": false,
+      "check_id": "CHECK-03",
+      "reason": "open_finding",
+      "open_findings": [
+        "A-01",
+        "A-03"
+      ]
+    },
+    "AC-02": {
+      "checked": false,
+      "check_id": "CHECK-03",
+      "reason": "open_finding",
+      "open_findings": [
+        "A-01",
+        "A-02",
+        "A-03"
+      ]
+    },
+    "AC-03": {
+      "checked": false,
+      "check_id": "CHECK-03",
+      "reason": "open_finding",
+      "open_findings": [
+        "A-04"
+      ]
+    },
+    "AC-04": {
+      "checked": false,
+      "check_id": "CHECK-03",
+      "reason": "open_finding",
+      "open_findings": [
+        "A-01",
+        "A-02",
+        "A-03",
+        "A-04",
+        "A-05",
+        "A-06"
+      ]
+    }
+  },
+  "checkbox_mismatches": [],
+  "rendered_markdown": "# PB-059: Построить карту зависимостей и объяснимый выбор проверок\n\nID: PB-059\nStatus: in_review\nPriority: P2\nDepends-On: PB-058\nExecutor: Devin\nModel: SWE-2 High\nCreated: 2026-11-07T01:07:04+03:00\nClosed: -\n\n<!-- playbook-meta:external -->\n\n## Задача\n\n### Цель и границы\n\nГраф и выбор. Модуль графа, Python analyzer, чистый selector/explain и бюджет; интеграция required_checks. Не ослаблять registry applicability legacy/v2.\n\n### Контекст\n\n[Спецификация](../specs/dependency-aware-verification.md): R-03–04,08–10; сценарии AC-01–04. [Design](../designs/dependency-aware-verification.md), [ADR-0006](../adr/0006-dependency-aware-verification.md), [план](../plans/dependency-aware-verification.md).\n\nПодготовлено по поручению инженера 2026-11-07. Выполнение пока не разрешено. Перед стартом: принятие технического проекта, завершённые зависимости, актуальный card show/handoff затрагиваемых работ и назначение исполнителя. Исходные чужие изменения сохранять.\n\n### Критерии приёмки\n\n- [ ] AC-01: Python AST и explicit/observed связи строят provenance-граф; reverse transitive closure, циклы, объединение старых/новых рёбер и удаления проверены. Dynamic import/unsupported не трактуются как независимость.\n- [ ] AC-02: Алгоритм module → subsystem → project расширяется только до доказанной границы и выдаёт explain цепочку; обязательства задачи дополняют вычисленный набор.\n- [ ] AC-03: План read-only, не исполняет discovery или найденный код; бюджет/неизвестная оценка блокируют дорогой fallback до запуска. Счётчики в fixtures подтверждают ожидаемый набор.\n- [ ] AC-04: Целевые поведенческие проверки и связанные регрессии пройдены; документация и self-manifest актуальны, EXEC/CHECK/HANDOFF содержат реальные доказательства и ограничения; передача зарегистрирована штатным CLI.\n\n### План\n\n1. Уточнить фактические интерфейсы зависимостей и связать изменения с критериями этой карточки.\n2. Реализовать ограниченный объём, добавить постоянные позитивные и негативные проверки критериев AC-01–03; не подменять их структурной проверкой.\n3. Обновить затронутые документы/шаблоны и self-manifest при изменениях комплекта; выполнить адресные проверки, index и check --ready.\n4. Подготовить материалы и пройти действующие preflight/verify/handoff. До явного opt-in использовать прежний контракт; не отключать полный legacy suite ради экономии.\n5. Записать EXEC/CHECK/HANDOFF и передать независимому аудитору; самостоятельно не закрывать.\n\n### Ресурсы\n\nPython и стандартная библиотека для основного CLI; локальные временные проекты и subprocess-счётчики. Новые зависимости защищённого executor обосновать в рамках принятого design. Фактические среда, policy_revision и бюджет фиксируются при старте; доступность отдельной OS/CI identity не предполагается.\n\nМатериалы: `docs/tasks/PB-059-evidence/`; команды воспроизведения и отчёты принадлежат этой карточке. Общие материалы и сквозная матрица — AUDIT-009/PB-064.\n\n## Журнал\n\n### EXEC-01 — Выполнение\n\nВремя: 2026-11-08T19:40:00+03:00\nИсполнитель: Devin\nМодель: SWE-2 High\nИзменения: новые модули checks_graph.py и checks_select.py по design §5 и spec R-03–04,08–10. `build_graph` собирает checks-graph.json: объявленные explicit/observed ребра политики + Python AST-анализатор ast-v1 (прямые/относительные/from-импорты, разрешение по проектным файлам через корень, предков и верхнеуровневые каталоги; flat- и src-layout без исполнения кода). `union_graph` объединяет прежний и новый снимки — удалённые файлы/импорты не теряют потребителей, одинаковый ключ обновляет доказательство. Динамический импорт (`__import__`, `importlib` с нелитеральным аргументом и алиасы), импорт вне модулей и неразбираемый файл — unknown с областью module/project. `select_checks` помечает затронутые модули, проходит обратное транзитивное замыкание (циклы через visited) с рефами subsystem: и расширяет набор только до доказанной границы; неприписанные пути при unknown_scope<project блокируют весь набор до решения инженера. Обязательства applicability/task_projection/policy_projection дополняют вычисленный набор и не сужают его; отсутствующая applicability — не обязательство (вычисленный набор не размывается). `compute_change` снимает universe-входы (модули + объявленные + unknown_paths поштучно) и diff'ит с baseline work/checks/snapshot.json; `evaluate_reuse` сравнивает binding (digests, adapter/runner, среда, поздний failed); `fallback.limits` рубит чтение по max_bytes и сумму таймаутов по max_seconds — превышение даёт blocked, не passed. `checks plan <TASK>` в playbook.py — read-only объяснение с цепочками и стоимостью; на self-project контролируемый отказ (политика не подключена). CLI-обвязка: загрузка политики/карточки/baseline/графа/результатов из work/checks/, повреждённые артефакты — примечание и консервативный набор.\nФайлы:\n- ai-dev-playbook/scripts/checks_graph.py\n- ai-dev-playbook/scripts/checks_select.py\n- ai-dev-playbook/scripts/playbook.py\n- tests/test_checks_graph.py\n- tests/test_checks_select.py\n- tests/test_checks_contract.py\n- docs/architecture.md\n- docs/code-map.md\n- CHANGELOG.md\n\n### CHECK-01 — Проверка\n\nВремя: 2026-11-08T20:15:00+03:00\nИсполнитель: Devin\nМодель: SWE-2 High\nРезультат: passed\nКритерии: AC-01, AC-02, AC-03, AC-04\nКоманда: `python3 ai-dev-playbook/scripts/playbook.py verify PB-059`; адресные `python3 -m unittest discover -s tests -p \"test_checks_graph.py\" -v` и `-p \"test_checks_select.py\" -v`\nСреда: macOS, Python 3.14, checkout feature/dependency-aware-verification; изолированные tempfile-проекты, установленный комплект для CLI, счётчики хеширования через внедряемый hash_fn.\nФакт: verify c8868c8fda5f4dacaba02b5cf45c03ca passed, inputs_unchanged=true; 912 тестов (+53 адресных: 22 graph, 31 select), unit-tests прошли. AC-01: provenance-рёбра explicit/observed/analyzer, union старых/новых, удаления, циклы, dynamic/неразбираемый/вне-модулей — unknown. AC-02: расширение только до доказанной границы (module→subsystem→project, unattributed→blocked при узком unknown_scope), explain-цепочки, обязательства дополняют набор. AC-03: план read-only (diff дерева до/после пуст), max_bytes рубит чтение → консервативный набор, max_seconds блокирует run до запуска, счётчик подтверждает однократное хеширование.\nДоказательства:\n- [Отчёт verify](../../work/verification/PB-059/c8868c8fda5f4dacaba02b5cf45c03ca/report.json)\n- [Команды и ограничения](PB-059-evidence/commands.md)\nОграничения: самопроверка исполнителя. Хранение baseline/графа/результатов, checks run/status и формат истории — PB-060; подключение политики и self-project — PB-063; доверенный контур — PB-061. Семантика unknown-областей и константа RUNNER — решения этой карточки в рамках design, не отдельно утверждённые.\n\n### HANDOFF-01 — Передача\n\nВремя: 2026-11-08T20:15:00+03:00\nИсполнитель: Devin\nМодель: SWE-2 High\nВыполнение: EXEC-01\nПроверки: CHECK-01\nСостояние: in_review, ветка feature/dependency-aware-verification, изменения не закоммичены. Следующий шаг — независимый аудит.\nФокус аудита: семантика unknown-областей (module/subsystem/project — затронут любым изменением), трактовка отсутствующей applicability как необязательства, покрытие unknown_paths файловыми входами universe-снимка, корректность reuse-binding (digests, среда, поздний failed), блокировка по бюджетам до запуска, read-only гарантия checks plan.\n\n### AUDIT-01 — Аудит\n\nВремя: 2026-11-08T18:24:49+03:00\nИсполнитель: Codex\nМодель: GPT-6.1 Sol (Medium)\nПередача: HANDOFF-01\nРезультат: changes_requested\nКритерии: AC-01, AC-02, AC-03, AC-04\nНезависимо проверено: исходная передача прошла verify PB-059 --audit-ready; просмотрены требования R-03–04,08–10, design §5–6, реализация графа, selector и CLI. Адресные наборы: 22 graph, 31 select, 53 contract — passed. Четыре дополнительные пробы воспроизводят дефекты ниже.\nДоказательства:\n- [Воспроизводимые пробы](../../work/verification/PB-059/audit-01/reproduce.py)\n- [Результаты проб](../../work/verification/PB-059/audit-01/reproduce.log)\n- [Graph tests](../../work/verification/PB-059/audit-01/graph-tests.log)\n- [Select tests](../../work/verification/PB-059/audit-01/select-tests.log)\n- [Contract tests](../../work/verification/PB-059/audit-01/contract-tests.log)\nОграничения: полный suite повторно не запускался; исходная передача ссылалась на свежий успешный verify с 912 тестами. Первичный запуск select совпал с незавершённым prepare-audit и получил четыре отказа установки по pending gate; после завершения операции все 31 тест повторно прошли. Эти служебные отказы не считаются дефектами PB-059. Код реализации не исправлялся. Точная модель GPT-6.1 Sol (Medium) подтверждена инженером после аудита. Требуются исправления, новые проверки и новая CLI-передача.\n\n#### A-01 — Замечание\n\nСерьёзность: P1\nКритерии: AC-01, AC-02, AC-04\nПроблема: checks_select.py:259 добавляет consumer в reached до push(consumer) на строке 274. push видит уже посещённый ref и не помещает его в очередь; обход обрывается после первого ребра.\nВоспроизведение: первая проба reproduce.py: checkout → payments, cart → checkout; изменён src/payments/pay.py.\nФакт: payments-tests и checkout-tests имеют run, но cart-tests — not_applicable.\nВлияние: изменённая зависимость не вызывает проверки транзитивного потребителя, нарушая R-04 и design §5.\nКритерий исправления: обходить все достигнутые refs; постоянные тесты selector на цепь минимум из двух рёбер, связи check/subsystem и цикл подтверждают полный набор и explain.\n\n#### A-02 — Замечание\n\nСерьёзность: P1\nКритерии: AC-02, AC-04\nПроблема: closure_digest вызывает set(used), но _key возвращает list (checks_select.py:362,365–366).\nВоспроизведение: вторая проба reproduce.py вызывает closure_digest для checkout-tests с ребром checkout → payments.\nФакт: TypeError: cannot use 'list' as a set element (unhashable type: 'list').\nВлияние: построение binding и оценка reuse для зависимых проверок завершаются исключением вместо объяснимого плана.\nКритерий исправления: использовать хешируемый ключ; проверить стабильный digest для непустого, циклического и изменённого замыкания, а также plan с существующим результатом зависимой проверки.\n\n#### A-03 — Замечание\n\nСерьёзность: P1\nКритерии: AC-01, AC-02, AC-04\nПроблема: checks_graph.py:124–126 пересекает локальный alias с исходными именами importlib, поэтому load не регистрируется; alias модуля importlib также не учитывается.\nВоспроизведение: третья проба reproduce.py: from importlib import import_module as load; load(chosen), а также import importlib as il; il.import_module(chosen).\nФакт: в обоих случаях targets пуст и dynamic пуст.\nВлияние: неизвестная зависимость считается отсутствием влияния; изменение динамически загружаемого модуля может исключить тесты потребителя.\nКритерий исправления: учитывать aliases исходных функций/модулей либо консервативно фиксировать unknown; добавить позитивные и негативные тесты analyze_python/build_graph/selector на оба варианта.\n\n#### A-04 — Замечание\n\nСерьёзность: P1\nКритерии: AC-03, AC-04\nПроблема: compute_change выставляет bytes_exceeded, но plan учитывает при блокировке только selection.blocked и max_seconds; флаг байтов возвращается информационно.\nВоспроизведение: четвёртая проба reproduce.py: max_bytes=1, файл src/payments/pay.py длиннее одного байта, достаточный max_seconds.\nФакт: bytes_exceeded=true, budget_blocked=false, budget_reasons=[], run=3, blocked=0.\nВлияние: превышение одобренного ресурсного бюджета приводит к широкому запуску вместо blocked/решения инженера, вопреки R-10. Дополнительно CLI вызывает AST-чтение build_graph до бюджетируемого snapshot, поэтому ограничение не охватывает весь анализ.\nКритерий исправления: превышение max_bytes блокирует затронутые обязательства и явно объясняется; бюджет чтения учитывает AST и snapshot; тесты проверяют blocked и счётчики фактического чтения.\n\n### EXEC-02 — Исправление\n\nВремя: 2026-11-08T20:50:00+03:00\nИсполнитель: Devin\nМодель: SWE-2 High\nЗамечания: A-01, A-02, A-03, A-04\nИзменения: A-01 — обрыв обратного замыкания: consumer помечался reached до push и не ставился в очередь; убрано досрочное reached.add, chains читается через .get — обход длиннее первого ребра восстановлен. A-02 — closure_digest: _key возвращал list, set() падал на unhashable; ключ переведён на tuple, digest стабилен для цепей/циклов. A-03 — алиасы importlib: from importlib import import_module as load регистрирует локальное имя по исходному имени функции; import importlib as il отслеживается через local_importlib и атрибут import_module. A-04 — bytes_exceeded в plan блокирует все run-обязательства с объяснением до решения инженера (не расширение запуска); граф строится внутри plan по previous и AST-чтение идёт под общим max_bytes через _counting_reader; CLI больше не читает исходники вне бюджета.\nФайлы:\n- ai-dev-playbook/scripts/checks_graph.py\n- ai-dev-playbook/scripts/checks_select.py\n- ai-dev-playbook/scripts/playbook.py\n- tests/test_checks_graph.py\n- tests/test_checks_select.py\n\n### CHECK-02 — Проверка\n\nВремя: 2026-11-08T21:30:00+03:00\nИсполнитель: Devin\nМодель: SWE-2 High\nРезультат: passed\nКритерии: AC-01, AC-02, AC-03, AC-04\nКоманда: `python3 ai-dev-playbook/scripts/playbook.py verify PB-059`; адресные `python3 -m unittest discover -s tests -p \"test_checks_graph.py\"` и `-p \"test_checks_select.py\"`\nСреда: macOS, Python 3.14, checkout feature/dependency-aware-verification; изолированные tempfile-проекты и установленный комплект для CLI.\nФакт: verify ca1cb5c4934e474b82e7316c671f809a passed, inputs_unchanged=true; 917 тестов (+5 регрессионных на A-01..A-04), unit-tests прошли. A-01: цепь checkout→payments→cart достигает транзитивного потребителя с explain. A-02: closure_digest стабилен для цепи/цикла и меняется с графом. A-03: alias-динамика фиксируется unknown (from-import-as и module-as). A-04: bytes_exceeded блокирует обязательства и AST-чтение под общим бюджетом.\nДоказательства:\n- [Отчёт verify](../../work/verification/PB-059/ca1cb5c4934e474b82e7316c671f809a/report.json)\n- [Команды и ограничения](PB-059-evidence/commands.md)\nОграничения: самопроверка исполнителя. Пробы аудита воспроизведены регрессионными тестами; полный suite обновлён целиком.\n\n### HANDOFF-02 — Передача\n\nВремя: 2026-11-08T21:30:00+03:00\nИсполнитель: Devin\nМодель: SWE-2 High\nВыполнение: EXEC-01, EXEC-02\nПроверки: CHECK-01, CHECK-02\nСостояние: in_review, ветка feature/dependency-aware-verification, изменения не закоммичены. Правки AUDIT-01 внесены, регрессионные тесты и свежий verify добавлены. Следующий шаг — повторный независимый аудит.\nФокус аудита: повторные пробы A-01..A-04 из reproduce.py; полнота обхода замыкания, digest-стабильность, alias-покрытие, единый бюджет чтения AST+snapshot и blocked-семантика.\n\n### AUDIT-02 — Аудит\n\nВремя: 2026-11-08T20:26:42+03:00\nИсполнитель: Codex\nМодель: GPT-6.1 Sol (Medium)\nПередача: HANDOFF-02\nРезультат: changes_requested\nКритерии: AC-01, AC-02, AC-03, AC-04\nНезависимо проверено: ранний audit-ready отказал из-за несвежих входов; inputs_fresh локализовал изменение docs/tasks/index.md. В диагностическом порядке проверены исправления A-01–A-04: 24 graph и 34 select теста passed; независимые пробы подтверждают транзитивную цепь и explain, стабильный digest циклического графа, оба alias динамического импорта, блокировку AST+snapshot по max_bytes до чтения. Приёмка не регистрировалась. A-01–A-04 технически исправлены по проверенным сценариям, но формальное закрытие невозможно до исправления связей EXEC и свежей передачи.\nДоказательства:\n- [Независимые пробы](../../work/verification/PB-059/audit-02/reproduce.py)\n- [Результаты проб](../../work/verification/PB-059/audit-02/reproduce.log)\n- [Graph tests](../../work/verification/PB-059/audit-02/graph-tests.log)\n- [Select tests](../../work/verification/PB-059/audit-02/select-tests.log)\n- [Готовность и проба закрытия](../../work/verification/PB-059/audit-02/readiness.txt)\nОграничения: полный suite и внешние контуры не запускались повторно; исходная HANDOFF-02 не прошла audit-ready. Изменения реализации и истории исполнителя аудитором не исправлялись. Поле Закрытые замечания намеренно не добавлено: parser требует явных ссылок из записи исправления. Следующий шаг исполнителя: оформить исправления и ссылки на находки в EXEC; подготовить окончательные статус/индекс/manifest; выполнить verify, новые CHECK/HANDOFF и CLI-передачу; затем проверить audit-ready и передать повторному аудитору. Повторный verify после сбоя подготовки запускать только после устранения причин.\n\n#### A-05 — Замечание\n\nСерьёзность: P1\nКритерии: AC-04\nПроблема: HANDOFF-02 не соответствует текущим входам полного verify ca1cb5c4934e474b82e7316c671f809a: изменён docs/tasks/index.md.\nВоспроизведение: verify PB-059 --audit-ready; verification.inputs_fresh для указанного отчёта с исключением собственной карточки.\nФакт: audit-ready завершился с кодом 1; inputs_fresh вернул False и единственный путь docs/tasks/index.md.\nВлияние: нет актуального доказательства для принятия текущего состояния, несмотря на успешные адресные пробы исправлений.\nКритерий исправления: сначала завершить подготовку записи исправления и индекса, затем выполнить verify и новую CHECK/HANDOFF с CLI-передачей; audit-ready проходит без изменения входов после проверки.\n\n#### A-06 — Замечание\n\nСерьёзность: P2\nКритерии: AC-04\nПроблема: EXEC-02 описывает исправления A-01–A-04 свободным текстом, но не содержит структурного поля Замечания; заголовок оставлен Выполнение вместо Исправление.\nВоспроизведение: в памяти добавить к текущей карточке accepted AUDIT с Закрытые замечания: A-01, A-02, A-03, A-04 и вызвать task_cards.parse.\nФакт: parser отклоняет закрытие: card format: AUDIT-02: закрытие без исправления/повторное закрытие.\nВлияние: технически исправленные находки невозможно закрыть штатным аудитом; текст EXEC не заменяет структурные связи формата карточки.\nКритерий исправления: зарегистрировать запись Исправление с явным полем Замечания для соответствующих A-ID, включая исправления подготовки передачи; после изменения EXEC нужны актуальные проверки и новая передача. Не менять принятую историю AUDIT-01.\n\n### EXEC-03 — Исправление\n\nВремя: 2026-11-08T22:10:00+03:00\nИсполнитель: Devin\nМодель: SWE-2 High\nЗамечания: A-05, A-06\nИзменения: A-05 — порядок передачи исправлен: запись исправления, статус и индекс завершаются до запуска verify; CHECK/HANDOFF и CLI-передача следуют за свежим прогоном без изменения входов. A-06 — EXEC-02 переоформлен записью Исправление со структурным полем Замечания со ссылками A-01..A-04; настоящая запись закрывает A-05/A-06. История AUDIT-01/02 не менялась.\nФайлы:\n- docs/tasks/PB-059.md\n\n### CHECK-03 — Проверка\n\nВремя: 2026-11-08T23:20:00+03:00\nИсполнитель: Devin\nМодель: SWE-2 High\nРезультат: passed\nКритерии: AC-01, AC-02, AC-03, AC-04\nКоманда: `python3 ai-dev-playbook/scripts/playbook.py verify PB-059`\nСреда: macOS, Python 3.14, checkout feature/dependency-aware-verification.\nФакт: verify 2e2e700a88484661badf45733c5b78fd passed, inputs_unchanged=true; unit-tests прошли (917 тестов). Прогон выполнен после завершения записей исправления и индекса — входы на момент передачи не менялись. Журнал парсится task_cards: EXEC-02 закрывает A-01..A-04 ссылками, EXEC-03 закрывает A-05, A-06.\nДоказательства:\n- [Отчёт verify](../../work/verification/PB-059/2e2e700a88484661badf45733c5b78fd/report.json)\n- [Команды и ограничения](PB-059-evidence/commands.md)\nОграничения: самопроверка исполнителя; свежесть входов проверяется аудитором через --audit-ready.\n\n### HANDOFF-03 — Передача\n\nВремя: 2026-11-08T23:20:00+03:00\nИсполнитель: Devin\nМодель: SWE-2 High\nВыполнение: EXEC-01, EXEC-02, EXEC-03\nПроверки: CHECK-01, CHECK-02, CHECK-03\nСостояние: in_review, ветка feature/dependency-aware-verification, изменения не закоммичены. Индекс и записи исправлений завершены до verify; свежесть входов на момент передачи сохранена. Следующий шаг — повторный независимый аудит.\nФокус аудита: audit-ready на отчёте 2e2e700a без дрейфа входов; закрытие A-01..A-06 ссылками Исправление→Замечания; повторные пробы AUDIT-01/02.\n",
+  "handoff_state": "current",
+  "acceptance_state": "not_current",
+  "acceptance_reason": "card format: нет последнего accepted-аудита"
+}

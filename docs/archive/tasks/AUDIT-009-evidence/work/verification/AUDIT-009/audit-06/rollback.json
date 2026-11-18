@@ -1,0 +1,212 @@
+{
+  "controlled_clocks": [
+    "2026-11-18T02:08:31.538628+00:00",
+    "2026-11-18T02:08:30.538628+00:00"
+  ],
+  "fixture": "Native records with run_seq; only wall clock is controlled. Commands execute real subprocesses. No history edits or UUID mocks.",
+  "no_git": true,
+  "runs_in_execution_order": [
+    {
+      "ok": true,
+      "summary": {
+        "passed": 1,
+        "reused": 0,
+        "failed": 0,
+        "timeout": 0,
+        "blocked": 0,
+        "not_run": 0,
+        "not_applicable": 0
+      },
+      "records": [
+        {
+          "schema_version": 1,
+          "result_id": "ed4898cc6abb4e648d2d41921d44889d-payment",
+          "project_id": "shop",
+          "check_id": "payment",
+          "kind": "command",
+          "binding": {
+            "policy_digest": "sha256:c36352f43a6003df10604b79ddb17b961c49a5f120b103612c3d2bd8c87e80f3",
+            "definition_digest": "sha256:bde3eb18c01490761fa5ee748dea0d8db3de856dcefbed5d0adbfbb1edad1849",
+            "adapter": {
+              "id": "argv-command",
+              "version": "1"
+            },
+            "runner": {
+              "id": "playbook-runner",
+              "version": "1"
+            },
+            "input_digest": "sha256:62fa614d994399a5d2b4d21a67c122c030931ce14deffe61698157d0f4db7d35",
+            "dependency_closure_digest": "sha256:cfb2a2c7946390255716b4b3616539e795d33e41b5bf2ac4b677ef09236b626e",
+            "environment": {
+              "platform": "darwin"
+            }
+          },
+          "status": "passed",
+          "started_at": "2026-11-18T02:08:31.538628+00:00",
+          "finished_at": "2026-11-18T02:08:31.538628+00:00",
+          "duration_seconds": 0.086,
+          "evidence": {
+            "stdout_log": "work/checks/runs/ed4898cc6abb4e648d2d41921d44889d/payment.stdout.log",
+            "stderr_log": "work/checks/runs/ed4898cc6abb4e648d2d41921d44889d/payment.stderr.log",
+            "run_id": "ed4898cc6abb4e648d2d41921d44889d",
+            "run_seq": 0
+          },
+          "command": {
+            "exit_code": 0,
+            "stdout_log": "work/checks/runs/ed4898cc6abb4e648d2d41921d44889d/payment.stdout.log",
+            "stderr_log": "work/checks/runs/ed4898cc6abb4e648d2d41921d44889d/payment.stderr.log"
+          }
+        }
+      ]
+    },
+    {
+      "ok": false,
+      "summary": {
+        "passed": 0,
+        "reused": 0,
+        "failed": 1,
+        "timeout": 0,
+        "blocked": 0,
+        "not_run": 0,
+        "not_applicable": 0
+      },
+      "records": [
+        {
+          "schema_version": 1,
+          "result_id": "8fab20adcfa148d3b27dd73ea9af40ef-payment",
+          "project_id": "shop",
+          "check_id": "payment",
+          "kind": "command",
+          "binding": {
+            "policy_digest": "sha256:c36352f43a6003df10604b79ddb17b961c49a5f120b103612c3d2bd8c87e80f3",
+            "definition_digest": "sha256:bde3eb18c01490761fa5ee748dea0d8db3de856dcefbed5d0adbfbb1edad1849",
+            "adapter": {
+              "id": "argv-command",
+              "version": "1"
+            },
+            "runner": {
+              "id": "playbook-runner",
+              "version": "1"
+            },
+            "input_digest": "sha256:62fa614d994399a5d2b4d21a67c122c030931ce14deffe61698157d0f4db7d35",
+            "dependency_closure_digest": "sha256:cfb2a2c7946390255716b4b3616539e795d33e41b5bf2ac4b677ef09236b626e",
+            "environment": {
+              "platform": "darwin"
+            }
+          },
+          "status": "failed",
+          "started_at": "2026-11-18T02:08:30.538628+00:00",
+          "finished_at": "2026-11-18T02:08:30.538628+00:00",
+          "duration_seconds": 0.08,
+          "evidence": {
+            "stdout_log": "work/checks/runs/8fab20adcfa148d3b27dd73ea9af40ef/payment.stdout.log",
+            "stderr_log": "work/checks/runs/8fab20adcfa148d3b27dd73ea9af40ef/payment.stderr.log",
+            "run_id": "8fab20adcfa148d3b27dd73ea9af40ef",
+            "run_seq": 1
+          },
+          "command": {
+            "exit_code": 1,
+            "stdout_log": "work/checks/runs/8fab20adcfa148d3b27dd73ea9af40ef/payment.stdout.log",
+            "stderr_log": "work/checks/runs/8fab20adcfa148d3b27dd73ea9af40ef/payment.stderr.log"
+          },
+          "reason": "команда завершилась кодом 1"
+        }
+      ]
+    }
+  ],
+  "gates_after_failure": {
+    "task": {
+      "ok": false,
+      "scope": "task",
+      "checkpoint": null,
+      "task_id": "DEV-1",
+      "trust_mode": "local",
+      "checks": {
+        "payment": {
+          "kind": "command",
+          "explain": [
+            "применимость always",
+            "запуск: последний результат failed"
+          ],
+          "status": "uncovered"
+        }
+      },
+      "covered": [],
+      "uncovered": [
+        "payment"
+      ],
+      "manual": [],
+      "blocked": [],
+      "not_applicable": [],
+      "notes": [],
+      "rejections": [],
+      "hashed_bytes": 20,
+      "hashed_files": 2,
+      "budget_reasons": [],
+      "trust": {
+        "mode": "local",
+        "capability": "local",
+        "note": "trust_mode=local: результаты диагностические — локальная история не защищена от владельца проекта; доверенное выполнение требует контура PB-061"
+      },
+      "protected_confirmed": false
+    },
+    "project": {
+      "ok": false,
+      "scope": "project",
+      "checkpoint": null,
+      "task_id": "DEV-1",
+      "trust_mode": "local",
+      "checks": {
+        "payment": {
+          "kind": "command",
+          "explain": [
+            "изменения не доказаны — консервативный набор",
+            "применимость always",
+            "запуск: последний результат failed",
+            "область project — весь обязательный набор"
+          ],
+          "status": "uncovered"
+        }
+      },
+      "covered": [],
+      "uncovered": [
+        "payment"
+      ],
+      "manual": [],
+      "blocked": [],
+      "not_applicable": [],
+      "notes": [],
+      "rejections": [],
+      "hashed_bytes": 20,
+      "hashed_files": 2,
+      "budget_reasons": [],
+      "trust": {
+        "mode": "local",
+        "capability": "local",
+        "note": "trust_mode=local: результаты диагностические — локальная история не защищена от владельца проекта; доверенное выполнение требует контура PB-061"
+      },
+      "protected_confirmed": false
+    }
+  },
+  "selected_after_failure": {
+    "payment": {
+      "status": "failed",
+      "run_seq": 1
+    }
+  },
+  "stale": {
+    "ok": false,
+    "summary": {
+      "passed": 0,
+      "reused": 0,
+      "failed": 1,
+      "timeout": 0,
+      "blocked": 0,
+      "not_run": 0,
+      "not_applicable": 0
+    }
+  },
+  "actual_attempts": 3,
+  "notes": [],
+  "corrupt": []
+}

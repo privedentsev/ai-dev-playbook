@@ -1,0 +1,25 @@
+{
+  "python": "3.14.6 (main, Jun 10 2026, 10:03:53) [Clang 21.0.0 (clang-2100.0.123.102)]",
+  "platform": "macOS-27.2.1-x86_64-i386-64bit-Mach-O",
+  "separate_os_identity": false,
+  "checks_policy_enabled_in_source": false,
+  "head": "e9e47be4205423ad1e7c24df66031e23534eee7a",
+  "branch": "feature/dependency-aware-verification",
+  "test_counts": {
+    "test_checks_contract": 53,
+    "test_checks_e2e": 14,
+    "test_checks_gate": 18,
+    "test_checks_graph": 24,
+    "test_checks_inventory": 62,
+    "test_checks_run": 38,
+    "test_checks_select": 34,
+    "test_checks_setup": 29,
+    "test_checks_trust": 44
+  },
+  "clean_test_summary": [
+    "Ran 316 tests in 171.442s",
+    "OK"
+  ],
+  "excluded_attempt": "checks-tests.log: contaminated by concurrent lifecycle prepare-audit and outer sandbox; not a product finding",
+  "clean_attempt": "checks-tests-unsandboxed.log: rerun after lifecycle transaction completed, outside outer sandbox for Seatbelt subprocess tests"
+}

@@ -1,0 +1,5 @@
+ENV {"passed": true, "HOME": null, "TMPDIR": null, "PATH": null, "keys": ["LC_CTYPE", "__CF_USER_TEXT_ENCODING", "platform"]}
+PROBE {"capability": "protected", "agent_can_write": false, "key_writable": true, "protected_confirmed": true}
+REVOCATION {"original_ok": false, "aggregate_ok": true, "gate_ok": true}
+EXTERNAL_EXCEPTION TypeError expected str, bytes or os.PathLike object, not dict
+FORGED_ADAPTER {"run_ok": true, "signature_ok": true, "gate_ok": true, "tests_defined": false, "test_events_fabricated": true}

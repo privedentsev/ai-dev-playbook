@@ -1,0 +1,17 @@
+test_a06_clock_rollback_end_to_end (test_checks_run.Audit009PB78RegressionTest.test_a06_clock_rollback_end_to_end)
+A-06: реальные subprocess-команды со счётчиком, управляемые ... ok
+test_a06_equal_seq_concurrent_is_conservative (test_checks_run.Audit009PB78RegressionTest.test_a06_equal_seq_concurrent_is_conservative)
+A-06: равный run_seq >= 0 — параллельные прогоны с общим ... ok
+test_a06_index_rebuild_and_loss_follow_seq (test_checks_run.Audit009PB78RegressionTest.test_a06_index_rebuild_and_loss_follow_seq)
+A-06: индекс, пересборка и свидетельство утраты используют ... ok
+test_a06_later_seq_beats_rolled_back_clock (test_checks_run.Audit009PB78RegressionTest.test_a06_later_seq_beats_rolled_back_clock)
+A-06: passed seq0 с поздним finished_at против failed seq1 ... ok
+test_a06_legacy_clock_order_preserved (test_checks_run.Audit009PB78RegressionTest.test_a06_legacy_clock_order_preserved)
+A-06: legacy-пара без run_seq упорядочена finished_at — ... ok
+test_a06_seq_record_beats_legacy_at_any_clock (test_checks_run.Audit009PB78RegressionTest.test_a06_seq_record_beats_legacy_at_any_clock)
+A-06: seq-запись доказанно позже любой legacy — даже при ... ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.353s
+
+OK

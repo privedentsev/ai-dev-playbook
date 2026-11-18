@@ -1,0 +1,506 @@
+План lc-752686308193dfdd (lifecycle):
+Основание: playbook.py close PB-062
+Исполнитель: cli:privedentsev1 (cli)
+Действия:
+  close_task PB-062: docs/tasks/PB-062.md → docs/archive/tasks/PB-062.md (done)
+Переносы:
+  docs/tasks/PB-062-evidence → docs/archive/tasks/PB-062-evidence
+  docs/tasks/PB-062-evidence/commands.md → docs/archive/tasks/PB-062-evidence/commands.md
+  docs/tasks/PB-062.md → docs/archive/tasks/PB-062.md
+  docs/tasks/PB-062.meta.json → docs/archive/tasks/PB-062.meta.json
+  work/verification/PB-062/02d82d1a1c7549dc813934603ab26a29 → docs/archive/tasks/PB-062-evidence/work/verification/PB-062/02d82d1a1c7549dc813934603ab26a29
+  work/verification/PB-062/02d82d1a1c7549dc813934603ab26a29/preflight-regressions.stderr.log → docs/archive/tasks/PB-062-evidence/work/verification/PB-062/02d82d1a1c7549dc813934603ab26a29/preflight-regressions.stderr.log
+  work/verification/PB-062/02d82d1a1c7549dc813934603ab26a29/preflight-regressions.stdout.log → docs/archive/tasks/PB-062-evidence/work/verification/PB-062/02d82d1a1c7549dc813934603ab26a29/preflight-regressions.stdout.log
+  work/verification/PB-062/02d82d1a1c7549dc813934603ab26a29/report.json → docs/archive/tasks/PB-062-evidence/work/verification/PB-062/02d82d1a1c7549dc813934603ab26a29/report.json
+  work/verification/PB-062/02d82d1a1c7549dc813934603ab26a29/self-check.stderr.log → docs/archive/tasks/PB-062-evidence/work/verification/PB-062/02d82d1a1c7549dc813934603ab26a29/self-check.stderr.log
+  work/verification/PB-062/02d82d1a1c7549dc813934603ab26a29/self-check.stdout.log → docs/archive/tasks/PB-062-evidence/work/verification/PB-062/02d82d1a1c7549dc813934603ab26a29/self-check.stdout.log
+  work/verification/PB-062/02d82d1a1c7549dc813934603ab26a29/unit-tests.stderr.log → docs/archive/tasks/PB-062-evidence/work/verification/PB-062/02d82d1a1c7549dc813934603ab26a29/unit-tests.stderr.log
+  work/verification/PB-062/02d82d1a1c7549dc813934603ab26a29/unit-tests.stdout.log → docs/archive/tasks/PB-062-evidence/work/verification/PB-062/02d82d1a1c7549dc813934603ab26a29/unit-tests.stdout.log
+  work/verification/PB-062/69f1c89b20a24c79be547ca1cf7b41e1 → docs/archive/tasks/PB-062-evidence/work/verification/PB-062/69f1c89b20a24c79be547ca1cf7b41e1
+  work/verification/PB-062/69f1c89b20a24c79be547ca1cf7b41e1/preflight-regressions.stderr.log → docs/archive/tasks/PB-062-evidence/work/verification/PB-062/69f1c89b20a24c79be547ca1cf7b41e1/preflight-regressions.stderr.log
+  work/verification/PB-062/69f1c89b20a24c79be547ca1cf7b41e1/preflight-regressions.stdout.log → docs/archive/tasks/PB-062-evidence/work/verification/PB-062/69f1c89b20a24c79be547ca1cf7b41e1/preflight-regressions.stdout.log
+  work/verification/PB-062/69f1c89b20a24c79be547ca1cf7b41e1/report.json → docs/archive/tasks/PB-062-evidence/work/verification/PB-062/69f1c89b20a24c79be547ca1cf7b41e1/report.json
+  work/verification/PB-062/69f1c89b20a24c79be547ca1cf7b41e1/self-check.stderr.log → docs/archive/tasks/PB-062-evidence/work/verification/PB-062/69f1c89b20a24c79be547ca1cf7b41e1/self-check.stderr.log
+  work/verification/PB-062/69f1c89b20a24c79be547ca1cf7b41e1/self-check.stdout.log → docs/archive/tasks/PB-062-evidence/work/verification/PB-062/69f1c89b20a24c79be547ca1cf7b41e1/self-check.stdout.log
+  work/verification/PB-062/69f1c89b20a24c79be547ca1cf7b41e1/unit-tests.stderr.log → docs/archive/tasks/PB-062-evidence/work/verification/PB-062/69f1c89b20a24c79be547ca1cf7b41e1/unit-tests.stderr.log
+  work/verification/PB-062/69f1c89b20a24c79be547ca1cf7b41e1/unit-tests.stdout.log → docs/archive/tasks/PB-062-evidence/work/verification/PB-062/69f1c89b20a24c79be547ca1cf7b41e1/unit-tests.stdout.log
+  work/verification/PB-062/84150d61e6ef44efaf39d7446a34f4a3 → docs/archive/tasks/PB-062-evidence/work/verification/PB-062/84150d61e6ef44efaf39d7446a34f4a3
+  work/verification/PB-062/84150d61e6ef44efaf39d7446a34f4a3/preflight-regressions.stderr.log → docs/archive/tasks/PB-062-evidence/work/verification/PB-062/84150d61e6ef44efaf39d7446a34f4a3/preflight-regressions.stderr.log
+  work/verification/PB-062/84150d61e6ef44efaf39d7446a34f4a3/preflight-regressions.stdout.log → docs/archive/tasks/PB-062-evidence/work/verification/PB-062/84150d61e6ef44efaf39d7446a34f4a3/preflight-regressions.stdout.log
+  work/verification/PB-062/84150d61e6ef44efaf39d7446a34f4a3/report.json → docs/archive/tasks/PB-062-evidence/work/verification/PB-062/84150d61e6ef44efaf39d7446a34f4a3/report.json
+  work/verification/PB-062/84150d61e6ef44efaf39d7446a34f4a3/self-check.stderr.log → docs/archive/tasks/PB-062-evidence/work/verification/PB-062/84150d61e6ef44efaf39d7446a34f4a3/self-check.stderr.log
+  work/verification/PB-062/84150d61e6ef44efaf39d7446a34f4a3/self-check.stdout.log → docs/archive/tasks/PB-062-evidence/work/verification/PB-062/84150d61e6ef44efaf39d7446a34f4a3/self-check.stdout.log
+  work/verification/PB-062/84150d61e6ef44efaf39d7446a34f4a3/unit-tests.stderr.log → docs/archive/tasks/PB-062-evidence/work/verification/PB-062/84150d61e6ef44efaf39d7446a34f4a3/unit-tests.stderr.log
+  work/verification/PB-062/84150d61e6ef44efaf39d7446a34f4a3/unit-tests.stdout.log → docs/archive/tasks/PB-062-evidence/work/verification/PB-062/84150d61e6ef44efaf39d7446a34f4a3/unit-tests.stdout.log
+  work/verification/PB-062/audit-01 → docs/archive/tasks/PB-062-evidence/work/verification/PB-062/audit-01
+  work/verification/PB-062/audit-01/checks.log → docs/archive/tasks/PB-062-evidence/work/verification/PB-062/audit-01/checks.log
+  work/verification/PB-062/audit-01/findings.txt → docs/archive/tasks/PB-062-evidence/work/verification/PB-062/audit-01/findings.txt
+  work/verification/PB-062/audit-01/probe_ttl.py → docs/archive/tasks/PB-062-evidence/work/verification/PB-062/audit-01/probe_ttl.py
+  work/verification/PB-062/audit-01/provenance.json → docs/archive/tasks/PB-062-evidence/work/verification/PB-062/audit-01/provenance.json
+  work/verification/PB-062/audit-01/provenance.sha256 → docs/archive/tasks/PB-062-evidence/work/verification/PB-062/audit-01/provenance.sha256
+  work/verification/PB-062/audit-01/snapshot.meta.json → docs/archive/tasks/PB-062-evidence/work/verification/PB-062/audit-01/snapshot.meta.json
+  work/verification/PB-062/audit-01/snapshot.txt → docs/archive/tasks/PB-062-evidence/work/verification/PB-062/audit-01/snapshot.txt
+  work/verification/PB-062/audit-02 → docs/archive/tasks/PB-062-evidence/work/verification/PB-062/audit-02
+  work/verification/PB-062/audit-02/checks.log → docs/archive/tasks/PB-062-evidence/work/verification/PB-062/audit-02/checks.log
+  work/verification/PB-062/audit-02/findings.txt → docs/archive/tasks/PB-062-evidence/work/verification/PB-062/audit-02/findings.txt
+  work/verification/PB-062/audit-02/preflight.log → docs/archive/tasks/PB-062-evidence/work/verification/PB-062/audit-02/preflight.log
+  work/verification/PB-062/audit-02/probe.log → docs/archive/tasks/PB-062-evidence/work/verification/PB-062/audit-02/probe.log
+  work/verification/PB-062/audit-02/probe.py → docs/archive/tasks/PB-062-evidence/work/verification/PB-062/audit-02/probe.py
+  work/verification/PB-062/audit-02/provenance.json → docs/archive/tasks/PB-062-evidence/work/verification/PB-062/audit-02/provenance.json
+  work/verification/PB-062/audit-02/provenance.sha256 → docs/archive/tasks/PB-062-evidence/work/verification/PB-062/audit-02/provenance.sha256
+  work/verification/PB-062/audit-02/ready.log → docs/archive/tasks/PB-062-evidence/work/verification/PB-062/audit-02/ready.log
+  work/verification/PB-062/audit-02/snapshot.meta.json → docs/archive/tasks/PB-062-evidence/work/verification/PB-062/audit-02/snapshot.meta.json
+  work/verification/PB-062/audit-02/snapshot.txt → docs/archive/tasks/PB-062-evidence/work/verification/PB-062/audit-02/snapshot.txt
+  work/verification/PB-062/audit-03 → docs/archive/tasks/PB-062-evidence/work/verification/PB-062/audit-03
+  work/verification/PB-062/audit-03/checks.log → docs/archive/tasks/PB-062-evidence/work/verification/PB-062/audit-03/checks.log
+  work/verification/PB-062/audit-03/findings.txt → docs/archive/tasks/PB-062-evidence/work/verification/PB-062/audit-03/findings.txt
+  work/verification/PB-062/audit-03/preflight.log → docs/archive/tasks/PB-062-evidence/work/verification/PB-062/audit-03/preflight.log
+  work/verification/PB-062/audit-03/previous-probe.log → docs/archive/tasks/PB-062-evidence/work/verification/PB-062/audit-03/previous-probe.log
+  work/verification/PB-062/audit-03/probe.log → docs/archive/tasks/PB-062-evidence/work/verification/PB-062/audit-03/probe.log
+  work/verification/PB-062/audit-03/probe.py → docs/archive/tasks/PB-062-evidence/work/verification/PB-062/audit-03/probe.py
+  work/verification/PB-062/audit-03/provenance.json → docs/archive/tasks/PB-062-evidence/work/verification/PB-062/audit-03/provenance.json
+  work/verification/PB-062/audit-03/provenance.sha256 → docs/archive/tasks/PB-062-evidence/work/verification/PB-062/audit-03/provenance.sha256
+  work/verification/PB-062/audit-03/ready.log → docs/archive/tasks/PB-062-evidence/work/verification/PB-062/audit-03/ready.log
+  work/verification/PB-062/audit-03/snapshot.meta.json → docs/archive/tasks/PB-062-evidence/work/verification/PB-062/audit-03/snapshot.meta.json
+  work/verification/PB-062/audit-03/snapshot.txt → docs/archive/tasks/PB-062-evidence/work/verification/PB-062/audit-03/snapshot.txt
+  work/verification/PB-062/audit-04 → docs/archive/tasks/PB-062-evidence/work/verification/PB-062/audit-04
+  work/verification/PB-062/audit-04/checks.log → docs/archive/tasks/PB-062-evidence/work/verification/PB-062/audit-04/checks.log
+  work/verification/PB-062/audit-04/findings.txt → docs/archive/tasks/PB-062-evidence/work/verification/PB-062/audit-04/findings.txt
+  work/verification/PB-062/audit-04/probe.log → docs/archive/tasks/PB-062-evidence/work/verification/PB-062/audit-04/probe.log
+  work/verification/PB-062/audit-04/probe.py → docs/archive/tasks/PB-062-evidence/work/verification/PB-062/audit-04/probe.py
+  work/verification/PB-062/audit-04/provenance.json → docs/archive/tasks/PB-062-evidence/work/verification/PB-062/audit-04/provenance.json
+  work/verification/PB-062/audit-04/provenance.sha256 → docs/archive/tasks/PB-062-evidence/work/verification/PB-062/audit-04/provenance.sha256
+  work/verification/PB-062/audit-04/snapshot.meta.json → docs/archive/tasks/PB-062-evidence/work/verification/PB-062/audit-04/snapshot.meta.json
+  work/verification/PB-062/audit-04/snapshot.txt → docs/archive/tasks/PB-062-evidence/work/verification/PB-062/audit-04/snapshot.txt
+  work/verification/PB-062/ddec203142ea47bf8b2c62ceaeb4c45e → docs/archive/tasks/PB-062-evidence/work/verification/PB-062/ddec203142ea47bf8b2c62ceaeb4c45e
+  work/verification/PB-062/ddec203142ea47bf8b2c62ceaeb4c45e/preflight-regressions.stderr.log → docs/archive/tasks/PB-062-evidence/work/verification/PB-062/ddec203142ea47bf8b2c62ceaeb4c45e/preflight-regressions.stderr.log
+  work/verification/PB-062/ddec203142ea47bf8b2c62ceaeb4c45e/preflight-regressions.stdout.log → docs/archive/tasks/PB-062-evidence/work/verification/PB-062/ddec203142ea47bf8b2c62ceaeb4c45e/preflight-regressions.stdout.log
+  work/verification/PB-062/ddec203142ea47bf8b2c62ceaeb4c45e/report.json → docs/archive/tasks/PB-062-evidence/work/verification/PB-062/ddec203142ea47bf8b2c62ceaeb4c45e/report.json
+  work/verification/PB-062/ddec203142ea47bf8b2c62ceaeb4c45e/self-check.stderr.log → docs/archive/tasks/PB-062-evidence/work/verification/PB-062/ddec203142ea47bf8b2c62ceaeb4c45e/self-check.stderr.log
+  work/verification/PB-062/ddec203142ea47bf8b2c62ceaeb4c45e/self-check.stdout.log → docs/archive/tasks/PB-062-evidence/work/verification/PB-062/ddec203142ea47bf8b2c62ceaeb4c45e/self-check.stdout.log
+  work/verification/PB-062/ddec203142ea47bf8b2c62ceaeb4c45e/unit-tests.stderr.log → docs/archive/tasks/PB-062-evidence/work/verification/PB-062/ddec203142ea47bf8b2c62ceaeb4c45e/unit-tests.stderr.log
+  work/verification/PB-062/ddec203142ea47bf8b2c62ceaeb4c45e/unit-tests.stdout.log → docs/archive/tasks/PB-062-evidence/work/verification/PB-062/ddec203142ea47bf8b2c62ceaeb4c45e/unit-tests.stdout.log
+  work/verification/PB-062/f47c0b6e977f473a9802ffcd8ed27ae7 → docs/archive/tasks/PB-062-evidence/work/verification/PB-062/f47c0b6e977f473a9802ffcd8ed27ae7
+  work/verification/PB-062/f47c0b6e977f473a9802ffcd8ed27ae7/preflight-regressions.stderr.log → docs/archive/tasks/PB-062-evidence/work/verification/PB-062/f47c0b6e977f473a9802ffcd8ed27ae7/preflight-regressions.stderr.log
+  work/verification/PB-062/f47c0b6e977f473a9802ffcd8ed27ae7/preflight-regressions.stdout.log → docs/archive/tasks/PB-062-evidence/work/verification/PB-062/f47c0b6e977f473a9802ffcd8ed27ae7/preflight-regressions.stdout.log
+  work/verification/PB-062/f47c0b6e977f473a9802ffcd8ed27ae7/report.json → docs/archive/tasks/PB-062-evidence/work/verification/PB-062/f47c0b6e977f473a9802ffcd8ed27ae7/report.json
+  work/verification/PB-062/f47c0b6e977f473a9802ffcd8ed27ae7/self-check.stderr.log → docs/archive/tasks/PB-062-evidence/work/verification/PB-062/f47c0b6e977f473a9802ffcd8ed27ae7/self-check.stderr.log
+  work/verification/PB-062/f47c0b6e977f473a9802ffcd8ed27ae7/self-check.stdout.log → docs/archive/tasks/PB-062-evidence/work/verification/PB-062/f47c0b6e977f473a9802ffcd8ed27ae7/self-check.stdout.log
+  work/verification/PB-062/f47c0b6e977f473a9802ffcd8ed27ae7/unit-tests.stderr.log → docs/archive/tasks/PB-062-evidence/work/verification/PB-062/f47c0b6e977f473a9802ffcd8ed27ae7/unit-tests.stderr.log
+  work/verification/PB-062/f47c0b6e977f473a9802ffcd8ed27ae7/unit-tests.stdout.log → docs/archive/tasks/PB-062-evidence/work/verification/PB-062/f47c0b6e977f473a9802ffcd8ed27ae7/unit-tests.stdout.log
+Удаляются каталоги:
+  docs/tasks/PB-062-evidence
+  work/verification/PB-062/02d82d1a1c7549dc813934603ab26a29
+  work/verification/PB-062/69f1c89b20a24c79be547ca1cf7b41e1
+  work/verification/PB-062/84150d61e6ef44efaf39d7446a34f4a3
+  work/verification/PB-062/audit-01
+  work/verification/PB-062/audit-02
+  work/verification/PB-062/audit-03
+  work/verification/PB-062/audit-04
+  work/verification/PB-062/ddec203142ea47bf8b2c62ceaeb4c45e
+  work/verification/PB-062/f47c0b6e977f473a9802ffcd8ed27ae7
+Записей: 78, удалений файлов: 74
+Diff записей (.md):
+  docs/archive/tasks/PB-062-evidence/commands.md: prepared stream sha256:21852cbbad71aece29b2b904f39b933885316dfb4d7598cfb13bf224f9b44f38
+  docs/archive/tasks/PB-062-evidence/work/verification/PB-062/02d82d1a1c7549dc813934603ab26a29/preflight-regressions.stderr.log: prepared stream sha256:3f9f8a02ad0b2c95c9cb91deeedd97b820456503196936df0da65adc659c354a
+  docs/archive/tasks/PB-062-evidence/work/verification/PB-062/02d82d1a1c7549dc813934603ab26a29/preflight-regressions.stdout.log: prepared stream sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+  docs/archive/tasks/PB-062-evidence/work/verification/PB-062/02d82d1a1c7549dc813934603ab26a29/report.json: prepared stream sha256:b46831bf170fc5a1eb9090c8510801bc4f8fc060490b3b05f263bbce8e346517
+  docs/archive/tasks/PB-062-evidence/work/verification/PB-062/02d82d1a1c7549dc813934603ab26a29/self-check.stderr.log: prepared stream sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+  docs/archive/tasks/PB-062-evidence/work/verification/PB-062/02d82d1a1c7549dc813934603ab26a29/self-check.stdout.log: prepared stream sha256:a64b032d2a54290daefe90947dc0712dc724beff1ff103737d0088df4f827798
+  docs/archive/tasks/PB-062-evidence/work/verification/PB-062/02d82d1a1c7549dc813934603ab26a29/unit-tests.stderr.log: prepared stream sha256:09ce7598eebf8cd762aefe75addf7195d21ece09df9dcdc19b88c7fc60f736e1
+  docs/archive/tasks/PB-062-evidence/work/verification/PB-062/02d82d1a1c7549dc813934603ab26a29/unit-tests.stdout.log: prepared stream sha256:90f15562d939e965eaaf8a1c953f90e13ddc9c12de4db320cfd6bec44bdd9c64
+  docs/archive/tasks/PB-062-evidence/work/verification/PB-062/69f1c89b20a24c79be547ca1cf7b41e1/preflight-regressions.stderr.log: prepared stream sha256:4da5a0a555b1880f94b0351a5694bcb65e3ab4762e494bb3353b2dc3b45fc30c
+  docs/archive/tasks/PB-062-evidence/work/verification/PB-062/69f1c89b20a24c79be547ca1cf7b41e1/preflight-regressions.stdout.log: prepared stream sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+  docs/archive/tasks/PB-062-evidence/work/verification/PB-062/69f1c89b20a24c79be547ca1cf7b41e1/report.json: prepared stream sha256:df1d8f7c1290ea5e36e761ecdc2ae36b5a6d00ef6cad7f1836cc0705f622d090
+  docs/archive/tasks/PB-062-evidence/work/verification/PB-062/69f1c89b20a24c79be547ca1cf7b41e1/self-check.stderr.log: prepared stream sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+  docs/archive/tasks/PB-062-evidence/work/verification/PB-062/69f1c89b20a24c79be547ca1cf7b41e1/self-check.stdout.log: prepared stream sha256:a64b032d2a54290daefe90947dc0712dc724beff1ff103737d0088df4f827798
+  docs/archive/tasks/PB-062-evidence/work/verification/PB-062/69f1c89b20a24c79be547ca1cf7b41e1/unit-tests.stderr.log: prepared stream sha256:6b8bf6191b2b5ac0c53398978a8ce16c51a711fc6b73a43a8e4fa09ae865cac1
+  docs/archive/tasks/PB-062-evidence/work/verification/PB-062/69f1c89b20a24c79be547ca1cf7b41e1/unit-tests.stdout.log: prepared stream sha256:6f169eea6f35d338ebaac96d0f4af1c95c14cf2dcc8ca0d914e709decafc6dab
+  docs/archive/tasks/PB-062-evidence/work/verification/PB-062/84150d61e6ef44efaf39d7446a34f4a3/preflight-regressions.stderr.log: prepared stream sha256:b1e15de2476e7f0e99ffb08525b297a12e0c9fb088c12cc3076606d30fd85446
+  docs/archive/tasks/PB-062-evidence/work/verification/PB-062/84150d61e6ef44efaf39d7446a34f4a3/preflight-regressions.stdout.log: prepared stream sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+  docs/archive/tasks/PB-062-evidence/work/verification/PB-062/84150d61e6ef44efaf39d7446a34f4a3/report.json: prepared stream sha256:f33db7cf48ccb83471b75c6476a03c441146959e34385efdda5d5f1cc8063c98
+  docs/archive/tasks/PB-062-evidence/work/verification/PB-062/84150d61e6ef44efaf39d7446a34f4a3/self-check.stderr.log: prepared stream sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+  docs/archive/tasks/PB-062-evidence/work/verification/PB-062/84150d61e6ef44efaf39d7446a34f4a3/self-check.stdout.log: prepared stream sha256:a64b032d2a54290daefe90947dc0712dc724beff1ff103737d0088df4f827798
+  docs/archive/tasks/PB-062-evidence/work/verification/PB-062/84150d61e6ef44efaf39d7446a34f4a3/unit-tests.stderr.log: prepared stream sha256:18b03641b5fc3d5c2edbdfd758c9a1c13ff18f55e2515ac9a0028eb543bccf8b
+  docs/archive/tasks/PB-062-evidence/work/verification/PB-062/84150d61e6ef44efaf39d7446a34f4a3/unit-tests.stdout.log: prepared stream sha256:f975b1eb3e8070d78ba0f73a94ad809985b107b5c8d93376c7dbae77b3f8313b
+  docs/archive/tasks/PB-062-evidence/work/verification/PB-062/audit-01/checks.log: prepared stream sha256:8a169a852c8bfd5ca08441104dd564059c1d400a4c2a9490f178d4f78a54e6a4
+  docs/archive/tasks/PB-062-evidence/work/verification/PB-062/audit-01/findings.txt: prepared stream sha256:437328fbdc23eaee13d57f71aa99b11423307815a4543d317ffb46935e247f8d
+  docs/archive/tasks/PB-062-evidence/work/verification/PB-062/audit-01/probe_ttl.py: prepared stream sha256:5ee9fe49ba88c30cce29a2b1fc17706b9634717e3d0f22616274360ee4625f80
+  docs/archive/tasks/PB-062-evidence/work/verification/PB-062/audit-01/provenance.json: prepared stream sha256:0515e2920273316ee09441f64a1caeb3673e23a739011559ab90788bd4f8c18d
+  docs/archive/tasks/PB-062-evidence/work/verification/PB-062/audit-01/provenance.sha256: prepared stream sha256:18318c119661e0f9178ca5031b86199c56e23ffdb2ba55ee12dc1cb8a6742993
+  docs/archive/tasks/PB-062-evidence/work/verification/PB-062/audit-01/snapshot.meta.json: prepared stream sha256:60a2fc3384a44fdde6f0cdac2c79eee0a8d9482570cf9b974f3643177823f90e
+  docs/archive/tasks/PB-062-evidence/work/verification/PB-062/audit-01/snapshot.txt: prepared stream sha256:74a21760e549ab88eb022a8305e1f740d6fa2cf3c72b9a3411d463fd2329c8c7
+  docs/archive/tasks/PB-062-evidence/work/verification/PB-062/audit-02/checks.log: prepared stream sha256:5f5ac7ab6f67a0ae91a54ce654eb5abf688c004805d3e2bae83a513d8d902a61
+  docs/archive/tasks/PB-062-evidence/work/verification/PB-062/audit-02/findings.txt: prepared stream sha256:26ea23410dcf97d886265bf34cd88c90c43164d42a59b12acbd002d72a72516f
+  docs/archive/tasks/PB-062-evidence/work/verification/PB-062/audit-02/preflight.log: prepared stream sha256:39eff2dd9802347573379102aa688e6dc07705ac3f6bb85e246a24a89bfe4322
+  docs/archive/tasks/PB-062-evidence/work/verification/PB-062/audit-02/probe.log: prepared stream sha256:587c247e8add5f38f2f166033c390aca8f321e6ab2deb92ada342d61df37576f
+  docs/archive/tasks/PB-062-evidence/work/verification/PB-062/audit-02/probe.py: prepared stream sha256:64bde8cfbc4b50a9f9bdae2b80a37f3c985754291694f1cdfac84c42269f8688
+  docs/archive/tasks/PB-062-evidence/work/verification/PB-062/audit-02/provenance.json: prepared stream sha256:1011ae61207fb42c86dc7861c2c06bbbbf957c7abc26b364c8e1edf4e40c6cb7
+  docs/archive/tasks/PB-062-evidence/work/verification/PB-062/audit-02/provenance.sha256: prepared stream sha256:9fbca5985b0a78afbbb60fe1408abbe9d810c3a3b3f4a2302692e5f57ee83006
+  docs/archive/tasks/PB-062-evidence/work/verification/PB-062/audit-02/ready.log: prepared stream sha256:a64b032d2a54290daefe90947dc0712dc724beff1ff103737d0088df4f827798
+  docs/archive/tasks/PB-062-evidence/work/verification/PB-062/audit-02/snapshot.meta.json: prepared stream sha256:2eb705eb37213d72ac5eac7eaae18cacf79fc77cb6aec94765ab1e06b8334cd1
+  docs/archive/tasks/PB-062-evidence/work/verification/PB-062/audit-02/snapshot.txt: prepared stream sha256:967cac29a9fb5aa05f286ba758be6e1f738677c9f2987b31628727b72f293c62
+  docs/archive/tasks/PB-062-evidence/work/verification/PB-062/audit-03/checks.log: prepared stream sha256:750e331f8324b52ea9e8a4424f9b7f51c644e32a2118cede3ed4887afd6cb160
+  docs/archive/tasks/PB-062-evidence/work/verification/PB-062/audit-03/findings.txt: prepared stream sha256:9da79005c3bb8a0171bfdbb7c3430bfed77e2d36339355489337e251ccf0ae49
+  docs/archive/tasks/PB-062-evidence/work/verification/PB-062/audit-03/preflight.log: prepared stream sha256:39eff2dd9802347573379102aa688e6dc07705ac3f6bb85e246a24a89bfe4322
+  docs/archive/tasks/PB-062-evidence/work/verification/PB-062/audit-03/previous-probe.log: prepared stream sha256:7f31468b9c7bedc6e996bff52a356752f8e0ed086cc24ef31f5e2c0e71b4b207
+  docs/archive/tasks/PB-062-evidence/work/verification/PB-062/audit-03/probe.log: prepared stream sha256:cadcae4a9addca41d639cce795f9f47ef7fcfa13be0cfa655907f7fa0b7b8ad9
+  docs/archive/tasks/PB-062-evidence/work/verification/PB-062/audit-03/probe.py: prepared stream sha256:ef3c83bbb7263c75e654d5f385f78b6abb565e590b102cab53cee0497ad6317f
+  docs/archive/tasks/PB-062-evidence/work/verification/PB-062/audit-03/provenance.json: prepared stream sha256:1fd338bc8e755c724011795aa74ae4b6aac015b2620ab5b1b76f41680132f796
+  docs/archive/tasks/PB-062-evidence/work/verification/PB-062/audit-03/provenance.sha256: prepared stream sha256:6474297d874d27ce6f90863fae88d9510291f3c989715ff0a9619fe0b2fd0737
+  docs/archive/tasks/PB-062-evidence/work/verification/PB-062/audit-03/ready.log: prepared stream sha256:a64b032d2a54290daefe90947dc0712dc724beff1ff103737d0088df4f827798
+  docs/archive/tasks/PB-062-evidence/work/verification/PB-062/audit-03/snapshot.meta.json: prepared stream sha256:b56234f91dc6dbbbc6f5852c59cc84f967634cd6243192ca3fd55cb251d83778
+  docs/archive/tasks/PB-062-evidence/work/verification/PB-062/audit-03/snapshot.txt: prepared stream sha256:457491215b4de08258c0402741e48474ef029adda6fe783e140d6b3508e6b569
+  docs/archive/tasks/PB-062-evidence/work/verification/PB-062/audit-04/checks.log: prepared stream sha256:02ce301a96422186e14eff5c8cab67a0a668b02c3d0babc07dd8f829089cae49
+  docs/archive/tasks/PB-062-evidence/work/verification/PB-062/audit-04/findings.txt: prepared stream sha256:e5a9e6d76bf893cae484fb9ac775256f703b873a23aa8e053ff70391d10f8bfd
+  docs/archive/tasks/PB-062-evidence/work/verification/PB-062/audit-04/probe.log: prepared stream sha256:a88ccb301e78fcf22ba67d640f73ae2f3dee825f048c1256f101e290054b890e
+  docs/archive/tasks/PB-062-evidence/work/verification/PB-062/audit-04/probe.py: prepared stream sha256:ef3c83bbb7263c75e654d5f385f78b6abb565e590b102cab53cee0497ad6317f
+  docs/archive/tasks/PB-062-evidence/work/verification/PB-062/audit-04/provenance.json: prepared stream sha256:f804f94956434e057ff49f55f73b62ef144770d2c05cdb6f2e042608f2ef1f0c
+  docs/archive/tasks/PB-062-evidence/work/verification/PB-062/audit-04/provenance.sha256: prepared stream sha256:2e892466a7babe2f3677cd0244f119a98ddc2682f55c8babbca6efedf42cbca8
+  docs/archive/tasks/PB-062-evidence/work/verification/PB-062/audit-04/snapshot.meta.json: prepared stream sha256:4e98f3527d7bc4736c07dc82bd554fe78169ae9586f861f8f634084396d68707
+  docs/archive/tasks/PB-062-evidence/work/verification/PB-062/audit-04/snapshot.txt: prepared stream sha256:be6db54c32ec740be698e174bd6fee3189e6528813d47d13e5bf59971d381e93
+  docs/archive/tasks/PB-062-evidence/work/verification/PB-062/ddec203142ea47bf8b2c62ceaeb4c45e/preflight-regressions.stderr.log: prepared stream sha256:b211918c5c6e658ca291f7b9fb262d1a4be7a69254c7e972735bcea82f07e3ef
+  docs/archive/tasks/PB-062-evidence/work/verification/PB-062/ddec203142ea47bf8b2c62ceaeb4c45e/preflight-regressions.stdout.log: prepared stream sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+  docs/archive/tasks/PB-062-evidence/work/verification/PB-062/ddec203142ea47bf8b2c62ceaeb4c45e/report.json: prepared stream sha256:6672a28513ea5a39bbfc9ad82900f23d0ee09f877436d27cc0eac52f2032018c
+  docs/archive/tasks/PB-062-evidence/work/verification/PB-062/ddec203142ea47bf8b2c62ceaeb4c45e/self-check.stderr.log: prepared stream sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+  docs/archive/tasks/PB-062-evidence/work/verification/PB-062/ddec203142ea47bf8b2c62ceaeb4c45e/self-check.stdout.log: prepared stream sha256:a64b032d2a54290daefe90947dc0712dc724beff1ff103737d0088df4f827798
+  docs/archive/tasks/PB-062-evidence/work/verification/PB-062/ddec203142ea47bf8b2c62ceaeb4c45e/unit-tests.stderr.log: prepared stream sha256:7cd0c7fd79c5dbf74195dc6a20ec2616726eccf1f41652dae4eab90d02c45d2b
+  docs/archive/tasks/PB-062-evidence/work/verification/PB-062/ddec203142ea47bf8b2c62ceaeb4c45e/unit-tests.stdout.log: prepared stream sha256:45c1862cf38c4cbf96bf321f1758c9a58bb6e71eb3e45ae534fd012ae0cd039c
+  docs/archive/tasks/PB-062-evidence/work/verification/PB-062/f47c0b6e977f473a9802ffcd8ed27ae7/preflight-regressions.stderr.log: prepared stream sha256:d3672d65dd97d736c83ccf27072434924d6fb715f133caf5b5a604b30649a662
+  docs/archive/tasks/PB-062-evidence/work/verification/PB-062/f47c0b6e977f473a9802ffcd8ed27ae7/preflight-regressions.stdout.log: prepared stream sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+  docs/archive/tasks/PB-062-evidence/work/verification/PB-062/f47c0b6e977f473a9802ffcd8ed27ae7/report.json: prepared stream sha256:a39ac9f9cc9f3a4c38083ca7ac7588e59708bceb76d2353a294b7c2bf9b6c04a
+  docs/archive/tasks/PB-062-evidence/work/verification/PB-062/f47c0b6e977f473a9802ffcd8ed27ae7/self-check.stderr.log: prepared stream sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+  docs/archive/tasks/PB-062-evidence/work/verification/PB-062/f47c0b6e977f473a9802ffcd8ed27ae7/self-check.stdout.log: prepared stream sha256:a64b032d2a54290daefe90947dc0712dc724beff1ff103737d0088df4f827798
+  docs/archive/tasks/PB-062-evidence/work/verification/PB-062/f47c0b6e977f473a9802ffcd8ed27ae7/unit-tests.stderr.log: prepared stream sha256:91a31fe58c706363323bfb8bc07a50f11bead792dd436a25094022316af8df72
+  docs/archive/tasks/PB-062-evidence/work/verification/PB-062/f47c0b6e977f473a9802ffcd8ed27ae7/unit-tests.stdout.log: prepared stream sha256:6cf84394194c699d9d37911fe23d736dbee79ba69f90618e7335f9c06eca1128
+--- /dev/null
++++ b/docs/archive/tasks/PB-062.md
+@@ -0,0 +1,288 @@
++# PB-062: Подключить выбор проверок к задачам и готовности релиза
++
++ID: PB-062
++Status: done
++Priority: P2
++Depends-On: PB-061
++Executor: Devin
++Model: SWE-2 Flash High
++Created: 2026-11-07T01:08:27+03:00
++Closed: 2026-11-12T03:45:37+03:00
++
++<!-- playbook-meta:external -->
++
++## Задача
++
++### Цель и границы
++
++Жизненный цикл и релиз. playbook.py/lifecycle.py, CLI modes/checkpoint и consumer gate, правила жизненного цикла. Не публиковать релиз и не создавать автоматические коммиты.
++
++### Контекст
++
++[Спецификация](../../specs/dependency-aware-verification.md): R-08,12,16–18,20; сценарии AC-05,08–09. [Design](../../designs/dependency-aware-verification.md), [ADR-0006](../../adr/0006-dependency-aware-verification.md), [план](../../plans/dependency-aware-verification.md).
++
++Подготовлено по поручению инженера 2026-11-07. Выполнение пока не разрешено. Перед стартом: принятие технического проекта, завершённые зависимости, актуальный card show/handoff затрагиваемых работ и назначение исполнителя. Исходные чужие изменения сохранять.
++
++### Критерии приёмки
++
++- [x] AC-01: Handoff/accept/release-ready используют один selector+coverage; текущие байты сверяются с проверенным candidate. В protected режиме local/поддельные отчёты не закрывают обязательства.
++- [x] AC-02: Release требует весь актуальный набор с cross-task reuse, force запускает всё; commit не триггер авторизации. Самостоятельная проверка/релиз владеют обычной карточкой, запуск в текущей задаче не создаёт новую.
++- [x] AC-03: Manual и новые сценарии приёмки не заменяются старым suite; stale передачи, перенос evidence, concurrent edits, restore и запреты внешнего release проверены.
++- [x] AC-04: Целевые поведенческие проверки и связанные регрессии пройдены; документация и self-manifest актуальны, EXEC/CHECK/HANDOFF содержат реальные доказательства и ограничения; передача зарегистрирована штатным CLI.
++
++### План
++
++1. Уточнить фактические интерфейсы зависимостей и связать изменения с критериями этой карточки.
++2. Реализовать ограниченный объём, добавить постоянные позитивные и негативные проверки критериев AC-01–03; не подменять их структурной проверкой.
++3. Обновить затронутые документы/шаблоны и self-manifest при изменениях комплекта; выполнить адресные проверки, index и check --ready.
++4. Подготовить материалы и пройти действующие preflight/verify/handoff. До явного opt-in использовать прежний контракт; не отключать полный legacy suite ради экономии.
++5. Записать EXEC/CHECK/HANDOFF и передать независимому аудитору; самостоятельно не закрывать.
++
++### Ресурсы
++
++Python и стандартная библиотека для основного CLI; локальные временные проекты и subprocess-счётчики. Новые зависимости защищённого executor обосновать в рамках принятого design. Фактические среда, policy_revision и бюджет фиксируются при старте; доступность отдельной OS/CI identity не предполагается.
++
++Материалы: `docs/tasks/PB-062-evidence/`; команды воспроизведения и отчёты принадлежат этой карточке. Общие материалы и сквозная матрица — AUDIT-009/PB-064.
++
++## Журнал
++
++### EXEC-01 — Выполнение
++Время: 2026-11-11T07:35:00+03:00
++Исполнитель: Devin
++Модель: SWE-2 Flash High
++Изменения: единый selector+coverage для lifecycle по design и spec R-08,12,16–18,20. `checks_gate.py` — read-only `evaluate` областей task/project: тот же `checks_select.plan` и свежесть, что `checks run --mode stale`/`checks status`; protected-вердикт только по квитанциям verifier'а текущего кандидата (candidate/policy digest, отзывы, task_requirements_digest для task_projection-входов), `ok` требует `capability=protected`. `checks_runner.confirm` — append-only подтверждение kind=manual с полной привязкой; `checks_select.evidence_latest` — `not_run` runner'а не маскирует подтверждение. `lifecycle.py` — `_checks_gate` в handoff/accept/close-evidence обеих схем карточек при объявленной `checks_policy`; без политики прежний контракт verify-отчётов; v2-контекст разворачивается до физического корня (ProjectView). CLI `checks confirm` и `checks release-ready` (read-only, exit 0 только при ok). Постоянные тесты tests/test_checks_gate.py — 11 сценариев AC-01–03 (local/protected покрытие, forgery, stale candidate, cross-task reuse, manual confirm, legacy без policy). Документация: rules/verification.md (раздел PB-062), architecture.md, code-map.md, CHANGELOG.md; self-manifest пересобран; evidence — docs/tasks/PB-062-evidence/commands.md.
++Файлы:
++- ai-dev-playbook/scripts/checks_gate.py
++- ai-dev-playbook/scripts/checks_runner.py
++- ai-dev-playbook/scripts/checks_select.py
++- ai-dev-playbook/scripts/lifecycle.py
++- ai-dev-playbook/scripts/playbook.py
++- ai-dev-playbook/rules/verification.md
++- ai-dev-playbook/manifest.json
++- tests/test_checks_gate.py
++- docs/architecture.md
++- docs/code-map.md
++- docs/tasks/PB-062-evidence/commands.md
++- CHANGELOG.md
++
++### CHECK-01 — Проверка
++Время: 2026-11-11T08:05:00+03:00
++Исполнитель: Devin
++Модель: SWE-2 Flash High
++Результат: passed
++Критерии: AC-01, AC-02, AC-03, AC-04
++Команда: `python3 -m unittest discover -s tests -p "test_checks_gate.py" -v` (11 сценариев PB-062), `python3 -m unittest discover -s tests -p "test_checks_*.py"` (266 тестов), `python3 -m unittest test_lifecycle test_workflow_e2e` (38 тестов), полный `python3 -m unittest discover -s tests -p "test_*.py"` (1035 тестов), `playbook.py index`, `playbook.py check --ready`, `playbook.py adopt . --force --apply`, полный `playbook.py verify PB-062` (self-check, preflight-regressions, unit-tests — отчёт 84150d61e6ef44efaf39d7446a34f4a3, inputs_unchanged)
++Среда: macOS Darwin 27, Python 3.14.6; временные проекты-фикстуры в /tmp; checkout dev.
++Факт: единый `checks_gate.evaluate` подключён к handoff/accept/close-evidence обеих схем карточек и `checks release-ready`; local-режим покрывается свежими результатами, protected — только квитанциями текущего кандидата при доказанной границе; manual подтверждается `checks confirm`, `not_run` не маскирует; release-ready требует весь набор project-области с cross-task reuse; без `checks_policy` поведение legacy сохранено (11 новых + 1035 регрессионных тестов зелёные).
++Доказательства: [команды и ограничения](PB-062-evidence/commands.md), [отчёт verify](PB-062-evidence/work/verification/PB-062/84150d61e6ef44efaf39d7446a34f4a3/report.json)
++Ограничения: самопроверка исполнителя. Стенд без отдельной OS identity — `verifier probe` capability=local; protected-вердикт покрыт тестом с подменой probe, защищённая эксплуатация не заявлена (ограничение PB-061 сохраняется). `checks_policy` в self-project не подключена (PB-063) — поведение проверено на временных фикстурах. Изменения не закоммичены.
++
++### HANDOFF-01 — Передача
++Время: 2026-11-11T08:05:00+03:00
++Исполнитель: Devin
++Модель: SWE-2 Flash High
++Выполнение: EXEC-01
++Проверки: CHECK-01
++Состояние: in_review; dev; изменения не закоммичены. Реализован lifecycle-gate PB-062 (checks_gate.evaluate, checks confirm, checks release-ready, подключение к handoff/accept/close legacy+v2); полный verify passed. Следующий шаг — независимый аудит в отдельной сессии.
++Фокус аудита: единый selector+coverage на handoff/accept/release-ready; сверка текущих байтов с кандидатом доказательств; отказ local/поддельных/stale/replay-квитанций в protected; обязательность всего набора при release и cross-task reuse по привязкам; force-полный перезапуск; отсутствие авторизации по commit/имени ветки и автосоздания карточек; сохранение legacy-контракта без checks_policy; маскировка manual-подтверждения not_run; ViewPath→физический корень в v2.
++
++### AUDIT-01 — Аудит
++Время: 2026-11-11T09:18:46+03:00
++Исполнитель: Codex
++Модель: GPT-6
++Передача: HANDOFF-01
++Результат: changes_requested
++Критерии: AC-01, AC-02, AC-03, AC-04
++Независимо проверено: требования и diff реализации; audit-ready и JSON состояния критериев; 11 целевых тестов; 266 связанных регрессионных тестов; отдельная поведенческая TTL-проба с настоящей квитанцией verifier.
++Доказательства: [протокол](PB-062-evidence/work/verification/PB-062/audit-01/findings.txt), [TTL-проба](PB-062-evidence/work/verification/PB-062/audit-01/probe_ttl.py), [регрессии](PB-062-evidence/work/verification/PB-062/audit-01/checks.log).
++Ограничения: audit-ready отклонил передачу до подготовки контейнера; приёмка и полный verify не выполнялись. Protected OS boundary в TTL-пробе подменена, как в целевом тесте; реальная отдельная identity не заявляется. Первые запуски затронули ограничения вложенного sandbox и активную операцию prepare-audit; повторные прогоны выполнены после устранения этих условий. Реализация не исправлялась.
++
++#### A-01 — Замечание
++Серьёзность: P1
++Критерии: AC-01, AC-02, AC-03
++Проблема: protected-gate принимает квитанцию после истечения TTL внешней зависимости. `_protected_receipts` проверяет подпись и candidate, но не свежесть исходного executable-result; `_protected_verdict` возвращает ему covered.
++Воспроизведение: из корня выполнить `python3 work/verification/PB-062/audit-01/probe_ttl.py` вне вложенного sandbox; политика требует api с TTL 60 секунд, реальный verifier выдаёт passed, evaluate вызывается с now=2099-01-01 и подменой только probe OS-границы.
++Факт: ok=true, covered=[probe], uncovered=[], rejections=[].
++Влияние: handoff/accept/release-ready могут признать просроченное внешнее доказательство пригодным; нарушена свежесть актуального набора по AC-05 спецификации.
++Критерий исправления: protected consumer проверяет TTL/always_run и значимые привязки доверенного исходного результата по общему контракту свежести; просроченный результат не покрывает обязательство. Добавлены поведенческие регрессии для run и aggregate receipts.
++
++#### A-02 — Замечание
++Серьёзность: P2
++Критерии: AC-04
++Проблема: CHECK-01 не совпадает с зарегистрированной привязкой criterion_evidence; передача не готова к аудиту.
++Воспроизведение: `playbook.py verify PB-062 --audit-ready` и `playbook.py card show PB-062 --json` на переданном состоянии до аудиторских правок.
++Факт: audit-ready exit=1; у AC-01–04 reason=unbound_or_changed_check. CHECK-01 привязан к verify-69f1c89b20a24c79be547ca1cf7b41e1, а текст CHECK сообщает отчёт 84150d61e6ef44efaf39d7446a34f4a3.
++Влияние: passed в журнале не подтверждает критерии через штатный gate; независимая приёмка невозможна.
++Критерий исправления: после исправлений добавить новые EXEC/CHECK/HANDOFF, зарегистрировать свежую передачу; audit-ready завершается успешно, критерии подтверждены CLI без переписывания прежней истории.
++
++### EXEC-02 — Исправление
++Время: 2026-11-11T09:24:00+03:00
++Исполнитель: Devin
++Модель: SWE-2 Flash High
++Замечания: A-01, A-02
++Изменения: A-01 — `_protected_receipts` в checks_gate.py теперь загружает доверенный результат каждой покрываемой проверки и применяет `checks_runner._external_freshness` (ttl/always_run по `finished_at`/`reused.issued_at`) — просроченное внешнее доказательство не закрывает обязательство ни для run-, ни для aggregate-квитанций; статус результата в доме перепроверяется (`passed`). A-02 — процессный: после исправления добавляются EXEC-02/CHECK-02/HANDOFF-02 со свежей передачей; статус in_review и индекс подготовлены до verify, чтобы не устаревал отчёт. Поведенческие регрессии tests/test_checks_gate.py::ProtectedTtlTest (run+aggregate, TTL 60с, now=2099). Документация: rules/verification.md, architecture.md, commands.md; self-manifest пересобран.
++Файлы:
++- ai-dev-playbook/scripts/checks_gate.py
++- tests/test_checks_gate.py
++- ai-dev-playbook/rules/verification.md
++- ai-dev-playbook/manifest.json
++- docs/architecture.md
++- docs/tasks/PB-062-evidence/commands.md
++
++### CHECK-02 — Проверка
++Время: 2026-11-11T09:52:00+03:00
++Исполнитель: Devin
++Модель: SWE-2 Flash High
++Результат: passed
++Критерии: AC-01, AC-02, AC-03, AC-04
++Команда: `python3 -m unittest discover -s tests -p "test_checks_gate.py" -v` (13 сценариев), `python3 -m unittest discover -s tests -p "test_checks_*.py"` (268 тестов), полный `playbook.py verify PB-062` (self-check, preflight-regressions, unit-tests — отчёт 02d82d1a1c7549dc813934603ab26a29, inputs_unchanged)
++Среда: macOS Darwin 27, Python 3.14.6; временные проекты-фикстуры в /tmp; checkout dev.
++Факт: A-01 исправлено — protected-consumer применяет общий контракт внешней свежести (ttl/always_run) к доверенному результату каждой квитанции; регрессии ProtectedTtlTest подтверждают отказ просроченного run- и aggregate-доказательства и покрытие свежего. A-02 — статус in_review и индекс подготовлены до verify; CHECK-02/HANDOFF-02 ссылаются на отчёт 02d82d1a, передача регистрируется заново штатным CLI.
++Доказательства: [команды и ограничения](PB-062-evidence/commands.md), [отчёт verify](PB-062-evidence/work/verification/PB-062/02d82d1a1c7549dc813934603ab26a29/report.json), [протокол аудита](PB-062-evidence/work/verification/PB-062/audit-01/findings.txt)
++Ограничения: самопроверка исполнителя. Стенд без отдельной OS identity — capability=local; protected-вердикт покрыт тестом с подменой probe. `checks_policy` в self-project не подключена (PB-063). Изменения не закоммичены.
++
++### HANDOFF-02 — Передача
++Время: 2026-11-11T09:52:00+03:00
++Исполнитель: Devin
++Модель: SWE-2 Flash High
++Выполнение: EXEC-02
++Проверки: CHECK-02
++Состояние: in_review; dev; изменения не закоммичены. Исправлены A-01 (TTL/always_run свежесть доверенных результатов в protected-gate, регрессии run+aggregate) и A-02 (свежая CHECK/HANDOFF-передача с консистентной привязкой); полный verify passed. Следующий шаг — повторный независимый аудит.
++Фокус аудита: `_protected_receipts` применяет `_external_freshness` ко всем покрываемым проверкам включая aggregate; отказ именно по свежести (не по подлинности) не ломает покрытие свежих квитанций; статус документа в доме перепроверяется; CHECK-02 привязан к отчёту 02d82d1a и audit-ready завершается успешно.
++
++### AUDIT-02 — Аудит
++Время: 2026-11-11T10:09:32+03:00
++Исполнитель: Codex
++Модель: GPT-6
++Передача: HANDOFF-02
++Результат: changes_requested
++Критерии: AC-01, AC-02, AC-03, AC-04
++Закрытые замечания: A-01, A-02
++Независимо проверено: исправления EXEC-02; TTL run/aggregate в 268 связанных checks-тестах; независимая проба настоящих verifier run/receipts: expired-only, expired+fresh в двух порядках имён, passed→failed на одинаковом candidate; хеш CHECK-02, хеш отчёта 02d82d1a, проекция требований и EXEC-02 совпадают со служебными привязками. Исходная причина A-01 устранена: expired-only теперь uncovered; причина A-02 устранена новой консистентной привязкой CHECK-02.
++Доказательства: [протокол](PB-062-evidence/work/verification/PB-062/audit-02/findings.txt), [поведенческая проба](PB-062-evidence/work/verification/PB-062/audit-02/probe.py), [вывод пробы](PB-062-evidence/work/verification/PB-062/audit-02/probe.log), [268 тестов](PB-062-evidence/work/verification/PB-062/audit-02/checks.log).
++Ограничения: до аудиторских правок audit-ready exit=1: прошлые A-01/A-02 ещё открыты, criterion_states отдаёт приоритет open_finding; это отдельное процессное препятствие, а не прежнее несовпадение CHECK. Полный verify повторно не запускался; приёмка не зарегистрирована. Проба подменяет только OS-boundary probe, защищённое развёртывание не заявляется. Код реализации не изменялся.
++
++#### A-03 — Замечание
++Серьёзность: P1
++Критерии: AC-01, AC-02
++Проблема: protected consumer игнорирует поздний failed/timeout и сохраняет покрытие более ранним passed. `_protected_receipts` отбрасывает непрошедшие результаты до выбора актуального результата и не использует доверенную последовательность истории.
++Воспроизведение: из корня выполнить `python3 work/verification/PB-062/audit-02/probe.py` вне вложенного sandbox; раздел passed_then_failed выполняет одобренную command-проверку, читающую внешний временный флаг: сначала 0, затем 1. Подписанные квитанции настоящие, candidate_digest обоих прогонов одинаков.
++Факт: outcomes первого прогона passed, второго failed; same_candidate=True; итоговый gate ok=True, covered=[probe], rejections=[].
++Влияние: handoff/accept/release-ready признают готовность после фактического падения обязательной проверки; нарушены AC-05 спецификации и раздел 6 design о последнем результате и доверенной истории.
++Критерий исправления: текущий исход обязательства определяется по защищённой последовательности/истории verifier; поздний failed/timeout блокирует старый passed. Удаление или переименование проектной копии квитанции не возвращает старое покрытие. Поведенческие регрессии проверяют отрицательный исход и последующее успешное восстановление.
++
++#### A-04 — Замечание
++Серьёзность: P2
++Критерии: AC-01, AC-02, AC-03
++Проблема: просроченная квитанция добавляется в глобальные rejections даже при наличии свежего успешного доказательства, а пропуск уже covered делает результат зависимым от лексикографического порядка имён файлов.
++Воспроизведение: та же probe.py, раздел old_then_fresh/fresh_then_old: настоящий passed-run с TTL 60 секунд в 00:00, второй passed-run в 00:02, evaluate в 00:02:01. Копии названы 000-old.json/999-new.json; затем только старая копия переименована в zzz-old.json.
++Факт: до переименования covered=[probe], uncovered=[], ok=False из-за истёкшего TTL старой квитанции; после переименования без изменения содержимого ok=True, rejections=[].
++Влияние: новый успешный прогон не гарантирует восстановление готовности; случайный receipt ID влияет на результат handoff/accept/release-ready.
++Критерий исправления: выбор актуального пригодного доказательства и причины непокрытия не зависят от имён/порядка файлов; старая просроченная квитанция не блокирует более свежий успешный результат для того же обязательства. Поддельные и отозванные доказательства сохраняют предусмотренные отказы; добавлены регрессии обоих порядков и aggregate.
++
++### EXEC-03 — Исправление
++Время: 2026-11-11T10:18:00+03:00
++Исполнитель: Devin
++Модель: SWE-2 Flash High
++Замечания: A-03, A-04
++Изменения: `_protected_receipts` переписан на доверенную историю verifier'а. Источник — квитанции доверенного дома (`verifier home/receipts`), а не проектные копии `work/checks/receipts`: их имена, порядок и наличие на вердикт не влияют, удаление/переименование копии не возвращает и не отменяет покрытие; квитанции прежнего кандидата/политики — история и пропускаются. Для каждой проверки актуальный исход — доверенный результат с максимальным `finished_at` среди валидных квитанций (aggregate подтверждает исходное время исполнения): поздний failed/timeout блокирует старый passed, просроченная по ttl квитанция отклоняется только когда она актуальная. Отказы сохранены для поддельных/отозванных/невалидных квитанций текущей эпохи. Поведенческие регрессии tests/test_checks_gate.py: ProtectedLatestOutcomeTest (passed→failed→passed на одном кандидате, aggregate не отменяет поздний failed, удаление копий не воскрешает покрытие) и ProtectedTtlTest (expired+fresh в обоих порядках имён, aggregate-вариант). Аудитская проба work/verification/PB-062/audit-02/probe.py: passed_then_failed_gate ok=False, old_then_fresh/fresh_then_old ok=True. Документация: rules/verification.md, architecture.md, code-map.md, CHANGELOG.md, commands.md; self-manifest пересобран.
++Файлы:
++- ai-dev-playbook/scripts/checks_gate.py
++- tests/test_checks_gate.py
++- ai-dev-playbook/rules/verification.md
++- ai-dev-playbook/manifest.json
++- docs/architecture.md
++- docs/code-map.md
++- CHANGELOG.md
++- docs/tasks/PB-062-evidence/commands.md
++
++### CHECK-03 — Проверка
++Время: 2026-11-11T10:47:00+03:00
++Исполнитель: Devin
++Модель: SWE-2 Flash High
++Результат: passed
++Критерии: AC-01, AC-02, AC-03, AC-04
++Команда: `python3 -m unittest discover -s tests -p "test_checks_gate.py" -v` (17 сценариев), `python3 -m unittest test_checks_contract test_checks_graph test_checks_inventory test_checks_run test_checks_select test_checks_trust test_checks_gate test_lifecycle` (306 тестов), аудитская проба `work/verification/PB-062/audit-02/probe.py`, полный `playbook.py verify PB-062` (self-check, preflight-regressions, unit-tests — отчёт f47c0b6e977f473a9802ffcd8ed27ae7, inputs_unchanged)
++Среда: macOS Darwin 27, Python 3.14.6; временные проекты-фикстуры в /tmp; checkout dev.
++Факт: A-03 исправлено — `_protected_receipts` определяет актуальный исход по доверенной истории verifier'а (результат с максимальным `finished_at` среди валидных квитанций текущего кандидата): passed→failed на одном кандидате даёт uncovered, aggregate не отменяет поздний failed, новый passed восстанавливает покрытие; проба passed_then_failed_gate ok=False/uncovered. A-04 исправлено — источник квитанций перенесён в доверенный дом, проектные копии не читаются: old_then_fresh и fresh_then_old дают одинаковый ok=True без ttl-отказа, expired_only по-прежнему uncovered+отказ; удаления/переименования копий вердикт не меняют. Поддельные и отозванные квитанции текущей эпохи — отказы; квитанции прежнего кандидата — история.
++Доказательства: [команды и ограничения](PB-062-evidence/commands.md), [отчёт verify](PB-062-evidence/work/verification/PB-062/f47c0b6e977f473a9802ffcd8ed27ae7/report.json), [протокол аудита](PB-062-evidence/work/verification/PB-062/audit-02/findings.txt)
++Ограничения: самопроверка исполнителя. Стенд без отдельной OS identity — capability=local; protected-вердикт покрыт тестом с подменой probe. `checks_policy` в self-project не подключена (PB-063). Изменения не закоммичены.
++
++### HANDOFF-03 — Передача
++Время: 2026-11-11T10:47:00+03:00
++Исполнитель: Devin
++Модель: SWE-2 Flash High
++Выполнение: EXEC-03
++Проверки: CHECK-03
++Состояние: in_review; dev; изменения не закоммичены. Исправлены A-03 (актуальный исход по доверенной истории verifier — поздний failed блокирует старый passed, aggregate не переопределяет) и A-04 (источник — квитанции дома, проектные копии не влияют; просроченная квитанция отклоняется только когда актуальная); полный verify passed. Следующий шаг — повторный независимый аудит.
++Фокус аудита: `_protected_receipts` читает квитанции из `verifier home/receipts`, а не из `work/checks/receipts`; выбор актуального исхода — max(finished_at, journal seq, result_digest), детерминирован и не зависит от имён файлов; aggregate-исход наследует finished_at исходного результата; отказ по свежести применяется только к актуальному исходу; квитанции чужого кандидата/политики пропускаются без отказа; CHECK-03 привязан к отчёту f47c0b6e.
++
++### AUDIT-03 — Аудит
++Время: 2026-11-12T02:34:31+03:00
++Исполнитель: Codex
++Модель: GPT-6
++Передача: HANDOFF-03
++Результат: changes_requested
++Критерии: AC-01, AC-02, AC-03, AC-04
++Закрытые замечания: A-04
++Независимо проверено: изменения EXEC-03; 272 связанных checks-теста; повторная проба audit-02 (expired-only отвергнут, expired+fresh в обоих порядках готов, passed→failed непокрыт); отдельная проба двух прогонов с одинаковым finished_at и последующим aggregate старого passed. CHECK-03, отчёт f47c0b6e, проекция требований и EXEC-03 совпадают со служебными хешами; отчёт passed, inputs_unchanged=true. A-04 исправлено переносом источника в доверенный дом. A-03 исправлено частично: разные finished_at обрабатываются правильно, равные времена позволяют aggregate отменить поздний failed; A-03 остаётся открытым, уточнение — A-05.
++Доказательства: [протокол](PB-062-evidence/work/verification/PB-062/audit-03/findings.txt), [новая проба](PB-062-evidence/work/verification/PB-062/audit-03/probe.py), [вывод](PB-062-evidence/work/verification/PB-062/audit-03/probe.log), [прежняя проба](PB-062-evidence/work/verification/PB-062/audit-03/previous-probe.log), [272 теста](PB-062-evidence/work/verification/PB-062/audit-03/checks.log).
++Ограничения: audit-ready до аудиторских правок exit=1 из-за открытых замечаний прошлого аудита (приоритет open_finding); приёмка не зарегистрирована. В новой пробе явно задан одинаковый now для обоих прогонов: проверен поддерживаемый случай коллизии временных меток, а не частота его возникновения в реальной среде. Результаты и квитанции настоящие, подменён только OS-boundary probe; реальное protected-развёртывание не заявляется. Полный verify повторно не запускался, реализация не изменялась.
++
++#### A-05 — Замечание
++Серьёзность: P2
++Критерии: AC-01, AC-02
++Проблема: уточнение незакрытого A-03 — при равных finished_at агрегированная квитанция старого passed побеждает более поздний failed. `_protected_receipts` использует seq выдачи aggregate вместо исходного исполнения как tie-breaker в max(finished_at, seq, result_digest).
++Воспроизведение: из корня выполнить `python3 work/verification/PB-062/audit-03/probe.py` вне вложенного sandbox. Два настоящих verifier.run на одном candidate с одинаковым now: первый passed, второй failed; затем verifier.aggregate только первой квитанции, без нового исполнения. Подменена только оценка OS-границы.
++Факт: real_outcomes={probe:passed},{probe:failed}, same_candidate=True; до aggregate ok=False/uncovered=[probe], после aggregate ok=True/covered=[probe].
++Влияние: агрегация старого успеха отменяет более позднее падение при коллизии временных меток. Контракт не гарантирует уникальность finished_at; требование AC-05 спецификации и раздела 6 design о сохранении последнего исхода нарушено.
++Критерий исправления: порядок исполнения определяется устойчивой доверенной последовательностью исходных запусков/результатов; aggregate сохраняет исходный порядок и не становится новым исполнением. Равные времена, aggregate старого passed после failed, восстановление новым реальным passed и перестановка копий покрыты поведенческими регрессиями.
++
++### EXEC-04 — Исправление
++Время: 2026-11-12T02:49:00+03:00
++Исполнитель: Devin
++Модель: SWE-2 Flash High
++Замечания: A-05
++Изменения: `_protected_receipts` — порядок исходов при равных `finished_at` переведён на устойчивую доверенную последовательность запусков: `exec_seq` — позиция receipt-события run-квитанции в журнале verifier для каждого result_digest (построена по всем валидным run-квитанциям дома, включая прежние эпохи — источники aggregate). Aggregate не становится новым исполнением: его исход наследует `exec_seq` исходного run, поэтому при коллизии временных меток aggregate старого passed не отменяет более поздний failed; восстановление — только новым реальным passed. Квитанции вне текущего кандидата/политики валидируются без expect-digest и в исходы не входят; невалидные квитанции прежних эпох отказов не создают. Поведенческая регрессия tests/test_checks_gate.py::test_same_timestamp_aggregate_keeps_failed_latest (passed→failed→aggregate→passed при одном now). Аудитская проба work/verification/PB-062/audit-03/probe.py: after_aggregate ok=False/uncovered=[probe]. Документация: rules/verification.md, architecture.md, code-map.md, CHANGELOG.md, commands.md; self-manifest пересобран.
++Файлы:
++- ai-dev-playbook/scripts/checks_gate.py
++- tests/test_checks_gate.py
++- ai-dev-playbook/rules/verification.md
++- ai-dev-playbook/manifest.json
++- docs/architecture.md
++- docs/code-map.md
++- CHANGELOG.md
++- docs/tasks/PB-062-evidence/commands.md
++
++### CHECK-04 — Проверка
++Время: 2026-11-12T03:18:00+03:00
++Исполнитель: Devin
++Модель: SWE-2 Flash High
++Результат: passed
++Критерии: AC-01, AC-02, AC-03, AC-04
++Команда: `python3 -m unittest discover -s tests -p "test_checks_gate.py" -v` (18 сценариев), `python3 -m unittest test_checks_contract test_checks_graph test_checks_inventory test_checks_run test_checks_select test_checks_trust test_checks_gate test_lifecycle` (307 тестов), аудитские пробы `work/verification/PB-062/audit-02/probe.py` и `work/verification/PB-062/audit-03/probe.py`, полный `playbook.py verify PB-062` (self-check, preflight-regressions, unit-tests — отчёт ddec203142ea47bf8b2c62ceaeb4c45e, inputs_unchanged)
++Среда: macOS Darwin 27, Python 3.14.6; временные проекты-фикстуры в /tmp; checkout dev.
++Факт: A-05 исправлено — `_protected_receipts` строит `exec_seq` (позиция receipt-события исходного run в журнале verifier для каждого result_digest, по всем валидным run-квитанциям дома включая прежние эпохи); aggregate наследует `exec_seq` исходного исполнения и не становится новым прогоном: при равных `finished_at` aggregate старого passed не отменяет поздний failed (проба audit-03: after_aggregate ok=False/uncovered), восстановление — только новым реальным passed (регрессия test_same_timestamp_aggregate_keeps_failed_latest). Пробы audit-02 без регрессий: expired-only отвергнут, expired+fresh в обоих порядках ok, passed→failed непокрыт.
++Доказательства: [команды и ограничения](PB-062-evidence/commands.md), [отчёт verify](PB-062-evidence/work/verification/PB-062/ddec203142ea47bf8b2c62ceaeb4c45e/report.json), [протокол аудита](PB-062-evidence/work/verification/PB-062/audit-03/findings.txt)
++Ограничения: самопроверка исполнителя. Стенд без отдельной OS identity — capability=local; protected-вердикт покрыт тестом с подменой probe. `checks_policy` в self-project не подключена (PB-063). Изменения не закоммичены.
++
++### HANDOFF-04 — Передача
++Время: 2026-11-12T03:18:00+03:00
++Исполнитель: Devin
++Модель: SWE-2 Flash High
++Выполнение: EXEC-04
++Проверки: CHECK-04
++Состояние: in_review; dev; изменения не закоммичены. Исправлено A-05 (порядок исходов при равных finished_at — exec_seq по журналу verifier; aggregate наследует исходную последовательность и не отменяет поздний failed); полный verify passed. Следующий шаг — повторный независимый аудит.
++Фокус аудита: `exec_seq` строится по всем валидным run-квитанциям дома (включая прежние кандидаты — источники aggregate), агрегатные исходы берут seq исходного run; невалидные квитанции прежних эпох отказов не создают; регрессия покрывает равные метки, aggregate после failed и восстановление новым passed; CHECK-04 привязан к отчёту ddec2031.
++
++### AUDIT-04 — Аудит
++Время: 2026-11-12T03:44:20+03:00
++Исполнитель: Codex
++Модель: GPT-6
++Передача: HANDOFF-04
++Результат: accepted
++Критерии: AC-01, AC-02, AC-03, AC-04
++Закрытые замечания: A-03, A-05
++Независимо проверено: EXEC-04 и порядок исходных run по журналу verifier: exec_seq строится отдельно от aggregate, включая исходные run прежних кандидатов; aggregate не увеличивает порядок исполнения. Повторена сохранённая проба audit-03: реальные passed→failed с одинаковым now на одном candidate до и после aggregate старого passed остаются uncovered/ok=false. 273 связанных checks-теста passed, включая TTL, поздний failed, восстановление новым реальным passed при равных метках, неподлинные/отозванные квитанции, legacy/manual и выбор набора. CHECK-04, полный отчёт ddec2031, проекция требований и EXEC-04 совпадают со служебными хешами; отчёт passed, inputs_unchanged=true. Новых замечаний не найдено; исходные A-03/A-05 закрыты.
++Доказательства: [протокол](PB-062-evidence/work/verification/PB-062/audit-04/findings.txt), [проба A-05](PB-062-evidence/work/verification/PB-062/audit-04/probe.py), [вывод пробы](PB-062-evidence/work/verification/PB-062/audit-04/probe.log), [273 теста](PB-062-evidence/work/verification/PB-062/audit-04/checks.log).
++Ограничения: audit-ready до добавления аудита отклоняет передачу из-за ещё открытых A-03/A-05 (open_finding), а не несовпадения CHECK/отчёта; они закрываются этим аудитом. Полный verify повторно не запускался: независимо проверены привязки переданного полного отчёта и затронутые регрессии. В пробе явно задан одинаковый now для воспроизведения коллизии, подменена только оценка OS-boundary; реальная отдельная identity не проверена. checks_policy self-project не подключена (PB-063). Приёмка относится к текущему результату PB-062 и не означает приёмку всего блока AUDIT-009 или разрешение внешнего release. Код реализации не менялся.
+--- a/docs/plans/dependency-aware-verification.md
++++ b/docs/plans/dependency-aware-verification.md
+@@ -49,7 +49,7 @@
+ | [PB-059](../archive/tasks/PB-059.md) | Граф и выбор | PB-058 | AC-01–04 |
+ | [PB-060](../archive/tasks/PB-060.md) | Runner и результаты | PB-059 | AC-04–07 |
+ | [PB-061](../archive/tasks/PB-061.md) | Граница доверия | PB-060 | AC-07–08,11 |
+-| [PB-062](../tasks/PB-062.md) | Жизненный цикл и релиз | PB-061 | AC-05,08–09 |
++| [PB-062](../archive/tasks/PB-062.md) | Жизненный цикл и релиз | PB-061 | AC-05,08–09 |
+ | [PB-063](../tasks/PB-063.md) | Настройка и миграция | PB-062 | AC-03,06,10 |
+ | [PB-064](../tasks/PB-064.md) | Сквозной пилот | PB-063 | AC-01–11 |
+ | [AUDIT-009](../tasks/AUDIT-009.md) | Независимая приёмка всего блока | PB-057–064 | AC-01–11 |
+--- a/docs/plans/index.md
++++ b/docs/plans/index.md
+@@ -6,7 +6,7 @@
+ | Документ | Состояние | Обновлён | Задачи |
+ |---|---|---|---|
+ | [План внедрения вариантов аудита и задач исправлений](block-acceptance.md) | draft | 2026-11-07 | [PB-065](../tasks/PB-065.md), [PB-066](../tasks/PB-066.md), [PB-067](../tasks/PB-067.md), [PB-068](../tasks/PB-068.md), [PB-069](../tasks/PB-069.md), [PB-070](../tasks/PB-070.md), [PB-071](../tasks/PB-071.md), [AUDIT-010](../tasks/AUDIT-010.md) |
+-| [План внедрения автоматического выбора проверок](dependency-aware-verification.md) | accepted | 2026-11-11 | [PB-057](../archive/tasks/PB-057.md), [PB-058](../archive/tasks/PB-058.md), [PB-059](../archive/tasks/PB-059.md), [PB-060](../archive/tasks/PB-060.md), [PB-061](../archive/tasks/PB-061.md), [PB-062](../tasks/PB-062.md), [PB-063](../tasks/PB-063.md), [PB-064](../tasks/PB-064.md), [AUDIT-009](../tasks/AUDIT-009.md) |
++| [План внедрения автоматического выбора проверок](dependency-aware-verification.md) | accepted | 2026-11-11 | [PB-057](../archive/tasks/PB-057.md), [PB-058](../archive/tasks/PB-058.md), [PB-059](../archive/tasks/PB-059.md), [PB-060](../archive/tasks/PB-060.md), [PB-061](../archive/tasks/PB-061.md), [PB-062](../archive/tasks/PB-062.md), [PB-063](../tasks/PB-063.md), [PB-064](../tasks/PB-064.md), [AUDIT-009](../tasks/AUDIT-009.md) |
+ | [Переход к выборочным файловым операциям и хранению 15 операций](scoped-file-operations.md) | draft | 2026-10-26 | [PB-045](../archive/tasks/PB-045.md), [PB-046](../tasks/PB-046.md), [PB-047](../tasks/PB-047.md), [PB-048](../tasks/PB-048.md), [PB-049](../tasks/PB-049.md), [PB-050](../tasks/PB-050.md), [AUDIT-008](../tasks/AUDIT-008.md) |
+ | [План предотвращения процессных ошибок перед проверкой и аудитом](verification-process-readiness.md) | draft | 2026-11-11 | — |
+ 
+--- a/docs/tasks/index.md
++++ b/docs/tasks/index.md
+@@ -18,7 +18,6 @@
+ | PB-048 | [PB-048: Перевести обновление комплекта на выборочную подготовку](PB-048.md) | draft | P2 | — | 2026-10-26 17:56 | — | PB-047 |
+ | PB-049 | [PB-049: Очищать завершённые операции и разрешать конфликты](PB-049.md) | draft | P2 | — | 2026-10-26 17:56 | — | PB-047, PB-048 |
+ | PB-050 | [PB-050: Проверить сквозной переход и описать новый контракт](PB-050.md) | draft | P2 | — | 2026-10-26 17:56 | — | PB-049 |
+-| PB-062 | [PB-062: Подключить выбор проверок к задачам и готовности релиза](PB-062.md) | in_review | P2 | Devin / SWE-2 Flash High | 2026-11-07 01:08 | — | PB-061 |
+ | PB-063 | [PB-063: Внедрить настройку проекта и совместимое обновление](PB-063.md) | draft | P2 | — | 2026-11-07 01:08 | — | PB-062 |
+ | PB-064 | [PB-064: Проверить сквозные сценарии и выполнить пилот выбора проверок](PB-064.md) | draft | P2 | — | 2026-11-07 01:09 | — | PB-063 |
+ | PB-065 | [PB-065: Определить форматы плана приёмки и графа зависимостей](PB-065.md) | in_review | P2 | Devin / SWE-2 High | 2026-11-07 01:35 | — | — |
+@@ -34,6 +33,7 @@
+ 
+ | ID | Задача | Статус | Приоритет | Исполнитель | Создана | Закрыта | Зависимости |
+ |---|---|---|---|---|---|---|---|
++| PB-062 | [PB-062: Подключить выбор проверок к задачам и готовности релиза](../archive/tasks/PB-062.md) | done | P2 | Devin / SWE-2 Flash High | 2026-11-07 01:08 | 2026-11-12 03:45 | PB-061 |
+ | PB-061 | [PB-061: Подтверждать результаты и политику в защищённом контуре](../archive/tasks/PB-061.md) | done | P2 | Codex / GPT-6.1 Sol (Low) | 2026-11-07 01:07 | 2026-11-11 05:14 | PB-060 |
+ | PB-060 | [PB-060: Учитывать выполненные тесты и переиспользовать актуальные результаты](../archive/tasks/PB-060.md) | done | P2 | Devin / SWE-2 High | 2026-11-07 01:07 | 2026-11-10 16:51 | PB-059 |
+ | PB-059 | [PB-059: Построить карту зависимостей и объяснимый выбор проверок](../archive/tasks/PB-059.md) | done | P2 | Devin / SWE-2 High | 2026-11-07 01:07 | 2026-11-09 09:10 | PB-058 |

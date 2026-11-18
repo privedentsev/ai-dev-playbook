@@ -1,0 +1,77 @@
+test_plan_prints_selection (test_checks_select.CliPlanTest.test_plan_prints_selection)
+checks plan печатает выбор проверок с кодом 0 ... ok
+test_plan_read_only (test_checks_select.CliPlanTest.test_plan_read_only)
+checks plan не изменяет файлы проекта ... ok
+test_plan_requires_policy_link (test_checks_select.CliPlanTest.test_plan_requires_policy_link)
+checks plan без checks_policy в project.json отклоняется ... ok
+test_plan_requires_task (test_checks_select.CliPlanTest.test_plan_requires_task)
+checks plan без задачи отклоняется ... ok
+test_ast_reads_within_same_budget (test_checks_select.PlanTest.test_ast_reads_within_same_budget)
+AST-чтения учитываются в том же байтовом бюджете ... ok
+test_bytes_budget_conservative (test_checks_select.PlanTest.test_bytes_budget_conservative)
+Малый байтовый бюджет делает план консервативным ... ok
+test_content_edit_detected (test_checks_select.PlanTest.test_content_edit_detected)
+Изменение содержимого файла обнаруживается планом ... ok
+test_corrupt_baseline_conservative (test_checks_select.PlanTest.test_corrupt_baseline_conservative)
+Повреждённый baseline делает план консервативным ... ok
+test_deleted_input_required (test_checks_select.PlanTest.test_deleted_input_required)
+Удалённый вход делает зависимую проверку обязательной ... ok
+test_edit_selects_consumer_chain (test_checks_select.PlanTest.test_edit_selects_consumer_chain)
+Правка файла выбирает цепочку проверок-потребителей ... ok
+test_environment_mismatch_not_reused (test_checks_select.PlanTest.test_environment_mismatch_not_reused)
+Несовпадение среды не переиспользует результат ... ok
+test_first_plan_no_baseline_requires_all (test_checks_select.PlanTest.test_first_plan_no_baseline_requires_all)
+Первый план без baseline требует все проверки ... ok
+test_hash_counter_expected_set (test_checks_select.PlanTest.test_hash_counter_expected_set)
+Счётчик хешей покрывает ровно ожидаемый набор файлов ... ok
+test_irrelevant_edit_outside_modules (test_checks_select.PlanTest.test_irrelevant_edit_outside_modules)
+Правка вне модулей не выбирает проверки ... ok
+test_newer_failed_hides_older_passed (test_checks_select.PlanTest.test_newer_failed_hides_older_passed)
+Более новый failed скрывает старый passed при reuse ... ok
+test_read_only_no_writes (test_checks_select.PlanTest.test_read_only_no_writes)
+Plan не пишет в дерево проекта ... ok
+test_reuse_valid_result (test_checks_select.PlanTest.test_reuse_valid_result)
+Валидный свежий результат переиспользуется в плане ... ok
+test_seconds_budget_blocks_before_run (test_checks_select.PlanTest.test_seconds_budget_blocks_before_run)
+Превышение бюджета секунд блокирует план до запуска ... ok
+test_stale_input_not_reused (test_checks_select.PlanTest.test_stale_input_not_reused)
+Устаревший вход не переиспользует результат ... ok
+test_always_and_task_obligations_add (test_checks_select.SelectTest.test_always_and_task_obligations_add)
+always и обязательства задачи добавляются к выбору ... ok
+test_change_only_inside_module_no_spill (test_checks_select.SelectTest.test_change_only_inside_module_no_spill)
+Изменение внутри модуля не затрагивает чужие проверки ... ok
+test_checkpoint_not_required_without_flag (test_checks_select.SelectTest.test_checkpoint_not_required_without_flag)
+Чекпоинт-проверка не обязательна без явного флага ... ok
+test_closure_digest_chain_cycle_change (test_checks_select.SelectTest.test_closure_digest_chain_cycle_change)
+Изменение в цепочке/цикле closure меняет digest выбора ... ok
+test_module_change_selects_own_and_consumers (test_checks_select.SelectTest.test_module_change_selects_own_and_consumers)
+Изменение модуля выбирает его проверки и проверки потребителей ... ok
+test_obligations_never_narrow (test_checks_select.SelectTest.test_obligations_never_narrow)
+Обязательства никогда не сужают выбор проверок ... ok
+test_subsystem_consumer_expands (test_checks_select.SelectTest.test_subsystem_consumer_expands)
+Потребитель-подсистема расширяет выбор по своим проверкам ... ok
+test_transitive_two_edge_chain (test_checks_select.SelectTest.test_transitive_two_edge_chain)
+Транзитивная цепочка из двух рёбер расширяет выбор ... ok
+test_unattributed_module_scope_blocked (test_checks_select.SelectTest.test_unattributed_module_scope_blocked)
+Неатрибутированный путь блокируется fallback scope=module ... ok
+test_unattributed_path_blocked_by_scope (test_checks_select.SelectTest.test_unattributed_path_blocked_by_scope)
+Неатрибутированный путь блокируется fallback scope=subsystem ... ok
+test_unattributed_path_project_scope (test_checks_select.SelectTest.test_unattributed_path_project_scope)
+Неатрибутированный путь попадает в unattributed при scope=project ... ok
+test_unknown_module_always_affected (test_checks_select.SelectTest.test_unknown_module_always_affected)
+Модуль из unknown-записей всегда считается затронутым ... ok
+test_unknown_project_scope_widens (test_checks_select.SelectTest.test_unknown_project_scope_widens)
+unknown со scope=project расширяет выбор консервативно ... ok
+test_unproven_change_widens (test_checks_select.SelectTest.test_unproven_change_widens)
+Недоказанное изменение расширяет выбор до run всех проверок ... ok
+test_when_paths_unmatched_not_required (test_checks_select.SelectTest.test_when_paths_unmatched_not_required)
+when_paths без совпадения не делает проверку обязательной ... ok
+
+----------------------------------------------------------------------
+Ran 34 tests in 2.779s
+
+OK
+Создано 74 файлов в /private/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/tmpqdtpkj4y; manifest записан. Заполните документы и project.json; setup_status=needs_review.
+Создано 74 файлов в /private/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/tmp49d46xbs; manifest записан. Заполните документы и project.json; setup_status=needs_review.
+Создано 74 файлов в /private/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/tmpgumpi18a; manifest записан. Заполните документы и project.json; setup_status=needs_review.
+Создано 74 файлов в /private/var/folders/53/qpdfw9ls555gkkcwh7dv04dw0000gp/T/tmpq8q9mfr7; manifest записан. Заполните документы и project.json; setup_status=needs_review.
