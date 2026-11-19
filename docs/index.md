@@ -16,8 +16,8 @@
 
 - Выборочная подготовка файлов и ограниченная история операций: [требования](specs/scoped-file-operations.md), [design](designs/scoped-file-operations.md), [ADR-0005](adr/0005-scoped-file-operations.md), [план PB-045–PB-050 и AUDIT-008](plans/scoped-file-operations.md). Подготовка до задач; выполнение не разрешено.
 
-- Автоматический выбор проверок по зависимостям: [требования](specs/dependency-aware-verification.md), [design](designs/dependency-aware-verification.md), [ADR-0006](adr/0006-dependency-aware-verification.md), [план PB-057–064 и AUDIT-009](archive/plans/dependency-aware-verification.md). Реализация и индивидуальная приёмка — в карточках подзадач; решение по совместной приёмке — в AUDIT-009.
+- Автоматический выбор проверок по зависимостям: [требования](specs/dependency-aware-verification.md), [design](designs/dependency-aware-verification.md), [ADR-0006](adr/0006-dependency-aware-verification.md), [план PB-057–064 и AUDIT-009](archive/plans/dependency-aware-verification.md). Изменения приняты в [AUDIT-009](archive/tasks/AUDIT-009.md). Локальная политика репозитория подключена в [PB-082](archive/tasks/PB-082.md).
 
-- Варианты аудита плана и исправления без возврата архива: [требования](specs/block-acceptance.md), [design](designs/block-acceptance.md), [ADR-0007](adr/0007-block-acceptance.md), [план PB-065–071 и AUDIT-010](plans/block-acceptance.md). Документы и карточки draft; реализация не начата.
+- Варианты аудита плана и исправления без возврата архива: [требования](specs/block-acceptance.md), [design](designs/block-acceptance.md), [ADR-0007](adr/0007-block-acceptance.md), [план PB-065–071 и AUDIT-010](plans/block-acceptance.md). Контракт и CLI из PB-065 переданы на проверку. Остальные работы блока запланированы.
 
-- Защита от коллизий архивирования материалов: [требования](specs/material-archive-safety.md), [design](designs/material-archive-safety.md), [PB-072](tasks/PB-072.md) и материалы реализации. Draft; подготовка разрешена, кодирование не начато.
+- Защита от коллизий архивирования материалов: [требования](specs/material-archive-safety.md), [design](designs/material-archive-safety.md), [PB-072](tasks/PB-072.md) и материалы реализации. Реализация передана на проверку.

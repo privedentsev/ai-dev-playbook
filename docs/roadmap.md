@@ -7,7 +7,7 @@
 - Защита актуальности плана и записи по находкам AUDIT-005: [PB-019](archive/tasks/PB-019.md), общая для PB-016/PB-018.
 - Режимы работы и жизненный цикл документов: [PB-020](archive/tasks/PB-020.md), [спецификация](specs/workflow-and-document-lifecycle.md), [техническое предложение](designs/workflow-and-document-lifecycle.md), [ADR](adr/index.md), [план реализации](archive/plans/workflow-and-document-lifecycle.md). Декомпозиция: PB-021–PB-029 → [AUDIT-006](archive/tasks/AUDIT-006.md); порядок и зависимости — в плане и карточках. Интеграция playbook обсуждается отдельно; планирование не разрешает реализацию.
 
-- Соразмерные маршруты, проверки и приёмка: [спецификация](specs/proportional-workflow.md), [design](designs/proportional-workflow.md), [ADR-0003](adr/0003-task-scoped-verification.md), [план](archive/plans/proportional-workflow.md). Карточки PB-031–PB-037 и AUDIT-007 подготовлены в draft; статусы — в [индексе задач](tasks/index.md). Планирование не разрешает реализацию и не меняет очередь существующих работ.
+- Соразмерные маршруты, проверки и приёмка: [спецификация](specs/proportional-workflow.md), [design](designs/proportional-workflow.md), [ADR-0003](adr/0003-task-scoped-verification.md), [план](archive/plans/proportional-workflow.md). Маршруты и пилот workflow v2 приняты в [AUDIT-007](archive/tasks/AUDIT-007.md).
 
 ## План: компактное чтение карточек и внешние метаданные
 
@@ -36,8 +36,8 @@
 
 ## Автоматический выбор проверок и доверенные результаты
 
-Подготовлены [требования](specs/dependency-aware-verification.md), [design](designs/dependency-aware-verification.md), [ADR-0006](adr/0006-dependency-aware-verification.md) и [план PB-057–064 / AUDIT-009](archive/plans/dependency-aware-verification.md). Git-независимые снимки, автоматические зависимости, выбор/reuse, фактический каталог тестов, защищённый executor, релизное покрытие и совместимый opt-in. Технический проект ожидает принятия; кодирование и включение режима не разрешены этой подготовкой. Статусы — в карточках; существующая очередь не изменяется.
+Подготовлены [требования](specs/dependency-aware-verification.md), [design](designs/dependency-aware-verification.md), [ADR-0006](adr/0006-dependency-aware-verification.md) и [план PB-057–064 / AUDIT-009](archive/plans/dependency-aware-verification.md). Git-независимые снимки, автоматические зависимости, выбор/reuse, фактический каталог тестов, защищённый executor, релизное покрытие и совместимый opt-in. Блок принят в [AUDIT-009](archive/tasks/AUDIT-009.md). В этом репозитории включены пять локальных групп [PB-082](archive/tasks/PB-082.md).
 
 ## Варианты аудита плана и исправления без возврата архива
 
-Подготовлены [требования](specs/block-acceptance.md), [design](designs/block-acceptance.md), [ADR-0007](adr/0007-block-acceptance.md) и [план PB-065–071 / AUDIT-010](plans/block-acceptance.md). Выбор per_task/final/mixed при согласовании плана, выполнение по проверенным передачам, приёмка конечного candidate и новые задачи исправлений по находкам. Документы и карточки draft; реализация не разрешена. Этот блок выполняется по действующему порядку отдельных приёмок; существующая очередь не изменяется.
+Подготовлены [требования](specs/block-acceptance.md), [design](designs/block-acceptance.md), [ADR-0007](adr/0007-block-acceptance.md) и [план PB-065–071 / AUDIT-010](plans/block-acceptance.md). Выбор per_task/final/mixed при согласовании плана, выполнение по проверенным передачам, приёмка конечного candidate и новые задачи исправлений по находкам. Реализация PB-065 передана на проверку. Статусы остальных задач ведутся в [индексе](tasks/index.md).

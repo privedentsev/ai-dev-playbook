@@ -1,0 +1,83 @@
+{
+  "schema_version": 1,
+  "card_format_version": 2,
+  "relations": [],
+  "materials": [
+    {
+      "id": "audit-01",
+      "role": "report",
+      "source": "work/verification/PB-083/audit-01",
+      "storage": "local",
+      "immutable": true,
+      "required": true,
+      "used_by": [
+        "PB-083"
+      ]
+    },
+    {
+      "id": "checks-ae0031dc11c4901e",
+      "role": "report",
+      "source": "work/checks/handoffs/PB-083/ae0031dc11c4901e",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-083"
+      ]
+    },
+    {
+      "id": "audit-02",
+      "role": "report",
+      "source": "work/verification/PB-083/audit-02",
+      "storage": "local",
+      "immutable": true,
+      "required": true,
+      "used_by": [
+        "PB-083"
+      ]
+    },
+    {
+      "id": "checks-13cd5f357291cad0",
+      "role": "report",
+      "source": "work/checks/handoffs/PB-083/13cd5f357291cad0",
+      "storage": "local",
+      "required": true,
+      "immutable": true,
+      "used_by": [
+        "PB-083"
+      ]
+    }
+  ],
+  "audit_packages": {
+    "audit-01": "sha256:d31098ec01a150d292053b7df34d5b6cc1fefabe45205d70b8145b06ed4b1740",
+    "audit-02": "sha256:d3f2bfeea1b3b6037dbe8ec1c7666e27aa674f035d6f71a5898aa96b81fef6c5"
+  },
+  "criterion_evidence": {
+    "CHECK-02": {
+      "check_sha256": "sha256:9ecf81e2b3644b9c109eacda0a6d8a5a6af5727b1d08f9f8da3b1fd41181d01a",
+      "card_projection": "sha256:4aa98fb7e230535f6ff41cdf3767b4f47e2efe11bcd527afc7bbd7e3cc004043",
+      "report_id": "checks-ae0031dc11c4901e",
+      "report_sha256": "sha256:f4e145cc50851ce906057807c0079e8db9e355be9ee91bed5ec9bd5417e8edd3"
+    },
+    "CHECK-03": {
+      "check_sha256": "sha256:40ac991d1e68fbee0c5972201937e9fd8d937812f07b468133f6a6f3640e3157",
+      "card_projection": "sha256:4aa98fb7e230535f6ff41cdf3767b4f47e2efe11bcd527afc7bbd7e3cc004043",
+      "report_id": "checks-13cd5f357291cad0",
+      "report_sha256": "sha256:02d65e75270fde3ed5392f921be81a4e7d75a4d554224802bb282906dc890e30"
+    }
+  },
+  "handoff": {
+    "at": "2026-11-19T08:00:55+03:00",
+    "actor": {
+      "name": "Codex",
+      "model": "GPT-6"
+    },
+    "summary": "HANDOFF-02",
+    "reports": [
+      "checks-13cd5f357291cad0"
+    ],
+    "card_projection": "sha256:4aa98fb7e230535f6ff41cdf3767b4f47e2efe11bcd527afc7bbd7e3cc004043",
+    "entry_id": "HANDOFF-02",
+    "journal_sha256": "sha256:4a8534ce062ccc4cb7866377e878339dcb99aa25fe52abfc87443a6fd12c90c4"
+  }
+}

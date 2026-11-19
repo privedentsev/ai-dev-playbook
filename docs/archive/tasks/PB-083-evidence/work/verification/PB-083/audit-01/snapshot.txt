@@ -1,0 +1,71 @@
+# PB-083: Подготовить ai-dev-playbook к релизу 0.2.0
+
+ID: PB-083
+Status: in_progress
+Priority: P2
+Depends-On: -
+Executor: Codex
+Model: GPT-6
+Created: 2026-11-18T23:37:09+03:00
+Closed: -
+
+<!-- playbook-meta:external -->
+
+## Задача
+
+### Цель и границы
+
+Подготовить 0.2.0 в локальной ветке `release/0.2.0`: оформить changelog, актуализировать документацию и пересобрать manifest. Публикация и изменение кода CLI вне объёма.
+
+### Контекст
+
+База — `origin/main` на `aad682e`. Переходы с 0.0.2, 0.0.3 и 0.1.0 приняты в [AUDIT-007](../archive/tasks/AUDIT-007.md). Локальные группы проверок приняты в [PB-082](../archive/tasks/PB-082.md).
+
+### Критерии приёмки
+
+- [ ] AC-01: В changelog выделена версия 0.2.0, документация отражает текущую конфигурацию.
+- [ ] AC-02: VERSION, project.json и пересобранный manifest согласованы.
+- [ ] AC-03: Проверка структуры и полный набор unittest проходят.
+
+### План
+
+1. Создать релизную ветку, проверить историю и сохранить локальные черновики.
+2. Обновить changelog, справочные материалы и manifest.
+3. Пересобрать индекс, проверить структуру и выполнить полный набор тестов.
+
+### Ресурсы
+
+Локальный Git, Python 3, CLI комплекта и unittest.
+
+## Журнал
+
+### EXEC-01 — Выполнение
+
+Время: 2026-11-18T23:39:45+03:00
+Исполнитель: Codex
+Модель: GPT-6
+Изменения: ветка release/0.2.0 создана от origin/main; удалены четыре локальные ветки после проверки достижимости их коммитов. Черновики сохранены в stash 197d8de. Записи changelog перенесены в 0.2.0, обновлены справочные материалы, пересобран manifest на 58 файлов.
+Файлы:
+- CHANGELOG.md
+- README.md
+- ai-dev-playbook/README.md
+- ai-dev-playbook/manifest.json
+- ai-dev-playbook/rules/update.md
+- docs/index.md
+- docs/roadmap.md
+- docs/tasks/index.md
+- docs/update-plan.md
+- docs/user-guide/modes.md
+
+### CHECK-01 — Проверка
+
+Время: 2026-11-19T00:50:18+03:00
+Исполнитель: Codex
+Модель: GPT-6
+Результат: passed
+Критерии: AC-01, AC-02, AC-03
+Команда: `playbook.py check --ready`, `playbook.py checks run PB-083 --scope project --checkpoint release --mode stale`, `playbook.py checks release-ready PB-083`; unittest discovery и повтор пилота на чистой копии.
+Среда: macOS, Python 3.14.6, локальная политика ai-dev-playbook-local rev 6.
+Факт: проверены версия и SHA-256 всех 58 файлов manifest. В штатном macOS-прогоне прошли 1143 теста из 1144. Пилот выявил ссылку README на файл, который удаляется при прогоне legacy; исправление ссылки перепроверено на чистой копии. Затем релизный контур подтвердил 7 из 7 проверок, включая повторный запуск группы с пилотом.
+Доказательства: локальный прогон релизного контура 6ab4ec28f6bf40a1bf20c651b60fd22a; повтор пилота test_self_project_copy_pilot — OK.
+Ограничения: локальный режим проверок; независимая приёмка и публикация впереди.
