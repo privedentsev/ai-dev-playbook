@@ -1,11 +1,11 @@
 {
   "schema_version": 1,
   "playbook_version": "0.2.0",
-  "release_id": "sha256:9cfd8e587c95d827f2906c5a8b9452155fc608e0c48996ddadcdccf907fa4c57",
-  "installed_at": "2026-11-18T18:34:24+03:00",
+  "release_id": "sha256:f1f338451f9b8818849b11b21bf45bae2eb32bf4e2d971a71796a10c4d5efd34",
+  "installed_at": "2026-11-18T23:38:24+03:00",
   "origin": "adopt:checkout",
   "files": {
-    "ai-dev-playbook/README.md": "sha256:b32337257154d9744e2330468a0ca0e26e01d6f8b57a73483ddfe8851d344600",
+    "ai-dev-playbook/README.md": "sha256:52d2b3711da8c1080f70366cb6cf5147935e890fa41bc105dc7ad94371a0612d",
     "ai-dev-playbook/VERSION": "sha256:1f930dd1f133c1f97a94fe3acb8db34372cf4c01ffdb2b3ff4ca72f9494121e9",
     "ai-dev-playbook/rules/context.md": "sha256:7dabb3e87e89534e8440bb965cb80a8a6467a70554b2b96de1a7b496b5b7191e",
     "ai-dev-playbook/rules/git.md": "sha256:03f5bb748dace633433bf1f99460f8578e23829e23ba92b8b8e31017313b66c0",
@@ -13,7 +13,7 @@
     "ai-dev-playbook/rules/resources.md": "sha256:2b05a73aab77252605f03630481e7a11d7bc8c6ff2a01cd54f3b41adf092ab18",
     "ai-dev-playbook/rules/task-card-format.md": "sha256:0dcdbc9f6604bebeb4f37343cdc2f3528e618180d3c06f98502ce80cf8d3884f",
     "ai-dev-playbook/rules/tasks.md": "sha256:7af100cf46b9c1bd38c7f2244e9b2947bfe5a968ac39c1deee4d016fef9e314d",
-    "ai-dev-playbook/rules/update.md": "sha256:42d47a5b0febe8a6b85b7c66652d6aae0853e3e5ee1d97abb25acc3750330853",
+    "ai-dev-playbook/rules/update.md": "sha256:289598edbd1172f863371d459e959465a1d70dd0f02b24f0fafb6c41f657e537",
     "ai-dev-playbook/rules/verification.md": "sha256:4e704e320b7f17c45995d8db1b913650806aaeb00e92c4b91ec2259470922050",
     "ai-dev-playbook/rules/workflow.md": "sha256:dd3e58e4d71f8710f352b510eb3af65f20c2497237c425c5fc71b71253fc4e0a",
     "ai-dev-playbook/scripts/block_workflow.py": "sha256:40a1ae4b064d26b78ae8bc8b8aa02089ef995aa5af0a0c6c71e93b68758d1891",
